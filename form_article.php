@@ -92,6 +92,10 @@ exit;
             <td class='<?php echo couleur_alternee (FALSE); ?>'> <input name="taux_tva" type="text" id="taux_tva" size="5" maxlength="5">
               %</td>
           </tr>
+		  <tr>
+		  	<td class='<?php echo couleur_alternee (); ?>'><?php echo $lang_marge;?></td>
+			<td class='<?php echo couleur_alternee (FALSE); ?>'><input name="marge" type="text" id="marge" size="5"></td>
+		  </tr>
           <tr> 
             <td class='<?php echo couleur_alternee (); ?>'> <?php echo "$langCommentaire" ?> : </td>
             <td class='<?php echo couleur_alternee (FALSE); ?>'><input name="commentaire" type="text" id="commentaire"> 

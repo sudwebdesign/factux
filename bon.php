@@ -72,6 +72,10 @@ mysql_query($sql1) or die('Erreur SQL !<br>'.$sql1.'<br>'.mysql_error());
         <td class="texte0"><?php echo $lang_quanti; ?> </td>
         <td class="texte0" colspan="3"><input name='quanti' type='text' id='quanti' size='6'></td>
 				</tr>
+		<tr>
+        <td class="texte0"><?php echo $lang_remise; ?> </td>
+        <td class="texte0" colspan="3"><input name='remise' type='text' id='remise' size='6'></td>
+				</tr>
 				<tr>
 			   <td class="texte0"><?php echo "$lang_article";
 				 include_once("include/configav.php");

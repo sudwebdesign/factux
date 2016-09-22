@@ -118,6 +118,7 @@ while($data = mysql_fetch_array($req))
 				<img src="image/delete.jpg" align="middle" border="0" alt="<?php echo $lang_supprimer; ?>"></a></td>
 		<td class="highlight"> 
 				<a href="fpdf/devis_pdf.php?num_dev=<?php echo $num_dev; ?>&amp;nom=<?php echo $nom_html; ?>&amp;pdf_user=adm" target="_blank">
+				<!--<a href="imp_devis.php?num_dev=<?php echo $num_dev; ?>&amp;nom=<?php echo $nom_html; ?>&amp;pdf_user=adm" target="_blank">-->
 				<img src="image/printer.gif" alt="<?php echo $lang_imprimer; ?>" align="middle" border="0" ></a></td>
 	<?php 
 if ($mail != '' and $login != '') { ?>

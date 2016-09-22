@@ -86,19 +86,19 @@ $num_pa2 = $num_pa +1;
 
 $pdf->AddPage();
 //la date
-$pdf->SetFillColor(255,238,204);
+$pdf->SetFillColor(255,255,255);
 $pdf->SetFont('Arial','B',10);
 $pdf->SetY(4);
 $pdf->SetX(135);
 $pdf->MultiCell(50,6,"$lang_date: $date_bon",1,C,1);
 //le logo
-$pdf->Image("../image/$logo",10,8,0, 0,'jpg');
+$pdf->Image("../image/$logo",10,8,50, 0,'jpg');
 //Troisieme cellule le slogan
 
 $pdf->SetFont('Arial','B',15);
-$pdf->SetY(45);
+$pdf->SetY(60);
 $pdf->SetX(10);
-$pdf->MultiCell(71,4,"$slogan",0,C,0);
+$pdf->MultiCell(90,4,"$slogan",0,C,0);
 
 //deuxieme cellule les coordoné clients
 $pdf->SetFont('Arial','B',10);
@@ -143,29 +143,31 @@ $pdf->AddCol('quanti',15,"$lang_quanti",'C');
 
 if($lot=='y'){
 $pdf->AddCol('uni',10,"$lang_unite",'C');
-$pdf->AddCol('article',76,"$lang_article",'C');	
+$pdf->AddCol('article',66,"$lang_article",'C');	
 $pdf->AddCol('num_lot',20,"$lang_num_lot",'C');
-$pdf->AddCol('taux_tva',15,"$lang_t_tva",'C');
+$pdf->AddCol('remise',15,"$lang_remise",'C');
+$pdf->AddCol('taux_tva',10,"$lang_t_tva",'C');
 $pdf->AddCol('p_u_jour',25,"$lang_prix_htva",'C');
 }else {
 $pdf->AddCol('uni',15,"$lang_unite",'C');
-$pdf->AddCol('article',81,"$lang_article",'C');	
+$pdf->AddCol('article',71,"$lang_article",'C');	
+$pdf->AddCol('remise',15,"$lang_remise",'C');
 $pdf->AddCol('taux_tva',20,"$lang_t_tva",'C');
-$pdf->AddCol('p_u_jour',30,"$lang_prix_htva",'C');
+$pdf->AddCol('p_u_jour',25,"$lang_prix_htva",'C');
 }
 
 $pdf->AddCol('tot_art_htva',25,"$lanf_tot_arti",'C');
 $prop=array('HeaderColor'=>array(255,150,100),
-		  'color1'=>array(255,255,210),
+		  'color1'=>array(255,255,255),
 			'color2'=>array(255,238,204),
 			'padding'=>2);
-$pdf->Table("SELECT " . $tblpref ."cont_bon.num, num_lot, quanti, uni, article, taux_tva, prix_htva, p_u_jour, tot_art_htva FROM " . $tblpref ."cont_bon RIGHT JOIN " . $tblpref ."article on " . $tblpref ."cont_bon.article_num = " . $tblpref ."article.num WHERE  bon_num = $num_bon LIMIT $nb, 15",$prop);
+$pdf->Table("SELECT " . $tblpref ."cont_bon.num, num_lot, quanti, remise, uni, article, taux_tva, prix_htva, p_u_jour, tot_art_htva FROM " . $tblpref ."cont_bon RIGHT JOIN " . $tblpref ."article on " . $tblpref ."cont_bon.article_num = " . $tblpref ."article.num WHERE  bon_num = $num_bon LIMIT $nb, 15",$prop);
 //les coordonnées vendeurs 2
-$pdf->SetFillColor(255,238,204);
+/*$pdf->SetFillColor(255,238,204);
 $pdf->SetFont('Arial','',8);
 $pdf->SetY(240);
 $pdf->SetX(25);
-$pdf->MultiCell(35,4,"$social\n $tel\n $tva_vend \n$compte \n$reg",0,C,0);
+$pdf->MultiCell(35,4,"$social\n $tel\n $tva_vend \n$compte \n$reg",0,C,0);*/
 //Pour la signature
 $pdf->SetFont('Arial','B',10);
 $pdf->SetY(238);
@@ -198,7 +200,7 @@ $pdf->MultiCell(190,4,"$coment",0,C,0);
 
    }
 //la derniere cellule conditions de facturation
-$pdf->SetFont('Arial','B',10);
+$pdf->SetFont('Arial','B',6);
 $pdf->SetY(268);
 $pdf->SetX(30);
 $pdf->MultiCell(160,4,"$lang_condi",0,C,0);

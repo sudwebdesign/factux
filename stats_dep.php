@@ -36,7 +36,7 @@ require_once("include/head.php");
 <select name="mois_1"><option value="1">Janvier</option><option value="2">Février</option><option value="3">Mars</option>
 <option value="4">Avril</option><option value="5">Mai</option><option value="6">Juin</option><option value="7">Juillet</option>
 <option value="8">Août</option><option value="9">Septembre</option><option value="10">Octobre</option><option value="11">Novembre</option>
-<option value="12">Decembre</option></select><select name="annee_1"><option value="2004">2004</option><option value="2005">2005</option><option value="2006">2006</option></select>
+<option value="12">Decembre</option></select><select name="annee_1"><option value="<?php $date=(date("Y")-1);echo"$date"; ?>"><?php $date=(date("Y")-1);echo"$date"; ?></option><option value="<?php $date=(date("Y"));echo"$date"; ?>"><?php $date=(date("Y"));echo"$date"; ?></option><option value="<?php $date=(date("Y")+1);echo"$date"; ?>"><?php $date=(date("Y")+1);echo"$date"; ?></option></select>
 <button type="submit">Envoyer</button>
 
 </form>

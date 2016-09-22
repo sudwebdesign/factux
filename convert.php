@@ -61,9 +61,10 @@ while($data = mysql_fetch_array($req))
 		$tot_art_htva = $data['tot_art_htva'];
 		$to_tva_art = $data['to_tva_art'];
 		$p_u_jour = $data['p_u_jour'];
+		$remise = $data['remise'];
 		
-$sql4 = "INSERT INTO " . $tblpref ."cont_bon(bon_num, article_num, quanti, tot_art_htva, to_tva_art, p_u_jour) 
-VALUES ('$max', '$article_num', '$quanti', '$tot_art_htva', '$to_tva_art', '$p_u_jour')";
+$sql4 = "INSERT INTO " . $tblpref ."cont_bon(bon_num, article_num, quanti, remise, tot_art_htva, to_tva_art, p_u_jour) 
+VALUES ('$max', '$article_num', '$quanti', '$remise', '$tot_art_htva', '$to_tva_art', '$p_u_jour')";
 mysql_query($sql4) or die('Erreur SQL !<br>'.$sql4.'<br>'.mysql_error());
 //on decremente le stock
 $sql12 = "UPDATE `" . $tblpref ."article` SET `stock` = (stock - $quanti) WHERE `num` = '$article_num'";
@@ -72,5 +73,5 @@ mysql_query($sql12) or die('Erreur SQL12 !<br>'.$sql12.'<br>'.mysql_error());
 }
 $message= "$lang_dev_cov <br><form action=\"fpdf/bon_pdf.php\" method=\"post\" target= \"_blank\" ><input type=\"hidden\" name=\"num_bon\" value=\"$max\" /><input type=\"hidden\" name=\"user\" VALUE=\"adm\"><input type=\"image\" src=\"image/printer.gif\" alt=\"imprimer\" /></form>";
 
-include_once("lister_devis.php");
+include_once("lister_commandes.php");
  ?> 

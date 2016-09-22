@@ -1,13 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 2.6.2
+-- version 2.6.1
 -- http://www.phpmyadmin.net
 -- 
--- Serveur: localhost
--- Généré le : Mardi 21 Juin 2005 à 17:20
--- Version du serveur: 4.0.24
--- Version de PHP: 4.3.10-15
+-- Host: localhost
+-- Generation Time: Jan 31, 2007 at 01:55 PM
+-- Server version: 4.1.9
+-- PHP Version: 4.3.10
 -- 
--- Base de données: `test_factu`
+-- Database: `factux2`
 -- 
 
 -- --------------------------------------------------------
@@ -21,6 +21,7 @@ CREATE TABLE `factux_article` (
   `article` varchar(40) NOT NULL default '0',
   `prix_htva` float NOT NULL default '0',
   `taux_tva` float default '0',
+  `marge` float default '0',
   `commentaire` varchar(30) NOT NULL default '0',
   `uni` varchar(5) NOT NULL default '',
   `actif` varchar(5) NOT NULL default '',
@@ -29,7 +30,7 @@ CREATE TABLE `factux_article` (
   `stomax` float(15,2) NOT NULL default '0.00',
   `cat` varchar(10) NOT NULL default '',
   PRIMARY KEY  (`num`)
-) TYPE=MyISAM AUTO_INCREMENT=17 ;
+) ENGINE=MyISAM ;
 
 -- --------------------------------------------------------
 
@@ -45,20 +46,21 @@ CREATE TABLE `factux_bon_comm` (
   `tot_tva` float(20,2) NOT NULL default '0.00',
   `fact` varchar(4) NOT NULL default '0',
   `coment` varchar(200) NOT NULL default '',
+  `date_fact` date NOT NULL default '0000-00-00',
   PRIMARY KEY  (`num_bon`)
-) TYPE=MyISAM AUTO_INCREMENT=261 ;
+) ENGINE=MyISAM ;
 
 -- --------------------------------------------------------
 
 -- 
--- Structure de la table `factux_categorie`
+-- Table structure for table `facturier_categorie`
 -- 
 
 CREATE TABLE `factux_categorie` (
   `id_cat` int(11) NOT NULL auto_increment,
   `categorie` varchar(30) NOT NULL default '',
   PRIMARY KEY  (`id_cat`)
-) TYPE=MyISAM AUTO_INCREMENT=8 ;
+) ENGINE=MyISAM ;
 
 -- --------------------------------------------------------
 
@@ -83,7 +85,7 @@ CREATE TABLE `factux_client` (
   `tel` varchar(30) NOT NULL default '',
   `fax` varchar(30) NOT NULL default '',
   PRIMARY KEY  (`num_client`)
-) TYPE=MyISAM AUTO_INCREMENT=37 ;
+) ENGINE=MyISAM ;
 
 -- --------------------------------------------------------
 
@@ -97,11 +99,12 @@ CREATE TABLE `factux_cont_bon` (
   `num_lot` varchar(15) NOT NULL default '',
   `article_num` varchar(30) NOT NULL default '',
   `quanti` double NOT NULL default '0',
+  `remise` float default '0',
   `tot_art_htva` float(20,2) NOT NULL default '0.00',
   `to_tva_art` float(20,2) NOT NULL default '0.00',
   `p_u_jour` float(20,2) NOT NULL default '0.00',
   PRIMARY KEY  (`num`)
-) TYPE=MyISAM AUTO_INCREMENT=440 ;
+) ENGINE=MyISAM ;
 
 -- --------------------------------------------------------
 
@@ -114,11 +117,12 @@ CREATE TABLE `factux_cont_dev` (
   `dev_num` varchar(30) NOT NULL default '',
   `article_num` varchar(30) NOT NULL default '',
   `quanti` double NOT NULL default '0',
+  `remise` float default '0',
   `tot_art_htva` float(20,2) NOT NULL default '0.00',
   `to_tva_art` float(20,2) NOT NULL default '0.00',
   `p_u_jour` float(20,2) NOT NULL default '0.00',
   PRIMARY KEY  (`num`)
-) TYPE=MyISAM AUTO_INCREMENT=119 ;
+) ENGINE=MyISAM ;
 
 -- --------------------------------------------------------
 
@@ -133,7 +137,7 @@ CREATE TABLE `factux_cont_lot` (
   `fourn` varchar(15) NOT NULL default '',
   `fourn_lot` varchar(20) NOT NULL default '',
   PRIMARY KEY  (`num`)
-) TYPE=MyISAM AUTO_INCREMENT=66 ;
+) ENGINE=MyISAM ;
 
 -- --------------------------------------------------------
 
@@ -148,7 +152,7 @@ CREATE TABLE `factux_depense` (
   `fournisseur` varchar(30) NOT NULL default '',
   `prix` float(10,2) NOT NULL default '0.00',
   PRIMARY KEY  (`num`)
-) TYPE=MyISAM AUTO_INCREMENT=8 ;
+) ENGINE=MyISAM ;
 
 -- --------------------------------------------------------
 
@@ -165,7 +169,7 @@ CREATE TABLE `factux_devis` (
   `resu` varchar(4) NOT NULL default '0',
   `coment` varchar(200) NOT NULL default '',
   PRIMARY KEY  (`num_dev`)
-) TYPE=MyISAM AUTO_INCREMENT=67 ;
+) ENGINE=MyISAM ;
 
 -- --------------------------------------------------------
 
@@ -189,7 +193,7 @@ CREATE TABLE `factux_facture` (
   `acompte` float(10,2) NOT NULL default '0.00',
   `list_num` mediumtext NOT NULL,
   PRIMARY KEY  (`num`)
-) TYPE=MyISAM AUTO_INCREMENT=151 ;
+) ENGINE=MyISAM ;
 
 -- --------------------------------------------------------
 
@@ -203,7 +207,7 @@ CREATE TABLE `factux_lot` (
   `actif` char(3) NOT NULL default '0',
   `date` date NOT NULL default '0000-00-00',
   PRIMARY KEY  (`num`)
-) TYPE=MyISAM AUTO_INCREMENT=25 ;
+) ENGINE=MyISAM ;
 
 -- --------------------------------------------------------
 
@@ -217,7 +221,7 @@ CREATE TABLE `factux_payement` (
   `pay` varchar(4) NOT NULL default '',
   `date_pay` date NOT NULL default '0000-00-00',
   PRIMARY KEY  (`num`)
-) TYPE=MyISAM AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM ;
 
 -- --------------------------------------------------------
 
@@ -241,5 +245,5 @@ CREATE TABLE `factux_user` (
   `art` char(1) NOT NULL default 'n',
   `cli` char(1) NOT NULL default 'n',
   PRIMARY KEY  (`num`)
-) TYPE=MyISAM AUTO_INCREMENT=19 ;
+) ENGINE=MyISAM ;
         

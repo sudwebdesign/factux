@@ -18,6 +18,9 @@
  * File Authors:
  * 		Guy Hendrickx
  *.
+ *Modification :
+ *      Daemon2a Corse Informatique Assistance
+ *              Le Facturier 2 beta 1
  */
 
 session_cache_limiter('private');
@@ -47,6 +50,7 @@ $oneclick=isset($_POST['oneclick'])?$_POST['oneclick']:"";
 if($oneclick!=''){
 list($jour, $mois,$annee) = preg_split('/\//', $oneclick, 3);
 $oneclick ="$annee-$mois-$jour";
+$oneclick2= $oneclick;
 }
 
 $euro= '€';
@@ -183,15 +187,17 @@ $sql ="$sql $suite_sql[$o]";
 
 $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 $nb_li = mysql_num_rows($req);
-$nb_pa1 = $nb_li /15 ;
+$nb_pa1 = $nb_li /26 ;
 $nb_pa = ceil($nb_pa1);
-$nb_li =$nb_pa * 15 ;
+$nb_li =$nb_pa * 26 ;
 
-$sql = "select payement, acompte, coment, DATE_FORMAT(date_fact,'%d/%m/%Y') AS date_2 
+
+$sql = "select payement, acompte, coment, DATE_FORMAT(date_fact,'%d/%m/%Y') AS date_2, date_fact as date_ciit
 from " . $tblpref ."facture where num = $num[$o]";
 $req = mysql_query($sql) or die('Erreur SQL
 !<br>'.$sql.'<br>'.mysql_error());
 $data = mysql_fetch_array($req);
+$date_fact_ciit = $data[date_ciit];
 $date_fact = $data[date_2];
 $coment = $data[coment];
 $acompte = $data[acompte];
@@ -209,6 +215,46 @@ $total_htva = $data["SUM(tot_art_htva)"];
 $total_tva = $data["SUM(to_tva_art)"];
 $tot_tva_inc = $tot_tva_inc + $total_htva;
 
+
+
+//Rajout du total des remise by www.ciit.fr 
+$sql_num_bon = "SELECT SUM(bon_num), bon_num as num_bon  
+FROM " . $tblpref ."client 
+RIGHT JOIN " . $tblpref ."bon_comm on " . $tblpref ."client.num_client = " . $tblpref ."bon_comm.client_num 
+LEFT join " . $tblpref ."cont_bon on " . $tblpref ."bon_comm.num_bon = " . $tblpref ."cont_bon.bon_num  
+LEFT JOIN  " . $tblpref ."article on " . $tblpref ."article.num = " . $tblpref ."cont_bon.article_num 
+WHERE " . $tblpref ."client.num_client = '".$client[$o]."'
+AND " . $tblpref ."bon_comm.date_fact = '".$date_fact_ciit."' GROUP BY num_bon"  ;
+$req_num_bon = mysql_query($sql_num_bon) or die('Erreur SQL
+!<br>'.$sql_num_bon.'<br>'.mysql_error());  
+
+/*modif ciit (rajout d'un champ dans BDD  bon_comm.date_fact (OBLIGATIORE fact.php et champ) 30.01.2007
+ Rajout du total des remise (fonctionne grace a fact.php modif et bdd (rajout de date_fact dans la table bon_comm)
+  $i = 0; //pour test 
+while($data_num_bon = mysql_fetch_array($req_num_bon))
+{  
+$sql_remise = "SELECT p_u_jour, quanti, tot_art_htva 
+FROM " . $tblpref ."cont_bon  
+WHERE " . $tblpref ."cont_bon.bon_num ='".$data_num_bon[1]."'";
+$req_remise = mysql_query($sql_remise) or die('Erreur SQL
+!<br>'.$sql_remise.'<br>'.mysql_error());
+    while($data_remise = mysql_fetch_array($req_remise)){ $i++;  //pour test
+    //recup des données
+		$quant = $data_remise[1];
+		$p_u = $data_remise[0];
+		$tot = $data_remise[2];
+      //calcul de la remise grace a la double boucle  
+        $tot_ht_article = $p_u * $quant ;
+        $tot_remise_article = $tot_ht_article - $tot ;
+        $tot_remise = $tot_remise + $tot_remise_article ;    
+	}  
+  //mysql_free_result($req_remise);  
+ }       
+$calcul_remise = $tot_remise;
+//fin calcul remise       */ 
+
+
+ 
 //pour le nom de client
 $sql1 = "SELECT mail, nom, nom2, rue, ville, cp, num_tva FROM " . $tblpref ."client WHERE  num_client = $client[$o]";
 $req = mysql_query($sql1) or die('Erreur SQL !<br>'.$sql1.'<br>'.mysql_error());
@@ -225,95 +271,100 @@ $data = mysql_fetch_array($req);
 for ($i=0;$i<$nb_pa;$i++)
 {
 
-$nb = $i *15;
+$nb = $i *26;
 $num_pa = $i;
 $num_pa2 = $num_pa +1;
 
 
 $pdf->AddPage();
 //la grande cellule sous le tableau
-$pdf->SetFillColor(243,244,251);
+$pdf->SetFillColor(255,255,255);
 $pdf->SetFont('Arial','B',6);
-$pdf->SetY(115);
+$pdf->SetY(75);
 $pdf->SetX(10);
-$pdf->Cell(187,95,"",1,0,'C',1);
+$pdf->Cell(187,135,"",1,0,'C',1);
 
 
 //premiere celule le numero de bon
 $pdf->SetFont('Arial','B',10);
-$pdf->SetY(85);
-$pdf->SetX(120);
+$pdf->SetY(12);
+$pdf->SetX(130);
 $pdf->Cell(65,6,"$lang_fact_num_ab $num[$o]",1,0,'C',1);
 $file = "facture_numero_$num[$o].pdf";
 
 //deuxieme cellule les coordonées du client
 $pdf->SetFont('Arial','B',10);
 $pdf->SetY(27);
-$pdf->SetX(120);
+$pdf->SetX(130);
 $pdf->MultiCell(65,6,"$nom \n $nom2 \n $rue \n $cp  $ville \n ",1,C,1);
 //cellule la tva client
 $pdf->SetFont('Arial','B',10);
-$pdf->SetY(70);
-$pdf->SetX(120);
+$pdf->SetY(20);
+$pdf->SetX(130);
 $pdf->MultiCell(65,6,"$num_tva",1,C,1);
 //le logo
 
-$pdf->Image("../image/$logo",10,8,0, 0,'jpg');
+$pdf->Image("../image/$logo",10,8,50, 0,'jpg');
 $pdf->ln(20);
 
 //Troisieme cellule le slogan
-$pdf->SetFont('Arial','B',15);
-$pdf->SetY(45);
+$pdf->SetFont('Arial','B',10);
+$pdf->SetY(60);
 $pdf->SetX(10);
-$pdf->MultiCell(71,4,"$slogan",0,C,0);
-//Troisieme cellule les coordonnées vendeur
-$pdf->SetFont('Arial','B',8);
-$pdf->SetY(70);
-$pdf->SetX(10);
-$pdf->MultiCell(40,4,"$lang_dev_pdf_soc",1,R,1);
+$pdf->MultiCell(90,4,"$slogan",0,C,0);
+
+//Troisieme cellule les coordonnées vendeur  nom des champs
+//$pdf->SetFont('Arial','B',8);
+//$pdf->SetY(0);
+//$pdf->SetX(60);
+//$pdf->MultiCell(40,4,"$lang_dev_pdf_soc",1,R,1);
+
 //la date
 $pdf->SetFont('Arial','B',10);
 $pdf->SetY(4);
-$pdf->SetX(135);
+$pdf->SetX(130);
 $pdf->MultiCell(50,6,"$lang_date: $date_fact",1,C,1);//
 //le cntenu des coordonnées vendeur
 $pdf->SetFont('Arial','',8);
-$pdf->SetY(70);
-$pdf->SetX(51);
-$pdf->MultiCell(60,4,"$entrep_nom\n$social\n $tel\n $tva_vend \n$compte \n$mail",0,L,1);//
-$pdf->Line(20,65,200,65);
-$pdf->ln(20);
+$pdf->SetY(10);
+$pdf->SetX(65);
+$pdf->MultiCell(50,4,"$entrep_nom\n$social\n $tel\n $tva_vend \n$compte \n$mail",0,L,1);//
+$pdf->Line(11,65,195,65);
+$pdf->ln(40);
 //Le tableau : on définit les colonnes
-$pdf->AddCol('num_bon',20,"$lang_num_bon_ab",'L');
-$pdf->AddCol('date',15,"$lang_date",'C');
+//$pdf->AddCol('num_bon',20,"$lang_num_bon_ab",'L');
+//$pdf->AddCol('date',15,"$lang_date",'C');
 $pdf->AddCol('quanti',18,"$lang_quantite",'R');
 $pdf->AddCol('uni',15,"$lang_unite" ,'L');
-$pdf->AddCol('article',45,"$lang_articles",'L');
-$pdf->AddCol('p_u_jour',21,"$lang_prixunitaire",'R');
-$pdf->AddCol('tot_art_htva',20,"$lang_total_h_tva",'R');
-$pdf->AddCol('taux_tva',15,"$lang_t_tva",'L');
+$pdf->AddCol('article',40,"$lang_articles",'L');
+$pdf->AddCol('p_u_jour',25,"$lang_prixunitaire",'R');
+$pdf->AddCol('remise',21,"$lang_remise %",'R');
+$pdf->AddCol('tot_art_htva',25,"$lang_total_h_tva",'R');
+$pdf->AddCol('taux_tva',25,"$lang_t_tva",'L');
 $pdf->AddCol('to_tva_art',18,"$lang_tva",'R');
 
 
-$prop=array('HeaderColor'=>array(198,198,200),
-		  'color1'=>array(243,244,251),
-			'color2'=>array(180,187,251),
+$prop=array('HeaderColor'=>array(255,255,120),
+		  'color1'=>array(255,255,255),
+			'color2'=>array(255,255,200),
 			'align' =>L,
 			'padding'=>2);
-$sql_table = "SELECT p_u_jour, DATE_FORMAT(date,'%d/%m/%Y') AS date, quanti, article, tot_art_htva, to_tva_art, taux_tva, uni, num_bon 
+$sql_table = "SELECT p_u_jour, DATE_FORMAT(date,'%d/%m/%Y') AS date, quanti, remise, article, tot_art_htva, to_tva_art, taux_tva, uni, num_bon 
 FROM " . $tblpref ."client 
 RIGHT JOIN " . $tblpref ."bon_comm on " . $tblpref ."client.num_client = " . $tblpref ."bon_comm.client_num 
 LEFT join " . $tblpref ."cont_bon on " . $tblpref ."bon_comm.num_bon = " . $tblpref ."cont_bon.bon_num  LEFT JOIN  " . $tblpref ."article on " . $tblpref ."article.num = " . $tblpref ."cont_bon.article_num 
 WHERE " . $tblpref ."client.num_client = '".$client[$o]."'"; 
-$suite2_sql = "LIMIT $nb, 15";
+$suite2_sql = "LIMIT $nb, 26";
 $sql_table="$sql_table $suite_sql[$o] $suite2_sql";
+
+
 $pdf->Table("$sql_table",$prop);
 //deuxieme cellule les coordonnées vendeurs 2
-$pdf->SetFillColor(243,244,251);
+/*$pdf->SetFillColor(243,244,251);
 $pdf->SetFont('Arial','',8);
 $pdf->SetY(240);
 $pdf->SetX(5);
-$pdf->MultiCell(50,4,"$entrep_nom\n$social\n $tel\n $tva_vend \n$compte \n$reg",0,C,0);
+$pdf->MultiCell(50,4,"$entrep_nom\n$social\n $tel\n $tva_vend \n$compte \n$reg",0,C,0);*/
 if($num_pa2 >= $nb_pa)
   {
 	if ($acompte == '0') { 
@@ -323,18 +374,18 @@ $pdf->SetFont('Arial','B',10);
 //$pdf->SetTextColor(255, 0, 0);
 $pdf->SetY(210);
 $pdf->SetX(157);
-$pdf->MultiCell(40,4,avec_virgule ($total_htva)." $devise\n". avec_virgule ($total_tva)." $devise\n",1,R,1);
+$pdf->MultiCell(40,4,avec_virgule ($total_htva)." $devise\n". avec_virgule ($total_tva)." $devise\n ",1,R,1);
 
 $pdf->SetY(218);
 $pdf->SetX(157);
 $pdf->SetTextColor(255, 0, 0);
-$pdf->MultiCell(40,4,avec_virgule ($total_htva + $total_tva)." $devise",1,R,1);
+$pdf->MultiCell(40,4,avec_virgule ($total_htva + $total_tva)." $devise\n",1,R,1);
 //Cinquieme cellule les totaux
 $pdf->SetFont('Arial','B',10);
 $pdf->SetTextColor(0, 0, 0);
 $pdf->SetY(210);
 $pdf->SetX(117);
-$pdf->MultiCell(40,4,"$lang_total_h_tva: \n $lang_tot_tva: \n $lang_tot_ttc:",1,R,1);
+$pdf->MultiCell(40,4,"$lang_total_h_tva: \n $lang_tot_tva: \n $lang_tot_ttc: ",1,R,1);
 }else{
 //si un acompte est present
 
@@ -389,14 +440,28 @@ $sql2="$sql2 $suite_sql[$o] $suite3_sql";
 $pdf->AddCol('taux_tva',20,'taux tva','L');
 $pdf->AddCol('SUM(to_tva_art)',20,'moontant tva','L');
 $pdf->AddCol('SUM(tot_art_htva)',25,"$lang_ba_imp",'L');
-$prop=array('color1'=>array(243,244,251),
-			'color2'=>array(180,187,251),
+$prop=array('color1'=>array(255,255,230),
+			'color2'=>array(255,255,255),
 			'padding'=>2,
 			'entete'=>0,
 			'align' =>L);
 $pdf->Table("$sql2",$prop);
 
 //fin ventillation
+
+/*//Pour le total de la remise
+$pdf->SetFont('Arial','B',8);
+$pdf->SetY(210);
+$pdf->SetX(86);
+$pdf->MultiCell(20,4,"$lang_remise",1,C,1);
+
+$pdf->SetY(214);
+$pdf->SetX(86);
+$pdf->SetTextColor(0, 0, 255);
+$pdf->MultiCell(20,4,avec_virgule ($calcul_remise)." $devise ",1,R,1);
+
+//fin total remise  */
+$pdf->SetTextColor(0, 0, 0);
 //pour les commentaire
 $pdf->SetFont('Arial','',10);
 $pdf->SetY(225);
@@ -411,12 +476,23 @@ $pdf->MultiCell(60,4,"$lang_po_acquis",0,C,0);
 }
 $pdf->Line(10,267,200,267);
 //la derniere cellule conditions de facturation
-$pdf->SetFont('Arial','B',10);
+/*$pdf->SetFont('Arial','B',6);
 $pdf->SetY(258);
 $pdf->SetX(30);
 $pdf->SetY(268);
 $annee_fact = substr ($date_fact,6,4);
-$pdf->MultiCell(0,4,"$lang_factpdf_penalites_conditions",0,C,0);
+$pdf->MultiCell(0,4,"$lang_condi",0,C,0);*/
+//la derniere cellule conditions de facturation
+$pdf->SetFont('Arial','B',6);
+$pdf->SetY(268);
+$pdf->SetX(30);
+$pdf->MultiCell(160,4,"$entrep_nom $social Tel :$tel \n$tva_vend $compte $reg",0,C,0);
+
+//Pour l'échéance
+$pdf->SetFont('Arial','B',12);
+$pdf->SetY(245);
+$pdf->SetX(10);
+$pdf->MultiCell(160,4,"Echéance à Trente jours",0,L,0);
 
 $pdf->SetFont('Arial','B',10);
 $pdf->SetY(260);

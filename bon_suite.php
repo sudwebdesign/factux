@@ -32,6 +32,7 @@ $article=isset($_POST['article'])?$_POST['article']:"";
 $num=isset($_POST['num'])?$_POST['num']:"";
 $lot1=isset($_POST['lot'])?$_POST['lot']:"";
 $nom=isset($_POST['nom'])?$_POST['nom']:"";
+$remise=isset($_POST['remise'])?$_POST['remise']:"";
 
 ?>
 <SCRIPT language="JavaScript" type="text/javascript">
@@ -75,12 +76,16 @@ $prix_article = mysql_result($result, 'prix_htva');
 $sql3 = "SELECT taux_tva FROM " . $tblpref ."article WHERE num = $article";
 $result = mysql_query($sql3) or die('Erreur SQL !<br>'.$sql3.'<br>'.mysql_error());
 $taux_tva = mysql_result($result, 'taux_tva');
+//on recupere le coeff de marge
+$sql4="select marge FROM " . $tblpref ."article WHERE num = $article";
+$result=mysql_query($sql4) or die('Erreur SQL !<br>'.$sql4.'<br>'.mysql_error());
+$marge=mysql_result($result, 'marge');
 
-$total_htva = $prix_article * $quanti ;
+$total_htva = $prix_article * $quanti * $marge * (1-($remise/100)) ;
 $mont_tva = $total_htva / 100 * $taux_tva ;
 //inserer les données dans la table du conten des bons.
-$sql1 = "INSERT INTO " . $tblpref ."cont_bon(p_u_jour, quanti, article_num, bon_num, tot_art_htva, to_tva_art, num_lot) 
-VALUES ('$prix_article', '$quanti', '$article', '$max', '$total_htva', '$mont_tva', '$lot1')";
+$sql1 = "INSERT INTO " . $tblpref ."cont_bon(p_u_jour, quanti, remise, article_num, bon_num, tot_art_htva, to_tva_art, num_lot) 
+VALUES ('$prix_article', '$quanti', '$remise', '$article', '$max', '$total_htva', '$mont_tva', '$lot1')";
 
 
 mysql_query($sql1) or die('Erreur SQL !<br>'.$sql1.'<br>'.mysql_error());
@@ -90,20 +95,21 @@ mysql_query($sql12) or die('Erreur SQL12 !<br>'.$sql12.'<br>'.mysql_error());
  ?>
  <caption><?php echo"$lang_nv_bon"; ?> </caption>
  <tr>
- <th><?php echo $lang_quantite ;?></th>
-  <th><?php echo $lang_unite ;?></th>
-  <th><?php echo $lang_article ;?></th>
-  <th><?php echo $lang_montant_htva ;?></th>
+ <th width="21"><?php echo $lang_quantite ;?></th>
+  <th width="21"><?php echo $lang_unite ;?></th>
+  <th width="21"><?php echo $lang_article ;?></th>
+  <th width="21"><?php echo $lang_montant_htva ;?></th>
+  <th width="43"><?php echo $lang_remise;?></th>
 	<?php 
 	if ($lot =='y') {?> 
- 		 <th><?php echo "$lang_lot"; ?></th>
+ 		 <th width="33"><?php echo "$lang_lot"; ?></th>
 	<?php } ?>
-   <th><? echo $lang_editer ;?></th>
-  <th><? echo $lang_supprimer ;?></th>
+   <th width="29"><? echo $lang_editer ;?></th>
+  <th width="20"><? echo $lang_supprimer ;?></th>
 
  <?php 
 //on recherche tout les contenus du bon et on les detaille
-$sql = "SELECT " . $tblpref ."cont_bon.num ,num_lot, uni, quanti, article, tot_art_htva FROM " . $tblpref ."cont_bon RIGHT JOIN " . $tblpref ."article on " . $tblpref ."cont_bon.article_num = " . $tblpref ."article.num WHERE  bon_num = $max";
+$sql = "SELECT " . $tblpref ."cont_bon.num ,num_lot, uni, quanti, remise, article, tot_art_htva FROM " . $tblpref ."cont_bon RIGHT JOIN " . $tblpref ."article on " . $tblpref ."cont_bon.article_num = " . $tblpref ."article.num WHERE  bon_num = $max";
 $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 
 while($data = mysql_fetch_array($req))
@@ -114,6 +120,7 @@ while($data = mysql_fetch_array($req))
 		$tot = $data['tot_art_htva'];
 		$num_cont = $data['num'];//$lang_li_tot2
 		$num_lot = $data['num_lot'];
+		$remise = $data['remise'];
 		$nombre = $nombre +1;
 		if($nombre & 1){
 		$line="0";
@@ -122,10 +129,11 @@ while($data = mysql_fetch_array($req))
 		}
 		?>		
 	<tr class="texte<?php echo"$line" ?>" onmouseover="this.className='highlight'" onmouseout="this.className='texte<?php echo"$line" ?>'">
-		<td class ='highlight'><?php echo"$quanti";?>
-		<td class ='highlight'><?php echo"$uni";?>
-		<td class ='highlight'><?php echo"$article";?>
-		<td class ='highlight'><?php echo"$tot $devise"; ?>
+		<td class ='highlight' width="10%"><?php echo"$quanti";?>
+		<td class ='highlight' width="10%"><?php echo"$uni";?>
+		<td class ='highlight' width="30%"><?php echo"$article";?>
+		<td class ='highlight' width="10%"><?php echo"$tot $devise"; ?>
+		<td class ='highlight' width="10%"><?php echo"$remise"; ?>
 		<?php
 		if ($lot =='y') { ?>
   	<td class ='highlight'><a href=voir_lot.php?num=<?php echo"$num_lot";?> target='_blank'><?php echo"$num_lot";?></a>
@@ -149,7 +157,7 @@ while($data = mysql_fetch_array($req))
 		}?>
 <tr><td class='totalmontant' colspan="3"><?php echo $lang_total_h_tva; ?></td>
 <td class='totaltexte'><?php echo "$total_bon $devise"; ?>  </td>
-<td class='totaltexte'><?php echo "$total_tva $devise $lang_tva"; ?></td><td colspan='2' class='totalmontant'>
+<td class='totaltexte'><?php echo "$total_tva $devise $lang_tva"; ?></td><td colspan='3' class='totalmontant'>
 </td></tr></table>
 <form name='formu2' method='post' action='bon_suite.php'>
 <table class="boiteaction">
@@ -159,6 +167,8 @@ while($data = mysql_fetch_array($req))
 
  <tr><td class='texte0'><?php echo "$lang_quanti"; ?>
  <td class='texte0'colspan='3'><input name='quanti' type='text' id='quanti' size='6'>
+ <tr><td class='texte0'><?php echo "$lang_remise"; ?>
+ <td class='texte0'colspan='3'><input name='remise' type='text' id='remise' size='6'>
  <tr><td class='texte0'><?php echo"$lang_article"; ?>
  <?php
 include_once("include/configav.php");

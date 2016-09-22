@@ -19,12 +19,14 @@
  * 		Guy Hendrickx
  *.
  */
+ session_start();
+ session_register('login_client');
 ini_set('session.save_path', '../include/session'); 
- if ($lang=='') { 
+ if (!isset($lang)) { 
 $lang ="fr";  
 }
-session_start();
-session_register('login_client');
+
+
 
 session_unset();
 session_destroy();

@@ -51,7 +51,11 @@ while ( $row = mysql_fetch_array( $result)) {
 ?>
     </SELECT>
 	</td>
-	<td>année<td><select name="an"><option value="2004"><?php $date=(date("Y")-1);echo"$date"; ?></option><option value="2005"><?php $date=date("Y");echo"$date"; ?></option></select></tr>
+	<td>année<td><select name="an">
+<option value="<?php $date=(date("Y")-2);echo"$date"; ?>"><?php echo"$date"; ?></option>
+<option value="<?php $date=(date("Y")-1);echo"$date"; ?>"><?php echo"$date"; ?></option>
+<option value="<?php $date=date("Y");echo"$date"; ?>"><?php echo"$date"; ?></option>
+</select></tr>
 	<tr><td colspan="3">
     <input type="submit" name="Submit" value="<? echo $lang_envoyer; ?>"></td></tr></table>
 </form>

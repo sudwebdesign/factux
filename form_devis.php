@@ -73,7 +73,7 @@ $jour = date("d");
 						require_once("include/configav.php");
 						if ($liste_cli!='y') { 
 						$rqSql="$rqSql order by nom";
-						echo"$rqSql";
+						//echo"$rqSql";
 						$result = mysql_query( $rqSql ) or die( "Exécution requête impossible.");
  ?>  
 			<SELECT NAME='listeville'>

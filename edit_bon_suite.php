@@ -29,6 +29,7 @@ $nom=isset($_POST['nom'])?$_POST['nom']:"";
 $num_bon=isset($_POST['num_bon'])?$_POST['num_bon']:"";
 $quanti=isset($_POST['quanti'])?$_POST['quanti']:"";
 $num_lot=isset($_POST['lot'])?$_POST['lot']:"";
+$remise=isset($_POST['remise'])?$_POST['remise']:"";
 
 //on recupere le prix htva		
 $sql2 = "SELECT prix_htva FROM " . $tblpref ."article WHERE num = $article";
@@ -38,14 +39,18 @@ $prix_article = mysql_result($result, 'prix_htva');
 $sql3 = "SELECT taux_tva FROM " . $tblpref ."article WHERE num = $article";
 $result = mysql_query($sql3) or die('Erreur SQL2 !<br>'.$sql3.'<br>'.mysql_error());
 $taux_tva = mysql_result($result, 'taux_tva');
+//on recupere le coeff de marge
+$sql4="select marge FROM " . $tblpref ."article WHERE num = $article";
+$result=mysql_query($sql4) or die('Erreur SQL3 !<br>'.$sql4.'<br>'.mysql_error());
+$marge=mysql_result($result, 'marge');
 
-$total_htva = $prix_article * $quanti ;
+$total_htva = $prix_article * $quanti*$marge*(1-($remise/100)) ;
 $mont_tva = $total_htva / 100 * $taux_tva ;
 //inserer les données dans la table du contenu des bons.
 
 mysql_select_db($db) or die ("Could not select $db database");
-$sql1 = "INSERT INTO " . $tblpref ."cont_bon(num_lot, quanti, article_num, bon_num, tot_art_htva, to_tva_art, p_u_jour) 
-VALUES ('$num_lot', '$quanti', '$article', '$num_bon', '$total_htva', '$mont_tva', '$prix_article')";
+$sql1 = "INSERT INTO " . $tblpref ."cont_bon(num_lot, quanti, remise, article_num, bon_num, tot_art_htva, to_tva_art, p_u_jour) 
+VALUES ('$num_lot', '$quanti', '$remise', '$article', '$num_bon', '$total_htva', '$mont_tva', '$prix_article')";
 mysql_query($sql1) or die('Erreur SQL3 !<br>'.$sql1.'<br>'.mysql_error());
 
 

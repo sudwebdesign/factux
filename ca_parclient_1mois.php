@@ -68,10 +68,11 @@ foreach ($calendrier as $numero_mois => $nom_mois)
 }
 ?>
 </select>
-<select name="annee_1">  
-  <option value="2005">2005</option>
-  <option value="2006">2006</option>
-  <option value="2004">2004</option>
+<select name="annee_1">
+  <option value="<?php $date=(date("Y")-2);echo"$date"; ?>"><?php echo"$date"; ?></option>  
+  <option value="<?php $date=(date("Y")-1);echo"$date"; ?>"><?php echo"$date"; ?></option>
+  <option value="<?php $date=date("Y");echo"$date"; ?>"><?php echo"$date"; ?></option>
+  
 </select>
 <button type="submit"><?php echo $lang_envoyer; ?></button>
 </form>
@@ -133,11 +134,10 @@ $pourcentage = number_format( round( ($tot*100)/$total), 0, ",", " ");
     <td class='totalmontant'>&nbsp;</td>
   </tr>
 </table><!-- InstanceEndEditable --> 
-</td></tr>
-</table>
 <?php
 include("help.php");
 include_once("include/bas.php");
-?>
+?></td></tr>
+</table>
 </body>
 <!-- InstanceEnd --></html>

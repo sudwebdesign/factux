@@ -25,13 +25,14 @@ include_once("include/language/$lang.php");
 ?>
 
 
-<table cellspacing="0" cellpadding="0">
+<table cellspacing="0" cellpadding="0" align="center">
   <tr>
 		<td ><?php echo $lang_factux ?>
-    <td  rowspan="2"><img src="image/factux.gif" alt="factux" ></td><td>&nbsp;
-		<tr>
-		<td> &nbsp;<td>&nbsp;
-		<?php echo $lang_source_fac ?><a href="http://www.factux.org/wiki/" target="_blank" >http://www.factux.org/wiki </a>
+    <td  rowspan="2"><a href="http://www.ciit.fr" target="_blank" ><img src="image/logoCIIT.jpg" alt="factux" width="300" height="92" ></a></td>
+    <td>
+  <tr>
+		<td> <td>&nbsp;
+		<?php echo $lang_source_fac ?><br /><a href="http://www.ciit.fr" target="_blank" >Creation Informatique Ingles Thomas </a>
 		
   
 </table><hr>
@@ -46,4 +47,3 @@ include_once("include/language/$lang.php");
           src="http://www.w3.org/Icons/valid-html401"
           alt="Valid HTML 4.01!" height="31" width="88"></a>
     </p>
-

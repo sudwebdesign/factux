@@ -26,19 +26,21 @@ $quanti=isset($_POST['quanti'])?$_POST['quanti']:"";
 $num_cont=isset($_POST['num_cont'])?$_POST['num_cont']:"";
 $dev_num=isset($_POST['dev_num'])?$_POST['dev_num']:"";
 $article=isset($_POST['article'])?$_POST['article']:"";
+$remise=isset($_POST['remise'])?$_POST['remise']:"";
 
-$sql = "SELECT prix_htva, taux_tva FROM " . $tblpref ."article WHERE  " . $tblpref ."article.num = $article";
+$sql = "SELECT prix_htva, taux_tva, marge FROM " . $tblpref ."article WHERE  " . $tblpref ."article.num = $article";
 $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 while($data = mysql_fetch_array($req))
     {
 		$prix_article = $data['prix_htva'];
 		$taux_tva = $data['taux_tva'];
+		$marge=$data['marge'];
 		//echo " $prix_ht <br>";
 		}
-$tot_htva = $quanti * $prix_article ;
+$tot_htva = $quanti * $prix_article*$marge*(1-($remise/100)) ;
 $tot_tva = $tot_htva / 100 * $taux_tva ;		 
 mysql_select_db($db) or die ("Could not select $db database");
-$sql2 = "UPDATE " . $tblpref ."cont_dev SET p_u_jour='".$prix_article."', quanti='".$quanti."', article_num='".$article."', tot_art_htva='".$tot_htva."', to_tva_art='".$tot_tva."'  WHERE num = '".$num_cont."'";
+$sql2 = "UPDATE " . $tblpref ."cont_dev SET p_u_jour='".$prix_article."', quanti='".$quanti."', remise='".$remise."', article_num='".$article."', tot_art_htva='".$tot_htva."', to_tva_art='".$tot_tva."'  WHERE num = '".$num_cont."'";
 mysql_query($sql2) OR die("<p>Erreur Mysql<br/>$sql2<br/>".mysql_error()."</p>");
   
  $num_dev = $dev_num ;

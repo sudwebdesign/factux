@@ -48,6 +48,7 @@ $nom=isset($_POST['nom'])?$_POST['nom']:"";
 $num_dev=isset($_POST['num_dev'])?$_POST['num_dev']:"";
 $quanti=isset($_POST['quanti'])?$_POST['quanti']:"";
 $article=isset($_POST['article'])?$_POST['article']:"";
+$remise=isset($_POST['remise'])?$_POST['remise']:"";
 
 
 //on recupere le prix htva		
@@ -63,15 +64,16 @@ $total_htva = $prix_article * $quanti ;
 $mont_tva = $total_htva / 100 * $taux_tva ;
 //inserer les données dans la table du contenu des devis.
 mysql_select_db($db) or die ("Could not select $db database");
-$sql1 = "INSERT INTO " . $tblpref ."cont_dev(quanti, article_num, dev_num, tot_art_htva, to_tva_art, p_u_jour) VALUES ('$quanti', '$article', '$num_dev', '$total_htva', '$mont_tva', '$prix_article')";
+$sql1 = "INSERT INTO " . $tblpref ."cont_dev(quanti, remise, article_num, dev_num, tot_art_htva, to_tva_art, p_u_jour) VALUES ('$quanti', '$remise', '$article', '$num_dev', '$total_htva', '$mont_tva', '$prix_article')";
 mysql_query($sql1) or die('Erreur SQL3 !<br>'.$sql1.'<br>'.mysql_error());
 include ("form_editer_devis.php");
 ?><!-- InstanceEndEditable --> 
-</td></tr>
-</table>
+
 <?php
 include("help.php");
 include_once("include/bas.php");
 ?>
+</td></tr>
+</table>
 </body>
 <!-- InstanceEnd --></html>

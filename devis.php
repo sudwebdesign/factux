@@ -108,8 +108,13 @@ $result = mysql_query( $rqSql )
           <td class="texte0"> <?php echo $lang_quanti; ?> </td>
           <td class="texte0"><input name='quanti' type='text' id='quanti' size='6'></td>
         </tr>
+		<tr>
+			<td class="texte0"><?php echo $lang_remise; ?></td>
+			<td class="texte0"><input name="remise" type="text" id="remise" size="6"></td>
+		</tr>
         <tr> 
           <td class="submit" colspan="2"><input type="submit" name="Submit" value='<?php echo $lang_valid; ?>'></td>
+		</tr>
       </table>
       <input name="nom" type="hidden" id="nom" value='<?php echo $nom; ?>'>
     </form>

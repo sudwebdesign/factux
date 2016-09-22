@@ -39,8 +39,8 @@ include_once("include/head.php");
 <tr>
 <td><form action="ca_annee.php" method="post" name="annee">
 année <select name="an">
-<option value="2004"><?php $date=(date("Y")-1);echo"$date"; ?></option>
-<option value="2005"><?php $date=date("Y");echo"$date"; ?></option></select><input type="submit" /></form>
+<option value="<?php $date=(date("Y")-1);echo"$date"; ?>"><?php $date=(date("Y")-1);echo"$date"; ?></option>
+<option value="<?php $date=date("Y");echo"$date"; ?>"><?php $date=date("Y");echo"$date"; ?></option></select><input type="submit" /></form>
 <tr>
 <td  class="page" align="center">
 

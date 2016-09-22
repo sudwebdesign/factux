@@ -185,15 +185,15 @@ $lang_notif_env = "Notification de changement du mot de passe envoyé à";
 $lang_pass_modif = "Modification de votre mot de passe";
 $lang_mail_li_up1= "Cher client<br>Votre mot de passe a été mis a jour par l'administrateur<br>Login:";
 $lang_mail_cli_up = "Ce mot de passe etant encodé dans notre base de données, il nous est impossible de vous le renvoyer si vous le perdiez.";
-$lang_ba_imp ="Base imposable";
+$lang_ba_imp ="Montant HT";
 $lang_fact_num_ab = "Facture n°:";
 $lang_totaux = "Total hors tva: \n Total tva: \n Total tva comprise:";
 $lang_num_bon_ab = "Bon n°:";
 $lang_de = "de";
 $lang_page = "Page";
-$lang_condi = "Facturation à suivre fin de mois\n De faktuur zal op het einde van de maand toe gestuurd worden\n";
+$lang_condi = "$entrep_nom $social Tel :$tel \n$tva_vend $compte $reg";
 $lang_prix_htva = "Prix H.T.V.A";
-$lang_dev_pdf_soc = "Société\nSiège social/Sociaal zetel\n Tel/Fax\n T.V.A/B.T.W\n Banque/Bank\n email";
+$lang_dev_pdf_soc = "Société\nSiège social\n\n Tel/Fax\n T.V.A\n Banque\n email";
 $lang_ajo_fact = "Ajouter un commentaire sur la facture (facultatif)";
 $lang_bon_enregistrer = "Enregistrer le bon";
 $lang_bon_ajouter = "Ajouter au bon";
@@ -210,7 +210,7 @@ $lang_con_gag = "Etes-vous sûr de vouloir mettre ce devis au statut gagné ?";
 $lang_con_effa_dev = "Etes-vous sûr de vouloir effacer ce devis ?";
 $lang_mail_a = "mail envoyé à:";
 $lang_benef = "Bénéfice";
-$lang_factux = "Factux le facturier libre V 1.1.5";
+$lang_factux = "factux 1.1.5 béta";
 $lang_de_per = "Votre devis $num_dev est maintenant au statut de devis perdu";
 $lang_sup_li = "Désirez-vous vraiment effacer cette ligne du bon de livraison ?";
 $lang_edit_bon = "Editer un bon de commande";
@@ -220,7 +220,7 @@ $lang_cli_jour = "Le client à été mis à jour";
 $lang_noti_pa = "Notification du mot de passe envoyé ";
 $lang_mai_cre = "Cher client<br>Votre mot de passe a ete créé par l'administrateur <br>Login:";
 $lang_mai_cr_pa = " Mot de passe:";
-$lang_source_fac = "Factux est une logiciel open source distribué par ";
+$lang_source_fac = "logiciel open source dérivé de Factux 1.1.5 distribué par ";
 $lang_mai_cre_enc = "<br><br>vous pouver changer ce mot de passe en ligne mais pas le login. <br>Ce mot de passe est encodé dans notre base de données .<br>Si vous le perdiez, veuilliez prévevir l ";
 $lang_pass_nou = "pour qu'il vous en donne un nouveau ";
 $lang_cre_mo_pa = "Création de votre mot de passe";
@@ -431,7 +431,7 @@ $lang_quantite = "Quantité";
 $lang_factpdf_penalites_taux = "Taux de pénalité de retard pour l'année.";
 $lanf_tot_arti = "Total article";
 $lang_facture_date_debut = "Date d'émission";
-$lang_po_rec ="Pour \n réception:";
+$lang_po_rec ="Pour \n accord:";
 $lang_devis_date_debut = "Date d'émission";
 $lang_devis_date_fin = "Devis valable jusqu'au";
 
@@ -492,6 +492,6 @@ $lang_devis_editer = "$lang_editer le devis";
 
 $code_langue = "fr_FR";
 
-
-
+$lang_remise="Remise";
+$lang_marge="Marge";
 ?>

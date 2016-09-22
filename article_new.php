@@ -33,6 +33,7 @@ $stock=isset($_POST['stock'])?$_POST['stock']:"";
 $stomin=isset($_POST['stomin'])?$_POST['stomin']:"";
 $stomax=isset($_POST['stomax'])?$_POST['stomax']:"";
 $categorie=isset($_POST['categorie'])?$_POST['categorie']:"";
+$marge=isset($_POST['marge'])?$_POST['marge']:"";
 if($article=='' || $prix==''|| $taux_tva=='' || $uni=='' )
 {
 echo "<center><h1>$lang_oubli_champ";
@@ -41,7 +42,7 @@ exit;
 }
 
 mysql_select_db($db) or die ("Could not select $db database");
-$sql1 = "INSERT INTO " . $tblpref ."article(article, prix_htva, taux_tva, commentaire, uni, stock, stomin, stomax, cat) VALUES ('$article', '$prix', '$taux_tva', '$commentaire', '$uni', '$stock', '$stomin', '$stomax', '$categorie')";
+$sql1 = "INSERT INTO " . $tblpref ."article(article, prix_htva, taux_tva, commentaire, uni, stock, stomin, stomax, cat, marge) VALUES ('$article', '$prix', '$taux_tva', '$commentaire', '$uni', '$stock', '$stomin', '$stomax', '$categorie', '$marge')";
 mysql_query($sql1) or die('Erreur SQL !<br>'.$sql1.'<br>'.mysql_error());
 $message= "<center><h2>$lang_nouv_art<br>$lang_commentaire $commentaire </h2>";
 include("form_article.php");

@@ -430,6 +430,7 @@ $lang_devis_editer = "$lang_editer le devis";
 
 $code_langue = "fr_FR";
 
-
+//ajout modif
+$lang_remeise="Remise";
 
 ?>

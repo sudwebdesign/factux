@@ -129,7 +129,7 @@ $num = $num + 1 ;
 
 
 //On afiche le resultat
-$sql9 = "SELECT date, quanti, article, tot_art_htva, to_tva_art, taux_tva, uni, num_bon 
+$sql9 = "SELECT date, quanti, article, remise, tot_art_htva, to_tva_art, taux_tva, uni, num_bon 
 FROM " . $tblpref ."client 
 RIGHT JOIN " . $tblpref ."bon_comm on " . $tblpref ."client.num_client = " . $tblpref ."bon_comm.client_num 
 LEFT join " . $tblpref ."cont_bon on " . $tblpref ."bon_comm.num_bon = " . $tblpref ."cont_bon.bon_num  
@@ -146,7 +146,7 @@ echo "<tr><td class='page'><table class='boiteaction'>
   </caption>
 "; 
 
-echo "<tr><th>Quanti <th>$lang_unite<th>$lang_article<th>$lang_prix_h_tva<th>$lang_taux_tva<th>$lang_tot_tva<th>$lang_num_bon<th>$lang_date_bon</tr>";
+echo "<tr><th>Quanti <th>$lang_unite<th>$lang_article<th>$lang_prix_h_tva<th>$lang_remise<th>$lang_taux_tva<th>$lang_tot_tva<th>$lang_num_bon<th>$lang_date_bon</tr>";
 while($data = mysql_fetch_array($req))
     {
 		$quanti = $data['quanti'];
@@ -157,7 +157,8 @@ while($data = mysql_fetch_array($req))
 		$uni = $data['uni'];
 		$num_bon = $data['num_bon'];
 		$date = $data['date'];
-		echo "<tr><td>$quanti<td>$uni<td>$article<td>$tot_htva<td>$taux<td>$tot_tva<td>$num_bon<td>$date</tr>";
+		$remise = $data['remise'];
+		echo "<tr><td>$quanti<td>$uni<td>$article<td>$tot_htva<td>$remise<td>$taux<td>$tot_tva<td>$num_bon<td>$date</tr>";
 		}
 		
 		echo "<tr><td>";
@@ -174,9 +175,9 @@ while($data = mysql_fetch_array($req))
 		
 		<?php  
 $rest = $total_htva + $total_tva - $acompte ;
-		echo"<td>&nbsp;<td><b>$lang_total</b><td><b>$total_htva $devise htva </b><td><b>$lang_tot_tva</b><td><b> $total_tva  $devise de tva </b><td><b><font color='red'>$lang_tot_ttc </font></b><td><b><font color='red'>$total_ttc $devise</font></b></tr>";    
-		echo " <tr><td colspan='6'>&nbsp;<td>$lang_acompte<td>$acompte $devise</tr>";
-		echo "<tr><td colspan='6'>&nbsp;<td>Reste a payer<td>$rest $devise</tr>
+		echo"<td>&nbsp;<td>&nbsp;<td><b>$lang_total</b><td><b>$total_htva $devise htva </b><td><b>$lang_tot_tva</b><td><b> $total_tva  $devise de tva </b><td><b><font color='red'>$lang_tot_ttc </font></b><td><b><font color='red'>$total_ttc $devise</font></b></tr>";    
+		echo " <tr><td colspan='7'>&nbsp;<td>$lang_acompte<td>$acompte $devise</tr>";
+		echo "<tr><td colspan='7'>&nbsp;<td>Reste a payer<td>$rest $devise</tr>
 		</table><br><hr>";
 //on enregistre le contenu de la facture
 $list_num = serialize($list_num);
@@ -186,6 +187,12 @@ mysql_query($sql1) or die('Erreur SQL1 !<br>'.$sql1.'<br>'.mysql_error());
 $message="<h2> Facture crenregistrée<br>";		
 $sql2 = "UPDATE " . $tblpref ."bon_comm SET fact='ok' WHERE " . $tblpref ."bon_comm.client_num = '".$client."' AND " . $tblpref ."bon_comm.date >= '".$debut."' and " . $tblpref ."bon_comm.date <= '".$fin."'";
 mysql_query($sql2) or die('Erreur SQL2 !<br>'.$sql2.'<br>'.mysql_error());
+
+//date_fact rajout by ciit (permet l'impression du total des remise
+$sql2 = "UPDATE " . $tblpref ."bon_comm SET date_fact='$date_fact' WHERE " . $tblpref ."bon_comm.client_num = '".$client."' AND " . $tblpref ."bon_comm.date >= '".$debut."' and " . $tblpref ."bon_comm.date <= '".$fin."'";
+mysql_query($sql2) or die('Erreur SQL2 !<br>'.$sql2.'<br>'.mysql_error());
+//FIN   date_fact rajout by ciit (permet l'impression du total des remise fpdf_fact.php) 
+
 //include('form_facture.php');
 ?>
 <tr><td>

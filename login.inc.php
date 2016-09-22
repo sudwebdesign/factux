@@ -60,7 +60,7 @@ if (ereg("MSIE", $_SERVER["HTTP_USER_AGENT"])) {?>
 <form action="login.php" method='post'>
   <table width="339" border="1" align="center">
   <tr>
-    <td class="highlight.login"width="57" rowspan="3" ><img src="image/factux.gif" width="160" height="160" alt="factux"></td>
+    <td class="highlight.login"width="57" rowspan="3" ><img src="image/logoCIA.jpg" width="211" height="211" alt="factux"></td>
     <td class="highlight.login"width="64" ><?php echo $lang_login ?></td>
     <td class="highlight.login"width="196" ><input type="text" name="login" maxlength="250"></td>
   </tr>

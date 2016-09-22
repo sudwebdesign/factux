@@ -24,7 +24,7 @@ $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 $data = mysql_fetch_array($req);
 $num = $data['client_num'];
 $coment = $data['coment'];
-$sql = "SELECT " . $tblpref ."cont_dev.num, quanti, uni, article, tot_art_htva, to_tva_art tva
+$sql = "SELECT " . $tblpref ."cont_dev.num, quanti, remise, uni, article, tot_art_htva, to_tva_art tva
         FROM " . $tblpref ."cont_dev RIGHT JOIN " . $tblpref ."article on " . $tblpref ."cont_dev.article_num = " . $tblpref ."article.num
 		WHERE  dev_num = $num_dev";
 $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
@@ -38,6 +38,7 @@ $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
   <th><? echo $lang_unite ;?></th>
   <th><? echo $lang_article ;?></th>
   <th><? echo $lang_montant_htva ;?></th>
+  <th><?php echo $lang_remise;?></th>
   <th><? echo $lang_editer ;?></th>
   <th><? echo $lang_supprimer ;?></th>
       <?php
@@ -54,6 +55,7 @@ while($data = mysql_fetch_array($req))
   $tot = $data['tot_art_htva'];
   $tva = $data['tva'];
   $num_cont = $data['num'];
+  $remise=$data['remise'];
   
 $total_dev += $tot;
 $total_tva += $tva;
@@ -63,6 +65,7 @@ $total_tva += $tva;
   <td class='<?php echo couleur_alternee (FALSE); ?>'><?php echo  $uni; ?>
   </td><td class='<?php echo couleur_alternee (FALSE); ?>'><?php echo  $article; ?></td>
    <td  class='<?php echo couleur_alternee (FALSE,"nombre"); ?>'><?php echo montant_financier ($tot); ?>
+   <td class="<?php echo couleur_alternee (FALSE,'nombre');?>"><?php echo $remise;?></td>
    </td><td class='<?php echo couleur_alternee (FALSE); ?>'>
    <form method="post" action="edit_cont_dev.php">
   <input name="<?php echo $lang_editer; ?>"
@@ -85,7 +88,7 @@ $total += $tot;
 
    <td  class='totalmontant'><?php echo montant_financier ($total); ?>
    </td><td class='totaltexte'>&nbsp;
-  </td><td class='totaltexte'>&nbsp;</td> </tr>
+  </td><td class='totaltexte'>&nbsp;</td> <td class='totaltexte'>&nbsp;</td></tr>
 <?php
 //on calcule la somme des contenus du bon
 $sql = " SELECT SUM(tot_art_htva) FROM " . $tblpref ."cont_dev WHERE dev_num = $num_dev";
@@ -133,7 +136,8 @@ $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 			        <tr> 
           <td class="texte0"><?php echo $lang_quantite; ?> 
         </td><td class="texte0" colspan="6"><input name="quanti" type="text" id="quanti" size="6">
-        </td class="texte0"></tr>
+        </td></tr>
+		<tr><td class="texte0" colspan="6"><?php echo $lang_remise;?></td><td class="texte0" colspan="6"><input name="remise" type="text" id="remise" size="6"></td></tr>
         <tr> 
           <td class="submit" colspan="7"> <input type="submit" name="Submit2"
 		   value='<?php echo $lang_devis_ajouter; ?>'></td>

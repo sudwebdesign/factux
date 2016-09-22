@@ -63,9 +63,10 @@ foreach ($calendrier as $numero_mois => $nom_mois)
 ?>
   </select>
  </td><td class="texte0"> <select name="annee_1">
-    <option value="2004"><?php $date=(date("Y")-1);echo"$date"; ?></option>
-    <option value="2005"><?php $date=date("Y");echo"$date"; ?></option>
-    <option value="2006"><?php $date=(date("Y")+1);echo"$date"; ?></option>
+<option value="<?php $date=(date("Y")-2);echo"$date"; ?>"><?php echo"$date"; ?></option>
+    <option value="<?php $date=(date("Y")-1);echo"$date"; ?>"><?php echo"$date"; ?></option>
+    <option value="<?php $date=date("Y");echo"$date"; ?>"><?php echo"$date"; ?></option>
+    
   </select>
   </td></tr><tr><td class="submit" colspan="2"><input type="submit" value='<?php echo $lang_envoyer; ?>'>
 </td></tr></table></form>

@@ -52,6 +52,7 @@ while($data = mysql_fetch_array($req))
   $article_num = $data['article_num'];
   $dev_num = $data['dev_num'];
   $prix_ht = $data['prix_htva'];
+  $remise = $data['remise'];
   //echo " $bon_num <br>";
 }
 ?>
@@ -66,7 +67,7 @@ while($data = mysql_fetch_array($req))
 <?php
 include_once("include/configav.php");
 				  if ($use_categorie !='y') { 
-					$rqSql = "SELECT num, article, prix_htva FROM " . $tblpref ."article WHERE actif != 'non' ORDER BY article asc";
+					$rqSql = "SELECT num, article, prix_htva, marge FROM " . $tblpref ."article WHERE actif != 'non' ORDER BY article asc";
 					$result = mysql_query( $rqSql )
              or die( "Exécution requête impossible.");
 
@@ -77,6 +78,7 @@ include_once("include/configav.php");
     				$num = $row["num"];
     				$article2 = $row["article"];
 						$prix = $row["prix_htva"];
+						$marge= $row['marge'];
     				?>
             <OPTION VALUE=<?php echo "$num" ?>
 			
@@ -97,6 +99,11 @@ include_once("include/configav.php");
     <tr> 
       <td  class="texte0" > <?php echo $lang_quanti ?> 
           </td><td class="texte0"><input name="quanti" type="text" size="5" id="quanti" value='<?php echo $quanti; ?>' >
+      </td> 
+    </tr>
+	 <tr> 
+      <td  class="texte0" > <?php echo $lang_remise ?> 
+          </td><td class="texte0"><input name="remise" type="text" size="5" id="remise" value='<?php echo $remise; ?>' >
       </td> 
     </tr>
     <tr>

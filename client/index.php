@@ -19,7 +19,7 @@
  * 		Guy Hendrickx
  *.
  */	
-  if ($lang=='') { 
+  if (!isset($lang)) { 
 $lang ="fr";  
 }
 include("logout.php");

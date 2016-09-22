@@ -29,12 +29,12 @@ $coment = htmlentities($data['coment'], ENT_QUOTES);
 $nom = htmlentities($data['nom'], ENT_QUOTES);
 
 
-$sql = "SELECT " . $tblpref ."cont_bon.num, num_lot, quanti, uni, article, tot_art_htva, to_tva_art tva
+$sql = "SELECT " . $tblpref ."cont_bon.num, num_lot, quanti, remise, uni, article, tot_art_htva, to_tva_art tva
         FROM " . $tblpref ."cont_bon 
 				RIGHT JOIN " . $tblpref ."article on " . $tblpref ."cont_bon.article_num = " . $tblpref ."article.num
 		WHERE  bon_num = $num_bon";
 $req5 = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
-$rqSql1 = "SELECT num, article, prix_htva, uni FROM " . $tblpref ."article WHERE actif != 'non' ORDER BY article,prix_htva";
+$rqSql1 = "SELECT num, article, prix_htva, uni, marge FROM " . $tblpref ."article WHERE actif != 'non' ORDER BY article,prix_htva";
 $result = mysql_query( $rqSql1 )
              or die( "Exécution requête impossible.");
 
@@ -90,6 +90,7 @@ if ($liste_cli!='y') {
   <th><? echo $lang_unite ;?></th>
   <th><? echo $lang_article ;?></th>
   <th><? echo $lang_montant_htva ;?></th>
+  <th><?php echo $lang_remise;?></th>
 	<?php 
 				if ($lot =='y') { ?>
 	 <th><? echo "N° lot"; ?></th>  
@@ -117,6 +118,7 @@ while($data = mysql_fetch_array($req5))
   $article = $data['article'];
   $tot = $data['tot_art_htva'];
   $tva = $data['tva'];
+  $remise=$data['remise'];
   $num_cont = $data['num'];
 	$num_lot = $data['num_lot'];
 $total_bon += $tot;
@@ -127,6 +129,7 @@ $total_tva += $tva;
   <td class='<?php echo couleur_alternee (FALSE); ?>'><?php echo  $uni; ?> </td>
 	<td class='<?php echo couleur_alternee (FALSE); ?>'><?php echo  $article; ?></td>
   <td  class='<?php echo couleur_alternee (FALSE,"nombre"); ?>'><?php echo montant_financier ($tot); ?></td>
+  <td  class='<?php echo couleur_alternee (FALSE,"nombre"); ?>'><?php echo $remise; ?></td>
 	<?php 
 if ($lot =='y') { ?>
   <td class='<?php echo couleur_alternee (FALSE); ?>'><?php echo $num_lot; ?></td>
@@ -223,6 +226,10 @@ $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 			        <tr> 
           <td class="texte0"><?php echo $lang_quantite; ?> 
         </td><td class="texte0" colspan="8"><input name="quanti" type="text" id="quanti" size="6">
+        </td></tr>
+		 <tr> 
+          <td class="texte0"><?php echo $lang_remise; ?> 
+        </td><td class="texte0" colspan="8"><input name="remise" type="text" id="remise" size="6">
         </td></tr>
         <tr> 
           <td class="submit" colspan="9"> <input type="submit" name="Submit2"

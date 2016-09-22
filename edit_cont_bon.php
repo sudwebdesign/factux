@@ -55,6 +55,7 @@ while($data = mysql_fetch_array($req))
 		$bon_num = $data['bon_num'];
 		$prix_ht = $data['prix_htva'];
 		$num_lot = $data['num_lot'];
+		$remise=$data['remise'];
 		
 		}
 ?>
@@ -64,11 +65,15 @@ while($data = mysql_fetch_array($req))
      <td class="texte0"><?php echo $lang_quanti ?>
      <td colspan="3" class="texte0"><input name="quanti" type="text" size="5" id="quanti" value='<?php echo"$quanti"?>' >
 	<tr>
+	<tr>
+     <td class="texte0"><?php echo $lang_remise ?>
+     <td colspan="3" class="texte0"><input name="remise" type="text" size="5" id="remise" value='<?php echo"$remise"?>' >
+	<tr>
 	<td class="texte0"><?php echo $lang_article ;?>
 <?php 
 include_once("include/configav.php");
 				  if ($use_categorie !='y') { 
-$rqSql = "SELECT uni, num, article, prix_htva FROM " . $tblpref ."article WHERE actif != 'non' ORDER BY article, prix_htva";
+$rqSql = "SELECT uni, num, article, prix_htva, marge FROM " . $tblpref ."article WHERE actif != 'non' ORDER BY article, prix_htva";
 $result = mysql_query( $rqSql )
              or die( "Exécution requête impossible.");
 $ld = "<SELECT NAME='article'>";
@@ -78,6 +83,7 @@ while ( $row = mysql_fetch_array( $result)) {
     $article2 = $row["article"];
 		$prix = $row["prix_htva"];
 		$uni = $row["uni"];
+		$marge=$row['marge'];
     $ld .= "<OPTION VALUE='$num'>$article2 $prix $devise /$uni</OPTION>";
 }?>
 <td class="texte0">

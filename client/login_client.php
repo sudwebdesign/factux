@@ -21,7 +21,7 @@
  * 		Guy Hendrickx
  *.
  */
-if ($lang=='') { 
+if (!isset($lang)) { 
 $lang ="fr";  
 }
 include_once("../include/config/common.php");

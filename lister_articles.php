@@ -71,6 +71,7 @@ $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql2.'<br>'.mysql_error());
 		<?php } ?>
     <th><a href="lister_articles.php?ordre=prix_htva"><?php echo $lang_htva; ?></a> </th>
     <th><a href="lister_articles.php?ordre=taux_tva"><?php echo $lang_taux_tva; ?></a></th>
+	<th><a href="lister_articles.php?ordre=marge"><?php echo $lang_marge;?></a></th>
     <th><a href="lister_articles.php?ordre=uni"><?php echo $lang_unite; ?></a></th>
 		<?php
 		if($use_stock=='y'){?>
@@ -92,6 +93,7 @@ while($data = mysql_fetch_array($req))
 		$num =$data['num'];
 		$prix = $data['prix_htva'];
 		$tva = $data['taux_tva'];
+		$marge=$data['marge'];
 		$uni = $data['uni'];
 		$stock = $data['stock'];
 		$min = $data['stomin'];
@@ -116,6 +118,7 @@ $line="1";
 		<?php } ?>
     <td class="highlight"><?php echo montant_financier ($prix); ?></td>
     <td class="highlight"><?php echo "$tva %"; ?></td>
+	<td class="highlight"><?php echo "$marge";?></td>
 		<td class="highlight"><?php echo $uni; ?></td>
 		<?php
 		if($use_stock=='y'){?>

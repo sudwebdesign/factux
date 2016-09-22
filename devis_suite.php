@@ -28,6 +28,7 @@ include_once("include/headers.php");
 include_once("include/finhead.php");
 $quanti=isset($_POST['quanti'])?$_POST['quanti']:"";
 $article=isset($_POST['article'])?$_POST['article']:"";
+$remise=isset($_POST['remise'])?$_POST['remise']:"";
 $num=isset($_POST['num'])?$_POST['num']:"";
 $nom=isset($_POST['nom'])?$_POST['nom']:"";
 ?>
@@ -58,6 +59,7 @@ echo "<center><table class='boiteaction'>
   <th><? echo $lang_unite ;?></th>
   <th><? echo $lang_article ;?></th>
   <th><? echo $lang_montant_htva ;?></th>
+  <th><?php echo $lang_remise;?></th>
   <th><? echo $lang_editer ;?></th>
   <th><? echo $lang_supprimer ;?></th></tr>
 <?php 
@@ -80,24 +82,31 @@ $prix_article = mysql_result($result, 'prix_htva');
 $sql3 = "SELECT taux_tva FROM " . $tblpref ."article WHERE num = $article";
 $result = mysql_query($sql3) or die('Erreur SQL !<br>'.$sql3.'<br>'.mysql_error());
 $taux_tva = mysql_result($result, 'taux_tva');
+//on recupere le coeff  de marge
+$sql4 = "select marge from " . $tblpref ."article WHERE num = $article";
+$result = mysql_query($sql4) or die('Erreur SQL !<br>'.$sql4.'<br>'.mysql_error());
+$marge = mysql_result($result, 'marge');
 
+//calcul du prix remisé
+$prix_article=$prix_article*(1-($remise/100))*$marge;
 $total_htva = $prix_article * $quanti ;
 $mont_tva = $total_htva / 100 * $taux_tva ;
 //inserer les données dans la table du conten des bons.
 mysql_select_db($db) or die ("Could not select $db database");
-$sql1 = "INSERT INTO " . $tblpref ."cont_dev(p_u_jour, quanti, article_num, dev_num, tot_art_htva, to_tva_art) VALUES ('$prix_article', '$quanti', '$article', '$max', '$total_htva', '$mont_tva')";
+$sql1 = "INSERT INTO " . $tblpref ."cont_dev(p_u_jour, quanti, remise, article_num, dev_num, tot_art_htva, to_tva_art) VALUES ('$prix_article', '$quanti', '$remise', '$article', '$max', '$total_htva', '$mont_tva')";
 mysql_query($sql1) or die('Erreur SQL !<br>'.$sql1.'<br>'.mysql_error());
  ?> 
  <?php 
 //echo "$lang_devis_compr <br>";
 //on recherche tout les contenus du bon et on les detaille
-$sql2 = "SELECT " . $tblpref ."cont_dev.num, uni, quanti, article, tot_art_htva FROM " . $tblpref ."cont_dev RIGHT JOIN " . $tblpref ."article on " . $tblpref ."cont_dev.article_num = " . $tblpref ."article.num WHERE  dev_num = $max";
+$sql2 = "SELECT " . $tblpref ."cont_dev.num, uni, quanti, remise, article, tot_art_htva FROM " . $tblpref ."cont_dev RIGHT JOIN " . $tblpref ."article on " . $tblpref ."cont_dev.article_num = " . $tblpref ."article.num WHERE  dev_num = $max";
 $req = mysql_query($sql2) or die('Erreur SQL2 !<br>'.$sql2.'<br>'.mysql_error());
 while($data = mysql_fetch_array($req))
     {
 		$quanti = $data['quanti'];
 		$uni = $data['uni'];
 		$article = $data['article'];
+		$remise = $data['remise'];
 		$tot = $data['tot_art_htva'];
 		$num_cont = $data['num'];//$lang_li_tot2
 		?>
@@ -105,6 +114,7 @@ while($data = mysql_fetch_array($req))
 		<td><?php echo $uni  ?>
 		<td><?php echo $article ?>
 		<td><?php echo "$tot $devise" ?>
+		<td><?php echo $remise;?></td>
 		<td><a href=edit_cont_dev.php?num_cont=<?php echo $num_cont ?>><img border=0 alt=editer src=image/edit.gif></a>&nbsp;
 		<td><a href=delete_cont_dev.php?num_cont=<?php echo $num_cont?>&num_dev=<?php echo $max ?> onClick='return confirmDelete()'><img border=0 src= image/delete.jpg ></a></tr>
 		<?php }
@@ -122,10 +132,11 @@ while($data = mysql_fetch_array($req))
     {
 		$total_tva = $data['SUM(to_tva_art)'];
 		}    
-echo "<td class='totalmontant'colspan='3'> $lang_total ";
+echo "<td class='totalmontant'colspan='4'> $lang_total ";
 echo "<td class='totalmontant'colspan='1'>$total_bon $devise<td class='totalmontant'>$lang_tva<td class='totalmontant'> $total_tva $devise<tr>"; 
- echo "<form name='formu2' method='post' action='devis_suite.php'><td><td><td>$lang_quanti<td>";
+ echo "<form name='formu2' method='post' action='devis_suite.php'><td><td>$lang_quanti<td>";
  echo "<input name='quanti' type='text' id='quanti' size='6'>";
+ echo "<td>$lang_remise</td><td><input name='remise' type='text' id='remise' size='6'></td>";
  echo "<td>$lang_article";
  include_once("include/configav.php");
 				  if ($use_categorie !='y') {

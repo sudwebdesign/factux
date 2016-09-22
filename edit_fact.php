@@ -81,13 +81,13 @@ $num_client= $data['CLIENT'];
 	   <input type="hidden" name="user" VALUE="adm">
 	   <input type="image" src="image/printer.gif" alt="imprimer" />
          </FORM></td>
-	 <td class='<?php echo couleur_alternee (FALSE); ?>'><FORM action="suite_edit_fact.php" method="POST" onClick='return confirmDelete()' enctype="multipart/form-data">
+	 <td class='<?php echo couleur_alternee (FALSE); ?>'><!--<FORM action="suite_edit_fact.php" method="POST" onClick='return confirmDelete()' enctype="multipart/form-data">
         <INPUT type="hidden" name="retirer" value="<?php echo"$num_bon"; ?>" >
 				<INPUT type="hidden" name="num_fact" value="<?php echo"$num_fact"; ?>" >
 				
 	<INPUT type="submit" value="retirer">
 	
-      </FORM></td></tr>
+      </FORM>--></td></tr>
        <?php
      } 
      echo"</table></center>";
@@ -124,11 +124,11 @@ $ttc =($tot_htva + $tot_tva);
 	   <input type="hidden" name="user" VALUE="adm">
 	   <input type="image" src="image/printer.gif" alt="imprimer" />
          </FORM></td>
-	 <td class='<?php echo couleur_alternee (FALSE); ?>'><FORM action="suite_edit_fact.php" method="POST" onClick='return confirmDelete2()' enctype="multipart/form-data">
+	 <td class='<?php echo couleur_alternee (FALSE); ?>'><!--<FORM action="suite_edit_fact.php" method="POST" onClick='return confirmDelete2()' enctype="multipart/form-data">
         <INPUT type="hidden" name="ajouter" value="<?php echo"$aj_num_bon"; ?>" onselect="submit">
 				<INPUT type="hidden" name="num_fact" value="<?php echo"$num_fact"; ?>" >
 	<INPUT type="submit" value="ajouter">
-      </FORM></td>
+      </FORM>--></td>
 </tr>
 <?php
 }
