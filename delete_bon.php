@@ -19,30 +19,25 @@
  * 		Guy Hendrickx
  *.
  */
-require_once("include/verif.php");
-include_once("include/head.php");
+include_once("include/verif.php");
 include_once("include/config/common.php");
+include_once("include/config/var.php");
 include_once("include/language/$lang.php");
-echo '<link rel="stylesheet" type="text/css" href="include/style.css">';
-echo'<link rel="shortcut icon" type="image/x-icon" href="image/favicon.ico" >';
+$num_bon=isset($_GET['num_bon'])?$_GET['num_bon']:"";
+$nom=isset($_GET['nom'])?$_GET['nom']:"";
 $sql = "SELECT fact FROM " . $tblpref ."bon_comm WHERE num_bon = $num_bon";
-$req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql2.'<br>'.mysql_error());
-while($data = mysql_fetch_array($req))
-    {
-		$fact = $data['fact'];
-		}
-if($fact=='ok')
-{
-echo "<center><h1>$lang_err_efa_bon";
-include('form_bon.php');
-exit;
+$req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+while($data = mysql_fetch_array($req)){
+ $fact = $data['fact'];
 }
-echo "<Center><h2><br>$lang_effacer_bon";
-?>
-<form action="delete_bon_suite.php" method="post" name="delete">
-<input type="hidden" name="num_bon" value=<?php echo $num_bon ?>>
-<input type="hidden" name="nom" value=<?php echo $nom ?>>
-<input type="submit" name="Submit" value=<?php echo $lang_effacer ?>>
-</form><?php 
-include("include/bas.php");
- ?>
+if($fact!='0'){#=='ok'
+ $message = "<h1>$lang_err_efa_bon</h1>";
+ include('form_commande.php');
+ exit;
+}
+$sql1 = "DELETE FROM " . $tblpref ."cont_bon WHERE bon_num = '".$num_bon."'";
+mysql_query($sql1) or die('Erreur SQL !<br>'.$sql1.'<br>'.mysql_error());
+$sql1 = "DELETE FROM " . $tblpref ."bon_comm WHERE num_bon = '".$num_bon."'";
+mysql_query($sql1) or die('Erreur SQL !<br>'.$sql1.'<br>'.mysql_error());
+$message= "<h2>$lang_bon_effa $nom</h2>";
+include("form_commande.php");

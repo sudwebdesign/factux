@@ -17,11 +17,11 @@
  * 
  * File Authors:
  * 		Guy Hendrickx
- *.
+ *
  */
 include_once("include/config/common.php");
 $num=isset($_GET['num'])?$_GET['num']:"";
-$sql2 = "UPDATE " . $tblpref ."lot SET actif='non' WHERE num = '".$num."'";
+$acte=isset($_GET['acte'])?$_GET['acte']:"non";
+$sql2 = "UPDATE " . $tblpref ."lot SET actif='".$acte."' WHERE num = '".$num."'";
 mysql_query($sql2) OR die("<p>Erreur Mysql<br/>$sql2<br/>".mysql_error()."</p>");
 include_once("lister_lot.php");
- ?> 

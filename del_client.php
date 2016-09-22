@@ -24,4 +24,3 @@ $num=isset($_GET['num'])?$_GET['num']:"";
 $sql2 = "UPDATE " . $tblpref ."client SET actif='non' WHERE num_client = '".$num."'";
 mysql_query($sql2) OR die("<p>Erreur Mysql<br/>$sql2<br/>".mysql_error()."</p>");
 include_once("lister_clients.php");
- ?> 

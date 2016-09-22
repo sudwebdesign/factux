@@ -1,42 +1,44 @@
 body {
-	background-color:#bfbfbf;
+	background-color:transparent;/*#bfbfbf;*/
 	text-align: center;
-font-size:SMALL;
+font-size:small;
 color:black;
 	}
+img{
+border: none;
+margin: 0;
+}		
 	
-	
-.INPUT { 
-background-color: #FFEFD5 ; 
-font-family: Arial, Helvetica, sans-serif ; 
-color: red ; 
+.input{ 
+background-color: #ffefd5 ; 
+font-family: arial, helvetica, sans-serif ; 
+color: red ;
 }
 
-.OPTION { 
-background-color: #FFEFD5 ; 
+.option { 
+background-color: #ffefd5 ; 
 }
 
-.SELECT { 
+.select { 
 background-color: 
-#FFEFD5 ; 
+#ffefd5 ; 
 }
 
-.TEXTAREA { 
-background-color: #FFEFD5 ; 
+.textarea { 
+background-color: #ffefd5 ; 
 color: red ; 
 }
 
-.BUTTON { font-family: arial, helvetica, sans-serif ; 
+.button { font-family: arial, helvetica, sans-serif ; 
 border-width: 2pt ;
  font-size: 16pt ; 
  color: black ; 
  top: 250px ; 
- background-color: #F5DEB3 ; 
+ background-color: #f5deb3 ; 
  }
 
- 
- 
- 
+.left50{float:left;width:50%;} 
+
  
 .libelle {
 	background-color: #CAE3FF;
@@ -51,6 +53,9 @@ border-width:1px;
 text-align:center;
 border-spacing: 1px;
 border: 1px;
+table-layout: auto;
+caption-side: top;
+border: thin solid #000000 ;
 
 }
 td {
@@ -59,7 +64,7 @@ td {
 	color:#000000;
 	text-align: left;
 	padding:4px;
-	vertical-align: top;
+	vertical-align: middle;
 	border: 1px;
 	
 }
@@ -69,7 +74,7 @@ td.highlight {
 	color:#000000;
 	text-align: left;
 	padding:4px;
-	vertical-align: top;
+	vertical-align: middle;
 	border: 1px ;
 }
 /*//#efefef;*/
@@ -88,31 +93,31 @@ text-align:center;
 	
 h1 {
 font-family:arial, sans-serif;
-font-size:MEDIUM;
+font-size:small;
 color:red;
 background-color:transparent;
 text-align:center;
-	font-weight: bold;
+font-weight: bold;
 }
 h2 {
 font-family:arial, sans-serif;
-font-size:MEDIUM;
+font-size:medium;
 color:green;
 background-color:transparent;
 text-align:center;
 }
 h3 {
 font-family:verdana, sans-serif;
-font-size:LARGE;
+font-size:large;
 color:black;
 background-color:transparent;
 text-align:center;
-	font-weight: bold;
+font-weight: bold;
 }
 
 h4 {
 font-family:verdana, sans-serif;
-font-size:LARGE;
+font-size:large;
 color:black;
 background-color:transparent;
 text-align:center;
@@ -120,7 +125,7 @@ text-align:center;
 
 h5 {
 font-family:verdana, sans-serif;
-font-size:MEDIUM;
+font-size:medium;
 color:black;
 background-color:transparent;
 text-align:center;
@@ -129,17 +134,15 @@ text-align:center;
 
 h6 {
 font-family:verdana, sans-serif;
-font-size:MEDIUM;
+font-size:medium;
 color:black;
 background-color:transparent;
 text-align:center;
 }
 
-
-
 p {
 font-family:verdana, sans-serif;
-font-size:SMALL;
+font-size:small;
 color:green;
 background-color:transparent;
 text-align:center;
@@ -148,7 +151,7 @@ margin-right:0px;
 }
 li {
 font-family:verdana, sans-serif;
-font-size:SMALL;
+font-size:small;
 color:black;
 background-color:transparent;
 text-align:center;
@@ -157,21 +160,21 @@ margin-right:0px;
 }
 a:link {
 font-family:verdana, sans-serif;
-font-size:SMALL;
+font-size:small;
 color:blue;
 background-color:transparent;
 text-decoration:underline;
 }
 a:visited {
 font-family:verdana, sans-serif;
-font-size:SMALL;
+font-size:small;
 color:black;
 background-color:transparent;
 text-decoration:underline;
 }
 a:hover {
 font-family:verdana, sans-serif;
-font-size:SMALL;
+font-size:small;
 color:navy;
 background-color:transparent;
 text-decoration:underline;
@@ -190,7 +193,7 @@ tr {
 	color:#000000;
 	text-align: center;
 	padding:4px;
-	vertical-align: top;
+	vertical-align: middle;
 	border-color:grey;
 	border: 1px;
 	background-color:#ffffee;
@@ -201,9 +204,9 @@ font-family:verdana, sans-serif;
 	color:#000000;
 	text-align: left;
 	padding:4px;
-	vertical-align: top;
+	vertical-align: middle;
 	border: 0px none;
-	background-color: #bfbfbf;
+	background-color: rgba(207,207,207,0.777);/*#cfcfcf;*/
 	border-color:grey;
 }
 .rien {
@@ -217,10 +220,10 @@ background-color:#FFFFCC;
 }
 td.td2{
 font-family:verdana, sans-serif;
-font-size:SMALL;
+/*font-size:small;*/
 color:#000000;
 text-align:center;
-background-color:#99DEFF;
+background-color:#DDDDDD;
 border-color:transparent;
 border-style:solid;
 border-width:0px;
@@ -232,20 +235,20 @@ font-family:verdana, sans-serif;
 	color:#000000;
 	text-align: left;
 	padding:4px;
-	vertical-align: top;
+	vertical-align: middle;
 	border: 0px none;
 }
 .td2montant{
-background-color:#CAE3FF;
+background-color:#F3F3F3;
 border-color:transparent;
 }
 
 .td3{
 font-family:verdana, sans-serif;
-font-size:SMALL;
+font-size:small;
 color:#000000;
 text-align:left;
-background-color:#CC6633;
+background-color:#996633;
 border-color:transparent;
 border-style:solid;
 border-width:0px;
@@ -253,7 +256,7 @@ padding:0;
 }
 .td4{
 font-family:verdana, sans-serif;
-font-size:SMALL;
+font-size:small;
 color:#000000;
 text-align:left;
 background-color:transparent;
@@ -261,7 +264,7 @@ background-color:transparent;
 
 .boiteaction {
 	background-color:#F3FFDD;
-	width:96%;
+	width:100%;/*ba*/
 	text-align:center;
 	border:2px;
 	border-color:grey;
@@ -270,7 +273,7 @@ background-color:transparent;
 
 .tdgraph{
 font-family:verdana, sans-serif;
-font-size:SMALL;
+font-size:small;
 color:#000000;
 text-align:left;
 background-image:url(../image/fond.gif);
@@ -287,7 +290,7 @@ padding:0;
 
 caption {
 	background-color: #b62819;
-	 font-size:MEDIUM;
+	 font-size:medium;
 	 color:#FFFFFF;
 	 font-weight: bold;
 	 text-align:center;
@@ -296,17 +299,18 @@ caption {
 }
 
 td.texte0 {
-	background-color: #ffffee;
+	background-color: rgba(255,255,227,0.407);/*#ffffee;*/
 	text-align: left;
 }
 tr.texte0 {
-	background-color: #ffffee;
+	background-color: rgba(255,255,227,0.407);/*#ffffee;*/
 	text-align: left;
-	border-width:1px;
+	border-width:0px;
+	border-left:thin solid black;
 }
 
 td.nombre0 {
-	background-color: #ffffee;
+	background-color: rgba(255,255,227,0.407);/*#ffffee;*/
 	text-align: right;
 }
 
@@ -316,20 +320,21 @@ td.install {
 	width: 150px;
 }
 
-
 td.texte1 {
-	background-color: #ddddcc;
+	background-color: rgba(255,255,207,0.407);/*#ffffcc;*/
 	text-align: left;
 }
 tr.texte1 {
-	background-color: #ddddcc;
+	background-color: rgba(255,255,207,0.807);/*#ffffcc;*/
 	text-align: left;
 	border-width:1px;
 }
 td.nombre1 {
-	background-color: #ddddcc;
+	background-color: rgba(255,255,207,0.407);/*#ffffcc;*/
 	text-align: right;
 }
+
+td.c.texte0,td.c.texte1{text-align: center; !important}/*action*/
 
 th {
 	background-color: #DDDDDD;
@@ -342,7 +347,6 @@ th a:link{
 	color:red;
 	font-weight: bold;
 	text-align: center;
-
 }
 th a:visited{
 	background-color: transparent;
@@ -356,7 +360,6 @@ th a:hover{
 	color:red;
 	font-weight: bold;
 	text-align: center;
-
 }
 .submit {
 	background-color: #b62819;
@@ -366,28 +369,28 @@ th a:hover{
 }
 
 .totaltexte {
-font-size:SMALL;
+font-size:small;
 	background-color: #dddddd;
 	color:red;
 	font-weight: bold;
 }
 
 .totalmontant {
-font-size:SMALL;
+font-size:small;
 	color:red;
 	font-weight: bold;
 text-align:right;
 	background-color: #dddddd;
 }	
 .boiteaction td, form, input {
-    padding: 0;
-    margin: 0;
+ /*padding: 0;*/
+ margin: 0;
 } 
 /***** menu CSS *****/
 @media print {
 /*A l'impression on cache le menu, marche au moins pour IE, Moz et Opéra.*/
-	.menu, .ssmenu {
-		visibility:hidden;
+	.menu, .ssmenu,h1 {
+		display: none;
 	}
 }
 

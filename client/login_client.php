@@ -1,5 +1,3 @@
-<html>
-<head>
 <?php 
 /*
  * Factux le facturier libre
@@ -21,33 +19,23 @@
  * 		Guy Hendrickx
  *.
  */
-if (!isset($lang)) { 
-$lang ="fr";  
-}
+$now='../';
 include_once("../include/config/common.php");
-include_once("../include/language/$lang.php");
 include_once("../include/config/var.php");
+$lang=isset($_POST['lang'])?$_POST['lang']:"";
+$lang=(empty($lang))?$default_lang:$lang;#default_lg in common
+include_once("../include/language/$lang.php");
 include_once("../include/utils.php");
-?>
-<title><?php echo $lang_factux; ?></title>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-<link rel="stylesheet" type="text/css" href="../include/style.css">
-
-</head>
-
-<body>
-<?php
+include_once("../include/headers.php");
+include_once("../include/finhead.php");
 $login=isset($_POST['login'])?$_POST['login']:"";
 $pass=isset($_POST['pass'])?$_POST['pass']:"";	
-$lang=isset($_POST['lang'])?$_POST['lang']:"";
-ini_set('session.save_path', '../include/session'); 
 
-if($login=='' || $pass=='')
-    {
-    echo $lang_oublie_champ;
-    include('login.htm');
-    exit;
-    }
+if($login=='' || $pass==''){
+ $message = "<h1>$lang_oublie_champ</h1>";
+ include(@$from_cli.'login.php');
+ exit;
+}
 
 $sql = "select pass from " . $tblpref ."client where login= '$login'";
 $req = mysql_query($sql) or die('Erreur SQL1
@@ -55,19 +43,13 @@ $req = mysql_query($sql) or die('Erreur SQL1
 
 $data = mysql_fetch_array($req);
   $pass_crypt = md5($pass);
-if($data['pass'] != $pass_crypt)
-    {
-    echo "<h1>$lang_bad_log</h1>";
-    include('login.htm'); 
-    exit;
-    }
+if($data['pass'] != $pass_crypt){
+ $message = "<h1>$lang_bad_log</h1>";
+ include(@$from_cli.'login.php'); 
+ exit;
+}
+ini_set('session.save_path', '../include/session'); 
 session_start();
-//session_register('login');
-$_SESSION['login_client'] = $login;
-	$_SESSION['lang'] = $lang ; 
-?>
-<?php 
+session_register('login');
+session_register('lang');
 include_once("client.php");
- ?> 
-</body>
-</html>

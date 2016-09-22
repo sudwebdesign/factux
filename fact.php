@@ -19,184 +19,242 @@
  * 		Guy Hendrickx
  *.
  */
-require_once("include/verif.php");
-include_once("include/config/common.php");
-include_once("include/config/var.php");
-include_once("include/language/$lang.php");
 include_once("include/headers.php");
-include_once("include/finhead.php");?>
-<table width="760" border="0" class="page" align="center">
-<tr>
-<td class="page" align="center">
-<?php
-include_once("include/head.php");
-if ($user_admin != y) { 
-echo "<h1>$lang_admin_droit";
-exit;
-}
-?>
-</td>
-</tr>
-<?php
-$acompte=isset($_POST['acompte'])?$_POST['acompte']:"";
+include_once("include/finhead.php");
+
+$acompte=isset($_POST['acompte'])?$_POST['acompte']+0.00:0.00;
 $date_deb=isset($_POST['date_deb'])?$_POST['date_deb']:"";
 list($jour_deb, $mois_deb,$annee_deb) = preg_split('/\//', $date_deb, 3);
 $date_fin=isset($_POST['date_fin'])?$_POST['date_fin']:"";
 list($jour_f, $mois_f,$annee_f) = preg_split('/\//', $date_fin, 3);
 $date_fact=isset($_POST['date_fact'])?$_POST['date_fact']:"";
 list($jour_fact, $mois_fact,$annee_fact) = preg_split('/\//', $date_fact, 3);
-$client=isset($_POST['listeville'])?$_POST['listeville']:"";
-$annee_fac=isset($_POST['annee_fac'])?$_POST['annee_fac']:"";
-$coment=isset($_POST['coment'])?$_POST['coment']:"";
+$client=isset($_POST['listeclients'])?$_POST['listeclients']:"";
+$coment=isset($_POST['coment'])?apostrophe($_POST['coment']):"";
 $debut = "$annee_deb-$mois_deb-$jour_deb" ;
 $fin = "$annee_f-$mois_f-$jour_f" ;
 $date_fact ="$annee_fact-$mois_fact-$jour_fact";
-if($client=='null' || $date_deb==''|| $date_fin=='' || $date_fact=='' )
-{
-$message= "<h1>$lang_oubli_champ</h1>";
-include('form_facture.php');
-exit;
+
+if($client=='' || $date_deb==''|| $date_fin=='' || $date_fact=='' ){
+ $message= "<h1>$lang_oubli_champ</h1>";
+ include('form_facture.php');
+ exit;
 }
-$sql = " SELECT nom, nom2 From " . $tblpref ."client WHERE num_client = $client ";
-$req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 
-
-while($data = mysql_fetch_array($req))
-    {
-		$nom = $data['nom'];
-		$nom2 = $data['nom2'];
-		}
-
-$sql = "SELECT * FROM " . $tblpref ."bon_comm 
-	 WHERE client_num = '".$client."' 
-	 AND " . $tblpref ."bon_comm.date >= '".$debut."' 
-	 and " . $tblpref ."bon_comm.date <= '".$fin."' 
-	 and fact = 'ok'";
-
-$req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
-while($data = mysql_fetch_array($req))
-    {
-		$fact = $data['fact'];
-		}
-if($fact=='ok')
-{
-$message= "<h1>$lang_err_fact</h1>";
-include('form_facture.php');
-exit;
+if ($user_admin != 'y'){ 
+ echo "<h1>$lang_admin_droit</h1>";
+ exit;
 }
-$sql = " SELECT SUM(tot_htva), SUM(tot_tva) 
-		FROM " . $tblpref ."bon_comm 
-		 WHERE " . $tblpref ."bon_comm.client_num = '".$client."' 
-		 AND " . $tblpref ."bon_comm.date >= '".$debut."' 
-		 and " . $tblpref ."bon_comm.date <= '".$fin."'";
+$sql = " SELECT civ, nom, nom2 From " . $tblpref ."client WHERE num_client = $client ";
+$req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+while($data = mysql_fetch_array($req)){
+ $civ = $data['civ'];
+ $nom = $data['nom'];
+ $nom2 = $data['nom2'];
+}
 
-  $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+$sql = "
+SELECT * FROM " . $tblpref ."bon_comm 
+WHERE client_num = '".$client."' 
+AND " . $tblpref ."bon_comm.date >= '".$debut."' 
+AND " . $tblpref ."bon_comm.date <= '".$fin."' 
+AND fact != '0'";#AND fact = 'ok'
+
+$req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+while($data = mysql_fetch_array($req)){
+ $fact = $data['fact'];
+}
+
+if(isset($fact)&&$fact!='0'){#$fact=='ok'
+ $message= "<h1>$lang_err_fact</h1>";
+ include('form_facture.php');
+ exit;
+}
+$sql = "
+SELECT SUM(tot_htva), SUM(tot_tva) 
+FROM " . $tblpref ."bon_comm 
+WHERE " . $tblpref ."bon_comm.client_num = '".$client."' 
+AND " . $tblpref ."bon_comm.date >= '".$debut."' 
+AND " . $tblpref ."bon_comm.date <= '".$fin."'
+";
+
+$req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 $data = mysql_fetch_array($req);
-		$total_htva = $data['SUM(tot_htva)'];
-		$total_tva = $data['SUM(tot_tva)'];
-		$total_ttc = $total_htva + $total_tva ;
-if($total_htva=='')
-{
-$message= "<h1>$lang_err_fact_2 </h1>";
-include('form_facture.php');
-exit;
+$total_htva = $data['SUM(tot_htva)'];
+$total_tva = $data['SUM(tot_tva)'];
+$total_ttc = $total_htva + $total_tva ;
+#var_dump($total_htva);exit;
+if($total_htva==''){
+ $message= "<h1>$lang_err_fact_2 $nom</h1>";
+ include('form_facture.php');
+ exit;
 }
 
 //nouvelle methode
-$sql = " SELECT num_bon 
-		FROM " . $tblpref ."bon_comm 
-		 WHERE " . $tblpref ."bon_comm.client_num = '".$client."' 
-		 AND " . $tblpref ."bon_comm.date >= '".$debut."' 
-		 and " . $tblpref ."bon_comm.date <= '".$fin."'";
+$sql = "
+SELECT num_bon 
+FROM " . $tblpref ."bon_comm 
+WHERE " . $tblpref ."bon_comm.client_num = '".$client."' 
+AND " . $tblpref ."bon_comm.date >= '".$debut."' 
+AND " . $tblpref ."bon_comm.date <= '".$fin."'
+";
 
 $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
-while($data = mysql_fetch_array($req))
-    {
-		$list_num[] = $data['num_bon'];
-		}
+while($data = mysql_fetch_array($req)){
+ $list_num[] = $data['num_bon'];
+}
 
 $suite_sql="and " . $tblpref ."bon_comm.num_bon ='$list_num[0]'";
 for($m=1; $m<count($list_num); $m++){
-$suite_sql .= " or " . $tblpref ."bon_comm.num_bon ='$list_num[$m]'";
-
+ $suite_sql .= " or " . $tblpref ."bon_comm.num_bon ='$list_num[$m]'";
 }
 
-//on recherche le numero de la facture crée
-$sql = "SELECT MAX(num) As Maxi FROM " . $tblpref ."facture";
-$result = mysql_query($sql) or die('Erreur');
-$num = mysql_result($result, 'Maxi');
-$num = $num + 1 ;
-
-
 //On afiche le resultat
-$sql9 = "SELECT date, quanti, article, remise, tot_art_htva, to_tva_art, taux_tva, uni, num_bon 
+$sql9 = "
+SELECT date, quanti, article, remise, p_u_jour, marge_jour, tot_art_htva, to_tva_art, taux_tva, uni, num_bon 
 FROM " . $tblpref ."client 
-RIGHT JOIN " . $tblpref ."bon_comm on " . $tblpref ."client.num_client = " . $tblpref ."bon_comm.client_num 
+LEFT JOIN " . $tblpref ."bon_comm on " . $tblpref ."client.num_client = " . $tblpref ."bon_comm.client_num 
 LEFT join " . $tblpref ."cont_bon on " . $tblpref ."bon_comm.num_bon = " . $tblpref ."cont_bon.bon_num  
 LEFT JOIN  " . $tblpref ."article on " . $tblpref ."article.num = " . $tblpref ."cont_bon.article_num 
-WHERE " . $tblpref ."client.num_client = '".$client."'"; 
-//AND " . $tblpref ."bon_comm.date >= '".$debut."' 
-//and " . $tblpref ."bon_comm.date <= '".$fin."'";
+WHERE " . $tblpref ."client.num_client = '".$client."'
+";
 $sql9="$sql9 $suite_sql";
-
 $req = mysql_query($sql9) or die('Erreur SQL9 !<br>'.$sql9.'<br>'.mysql_error());
-echo "<tr><td class='page'><table class='boiteaction'>
-  <caption>
-  Facture $num créée pour $nom $nom2
-  </caption>
-"; 
 
-echo "<tr><th>Quanti <th>$lang_unite<th>$lang_article<th>$lang_prix_h_tva<th>$lang_remise<th>$lang_taux_tva<th>$lang_tot_tva<th>$lang_num_bon<th>$lang_date_bon</tr>";
-while($data = mysql_fetch_array($req))
-    {
-		$quanti = $data['quanti'];
-		$article = $data['article'];
-		$tot_htva = $data['tot_art_htva'];
-		$tot_tva = $data['to_tva_art'];
-		$taux = $data['taux_tva'];
-		$uni = $data['uni'];
-		$num_bon = $data['num_bon'];
-		$date = $data['date'];
-		$remise = $data['remise'];
-		echo "<tr><td>$quanti<td>$uni<td>$article<td>$tot_htva<td>$remise<td>$taux<td>$tot_tva<td>$num_bon<td>$date</tr>";
-		}
-		
-		echo "<tr><td>";
-		?>
-		<form action="fpdf/fact_pdf.php" method="post" target="_blank" >
-		<input type="hidden" name="client" value="<?php echo $client ?>" />
-		<input type="hidden" name="debut" value="<?php echo $debut ?>" />
-		<input type="hidden" name="fin" value="<?php echo $fin ?>" />
-		<input type="hidden" name="num" value="<?php echo $num ?>" />
-		<input type="hidden" name="user" value="adm" />
-		<input type="image" src="image/printer.gif" alt="imprimer" />
+if (!isset($_POST['simuler'])){
+ //on enregistre le contenu de la facture
+ $list_num = serialize($list_num);
+ $sql1 = "
+ INSERT INTO " . $tblpref ."facture(acompte, coment, client, date_fact, total_fact_h, total_fact_ttc, list_num)
+ VALUES ('$acompte', '$coment', '$client', '$date_fact', '$total_htva', '$total_ttc', '$list_num')
+ ";/**/
+ mysql_query($sql1) or die('Erreur SQL1 !<br>'.$sql1.'<br>'.mysql_error());
+ $num_fact = mysql_insert_id();//le numero de la facture créée
 
-</form>
-		
-		<?php  
-$rest = $total_htva + $total_tva - $acompte ;
-		echo"<td>&nbsp;<td>&nbsp;<td><b>$lang_total</b><td><b>$total_htva $devise htva </b><td><b>$lang_tot_tva</b><td><b> $total_tva  $devise de tva </b><td><b><font color='red'>$lang_tot_ttc </font></b><td><b><font color='red'>$total_ttc $devise</font></b></tr>";    
-		echo " <tr><td colspan='7'>&nbsp;<td>$lang_acompte<td>$acompte $devise</tr>";
-		echo "<tr><td colspan='7'>&nbsp;<td>Reste a payer<td>$rest $devise</tr>
-		</table><br><hr>";
-//on enregistre le contenu de la facture
-$list_num = serialize($list_num);
-$sql1 = "INSERT INTO " . $tblpref ."facture(acompte, coment, client, date_fact, total_fact_h, total_fact_ttc, list_num)
-	 VALUES ('$acompte', '$coment', '$client', '$date_fact', '$total_htva', '$total_ttc', '$list_num')";
-mysql_query($sql1) or die('Erreur SQL1 !<br>'.$sql1.'<br>'.mysql_error());
-$message="<h2> Facture crenregistrée<br>";		
-$sql2 = "UPDATE " . $tblpref ."bon_comm SET fact='ok' WHERE " . $tblpref ."bon_comm.client_num = '".$client."' AND " . $tblpref ."bon_comm.date >= '".$debut."' and " . $tblpref ."bon_comm.date <= '".$fin."'";
-mysql_query($sql2) or die('Erreur SQL2 !<br>'.$sql2.'<br>'.mysql_error());
-
-//date_fact rajout by ciit (permet l'impression du total des remise
-$sql2 = "UPDATE " . $tblpref ."bon_comm SET date_fact='$date_fact' WHERE " . $tblpref ."bon_comm.client_num = '".$client."' AND " . $tblpref ."bon_comm.date >= '".$debut."' and " . $tblpref ."bon_comm.date <= '".$fin."'";
-mysql_query($sql2) or die('Erreur SQL2 !<br>'.$sql2.'<br>'.mysql_error());
-//FIN   date_fact rajout by ciit (permet l'impression du total des remise fpdf_fact.php) 
-
-//include('form_facture.php');
+ $sql2 = "
+ UPDATE " . $tblpref ."bon_comm 
+ SET fact = '$num_fact' 
+ WHERE " . $tblpref ."bon_comm.client_num = '".$client."' 
+ AND " . $tblpref ."bon_comm.date >= '".$debut."' 
+ AND " . $tblpref ."bon_comm.date <= '".$fin."'
+ ";
+ mysql_query($sql2) or die('Erreur SQL2 !<br>'.$sql2.'<br>'.mysql_error());
+}else
+ $num_fact = $lang_simu;
 ?>
-<tr><td>
+<table width="760" border="0" class="page" align="center">
+ <tr>
+  <td class="page" align="center">
+<?php include_once("include/head.php"); echo (isset($_POST['simuler']))?"<h1>$lang_simu</h1>":'';?>
+   <h2><?php echo "$lang_fact_enr $nom $nom2"; ?></h2>
+   <table class="page boiteaction">
+    <caption><?php echo "$lang_facture $num_fact $lang_créée_pour $civ $nom"; ?></caption>
+    <tr>
+     <th><?php echo $lang_quanti; ?></th>
+     <th><?php echo $lang_unite; ?></th>
+     <th><?php echo $lang_article; ?></th>
+     <th><?php echo $lang_prix_h_tva; ?></th>
+     <th><?php echo $lang_remise; ?></th>
+     <th><?php echo $lang_taux_tva; ?></th>
+     <th><?php echo $lang_tot_tva; ?></th>
+     <th><?php echo $lang_num_bon; ?></th>
+     <th><?php echo $lang_date_bon; ?></th>
+    </tr>
+<?php 
+
+$total_marge_htva = 0;
+$total_remise_htva = 0;
+while($data = mysql_fetch_array($req)){
+ $quanti = $data['quanti'];
+ $article = $data['article'];
+ $tot_htva = $data['tot_art_htva'];#remisé & margé
+ $tot_tva = $data['to_tva_art'];
+ $taux = $data['taux_tva'];
+ $uni = $data['uni'];
+ $num_fact_bon = $data['num_bon'];
+ $date = $data['date'];
+ $remise = $data['remise'];
+//+ calcul du montant de la remise #2015
+ $prx_ht = ($data['p_u_jour']/$data['marge_jour']);#non margé
+ $tx_remise = (1-($data['remise']/100));#taux remise
+
+ $remise_art_htva = ( $data['p_u_jour'] * $quanti ) - $tot_htva;
+ $marge_art_htva = $tot_htva - (( $prx_ht * $quanti ) * $tx_remise);
+
+ $total_remise_htva += $remise_art_htva;
+ $total_marge_htva += $marge_art_htva;
+?>
+    <tr>
+     <td class='<?php echo couleur_alternee (TRUE,"nombre"); ?>'><?php echo $quanti; ?></td>
+     <td class='<?php echo couleur_alternee (FALSE); ?>'><?php echo $uni; ?></td>
+     <td class='<?php echo couleur_alternee (FALSE); ?>'><?php echo $article; ?></td>
+     <td class='<?php echo couleur_alternee (FALSE,"nombre"); ?>'><?php echo montant_financier($tot_htva); ?></td>
+     <td class='<?php echo couleur_alternee (FALSE,"nombre"); ?>'><?php echo montant_taux($remise); ?></td>
+     <td class='<?php echo couleur_alternee (FALSE,"nombre"); ?>'><?php echo montant_taux($taux); ?></td>
+     <td class='<?php echo couleur_alternee (FALSE,"nombre"); ?>'><?php echo montant_financier($tot_tva); ?></td>
+     <td class='<?php echo couleur_alternee (FALSE,"nombre"); ?>'><?php echo $num_fact_bon; ?></td>
+     <td class='<?php echo couleur_alternee (FALSE,"c texte"); ?>'><?php echo $date; ?></td>
+    </tr>
+<?php }
+$rest = $total_htva + $total_tva - $acompte;
+?>
+    <tr>
+     <td colspan='9'><hr /></td>
+    </tr>
+    <tr>
+     <td colspan='7'>&nbsp;</td>
+     <td class='texte1'><?php echo "$lang_total $lang_remise"; ?></td>
+     <td class='nombre1'><?php echo montant_financier($total_remise_htva); ?></td>
+    </tr>
+    <tr>
+     <td colspan='7'>&nbsp;</td>
+     <td class='texte1'><?php echo "$lang_total $lang_marge"; ?></td>
+     <td class='nombre1'><?php echo montant_financier($total_marge_htva); ?></td>
+    </tr>
+    <tr>
+     <td colspan='7'>&nbsp;</td>
+     <td class='texte1'><b><?php echo $lang_total_htva; ?></b></td>
+     <td class='nombre1'><b><?php echo montant_financier($total_htva); ?></b></td>
+    </tr>
+    <tr>
+     <td colspan='7'>&nbsp;</td>
+     <td class='texte1'><b><?php echo $lang_tot_tva; ?></b></td>
+     <td class='nombre1'><b><?php echo montant_financier($total_tva); ?></b></td>
+    </tr>
+    <tr>
+     <td colspan='7'>&nbsp;</td>
+     <td class='totaltexte'><b><?php echo $lang_tot_ttc; ?></b></td>
+     <td class='totalmontant'><b><?php echo montant_financier($total_ttc); ?></b></td>
+    </tr>
+    <tr>
+     <td colspan='7'>&nbsp;</td>
+     <td class='texte0'><?php echo $lang_acompte; ?></td>
+     <td class='nombre0'><?php echo montant_financier($acompte); ?></td>
+    </tr>
+    <tr>
+     <td colspan='7'>&nbsp;</td>
+     <td class='texte0'><?php echo $lang_rest_pay; ?></td>
+     <td class='nombre0'><?php echo montant_financier($rest); ?></td>
+    </tr>
+    <tr>
+     <td colspan='7'>&nbsp;</td>
+     <td colspan='2' class='nombre0'>
+<?php if (!isset($_POST['simuler'])){ ?>
+      <form action="fpdf/fact_pdf.php" method="post" target="_blank">
+       <input type="hidden" name="client" value="<?php echo $client ?>" />
+       <input type="hidden" name="debut" value="<?php echo $debut ?>" />
+       <input type="hidden" name="fin" value="<?php echo $fin ?>" />
+       <input type="hidden" name="num" value="<?php echo $num_fact ?>" />
+       <input type="hidden" name="user" value="adm" />
+       <input type="image" src="image/prinfer.gif" alt="<?php echo $lang_imprimer; ?>" />
+      </form>
+<?php } else echo $lang_simu; ?>
+     </td>
+    </tr>
+   </table>
+  </td>
+ </tr>
+ <tr>
+  <td>
 <?php
-include_once("include/bas.php");
-?> 
-</td></tr></table>
+include('form_facture.php');

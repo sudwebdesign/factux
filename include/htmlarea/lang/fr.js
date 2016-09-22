@@ -57,5 +57,28 @@ HTMLArea.I18N = {
 	msg: {
 		"Path":         "Chemin",
 		"TEXT_MODE":    "Vous êtes en mode texte.  Utilisez le bouton [<>] pour revenir au mode WYSIWIG."
-	}
+/*
+		"IE-sucks-full-screen" :
+		// translate here
+		"The full screen mode is known to cause problems with Internet Explorer, " +
+		"due to browser bugs that we weren't able to workaround.  You might experience garbage " +
+		"display, lack of editor functions and/or random browser crashes.  If your system is Windows 9x " +
+		"it's very likely that you'll get a 'General Protection Fault' and need to reboot.\n\n" +
+		"You have been warned.  Please press OK if you still want to try the full screen editor."*/
+	},
+
+	dialogs: {
+		"Cancel"                                            : "Annuler",
+		"Insert/Modify Link"                                : "Inserer/Modifier Lirn",
+		"New window (_blank)"                               : "Novelle fenetre (_blank)",
+		"None (use implicit)"                               : "Non (ustiliser implicit)",
+		"OK"                                                : "Daccord",
+		"Other"                                             : "Autre",
+		"Same frame (_self)"                                : "Même cadre (_self)",
+		"Target:"                                           : "Cible:",
+		"Title (tooltip):"                                  : "Titre (tooltip):",
+		"Top frame (_top)"                                  : "Cadre du haut (_top)",
+		"URL:"                                              : "URL:",
+		"You must enter the URL where this link points to"  : "Entrer l'URL où ce lien doit diriger"
+	}/**/
 };

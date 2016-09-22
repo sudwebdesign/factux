@@ -9,8 +9,8 @@
  * For further information visit:
  * 		http://factux.sourceforge.net
  * 
- * File Name: fckconfig.js
- * 	Editor configuration settings.
+ * File Name: verif2.php
+ * 	Fichier de création et verification de la session
  * 
  * * Version:  1.1.5
  * * * Modified: 23/07/2005
@@ -23,11 +23,9 @@
 ini_set('session.save_path', '../include/session');
 session_cache_limiter('private'); 
 session_start();
-if($_SESSION['trucmuch']=='')
-    {
-    echo 'Vous n\'êtes pas autorisé à acceder à cette zone';
-    include('../login.inc.php');
-    exit;
-    }	
+if(!isset($_SESSION['trucmuch'])||$_SESSION['trucmuch']==''){#if(isset($_SESSION['trucmuch'])&&$_SESSION['trucmuch']==''){
+ $message = "i";#interdit
+ include('../login.inc.php');
+ exit;
+}	
 $lang = $_SESSION['lang'];
-		?>

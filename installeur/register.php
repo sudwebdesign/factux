@@ -19,36 +19,31 @@
  * 		Guy Hendrickx
  *.
  */
-echo "<link rel='stylesheet' type='text/css' href='../include/themes/default/style.css'>";
-echo'<link rel="shortcut icon" type="image/x-icon" href="../image/favicon.ico" >';
-echo '<table width="100%" border="1" cellpadding="0" cellspacing="0" summary="">';
-echo '<tr><td class ="install"><img src="../image/factux.gif" alt=""><br><IMG SRC="../image/spacer.gif" WIDTH=150 HEIGHT=400 ALT=""><br></th><td>';
-
+$now='../';
 require_once("../include/config/common.php");
+$lang=(!isset($lang))?$default_lang:$lang;#default_lg in common
+include_once("../include/language/$lang.php");
 $login2=isset($_POST['login2'])?$_POST['login2']:"";
 $pass=isset($_POST['pass'])?$_POST['pass']:"";
-$nom=isset($_POST['nom'])?$_POST['nom']:"";
-$prenom=isset($_POST['prenom'])?$_POST['prenom']:"";
+$nom=isset($_POST['nom'])?apostrophe($_POST['nom']):"";
+$prenom=isset($_POST['prenom'])?apostrophe($_POST['prenom']):"";
 $mail=isset($_POST['mail'])?$_POST['mail']:"";
 $pass2=isset($_POST['pass2'])?$_POST['pass2']:"";
-if($login2=='' || $pass==''|| $nom=='' || $prenom=='' || $mail=='' )
-{
-echo "<h1>Vous avez oublié de remplir un champ !!!";
-include('');
-exit;
+if($login2=='' || $pass==''|| $nom=='' || $prenom=='' || $mail=='' ){
+ echo "<h1>$lang_oublie_champ</h1>";
+ include('user_create.php'); // On inclus le formulaire d'identification
+ exit;
 }
-if($pass != $pass2)
-    {
-    echo "<h1>Erreur, les deux mots de passe ne correspondent pas</h1>";
-    include('user_create.php'); // On inclus le formulaire d'identification
-    exit;
-    }
-else
+if($pass != $pass2){
+ echo "<h1>$lang_suite_edit_utilisateur_err_pass</h1>";
+ include('user_create.php'); // On inclus le formulaire d'identification
+ exit;
+}
 $pass_crypt = md5($pass);
-mysql_select_db($db) or die ("Could not select $db database");
 $sql7 = "INSERT INTO " . $tblpref ."user (login, pwd, nom, prenom, email, dev, com, fact, admin, dep, stat, art, cli) VALUES ('$login2', '$pass_crypt', '$nom', '$prenom', '$mail', 'y', 'y', 'y', 'y', 'y', 'y', 'y', 'y')";
 mysql_query($sql7) or die('Erreur SQL !<br>'.$sql7.'<br>'.mysql_error());
-echo " <br><br><center><h2>$prenom $nom est maintenant enregistré et a comme login : $login2 mot de passe : $pass .<br>";
+
+$etape = "Étape N°6 : Enregister le logo de l'entreprise";
+include_once('headers.php');
+echo "<h2>$prenom $nom est maintenant enregistré et a comme login : $login2 et comme mot de passe : $pass</h2>";
 include("upload.php");
-//echo "<br><a href=''>Continuer</a>"; 
- ?> 

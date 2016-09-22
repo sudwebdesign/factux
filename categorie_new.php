@@ -19,17 +19,20 @@
  * 		Guy Hendrickx
  *.
  */
- 
 require_once("include/verif.php");
 include_once("include/config/common.php");
+include_once("include/config/var.php");
 include_once("include/language/$lang.php");
-echo '<link rel="stylesheet" type="text/css" href="include/style.css">';
-echo'<link rel="shortcut icon" type="image/x-icon" href="image/favicon.ico" >';
-
-$categorie=isset($_POST['categorie'])?$_POST['categorie']:"";
-$sql1 = "INSERT INTO " . $tblpref ."categorie(categorie) VALUES ('$categorie')";
-mysql_query($sql1) or die('Erreur SQL !<br>'.$sql1.'<br>'.mysql_error());
-$message = "<center><h2>$lang_nouv_categorie<br>";
-
-include("form_article.php");
-?> 
+$categorie=isset($_POST['categorie'])?apostrophe($_POST['categorie']):"";
+$sql = "INSERT INTO " . $tblpref ."categorie(categorie) VALUES ('$categorie')";
+if($categorie!=''&&$categorie!=$lang_divers){
+ mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+ $message = "<h2>$lang_nouv_categorie</h2>";
+}
+if($categorie==$lang_divers)
+ $message = "<h1>$lang_categorie $lang_divers</h1>";
+if(basename($_SERVER['HTTP_REFERER'])==basename(__file__))#if self call by ajouter_cat.php.php
+ $_SERVER['HTTP_REFERER']="lister_cat.php";
+if(strstr($_SERVER['HTTP_REFERER'],"_cat.php"))#? if query (old) #delete_cat.php or edit_cat.php?id_cat=1
+ $_SERVER['HTTP_REFERER']="lister_cat.php";
+include_once(basename($_SERVER['HTTP_REFERER']));#include("lister_cat.php");#include("form_article.php");

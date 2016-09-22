@@ -19,22 +19,20 @@
  * 		Guy Hendrickx
  *.
  */
-echo "<link rel='stylesheet' type='text/css' href='../include/themes/default/style.css'>";
-echo'<link rel="shortcut icon" type="image/x-icon" href="../image/favicon.ico" >';
-echo '<table width="100%" border="1" cellpadding="0" cellspacing="0" summary="">';
-echo '<tr><td class ="install"><img src="../image/factux.gif" alt=""><br><IMG SRC="../image/spacer.gif" WIDTH=150 HEIGHT=400 ALT=""><br></th><td>';
-
+$etape = "Étape N°3 : Données figurantes sur vos bons de commande et factures";
+include('headers.php');
 $un=isset($_POST['un'])?$_POST['un']:"";
 $deux=isset($_POST['deux'])?$_POST['deux']:"";
 $trois=isset($_POST['trois'])?$_POST['trois']:"";
 $quatre=isset($_POST['quatre'])?$_POST['quatre']:"";
 $cinq=isset($_POST['cinq'])?$_POST['cinq']:"";
 $six=isset($_POST['six'])?$_POST['six']:"";
-mysql_connect($quatre,$un,$deux) or die ("<font color= red size=4 > Les informations que vous avez entrées semblent incorrectes, veuillez les verifier et recommencer l'installeur.");
+mysql_connect($quatre,$un,$deux) or die ("<font color='red' size='4'> Les informations que vous avez entrées semblent incorrectes, veuillez les verifier et recommencer l'installeur.");
 
 $type = '<?php' . "\n";
 /*$type_fin = '?>';*/
-$com= '//common.php créé grace à l\'installeur de Factux, soyez prudent si vous l\'éditez'. "\n";
+$com = '//common.php créé grace à l\'installeur de Factux, soyez prudent si vous l\'éditez'. "\n";
+$com .= 'error_reporting(E_ERROR | E_WARNING | E_PARSE | E_NOTICE);#cache les éléments deprécié'. "\n";
 //$connect = 'mysql_connect($host,$user,$pwd) or die ("serveur de base de données injoignable, verifiez dans /factux/include/common.php si $host est correct.");' . "\n";
 //$connect2 = 'mysql_select_db($db) or die ("La base de données est injoignable, verifiez dans /factux/include/common.php si $user, $pwd, $db sont exacts.");' . "\n";
 //$un = "valeur1";
@@ -48,12 +46,17 @@ $quatre = '"'.$quatre.'";//l\'adresse de la base de données mysql ' . "\n";
 //$cinq = "valeur5";
 $cinq = '"'.$cinq.'";//la langue de l\'interface et des factures créées par Factux : voir la doc pour les abbréviations' . "\n";
 $six = '"'.$six.'";//prefixe des tables ' . "\n";
-
+$sept = 'require_once(@$now."include/0.php");#uptophp7'."\n";
 //a modifier avant realease common et pas common2
 $monfichier = fopen("../include/config/common.php", "w+"); 
 
-fwrite($monfichier, ''.$type.''.$com.'$user= '.$un.'$pwd= '.$deux.'$db= '.$trois.'$host= '.$quatre.'$default_lang= '.$cinq.'$tblpref= '.$six.'');
-echo "<center><br><br><b><font color= green> Vos données ont été enregistrées avec succès dans le fichier <font color=red>/factux/include/config/common.php<font color=green><br>En cas d'erreur, vous avez 2 choix : recommencer l'installeur de Factux ou éditer ce fichier.<br>Ce fichier est largement commenté (en francais) pour vous y aider.<br>";
+fwrite($monfichier, ''.$type.''.$com.'$user= '.$un.'$pwd= '.$deux.'$db= '.$trois.'$host= '.$quatre.'$default_lang= '.$cinq.'$tblpref= '.$six.$sept);
 fclose($monfichier);
-include("setup_suite.php");
 ?>
+<center>
+ <h2>Les informations de connexion a la base de données ont été enregistrées avec succès dans le fichier<font color="red">/factux/include/config/common.php</font></h2>
+ <h2>En cas d'erreur, vous avez 2 choix : recommencer l'installeur de Factux ou éditer ce fichier.<br>
+ Ce fichier est largement commenté (en francais) pour vous y aider.</h2>
+</center><hr>
+<?php
+include("setup_suite.php");

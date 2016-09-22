@@ -10,7 +10,7 @@
  * 		http://factux.sourceforge.net
  * 
  * File Name: mailing.php
- * 	envoie des mail au clients
+ * 	envoie des courriels aux clients
  * 
  * * * Version:  1.1.5
  * * * * Modified: 23/07/2005
@@ -19,15 +19,20 @@
  * 		Guy Hendrickx
  *.
  */
-require_once("include/verif.php");
-include_once("include/config/common.php");
-include_once("include/head.php");
-include_once("include/config/var.php");
-echo '<link rel="stylesheet" type="text/css" href="include/style.css">';
-echo'<link rel="shortcut icon" type="image/x-icon" href="image/favicon.ico" >';
-echo "<hr>";
+include_once("include/headers.php");
 $titre=isset($_POST['titre'])?$_POST['titre']:"";
 $message=isset($_POST['message'])?$_POST['message']:"";
+if(empty($titre)&&$message=='&nbsp;'){
+ $message = "<h1>$lang_oubli_champ</h1>";
+ include_once("form_mailing.php");
+ exit;
+}
+?>
+<table width="760" border="0" class="page" align="center">
+ <tr>
+  <td class="page" align="center">
+<?php
+include_once("include/head.php");
 $titre= stripslashes($titre);
 $message = stripslashes($message);
 $body = "<html><body>";
@@ -43,22 +48,36 @@ $header = 'From: '.$from ."\n"
   .'X-Mailer: Factux'."\n"
  .'Content-Type: text/html; charset= ISO-8859-1; charset= ISO-8859-1'."\n"
  .'Content-Transfer-Encoding: 8bit'."\n\n";
-
-echo "<center><table class='boiteaction'>
-  <caption>
-$lang_mail_a
-  </caption>
-";
+?>
+   <table class="page boiteaction">
+    <caption><?php echo $lang_mail_a; ?></caption>
+<?php
 $sql2 = "SELECT * FROM " . $tblpref ."client WHERE mail!= ''AND actif != 'non'";
 $req = mysql_query($sql2) or die('Erreur SQL !<br>'.$sql2.'<br>'.mysql_error());
-while($data = mysql_fetch_array($req))
-    {
-	$to = $data['mail'];
-	$nom = $data['nom'];
-	$nom2 = $data['nom2'];
-		echo "<tr><td><a href='mailto:$to'>$nom $nom2</a></td></tr>";
-	mail($to,$subject,$message,$header);
-	}
-	echo "</table>$titre<br>$message<br>$from<br><hr>";
+while($data = mysql_fetch_array($req)){
+  $to = $data['mail'];
+  $nom = $data['nom'];
+  $nom2 = $data['nom2'];
+?>
+    <tr>
+     <td><a alt="mailto:<?php echo $to; ?>" href='mailto:<?php echo "$to?subject=".$titre."&amp;body=".$message; ?>'><?php echo "$nom $nom2"; ?></a></td>
+<?php
+  if(mail($to,$subject,$message,$header)){
+   echo "<td>$lang_email_envoyé</td></tr>";
+  }else
+   echo "<td>$lang_email_envoi_err</td></tr>";
+}
+$message = str_replace(['html>','body>'],['div>','div>'],$message);
+?>
+   </table>
+   <?php echo $titre; ?>
+   <?php echo $message; ?>
+   <?php echo $from; ?>
+<?php
 include_once("include/bas.php");
- ?> 
+?> 
+  </td>
+ </tr>
+</table>
+</body>
+</html>

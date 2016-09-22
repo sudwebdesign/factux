@@ -1,39 +1,43 @@
 body {
-	background-color:#bfbfbf;
+	background-color:transparent;/*#bfbfbf;*/
 	text-align: center;
-font-size:SMALL;
+font-size:small;
 color:black;
 	}
-img {
+img{
 border: none;
 margin: 0;
 }		
 	
-.INPUT { 
-background-color: #FFEFD5 ; 
-font-family: Arial, Helvetica, sans-serif ; 
-
+.input{ 
+background-color: #ffefd5 ; 
+font-family: arial, helvetica, sans-serif ; 
+color: red ;
 }
 
-OPTION  { 
-background-color: #FFEFD5 ;
-cursor: pointer;
- 
+.option { 
+background-color: #ffefd5 ; 
 }
-submit
-{
-background-color: transparent; 
-}
-SELECT { 
+
+.select { 
 background-color: 
-#FFEFD5 ; 
+#ffefd5 ; 
 }
 
-.TEXTAREA { 
-background-color: #FFEFD5 ; 
+.textarea { 
+background-color: #ffefd5 ; 
 color: red ; 
 }
 
+.button { font-family: arial, helvetica, sans-serif ; 
+border-width: 2pt ;
+ font-size: 16pt ; 
+ color: black ; 
+ top: 250px ; 
+ background-color: #f5deb3 ; 
+ }
+
+.left50{float:left;width:50%;} 
 
  
 .libelle {
@@ -60,7 +64,7 @@ td {
 	color:#000000;
 	text-align: left;
 	padding:4px;
-	vertical-align: top;
+	vertical-align: middle;
 	border: 0px;
 }
 td.highlight {
@@ -73,7 +77,6 @@ td.highlight {
 td.page{
 text-align:center;
 border: 1px ;
-
 }
 table.page {
 border-style:solid;
@@ -89,27 +92,27 @@ font-size:small;
 color:red;
 background-color:transparent;
 text-align:center;
-	font-weight: bold;
+font-weight: bold;
 }
 h2 {
 font-family:arial, sans-serif;
-font-size:MEDIUM;
+font-size:medium;
 color:green;
 background-color:transparent;
 text-align:center;
 }
 h3 {
 font-family:verdana, sans-serif;
-font-size:LARGE;
+font-size:large;
 color:black;
 background-color:transparent;
 text-align:center;
-	font-weight: bold;
+font-weight: bold;
 }
 
 h4 {
 font-family:verdana, sans-serif;
-font-size:LARGE;
+font-size:large;
 color:black;
 background-color:transparent;
 text-align:center;
@@ -117,7 +120,7 @@ text-align:center;
 
 h5 {
 font-family:verdana, sans-serif;
-font-size:MEDIUM;
+font-size:medium;
 color:black;
 background-color:transparent;
 text-align:center;
@@ -126,17 +129,15 @@ text-align:center;
 
 h6 {
 font-family:verdana, sans-serif;
-font-size:MEDIUM;
+font-size:medium;
 color:black;
 background-color:transparent;
 text-align:center;
 }
 
-
-
 p {
 font-family:verdana, sans-serif;
-font-size:SMALL;
+font-size:small;
 color:green;
 background-color:transparent;
 text-align:center;
@@ -145,7 +146,7 @@ margin-right:0px;
 }
 li {
 font-family:verdana, sans-serif;
-font-size:SMALL;
+font-size:small;
 color:black;
 background-color:transparent;
 text-align:center;
@@ -154,21 +155,21 @@ margin-right:0px;
 }
 a:link {
 font-family:verdana, sans-serif;
-font-size:SMALL;
+font-size:small;
 color:blue;
 background-color:transparent;
 text-decoration:underline;
 }
 a:visited {
 font-family:verdana, sans-serif;
-font-size:SMALL;
+font-size:small;
 color:black;
 background-color:transparent;
 text-decoration:underline;
 }
 a:hover {
 font-family:verdana, sans-serif;
-font-size:SMALL;
+font-size:small;
 color:navy;
 background-color:transparent;
 text-decoration:underline;
@@ -185,7 +186,7 @@ tr {
 	font-family:verdana, sans-serif;
 	font-size:x-small;
 	color:#000000;
-	
+	vertical-align: middle;
 	border: 0px;
 	background-color:#ffffee;
 	
@@ -195,7 +196,7 @@ font-family:verdana, sans-serif;
 	font-size:x-small;
 	color:#000000;
 	border: 0px ;
-	background-color: #bfbfbf;
+	background-color: #ddbfbf;
 	
 	
 }
@@ -211,7 +212,7 @@ background-color:#FFFFCC;
 
 td.td2{
 font-family:verdana, sans-serif;
-font-size:SMALL;
+/*font-size:small;*/
 color:#000000;
 text-align:center;
 background-color:#DDDDDD;
@@ -227,7 +228,7 @@ font-family:verdana, sans-serif;
 	color:#000000;
 	text-align: left;
 	padding:4px;
-	vertical-align: top;
+	vertical-align: middle;
 	border: 0px none;
 }
 .td2montant{
@@ -237,7 +238,7 @@ border-color:transparent;
 
 .td3{
 font-family:verdana, sans-serif;
-font-size:SMALL;
+font-size:small;
 color:#000000;
 text-align:left;
 background-color:#CC6633;
@@ -248,16 +249,15 @@ padding:0;
 }
 .td4{
 font-family:verdana, sans-serif;
-font-size:SMALL;
+font-size:small;
 color:#000000;
 text-align:left;
 background-color:transparent;
 }
 
 .boiteaction {
-	background-color:black;
-	/*#F3FFDD;*/
-	width:96%;
+	/*background-color:#F3FFDD;*/
+	width:100%;/*ba*/
 	text-align:center;
 	border:1px;
 	
@@ -266,7 +266,7 @@ background-color:transparent;
 
 .tdgraph{
 font-family:verdana, sans-serif;
-font-size:SMALL;
+font-size:small;
 color:#000000;
 text-align:left;
 background-image:url(../image/fond.gif);
@@ -283,27 +283,27 @@ padding:0;
 
 caption {
 	background-color: #b62819;
-	 font-size:MEDIUM;
+	 font-size:medium;
 	 color:#FFFFFF;
 	 font-weight: bold;
 	 text-align:center;
-	 
+	 border-color:grey;
 	 border-width:1px;
 }
 
 td.texte0 {
-	background-color: #ffffee;
+	background-color: rgba(255,255,238,0.5);/*#ffffee;*/
 	text-align: left;
 }
 tr.texte0 {
-	background-color: #ffffee;
+	background-color: rgba(255,255,238,0.5);/*#ffffee;*/
 	text-align: left;
 	border-width:0px;
 	border-left:thin solid black;
 }
 
 td.nombre0 {
-	background-color: #ffffee;
+	background-color: rgba(255,255,238,0.5);/*#ffffee;*/
 	text-align: right;
 }
 
@@ -313,35 +313,33 @@ td.install {
 	width: 150px;
 }
 
-
 td.texte1 {
-	background-color: #ddddcc;
+	background-color: rgba(255,255,204,0.5);/*#ffffcc;*/
 	text-align: left;
 }
 tr.texte1 {
-	background-color: #ddddcc;
+	background-color: rgba(255,255,204,0.5);/*#ffffcc;*/
 	text-align: left;
 	border-width:1px;
-	
 }
 td.nombre1 {
-	background-color: #ddddcc;
+	background-color: rgba(255,255,204,0.5);/*#ffffcc;*/
 	text-align: right;
 }
+
+td.c.texte0,td.c.texte1{text-align: center; !important}/*action*/
 
 th {
 	background-color: #DDDDDD;
 	color:red;
 	font-weight: bold;
 	text-align: center;
-	
 }
 th a:link{
 	background-color: transparent;
 	color:red;
 	font-weight: bold;
 	text-align: center;
-
 }
 th a:visited{
 	background-color: transparent;
@@ -355,7 +353,6 @@ th a:hover{
 	color:red;
 	font-weight: bold;
 	text-align: center;
-
 }
 .submit {
 	background-color: #b62819;
@@ -365,28 +362,28 @@ th a:hover{
 }
 
 .totaltexte {
-font-size:SMALL;
+font-size:small;
 	background-color: #dddddd;
 	color:red;
 	font-weight: bold;
 }
 
 .totalmontant {
-font-size:SMALL;
+font-size:small;
 	color:red;
 	font-weight: bold;
 text-align:right;
 	background-color: #dddddd;
 }	
 .boiteaction td, form, input {
-    padding: 1px;
-    margin: 0;
+ /*padding: 0;*/
+ margin: 0;
 } 
 /***** menu CSS *****/
 @media print {
 /*A l'impression on cache le menu, marche au moins pour IE, Moz et Opéra.*/
-	.menu, .ssmenu {
-		visibility:hidden;
+	.menu, .ssmenu,h1 {
+		display: none;
 	}
 }
 

@@ -19,144 +19,147 @@
  * 		Guy Hendrickx
  *.
  */
-require_once("include/verif.php");
+include_once("include/headers.php");
+include_once("include/finhead.php");
+?>
+<table width="760" border="0" class="page" align="center">
+ <tr>
+  <td class="page" align="center">
+<?php
+if($_SERVER["QUERY_STRING"]=="file=backup.sql")#before head 4 display TuxInWork flush #2015
+ echo "<center id='message_backup'><h2><img src='image/tux.gif'>$lang_restore_backup</h2></center>";
 include_once("include/head.php");
-include_once("include/config/common.php");
-include_once("include/language/$lang.php");
-echo '<link rel="stylesheet" type="text/css" href="include/style.css">';
-echo'<link rel="shortcut icon" type="image/x-icon" href="image/favicon.ico" >';
-
 extract ($_REQUEST);
-if (!file_exists("dbinfo.php")) {
-   die("Cannot find backup info file, restore aborted");
-}   
-
+if (!file_exists("dbinfo.php"))
+ die($lang_restore_err_dbinfo_file);
 include "dbinfo.php"; 
 $password = $dbpass;
-?>
-<html>
-<head>
-
-<style type="text/css">
-body { font-family: "verdana", sans-serif }
-</style>
-</head>
-
-
-<center>
-  <TABLE WIDTH="80%" border="0" cellspacing="0" >
-    <TR> 
-      <td class="texte0"><caption><?php echo "$lang_back_ti_re" ?></caption>
-      </TD>
-    </TR>  
-
-<?
-if (!isset($file)) {
-    echo '
-    <TR> 
-      <TD valign="top">
-         </TD>
-    </TR> ';
-} ?>    
-
-    <TR> 
+#js hide TuxInWork #2015 ?>
+   <script type="text/javascript">document.getElementById('message_backup').style='display:none !important';</script>
+   <center>
+    <table class="page" width="80%" border="0" cellspacing="0">
+     <caption><?php echo $lang_back_ti_re; ?></caption>
+<?php if (!isset($file)) { ?>
+     <tr><td class="texte0" valign="top">&nbsp;</td></tr>
+<?php } ?>    
+     <tr> 
       <td class="texte0"> 
-        <?
-$x=  $_SERVER[SERVER_SOFTWARE];
+<?php
+$x=$_SERVER['SERVER_SOFTWARE'];
 if (strpos($x,"Win32")!=0) {
-   $path = $path . "dump\\";
+ $path = $path . "dump\\";
 } else {
-   $path = $path . "dump/";
+ $path = $path . "dump/";
 }
 
 // IF WINDOWS GIVES PROBLEMS
 // FOR WINDOWS change to ==> $path = $path . "dump\\";
-if ($file!="") {
-      if (eregi("gz",$file)) { //zip file decompress first than show only
-         @unlink($path."backup.sql");
-         $fp2 = @fopen("dump/backup.sql","w");
-         fwrite ($fp2,"");
-	 fclose ($fp2);
-         chmod($path."backup.sql", 0777);
-         $fp = @fopen("dump/backup.sql","w");
-         $zp = @gzopen("dump/$file", "rb");
-         if(!$fp) {
-              die("No sql file can be created"); 
-         }    
-         if(!$zp) {
-              die("Cannot read zip file");
-         }    
-         while(!gzeof($zp)){
-	      $data=gzgets($zp, 8192);// buffer php
-	      fwrite($fp,$data);
-         }
-         fclose($fp);
-         gzclose($zp);
-         $file="backup.sql";
-         echo " <br>$lang_back_ext <br>";
-         $file='';
-      } // end of unzip
+if (isset($file)&&$file!=""){
+ if (preg_match("~gz~",$file)) {#deprcated   if (eregi("gz",$file)) { //zip file decompress first than show only
+  unlink($path."backup.sql");
+  $fp2 = fopen("dump/backup.sql","w");
+  fwrite ($fp2,"");
+  fclose ($fp2);
+  chmod($path."backup.sql", 0777);
+  $fp = fopen("dump/backup.sql","w");
+  $zp = gzopen("dump/$file", "rb");
+  if(!$fp) {
+   die($lang_restore_err_crea_sql);
+  }    
+  if(!$zp) {
+   die($lang_restore_err_zip);
+  }    
+  while(!gzeof($zp)){
+   $data=gzgets($zp, 8192);// buffer php
+   fwrite($fp,$data);
+  }
+  fclose($fp);
+  gzclose($zp);
+  echo " <p>$lang_back_ext $file <img alt='$lang_oui' src='image/oui.gif'></p>";
+  $file='';
+ } // end of unzip
 }
-if ($file!=""){  
-         
-      flush();
-      $conn = mysql_connect($dbhost,$dbuser,$password) or die(mysql_error());
-	$filename = $file;
-	set_time_limit(1000);
-	$file=fread(fopen($path.$file, "r"), filesize($path.$file));
-	$query=explode(";#%%\n",$file);
-	for ($i=0;$i < count($query)-1;$i++) {
-		mysql_db_query($dbname,$query[$i],$conn) or die(mysql_error());
-	}
-	echo "<table width=\"90%\"><tr><td class='texte0'>$lang_back_resto 
-.</b> $lang_back_restO2 
-.<br><br></td></tr></table>";
-} 
+if (isset($file)&&$file!=""){
+ flush();
+ $conn = mysql_connect($dbhost,$dbuser,$password) or die(mysql_error());
+ $filename = $file;
+ set_time_limit(1000);
+ $file=fread(fopen($path.$file, "r"), filesize($path.$file));
+ $query=explode(";#%%\n",$file);
+ for ($i=0;$i < count($query)-1;$i++) {
+  mysql_db_query($dbname,$query[$i],$conn) or die(mysql_error());
+ }
 ?>
-      </TD>
-    </TR>
-    <TR> 
-      <td class='texte0'><table width="625" cellspacing="0">
-          <tr> 
-            <td class="texte0"width="125" align="center"><font size="2"><u><i><?php echo "$lang_fichier" ?></i></u></font></td>
-            <td class="texte0" width="125" align="center"><font size="2"><u><i><?php echo "$lang_tai" ?></i></u></font></td>
-            <td class="texte0" width="125" align="center"><font size="2"><u><i><?php echo "$lang_date" ?></i></u></font></td>
-            <td class="texte0" width="125"><font size="2">&nbsp;</font></td>
-            <td class="texte0" width="125"><font size="2">&nbsp;</font></td>
-          </tr>
-          <?
+      <table class="page" width="100%">
+       <tr>
+        <td class='texte0'>
+         <p><b><?php echo $lang_back_resto; ?></b><img alt="<?php echo $lang_oui; ?>" src="image/oui.gif"></p>
+         <p><?php echo $lang_back_restO2; ?>.</p>
+        </td>
+       </tr>
+      </table>
+<?php } ?>
+      </td>
+     </tr>
+     <tr> 
+      <td class='texte0'>
+       <table class="page" width="625" cellspacing="0">
+        <tr> 
+         <td class="texte0" width="125" align="center"><font size="2"><u><i><?php echo $lang_fichier; ?></i></u></font></td>
+         <td class="texte0" width="125" align="center"><font size="2"><u><i><?php echo $lang_tai; ?></i></u></font></td>
+         <td class="texte0" width="125" align="center"><font size="2"><u><i><?php echo $lang_date; ?></i></u></font></td>
+         <td class="texte0" width="125"><font size="2">&nbsp;</font></td>
+         <td class="texte0" width="125"><font size="2">&nbsp;</font></td>
+        </tr>
+<?php
 	$dir=opendir($path); 
-	$file = readdir($dir);
-	while ($file = readdir ($dir)) { 
-	    if ($file != "." && $file != ".." &&  (eregi("\.sql",$file) || eregi("\.gz",$file))){ 
-	        if (eregi("\.sql",$file) ) {
-	           echo "<tr><td class='texte0'>$file</td>
-	        	 <td class='texte0'>".round(filesize($path.$file) / 1024, 2)." KB</td>
-	        	 <td class='texte0'>".date("d-m-Y",filemtime($path.$file))."</td>
-	        	 <td class='texte0'><a href=\"restore.php?file=$file\">$lang_rest</a></td>
-	        	 <td class='texte0'><a href=\"dump/$file\">$lang_voir</a></td></tr>"; 
-	        } else {
-	           echo "<tr><td nowrap bgcolor=\"#dddddd\" align=\"center\">$file</td>
-	        	 <td class='texte0'>".round(filesize($path.$file) / 1024, 2)." KB</td>
-	        	 <td class='texte0'>".date("d-m-Y",filemtime($path.$file))."</td>
-	        	 <td class='texte0'><a href=\"restore.php?file=$file\">Unzip</a></td>
-	        	 <td></td></tr>"; 
-               }
-	    } 
-	}
+while ($file = readdir ($dir)) {
+    #if ($file != "." && $file != ".." &&  (eregi("\.sql",$file) || eregi("\.gz",$file))){ #deprecated
+ if ($file != "." && $file != ".." && (preg_match("~\.sql~",$file) || preg_match("~\.gz~",$file))){#strtr ? 
+  if (preg_match("~\.sql~",$file)) {#deprecated (eregi("\.sql",$file) ) {
+?>
+        <tr>
+         <td class='texte0'><?php echo $file; ?></td>
+         <td class='texte0'><?php echo round(filesize($path.$file) / 1024, 2); ?> KB</td>
+         <td class='texte0'><?php echo date("d-m-Y",filemtime($path.$file)); ?></td>
+         <td class='texte0'><a href="restore.php?file=<?php echo $file; ?>"><?php echo $lang_rest; ?></a></td>
+         <td class='texte0'><a href="dump/<?php echo $file; ?>"><?php echo $lang_voir; ?></a></td>
+        </tr>
+<?php } else { ?>
+        <tr>
+         <td class='texte1'><?php echo $file; ?></td>
+         <td class='texte0'><?php echo round(filesize($path.$file) / 1024, 2); ?> KB</td>
+         <td class='texte0'><?php echo date("d-m-Y",filemtime($path.$file)); ?></td>
+         <td class='texte0'><a href="restore.php?file=<?php echo $file; ?>"><?php echo $lang_decompresser; ?></a></td>
+         <td class='texte0'></td>
+        </tr> 
+<?php
+  }
+ } 
+}
 	closedir($dir);
-    ?>
-        </table></TD>
-    </TR>
-    <TR> 
-      <td class='texte0' height="20" valign="top"><p><br>
-          <b><a href="main.php"><?php echo "$lang_back_ret" ?></a></b></p></TD>
-    </TR>
-    
-  </TABLE>
-</center><br><hr>
-<?php 
+?>
+       </table>
+      </td>
+     </tr>
+     <tr> 
+      <td class='texte0' height="20" valign="top">
+       <p><br><b><a href="main.php"><?php echo $lang_back_ret; ?></a></b></p>
+      </td>
+     </tr>
+    </table>
+   </center>
+  </td>
+ </tr>
+ <tr>
+  <td>
+<?php
+$aide='restaurer';
+include("help.php");
 include_once("include/bas.php");
- ?> 
+?>
+  </td>
+ </tr>
+</table>
 </body>
 </html>

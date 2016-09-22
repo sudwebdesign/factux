@@ -1,4 +1,4 @@
-<?php
+<?php 
 /*
  * Factux le facturier libre
  * Copyright (C) 2003-2004 Guy Hendrickx
@@ -9,8 +9,8 @@
  * For further information visit:
  * 		http://factux.sourceforge.net
  * 
- * File Name: fckconfig.js
- * 	Editor configuration settings.
+ * File Name: index2.php
+ * 	suite de l'installation choix et enregistrement des parametres.
  * 
  * * * Version:  1.1.5
  * * * * Modified: 23/07/2005
@@ -19,81 +19,54 @@
  * 		Guy Hendrickx
  *.
  */
-$erreur = "Erreur, veuillez vérifier les droits en écriture sur ce fichier !!";
-$verif = "Vérification des droits d'écriture pour le répertoire";
-$verif2 = "Vérification des droits d'écriture pour le fichier";
-$doss1 = "../include";
-$doss2 = "../dump";
-$doss4 = "../image";
-$doss3 = "..";
-$doss5 = "../include/session";
-$doss6 = "../fpdf";
-$fich1 ="../include/config/common.php";
-$fich2 = "../include/config/var.php";
+ $etape = "Étape N°2 : Informations de connexion à la Base de données mysql";
+ include_once('headers.php');
+?> 
+  <h3>Les paramètres de connexion à votre base de données mysql.</h3>
+  <hr><br>
+   <form action="setup.php" method="post" name="artice" id="artice">
+    <center>
+     <table>
+      <caption>Paramètres d'installation :</caption>
+      <tr>
+       <td>Utilisateur (login) de la base de données mysql</td>
+       <td><input name="un" type="text" id="article" maxlength="40"></td>
+      </tr>
+      <tr>
+       <td>Mot de passe de l'utilisateur mysql</td>
+       <td><input name="deux" type="password"  ></td>
+      </tr>
+      <tr>
+       <td>Nom de la base de donnée mysql</td>
+       <td><input name="trois" type="text" ></td>
+      <tr>
+       <td>Adresse de la base de données mysql (adresse ip ou non d'hôte)</td>
+       <td><input name="quatre" type="text" ></td>
+      <tr>
+       <td>Langage par défaut de l'interface et des factures<br>Les autres langages seront disponibles via un menu</td>
+       <td>
+        <select name="cinq" >
+         <option value="fr">Francais</option>
+         <option value="en">Anglais</option>
+         <option value="nl">Neerlandais</option>
+        </select>
+       </td>
+      </tr>
+      <tr>
+       <td>Préfixe des tables dans la base de données</td>
+       <td><input name="six" type="text" value="factux_" ></td>
+      <tr>
+       <td><input type="submit" name="Submit" value="Envoyer"></td>
+       <td><input name="reset" type="reset" id="reset" value="effacer"></td>
+      </tr>
+     </table>
+    </center>
+   </form>
+<?php include_once("../include/bas_cli.php"); ?> 
+  </td>
+ </tr>
+</table>
+</body>
+</html>
 
-
-
-echo "<br><center><table><tr>";
-echo "<caption>Vérification des droits.</caption>";
-echo "<td>$verif $doss1 :<td>";
-if (is_writable("$doss1")) {
-echo "<font color=green> OK</font></td></tr>";
-} else {
-echo "<font color=red> $erreur</td></tr>";
-}
-echo "<tr><td>$verif $doss2 :<td>";
-if (is_writable("$doss2")) {
-echo "<font color=green> OK</font></td></tr>";
-} else {
-echo "<font color=red> $erreur</td></tr>";
-}
-
-echo "<td>$verif $doss3 :<td>";
-if (is_writable("$doss3")) {
-echo "<font color=green> OK</font></td></tr>";
-} else {
-echo "<font color=red> $erreur</td></tr>";
-}
-echo "<td>$verif $doss4 :<td>";
-if (is_writable("$doss4")) {
-echo "<font color=green> OK</font></td></tr>";
-} else {
-echo "<font color=red> $erreur</td></tr>";
-}
-
-echo "<td>$verif $doss5 :<td>";
-if (is_writable("$doss5")) {
-echo "<font color=green> OK</font></td></tr>";
-} else {
-echo "<font color=red> $erreur</td></tr>";
-}
-
-echo "<td>$verif $doss6 :<td>";
-if (is_writable("$doss6")) {
-echo "<font color=green> OK</font></td></tr>";
-} else {
-echo "<font color=red> $erreur</td></tr>";
-}
-
-echo "<td>$verif2 $fich1 :<td>";
-if (is_writable("$fich1")) {
-echo "<font color=green> OK</font></td></tr>";
-} else {
-echo "<font color=red> $erreur</td></tr>";
-}
-
-echo "<td>$verif2 $fich2 :<td>";
-if (is_writable("$fich2")) {
-echo "<font color=green> OK</font></td></tr>";
-} else {
-echo "<font color=red> $erreur</font></td></tr>";
-}
-echo "</table><br>";
-if (!is_writable ($doss1 )||!is_writable ($doss2) || !is_writable ($doss3) || !is_writable ($doss4) || !is_writable ($doss5) || !is_writable ($fich1) || !is_writable ($fich2))
-{echo "<h1>Veuiller vérifier les erreurs ci-dessus avant de poursuivre</h1>";
-  }else {
-	include("index3.php");
-
-}
-
- ?>
+ 

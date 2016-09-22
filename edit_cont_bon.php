@@ -19,111 +19,94 @@
  * 		Guy Hendrickx
  *.
  */
-require_once("include/verif.php");
-include_once("include/config/common.php");
-include_once("include/config/var.php");
-include_once("include/language/$lang.php");
-include_once("include/utils.php");
 include_once("include/headers.php");
 include_once("include/finhead.php");
-$num_cont=isset($_GET['num_cont'])?$_GET['num_cont']:"";
-
+$num_cont=isset($_POST['num_cont'])?$_POST['num_cont']:"";
 ?>
 <table width="760" border="0" class="page" align="center">
-<tr>
-<td class="page" align="center">
+ <tr>
+  <td class="page" align="center">
+<?php include_once("include/head.php"); ?>
+   <center>
+    <form name="formu2" method="post" action="edit_cont_bon_suite.php">
+     <table class='page boiteaction'>
+      <caption><?php  echo $lang_edi_cont_bon ?></caption>
 <?php
-include_once("include/head.php");
-?>
-<hr><form name="formu2" method="post" action="suite_edit_cont_bon.php">
-<center><table class="boiteaction">
-  <caption>
-  <?php  echo $lang_edi_cont_bon ?>
-  </caption>
-
-  
-    <?php
-$sql = "SELECT * FROM " . $tblpref ."cont_bon  RIGHT JOIN " . $tblpref ."article on " . $tblpref ."cont_bon.article_num = " . $tblpref ."article.num WHERE  " . $tblpref ."cont_bon.num = $num_cont";
+$sql = "
+SELECT * FROM " . $tblpref ."cont_bon  
+LEFT JOIN " . $tblpref ."article on " . $tblpref ."cont_bon.article_num = " . $tblpref ."article.num 
+WHERE  " . $tblpref ."cont_bon.num = $num_cont
+";
 $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
-while($data = mysql_fetch_array($req))
-    {
-		$quanti = $data['quanti'];
-		$article = $data['article'];
-		$tot = $data['tot_art_htva'];
-		$num_art = $data['num'];
-		$article_num = $data['article_num'];
-		$bon_num = $data['bon_num'];
-		$prix_ht = $data['prix_htva'];
-		$num_lot = $data['num_lot'];
-		$remise=$data['remise'];
-		
-		}
+while($data = mysql_fetch_array($req)){
+ $quanti = $data['quanti'];
+ $article = $data['article'];
+ $tot = $data['tot_art_htva'];
+ $num_art = $data['num'];
+ $article_num = $data['article_num'];
+ $bon_num = $data['bon_num'];
+ $prix_ht = $data['prix_htva'];
+ $num_lot = $data['num_lot'];
+ $remise=$data['remise'];
+}
 ?>
-  <tr>
-     <td colspan="4">
      <tr>
-     <td class="texte0"><?php echo $lang_quanti ?>
-     <td colspan="3" class="texte0"><input name="quanti" type="text" size="5" id="quanti" value='<?php echo"$quanti"?>' >
-	<tr>
-	<tr>
-     <td class="texte0"><?php echo $lang_remise ?>
-     <td colspan="3" class="texte0"><input name="remise" type="text" size="5" id="remise" value='<?php echo"$remise"?>' >
-	<tr>
-	<td class="texte0"><?php echo $lang_article ;?>
+      <td class="texte0"><?php echo $lang_article ;?></td>
+      <td class="texte0">
+<?php include("include/article_choix.php"); ?>
+     </td>
 <?php 
-include_once("include/configav.php");
-				  if ($use_categorie !='y') { 
-$rqSql = "SELECT uni, num, article, prix_htva, marge FROM " . $tblpref ."article WHERE actif != 'non' ORDER BY article, prix_htva";
-$result = mysql_query( $rqSql )
-             or die( "Exécution requête impossible.");
-$ld = "<SELECT NAME='article'>";
-$ld .= "<OPTION VALUE=$article_num>".$article."/".$prix_ht.$devise."</OPTION>";
-while ( $row = mysql_fetch_array( $result)) {
-    $num = $row["num"];
-    $article2 = $row["article"];
-		$prix = $row["prix_htva"];
-		$uni = $row["uni"];
-		$marge=$row['marge'];
-    $ld .= "<OPTION VALUE='$num'>$article2 $prix $devise /$uni</OPTION>";
-}?>
-<td class="texte0">
-<?php 
-$ld .= "</SELECT>";
-print $ld;
-}else{
-echo "<td class='texte0'>";
-include("include/categorie_choix.php"); 
-}
 if ($lot == 'y') { 
-$rqSql = "SELECT num, prod FROM " . $tblpref ."lot WHERE actif != 'non' ORDER BY num";
-			$result = mysql_query( $rqSql )
-             or die( "Exécution de la requête impossible.");?>
-<td class="texte0">Lot</td>
-<td class="texte0"><select NAME='num_lot'>
-					<option VALUE=<?php echo "$num_lot >$num_lot"; ?></OPTION>
-            <?php
-						while ( $row = mysql_fetch_array( $result)) {
-    							$num = $row["num"];
-    							$prod = $row["prod"];
-		    ?>
-            <option VALUE='<?php echo $num; ?>'><?php echo "$num $prod "; ?></option>
-						
-					<?php 
-}
- ?> </select>  
-<?php
-}
+  $rqSql = "SELECT num, prod FROM " . $tblpref ."lot WHERE actif != 'non' ORDER BY num";
+  $result = mysql_query( $rqSql )or die( "Exécution de la requête impossible.");
 ?>
-	<input name="num_cont" type="hidden" value=<?php echo $num_cont ?>>
-	<input name="bon_num" type="hidden" value=<?php echo $bon_num ?>>
-        <tr>
-	<td class="submit" colspan="4"><input type="submit" name="Submit" value=<?php echo $lang_modifier ?>>
-
-    </td>
-    </tr>
-  </table></center></form>
-<tr><TD>
-<?php 
+       <td class="texte0"><?php echo $lang_lot; ?></td>
+       <td class="texte0">
+        <select name='num_lot'>
+         <option value=''><?php echo $lang_choisissez;?></option>
+<?php
+while ( $row = mysql_fetch_array( $result)) {
+  $sel=($row['num']==$num_lot)?"' selected='selected":'';
+?>
+         <option value='<?php echo "$row[num]$sel"; ?>'><?php echo "$row[num] $row[prod] "; ?></option>
+<?php } ?>
+        </select>
+       </td>  
+<?php } ?>
+      </tr>
+      <tr>
+       <td class="texte0"><?php echo $lang_quanti ?></td>
+       <td colspan="3" class="texte0">
+        <input name="quanti" type="text" size="5" id="quanti" value="<?php echo"$quanti"?>">
+       </td>
+      </tr>
+      <tr>
+       <td class="texte0"><?php echo $lang_remise ?></td>
+       <td colspan="3" class="texte0">
+        <input name="remise" type="text" size="5" id="remise" value="<?php echo"$remise"?>">%
+       </td>
+      </tr>
+      <tr>
+       <td class="submit" colspan="4">
+        <input type="submit" name="Submit2" value="<?php echo $lang_modifier; ?>">
+        <input name="num_cont" type="hidden" value="<?php echo $num_cont ?>">
+        <input name="bon_num" type="hidden" value="<?php echo $bon_num ?>">
+       </td>
+      </tr>
+     </table>
+    </form>
+   </center>
+  </td>
+ </tr>
+ <tr>
+  <td>
+<?php
+$aide='bon';
+include("help.php");
 include_once("include/bas.php");
- ?>
-</TD></tr></table>
+?>
+  </td>
+ </tr>
+</table>
+</body>
+</html>

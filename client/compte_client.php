@@ -19,37 +19,38 @@
  * 		Guy Hendrickx
  *.
  */
- ?>  <form action="client_update.php" method="post" name="client" id="client"
-	  onSubmit="return verif_formulaire()">
-  <table class="boiteaction">
-    <caption>
-    <?php echo "$lang_chng_mdp"; ?>
-    </caption>
-    <tr> 
+if(!isset($num_client))
+ header("Location:index.php");
+?>
+ <form action="client_update.php" method="post" name="client" id="client" onSubmit="return verif_formulaire()">
+  <table class="page boiteaction">
+    <caption><?php echo $lang_chng_mdp; ?></caption> 
     <tr>
-      <td class="texte0"><?php echo $lang_login; ?></td><td class="texte0"> <?php echo "<b>$login</b>" ?> </td>
-      <input name="login" type="hidden" id="login" value="<?php echo "$login " ?>"></td>
+      <td class="texte0"><?php echo $lang_login; ?></td>
+      <td class="texte0"><b><?php echo $login ?></b></td>
     </tr>
     <tr>
-      <td class="texte0"><?php echo $lang_motdepasse_ancien; ?> </td><td class="texte0"><input name = "pass" type="password"> 
+      <td class="texte0"><?php echo $lang_motdepasse_ancien; ?></td>
+      <td class="texte0"><input name = "pass" type="password" maxlength="40" /></td>
+    </tr>
+    <tr>
+      <td class="texte0"><?php echo $lang_motdepasse_nouveau; ?></td>
+      <td class="texte0"> <input name = "pass_new" type= "password" maxlength="40" /></td>
+    </tr>
+    <tr>
+      <td class="texte0"><?php echo $lang_motdepasse_verification; ?></td>
+      <td class="texte0"><input name = "pass_new2" type = "password" maxlength="40" /></td>
+    </tr>
+    <tr>
+      <td class="submit" colspan="3"> 
+        <input type="submit" value="<?php echo $lang_motdepasse_changer; ?>" /> 
+        <input type="reset" value="<?php echo $lang_annuler; ?>" />
+        <input name="login" type="hidden" id="login" value="<?php echo $login; ?>" />
       </td>
-    </tr>
-    <tr>
-      <td class="texte0"><?php echo $lang_motdepasse_nouveau; ?></td><td class="texte0"> <input name = "pass_new" type= "password"> 
-      </td>
-    </tr>
-    <tr>
-      <td class="texte0"><?php echo $lang_motdepasse_verification; ?> </td><td class="texte0"><input name = "pass_new2" type = "password"> 
-      </td>
-    </tr>
-    <tr>
-      <td class="submit" colspan="2"> <input type="submit" value="<?php echo $lang_motdepasse_changer; ?>" /> 
-        <input type="reset" value="<?php echo $lang_annuler; ?>" /> </td>
     </tr>
   </table>
   <input name="num_client" type="hidden" value='<?php echo $num_client; ?>'>
 </form>
-<center><a href='logout.php'><?php echo $lang_sortir ?></a> 
+<a href='logout.php'><h2><?php echo $lang_sortir; ?></h2></a> 
 <?php
 include_once("../include/bas_cli.php");
-?>

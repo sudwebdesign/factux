@@ -20,40 +20,35 @@
  *.
  */
 ini_set('session.save_path', 'include/session');
-session_start();
-
-
-
-if($_SESSION['trucmuch']=='')
-{
-echo "Vous n'êtes pas autorisé à accéder à cette zone";
-include('login.inc.php');
-exit;
+if(!isset($login)||$login=='')#Only in login.php?
+  session_start();#Notice: A session had already been started (in login.php on enter)
+$page_name = isset($page_name)?$page_name:'';#fix bon/devis_fin,...
+if(!isset($_SESSION['trucmuch']) || $_SESSION['trucmuch']==''){
+ if(!strstr($page_name,'Log')&!strstr($page_name,'Index'))
+  $message = "i";#interdit
+ $login=1;#in verif emule login.php (evite de refaire sessions start et créer un fichier vide)
+ include('logout.php');
+ if (empty($_SESSION)===false)#count($_SESSION)>0
+  session_destroy();
+ exit;
 }
 $utili = $_SESSION['trucmuch'];
-$lang = $_SESSION['lang'];	
- if ($lang=='') { 
-$lang ="fr";  
-}		
-
+$lang = $_SESSION['lang'];
 include_once("include/config/common.php");
+
 $sqlz = "SELECT * FROM " . $tblpref ."user WHERE " . $tblpref ."user.login = \"$utili\"";
 $req = mysql_query($sqlz) or die('Erreur SQL !<br>'.$sqlz.'<br>'.mysql_error());
-while($data = mysql_fetch_array($req))
-{
-  $user_num = $data['num'];
-  $user_nom = $data["nom"];
-  $user_prenom = $data["prenom"];
-  $user_email = $data['email'];
-	$user_fact = $data['fact'];
-	$user_com = $data['com'];
-	$user_dev = $data['dev'];
-	$user_admin = $data['admin'];
-	$user_dep = $data['dep'];
-	$user_stat = $data['stat'];
-	$user_art = $data['art'];
-	$user_cli = $data['cli'];
-
-	}
-
-?>
+while($data = mysql_fetch_array($req)){
+ $user_num = $data['num'];
+ $user_nom = $data["nom"];
+ $user_prenom = $data["prenom"];
+ $user_email = $data['email'];
+ $user_fact = $data['fact'];
+ $user_com = $data['com'];
+ $user_dev = $data['dev'];
+ $user_admin = $data['admin'];
+ $user_dep = $data['dep'];
+ $user_stat = $data['stat'];
+ $user_art = $data['art'];
+ $user_cli = $data['cli'];
+}

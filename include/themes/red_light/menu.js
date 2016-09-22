@@ -23,7 +23,7 @@ var largeur_menu = 105;
 /* En mode vertical, on a besoin de connaître la hauteur de chaque menu.
 	Même si les "cases" ne sont pas dimensionnées en hauteur.
 	Ajustez cette variable si les menus sont trop rapprochés ou espacés en vertical. */
-var hauteur_menu = 25;
+var hauteur_menu = 24;
 
 /* En mode horizontal.
 	Largeur des sous-menus, pour IE uniquement, les autres navigateurs respectent la largeur
@@ -41,7 +41,7 @@ var top_menu = 2;
 /* En version horizontale.
 	position des sous-menus par rapport au haut de l'écran ou de la page. Il faut prévoir
 	la hauteur des menus, donc ne pas mettre 0 et faire "à tâton". en px */
-var top_ssmenu = top_menu + 25;
+var top_ssmenu = top_menu + 24;
 
 /* Position gauche du menu, en px. */
 var left_menu = 0;
@@ -59,7 +59,7 @@ var delai = 650; // en milliseconde
 	Comme le menu peut se superposer avec le texte de la page, il est possible de faire
 	descendre un peu la page (on augmente la marge du haut) pour aérer un peu la page,
 	une quarantaine de pixel c'est pas mal. en px*/
-var marge_en_haut_de_page = top_menu + 25;
+var marge_en_haut_de_page = top_menu + 24;
 /* En version verticale.
 	On décale le document à droite pour pas que le menu le superpose. */
 var marge_a_gauche_de_la_page = largeur_menu + 10;

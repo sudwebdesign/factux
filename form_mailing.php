@@ -19,12 +19,8 @@
  * 		Guy Hendrickx
  *.
  */
-require_once("include/verif.php");
-include_once("include/config/common.php");
-include_once("include/language/$lang.php");
-include_once("include/utils.php");
 include_once("include/headers.php");
-include_once("include/finhead.php");
+#include_once("include/finhead.php");
 ?>
 
 <script type="text/javascript">
@@ -124,19 +120,16 @@ function highlight() {
 <td class="page" align="center">
 <?php
 include_once("include/head.php");
-
-if ($user_admin != y) { 
-echo "<h1>$lang_admin_droit";
-exit;
+if (isset($message)&&$message!='') { 
+ echo $message; $message='';
 }
-
+if ($user_admin != 'y') { 
+ echo "<h1>$lang_admin_droit";
+ exit;
+}
 ?>
-</td>
-</tr>
-<tr>
-<td  class="page" align="center">
 <form action="mailing.php" method="post" id="edit" name="edit">
-  <table vlass="boiteaction">
+  <table class="page boiteaction">
     <tr>
       <caption><?php echo $lang_mailing_list; ?></caption>
     </tr>
@@ -146,8 +139,7 @@ exit;
     <tr>
       <td class="texte0"><?php echo  "$lang_mailing_list_message"; ?></td>
 	  <td class="texte0">	 
-		<textarea id="ta" name="message" style="width:100%" rows="20" cols="80">
-		</TEXTAREA>
+		<textarea id="ta" name="message" style="width:100%" rows="20" cols="80"></textarea>
 		</td>
 	  </tr>
     <tr>
@@ -156,14 +148,12 @@ exit;
     </tr>
   </table>
 </form>
-<?php 
-$aide = mailing;
-?><!-- InstanceEndEditable --> 
-</td></tr>
-</table>
 <?php
+$aide = 'mailing';
 include("help.php");
 include_once("include/bas.php");
 ?>
+</td></tr>
+</table>
 </body>
-<!-- InstanceEnd --></html>
+</html>

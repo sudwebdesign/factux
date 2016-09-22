@@ -20,7 +20,7 @@
  *.
  */
 
-$anneeMin = 0;
+$anneeMin = 1;
 $anneeMax = 3;
 
 
@@ -38,17 +38,17 @@ $nomj[5] = "Vendredi";
 $nomj[6] = "Samedi";
 
 $nomm[0] = "Janvier";
-$nomm[1] = "F&eacute;vrier";
+$nomm[1] = "Février";
 $nomm[2] = "Mars";
 $nomm[3] = "Avril";
 $nomm[4] = "Mai";
 $nomm[5] = "Juin";
 $nomm[6] = "Juillet";
-$nomm[7] = "Ao&ucirc;t";
+$nomm[7] = "Août";
 $nomm[8] = "Septembre";
 $nomm[9] = "Octobre";
 $nomm[10] = "Novembre";
-$nomm[11] = "D&eacute;cembre";
+$nomm[11] = "Décembre";
 
 /**
  ---------------------------------------------------------------------------------------------
@@ -60,7 +60,7 @@ $ajd = getdate();
 
 $frm = $_GET["frm"];
 $champ = $_GET["ch"];
-$link = "?frm=".$frm."&ch=".$champ;
+$link = "?frm=".$frm."&amp;ch=".$champ;
 
 if (isset($_POST["mois"])){
     $mois = $_POST["mois"];
@@ -289,7 +289,7 @@ function get_classeJourReste($i, $cptJour, $mode){
         #calendrier select {
             width: 49%;
             margin: 0;
-            padding: 0;
+            padding: 4px;
         }
     </style>
 </head>
@@ -333,10 +333,11 @@ for ($i = $ajd["year"] - $anneeMin; $i < $ajd["year"] + $anneeMax; $i++){
 for ($jour = 0; $jour < 7; $jour++){
     $classe = get_classe($jour, 1, $affichage);
 ?>
-        <th<?php echo $classe; ?>><?php echo $nomj[$jour]; ?></th>
+        <th <?php echo $classe; ?>><?php echo $nomj[$jour]; ?></th>
 <?php
 }
 ?>
+    </tr>
     <tr>
 <?php
 /**
@@ -345,7 +346,7 @@ for ($jour = 0; $jour < 7; $jour++){
 for ($prems = 0; $prems < $premierJour; $prems++){
     $classe = get_classe($prems, 2, $affichage);
 ?>
-        <td<?php echo $classe; ?>>&nbsp;</td>
+        <td <?php echo $classe; ?>>&nbsp;</td>
 <?php
 }
 /**
@@ -356,7 +357,7 @@ for ($jour = 1; $jour <= $dernierJour; $jour++){
     $classe = get_classeJour($aujourdhui, $annee, $mois, $jour, $cptJour, $premierJour, $nomj, $prems, $affichage);
     $cptJour++;
 ?>
-        <td<?php echo $classe; ?>><a href="#" onClick="submitDate(<?php echo $jour; ?>)"><?php echo $jour; ?></a></td>
+        <td <?php echo $classe; ?>><a href="#" onClick="submitDate(<?php echo $jour; ?>)"><?php echo $jour; ?></a></td>
 <?php
     if (is_int(($jour + $prems) / 7)){
         $cptJour = 0;
@@ -377,7 +378,7 @@ if ($cptJour != 0){
     for ($i = 0; $i < (7 - $cptJour); $i++){
         $classe = get_classeJourReste($i, $cptJour, $affichage);
 ?>
-        <td<?php echo $classe; ?>>&nbsp;</td>
+        <td <?php echo $classe; ?>>&nbsp;</td>
 <?php
     }
 ?>

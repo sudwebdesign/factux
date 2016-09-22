@@ -26,16 +26,16 @@ de factux 1.1.4 sur votre serveur</B></FONT></FONT></P>
 <P STYLE="margin-bottom: 0cm">Avant l'installation assurez-vous de
 recupérer 
 </P>
-<P STYLE="margin-bottom: 0cm">1. l'adresse de votre base de donn&eacute;es</P>
+<P STYLE="margin-bottom: 0cm">1. l'adresse de votre base de données</P>
 <P STYLE="margin-bottom: 0cm">2. le mot de passe de l'utilisateur de
 votre base mysql</P>
 <P STYLE="margin-bottom: 0cm">3. le login de votre utilisateur mysql</P>
-<P STYLE="margin-bottom: 0cm">4. Si la base de donn&eacute;es a
-&eacute;t&eacute; cr&eacute;ée le nom de cette base de donn&eacute;es
+<P STYLE="margin-bottom: 0cm">4. Si la base de données a
+été créée le nom de cette base de données
 vide</P>
 <P STYLE="margin-bottom: 0cm">(si elle n'existe pas et que vous avez
-les droits n&eacute;cessaires sur le serveur de bases de donn&eacute;es, Factux
-la cr&eacute;era pour vous</P>
+les droits nécessaires sur le serveur de bases de données, Factux
+la créera pour vous</P>
 <P STYLE="margin-bottom: 0cm">5. Toutes les infos de votre entreprise
 (n&deg; de tva, adresse, tel, registre de commerce...)</P>
 <P STYLE="margin-bottom: 0cm"><BR>
@@ -43,12 +43,12 @@ la cr&eacute;era pour vous</P>
 <P STYLE="margin-bottom: 0cm"><BR>
 </P>
 <P STYLE="margin-bottom: 0cm">Décompressez le fichier dans un
-r&eacute;pertoire accessible par apache</P>
-<P STYLE="margin-bottom: 0cm">V&eacute;rifiez les droits des fichiers
+répertoire accessible par apache</P>
+<P STYLE="margin-bottom: 0cm">Vérifiez les droits des fichiers
 (chmod)</P>
 <P STYLE="margin-bottom: 0cm">Tous les fichiers doivent être lisibles
 par apache</P>
-<P STYLE="margin-bottom: 0cm">Les r&eacute;pertoires</P>
+<P STYLE="margin-bottom: 0cm">Les répertoires</P>
 <P STYLE="margin-bottom: 0cm">/include 
 </P>
 <P STYLE="margin-bottom: 0cm">/dump 
@@ -57,7 +57,7 @@ par apache</P>
 </P>
 <P STYLE="margin-bottom: 0cm">/fpdf</P>
 <P STYLE="margin-bottom: 0cm">/include/session</P>
-<P STYLE="margin-bottom: 0cm">et le r&eacute;pertoire racine de
+<P STYLE="margin-bottom: 0cm">et le répertoire racine de
 factux 
 </P>
 <P STYLE="margin-bottom: 0cm">doivent permettre un droit d'écriture
@@ -67,17 +67,17 @@ par apache</P>
 <P STYLE="margin-bottom: 0cm">Pointez votre navigateur sur
 http://votre_hebergeur.org/factux/installeur/</P>
 <P STYLE="margin-bottom: 0cm">Suivez les instructions &agrave;
-l'&eacute;cran.</P>
+l'écran.</P>
 <P STYLE="margin-bottom: 0cm">Apres l'installation, il faut effacer le
-r&eacute;pertoire installer de l'arborescence de factux (si vous ne
+répertoire installer de l'arborescence de factux (si vous ne
 le faites pas un message vous le rappellera)</P>
-<P STYLE="margin-bottom: 0cm">R&eacute;duire les droits des fichiers :</P>
+<P STYLE="margin-bottom: 0cm">Réduire les droits des fichiers :</P>
 <P STYLE="margin-bottom: 0cm">/include/config/var.php</P>
 <P STYLE="margin-bottom: 0cm">/include/config/common.php</P>
 <P STYLE="margin-bottom: 0cm">Ceux-ci ne doivent être accessibles qu'en
 lecture par apache.</P>
 <P STYLE="margin-bottom: 0cm">Si vous ne le faites pas, un rappel vous
-sera adress&eacute; dans Factux</P>
+sera adressé dans Factux</P>
 <P STYLE="margin-bottom: 0cm"><BR>
 </P>
 <P STYLE="margin-bottom: 0cm">Bugs et desiderata sur
@@ -93,7 +93,7 @@ de Factux</B></FONT></FONT></P>
 <P STYLE="margin-bottom: 0cm"><BR>
 </P>
 <P STYLE="margin-bottom: 0cm">Faites tout d'abord une sauvegarde de
-votre base de donn&eacute;e (en ligne de commande ou avec
+votre base de donnée (en ligne de commande ou avec
 l'utilitaire de Factux ou encore via phpmyadmin ou tout autre soft
 de gestion de mysql)</P>
 <P STYLE="margin-bottom: 0cm">Ensuite faites un backup des fichiers
@@ -101,7 +101,7 @@ suivants :</P>
 <P STYLE="margin-bottom: 0cm">/include/config/common.php</P>
 <P STYLE="margin-bottom: 0cm">/include/config/var.php</P>
 <P STYLE="margin-bottom: 0cm">Ceci fait, decompressez l'archive et
-uploadez les fichiers dans le r&eacute;pertoire de factux en ecrasant
+uploadez les fichiers dans le répertoire de factux en ecrasant
 les anciens fichiers.</P>
 <P STYLE="margin-bottom: 0cm">Verifiez les droits comme pour
 l'installation (voir plus haut) 
@@ -116,26 +116,26 @@ l'installation (voir plus haut)
 <P STYLE="margin-bottom: 0cm">Editez
 /include/config/var.php et remplacez et remplacer $devise ="&amp;#128;"; par $devise ="&amp;euro;";</P>
 
-<P STYLE="margin-bottom: 0cm"># Si vous avez modifi&eacute; les
+<P STYLE="margin-bottom: 0cm"># Si vous avez modifié les
 fichiers fact_pdf.php ou bon_pdf.php vous devrez malheureusement
 refaire ces modifications</P>
 <P STYLE="margin-bottom: 0cm"><BR>
 </P>
 <P STYLE="margin-bottom: 0cm">!!!!!!!!!!!!! Je ne suis en aucun cas
-responsable des pertes de donn&eacute;es dues &agrave; l'upgrade de
+responsable des pertes de données dues &agrave; l'upgrade de
 Factux !!!!!!!!!!!!!</P>
 <P STYLE="margin-bottom: 0cm"><BR>
 </P>
 <P STYLE="margin-bottom: 0cm">Ouvrez votre navigateur et aller  http://votre hebergeur.com/factux/installeur/upgrade/ </p>
 <P STYLE="margin-bottom: 0cm">Suivez les instructions &agrave;
 l'ecran</P>
-<P STYLE="margin-bottom: 0cm">Si vous avez modifi&eacute; les fichiers
+<P STYLE="margin-bottom: 0cm">Si vous avez modifié les fichiers
 fact_pdf.php ou bon_pdf.php vous devrez malheureusement refaire ces
 modifications</P>
 <P STYLE="margin-bottom: 0cm"><BR>
 </P>
 <P STYLE="margin-bottom: 0cm">!!!!!!!!!!!!! Je ne suis en aucun cas
-responsable des pertes de donn&eacute;es dues &agrave; l'upgrade de
+responsable des pertes de données dues &agrave; l'upgrade de
 Factux !!!!!!!!!!</P>
 <P STYLE="margin-bottom: 0cm">############################################################</P>
 <P STYLE="margin-bottom: 0cm"><b>Changelog 1.1.4 --> 1.1.5</b></p>
@@ -160,9 +160,9 @@ Factux !!!!!!!!!!</P>
 <P STYLE="margin-bottom: 0cm">Chasse aux bugs</P>
 <P STYLE="margin-bottom: 0cm">Meilleure gestion des fichiers de
 langage</P>
-<P STYLE="margin-bottom: 0cm">Possibilit&eacute; d'imprimer les
+<P STYLE="margin-bottom: 0cm">Possibilité d'imprimer les
 factures par lot</P>
-<P STYLE="margin-bottom: 0cm">Possibilit&eacute; de générer les
+<P STYLE="margin-bottom: 0cm">Possibilité de générer les
 factures par lot</P>
 <P STYLE="margin-bottom: 0cm">Intégration des fichiers de langage
 nl.php et en.php (merci &agrave; Toine et Cass pour leurs traductions
@@ -185,20 +185,20 @@ respectives.)</P>
 </P>
 <P STYLE="margin-bottom: 0cm">#Ajout d'un module de hiérarchie des
 utilisateurs</P>
-<P STYLE="margin-bottom: 0cm">#Ajout de la possibilit&eacute;
+<P STYLE="margin-bottom: 0cm">#Ajout de la possibilité
 d'envoyer les documents par mails aux clients.</P>
 <P STYLE="margin-bottom: 0cm">#Ajout d'un calendrier en javascript
 pour la saisie des dates</P>
-<P STYLE="margin-bottom: 0cm">#Possibilit&eacute; de changer
+<P STYLE="margin-bottom: 0cm">#Possibilité de changer
 l'appartenance d'un bon de commande.</P>
-<P STYLE="margin-bottom: 0cm">#Possibilit&eacute; de voir les
-statistiques des ann&eacute;es pr&eacute;c&eacute;dentes</P>
+<P STYLE="margin-bottom: 0cm">#Possibilité de voir les
+statistiques des années précédentes</P>
 <P STYLE="margin-bottom: 0cm">#Ajout d'un favico.ico</P>
 <P STYLE="margin-bottom: 0cm">#Ajout d'un editeur html en ligne pour
 la mailing liste (mozilla uniquement)</P>
-<P STYLE="margin-bottom: 0cm">#Meilleure compatibilit&eacute; avec les
-navigateurs : les documents sont à présent sauv&eacute;s sur le serveur
-avant d'être transmits au navigateur. Ils sont effac&eacute;s
+<P STYLE="margin-bottom: 0cm">#Meilleure compatibilité avec les
+navigateurs : les documents sont à présent sauvés sur le serveur
+avant d'être transmits au navigateur. Ils sont effacés
 automatiquement par la suite.</P>
 <P STYLE="margin-bottom: 0cm"><BR>
 </P>
@@ -210,13 +210,13 @@ automatiquement par la suite.</P>
 </P>
 <P STYLE="margin-bottom: 0cm"><BR>
 </P>
-<P STYLE="margin-bottom: 0cm"># correction des Bugs signal&eacute;s
+<P STYLE="margin-bottom: 0cm"># correction des Bugs signalés
 précédemment <BR># refonte de l'interface par Gilbert <BR># ajout de la
-possibilit&eacute; de notification de nouveaux documents par email <BR>#
+possibilité de notification de nouveaux documents par email <BR>#
 Correction orthographique <BR>#commentaire sur les documents <BR>#
 Ajout de prefixes aux tables <BR>#Amélioration de l'installeur et
 adaptation suivant les nouveaux standards <BR># Ajout d'un choix de
-devise afin d'augmenter l'internationalisation du logiciel (début&eacute;
+devise afin d'augmenter l'internationalisation du logiciel (débuté
 par Gilbert) <BR># Ajout de ventilation de la tva dans les factures
 suivant le % 
 </P>
@@ -234,7 +234,7 @@ suivant le %
 <P STYLE="margin-bottom: 0cm"># Ajout de gifs et autre images afin
 d'embellir l'interface.</P>
 <P STYLE="margin-bottom: 0cm"># Modification des styles css et ajout
-de classes dans les tableaux afin de facilit&eacute;r la lisibilit&eacute;e
+de classes dans les tableaux afin de facilitér la lisibilitée
 des tableaux. 
 </P>
 <P STYLE="margin-bottom: 0cm"># Ajout d'un nouveau module de
@@ -242,32 +242,32 @@ statistiques permettant de voir l'évolution du chiffre d'affaire d'un
 client par mois. (ok)</P>
 <P STYLE="margin-bottom: 0cm"># Achèvement de l'internationalisation
 de l'interface (et publication du fichier langage afin de de
-demander des contributions au niveau de la traduction).(50 % effectu&eacute;)</P>
+demander des contributions au niveau de la traduction).(50 % effectué)</P>
 <P STYLE="margin-bottom: 0cm"># Ajout d'un module de devis. 
 </P>
-<P STYLE="margin-bottom: 0cm"># Possibilit&eacute; d'&eacute;diter
-et de supprimer les d&eacute;penses.</P>
+<P STYLE="margin-bottom: 0cm"># Possibilité d'éditer
+et de supprimer les dépenses.</P>
 <P STYLE="margin-bottom: 0cm"># Meilleure gestion des fournisseurs
-dans les fichier de d&eacute;pense. 
+dans les fichier de dépense. 
 </P>
 <P STYLE="margin-bottom: 0cm"># La version 1.1 devrait être
 compatible avec les serveurs qui sont sur register_global Off (mouveau
 standard d'installation de php). 
 </P>
 <P STYLE="margin-bottom: 0cm"># Intégration d'un module de backup et
-restauration des bases de donn&eacute;es. 
+restauration des bases de données. 
 </P>
 <P STYLE="margin-bottom: 0cm"># Amélioration de l'installeur avec
 vérification des droits d'ecriture dans les fichiers
 necessaires. Propose aussi l'upload du logo de l'entreprise</P>
-<P STYLE="margin-bottom: 0cm"># Int&eacute;gration d'un menu dropdown
+<P STYLE="margin-bottom: 0cm"># Intégration d'un menu dropdown
 avec image en lieu et place des icônes actuelles. 
 </P>
 <P STYLE="margin-bottom: 0cm"># Ajout d'un module permettant aux
 clients de voir et d'imprimer leus factures, devis et bons de
 commande en ligne. 
 </P>
-<P STYLE="margin-bottom: 0cm"># Ajout d'une mailing-list bas&eacute;e
+<P STYLE="margin-bottom: 0cm"># Ajout d'une mailing-list basée
 sur les adresses email des clients, permettant, par exemple, d'envoyer
 vos promos ou fermetures annuelles &agrave; vos cients. 
 </P>

@@ -19,15 +19,18 @@
  * 		Guy Hendrickx
  *.
  */
+$now='../';
 require_once("../include/verif_client.php");
 include_once("../include/config/common.php");
 include_once("../include/config/var.php");
 include_once("../include/language/$lang.php");
-echo '<link rel="stylesheet" type="text/css" href="../include/style.css">';
+include_once("../include/utils.php");
+include_once("../include/headers.php");
+include_once("../include/finhead.php");
 $num_dev=isset($_POST['num_dev'])?$_POST['num_dev']:"";
 $login=isset($_POST['login'])?$_POST['login']:"";
 $message=isset($_POST['message'])?$_POST['message']:"";
-$sql2 = "UPDATE " . $tblpref ."devis SET resu='per' WHERE num_dev= $num_dev";
+$sql2 = "UPDATE " . $tblpref ."devis SET resu = '-1' WHERE num_dev = $num_dev";
 mysql_query($sql2) or die('Erreur SQL2 !<br>'.$sql2.'<br>'.mysql_error());
 echo "$lang_de_per";
 $from = "$mail" ;
@@ -38,6 +41,10 @@ $header = 'From: '.$from."\n"
  .'Content-Type: text/html; charset= ISO-8859-1'."\n"
  .'Content-Transfer-Encoding: 7bit'."\n\n";
 
-mail($to,$subject,$message,$header);
+if(mail($to,$subject,$message,$header))
+ echo "<h2>$lang_email_envoyé</h2>";
+else
+ echo "<h1>$lang_email_envoi_err</h1>";
+
 include_once("client.php");
  ?> 

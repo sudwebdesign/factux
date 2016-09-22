@@ -1,60 +1,100 @@
 #######################################################################
 
 
-Installation de factux sur votre serveur
+Installation de FactuX5.10.5 sur votre serveur
 
-Version 1.1.5"
+Version X5.*
 
 Avant l'installation assurer vous de recuperer 
 1.l'adresse de votre base de donnée
 2.le mot de passe de l'utilisateur de votre base mysql
 3.le login de votre utilisateur mysql
-4.Si la base de donnée à été crée le nom de cette base de donnée vide
-(si elle n'existe pas et que vous avez les droit necessaire sur le sertveur de base de donnée,Factux la créeras pour vous
+4.Si la base de donnée à été crée, le nom de cette base de donnée vide
+(si elle est inexistante et que vous avez les droits necessaires sur le serveur de base de donnée, Factux permet de la créer pour vous
 5.Toutes les info de votre entreprise (n° de tva, adresse, tel, registre de commerce...)
+6. une image du logo de votre entreprise au format jpg 
 
 
 Decompressez le fichier dans un repertoire accecible par apache
 Verifier les droit des fichier (chmod)
 - Touts les fichier doivent etres lisibles par apache
 - Les repertoires 
-									/include 
-									/dump 
-									/image 	
-									/include/session
-									/fpdf
-									et le repertoire racine de factux doivent permettre un droit d'ecriture par apache
+   /include 
+   /dump 
+   /image 	
+   /include/session
+   /fpdf
+   et le repertoire racine de Factux doivent permettre un droit d'ecriture par apache
 
 Pointez votre navigateur sur http://votre_hebergeur.org/factux/installeur/
 Suivez les instructions à l'ecran.
-Apres l'installation il faut effacer le repertoire installeur de l'arboressence de factux (si vous ne le faites pas un message de rapel vous en feras le rappel)
-Réduire les droit des fichier :
-									/include/config/var.php
-									/include/config/common.php
-		Ceux ci ne doivent etre accesible quen lecture par apache.
+Apres l'installation il faut effacer le repertoire installeur de l'arboressence de factux.
+(si vous ne le faites pas un message de rapel vous sera adressé et vous permettra de supprimer ce repertoire)
+Réduire les droit des fichiers :
+   /include/config/var.php
+   /include/config/common.php
+Ceux ci ne doivent etre accesible quen lecture par apache.
 Si Vous ne le faites pas un rappel vous seras adressé dans Factux
 
- Bugs et desiteratas sur http://factux.sourceforge.net 
+ Bugs et desiteratas sur http://
 
 ######################################################
 
 Upgrade de Factux
 
-Faites tout d'abord une sauvgarde de votre base de donnée (en ligne de commande ou via phpmyadmin ou tout autre soft de gestion de mysql)
-Ensuite faite iun backup des fichiers suivant:
-												 		 									/include/config/common.php
-																							/include/config/var.php
-														
-Ceci fait decompresser l'archive et uploader les fichier dans le repertoire de factux en ecrassant les anciens fichiers.
+Faites tout d'abord une sauvegarde de votre base de donnée 
+(en ligne de commande ou via phpmyadmin, adminer ou tout autre soft de gestion de mysql)
+
+Ensuite faite une sauvegade des fichiers suivant:
+   /include/config/common.php
+   /include/config/var.php
+   /image/votreficherlogo.jpg
+
+Ceci fait, supprimer les fichiers de factux.1.1.5 de votre serveur ou déplacer lès dans un autre répertoire (au cas ou* ;-)
+Beaucoup de fichiers ont changer de nom, en écrasant simplement le dossier,
+des fichiers non usités resteraient sur le serveur risquant de créér des anomalies et failles de sécurité.
+
+decompresser l'archive et uploader les fichiers dans le repertoire de votre Factux ou si votre hebergeur le permet,
+téléversé l'archive avec leur webiciel de gestion de fichiers et décompressé là directement dans le dossier de Factux.
+
 Verifier les droits comme pour l'installation (voir plus haut) 
-reuploader les fichiers:
-			 		 									/include/config/common.php
-														/include/config/var.php	
-Si vous utliser l'euro comme devise:editer /include/config/var.php et remplacer $devise ="&#128;"; par $devise ="&euro;";
+Si vous utliser l'euro comme devise:editer /include/config/var.php et remplacer $devise ="&euro;"; par $devise ="€";
+remplacer les fichiers vides :
+   /include/config/common.php
+   /include/config/var.php
+du serveur par les votres
+aisi que
+   /image/votreficherlogo.jpg
+
 Pointez votre navigateur sur http://votre_hebergeur.org/factux/installeur/upgrade et suivez les instructions a l'ecran
-# Si vous avez modifié les fichier fact_pdf.php ou bon_pdf.php vous devrez malheureusement refaire ces modifications
+# Si vous avez modifié les fichier fact_pdf.php ou bon_pdf.php vous devrez malheureusement refaire ces modifications*
 
 !!!!!!!!!!!!!Je ne suis en aucun cas responsable des pertes de données du à l'upgrade de Factux !!!!!!!!!!!!!
+#####################################################
+Changelog 1.1.5 --> X5.10.5 révision des dix ans par thom@s
+
+Chasse et pêche aux cafards
+OSI concept 'One Space Indent'
+CISEN Concept 'Clean/Correct If See Error Now'
+Correction des entête des fichiers et intégration complete du système de thême
+Fichier et systeme de langue consolidé & augmenté (en français). #need #translator #english #nederlands #verification
+Fichiers non usités supprimés
+MAJ de l'installeur
+Integration d'un systeme remises* 
+Integration du coef de marge*
+MAJ des thêmes + 1 ajout
+MAJ de nombres litéraux
+MAJ du systeme de gestion des articles*
+MAJ du systeme de gestion des factures non réglés*
+Module de gestion des catégories ajouté
+Révision des requettes SQL
+Reroutage de cerains point clé de Factux
+Réécrit en PHP 5.5, HTML5
+Si PHP 7 une librairie de migration pour MariaDB & Mysql s'active #thx: dotpointer ;-)
+Validation du code selon les standards du w3c temps au point de vue css que html. 
+
+*from older factux fork, #thx devs.
+
 #####################################################
 Changelog 1.1.4 --> 1.1.5
 
@@ -88,7 +128,7 @@ changelog 1.1.2--> 1.1.3
 
 #chasse aux bugs
 #Modification de la methode de création des bon, facture et devis en pdf ,il sont a present stocké temporairement sur le serveur et effacé par la suite.
-#Ajout d'un module permettant de gerer les utilisateur de Factux et ainssi leur donner les droits sur tout ou partie du facturier
+#Ajout d'un module permettant de gerer les utilisateur de Factux et ainsi leur donner les droits sur tout ou partie du facturier
 #Amelioration de la mailing liste avec l'ajout d'un editeur hml en ligne (disponible seulement avec mozilla ou mozilla-firefox)
 #ajout de la possibilitée d'envoyer les document par mail au format pdf.
 #Le client peut a present etre modifié apres la création du bon

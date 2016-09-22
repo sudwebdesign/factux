@@ -19,52 +19,45 @@
  * 		Guy Hendrickx
  *.
  */
- ?> 
-<table class="boiteaction">
-      <caption><?php echo $lang_commandes; ?></caption>
-<?php
+if(!isset($num_client))
+ header("Location:index.php");
+ 
 include_once("../include/config/common.php");
 include_once("../include/language/$lang.php");
 include_once("../include/config/var.php");
 include_once("../include/utils.php");
-$sql2 = "SELECT num_bon, tot_htva, tot_tva, DATE_FORMAT(date,'%d/%m/%Y') AS date, nom FROM " . $tblpref ."bon_comm RIGHT JOIN " . $tblpref ."client on " . $tblpref ."bon_comm.client_num = num_client WHERE client_num = '".$num_client."' ORDER BY " . $tblpref ."bon_comm.num_bon DESC ";
+?> 
+<table class="page boiteaction">
+ <caption><?php echo $lang_commandes; ?></caption>
+ <tr> 
+  <th><?php echo $lang_numero; ?> </th>
+  <th><?php echo $lang_date; ?></th>
+  <th><?php echo $lang_total_h_tva; ?></th>
+  <th><?php echo $lang_total_ttc; ?></th>
+  <th><?php echo $lang_imprimer; ?></th>
+ </tr>
+<?php
+$sql2 = "
+SELECT num_bon, tot_htva, tot_tva, DATE_FORMAT(date,'%d/%m/%Y') AS date, nom FROM " . $tblpref ."bon_comm 
+LEFT JOIN " . $tblpref ."client on " . $tblpref ."bon_comm.client_num = num_client 
+WHERE client_num = '".$num_client."' 
+ORDER BY " . $tblpref ."bon_comm.num_bon DESC
+";
 $req2 = mysql_query($sql2) or die('Erreur SQL2 !<br>'.$sql2.'<br>'.mysql_error());
+while($data = mysql_fetch_array($req2)){
 ?>
-      <tr> 
-        <th><?php echo $lang_numero; ?> </th>
-        <th><?php echo $lang_client; ?></th>
-        <th><?php echo $lang_date; ?></th>
-        <th><?php echo $lang_total_h_tva; ?></th>
-        <th><?php echo $lang_total_ttc; ?></th>
-        <th><?php echo $lang_imprimer; ?></th>
-      </tr>
-      <?php
-while($data = mysql_fetch_array($req2))
-    {
-		$num_bon = $data['num_bon'];
-		$total = $data['tot_htva'];
-		$tva = $data['tot_tva'];
-		$date = $data['date'];
-		$nom = $data['nom'];
-		$ttc = $total + $tva ;
-		?>
-      <tr> 
-        <td class='<?php echo couleur_alternee (TRUE,"nombre"); ?>'><?php echo $num_bon; ?></td>
-        <td  class='<?php echo couleur_alternee (FALSE); ?>'><?php echo $nom; ?></td>
-        <td class='<?php echo couleur_alternee (FALSE); ?>'><?php echo $date; ?></td>
-        <td  class='<?php echo couleur_alternee (FALSE,"nombre"); ?>'><?php echo montant_financier($total); ?></td>
-        <td class='<?php echo couleur_alternee (FALSE,"nombre"); ?>'>
-		<?php echo montant_financier($ttc); ?></td>
-        <td class='<?php echo couleur_alternee (FALSE); ?>'>
-				<form action="../fpdf/bon_pdf.php" method="post" target="_blank">
-				<input type="hidden" name="num_bon" value="<?php echo $num_bon; ?>" />
-				<input type="hidden" name="nom" value="<?php echo $nom; ?>" />
-<input type="image" src="../image/printer.gif " alt="imprimer" />
-</form> 
-</td>
-      </tr>
-        <?php 
-		}
-    ?>
-	</table>
-<br><br>
+ <tr> 
+  <td class='<?php echo couleur_alternee (); ?>'><?php echo $data['num_bon']; ?></td>
+  <td class='<?php echo couleur_alternee (FALSE, "c texte"); ?>'><?php echo $data['date']; ?></td>
+  <td class='<?php echo couleur_alternee (FALSE,"nombre"); ?>'><?php echo montant_financier($data['tot_htva']); ?></td>
+  <td class='<?php echo couleur_alternee (FALSE,"nombre"); ?>'><?php echo montant_financier($data['tot_htva']+$data['tot_tva']); ?></td>
+  <td class='<?php echo couleur_alternee (FALSE, "c texte"); ?>'>
+   <form action="../fpdf/bon_pdf.php" method="post" target="_blank">
+    <input type="hidden" name="num_bon" value="<?php echo $data['num_bon']; ?>" />
+    <input type="hidden" name="nom" value="<?php echo $data['nom']; ?>" />
+    <input type="image" src="../image/printer.gif " alt="<?php echo $lang_imprimer; ?>" />
+   </form> 
+  </td>
+ </tr>
+<?php } ?>
+</table>

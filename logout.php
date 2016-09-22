@@ -12,36 +12,20 @@
  * File Name: logout.php
  * 	deconnexion du programme
  * 
- * * * Version:  1.1.5_modif
+ * * * Version:  1.1.5
  * Modified: 11/04/2005
  * 
  * File Authors:
  * 		Guy Hendrickx
  *.
  */
- 
- ini_set('session.save_path', 'include/session'); 
-
-session_start();
-session_register('trucmuch');
-
-session_unset();
+include("include/config/common.php");
+ini_set('session.save_path', 'include/session'); 	
+if(session_id() === '')#if(basename($_SERVER['SCRIPT_FILENAME'])==basename(__FILE__))#elle meme
+ session_start();
+$_SESSION['trucmuch'] = '';#session_register('login');
+$_SESSION['lang'] = ''; 
+unset($_SESSION['trucmuch'],$_SESSION['lang']);
 session_destroy();
-    //Efface les fichiers temporaires
-    $dir = "fpdf" ;
-    $t=time();
-    $h=opendir($dir);
-    while($file=readdir($h))
-    {
-        if(substr($file,0,3)=='tmp' and substr($file,-4)=='.pdf')
-        {
-            $path=$dir.'/'.$file;
-            if($t-filemtime($path)>3)
-                @unlink($path);
-        }
-    }
-    closedir($h);
-
+include("include/del_pdf.php");#remove olds files of session
 include("login.inc.php");
-
- ?> 

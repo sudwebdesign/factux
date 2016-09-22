@@ -19,16 +19,12 @@
  * 		Guy Hendrickx
  *.
  */
-echo "<link rel='stylesheet' type='text/css' href='../include/themes/default/style.css'>";
-echo'<link rel="shortcut icon" type="image/x-icon" href="../image/favicon.ico" >';
-echo '<table width="100%" border="1" cellpadding="0" cellspacing="0" summary="">';
-echo '<tr><td class ="install"><img src="../image/factux.gif" alt=""><br><IMG SRC="../image/spacer.gif" WIDTH=150 HEIGHT=400 ALT=""><br></th><td>';
-
+$etape = "Étape N°4 : Initialiser la base de données, créer la base, les tables et l'utilisateur primaire";
+include('headers.php');
+$now='../';
 require_once("../include/config/common.php");
 mysql_connect($host,$user,$pwd) or die ("Could not connect to MySQL");
 $sql = "create database $db";
-mysql_query($sql)or die('Erreur SQL !'.$sql.'
-'.mysql_error());
+mysql_query($sql)or die('Erreur SQL !'.$sql.''.mysql_error());
+echo "Votre base de donnée $db à été crée avec succes<hr>";
 include("table_create.php");
-//echo "Votre base de donnée $db à été crée avec succes <a href=''>Continuer</a><hr>";
-?>

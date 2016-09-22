@@ -17,15 +17,16 @@
  * 
  * File Authors:
  * 		Guy Hendrickx
- *.
+ *.error_reporting(0);
  */
-error_reporting(0);
+
 require_once("include/config/common.php"); 
 if (empty($host)) {
-echo '<link rel="stylesheet" type="text/css" href="include/style.css">';
-echo'<link rel="shortcut icon" type="image/x-icon" href="image/favicon.ico" >';
-echo '<h1>Le logiciel ne semble pas encore avoir ete configuré. Cliquez <a href="installeur/index.php">ici</a> pour le configurer dès maintenant.</h1>';
-
+?>
+<link rel="stylesheet" type="text/css" href="include/theme/red/style.css">
+<link rel="shortcut icon" type="image/x-icon" href="image/favicon.ico" >
+<?php
+$message = '<h1>Le logiciel ne semble pas encore avoir ete configuré.<br />
+Cliquez <a href="installeur/index.php">ici</a> pour le configurer dès maintenant.</h1>';
 }
 include("logout.php");
- ?> 

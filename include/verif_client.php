@@ -17,16 +17,14 @@
  * 
  * File Authors:
  * 		Guy Hendrickx
- *.
+ *
  */
-error_reporting(0);
 ini_set('session.save_path', '../include/session'); 
-session_start();
-if($_SESSION['login_client']=='')
-{
-  echo 'Vous n\'êtes pas autorisé à accéder à cette zone.';
-  include('login.htm');
-  exit;
+if(!isset($_SESSION['login']))
+ session_start();
+if(!isset($_SESSION['login'])||$_SESSION['login']==''){
+ $message = "i";#interdit
+ include(@$from_cli.'login.php');
+ exit;
 }
 $lang = $_SESSION['lang'];
-?>

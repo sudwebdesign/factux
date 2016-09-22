@@ -19,32 +19,13 @@
  * 		Guy Hendrickx
  *.
  */
- session_start();
- session_register('login_client');
+$now='../';
+include('../include/config/common.php');#session_register();
 ini_set('session.save_path', '../include/session'); 
- if (!isset($lang)) { 
-$lang ="fr";  
-}
-
-
-
-session_unset();
+session_start();
+$_SESSION['trucmuch'] = '';#session_register('login');
+$_SESSION['lang'] = ''; 
+unset($_SESSION['trucmuch'],$_SESSION['lang']);
 session_destroy();
-    //Efface les fichiers temporaires
-		$dir = "../fpdf" ;
-    $t=time();
-    $h=opendir($dir);
-    while($file=readdir($h))
-    {
-        if(substr($file,0,3)=='tmp' and substr($file,-4)=='.pdf')
-        {
-            $path=$dir.'/'.$file;
-            if($t-filemtime($path)>3)
-                @unlink($path);
-        }
-    }
-    closedir($h);
-
-include("login.htm");
-
- ?> 
+require ("../include/del_pdf.php");
+include("login.php");

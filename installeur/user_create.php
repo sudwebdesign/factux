@@ -18,36 +18,51 @@
  * File Authors:
  * 		Guy Hendrickx
  *.
- */
-echo '<table width="100%" border="1" cellpadding="0" cellspacing="0" summary="">';
- ?>
- <br><h2> Ajouter un utilisateur </font><br><br>
- <p>Cet utilisateur aura les droits d'administrateur et ne pourra être effacé par la suite</p>
-<center><table bgcolor="#FFFFCC" border="1" cellspacing="0" cellpadding="0">
-  <tr >
-    <td colspan="2"><form action="register.php" method="post" name="utilisateur" id="utilisateur">
-      <p align="right"><font color =#006600>Nom d'utilisateur (login) :
-          <input name="login2" type="text" id="login2"> 
-          </p>
-      <p align="right">Nom : 
-        <input name="nom" type="text" id="nom">
-Pr&eacute;nom: 
-<input name="prenom" type="text" id="prenom">
-</p>
-      <p align="right">Mot de passe : 
-        <input name="pass" type="password" id="pass">
-</p>
-      <p align="right">Mot de passe (pour vérification) :
-        <input name="pass2" type="password" id="pass2"> 
-      </p>
-      <p align="right">Adresse email : 
-        <input name="mail" type="text" id="mail"> 
-      </p>
-      <p align="right">
-        <input type="submit" name="Submit" value="Envoyer">
-        <input name="reset" type="reset" id="reset" value="R&eacute;initialiser">    
-          </p>
-    </form></td>    
-  </tr>
-</table><br><hr>
+ */ 
+ $etape = "Étape N°5 : Enregister l'utilisateur primaire";
+ include_once('headers.php');
+?>
+    <br><h2><?php echo $lang_utilisateur_ajouter; ?></h2><br><br>
+    <p><?php echo $lang_install_user_create; ?></p>
+     <center>
+      <form action="register.php" method="post" name="utilisateur" id="utilisateur">
+       <table bgcolor="#FFFFCC" border="1" cellspacing="0" cellpadding="0">
+        <tr>
+         <td><?php echo $lang_utilisateur_nom; ?></td>
+         <td><input name="login2" type="text" id="login2"></td>
+        </tr>
+        <tr>
+         <td><?php echo $lang_nom; ?></td>
+         <td><input name="nom" type="text" id="nom"></td>
+        </tr>
+        <tr>
+         <td><?php echo $lang_prenom; ?></td>
+         <td><input name="prenom" type="text" id="prenom"></td>
+        </tr>
+        <tr>
+         <td><?php echo $lang_motdepasse; ?></td>
+         <td><input name="pass" type="password" id="pass"></td>
+        </tr>
+        <tr>
+         <td><?php echo $lang_mot_de_passe; ?></td>
+         <td><input name="pass2" type="password" id="pass2"></td>
+        </tr>
+        <tr>
+         <td><?php echo $lang_mail; ?></td>
+         <td><input name="mail" type="text" id="mail"></td>
+        </tr>
+        <tr>
+         <td><input type="submit" name="Submit" value="<?php echo $lang_envoyer; ?>"></td>
+         <td><input name="reset" type="reset" id="reset" value="<?php echo $lang_effacer; ?>"></td>
+        </tr>
+       </table>
+      </form>
+     </center>
+   <br><hr>
+<?php include_once("../include/bas_cli.php"); ?> 
+  </td>
+ </tr>
+</table>
+</body>
+</html>
 

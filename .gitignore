@@ -1,0 +1,5 @@
+include/config/common.php
+include/config/var.php
+include/session/*
+fpdf/*.pdf
+dbinfo.php

@@ -1,4 +1,3 @@
-
 <?php 
 /*
  * Factux le facturier libre
@@ -20,30 +19,24 @@
  * 		Guy Hendrickx
  *.
  */
-include_once("include/config/var.php");
-include_once("include/language/$lang.php");
 ?>
-
-
-<table cellspacing="0" cellpadding="0" align="center">
-  <tr>
-		<td ><?php echo $lang_factux ?>
-    <td  rowspan="2"><a href="http://www.ciit.fr" target="_blank" ><img src="image/logoCIIT.jpg" alt="factux" width="300" height="92" ></a></td>
-    <td>
-  <tr>
-		<td> <td>&nbsp;
-		<?php echo $lang_source_fac ?><br /><a href="http://www.ciit.fr" target="_blank" >Creation Informatique Ingles Thomas </a>
-		
-  
-</table><hr>
-<p>
- <a href="http://jigsaw.w3.org/css-validator/">
-  <img style="border:0;width:88px;height:31px"
-       src="http://jigsaw.w3.org/css-validator/images/vcss" 
-       alt="Valid CSS!">
- </a>
-
-      <a href="http://validator.w3.org/check?uri=referer"><img border="0"
-          src="http://www.w3.org/Icons/valid-html401"
-          alt="Valid HTML 4.01!" height="31" width="88"></a>
-    </p>
+  <table cellspacing="0" cellpadding="0" align="center">
+   <tr>
+    <td ><?php echo $lang_factux ?>
+    <td rowspan="2"><a href="http://www.ciit.fr" target="_blank" ><img src="image/factux.gif" height="77" alt="<?php echo $lang_factux ?>" ></a></td>
+   <tr>
+   <td> 
+    <?php echo $lang_source_fac ?>
+    <a href="http://www.ciit.fr" target="_blank" alt="Creation Informatique Ingles Thomas">Thom@s</a>
+   </td>
+   </tr>
+  </table>
+  <hr>
+  <p>
+    <a href="http://jigsaw.w3.org/css-validator/">
+     <img style="border:0;width:88px;height:31px" src="image/vcss.gif" alt="Valid CSS!">
+    </a>
+    <a href="http://validator.w3.org/check?uri=referer">
+      <img border="0" src="image/valid-html401.png" alt="Valid HTML 4.01!" height="31" width="88">
+    </a>
+  </p>

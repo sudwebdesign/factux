@@ -21,37 +21,40 @@
  */
 include_once("include/verif.php");
 include_once("include/config/common.php");
+include_once("include/config/var.php");
 include_once("include/language/$lang.php");
 include_once("include/utils.php");
-require_once("include/configav.php");
 $article=isset($_POST['article'])?$_POST['article']:"";
 $nom=isset($_POST['nom'])?$_POST['nom']:"";
 $num_bon=isset($_POST['num_bon'])?$_POST['num_bon']:"";
 $quanti=isset($_POST['quanti'])?$_POST['quanti']:"";
 $num_lot=isset($_POST['lot'])?$_POST['lot']:"";
 $remise=isset($_POST['remise'])?$_POST['remise']:"";
-
-//on recupere le prix htva		
-$sql2 = "SELECT prix_htva FROM " . $tblpref ."article WHERE num = $article";
-$result = mysql_query($sql2) or die('Erreur SQL1 !<br>'.$sql2.'<br>'.mysql_error());
-$prix_article = mysql_result($result, 'prix_htva');
-//on recupere le taux de tva
-$sql3 = "SELECT taux_tva FROM " . $tblpref ."article WHERE num = $article";
-$result = mysql_query($sql3) or die('Erreur SQL2 !<br>'.$sql3.'<br>'.mysql_error());
-$taux_tva = mysql_result($result, 'taux_tva');
-//on recupere le coeff de marge
-$sql4="select marge FROM " . $tblpref ."article WHERE num = $article";
-$result=mysql_query($sql4) or die('Erreur SQL3 !<br>'.$sql4.'<br>'.mysql_error());
-$marge=mysql_result($result, 'marge');
-
-$total_htva = $prix_article * $quanti*$marge*(1-($remise/100)) ;
-$mont_tva = $total_htva / 100 * $taux_tva ;
-//inserer les données dans la table du contenu des bons.
-
-mysql_select_db($db) or die ("Could not select $db database");
-$sql1 = "INSERT INTO " . $tblpref ."cont_bon(num_lot, quanti, remise, article_num, bon_num, tot_art_htva, to_tva_art, p_u_jour) 
-VALUES ('$num_lot', '$quanti', '$remise', '$article', '$num_bon', '$total_htva', '$mont_tva', '$prix_article')";
-mysql_query($sql1) or die('Erreur SQL3 !<br>'.$sql1.'<br>'.mysql_error());
-
-
+if($article!=0&&$quanti!=''){
+    //on recupere le prix htva		
+    $sql2 = "SELECT prix_htva FROM " . $tblpref ."article WHERE num = $article";
+    $result = mysql_query($sql2) or die('Erreur SQL !<br>'.$sql2.'<br>'.mysql_error());
+    $prix_article = mysql_result($result, 0);
+    //on recupere le taux de tva
+    $sql3 = "SELECT taux_tva FROM " . $tblpref ."article WHERE num = $article";
+    $result = mysql_query($sql3) or die('Erreur SQL !<br>'.$sql3.'<br>'.mysql_error());
+    $taux_tva = mysql_result($result, 0);
+    //on recupere le coeff de marge
+    $sql4="select marge FROM " . $tblpref ."article WHERE num = $article";
+    $result=mysql_query($sql4) or die('Erreur SQL !<br>'.$sql4.'<br>'.mysql_error());
+    $marge=mysql_result($result, 0);
+    //calcul du prix unitaire du jour (margé et remisé)#2015
+    $prix_article=$prix_article * $marge;
+    $total_htva = $prix_article * (1-($remise/100)) * $quanti;
+    $mont_tva = $total_htva / 100 * $taux_tva ;
+    //inserer les données dans la table du contenu des bons.
+    $sql1 = "INSERT INTO " . $tblpref ."cont_bon(p_u_jour, quanti, article_num, bon_num, tot_art_htva, to_tva_art, num_lot, remise, marge_jour) 
+             VALUES ('$prix_article', '$quanti', '$article', '$num_bon', '$total_htva', '$mont_tva', '$num_lot', '$remise', '$marge')";
+    mysql_query($sql1) or die('Erreur SQL !<br>'.$sql1.'<br>'.mysql_error());
+    
+    //on decremente le stock
+    $sql12 = "UPDATE `" . $tblpref ."article` SET `stock` = (stock - $quanti) WHERE `num` = '$article'";
+    mysql_query($sql12) or die('Erreur SQL !<br>'.$sql12.'<br>'.mysql_error());
+}else
+ $message= "<h1>$lang_champ_oubli</h1>";
 include_once("edit_bon.php");

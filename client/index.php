@@ -18,10 +18,5 @@
  * File Authors:
  * 		Guy Hendrickx
  *.
- */	
-  if (!isset($lang)) { 
-$lang ="fr";  
-}
+ */
 include("logout.php");
-require("../include/config/var.php");
- ?> 

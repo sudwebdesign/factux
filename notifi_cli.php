@@ -19,35 +19,28 @@
  * 		Guy Hendrickx
  *.
  */
-require_once("include/verif.php");
-include_once("include/config/common.php");
-include_once("include/config/var.php");
-include_once("include/language/$lang.php");
-include_once("include/utils.php");
+include_once("include/headers.php");
+include_once("include/finhead.php");
 $type =isset($_GET['type'])?$_GET['type']:"";
 $email =isset($_GET['mail'])?$_GET['mail']:"";
 //p?type=comm&mail=$mail
- ?> 
- </head>
- <!-- InstanceBeginEditable name="doctitle" --> 
-<title><?php echo "$lang_factux" ?></title>
-<!-- InstanceEndEditable --> 
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-<link rel="stylesheet" type="text/css" href="include/style.css">
-<!-- InstanceBeginEditable name="head" --> <!-- InstanceEndEditable -->
-</head>
-<?php 
-if ($type == comm) { 
-$titre = "Nouveau bon de commande";
-$message = "Un nouveau bon de commade vous est adressé par $entrep_nom <br>vous pouvez le consulter en vous rendant sur le site internet avec votre login mot de passe<br>$entrep_nom";
+?>
+<table width="760" border="0" class="page" align="center">
+ <tr>
+  <td class="page" align="center">
+<?php
+include_once("include/head.php");
+if ($type == 'comm') { 
+$titre = $lang_notifi_titre_bon;
+$message = $lang_notifi_message_bon;
 }
-if ($type == fact) { 
-$titre = "Nouvele facture";  
-$message = "Une nouvelle facture vous est adressé par $entrep_nom <br>vous pouvez la consulter en vous rendant sur le site internet avec votre login mot de passe<br>$entrep_nom";
+if ($type == 'fact') { 
+$titre = $lang_notifi_titre_fact;  
+$message = $lang_notifi_message_fact;
 }
-if ($type == devis) { 
-$titre = "Nouveau devis";
-$message = "Un nouveau devis vous est adressé par $entrep_nom <br>vous pouvez le consulter en vous rendant sur le site internet avec votre login mot de passe<br>$entrep_nom";
+if ($type == 'devis') { 
+$titre = $lang_notifi_titre_dev;
+$message = $lang_notifi_message_dev;
 }
 $to = "$email";
 $from = "$entrep_nom<$mail>" ;
@@ -56,18 +49,19 @@ $header = 'From: '.$mail ."\n"
  .'MIME-Version: 1.0'."\n"
  .'Reply-To: '.$from."\n"
  .'X-priority: 3 (Normal)'."\n"
-  .'X-Mailer: Factux'."\n"
+ .'X-Mailer: Factux'."\n"
  .'Content-Type: text/html; charset= ISO-8859-1; charset= ISO-8859-1'."\n"
  .'Content-Transfer-Encoding: 8bit'."\n\n";
-	mail($to,$subject,$message,$header);
-echo "mail de notification envoyé !";
-if ($type == comm) {
+if(mail($to,$subject,$message,$header))
+ $message = "<h2>$lang_notifi_cli</h2>";
+else
+ $message = "<h1>$lang_notifi_cli_non</h1>";#<br>$message
+if ($type == 'comm') {
 include_once("lister_commandes.php");
 }
-if ($type == fact) { 
+if ($type == 'fact') { 
 include_once("lister_factures.php");
 }
-if ($type == devis) { 
+if ($type == 'devis') { 
 include_once("lister_devis.php");
 }
-?> 

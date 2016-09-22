@@ -29,7 +29,7 @@ function couleur_alternee ($alterne=TRUE, $type="texte")
 function stat_baton_horizontal($valeur,$largeur = 3, $image = "image/barre.jpg",  $font=2)
 {
   $barre = round($valeur) * $largeur;
-  return '<img src="'.$image.'" width="'.$barre.'" height="10"alt="barre"> <font size='.$font.'>'. $valeur.'</font>';
+  return '<img src="'.$image.'" width="'.$barre.'" height="10" alt="barre"><font size='.$font.'>'. $valeur.'</font>';
 }
 
 function parseCSS($filename){ 

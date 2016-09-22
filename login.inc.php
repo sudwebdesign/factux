@@ -18,72 +18,70 @@
  * File Authors:
  * 		Hendrickx Guy
  *.
- */	 
+ */
 include_once("include/config/common.php");
 include_once("include/config/var.php"); 
-if (!isset($lang)) {
-   $lang ="$default_lang";
-}
-
+$lang=isset($_POST['lang'])?$_POST['lang']:"";
+$lang=(empty($lang))?$default_lang:$lang;#default_lg in common
 include_once("include/language/$lang.php");
-include_once("include/headers.php");?>
-<script type="text/javascript">
-
-
-function popUp(URL) {
-day = new Date();
-id = day.getTime();
-eval("page" + id + " = window.open(URL, '" + id + "', 'toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=1,width=250,height=450,left = 412,top = 234');");
-}
-
-</script>
-
-<?php
-include_once("include/finhead.php");
-
-
-if (ereg("MSIE", $_SERVER["HTTP_USER_AGENT"])) {?>
-    <BODY onLoad="javascript:popUp('ie.php')">
-		<?php
-} 
+include_once("include/headers.php");
 ?>
+<script type="text/javascript">
+ function popUp(URL) {
+  day = new Date();
+  id = day.getTime();
+  eval("page" + id + " = window.open(URL, '" + id + "', 'toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=1,width=250,height=450,left = 412,top = 234');");
+ }
+</script>
+<?php
 
- 
- <div align="center" >
-   <p><?php echo $lang_factux ?></p>
-	 <p><?php echo $lang_en_admi ?></p>
-   <p><?php echo $lang_ident ?></p>
-   <p><?php echo $entrep_nom ?></p>
-   <p><img src="image/<?php echo $logo ?>" alt="<?php echo $entrep_nom ?>"></p>
-   <p>&nbsp;</p>
- </div>
-<form action="login.php" method='post'>
-  <table width="339" border="1" align="center">
-  <tr>
-    <td class="highlight.login"width="57" rowspan="3" ><img src="image/logoCIA.jpg" width="211" height="211" alt="factux"></td>
-    <td class="highlight.login"width="64" ><?php echo $lang_login ?></td>
-    <td class="highlight.login"width="196" ><input type="text" name="login" maxlength="250"></td>
-  </tr>
-  <tr>
-    <td class="highlight.login"><?php echo $lang_mai_cr_pa ?></td>
-    <td class="highlight.login"><input type="password"name="pass" maxlength="30"></td>
-  </tr>
-	<tr> 
-			<td class="highlight.login">Langue</td>
-			<td class="highlight.login"><select name="lang">
-					<option value="<?php echo "$default_lang" ?>"><?php echo "$lang_deflang" ?></option>
-					<option value="fr">Francais</option>
-					<option value="en">English</option>
-					<option value="nl">Neederlands</option>
-			
-			</select></td> 
-	</tr>
-  <tr class="submit">
-    <td class="submit">&nbsp;</td>
-    <td class="submit"><input name="submit" type="submit" value="login"></td>
-		<td class="submit">&nbsp;</td>
-  </tr>
-</table>
+if (preg_match("~MSIE~", $_SERVER["HTTP_USER_AGENT"])||preg_match("~Edge~", $_SERVER["HTTP_USER_AGENT"]))#quel est celui de spartan ? "Edge/12.#### ça veut dire bord
+ echo "</head>\n".'<body onLoad="javascript:popUp(\''.@$now.'ie.php\')">'."\n";
+else
+ include_once("include/finhead.php");
+?>
+<div align="center">
+<?php
+if (isset($message)&&$message!='') {
+ $message = ($message=="i")?"<h1>$lang_interdit</h1>":$message;
+ echo "<div>$message</div>\n"; 
+}
+?>
+ <p><?php echo $lang_factux; ?></p>
+ <p><?php echo $lang_en_admi; ?></p>
+ <p><?php echo $lang_ident; ?></p>
+ <p><?php echo $entrep_nom; ?></p>
+ <p><img height="161" src="<?php echo @$now; ?>image/<?php echo $logo ?>" alt="<?php echo $entrep_nom; ?>"></p>
+ <p>&nbsp;</p>
+ <form action="<?php echo @$now; ?>login.php" method='post'>
+  <table width="339" border="0" align="center" class="page">
+   <tr>
+    <td class="boiteaction" rowspan="3" ><a href="http://www.ciit.fr/" target="_blank"><img src="<?php echo @$now; ?>image/factux.png" alt="<?php echo $lang_factux; ?>"></a></td>
+    <td class="boiteaction"><?php echo $lang_login ?></td>
+    <td class="boiteaction"><input type="text" name="login" maxlength="10"></td>
+   </tr>
+   <tr>
+    <td class="boiteaction"><?php echo $lang_mai_cr_pa ?></td>
+    <td class="boiteaction"><input type="password" name="pass" maxlength="30"></td>
+   </tr>
+   <tr> 
+    <td class="boiteaction">Langue</td>
+    <td class="boiteaction">
+     <select name="lang">
+      <option value="<?php echo $default_lang; ?>"><?php echo $lang_deflang; ?></option>
+      <option value="fr">Francais</option>
+      <option value="en">English</option>
+      <option value="nl">Neederlands</option>
+     </select>
+    </td> 
+   </tr>
+   <tr>
+    <td class="boiteaction"><a href="<?php echo @$now; ?>client/index.php"><?php echo $lang_en_cli; ?></a></td>
+    <td class="boiteaction">&nbsp;</td>
+    <td class="boiteaction"><input name="submit" type="submit" value="<?php echo ucfirst($lang_enter); ?>"></td>
+   </tr>
+  </table>
 </form>
-<center><a href="client/index.php"><?php echo $lang_en_cli ?></a></center>
-
+</div>
+</body>
+</html>

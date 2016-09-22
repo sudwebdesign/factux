@@ -537,166 +537,149 @@ function getPageOffsetTop(el) {
 
 //]]></script>
 
-
-
 <!-- Menu bar. -->
-
-<div class="menuBar" style="width:80%;"
-><a class="menuButton"
+<div class="menuBar">
+<a class="menuButton"
     href="#"
     onclick="return buttonClick(event, 'DevisMenu');"
-    onmouseover="buttonMouseover(event, 'DevisMenu');"
-><?php echo $lang_devis_pluriel; ?></a
-><a class="menuButton"
+    onmouseover="buttonMouseover(event, 'DevisMenu');"><?php echo $lang_devis_pluriel; ?></a>
+<a class="menuButton"
     href="#"
     onclick="return buttonClick(event, 'CommandesMenu');"
-    onmouseover="buttonMouseover(event, 'CommandesMenu');"
-><?php echo "$lang_commandes"; ?></a
-><a class="menuButton"
+    onmouseover="buttonMouseover(event, 'CommandesMenu');"><?php echo $lang_commandes; ?></a>
+<a class="menuButton"
     href="#"
     onclick="return buttonClick(event, 'FacturesMenu');"
-    onmouseover="buttonMouseover(event, 'FacturesMenu');"
-><?php echo $lang_factures; ?></a
-><a class="menuButton"
+    onmouseover="buttonMouseover(event, 'FacturesMenu');"><?php echo $lang_factures; ?></a>
+<a class="menuButton"
     href="#"
     onclick="return buttonClick(event, 'DepensesMenu');"
-    onmouseover="buttonMouseover(event, 'DepensesMenu');"
-><?php echo $lang_depenses; ?></a
-><a class="menuButton"
+    onmouseover="buttonMouseover(event, 'DepensesMenu');"><?php echo $lang_depenses; ?></a>
+<a class="menuButton"
     href="#"
     onclick="return buttonClick(event, 'ArticlesMenu');"
-    onmouseover="buttonMouseover(event, 'ArticlesMenu');"
-><?php echo $lang_articles; ?></a
-><a class="menuButton"
+    onmouseover="buttonMouseover(event, 'ArticlesMenu');"><?php echo $lang_articles; ?></a>
+<a class="menuButton"
     href="#"
     onclick="return buttonClick(event, 'ClientsMenu');"
-    onmouseover="buttonMouseover(event, 'ClientsMenu');"
-><?php echo $lang_clients; ?></a
-><a class="menuButton"
+    onmouseover="buttonMouseover(event, 'ClientsMenu');"><?php echo $lang_clients; ?></a>
+<a class="menuButton"
     href="#"
     onclick="return buttonClick(event, 'StatsMenu');"
-    onmouseover="buttonMouseover(event, 'StatsMenu');"
-><?php echo $lang_statistiques; ?></a>
-
+    onmouseover="buttonMouseover(event, 'StatsMenu');"><?php echo $lang_statistiques; ?></a>
 <a class="menuButton"
     href="#"
     onclick="return buttonClick(event, 'OutilsMenu');"
-    onmouseover="buttonMouseover(event, 'OutilsMenu');"
-><?php echo $lang_outils; ?></a>
+    onmouseover="buttonMouseover(event, 'OutilsMenu');"><?php echo $lang_outils; ?></a>
 <?php if ($lot == 'y') { ?>
 <a class="menuButton"
     href="#"
     onclick="return buttonClick(event, 'LotsMenu');"
-    onmouseover="buttonMouseover(event, 'LotsMenu');"
-><?php echo $lang_lots; ?></a>
+    onmouseover="buttonMouseover(event, 'LotsMenu');"><?php echo $lang_lots; ?></a>
 <?php } ?>
-
 </div>
 
 <!-- devis -->
-
-<div id="DevisMenu" class="menu"
-     onmouseover="menuMouseover(event)">
-		 <?php if ($user_dev != 'n') { ?>
-<a class="menuItem" href="form_devis.php"><?php echo $lang_creer ?></a>
-<div class="menuItemSep"></div>
-<a class="menuItem" href="lister_devis.php"><?php echo $lang_lister ?></a>
-<a class="menuItem" href="chercher_devis.php"><?php echo $lang_cherc ?></a>
-<div class="menuItemSep"></div>
-<a class="menuItem" href="devis_non_commandes.php"><?php echo $lang_non_com ?></a>
-<div class="menuItemSep"></div>
+<div id="DevisMenu" class="menu">
+<?php if ($user_dev != 'n') { ?>
+ <a class="menuItem" href="form_devis.php"><?php echo $lang_creer ?></a>
+ <div class="menuItemSep"></div>
+ <a class="menuItem" href="lister_devis.php"><?php echo $lang_lister ?></a>
+ <a class="menuItem" href="chercher_devis.php"><?php echo $lang_cherc ?></a>
+ <div class="menuItemSep"></div>
+ <a class="menuItem" href="devis_non_commandes.php"><?php echo $lang_non_com ?></a>
 <?php } ?>
 </div>
 <!-- commandes -->
-<div id="CommandesMenu" class="menu"
-     onmouseover="menuMouseover(event)">
-		 <?php if ($user_com != 'n') { ?>
-<a class="menuItem" href="form_commande.php"><?php echo $lang_creer ?></a>
-<div class="menuItemSep"></div>
-<a class="menuItem" href="lister_commandes.php"><?php echo $lang_lister ?></a>
-<a class="menuItem" href="chercher_commande.php"><?php echo $lang_cherc ?></a>
-<div class="menuItemSep"></div>
-<a class="menuItem" href="lister_commandes_non_facturees.php"><?php echo $lang_non_facu ?></a>
+<div id="CommandesMenu" class="menu">
+<?php if ($user_com != 'n') { ?>
+ <a class="menuItem" href="form_commande.php"><?php echo $lang_creer ?></a>
+ <div class="menuItemSep"></div>
+ <a class="menuItem" href="lister_commandes.php"><?php echo $lang_lister ?></a>
+ <a class="menuItem" href="chercher_commandes.php"><?php echo $lang_cherc ?></a>
+ <div class="menuItemSep"></div>
+ <a class="menuItem" href="lister_commandes_non_facturees.php"><?php echo $lang_non_facu ?></a>
 <?php } ?>
 </div>
 <!-- factures -->
 <div id="FacturesMenu" class="menu">
 <?php if ($user_fact != 'n') { ?>
-<a class="menuItem" href="form_facture.php"><?php echo $lang_creer ?></a>
-<div class="menuItemSep"></div>
-<a class="menuItem" href="lister_factures.php"><?php echo $lang_lister ?></a>
-<a class="menuItem" href="chercher_factures.php"><?php echo $lang_cherc ?></a>
-<div class="menuItemSep"></div>
-<a class="menuItem" href="lister_factures_non_reglees.php"><?php echo $lang_non_reg ?></a>
-<a class="menuItem" href="form_multi_facture.php"><?php echo $lang_fact_multi ?></a>
-<a class="menuItem" href="oneclick.php"><?php echo $lang_imp_multi ?></a>
+ <a class="menuItem" href="form_facture.php"><?php echo $lang_creer ?></a>
+ <div class="menuItemSep"></div>
+ <a class="menuItem" href="lister_factures.php"><?php echo $lang_lister ?></a>
+ <a class="menuItem" href="chercher_factures.php"><?php echo $lang_cherc ?></a>
+ <div class="menuItemSep"></div>
+ <a class="menuItem" href="lister_factures_non_reglees.php"><?php echo $lang_non_reg ?></a>
+ <a class="menuItem" href="form_multi_facture.php"><?php echo $lang_fact_multi ?></a>
+ <a class="menuItem" href="oneclick.php"><?php echo $lang_imp_multi ?></a>
 <?php } ?>
 </div>
 <!-- depenses -->
-<div id="DepensesMenu" class="menu"
-     onmouseover="menuMouseover(event)">
-		 <?php if ($user_dep != 'n') { ?>
-<a class="menuItem" href="form_depenses.php"><?php echo $lang_creer ?></a>
-<div class="menuItemSep"></div>
-<a class="menuItem" href="lister_depenses.php"><?php echo $lang_lister ?></a>
-<a class="menuItem" href="chercher_dep.php"><?php echo $lang_cherc ?></a>
-<div class="menuItemSep"></div>
+<div id="DepensesMenu" class="menu">
+<?php if ($user_dep != 'n') { ?>
+ <a class="menuItem" href="form_depenses.php"><?php echo $lang_creer ?></a>
+ <div class="menuItemSep"></div>
+ <a class="menuItem" href="lister_depenses.php"><?php echo $lang_lister ?></a>
+ <a class="menuItem" href="chercher_depenses.php"><?php echo $lang_cherc ?></a>
 <?php if ($user_stat != 'n') { ?>
-<a class="menuItem" href="stats_dep.php"><?php echo $lang_depenses_par_fournisseur; ?></a>
-<a class="menuItem" href="stat_depenses_mois.php"><?php echo $lang_depenses_par_fournisseur_mois; ?></a>
-<a class="menuItem" href="stat_depenses_annee.php"><?php echo $lang_depenses_par_fournisseur_mois_annee ?></a>
+ <div class="menuItemSep"></div>
+ <a class="menuItem" href="graph_depense.php"><?php echo $lang_depenses_par_fournisseur; ?></a>
+ <a class="menuItem" href="graph_depenses.php"><?php echo $lang_depenses_par_fournisseur_mois; ?></a>
 <?php }
 } ?>
 </div>
 <!-- articles -->
 <div id="ArticlesMenu" class="menu">
 <?php if ($user_art != 'n') { ?>
-<a class="menuItem" href="form_article.php"><?php echo $lang_creer ?></a>
-<a class="menuItem" href="lister_articles.php"><?php echo $lang_lister ?></a>
-<?php } ?>
+ <a class="menuItem" href="form_article.php"><?php echo $lang_creer ?></a>
+ <a class="menuItem" href="lister_articles.php"><?php echo $lang_lister ?></a>
+<?php if ($use_categorie =='y') { ?>
+ <a class="menuItem" href="lister_cat.php"><?php echo $lang_categorie ?>'s</a>
+<?php  } 
+} ?>
 </div>
 <!-- clients -->
 <div id="ClientsMenu" class="menu">
 <?php if ($user_cli != 'n') { ?>
-<a class="menuItem" href="form_client.php"><?php echo $lang_creer ?></a>
-<a class="menuItem" href="lister_clients.php"><?php echo $lang_lister ?></a>
+ <a class="menuItem" href="form_client.php"><?php echo $lang_creer ?></a>
+ <a class="menuItem" href="lister_clients.php"><?php echo $lang_lister ?></a>
 <?php } ?>
 </div>
 <!-- Statistiques -->
 <div id="StatsMenu" class="menu">
 <?php if ($user_stat != 'n') { ?>
-<a class="menuItem" href="ca_annee.php"><?php echo $lang_annuelles ?></a>
-<a class="menuItem" href="ca_parclient.php"><?php echo $lang_ca_cli ?></a>
-<div class="menuItemSep"></div>
-<a class="menuItem" href="ca_parclient_1mois.php"><?php echo $lang_cli_moi ?></a>
-<a class="menuItem" href="ca_articles.php"><?php echo $lang_stat_art ?></a>
-<a class="menuItem" href="form_stat_client.php"><?php echo $lang_moi_cli ?></a>
-<a class="menuItem" href="stat_depenses_mois.php"><?php echo $lang_depenses_par_fournisseur_mois; ?></a>
-<a class="menuItem" href="stats_dep.php"><?php echo $lang_depenses_par_fournisseur; ?></a>
+ <a class="menuItem" href="graph_annuel.php"><?php echo $lang_annuelles ?></a>
+ <a class="menuItem" href="graph_tva.php"><?php echo $lang_tva; ?></a>
+ <div class="menuItemSep"></div>
+ <a class="menuItem" href="graph_ca_clients.php"><?php echo $lang_ca_cli ?></a>
+ <a class="menuItem" href="graph_ca_clients_mois.php"><?php echo $lang_cli_moi ?></a>
+ <a class="menuItem" href="graph_ca_client.php"><?php echo $lang_moi_cli ?></a>
+ <div class="menuItemSep"></div>
+ <a class="menuItem" href="graph_article.php"><?php echo $lang_stat_art ?></a>
+ <div class="menuItemSep"></div>
+ <a class="menuItem" href="graph_depense.php"><?php echo $lang_depenses_par_fournisseur; ?></a>
+ <a class="menuItem" href="graph_depenses.php"><?php echo $lang_depenses_par_fournisseur_mois; ?></a>
 <?php } ?>
 </div>
-
 <!-- outils -->
 <div id="OutilsMenu" class="menu">
 <?php if ($user_admin == 'y'){ ?>
-<a class="menuItem" href="form_utilisateurs.php"><?php echo $lang_aj_utl ?></a>
-<a class="menuItem" href="lister_utilisateurs.php"><?php echo $lang_list_utl ?></a>
-<a class="menuItem" href="form_mailing.php"><?php echo $lang_mainling_list ?></a>
-<a class="menuItem" href="form_backup.php"><?php echo $lang_back_men ?></a>
-<a class="menuItem" href="admin.php"><?php echo $lang_administra ?></a>
+ <a class="menuItem" href="form_utilisateurs.php"><?php echo $lang_aj_utl ?></a>
+ <a class="menuItem" href="lister_utilisateurs.php"><?php echo $lang_list_utl ?></a>
+ <a class="menuItem" href="form_mailing.php"><?php echo $lang_infolettre ?></a>
+ <a class="menuItem" href="form_backup.php"><?php echo $lang_back_men ?></a>
+ <a class="menuItem" href="admin.php"><?php echo $lang_administra ?></a>
 <?php } ?>
-<div class="menuItemSep"></div>
-<a class="menuItem" href="include/calculette.html" onclick="window.open('','popup','width=300,height=220,top=200,left=150,toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=0,resizable=0')" target="popup"><?php echo $lang_calculette; ?></a>
-<a class="menuItem" href="logout.php"><?php echo $lang_sortir ?></a>
-
+ <div class="menuItemSep"></div>
+ <a class="menuItem" href="include/calculette.html" onclick="window.open('','popup','width=300,height=220,top=200,left=150,toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=0,resizable=0')" target="popup"><?php echo $lang_calculette; ?></a>
+ <a class="menuItem" href="logout.php"><?php echo $lang_sortir ?></a>
 </div>
-
 <!-- Lots -->
 <div id="LotsMenu" class="menu">
 <?php if ($user_fact != 'n') { ?>
-<a class="menuItem" href="lister_lot.php"><?php echo "Lister" ?></a>
-<a class="menuItem" href="form_lot.php"><?php echo "Créer" ?></a>
-<div class="menuItemSep"></div>
-<a class="menuItem" href="form_recherche_lot.php"><?php echo "Rechercher" ?></a>
+ <a class="menuItem" href="form_lot.php"><?php echo $lang_creer ?></a>
+ <div class="menuItemSep"></div>
+ <a class="menuItem" href="lister_lot.php"><?php echo $lang_lister ?></a>
+ <a class="menuItem" href="chercher_lots.php"><?php echo $lang_cherc ?></a>
 <?php } ?>
 </div>

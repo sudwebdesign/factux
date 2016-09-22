@@ -19,11 +19,12 @@
  * 		Guy Hendrickx
  *.
  */
+require_once("include/verif.php");
 include_once("include/config/common.php");
+include_once("include/config/var.php");
+include_once("include/language/$lang.php");
 $article=isset($_GET['article'])?$_GET['article']:"";
 $sql2 = "UPDATE " . $tblpref ."article SET actif='non' WHERE num = '".$article."'";
 mysql_query($sql2) OR die("<p>Erreur Mysql<br/>$sql2<br/>".mysql_error()."</p>");
-//echo "<center><font size = 4 color = red >facture $num reglée</font>";
-include_once("lister_articles.php");
-
- ?> 
+$message = "<h2>$lang_art_eff</h2>";
+include_once("form_article.php");
