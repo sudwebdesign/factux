@@ -1,0 +1,329 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=windows-1252">
+	<TITLE></TITLE>
+	<META NAME="GENERATOR" CONTENT="OpenOffice.org 1.1.0  (Win32)">
+	<META NAME="CREATED" CONTENT="20040521;19584669">
+	<META NAME="CHANGED" CONTENT="20050425;21510498">
+	<STYLE>
+	<!--
+		@page { size: 21cm 29.7cm; margin: 2cm }
+		P { margin-bottom: 0.21cm }
+	-->
+	</STYLE>
+</HEAD>
+<BODY LANG="fr-BE" DIR="LTR">
+<P STYLE="margin-bottom: 0cm"><BR>
+</P>
+<P ALIGN=CENTER STYLE="margin-bottom: 0cm"><FONT COLOR="#800000"><FONT SIZE=4 STYLE="font-size: 15pt"><B>Installation
+de factux 1.1.4 sur votre serveur</B></FONT></FONT></P>
+<P STYLE="margin-bottom: 0cm"><BR>
+</P>
+<P STYLE="margin-bottom: 0cm">Version 1.1.4</P>
+<P STYLE="margin-bottom: 0cm"><BR>
+</P>
+<P STYLE="margin-bottom: 0cm">Avant l'installation assurez-vous de
+recupérer 
+</P>
+<P STYLE="margin-bottom: 0cm">1. l'adresse de votre base de donn&eacute;es</P>
+<P STYLE="margin-bottom: 0cm">2. le mot de passe de l'utilisateur de
+votre base mysql</P>
+<P STYLE="margin-bottom: 0cm">3. le login de votre utilisateur mysql</P>
+<P STYLE="margin-bottom: 0cm">4. Si la base de donn&eacute;es a
+&eacute;t&eacute; cr&eacute;ée le nom de cette base de donn&eacute;es
+vide</P>
+<P STYLE="margin-bottom: 0cm">(si elle n'existe pas et que vous avez
+les droits n&eacute;cessaires sur le serveur de bases de donn&eacute;es, Factux
+la cr&eacute;era pour vous</P>
+<P STYLE="margin-bottom: 0cm">5. Toutes les infos de votre entreprise
+(n&deg; de tva, adresse, tel, registre de commerce...)</P>
+<P STYLE="margin-bottom: 0cm"><BR>
+</P>
+<P STYLE="margin-bottom: 0cm"><BR>
+</P>
+<P STYLE="margin-bottom: 0cm">Décompressez le fichier dans un
+r&eacute;pertoire accessible par apache</P>
+<P STYLE="margin-bottom: 0cm">V&eacute;rifiez les droits des fichiers
+(chmod)</P>
+<P STYLE="margin-bottom: 0cm">Tous les fichiers doivent être lisibles
+par apache</P>
+<P STYLE="margin-bottom: 0cm">Les r&eacute;pertoires</P>
+<P STYLE="margin-bottom: 0cm">/include 
+</P>
+<P STYLE="margin-bottom: 0cm">/dump 
+</P>
+<P STYLE="margin-bottom: 0cm">/image 
+</P>
+<P STYLE="margin-bottom: 0cm">/fpdf</P>
+<P STYLE="margin-bottom: 0cm">/include/session</P>
+<P STYLE="margin-bottom: 0cm">et le r&eacute;pertoire racine de
+factux 
+</P>
+<P STYLE="margin-bottom: 0cm">doivent permettre un droit d'écriture
+par apache</P>
+<P STYLE="margin-bottom: 0cm"><BR>
+</P>
+<P STYLE="margin-bottom: 0cm">Pointez votre navigateur sur
+http://votre_hebergeur.org/factux/installeur/</P>
+<P STYLE="margin-bottom: 0cm">Suivez les instructions &agrave;
+l'&eacute;cran.</P>
+<P STYLE="margin-bottom: 0cm">Apres l'installation, il faut effacer le
+r&eacute;pertoire installer de l'arborescence de factux (si vous ne
+le faites pas un message vous le rappellera)</P>
+<P STYLE="margin-bottom: 0cm">R&eacute;duire les droits des fichiers :</P>
+<P STYLE="margin-bottom: 0cm">/include/config/var.php</P>
+<P STYLE="margin-bottom: 0cm">/include/config/common.php</P>
+<P STYLE="margin-bottom: 0cm">Ceux-ci ne doivent être accessibles qu'en
+lecture par apache.</P>
+<P STYLE="margin-bottom: 0cm">Si vous ne le faites pas, un rappel vous
+sera adress&eacute; dans Factux</P>
+<P STYLE="margin-bottom: 0cm"><BR>
+</P>
+<P STYLE="margin-bottom: 0cm">Bugs et desiderata sur
+http://factux.sourceforge.net 
+</P>
+<P STYLE="margin-bottom: 0cm"><BR>
+</P>
+<P STYLE="margin-bottom: 0cm">######################################################</P>
+<P STYLE="margin-bottom: 0cm"><BR>
+</P>
+<P ALIGN=CENTER STYLE="margin-bottom: 0cm"><FONT COLOR="#800000"><FONT SIZE=4 STYLE="font-size: 15pt"><B>Upgrade
+de Factux</B></FONT></FONT></P>
+<P STYLE="margin-bottom: 0cm"><BR>
+</P>
+<P STYLE="margin-bottom: 0cm">Faites tout d'abord une sauvegarde de
+votre base de donn&eacute;e (en ligne de commande ou avec
+l'utilitaire de Factux ou encore via phpmyadmin ou tout autre soft
+de gestion de mysql)</P>
+<P STYLE="margin-bottom: 0cm">Ensuite faites un backup des fichiers
+suivants :</P>
+<P STYLE="margin-bottom: 0cm">/include/config/common.php</P>
+<P STYLE="margin-bottom: 0cm">/include/config/var.php</P>
+<P STYLE="margin-bottom: 0cm">Ceci fait, decompressez l'archive et
+uploadez les fichiers dans le r&eacute;pertoire de factux en ecrasant
+les anciens fichiers.</P>
+<P STYLE="margin-bottom: 0cm">Verifiez les droits comme pour
+l'installation (voir plus haut) 
+</P>
+<P STYLE="margin-bottom: 0cm"><BR>
+</P>
+<P STYLE="margin-bottom: 0cm">Reuploader les fichiers</P>
+<P STYLE="margin-bottom: 0cm">/include/config/common.php /</P>
+<P STYLE="margin-bottom: 0cm">include/config/var.php 
+</P>
+<P STYLE="margin-bottom: 0cm">Si vous utliser l'euro comme devise:
+<P STYLE="margin-bottom: 0cm">Editez
+/include/config/var.php et remplacez et remplacer $devise ="&amp;#128;"; par $devise ="&amp;euro;";</P>
+
+<P STYLE="margin-bottom: 0cm"># Si vous avez modifi&eacute; les
+fichiers fact_pdf.php ou bon_pdf.php vous devrez malheureusement
+refaire ces modifications</P>
+<P STYLE="margin-bottom: 0cm"><BR>
+</P>
+<P STYLE="margin-bottom: 0cm">!!!!!!!!!!!!! Je ne suis en aucun cas
+responsable des pertes de donn&eacute;es dues &agrave; l'upgrade de
+Factux !!!!!!!!!!!!!</P>
+<P STYLE="margin-bottom: 0cm"><BR>
+</P>
+<P STYLE="margin-bottom: 0cm">Ouvrez votre navigateur et aller  http://votre hebergeur.com/factux/installeur/upgrade/ </p>
+<P STYLE="margin-bottom: 0cm">Suivez les instructions &agrave;
+l'ecran</P>
+<P STYLE="margin-bottom: 0cm">Si vous avez modifi&eacute; les fichiers
+fact_pdf.php ou bon_pdf.php vous devrez malheureusement refaire ces
+modifications</P>
+<P STYLE="margin-bottom: 0cm"><BR>
+</P>
+<P STYLE="margin-bottom: 0cm">!!!!!!!!!!!!! Je ne suis en aucun cas
+responsable des pertes de donn&eacute;es dues &agrave; l'upgrade de
+Factux !!!!!!!!!!</P>
+<P STYLE="margin-bottom: 0cm">############################################################</P>
+<P STYLE="margin-bottom: 0cm"><b>Changelog 1.1.4 --> 1.1.5</b></p>
+
+<P STYLE="margin-bottom: 0cm">Chasse aux bugs</P>
+<P STYLE="margin-bottom: 0cm">un module de themes et 4 themes</P>
+<P STYLE="margin-bottom: 0cm">le choix des categories</P>
+<P STYLE="margin-bottom: 0cm">l'integration du module lot</P>
+<P STYLE="margin-bottom: 0cm">le choix avancé des clients selon leur initiale</P>
+<P STYLE="margin-bottom: 0cm">un systheme de choix de payement ds factures. </P>
+<P STYLE="margin-bottom: 0cm">Ajout d'un module de stock</P>
+<P STYLE="margin-bottom: 0cm">La validation du code selon les standarts du w3c temps au point de vue css que html. </P>
+<P STYLE="margin-bottom: 0cm">Ajout d'un sytheme permetant l'auto-impression des documents generés</P>
+<P STYLE="margin-bottom: 0cm"><BR></p>
+
+<P STYLE="margin-bottom: 0cm">############################################################</P>
+<P STYLE="margin-bottom: 0cm"><B>changelog 1.1.3--&gt; 1.1.4</B></P>
+<P STYLE="margin-bottom: 0cm">	 
+</P>
+<P STYLE="margin-bottom: 0cm"><BR>
+</P>
+<P STYLE="margin-bottom: 0cm">Chasse aux bugs</P>
+<P STYLE="margin-bottom: 0cm">Meilleure gestion des fichiers de
+langage</P>
+<P STYLE="margin-bottom: 0cm">Possibilit&eacute; d'imprimer les
+factures par lot</P>
+<P STYLE="margin-bottom: 0cm">Possibilit&eacute; de générer les
+factures par lot</P>
+<P STYLE="margin-bottom: 0cm">Intégration des fichiers de langage
+nl.php et en.php (merci &agrave; Toine et Cass pour leurs traductions
+respectives.)</P>
+<P STYLE="margin-bottom: 0cm"><BR>
+</P>
+<P STYLE="margin-bottom: 0cm"><BR>
+</P>
+<P STYLE="margin-bottom: 0cm"><BR>
+</P>
+<P STYLE="margin-bottom: 0cm"><BR>
+</P>
+<P STYLE="margin-bottom: 0cm"><BR>
+</P>
+<P STYLE="margin-bottom: 0cm">############################################################</P>
+<P STYLE="margin-bottom: 0cm"><B>Changelog 1.1.2 --&gt; 1.1.3</B></P>
+<P STYLE="margin-bottom: 0cm"><BR>
+</P>
+<P STYLE="margin-bottom: 0cm">#Correction des bugs 
+</P>
+<P STYLE="margin-bottom: 0cm">#Ajout d'un module de hiérarchie des
+utilisateurs</P>
+<P STYLE="margin-bottom: 0cm">#Ajout de la possibilit&eacute;
+d'envoyer les documents par mails aux clients.</P>
+<P STYLE="margin-bottom: 0cm">#Ajout d'un calendrier en javascript
+pour la saisie des dates</P>
+<P STYLE="margin-bottom: 0cm">#Possibilit&eacute; de changer
+l'appartenance d'un bon de commande.</P>
+<P STYLE="margin-bottom: 0cm">#Possibilit&eacute; de voir les
+statistiques des ann&eacute;es pr&eacute;c&eacute;dentes</P>
+<P STYLE="margin-bottom: 0cm">#Ajout d'un favico.ico</P>
+<P STYLE="margin-bottom: 0cm">#Ajout d'un editeur html en ligne pour
+la mailing liste (mozilla uniquement)</P>
+<P STYLE="margin-bottom: 0cm">#Meilleure compatibilit&eacute; avec les
+navigateurs : les documents sont à présent sauv&eacute;s sur le serveur
+avant d'être transmits au navigateur. Ils sont effac&eacute;s
+automatiquement par la suite.</P>
+<P STYLE="margin-bottom: 0cm"><BR>
+</P>
+<P STYLE="margin-bottom: 0cm"><BR>
+</P>
+<P STYLE="margin-bottom: 0cm">#############################################################</P>
+<P STYLE="margin-bottom: 0cm"><B>Changelog 1.1 --&gt; 1.1.2</B></P>
+<P STYLE="margin-bottom: 0cm"><BR>
+</P>
+<P STYLE="margin-bottom: 0cm"><BR>
+</P>
+<P STYLE="margin-bottom: 0cm"># correction des Bugs signal&eacute;s
+précédemment <BR># refonte de l'interface par Gilbert <BR># ajout de la
+possibilit&eacute; de notification de nouveaux documents par email <BR>#
+Correction orthographique <BR>#commentaire sur les documents <BR>#
+Ajout de prefixes aux tables <BR>#Amélioration de l'installeur et
+adaptation suivant les nouveaux standards <BR># Ajout d'un choix de
+devise afin d'augmenter l'internationalisation du logiciel (début&eacute;
+par Gilbert) <BR># Ajout de ventilation de la tva dans les factures
+suivant le % 
+</P>
+<P STYLE="margin-bottom: 0cm"><BR>
+</P>
+<P STYLE="margin-bottom: 0cm"><BR>
+</P>
+<P STYLE="margin-bottom: 0cm"><BR>
+</P>
+<P STYLE="margin-bottom: 0cm">######################################################</P>
+<P STYLE="margin-bottom: 0cm"><B>Changelog 1 --&gt;1.1</B></P>
+<P STYLE="margin-bottom: 0cm"><BR>
+</P>
+<P STYLE="margin-bottom: 0cm"># chasse aux bugs .</P>
+<P STYLE="margin-bottom: 0cm"># Ajout de gifs et autre images afin
+d'embellir l'interface.</P>
+<P STYLE="margin-bottom: 0cm"># Modification des styles css et ajout
+de classes dans les tableaux afin de facilit&eacute;r la lisibilit&eacute;e
+des tableaux. 
+</P>
+<P STYLE="margin-bottom: 0cm"># Ajout d'un nouveau module de
+statistiques permettant de voir l'évolution du chiffre d'affaire d'un
+client par mois. (ok)</P>
+<P STYLE="margin-bottom: 0cm"># Achèvement de l'internationalisation
+de l'interface (et publication du fichier langage afin de de
+demander des contributions au niveau de la traduction).(50 % effectu&eacute;)</P>
+<P STYLE="margin-bottom: 0cm"># Ajout d'un module de devis. 
+</P>
+<P STYLE="margin-bottom: 0cm"># Possibilit&eacute; d'&eacute;diter
+et de supprimer les d&eacute;penses.</P>
+<P STYLE="margin-bottom: 0cm"># Meilleure gestion des fournisseurs
+dans les fichier de d&eacute;pense. 
+</P>
+<P STYLE="margin-bottom: 0cm"># La version 1.1 devrait être
+compatible avec les serveurs qui sont sur register_global Off (mouveau
+standard d'installation de php). 
+</P>
+<P STYLE="margin-bottom: 0cm"># Intégration d'un module de backup et
+restauration des bases de donn&eacute;es. 
+</P>
+<P STYLE="margin-bottom: 0cm"># Amélioration de l'installeur avec
+vérification des droits d'ecriture dans les fichiers
+necessaires. Propose aussi l'upload du logo de l'entreprise</P>
+<P STYLE="margin-bottom: 0cm"># Int&eacute;gration d'un menu dropdown
+avec image en lieu et place des icônes actuelles. 
+</P>
+<P STYLE="margin-bottom: 0cm"># Ajout d'un module permettant aux
+clients de voir et d'imprimer leus factures, devis et bons de
+commande en ligne. 
+</P>
+<P STYLE="margin-bottom: 0cm"># Ajout d'une mailing-list bas&eacute;e
+sur les adresses email des clients, permettant, par exemple, d'envoyer
+vos promos ou fermetures annuelles &agrave; vos cients. 
+</P>
+<P STYLE="margin-bottom: 0cm"># insertion intelligente de l'aide dans
+le logiciel.</P>
+<P STYLE="margin-bottom: 0cm"><BR>
+</P>
+<P STYLE="margin-bottom: 0cm"><BR>
+</P>
+<P STYLE="margin-bottom: 0cm"><B>Changelog beta --&gt;1 stable</B></P>
+<P STYLE="margin-bottom: 0cm"><BR>
+</P>
+<P STYLE="margin-bottom: 0cm">Eradication féroce des bugs</P>
+<P STYLE="margin-bottom: 0cm">amélioration de l'interface de
+plusieurs fichiers pour un confort d'utilisation</P>
+<P STYLE="margin-bottom: 0cm">Ajout d'un indicateur de version</P>
+<P STYLE="margin-bottom: 0cm">Notification en javascript pour les
+confirmations d'effacement et de payement de bons et factures</P>
+<P STYLE="margin-bottom: 0cm">Amélioration de l'interface des bons de
+commande</P>
+<P STYLE="margin-bottom: 0cm">Amélioration de l'installeur</P>
+<P STYLE="margin-bottom: 0cm">lun avr 26 21:03:30 CEST 2004#</P>
+<P STYLE="margin-bottom: 0cm"><BR>
+</P>
+<P STYLE="margin-bottom: 0cm">###########################################</P>
+<P STYLE="margin-bottom: 0cm"><BR>
+</P>
+<P STYLE="margin-bottom: 0cm"><B>License</B></P>
+<P STYLE="margin-bottom: 0cm"><BR>
+</P>
+<P STYLE="margin-bottom: 0cm"><BR>
+</P>
+<P STYLE="margin-bottom: 0cm"># This program is free software; you
+can redistribute it and/or modify</P>
+<P STYLE="margin-bottom: 0cm"># it under the terms of the GNU General
+Public License as published by</P>
+<P STYLE="margin-bottom: 0cm"># the Free Software Foundation; either
+version 2 of the License, or</P>
+<P STYLE="margin-bottom: 0cm"># (at your option) any later version.</P>
+<P STYLE="margin-bottom: 0cm">#</P>
+<P STYLE="margin-bottom: 0cm"># This program is distributed in the
+hope that it will be useful,</P>
+<P STYLE="margin-bottom: 0cm"># but WITHOUT ANY WARRANTY; without
+even the implied warranty of</P>
+<P STYLE="margin-bottom: 0cm"># MERCHANTABILITY or FITNESS FOR A
+PARTICULAR PURPOSE. See the</P>
+<P STYLE="margin-bottom: 0cm"># GNU General Public License for more
+details.</P>
+<P STYLE="margin-bottom: 0cm">#</P>
+<P STYLE="margin-bottom: 0cm"># You should have received a copy of
+the GNU General Public License</P>
+<P STYLE="margin-bottom: 0cm"># along with this program; if not,
+write to the Free Software</P>
+<P STYLE="margin-bottom: 0cm"># Foundation, Inc., 59 Temple Place -
+Suite 330, Boston, MA 02111-1307, USA.</P>
+<P STYLE="margin-bottom: 0cm"><BR>
+</P>
+</BODY>
+</HTML>

@@ -1,0 +1,4 @@
+# Overload PHP variables:
+<IfModule mod_php4.c>
+   php_value magic_quotes_gpc        1
+</IfModule>

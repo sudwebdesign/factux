@@ -1,0 +1,9 @@
+    #php.ini configuration
+    <IfModule mod_php4.c>
+    php_value session.use_trans_sid 0
+    php_value magic_quotes_gpc  1
+    </IfModule>
+
+php_flag display_errors On
+php_flag register_globals On
+php_flag track_vars On

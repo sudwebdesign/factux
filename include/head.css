@@ -1,0 +1,82 @@
+/***** menu CSS *****/
+@media print {
+/*A l'impression on cache le menu, marche au moins pour IE, Moz et Opéra.*/
+	.menu, .ssmenu {
+		visibility:hidden;
+	}
+}
+
+.menu, .ssmenu {
+/* Il est important de laisser une largeur, au cas où le Javascript soit désactivé.
+margin aussi */
+	background-color:#AA8922;
+	font-size:12px;
+	font-weight:bold;
+	font-color:green;
+	border:0px solid #EFB;
+	color:white;
+	width:150px;
+	padding:2px;
+	margin:1em;
+}
+
+.menu {
+	text-align:center;
+	background:#93C4D7;
+	border-color:#004455;
+	
+}
+.ssmenu {
+	background:#93C4D7;
+	border-color:#ABCDEF;
+}
+
+.menu span, .ssmenu span {
+/* pour cacher les ; en fin de <li>, ce qui permet aux synthèse vocales de prendre une
+	pause dans l'élocution */
+	display:none;
+}
+
+.ssmenu ul, .ssmenu li {
+/* Les items (les <li>) des sous-menus, notamment pour enlever les puces des liste */
+	padding:0;
+	margin:0;
+	list-style-type:none;
+}
+
+.menu a:link, .ssmenu a:link, .menu a:visited, .ssmenu a:visited {
+/* Les liens qui ne sont pas sous le curseur. */
+	font-family:MS Sans Serif, sans-serif, Verdana, Arial;
+	text-decoration:none;
+	color:#FEB;
+	padding:2px 0px;
+/* Ne pas modifier le block */
+	display:block;
+/*	Un width:100% fait planter Mozilla, sans le width:100% c'est IE et Opera... La combinaison
+	aucun width et height:100% marche sur tous, donc ne pas toucher ces 2 lignes */
+	height:100%;
+	margin:0px;*/
+	margin:0px;
+/*	width:100%;*/
+	voice-family: "\"}\"";
+	voice-family:inherit;
+}
+html>body .menu a, .ssmenu a, .menu a:visited, .ssmenu a:visited {
+	width :auto;
+}
+
+.ssmenu ul:hover, .ssmenu a:hover, .ssmenu a:focus, .menu a:hover, .menu a:focus {
+/* Les liens sous le curseur.
+	On change les couleurs du texte et de fond, et on enlève le soulignement.
+	*/
+	background-color:#BEF;
+	color:#034;
+	text-decoration:none;
+	}
+
+/*
+Bref... pour résumer, ce qu'il y a à modifier à la base, c'est :
+- couleurs, police, bordure et largeur des menu et ssmenu.
+- l'effet spécial IE pour les ssmenu
+- police et couleurs des liens "non survolés" et "survolés".
+*/

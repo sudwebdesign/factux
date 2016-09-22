@@ -1,0 +1,436 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+	<title>Utilisation de Factux 1.1.5</title>
+	<meta name="created" content="20040521;20064083">
+	<meta name="changed" content="20050425;21513503">
+	<style type="text/css">
+	<!--
+		@page { size: 21cm 29.7cm; margin: 2cm }
+		h1 {color:#800000; font-size: 16pt; text-align:center;}
+		h2 {color:#800000; font-size: 14pt;}
+		h3 {font-size:13pt;}
+		p { margin-bottom: 0cm; text-align:justify; }
+		a.som {font-size: 13pt; color:#000000;}
+		.code {font-family:tw cen mt condensed, sans-serif;}
+	-->
+	</style>
+</head>
+<body lang="fr-be" dir="ltr">
+<p style="">
+ <a href="http://factux.sourceforge.net/">
+ <img src="../image/factux.gif" alt="Factux" name="image4" width="160" height="160" border="0" />
+ </a>
+</p>
+<h1>Utilisation de Factux 1.1.5</h1>
+<h2>Sommaire</h2>
+<p><a class="som" href="#prerequis">1. pr&eacute;requis</a></p>
+<p><a class="som" href="#remarques">2. remarques importantes</a></p>
+<p><a class="som" href="#bases">3. les bases</a></p>
+<p><a class="som" href="#client">4. cr&eacute;er un client</a></p>
+<p><a class="som" href="#article">5. cr&eacute;er un article</a></p>
+<p><a class="som" href="#devis">6. devis</a></p>
+<p><a class="som" href="#bon">7. cr&eacute;er un bon de commande</a></p>
+<p><a class="som" href="#factures">8. cr&eacute;er une facture</a></p>
+<p><a class="som" href="#payement">9. les factures non pay&eacute;es</a></p>
+<p><a class="som" href="#rappel">10. les rappels de factures</a></p>
+<p><a class="som" href="#depense">11. cr&eacute;er une d&eacute;pense</a></p>
+<p><a class="som" href="#mailing">12. utiliser la mailing-list</a></p>
+<p><a class="som" href="#backups">13. utiliser l'utilitaire de backup</a></p>
+<p><a class="som" href="#restaurer">14. restaurer un backup</a></p>
+<p><a class="som" href="#acces">15. acc&egrave;s clients aux bons, devis et factures</a></p>
+<p><a class="som" href="#divers">16. divers</a></p>
+<p><a class="som" href="#onclick">18. impressions multiples</a></p>
+<p><a class="som" href="#admin">19. Administration</a></p>
+<p>&nbsp;</p>
+<h3><a name="prerequis"></a>* Pr&eacute;requis</h3>
+<p>Cot&eacute; serveur : un serveur web (apache conseill&eacute;) compil&eacute; avec
+php (version 4.2 min.), un serveur de bases de donn&eacute;es mysql. php
+doit &ecirc;tre compil&eacute; avec gzip
+pour permettre la compression des fichiers de backup.<br />
+La fonction mail et un serveur smtp
+doivent &ecirc;tre activ&eacute;s pour la gestion de mailing-lists et
+l'envoi de mots de passe aux clients.<br />
+Les locales concernant le language que vous choisissez doivent etres installées sur le serveur sous peines d'avoir certains termes en anglais<br>
+Sous windows la suite easyphp convient
+parfaitement &agrave; condition de param&eacute;trer le php.ini afin
+d'utiliser un serveur smtp ou de param&eacute;trer un serveur smtp
+sur la machine (voir le forum pour plus de support).</p>
+<p>Cot&eacute; client : un navigateur web
+avec javascript activ&eacute;, un logiciel permettant de consulter
+les fichiers pdf et ayant le support euro xpdf, gv, gpdf cependant
+acrobat reader est conseill&eacute; pour son int&eacute;gration dans
+le navigateur ; attention ce programme n'est malheureusement pas libre
+(acrobat reader 5 minimum pour l'&euro;).
+</p>
+		<h3><a name="remarques"></a>* Remarques importantes</h3>
+<p><strong>le s&eacute;parateur de
+d&eacute;cimales est le point (.) pour une facilit&eacute;
+d'utilisation du clavier num&eacute;rique et un codage plus facile
+sous mysql.</strong></p>
+	<p style="margin-left:10px;"><strong>Ne jamais utiliser les boutons
+	back (pr&eacute;c&eacute;dent), forward (suivant), refresh (rafra&icirc;chir)
+	du navigateur internet.</strong> Ceci pourrait corrompre les factures et
+	bons cr&eacute;és par factux. Le menu de navigation de Factux est là
+	pour vous permettre de naviguer entre les diff&eacute;rentes fonctionnalit&eacute;s
+	 du logiciel. Sur certaines pages, ce menu n'est pas
+	affich&eacute;, c'est normal : il s'agit de pages ou un formulaire
+	vous propose d'autres actions que vous devez absolument terminer
+	avant de passer &agrave; autre chose. Je vous recommande d'utiliser
+	<a href="http://www.mozilla.org/">Mozilla</a> qui permet de masquer
+	facilement les boutons de navigation.</p>
+		<h3><a name="client"></a>* Cr&eacute;er un client</h3>
+<p>Pour cr&eacute;er un client, choisissez &quot;client&quot; dans le menu.<br />
+Vous voici face &agrave; un formulaire vous demandant 
+</p>
+<ul>
+	<li>Civilit&eacute; (ie : Mme, M.)</li>
+	<li>*Le non du client (ie : restaurant au bon repas...)</li>
+	<li>*Le compl&eacute;ment du nom (ie : s.p.r.l bon resto)</li>
+	<li>*La rue (ie : rue du coin 12)</li>
+	<li>*Le code postal (ie : 1212, 75001)</li>
+	<li>*La ville (ie : jolie ville)</li>
+	<li>*Le num&eacute;ro de T.V.A. (ie : be123-456-789)</li>
+	<li>T&eacute;l&eacute;phone (ie : 02/222.222.222, 0110101010)</li>
+	<li>Fax (ie : 02/222.222.223)</li>
+</ul>
+	<p style="margin-left:10px; font-style:italic;">Note : les &eacute;l&eacute;ments marqu&eacute;s
+	d'une * sont requis pour la cr&eacute;ation d'un client ; si vous ne
+	les remplissez pas tous, un rappel &agrave; l'ordre vous
+	sera adress&eacute;</p>
+<ul>
+	<li>Le login client dans le cas où
+	vous voulez permettre &agrave; votre client de voir ses factures,
+	devis et bons de commande en ligne : vous devez lui assigner un couple
+	login et mot de passe (ils lui seront transmis automatiquement
+	par mail). Le client pourra, &agrave; tout moment, changer son mot
+	de passe gr&acirc;ce &agrave; son acc&egrave;s client, mais ne
+	pourra modifier son login.</li>
+	<li>Mot de passe : voir ci-dessus</li>
+	<li>Mot de passe pour v&eacute;rification :	voir ci dessus</li>
+	<li>Adresse email : l'adresse email de
+	votre client est utilis&eacute;e afin de lui transmettre son couple
+	login mot de passe mais aussi pour l'utilisation de la mailing-list.
+	Si vous ne voulez pas que le client ait acc&egrave;s &agrave; ses
+	factures mais bien qu'il soit inclus dans votre mailing, entrez
+	son adresse email mais pas de login mot de passe. Attention, aucune
+	v&eacute;rification de l'&eacute;mail n'est effectu&eacute;e.</li>
+</ul>
+<p>&Agrave;pres avoir rempli les champs
+qui vous int&eacute;ressent, cliquez sur envoyer afin d'enregistrer
+ces valeurs dans votre base de donn&eacute;es.<br />
+Par la suite vous pourrez modifier ces
+donn&eacute;es mais les bons, devis et factures ant&eacute;rieurs
+seront affect&eacute;s par ces changements.</p>
+		<h3><a name="article"></a>* Cr&eacute;er un nouvel article</h3>
+<p>Cliquez pour ce faire sur &quot;article&quot; dans le menu.<br />
+Vous voici face &agrave; un formulaire vous demandant</p>
+<ul>
+	<li>Le nom de	l'article (ie : pommes de terre)</li>
+	<li>L'unit&eacute; de l'article (ie : kg)</li>
+	<li>Le prix	H.T. unitaire de l'article (ie 0.80)</li>
+	<li>Le taux de T.V.A. de l'article (ie : 6, 19.6)</li>
+	<li>Un commentaire optionnel : ce commentaire ne sera pas vu par le client</li>
+</ul>
+<p>Par la suite, vous pourrez modifier le prix de cet article sans crainte pour vos bons et
+factures ant&eacute;rieurs mais pas les autres donn&eacute;es.</p>
+<p>Il vous est à pr&eacute;sent possible de supprimer un article (attention cet
+article n'est pas supprimé physiquement, il est simplement masqu&eacute;
+et sera toujours visible dans les statistiques).</p>
+		<h3><a name="bases"></a>* Les bases</h3>
+<p style="font-size:13pt;">Factux est un logiciel en php mysql conçu pour cr&eacute;er des factures
+sur base de bons de commande.</p>
+<p>L'acc&egrave;s au logiciel se fait à partir de la page
+<a href="#">http://votrehebergeur.com/Factux/</a><br />
+Les login et mot de passe &agrave; entrer sont ceux que vous avez saisi
+durant l'installation de Factux sur votre serveur.</p>
+<p>i.e. Vous livrez plusieurs fois par semaine un client, &agrave; chaque
+livraison vous faites un bon de commande et, en fin de mois, sur la base de
+ces bons de commandes une facture est g&eacute;n&eacute;r&eacute;e.<br />
+Il est possible aussi de faire des devis. Si un devis est gagn&eacute;
+(accept&eacute; par le client) il sera converti en bon de commande
+&agrave; la date du jour et pris en compte lors de la facture
+suivante. S'il est perdu (refus&eacute; par le client) le devis sera class&eacute;
+comme tel et non pris en compte lors de la g&eacute;n&eacute;ration
+de la facture.</p>
+<p><img src="../image/edit.gif" name="image1" alt="#" align="left" width="16" height="16" border="0"><br clear="left" />Vous
+permet d'&eacute;diter un bon de commande, une d&eacute;pense ou un devis</p>
+<p><img src="../image/delete.jpg" name="image2" alt="#" align="left" width="16" height="16" border="0"><br clear="left" />Vous
+permet d'effacer un bon de commande, un devis ou une d&eacute;pense</p>
+<p><img src="../image/printer.jpg" name="image3" alt="#" align="left" width="16" height="17" border="0"><br clear="left" />Vous
+permet d'exporter un bon de commande, un devis ou une facture au
+format .pdf et ainsi de l'imprimer</p>
+<p><img src="../image/mail.gif" name="image8" alt="#" align="left" width="16" height="18" border="0"><br clear="left" />Vous
+permet de notifier au client qu'un nouveau document est
+disponible : ce lien ne sera affich&eacute; que si le client poss&egrave;de
+un acc&egrave;s au logiciel.</p>
+<p><img src="../image/pdf.gif" name="image9" alt="#" align="left" width="16" height="18" border="0"><br clear="left" />Vous
+permet d'envoyer le document par mail au client : ce lien n'est
+affich&eacute; que si l'on poss&egrave;de l'adresse mail du client.</p>
+		<h3><a name="bon"></a>* Cr&eacute;er un bon de commande</h3>
+<p>Choisissez "nouveau bon" dans le menu d&eacute;roulant dans la section "commande".<br />
+Vous devez à pr&eacute;sent choisir un client dans le menu d&eacute;roulant
+listant les clients que vous avez enregistr&eacute;
+pr&eacute;c&eacute;demment. Saisissez aussi une date gr&acirc;ce au
+calendrier : par d&eacute;faut la date du jour (du serveur) est
+s&eacute;lectionn&eacute;e. Cliquez ensuite sur "cr&eacute;er le bon",
+vous serez alors invit&eacute; à saisir la quantit&eacute; et
+à choisir l'article dans la liste d&eacute;roulante des articles
+pr&eacute;c&eacute;demment enregistr&eacute;e.</p>
+<p>La premi&egrave;re ligne du bon de commande est cr&eacute;&eacute;e et
+vous &ecirc;tes invit&eacute; &agrave; ajout&eacute;r une ligne
+suppl&eacute;mentaire quand vous avez saisi tout le bon de commande.
+Il vous reste &agrave; saisir un commentaire (optionnel) puis à
+cliquez sur terminer et votre bon de commande sera complet. Vous
+serez dirig&eacute; vers la liste des bons de commande et vous
+pourrez alors imprimer le bon ou notifier au client qu'un
+nouveau document est disponible.</p>
+		<h3><a name="devis"></a>* Cr&eacute;er un devis </h3>
+<p>Choisissiez "nouveau devis" dans le menu d&eacute;roulant dans la section "devis".<br />
+La m&eacute;thode de cr&eacute;ation de devis est la m&ecirc;me que la cr&eacute;ation de bons de commande.
+&Acirc;pres avoir cr&eacute;é un devis, il vous est possible de le transformer en bon de commande en cliquant
+sur l'ic&ocirc;ne "gagn&eacute;" dans la liste des devis et la date du
+jour sera prise en compte pour ce bon de commande. En cas de refus
+de devis par le client vous pouvez le mettre au statut perdu en
+cliquant sur l'ic&ocirc;ne "perdu". Ce devis sera alors rangé dans la
+cat&eacute;gorie des devis perdus et il vous sera alors impossible
+de le convertir en bon de commande.</p>
+		<h3><a name="factures"></a>* Cr&eacute;er une facture</h3>
+<p>Les factures sont cr&eacute;&eacute;es sur la base des bons de commande.</p>
+<p>Choisissiez "nouvelle facture" dans le menu d&eacute;roulant dans la section "facture".<br />
+Vous &ecirc;tes invit&eacute; a choisir
+un client dans la liste d&eacute;roulante. Ensuite, s&eacute;lectionnez une date de d&eacute;but
+pour la p&eacute;riode des bons qui seront inclus dans la facture (par d&eacute;faut le premier jour du
+mois courant est pr&eacute;s&eacute;lectionn&eacute;). Puis, choisissez la date de fin de la
+p&eacute;riode des bons (par d&eacute;faut la date du jour est
+s&eacute;lectionn&eacute;e), ainsi que  la date de la facture (la
+date du jour est s&eacute;lectionn&eacute;e par d&eacute;faut). (Dans le cas ou vos factures sont
+mensuelles et que vous les g&eacute;n&eacute;rez le dernier jour du
+mois, il n'y a donc que le client &agrave; choisir, le logiciel faisant
+le bon choix pour vous.) Vous pouvez aussi ajouter un commentaire sur
+la facture.<br />
+Cliquez ensuite sur cr&eacute;er la
+facture, et c'est tout, votre facture est enregistr&eacute;e. Il
+vous reste &agrave; cliquez sur imprimer pour lancer la g&eacute;n&eacute;ration
+au format pdf ou notifier le client par mail ou encore l'envoyer
+par mail avec la facture au format pdf en piece jointe.</p>
+		<h3><a name="onclick"></a>* Impressions multiples</h3>
+<p>Il est d&eacute;sormais possible de
+g&eacute;n&eacute;rer les factures par lots en selectionnant dans le
+menu facture l'onglet &quot;factures multiples&quot;. Pour ce faire, s&eacute;lectionnez les
+dates de d&eacute;but et de fin des factures. Choisissez ensuite les clients pour qui
+vous d&eacute;sirez g&eacute;nerer les factures. Enfin; saisisez l'acompte (attention
+les donn&eacute;es entr&eacute;es doivent s'appliquer &agrave; tout
+les clients s&eacute;lectionn&eacute;s).<br />
+Toutes les factures de cette date
+seront g&eacute;n&eacute;r&eacute;es en un seul fichier pdf facilitant ainssi l'impression.</p>
+		<h3><a name="payement"></a>* Les factures non pay&eacute;es</h3>
+<p>Pour voir les
+factures non pay&eacute;es et changer celles-ci en factures pay&eacute;es
+lors du payement par le client, cliquez sur &quot;factures non pay&eacute;es&quot;
+dans le menu d&eacute;roulant dans la section &quot;facturer&quot;. Un tableau
+vous pr&eacute;sente toutes les factures au statut non
+pay&eacute; avec le nombre de jours &eacute;coul&eacute;s
+depuis leur envoi au client. Pour mettre une facture au statut r&eacute;gl&eacute;
+cliquez sur :<br />
+<img src="../image/ok.jpg" name="image7" alt="#" align="left" width="16" height="16" border="0" /><br />
+Une confirmation vous sera demand&eacute;e avant de mettre la facture &agrave; son
+nouveau statut.</p>
+		<h3><a name="rappel"></a>* Les rappels</h3>
+<p>Pour cr&eacute;er
+des rappels en cas de retard de payement, cliquez sur &quot;factures non
+pay&eacute;es&quot; dans la rubrique &quot;factures&quot;. Cliquez ensuite
+sur le lien indiquant le nombre de jours de retard de payement de la
+facture. Vous voici devant
+un formulaire qui vous propose de choisir quel rappel de payement
+vous d&eacute;sirez utiliser : 1er, 2&egrave;me ou 3&egrave;me
+rappel. Vous devez aussi choisir quelles factures vous d&eacute;sirer
+inclure dans le rappel. Cliquez sur valider pour lancer la g&eacute;n&eacute;ration de
+votre rappel au format pdf</p>
+		<h3><a name="depense"></a>* Cr&eacute;er une d&eacute;pense</h3>
+<p>Cliquez sur &quot;nouvelle d&eacute;pense&quot;
+dans le menu d&eacute;roulant dans la section d&eacute;penses.<br />
+Vous voici devant un formulaire qui vous demande :</p>
+<ul>
+	<li>Le fournisseur : deux choix se
+	pr&eacute;sentent &agrave; vous : si vous avez d&eacute;j&agrave;
+	fait des achats chez ce fournisseur, il sera pr&eacute;sent dans le
+	menu d&eacute;roulant et il vous reste &agrave; le s&eacute;lectionner
+	d'un simple clic ; dans le cas contraire entrez son nom dans le champ
+	de droite.</li>
+	<li>Le libell&eacute; : entrez le
+	libell&eacute; de votre achat</li>
+	<li>Le prix H.T. </li>
+	<li>La date de la d&eacute;pense</li>
+</ul>
+<p>Cliquez ensuite sur envoyer pour
+enregistrer votre commande.</p>
+		<h3><a name="mailing"></a>* Utiliser la
+mailing-list</h3>
+    <p>Cliquez sur &quot;mailing list&quot; dans le menu
+d&eacute;roulant dans la section &quot;outils&quot;.<br />
+Un formulaire vous est propos&eacute; :
+</p>
+ <ul>
+    <li>titre de l'email : soyez clair afin de
+bien vous identifier par rapport &agrave; vos clients (ie : offres du
+mois cher Factux)</li>
+		<li>message : un menu de cr&eacute;ation en javascript vous sera propos&eacute;.</li>
+    <li>pour les autres : le message sera envoy&eacute; au
+format html cela signifie que vous pourrez ins&eacute;rer des images, des
+liens et formater votre message comme vous le d&eacute;sirez gr&acirc;ce
+aux tags html.</li>
+</ul>
+<p>Quelques exemples :</p>
+<p>&lt;b&gt;texte en gras&lt;b&gt; donnera <strong>texte en gras</strong></p>
+<p>&lt;i&gt;texte en
+italique &lt;i&gt; donnera <em>texte en italique</em></p>
+<p>&lt;a
+href=&quot;http://factux.sourceforge.net&quot;&gt;Factux&lt;/a&gt;
+donnera <a href="http://factux.sourceforge.net/">Factux</a> c'est-&agrave;-dire un lien vers <a href="http://factux.sourceforge.net/">http://factux.sourceforge.net</a>
+qui s'appelle Factux. Le chemin complet vers le site est
+requis c'est a dire avec http:// 
+</p>
+<p>&lt;img
+src=&quot;http://www.factux.org/wiki/data/documents/factux.png&quot;&gt;
+donnera</p>
+<p><img src="http://www.factux.org/wiki/data/documents/factux.png" name="image5" alt="#" align="left" width="160" height="160" border="0" /><br clear="left" />
+c'est-&agrave;-dire que cela affichera l'image situ&eacute;e au bout du lien.<br />
+Pour plus de fonctions, consultez un site expliquant les bases du html.<br />
+Inutile de mettre les tags &lt;html&gt;
+et &lt;body&gt; ceux-ci sont ajout&eacute;s automatiquement au d&eacute;but
+de l'&eacute;mail et ferm&eacute;s en fin de mail.</p>
+<p>Cliquez ensuite sur &quot;envoyer&quot;. La liste
+des correspondants &agrave; qui l'email a &eacute;t&eacute;
+envoy&eacute; sera affich&eacute;e en temps r&eacute;el. Attendez
+la fin de l'affichage de cette page avant de faire autre chose, sans
+quoi votre mail ne serait pas envoy&eacute; a touts vos
+correspondants. L'email d'origine est celui que vous avez entr&eacute;
+lors de l'installation de Factux et qui figure sur vos factures et
+bons de commande.</p>
+		<h3><a name="backups"></a>* Utilisation
+de l'utilitaire de backup</h3>
+    <p>Cliquez sur &quot;backup&quot; dans le menu
+d&eacute;roulant dans la section &quot;outils&quot;.<br />
+Vous voici devant un formulaire pr&eacute;
+rempli. Ne modifiez pas ces valeurs : pour une utilisation normale de
+Factux elles sont correctes et remplies par le logiciel gr&acirc;ce
+aux donn&eacute;es que vous avez indiqu&eacute; &agrave; l'installation de
+Factux. Cliquez simplement sur &quot;ok&quot;.<br />
+Le logiciel vous pr&eacute;sente la
+liste des tables utilis&eacute;es par Factux et que vous pouvez
+sauvegarder (article; bon_comm; client; cont_bon; cont_dev; depense;
+devis; facture; payement) ne rien modifier  pour un backup complet. Cliquez simplement sur le bouton &quot;backup&quot; et le logiciel fera un
+backup de ces tables puis placera le backup nomm&eacute; backup.sql
+dans le r&eacute;pertoire dump de l'architecture de factux. Vous
+serez redirig&eacute; vers une page de confirmation du backup.
+Cliquez ensuite sur &quot;retour &agrave; l'utilitaire de backup&quot;, puis sur &quot;t&eacute;l&eacute;charger
+le backup&quot; au format sql. Si votre navigateur est param&eacute;tr&eacute;
+pour afficher les fichiers texte celui ci vous sera affich&eacute; &agrave;
+l'&eacute;cran. Choisissez alors &quot;enregistrer la page sous&quot; dans le menu
+&quot;fichier&quot; de votre navigateur. Je vous conseille de nommer ce backup
+par un nom explicite et contenant la date de cr&eacute;ation du
+backup. Pour plus de s&eacute;curit&eacute; sauvez ce backup sur une
+disquette que vous placerez en lieu s&ucirc;r.<br />
+Il est tr&egrave;s dangereux de laisser
+un backup sur votre serveur web, une personne mal intentionn&eacute;e
+pourrait se l'approprier et ainsi avoir acc&egrave;s &agrave; toutes
+vos donn&eacute;es. Donc, apres avoir sauvegard&eacute;
+ce backup sur votre ordinateur &agrave; l'abri de toute mauvaise intention
+cliquez sur &quot;delete&quot; afin d'effacer ce fichier.</p>
+    <h3><a name="restaurer"></a>* Restaurer un backup</h3>
+    <p>Si vos donn&eacute;es ont &eacute;t&eacute;
+corrompues, uploadez le fichier t&eacute;lecharg&eacute; dans le
+r&eacute;pertoire dump de l'architecture de Factux. V&eacute;rifiez
+que l'utilisateur apache ait bien les droits d'&eacute;criture sur ce
+fichier et ex&eacute;cutez l'utilitaire de backup en choisissant
+restaure en lieu et place de backup. L'utilitaire vous pr&eacute;sente
+alors la liste des backups pr&eacute;sents dans le r&eacute;pertoire
+dump avec leur date de cr&eacute;ation. Cliquez sur &quot;restaurer &agrave; ce
+moment&quot; afin de r&eacute;installer vos donn&eacute;es comme elles
+l'&eacute;taient au moment de votre backup. Les donn&eacute;es
+entr&eacute;es apr&egrave;s la cr&eacute;ation de ce backup seront bien
+&eacute;videment perdues.</p>
+    <p>Je ne saurais trop vous conseiller le
+plus de rigueur possible lors de cette manipulation et aussi de
+faire des backups r&eacute;guliers, surtout apr&egrave;s de grosses
+modifications sur Factux (par exemple si vous faites vos factures fin
+de mois prenez l'habitude de faire un backup des que toutes vos
+factures sont faites ; personnellement je le fais toutes les
+semaines afin de minimiser les risques de pertes de donn&eacute;es.). Apr&egrave;s avoir restaur&eacute; votre backup n'oubliez pas
+d'effacer le fichier de votre serveur en utilisant la fonction incluse
+dans le logiciel.</p>
+		<h3><a name="divers"></a>* Divers </h3>
+    <p>Quittez toujours Factux en utilisant la
+fonction <font face="times new roman, serif">&quot;logout&quot;</font> dans le
+menu d&eacute;roulant de la section &quot;outils&quot;.</p>
+    <p>La fonction &quot;bons orphelins&quot; dans le menu
+d&eacute;roulant de la section &quot;bons&quot; vous permet de voir les bons qui
+ne font pas encore partie d'une facture et ainsi de ne pas oublier de
+facturer un client.</p>
+    <p>Dans les sections &quot;devis&quot;, &quot;bons de commande&quot;
+et &quot;factures&quot; vous avez un moteur de recherche qui vous permet de
+trouver facilement un bon, devis ou facture selon vos propres
+crit&egrave;res.</p>
+    <p>Cette aide est accessible directement &agrave;
+partir du logiciel en cliquant sur l'ic&ocirc;ne ce qui vous
+dirigera vers la partie en rapport avec la page dans laquelle vous
+vous trouvez.</p>
+<p><img src="../image/help.png" name="image6" alt="#" align="left" width="48" height="48" border="0" /><br clear="left" /></p>
+		<h3><a name="acces"></a>* Acc&egrave;s client aux
+bons, devis et factures</h3>
+    <p>Si vous d&eacute;sirez permettre un
+acc&egrave;s limit&eacute; &agrave; vos clients vous devez
+imp&eacute;rativement leur donner un couple login/mot de passe. Pour
+se faire r&eacute;f&eacute;rez-vous au chapitre <a href="#client">4 cr&eacute;er un
+client</a> de l'aide.<br />
+L'acc&egrave;s client se fait a partir
+de la page <a href="http://votrehebergeur.com/Factux/client/index.php">http://votrehebergeur.com/Factux/<strong>client/index.php</strong></a><br />
+L'acc&egrave;s aux diverses informations
+est bien entendu s&eacute;curis&eacute; et votre client ne peut voir
+que ses propres informations. Il n'a en aucun cas l'acc&egrave;s aux
+factures des autres clients ni au reste de votre facturier. Il
+peut seulement visualiser et imprimer ses bons de commande, devis et
+factures et modifier son mot de passe s'il le d&eacute;sire. Si le
+client modifie son mot de passe il recevra une confirmation par
+mail.</p>
+    <p>Ceci fait que vous
+pouvez param&egrave;trer ce que les clients verront. Par d&eacute;faut,
+vos clients ayant re&ccedil;u un login/mot de passe peuvent voir leurs
+devis, bons de commande et factures. Pour cela &eacute;ditez le fichier
+/client/list_factures.php.<br />
+Au d&eacute;but du
+fichier vous trouverez ces quelques lignes :</p>
+    <p class="code">//pour
+authoriser la visualisation des bons de commande ok (valeur par
+d&eacute;faut) pour l'interdire laisser la valeur vide<br />
+$bon_auth=ok;</p>
+    <p class="code">//pour
+authorisser la visualisation des factures ok (valeur par default)
+pour l'interdire laisser la valeur vide<br />
+$fact_auth= ok;</p>
+    <p class="code">//pour
+authoriser la visualisation des devis ok (valeur par default) pour
+l'interdire laisser la valeur vide<br />
+$devis_auth= ok;</p>
+<p>Pour d&eacute;sactiver l'affichage de l'un ou l'autre de ces param&egrave;tres
+modifier la valeur apr&egrave;s le = . ok autorise la visualisation, un
+pram&egrave;tre vide interdit cette visualisation. Ne
+modifiez rien en dehors de ces trois param&egrave;tres (&agrave; moins d'&ecirc;tre vraiment s&ucirc;r de ce que vous faites).</p>
+     
+<h3><a name="admin"></a>* Administration</h3>
+<p>
+Ce module vous permet de modifier certains comportements de Factux.<br><br>
+<b>Utiliser le module categorie </b>: Vous permet un autre mode de listage des articles en créant des categories dans lequelles vous pouver classer les articles<br>
+<b>Utiliser le listage avancé des clients</b> :Vous permet d'utiliser un autre listage des client, à la place d'etre montrés à la queue leu-leu dans une boite de selection vous aurrer deux boites de selection la premiere contenant les initiales et la suivante les clients dont le nom commance par ces initiales.<br>
+<b>Utiliser le module de type de paiement des factures </b>:Vous permet de choisir lors du payement des facture la méthode de payement de ces factures.<br>
+<b>Utiliser le module de lots</b>:Vous permet, pour etre en regle avec la legislation de tracabilité européenne de definir des lots sur les bons de commande. <br>
+<b>Utiliser le module de stocks</b>:vous permet de savoir a tout moment l'etat de vos stock apres avoir activé cette option il vous faut regler le niveau des stock en listant et editant les articles.<br>
+<b>Choisir le thême de Factux</B>: Vous permet de choisir entre plusieurs themes pour l'interface de Factux et ainssi de l'adapter à votre propre gout visuel.<br>
+<b>Utiliser l'impression automatique</b>: Si cette option est selectionnée et un nombre d'impression positif choisit dans la case Nombre d'impressions, tout les document pdf seront transmits à l'imprimante par default du systheme et imprimés le nombre de fois definit dans la boite de dialogue des que le document (devis,bon de commande ou facture) seras affiché à l'écran.<br>
+</p>
+
+<p>&nbsp;</p>
+</body>
+</html>
