@@ -1,19 +1,19 @@
 <?php
 /*
  * Factux le facturier libre
- * Copyright (C) 2003-2004 Guy Hendrickx
+ * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
  * 
  * Licensed under the terms of the GNU  General Public License:
- * 		http://www.opensource.org/licenses/gpl-license.php
+ * 		http://opensource.org/licenses/GPL-3.0
  * 
  * For further information visit:
- * 		http://factux.sourceforge.net
+ * 		http://factux.free.fr
  * 
  * File Name: graph_tva.php
- * 	statisqiques annuelles decrtiquées par mois
+ * 	statisqiques annuelles decrtiquÃ©es par mois
  * 
- * * * Version:  1.1.5
- * * * * Modified: 23/07/2005
+ * * * Version:  5.0.0
+ * * * * Modified: 07/10/2016
  * 
  * File Authors:
  * 		Guy Hendrickx
@@ -38,19 +38,19 @@ if ($user_stat== 'n'){
    <form action="graph_tva.php" method="post" name="annee">
 <?php echo $lang_annee; ?>
     <select name="annee_1">
-     <option value="<?php echo $lang_toutes; ?>"<?php echo ('tout'==$annee_1)?' selected="selected"':''; ?>><?php echo ucfirst($lang_toutes); ?></option>
+     <option value="<?php echo $lang_toutes; ?>"<?php echo ($lang_toutes==$annee_1)?' selected="selected"':''; ?>><?php echo ucfirst($lang_toutes); ?></option>
 <?php for ($i=date("Y");$i>=date("Y")-13;$i--){?>
      <option value="<?php echo$i; ?>"<?php echo ($i==$annee_1)?' selected="selected"':''; ?>><?php echo $i; ?></option>
 <?php } ?>
     </select>
-     <input type="submit" /><input alt="<?php echo $lang_au_reel; ?>" type="checkbox" name="fact"<?php echo ($fact)?' checked="checked"':''; ?> /> 
+     <input type="submit" value="<?php echo $lang_envoyer; ?>" /><input alt="<?php echo $lang_au_reel; ?>" type="checkbox" name="fact"<?php echo ($fact)?' checked="checked"':''; ?> /> 
    </form>
   </td>
  </tr>
  <tr>
   <td class="page" align="center">
 <?php
-// initialisation à 0
+// initialisation Ã  0
 $liste_mois = calendrier_local_mois ();$recettes = array ();
 $depenses = array ();
 $resultat_net = array ();
@@ -71,7 +71,7 @@ FROM " . $tblpref ."bon_comm
 GROUP BY numero_mois
 ";
 
-if($fact)//réelles
+if($fact)//rÃ©elles
 $sql1 = "
 SELECT  MONTH(date_fact) numero_mois, SUM(total_fact_h) as htva, SUM(total_fact_ttc) as ttc
 FROM " . $tblpref ."facture
@@ -86,7 +86,7 @@ while ($data = mysql_fetch_array($req)){
  $recettes[$numero_mois]["tva"] = ($fact)?$data["ttc"]-$data["htva"]:$data["tva"];
 }
 
-// Dépenses
+// DÃ©penses
 $sql2 = "
 SELECT MONTH(date) numero_mois, SUM(prix) as htva, SUM(mont_tva) as tva
 FROM " . $tblpref ."depense
@@ -117,7 +117,8 @@ while ($dataAv = mysql_fetch_array($reqAv)){
  $avoirs [$numero_mois]["tva"] = $dataAv ["tva"];
 }
 */
-// Résultat net
+// RÃ©sultat net
+
 reset ($liste_mois);
 $re=$de=$av=0;
 while (list ($numero_mois, $nom_mois) = each ($liste_mois)){
@@ -126,16 +127,19 @@ while (list ($numero_mois, $nom_mois) = each ($liste_mois)){
  $de += $depenses[$numero_mois]["tva"];
  #$av += ;$avoirs[$numero_mois]["tva"];
 }
+$titre_recette = $lang_commandes;
+if($fact)//rÃ©elles
+ $titre_recette = $lang_factures;
 ?>
   <table class="page boiteaction">
-   <caption><?php echo "Montant total TVA par mois de ".(($annee_1!=$lang_toutes)?"l'année $annee_1":" toutes les années")." ".(($fact)?" $lang_au_reel":""); ?></caption>
+   <caption><?php echo "$lang_montant $lang_total $lang_tva $lang_par $lang_mois $lang_de ".(($annee_1!=$lang_toutes)?"$lang_l_annÃ©e $annee_1":" $lang_toutes_les_annÃ©es")." ".(($fact)?" $lang_au_reel":""); ?></caption>
    <tr>
     <th>&nbsp;</th>
-    <th><?php echo "TVA depense"; ?></th>
-    <th><?php echo "TVA recette"; ?></th>
+    <th><?php echo "$lang_tva $lang_depenses"; ?></th>
+    <th><?php echo "$lang_tva $titre_recette"; ?></th>
     <!--<th><?php //echo $lang_resultat_net; ?></th>
-    <th><?php //echo "TVA Avoir" ?></th>-->
-    <th><?php echo "TVA a déclaré"; ?></th>
+    <th><?php //echo "$lang_tva Avoir" ?></th>-->
+    <th><?php echo "$lang_tva $lang_total_mois"; ?></th>
    </tr>
 <?php
 reset ($liste_mois);

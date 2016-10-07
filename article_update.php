@@ -1,19 +1,19 @@
 <?php 
 /*
  * Factux le facturier libre
- * Copyright (C) 2003-2004 Guy Hendrickx
+ * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
  * 
  * Licensed under the terms of the GNU  General Public License:
- * 		http://www.opensource.org/licenses/gpl-license.php
+ * 		http://opensource.org/licenses/GPL-3.0
  * 
  * For further information visit:
- * 		http://factux.sourceforge.net
+ * 		http://factux.free.fr
  * 
  * File Name: article_update.php
  * 	saisie de la modification d'un article
  * 
- * * Version:  1.1.5
- * * * * Modified: 23/07/2005
+ * * Version:  5.0.0
+ * * * * Modified: 07/10/2016
  * 
  * File Authors:
  * 		Guy Hendrickx
@@ -35,11 +35,19 @@ $categorie=isset($_POST['categorie'])?$_POST['categorie']:"";
 
 $article=isset($_POST['article'])?apostrophe($_POST['article']):"";### ‘	&#145;	&lsquo;	Left single quotation mark ::: 4 change Single quote (') http://ascii-code.com/
 $uni=isset($_POST['uni'])?$_POST['uni']:"";
+$taux_tva=isset($_POST['taux_tva'])?$_POST['taux_tva']:"";
 $set='';
-if($article!=""&&$uni!="")#jamais commandé
- $set=",
-`article`='".$article."',
+if($article!="")#jamais commandé
+ $set.=",
+`article`='".$article."'
+";
+if($uni!="")#jamais commandé
+ $set.=",
 `uni`='".$uni."'  
+";
+if($taux_tva!="")#jamais commandé
+ $set.=",
+`taux_tva`='".$taux_tva."'  
 ";
 
 $sql2 = "

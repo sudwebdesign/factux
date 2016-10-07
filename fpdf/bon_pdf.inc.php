@@ -1,24 +1,24 @@
 <?php
 /*
  * Factux le facturier libre
- * Copyright (C) 2003-2004 Guy Hendrickx
+ * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
  * 
  * Licensed under the terms of the GNU  General Public License:
- * 		http://www.opensource.org/licenses/gpl-license.php
+ * 		http://opensource.org/licenses/GPL-3.0
  * 
  * For further information visit:
- * 		http://factux.sourceforge.net
+ * 		http://factux.free.fr
  * 
  * File Name: bon_pdf.inc.php
  * 	Fichier dependant de bon_pdf.php
  * 
- * * * Version:  1.1.5
- * * * * Modified: 23/07/2005
+ * * * Version:  5.0.0
+ * * * * Modified: 07/10/2016
  * 
  * File Authors:
  * 		Guy Hendrickx
  *
- *      Création Informatique Ingles Thomas
+ *      CrÃ©ation Informatique Ingles Thomas
  *              Factux 10 years Remix.8.2015
  */
 session_cache_limiter('private');
@@ -66,8 +66,8 @@ $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 $total_marge_htva = 0;
 $total_remise_htva = 0;
 while($data = mysql_fetch_array($req)){
- $ttl_htva = $data['tot_art_htva'];#remisé & margé
- $prx_v = $data['p_u_jour'];#margé & non remisé
+ $ttl_htva = $data['tot_art_htva'];#remisÃ© & margÃ©
+ $prx_v = $data['p_u_jour'];#margÃ© & non remisÃ©
  $qnt = $data['quanti'];
  $tx_remise = (1-($data['remise']/100));#taux
  $tx_marge = $data['marge_jour'];#taux

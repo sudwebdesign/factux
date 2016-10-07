@@ -1,19 +1,19 @@
 <?php 
 /*
  * Factux le facturier libre
- * Copyright (C) 2003-2004 Guy Hendrickx
+ * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
  * 
  * Licensed under the terms of the GNU  General Public License:
- * 		http://www.opensource.org/licenses/gpl-license.php
+ * 		http://opensource.org/licenses/GPL-3.0
  * 
  * For further information visit:
- * 		http://factux.sourceforge.net
+ * 		http://factux.free.fr
  * 
  * File Name: form_devis
  * 	formulaire de saisie des devis
  * 
- * * * Version:  1.1.5
- * * * * Modified: 23/07/2005
+ * * * Version:  5.0.0
+ * * * * Modified: 07/10/2016
  * 
  * File Authors:
  * 		Guy Hendrickx
@@ -49,7 +49,7 @@ $jour = date("d");
 <center>
  <form name="formu" method="post" action="devis.php">
   <table border='0' class='page' align='center'>
-   <caption><?php echo $lang_devis_créer; ?></caption>
+   <caption><?php echo $lang_devis_crÃ©er; ?></caption>
    <tr> 
     <td class="texte0"><?php echo "$lang_client"; ?></td>
     <td class="texte0">
@@ -70,11 +70,11 @@ if ($liste_cli!='y') {
    <tr> 
     <td class="texte0"><?php echo "date" ?></td>
     <td class="texte0"><input type="text" name="date" value="<?php echo "$jour/$mois/$annee" ?>" readonly="readonly"/>
-      <a href="#" onClick=" window.open('include/pop.calendrier.php?frm=formu&amp;ch=date','calendrier','width=415,height=160,scrollbars=0').focus();"><img src="image/petit_calendrier.gif" alt="calendrier" border="0"/></a>
+      <a href="#" onClick=" window.open('include/pop.calendrier.php?frm=formu&amp;ch=date','calendrier','width=460,height=170,scrollbars=0').focus();"><img src="image/petit_calendrier.gif" alt="calendrier" border="0"/></a>
     </td>
    </tr>
    <tr> 
-    <td class="submit" colspan="2"><input type="submit" name="Submit" value="<?php echo "Créer le devis" ?>"></td>
+    <td class="submit" colspan="2"><input type="submit" name="Submit" value="<?php echo $lang_devis_crÃ©er; ?>"></td>
    </tr>
   </table>
  </form>

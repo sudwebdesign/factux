@@ -1,19 +1,19 @@
 <?php 
 /*
  * Factux le facturier libre
- * Copyright (C) 2003-2004 Guy Hendrickx
+ * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
  * 
  * Licensed under the terms of the GNU  General Public License:
- * 		http://www.opensource.org/licenses/gpl-license.php
+ * 		http://opensource.org/licenses/GPL-3.0
  * 
  * For further information visit:
- * 		http://factux.sourceforge.net
+ * 		http://factux.free.fr
  * 
  * File Name: edit_lot.php
  * 	Formulaire d'edition des lots
  * 
- * * * Version:  1.1.5
- * * * * Modified: 23/07/2005
+ * * * Version:  5.0.0
+ * * * * Modified: 07/10/2016
  * 
  * File Authors:
  * 		Guy Hendrickx
@@ -51,7 +51,7 @@ $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error())
 ?>
    <form action="edit_lot_suite.php" method="post" name="lot" id="lot">
     <table class="page boiteaction">
-     <caption><?php echo "Editer un lot"; ?></caption>
+     <caption><?php echo $lang_edit_lot; ?></caption>
      <tr> 
       <th colspan="3" align="center"><?php echo $lang_produit; ?></th>
      </tr>

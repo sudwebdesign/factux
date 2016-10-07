@@ -1,18 +1,18 @@
 <?php
 /*
  * Factux le facturier libre
- * Copyright (C) 2003-2004 Guy Hendrickx
+ * Copyright (C) 2015 Thomas Ingles
  * 
  * Licensed under the terms of the GNU  General Public License:
- * 		http://www.opensource.org/licenses/gpl-license.php
+ * 		http://opensource.org/licenses/GPL-3.0
  * 
  * For further information visit:
- * 		http://factux.sourceforge.net
+ * 		http://factux.free.fr
  * 
- * File Name: pop.marge
+ * File Name: pop.marge.php
  * 
- * * Version:  1.15
- * * * Modified: 30/08/2015
+ * * Version:  5.0.0
+ * * * Modified: 07/10/2016
  * 
  * File Authors:
  *  Thomas Ingles
@@ -22,10 +22,14 @@
 
 /**
  ---------------------------------------------------------------------------------------------
- * Le reste du code PHP, à priori, y'a plus besoin de le toucher. Par contre, y'a la CSS juste
- * un peu plus bas. Celle-là est parfaitement modifiable (c'est d'ailleurs recommandé, c'est
+ * Le reste du code PHP, Ã  priori, y'a plus besoin de le toucher. Par contre, y'a la CSS juste
+ * un peu plus bas. Celle-lÃ  est parfaitement modifiable (c'est d'ailleurs recommandÃ©, c'est
  * toujours mieux de personnaliser un peu le truc)
  */
+ini_set('session.save_path', '../include/session');
+session_cache_limiter('private'); 
+session_start();
+
 $frm = $_GET["frm"];
 $champ = $_GET["ch"];
 $link = "?frm=".$frm."&amp;ch=".$champ;
@@ -51,7 +55,7 @@ if (isset($_POST["pa"])){
 }
 #calc
 if($marge!=0){
- if($marge>=100)#La division par zéro est indéfinie
+ if($marge>=100)#La division par zÃ©ro est indÃ©finie
   $marge=99.999;
  $coef = (1/(1-($marge/100)));
  $tauxmarge = (1-(1/$coef))*100;#%
@@ -69,19 +73,22 @@ $prix_vente_ttc2 = $prix_achat * $coefttc;
  $tva = round($tva,3);
  $prix_vente_ttc = round($prix_vente_ttc,3);
  $prix_vente_ttc2 = round($prix_vente_ttc2,3);
-#in fr
-$devise="¤";#
-$lang_coef = "Coef";
-$lang_prix = "Prix";#
-$lang_htva = "H.T.";#
-$lang_ttc = "T.T.C.";#
-$lang_tva = "T.V.A.";#
-$lang_marge = "marge";#
-$lang_de = "de";#
-$lang_prixunitaire = "Prix unitaire";#
+#*in lang
+include('config/var.php');#$devise
+$lang=(!empty($_SESSION['lang']))?$_SESSION['lang']:'fr';
+//~ $lang_prix = "Prix";#*
+//~ $lang_htva = "H.T.";#*
+//~ $lang_ttc = "T.T.C.";#*
+//~ $lang_tva = "T.V.A.";#*
+//~ $lang_marge = "marge";#*
+//~ $lang_de = "de";#*
+//~ $lang_prixunitaire = "Prix unitaire";#*
+//~ $lang_dachat = "d'achat";#*
+//~ $lang_de_vente = "de vente";#*
+include_once("language/$lang.php");
 
-$lang_dachat = "d'achat";#
-$lang_de_vente = "de vente";#
+$lang_coef = "Coef";
+
 
 $lang_prixunitaire_ht = "$lang_prixunitaire $lang_htva";
 $lang_prix_dachat_ht = "$lang_prix $lang_dachat $lang_htva";
@@ -90,14 +97,14 @@ $lang_prix_vente_ttc = "$lang_prix $lang_de_vente $lang_ttc";
 $lang_coef_ht = "$lang_coef $lang_htva";
 $lang_coef_ttc = "$lang_coef $lang_ttc";
 $lang_prix_ht = "$lang_prix $lang_htva";
-$lang_retour_marge = "Retourner un $lang_prix_vente_ht $prix_vente_ht$devise et une $lang_marge $lang_de $tauxmarge%";
-$lang_retour_marge_title = "Envoyer le prix d'achat de $prix_achat$devise et la Marge de $tauxmarge%";
+$lang_retour_marge = "$lang_envoyer un $lang_prix_vente_ht $prix_vente_ht$devise avec une $lang_marge $lang_de $tauxmarge%";
+$lang_retour_marge_title = "$lang_envoyer le $lang_prix $lang_dachat $lang_de $prix_achat$devise et la $lang_marge $lang_de $tauxmarge%";
 ?>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!DOCTYPE HTML>
 <html>
 <head>
  <title><?php echo $lang_marge; ?></title>
- <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-15"><?php #html4 & x.1.1  iso-8859-15 ?>
+ <meta charset="utf-8">
  <style>
   body, table, select {
    font-family: Arial;
@@ -210,32 +217,32 @@ i{cursor:pointer;}
     <p id="sexy">
      Un coef de <i onClick="margesex('sex',270,1);" title="En Voir Plus">marge</i> 30% se calcule ici avec la formule :<br />
      1/(1-0,30) [0.30 = 30%] = 1,429<br />
-     Elle sert en général a trouver le prix de vente TTC<br />par une simple multiplication.<br />
+     Elle sert en gÃ©nÃ©ral a trouver le prix de vente TTC<br />par une simple multiplication.<br />
      Sauf qu'ici elle sert a trouver le "prix unitaire" de vente HT pour Factux.</p>
      <br />
      <br />    <br />
-     <p id="sex" style="opacity:0;">Une <i onClick="margesex('nue',600,1);" title="En SaVoir Plus">Marge comme ça,</i> j'aime.</p>
+     <p id="sex" style="opacity:0;">Une <i onClick="margesex('nue',600,1);" title="En SaVoir Plus">Marge comme Ã§a,</i> j'aime.</p>
      <br />    <br />
      <br />
      <p>
-     Le coef de <i onClick="margenue('nue',600,1);" title="Voir marge nue">marge</i> est utilisé afin de<br /> 
-     récupérer la TVA déboursé a l'achat du/des produit/s.<br />
+     Le coef de <i onClick="margenue('nue',600,1);" title="Voir marge nue">marge</i> est utilisÃ© afin de<br /> 
+     rÃ©cupÃ©rer la TVA dÃ©boursÃ© a l'achat du/des produit/s.<br />
      Pour ainsi l'inclure dans le prix de vente<br />Toutes TAXEs Comprises des acheteurs finaux.<br />
-     D'ailleur voici la formule pour trouver le coef de <i onClick="margenue('sex',600,1);" title="Voir marge sexy">marge</i> courrament usité :
+     D'ailleur voici la formule pour trouver le coef de <i onClick="margenue('sex',600,1);" title="Voir marge sexy">marge</i> courrament usitÃ© :
      </p>
      <?php echo $lang_prix_dachat_ht; ?> : 10<?php echo $devise; ?><br />
      Taxe <?php echo $lang_dachat; ?> (<?php echo $lang_tva; ?>) : 5,5%<br />
-     <?php echo ucfirst($lang_marge); ?> souhaité : 16%<br />
+     <?php echo ucfirst($lang_marge); ?> souhaitÃ© : 16%<br />
      <?php echo $lang_coef; ?>: ((1+0.055)/(1-0.16)) = 1,256<br />
      <?php echo $lang_prix_vente_ttc; ?>: 10 x 1,256 = 12,56<?php echo $devise; ?><br />
      <hr />
-     Méthode Factux<br />
+     MÃ©thode Factux<br />
      <?php echo $lang_coef; ?>: (1/(1-0.16)) = 1,19<br />
      <?php echo $lang_prixunitaire_ht; ?>: 10 x 1,19 = 11,90<?php echo $devise; ?><br />
      TAXE / la Voleur Ajouter: 11,90 x 0,055 = 0,66<br />
      <?php echo $lang_prix_vente_ttc; ?>: 11,90 + 0,66 = 12,56<?php echo $devise; ?><br />
      <hr />
-     <p id="nue" style="opacity:0;">Cela revient au même au final (question d'arrondis) la <i onClick="margesex('sexy',160,1);" title="Réhabillé marge">marge</i> est toujours respecté, ainsi que la récupération de la TVA déboursé a nos fournisseurs.</p>
+     <p id="nue" style="opacity:0;">Cela revient au mÃªme au final (question d'arrondis) la <i onClick="margesex('sexy',160,1);" title="RÃ©habillÃ© marge">marge</i> est toujours respectÃ©, ainsi que la rÃ©cupÃ©ration de la TVA dÃ©boursÃ© a nos fournisseurs.</p>
      <br /><br /><hr />
    </td>
   </tr>
@@ -246,20 +253,20 @@ i{cursor:pointer;}
 
 <script type="text/javascript">
  /**
-  * Reload la fenêtre en soumettant le formulaire
+  * Reload la fenÃªtre en soumettant le formulaire
   *
   * @param   object   frm  L'object document du formulaire
   */
  function reload(frm){
   frm.submit();
 /*
-//non testé, juste transformé du php en js, doit être proche de fonctionner. Thomas
+//non testÃ©, juste transformÃ© du php en js, doit Ãªtre proche de fonctionner. Thomas
   var prix_achat = frm.elements["pa"];
   var marge = frm.elements["ma"];
   var tv = frm.elements["tv"];
 //calc
 if(marge.value!=0){
- if(marge.value>=100)//La division par zéro est indéfinie
+ if(marge.value>=100)//La division par zÃ©ro est indÃ©finie
   marge.value=99.999;
  var coef = (1/(1-(marge.value/100)));
  var tauxmarge = (1-(1/coef))*100;
@@ -269,16 +276,16 @@ var prix_vente_ht = prix_achat.value * coef;
 var tva = prix_vente_ht * (tv.value/100);
 var prix_vente_ttc = prix_vente_ht + tva;
 var prix_vente_ttc2 = prix_achat.value * coefttc;
-//var p = parseFloat(FLOATVAR).toFixed(2);//arrondir a deux décimale
+//var p = parseFloat(FLOATVAR).toFixed(2);//arrondir a deux dÃ©cimale
 */
  }
  /**
-  * Créé la string de retour et la renvoie à la page d'appel
+  * CrÃ©Ã© la string de retour et la renvoie Ã  la page d'appel
   *
-  * C'est ici que le champ du formulaire de la page d'appel reçoit la valeur de retour.
-  * La fenêtre s'auto-fermera ensuite toute seule comme une grande.
+  * C'est ici que le champ du formulaire de la page d'appel reÃ§oit la valeur de retour.
+  * La fenÃªtre s'auto-fermera ensuite toute seule comme une grande.
   *
-  * Paisible est l'étudiant qui comme la rivière peut suivre son cours sans quitter son lit...
+  * Paisible est l'Ã©tudiant qui comme la riviÃ¨re peut suivre son cours sans quitter son lit...
   *
   * @param   integer  taux  Le taux de marge ht
   */
@@ -288,7 +295,7 @@ var prix_vente_ttc2 = prix_achat.value * coefttc;
   var prixvente = window.opener.document.<?php echo $frm ?>.elements['prixvente'];
   var tauxmarge = window.opener.document.<?php echo $frm ?>.elements['tauxmarge'];
   var prix = window.opener.document.<?php echo $frm; ?>.elements['prix'];
-  //Écrire les nouvelles valeurs 
+  //Ã‰crire les nouvelles valeurs 
   <?php echo $champ; ?>.value = val;
   prixvente.value = '<?php echo $prix_vente_ht.$devise; ?>';
   tauxmarge.value = '<?php echo  $tauxmarge; ?>%';
@@ -322,7 +329,7 @@ var prix_vente_ttc2 = prix_achat.value * coefttc;
   setTimeout(function(){
    document.getElementById(c).style['opacity'] = o;
    suggere.style['opacity'] = 0;
-   document.body.className = c;//si commenté , elle se réhabille tjrs (*)
+   document.body.className = c;//si commentÃ© , elle se rÃ©habille tjrs (*)
   }, 7000);
   suggere.className = c;//alert(suggere.className);
 
@@ -336,7 +343,7 @@ var prix_vente_ttc2 = prix_achat.value * coefttc;
  function margenue(c,h,o){
   var bg = document.getElementById("bg-ios");
   var bd = window.document.body;
-//  bd.className = c;// commenté, reviens au bg original +  si (*) commenté elle se réhabille tjrs
+//  bd.className = c;// commentÃ©, reviens au bg original +  si (*) commentÃ© elle se rÃ©habille tjrs
   bg.className = c;
   bg.style['z-index']=2;
   bg.style['opacity'] = o

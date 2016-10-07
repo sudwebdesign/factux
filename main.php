@@ -1,19 +1,19 @@
 <?php
 /*
  * Factux le facturier libre
- * Copyright (C) 2003-2004 Guy Hendrickx
+ * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
  * 
  * Licensed under the terms of the GNU General Public License:
- * 		http://www.opensource.org/licenses/gpl-license.php
+ * 		http://opensource.org/licenses/GPL-3.0
  * 
  * For further information visit:
- * 		http://factux.sourceforge.net
+ * 		http://factux.free.fr
  * 
  * File Name: fckconfig.js
  * 	Editor configuration settings.
  * 
- * * * Version: 1.1.5
- * * * * Modified: 23/07/2005
+ * * * Version: 5.0.0
+ * * * * Modified: 07/10/2016
  * 
  * File Authors:
  * 		Guy Hendrickx
@@ -49,14 +49,19 @@ extract($_POST);
 if (isset($send2) && $send2 == $lang_enter){
  $conn = @mysql_connect($dbhost,$dbuser,$dbpass); 
  if ($conn==FALSE){
-  die("<BR>ERROR: cannot connect to database<BR>" );
+  die("<h1>ERROR: cannot connect to database</h1>" );
  }
 
  $tables = mysql_list_tables($dbname,$conn);
  $num_tables = @mysql_num_rows($tables);
  if ($num_tables==0){
-  die("ERROR: Database contains no tables");
- }  
+  die("<h1>ERROR: Database contains no tables</h1>");
+ }
+ #maintenant dbinfo est supprimé quant on supprime les backup  
+ //~ if(!is_writable($path."dbinfo.php")){
+  //~ echo "<meta http-equiv=Refresh content='3;URL=form_backup.php'>";
+  //~ die("<h1>$lang_fi_lect_sl (dbinfo.php)</h1>" );
+ //~ } 
  $fp3 = fopen ($path."dbinfo.php","w");
  fwrite ($fp3,"<?php\n");
  fwrite ($fp3,"\$dbhost=\"$dbhost\";\n");

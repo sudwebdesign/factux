@@ -1,19 +1,19 @@
 <?php 
 /*
  * Factux le facturier libre
- * Copyright (C) 2003-2004 Guy Hendrickx
+ * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
  * 
  * Licensed under the terms of the GNU  General Public License:
- * 		http://www.opensource.org/licenses/gpl-license.php
+ * 		http://opensource.org/licenses/GPL-3.0
  * 
  * For further information visit:
- * 		http://factux.sourceforge.net
+ * 		http://factux.free.fr
  * 
  * File Name: fckconfig.js
  * 	Editor configuration settings.
  * 
- * * * Version:  1.1.5
- * Modified: 11/04/2005
+ * * * Version:  5.0.0
+ * Modified: 07/10/2016
  * 
  * File Authors:
  * 		Guy Hendrickx
@@ -37,7 +37,7 @@ if($login=='' || $pass==''){
  exit;
 }
 
-// on recupère le password de la table qui correspond au login du visiteur
+// on recupÃ¨re le password de la table qui correspond au login du visiteur
 $sql = "select pwd from " . $tblpref ."user where login= '$login'";
 $req = mysql_query($sql) or die('Erreur SQL!<br>'.$sql.'<br>'.mysql_error());
 
@@ -53,5 +53,6 @@ if($data['pwd'] != $pass_crypt){
  $_SESSION['trucmuch'] = $login ;
  $_SESSION['lang'] = $lang ; 
  $message= "<h2>$lang_authentification_ok <br> $lang_bienvenue $login</h2>";
+ include_once("include/verif.php");
  include_once("form_commande.php");
 }

@@ -390,14 +390,14 @@ text-align:right;
 } 
 /***** menu CSS *****/
 @media print {
-/*A l'impression on cache le menu, marche au moins pour IE, Moz et Opéra.*/
+/*A l'impression on cache le menu, marche au moins pour IE, Moz et OpÃ©ra.*/
 	.menu, .ssmenu,h1 {
 		display: none;
 	}
 }
 
 .menu, .ssmenu {
-/* Il est important de laisser une largeur, au cas où le Javascript soit désactivé.
+/* Il est important de laisser une largeur, au cas oÃ¹ le Javascript soit dÃ©sactivÃ©.
 margin aussi */
 	background-color:#AA8922;
 	font-size:12px;
@@ -422,8 +422,8 @@ margin aussi */
 }
 
 .menu span, .ssmenu span {
-/* pour cacher les ; en fin de <li>, ce qui permet aux synthèse vocales de prendre une
-	pause dans l'élocution */
+/* pour cacher les ; en fin de <li>, ce qui permet aux synthÃ¨se vocales de prendre une
+	pause dans l'Ã©locution */
 	display:none;
 }
 
@@ -457,7 +457,7 @@ margin aussi */
 
 .ssmenu ul:hover, .ssmenu a:hover, .ssmenu a:focus, .menu a:hover, .menu a:focus {
 /* Les liens sous le curseur.
-	On change les couleurs du texte et de fond, et on enlève le soulignement.
+	On change les couleurs du texte et de fond, et on enlÃ¨ve le soulignement.
 	*/
 	background-color:#BEF;
 	color:#034;
@@ -467,8 +467,8 @@ margin aussi */
 
 	
 /*
-Bref... pour résumer, ce qu'il y a à modifier à la base, c'est :
+Bref... pour rÃ©sumer, ce qu'il y a Ã  modifier Ã  la base, c'est :
 - couleurs, police, bordure et largeur des menu et ssmenu.
-- l'effet spécial IE pour les ssmenu
-- police et couleurs des liens "non survolés" et "survolés".
+- l'effet spÃ©cial IE pour les ssmenu
+- police et couleurs des liens "non survolÃ©s" et "survolÃ©s".
 */

@@ -1,19 +1,19 @@
 <?php 
 /*
  * Factux le facturier libre
- * Copyright (C) 2003-2004 Guy Hendrickx
+ * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
  * 
  * Licensed under the terms of the GNU  General Public License:
- * 		http://www.opensource.org/licenses/gpl-license.php
+ * 		http://opensource.org/licenses/GPL-3.0
  * 
  * For further information visit:
- * 		http://factux.sourceforge.net
+ * 		http://factux.free.fr
  * 
  * File Name: lister_article.php
  * 	liste les article et donne acces a differentes actions
  * 
- * * * Version:  1.1.5
- * * * * Modified: 23/07/2005
+ * * * Version:  5.0.0
+ * * * * Modified: 07/10/2016
  * 
  * File Authors:
  * 		Guy Hendrickx
@@ -71,7 +71,7 @@ if ($use_categorie =='y'){ ?>
 $c=0;
 while($data = mysql_fetch_array($req)){
  $article = $data['article'];
- $article = htmlspecialchars($article, ENT_COMPAT | ENT_HTML401 | ENT_SUBSTITUTE, ini_get("default_charset"), FALSE);
+ $article = thespecialchars($article);
  #$article = htmlentities($article, ENT_QUOTES);
  $cat = $data['categorie'];
  #$cat = htmlentities($cat, ENT_QUOTES);#if actif undisplayed
@@ -114,7 +114,7 @@ while($data = mysql_fetch_array($req)){
     <td class='<?php echo couleur_alternee (FALSE,"c texte"); ?>'>
      <a href="delete_article.php?article=<?php echo $num; ?>" 
         onClick="return confirmDelete('<?php echo $lang_art_effa.$article; ?>?');">
-      <img border="0" alt="<?php echo $lang_supprimer; ?>" src="image/delete.jpg" >
+      <img border="0" alt="<?php echo $lang_supprimer; ?>" src="image/delete.jpg">
      </a>
     </td>
    </tr>

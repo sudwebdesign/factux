@@ -1,249 +1,187 @@
--- phpMyAdmin SQL Dump
--- version 2.6.1
--- http://www.phpmyadmin.net
--- 
--- Host: localhost
--- Generation Time: Jan 31, 2007 at 01:55 PM
--- Server version: 4.1.9
--- PHP Version: 4.3.10
--- 
--- Database: `factux2`
--- 
+-- Adminer 4.2.4 MySQL dump
 
--- --------------------------------------------------------
+SET NAMES utf8;
+SET time_zone = '+00:00';
+SET foreign_key_checks = 0;
+SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
 
--- 
--- Structure de la table `factux_article`
--- 
-
+DROP TABLE IF EXISTS `factux_article`;
 CREATE TABLE `factux_article` (
-  `num` int(10) NOT NULL auto_increment,
-  `article` varchar(40) NOT NULL default '0',
-  `prix_htva` float NOT NULL default '0',
-  `taux_tva` float default '0',
-  `marge` float default '0',
-  `commentaire` varchar(30) NOT NULL default '0',
-  `uni` varchar(5) NOT NULL default '',
-  `actif` varchar(5) NOT NULL default '',
-  `stock` float(15,2) NOT NULL default '0.00',
-  `stomin` float(15,2) NOT NULL default '0.00',
-  `stomax` float(15,2) NOT NULL default '0.00',
-  `cat` varchar(10) NOT NULL default '',
-  PRIMARY KEY  (`num`)
-) ENGINE=MyISAM ;
+  `num` int(10) NOT NULL AUTO_INCREMENT,
+  `article` varchar(40) NOT NULL DEFAULT '0',
+  `prix_htva` float(20,2) NOT NULL DEFAULT '0.00',
+  `taux_tva` float(4,2) NOT NULL DEFAULT '0.00',
+  `marge` float(6,2) NOT NULL DEFAULT '1.00',
+  `commentaire` varchar(30) NOT NULL DEFAULT '0',
+  `uni` varchar(5) NOT NULL DEFAULT '',
+  `actif` varchar(5) NOT NULL DEFAULT '',
+  `stock` float(15,2) NOT NULL DEFAULT '0.00',
+  `stomin` float(15,2) NOT NULL DEFAULT '0.00',
+  `stomax` float(15,2) NOT NULL DEFAULT '0.00',
+  `cat` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`num`)
+) ENGINE=MyISAM;
 
--- --------------------------------------------------------
 
--- 
--- Structure de la table `factux_bon_comm`
--- 
-
+DROP TABLE IF EXISTS `factux_bon_comm`;
 CREATE TABLE `factux_bon_comm` (
-  `num_bon` int(30) NOT NULL auto_increment,
-  `client_num` varchar(10) NOT NULL default '',
-  `date` date NOT NULL default '0000-00-00',
-  `tot_htva` float(20,2) NOT NULL default '0.00',
-  `tot_tva` float(20,2) NOT NULL default '0.00',
-  `fact` varchar(4) NOT NULL default '0',
-  `coment` varchar(200) NOT NULL default '',
-  `date_fact` date NOT NULL default '0000-00-00',
-  PRIMARY KEY  (`num_bon`)
-) ENGINE=MyISAM ;
+  `num_bon` int(30) NOT NULL AUTO_INCREMENT,
+  `client_num` int(10) NOT NULL DEFAULT '0',
+  `date` date NOT NULL DEFAULT '0000-00-00',
+  `tot_htva` float(20,2) NOT NULL DEFAULT '0.00',
+  `tot_tva` float(20,2) NOT NULL DEFAULT '0.00',
+  `fact` int(11) NOT NULL DEFAULT '0',
+  `coment` varchar(200) NOT NULL DEFAULT '',
+  PRIMARY KEY (`num_bon`)
+) ENGINE=MyISAM;
 
--- --------------------------------------------------------
 
--- 
--- Table structure for table `facturier_categorie`
--- 
-
+DROP TABLE IF EXISTS `factux_categorie`;
 CREATE TABLE `factux_categorie` (
-  `id_cat` int(11) NOT NULL auto_increment,
-  `categorie` varchar(30) NOT NULL default '',
-  PRIMARY KEY  (`id_cat`)
-) ENGINE=MyISAM ;
+  `id_cat` int(11) NOT NULL AUTO_INCREMENT,
+  `categorie` varchar(30) NOT NULL DEFAULT '',
+  PRIMARY KEY (`id_cat`)
+) ENGINE=MyISAM;
 
--- --------------------------------------------------------
 
--- 
--- Structure de la table `factux_client`
--- 
-
+DROP TABLE IF EXISTS `factux_client`;
 CREATE TABLE `factux_client` (
-  `num_client` int(10) NOT NULL auto_increment,
-  `nom` varchar(30) NOT NULL default '',
-  `nom2` varchar(30) NOT NULL default '',
-  `rue` varchar(30) NOT NULL default '',
-  `ville` varchar(30) NOT NULL default '',
-  `cp` varchar(5) NOT NULL default '',
-  `num_tva` varchar(30) NOT NULL default '',
-  `login` varchar(10) NOT NULL default '',
-  `pass` varchar(40) NOT NULL default '',
-  `mail` varchar(30) NOT NULL default '',
-  `actif` varchar(5) NOT NULL default '',
-  `permi` varchar(255) NOT NULL default '',
-  `civ` varchar(15) NOT NULL default '',
-  `tel` varchar(30) NOT NULL default '',
-  `fax` varchar(30) NOT NULL default '',
-  PRIMARY KEY  (`num_client`)
-) ENGINE=MyISAM ;
+  `num_client` int(10) NOT NULL AUTO_INCREMENT,
+  `nom` varchar(30) NOT NULL DEFAULT '',
+  `nom2` varchar(30) NOT NULL DEFAULT '',
+  `rue` varchar(30) NOT NULL DEFAULT '',
+  `ville` varchar(30) NOT NULL DEFAULT '',
+  `cp` varchar(5) NOT NULL DEFAULT '',
+  `num_tva` varchar(30) NOT NULL DEFAULT '',
+  `login` varchar(10) NOT NULL DEFAULT '',
+  `pass` varchar(40) NOT NULL DEFAULT '',
+  `mail` varchar(30) NOT NULL DEFAULT '',
+  `actif` varchar(5) NOT NULL DEFAULT '',
+  `permi` varchar(255) NOT NULL DEFAULT '',
+  `civ` varchar(15) NOT NULL DEFAULT '',
+  `tel` varchar(30) NOT NULL DEFAULT '',
+  `fax` varchar(30) NOT NULL DEFAULT '',
+  PRIMARY KEY (`num_client`)
+) ENGINE=MyISAM;
 
--- --------------------------------------------------------
 
--- 
--- Structure de la table `factux_cont_bon`
--- 
-
+DROP TABLE IF EXISTS `factux_cont_bon`;
 CREATE TABLE `factux_cont_bon` (
-  `num` int(30) NOT NULL auto_increment,
-  `bon_num` varchar(30) NOT NULL default '',
-  `num_lot` varchar(15) NOT NULL default '',
-  `article_num` varchar(30) NOT NULL default '',
-  `quanti` double NOT NULL default '0',
-  `remise` float default '0',
-  `tot_art_htva` float(20,2) NOT NULL default '0.00',
-  `to_tva_art` float(20,2) NOT NULL default '0.00',
-  `p_u_jour` float(20,2) NOT NULL default '0.00',
-  PRIMARY KEY  (`num`)
-) ENGINE=MyISAM ;
+  `num` int(40) NOT NULL AUTO_INCREMENT,
+  `bon_num` int(30) NOT NULL DEFAULT '0',
+  `num_lot` int(10) NOT NULL,
+  `article_num` int(10) NOT NULL DEFAULT '0',
+  `quanti` double NOT NULL DEFAULT '0',
+  `tot_art_htva` float(20,2) NOT NULL DEFAULT '0.00',
+  `to_tva_art` float(20,2) NOT NULL DEFAULT '0.00',
+  `p_u_jour` float(20,2) NOT NULL DEFAULT '0.00',
+  `marge_jour` float(6,2) NOT NULL DEFAULT '1.00',
+  `remise` float(6,2) NOT NULL DEFAULT '0.00',
+  PRIMARY KEY (`num`)
+) ENGINE=MyISAM;
 
--- --------------------------------------------------------
 
--- 
--- Structure de la table `factux_cont_dev`
--- 
-
+DROP TABLE IF EXISTS `factux_cont_dev`;
 CREATE TABLE `factux_cont_dev` (
-  `num` int(30) NOT NULL auto_increment,
-  `dev_num` varchar(30) NOT NULL default '',
-  `article_num` varchar(30) NOT NULL default '',
-  `quanti` double NOT NULL default '0',
-  `remise` float default '0',
-  `tot_art_htva` float(20,2) NOT NULL default '0.00',
-  `to_tva_art` float(20,2) NOT NULL default '0.00',
-  `p_u_jour` float(20,2) NOT NULL default '0.00',
-  PRIMARY KEY  (`num`)
-) ENGINE=MyISAM ;
+  `num` int(40) NOT NULL AUTO_INCREMENT,
+  `dev_num` int(30) NOT NULL DEFAULT '0',
+  `article_num` int(10) NOT NULL DEFAULT '0',
+  `quanti` double NOT NULL DEFAULT '0',
+  `tot_art_htva` float(20,2) NOT NULL DEFAULT '0.00',
+  `to_tva_art` float(20,2) NOT NULL DEFAULT '0.00',
+  `p_u_jour` float(20,2) NOT NULL DEFAULT '0.00',
+  `marge_jour` float(6,2) NOT NULL DEFAULT '1.00',
+  `remise` float(6,2) NOT NULL DEFAULT '0.00',
+  PRIMARY KEY (`num`)
+) ENGINE=MyISAM;
 
--- --------------------------------------------------------
 
--- 
--- Structure de la table `factux_cont_lot`
--- 
-
+DROP TABLE IF EXISTS `factux_cont_lot`;
 CREATE TABLE `factux_cont_lot` (
-  `num` int(15) NOT NULL auto_increment,
-  `num_lot` int(10) NOT NULL default '0',
-  `ingr` varchar(20) NOT NULL default '',
-  `fourn` varchar(15) NOT NULL default '',
-  `fourn_lot` varchar(20) NOT NULL default '',
-  PRIMARY KEY  (`num`)
-) ENGINE=MyISAM ;
+  `num` int(15) NOT NULL AUTO_INCREMENT,
+  `num_lot` int(10) NOT NULL DEFAULT '0',
+  `ingr` varchar(20) NOT NULL DEFAULT '',
+  `fourn` varchar(15) NOT NULL DEFAULT '',
+  `fourn_lot` varchar(20) NOT NULL DEFAULT '',
+  PRIMARY KEY (`num`)
+) ENGINE=MyISAM;
 
--- --------------------------------------------------------
 
--- 
--- Structure de la table `factux_depense`
--- 
-
+DROP TABLE IF EXISTS `factux_depense`;
 CREATE TABLE `factux_depense` (
-  `num` int(11) NOT NULL auto_increment,
-  `date` date NOT NULL default '0000-00-00',
-  `lib` varchar(50) NOT NULL default '',
-  `fournisseur` varchar(30) NOT NULL default '',
-  `prix` float(10,2) NOT NULL default '0.00',
-  PRIMARY KEY  (`num`)
-) ENGINE=MyISAM ;
+  `num` int(11) NOT NULL AUTO_INCREMENT,
+  `date` date NOT NULL DEFAULT '0000-00-00',
+  `lib` varchar(50) NOT NULL DEFAULT '',
+  `fournisseur` varchar(30) NOT NULL DEFAULT '',
+  `prix` float(10,2) NOT NULL DEFAULT '0.00',
+  `mont_tva` float(10,2) NOT NULL DEFAULT '0.00',
+  `tx_tva` float(10,2) NOT NULL DEFAULT '0.00',
+  PRIMARY KEY (`num`)
+) ENGINE=MyISAM;
 
--- --------------------------------------------------------
 
--- 
--- Structure de la table `factux_devis`
--- 
-
+DROP TABLE IF EXISTS `factux_devis`;
 CREATE TABLE `factux_devis` (
-  `num_dev` int(30) NOT NULL auto_increment,
-  `client_num` varchar(10) NOT NULL default '',
-  `date` date NOT NULL default '0000-00-00',
-  `tot_htva` float(20,2) NOT NULL default '0.00',
-  `tot_tva` float(20,2) NOT NULL default '0.00',
-  `resu` varchar(4) NOT NULL default '0',
-  `coment` varchar(200) NOT NULL default '',
-  PRIMARY KEY  (`num_dev`)
-) ENGINE=MyISAM ;
+  `num_dev` int(30) NOT NULL AUTO_INCREMENT,
+  `client_num` int(10) NOT NULL DEFAULT '0',
+  `date` date NOT NULL DEFAULT '0000-00-00',
+  `tot_htva` float(20,2) NOT NULL DEFAULT '0.00',
+  `tot_tva` float(20,2) NOT NULL DEFAULT '0.00',
+  `resu` int(30) NOT NULL DEFAULT '0',
+  `coment` varchar(200) NOT NULL DEFAULT '',
+  PRIMARY KEY (`num_dev`)
+) ENGINE=MyISAM;
 
--- --------------------------------------------------------
 
--- 
--- Structure de la table `factux_facture`
--- 
-
+DROP TABLE IF EXISTS `factux_facture`;
 CREATE TABLE `factux_facture` (
-  `num` int(11) NOT NULL auto_increment,
-  `date_deb` date NOT NULL default '0000-00-00',
-  `date_fin` date NOT NULL default '0000-00-00',
-  `CLIENT` varchar(30) NOT NULL default '',
-  `payement` varchar(15) NOT NULL default 'non',
-  `date_fact` date NOT NULL default '0000-00-00',
-  `total_fact_h` float(20,2) NOT NULL default '0.00',
-  `total_fact_ttc` float(20,2) NOT NULL default '0.00',
-  `r1` varchar(10) NOT NULL default 'non',
-  `r2` varchar(10) NOT NULL default 'non',
-  `r3` varchar(10) NOT NULL default 'non',
-  `coment` varchar(200) NOT NULL default '',
-  `acompte` float(10,2) NOT NULL default '0.00',
+  `num` int(11) NOT NULL AUTO_INCREMENT,
+  `date_deb` date NOT NULL DEFAULT '0000-00-00',
+  `date_fin` date NOT NULL DEFAULT '0000-00-00',
+  `date_fact` date NOT NULL DEFAULT '0000-00-00',
+  `date_pay` date NOT NULL DEFAULT '0000-00-00',
+  `client` int(10) NOT NULL DEFAULT '0',
+  `payement` varchar(15) NOT NULL DEFAULT 'non',
+  `total_fact_h` float(20,2) NOT NULL DEFAULT '0.00',
+  `total_fact_ttc` float(20,2) NOT NULL DEFAULT '0.00',
+  `r1` varchar(10) NOT NULL DEFAULT 'non',
+  `r2` varchar(10) NOT NULL DEFAULT 'non',
+  `r3` varchar(10) NOT NULL DEFAULT 'non',
+  `coment` varchar(200) NOT NULL DEFAULT '',
+  `acompte` float(10,2) NOT NULL DEFAULT '0.00',
   `list_num` mediumtext NOT NULL,
-  PRIMARY KEY  (`num`)
-) ENGINE=MyISAM ;
+  PRIMARY KEY (`num`)
+) ENGINE=MyISAM;
 
--- --------------------------------------------------------
 
--- 
--- Structure de la table `factux_lot`
--- 
-
+DROP TABLE IF EXISTS `factux_lot`;
 CREATE TABLE `factux_lot` (
-  `num` int(10) NOT NULL auto_increment,
-  `prod` varchar(25) NOT NULL default '',
-  `actif` char(3) NOT NULL default '0',
-  `date` date NOT NULL default '0000-00-00',
-  PRIMARY KEY  (`num`)
-) ENGINE=MyISAM ;
+  `num` int(10) NOT NULL AUTO_INCREMENT,
+  `prod` varchar(25) NOT NULL DEFAULT '',
+  `actif` char(3) NOT NULL DEFAULT '0',
+  `date` date NOT NULL DEFAULT '0000-00-00',
+  PRIMARY KEY (`num`)
+) ENGINE=MyISAM;
 
--- --------------------------------------------------------
 
--- 
--- Structure de la table `factux_payement`
--- 
-
-CREATE TABLE `factux_payement` (
-  `num` int(10) NOT NULL auto_increment,
-  `num_fact` varchar(30) NOT NULL default '',
-  `pay` varchar(4) NOT NULL default '',
-  `date_pay` date NOT NULL default '0000-00-00',
-  PRIMARY KEY  (`num`)
-) ENGINE=MyISAM ;
-
--- --------------------------------------------------------
-
--- 
--- Structure de la table `factux_user`
--- 
-
+DROP TABLE IF EXISTS `factux_user`;
 CREATE TABLE `factux_user` (
-  `num` int(10) NOT NULL auto_increment,
-  `login` varchar(10) NOT NULL default '',
-  `nom` varchar(20) NOT NULL default '',
-  `prenom` varchar(20) NOT NULL default '',
-  `pwd` varchar(40) NOT NULL default '',
-  `email` varchar(30) NOT NULL default '',
-  `dev` char(1) NOT NULL default 'n',
-  `com` char(1) NOT NULL default 'n',
-  `fact` char(1) NOT NULL default 'n',
-  `admin` char(1) NOT NULL default 'n',
-  `dep` char(1) NOT NULL default 'n',
-  `stat` char(1) NOT NULL default 'n',
-  `art` char(1) NOT NULL default 'n',
-  `cli` char(1) NOT NULL default 'n',
-  PRIMARY KEY  (`num`)
-) ENGINE=MyISAM ;
-        
+  `num` int(10) NOT NULL AUTO_INCREMENT,
+  `login` varchar(10) NOT NULL DEFAULT '',
+  `nom` varchar(20) NOT NULL DEFAULT '',
+  `prenom` varchar(20) NOT NULL DEFAULT '',
+  `pwd` varchar(40) NOT NULL DEFAULT '',
+  `email` varchar(30) NOT NULL DEFAULT '',
+  `dev` char(1) NOT NULL DEFAULT 'n',
+  `com` char(1) NOT NULL DEFAULT 'n',
+  `fact` char(1) NOT NULL DEFAULT 'n',
+  `admin` char(1) NOT NULL DEFAULT 'n',
+  `dep` char(1) NOT NULL DEFAULT 'n',
+  `stat` char(1) NOT NULL DEFAULT 'n',
+  `art` char(1) NOT NULL DEFAULT 'n',
+  `cli` char(1) NOT NULL DEFAULT 'n',
+  PRIMARY KEY (`num`)
+) ENGINE=MyISAM;
+
+
+-- 2016-10-07 12:02:07

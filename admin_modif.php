@@ -1,19 +1,19 @@
 <?php 
 /*
  * Factux le facturier libre
- * Copyright (C) 2003-2004 Guy Hendrickx
+ * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
  * 
  * Licensed under the terms of the GNU  General Public License:
- * 		http://www.opensource.org/licenses/gpl-license.php
+ * 		http://opensource.org/licenses/GPL-3.0
  * 
  * For further information visit:
- * 		http://factux.sourceforge.net
+ * 		http://factux.free.fr
  * 
  * File Name: admin_modif.php
  * 	Enregistrement des parametres: configav.php
  * 
- * * Version:  1.1.5
- * * * * Modified: 23/07/2005
+ * * Version:  5.0.0
+ * * * * Modified: 07/10/2016
  * 
  * File Authors:
  * 		Guy Hendrickx
@@ -104,12 +104,12 @@ $texte.="\n";
 
 if (is_writable($filename)){
  if (!$handle = fopen($filename, 'w+')){
-  echo "Impossible d'ouvrir le fichier ($filename)";
+  echo "$lang_fi_innouvr ($filename).";
   include("admin.php"); 
   exit;
  }
  if (fwrite($handle, $texte) === FALSE){
-  $message= "<h1>Impossible d'écrire dans le fichier ($filename)</h1>";
+  $message= "<h1>$lang_fi_inedita ($filename).</h1>";
   include("admin.php"); 
   exit;
  }
@@ -117,6 +117,6 @@ if (is_writable($filename)){
  $message="<h2>$lang_new_config_ok</h2>";
  include("admin.php");
 }else{
- $message= "<h1>Le fichier $filename n'est pas accessible en écriture.</h1>";
+ $message= "<h1>$lang_fi_lect_sl ($filename).</h1>";
  include("admin.php"); 
 }

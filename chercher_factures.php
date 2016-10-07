@@ -1,19 +1,19 @@
 <?php 
 /*
  * Factux le facturier libre
- * Copyright (C) 2003-2004 Guy Hendrickx
+ * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
  * 
  * Licensed under the terms of the GNU  General Public License:
- * 		http://www.opensource.org/licenses/gpl-license.php
+ * 		http://opensource.org/licenses/GPL-3.0
  * 
  * For further information visit:
- * 		http://factux.sourceforge.net
+ * 		http://factux.free.fr
  * 
  * File Name: chercher_factures.php
  * 	formulaire de recherche des factures
  * 
- * * * Version:  1.1.5
- * * * * Modified: 23/07/2005
+ * * * Version:  5.0.0
+ * * * * Modified: 07/10/2016
  * 
  * File Authors:
  * 		Guy Hendrickx
@@ -51,7 +51,7 @@ or " . $tblpref ."client.permi LIKE '$user_num,%'
 <?php 
 if ($liste_cli!='y') { 
 $rqSql="$rqSql order by nom";
-$result = mysql_query( $rqSql ) or die( "Exécution requête impossible.");
+$result = mysql_query( $rqSql ) or die( "ExÃ©cution requÃªte impossible.");
 ?> 
         <select name='listeclients'>
          <option value=""><?php echo $lang_choisissez; ?></option>

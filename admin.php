@@ -1,19 +1,19 @@
 <?php 
 /*
  * Factux le facturier libre
- * Copyright (C) 2003-2004 Guy Hendrickx
+ * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
  * 
  * Licensed under the terms of the GNU  General Public License:
- * 		http://www.opensource.org/licenses/gpl-license.php
+ * 		http://opensource.org/licenses/GPL-3.0
  * 
  * For further information visit:
- * 		http://factux.sourceforge.net
+ * 		http://factux.free.fr
  * 
  * File Name: form_lot.php
  * 	Formulaire de creation des lots
  * 
- * * * Version:  1.1.5
- * * * * Modified: 23/07/2005
+ * * * Version:  5.0.0
+ * * * * Modified: 07/10/2016
  * 
  * File Authors:
  * 		Guy Hendrickx
@@ -175,8 +175,8 @@ if ($handle = opendir('include/themes')){
      </tr>
      <tr>
       <td colspan="2" class="submit">
-       <input type="submit" />
-       <input type="reset" />
+       <input type="submit" value="<?php echo $lang_envoyer; ?>" />
+       <input type="reset" value="<?php echo $lang_annuler; ?>" />
       </td>
      </tr>
     </table>

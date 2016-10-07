@@ -1,19 +1,19 @@
 <?php 
 /*
  * Factux le facturier libre
- * Copyright (C) 2003-2004 Guy Hendrickx
+ * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
  * 
  * Licensed under the terms of the GNU  General Public License:
- * 		http://www.opensource.org/licenses/gpl-license.php
+ * 		http://opensource.org/licenses/GPL-3.0
  * 
  * For further information visit:
- * 		http://factux.sourceforge.net
+ * 		http://factux.free.fr
  * 
  * File Name: form_depense.php
  * 	formulaire de saisie des depenses
  * 
- * * * Version:  1.1.5
- * * * * Modified: 23/07/2005
+ * * * Version:  5.0.0
+ * * * * Modified: 07/10/2016
  * 
  * File Authors:
  * 		Guy Hendrickx
@@ -71,12 +71,12 @@ while ( $row = mysql_fetch_array( $result)){
       <td class="texte0"> <?php echo $lang_prix_h_tva;  ?>: </td><td colspan="4" class="texte0" ><input name="prix" type="text" id="prix"><?php echo $devise; ?></td>
      </tr>
      <tr>
-      <td class="texte0"> <?php echo $lang_t_tva;  ?>: </td><td colspan="4" class="texte0" ><input name="tva" type="text" id="prix"><?php echo "%"; ?></td>
+      <td class="texte0"> <?php echo $lang_t_tva;  ?>: </td><td colspan="4" class="texte0" ><input name="tva" type="text" id="tva"><?php echo "%"; ?></td>
      </tr>
      <tr>
       <td class="texte0"> <?php echo $lang_date; ?>: </td>
       <td colspan="4" class="texte0"><input type="text" name="date" value="<?php echo"$jour/$mois/$annee" ?>" readonly="readonly"/>
-       <a href="#" onClick=" window.open('include/pop.calendrier.php?frm=depense&amp;ch=date','calendrier','width=415,height=160,scrollbars=0').focus();">
+       <a href="#" onClick=" window.open('include/pop.calendrier.php?frm=depense&amp;ch=date','calendrier','width=460,height=170,scrollbars=0').focus();">
         <img src="image/petit_calendrier.gif" alt="calendrier" border="0"/>
        </a>
       </td>

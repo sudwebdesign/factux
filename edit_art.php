@@ -1,19 +1,19 @@
 <?php 
 /*
  * Factux le facturier libre
- * Copyright (C) 2003-2004 Guy Hendrickx
+ * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
  * 
  * Licensed under the terms of the GNU  General Public License:
- * 		http://www.opensource.org/licenses/gpl-license.php
+ * 		http://opensource.org/licenses/GPL-3.0
  * 
  * For further information visit:
- * 		http://factux.sourceforge.net
+ * 		http://factux.free.fr
  * 
  * File Name: edit_art.php
  * 	Permet de modifier certains parametres des articles.
  * 
- * * * Version:  1.1.5
- * * * * Modified: 23/07/2005
+ * * * Version:  5.0.0
+ * * * * Modified: 07/10/2016
  * 
  * File Authors:
  * 		Guy Hendrickx
@@ -54,15 +54,17 @@ while($data = mysql_fetch_array($req)){
    <center>
     <form action="article_update.php" method="post" name="article_edit" id="article_edit">
      <table class="page boiteaction">
-      <caption><?php echo"$lang_modi_pri $article ".(($quanti)?"<br><sup>$quanti $uni $lang_déja_commandé(s)</sup>":''); ?></caption>
+      <caption><?php echo"$lang_modi_pri $article ".(($quanti)?"<br><sup>$quanti $uni $lang_dÃ©ja_commandÃ©(s)</sup>":''); ?></caption>
 <?php if($quanti==0){ ?>
       <tr>
-       <th colspan="2"><?php echo $lang_art_no; ?></th>
+       <th><?php echo $lang_art_no; ?></th>
        <th><?php echo $lang_uni_art; ?></th>
+       <th><?php echo $lang_ttva; ?></th>
       </tr>
       <tr> 
-       <td colspan="2" class="c texte0"><input name="article" type="text" id="article" size="40" maxlength="40" value="<?php echo $article; ?>"></td>
-       <td class="c texte0"><input name="uni" type="text" id="uni" size="8" maxlength="8" value="<?php echo $uni; ?>"></td>
+       <td class="c texte0"><input name="article" type="text" id="article" size="40" maxlength="40" value='<?php echo $article; ?>'></td>
+       <td class="c texte0"><input name="uni" type="text" id="uni" size="8" maxlength="8" value='<?php echo $uni; ?>'></td>
+       <td class="c texte0"><input name="taux_tva" type="text" id="taux_tva" size="5" maxlength="5" value="<?php echo $tva; ?>"> %</td>
       </tr>
 <?php } ?>
       <tr>
@@ -75,7 +77,7 @@ while($data = mysql_fetch_array($req)){
        <td class="c texte0">
 <?php  if ($use_categorie =='y') {
 $rqSql = "SELECT id_cat, categorie FROM " . $tblpref ."categorie WHERE 1";
-$result = mysql_query( $rqSql ) or die( "Exécution requête impossible.");  
+$result = mysql_query( $rqSql ) or die( "ExÃ©cution requÃªte impossible.");  
 ?>
         <select name='categorie'>
          <option value=''><?php echo $lang_divers; ?></option>
@@ -158,7 +160,7 @@ while ( $row = mysql_fetch_array( $result)) {
   </td>
  </tr>
 </table>
-<script type="text/javascript">//calcul du prix de vente HT margé
+<script type="text/javascript">//calcul du prix de vente HT margÃ©
  function pht(frm){
   if(frm.elements["marge"].value>1){//calc
    var p = parseFloat(frm.elements["prix"].value * frm.elements["marge"].value).toFixed(2);//arrondir a 2 decimales

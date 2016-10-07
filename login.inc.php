@@ -4,16 +4,16 @@
  * Copyright (C) 2003-2004 Hendrickx
  * 
  * Licensed under the terms of the GNU  General Public License:
- * 		http://www.opensource.org/licenses/gpl-license.php
+ * 		http://opensource.org/licenses/GPL-3.0
  * 
  * For further information visit:
- * 		http://factux.sourceforge.net
+ * 		http://factux.free.fr
  * 
  * File Name: login.php.inc
  * 	Editor configuration settings.
  * 
- * * * Version:  1.1.5
- * Modified: 22/01/2005
+ * * * Version:  5.0.0
+ * Modified: 07/10/2016
  * 
  * File Authors:
  * 		Hendrickx Guy
@@ -56,7 +56,7 @@ if (isset($message)&&$message!='') {
  <form action="<?php echo @$now; ?>login.php" method='post'>
   <table width="339" border="0" align="center" class="page">
    <tr>
-    <td class="boiteaction" rowspan="3" ><a href="http://www.ciit.fr/" target="_blank"><img src="<?php echo @$now; ?>image/factux.png" alt="<?php echo $lang_factux; ?>"></a></td>
+    <td class="boiteaction" rowspan="3" ><a href="http://factux.free.fr/" target="_blank"><img src="<?php echo @$now; ?>image/factux.png" alt="<?php echo $lang_factux; ?>"></a></td>
     <td class="boiteaction"><?php echo $lang_login ?></td>
     <td class="boiteaction"><input type="text" name="login" maxlength="10"></td>
    </tr>
@@ -72,6 +72,16 @@ if (isset($message)&&$message!='') {
       <option value="fr">Francais</option>
       <option value="en">English</option>
       <option value="nl">Neederlands</option>
+      <option value="es">Español (baby)</option>
+      <option value="es.m">Español (bing)</option>
+      <option value="it">Italiano (baby)</option>
+      <option value="it.m">Italiano (bing)</option>
+      <option value="de">Deutsch (baby)</option>
+      <option value="de.m">Deutsch (bing)</option>
+      <option value="pl">Polski (baby)</option>
+      <option value="pl.m">Polski (bing)</option>
+      <option value="el">Ελληνικά (baby)</option>
+      <option value="el.m">Ελληνικά (bing)</option>
      </select>
     </td> 
    </tr>

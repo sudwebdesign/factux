@@ -1,19 +1,19 @@
 <?php
 /*
  * Factux le facturier libre
- * Copyright (C) 2003-2004 Guy Hendrickx
+ * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
  * 
  * Licensed under the terms of the GNU  General Public License:
- * 		http://www.opensource.org/licenses/gpl-license.php
+ * 		http://opensource.org/licenses/GPL-3.0
  * 
  * For further information visit:
- * 		http://factux.sourceforge.net
+ * 		http://factux.free.fr
  * 
  * File Name: fckconfig.js
  * 	Editor configuration settings.
  * 
- * * * Version:  1.1.5
- * * * * Modified: 23/07/2005
+ * * * Version:  5.0.0
+ * * * * Modified: 07/10/2016
  * 
  * File Authors:
  * 		Guy Hendrickx
@@ -26,7 +26,7 @@ require_once("include/verif.php");
 
 
 /*
-** Convertir les degrés en radians
+** Convertir les degrÃ©s en radians
 */
 function radians($degrees){
  return($degrees * (pi()/180.0));
@@ -42,20 +42,24 @@ function circle_point($degrees, $diameter){
  return (array($x, $y));
 }
 
-//remplir les paramètres
+//remplir les paramÃ¨tres
 $ChartDiameter = isset($ChartDiameter)?$ChartDiameter:200;
 $ChartFont = isset($ChartFont)?$ChartFont:3;
 $ChartFontHeight = imagefontheight($ChartFont);
 
+include('include/lang_days_months.php');
+for ($i=0;$i<=11;$i++){
+ $m[$i] = $jm[$i][$_SESSION['lang']];
+}
 $ChartData = isset($ChartData)?$ChartData:array("$entre[1]", "$entre[2]", "$entre[3]", "$entre[4]", "$entre[5]", "$entre[6]", "$entre[7]", "$entre[8]", "$entre[9]", "$entre[10]", "$entre[11]", "$entre[12]");
-$ChartLabel = isset($ChartLabel)?$ChartLabel:array("Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Decembre");
-//détermine le total de toutes les valeurs
+$ChartLabel = isset($ChartLabel)?$ChartLabel:$m;#array("Janvier", "FÃ©vrier", "Mars", "Avril", "Mai", "Juin", "Juillet", "AoÃ»t", "Septembre", "Octobre", "Novembre", "Decembre")
+//dÃ©termine le total de toutes les valeurs
 $ChartTotal = 0;
 for($index = 0; $index < count($ChartData); $index++){
  $ChartTotal += $ChartData[$index];
 }
 
-//déterminer la taille du graphique
+//dÃ©terminer la taille du graphique
 $ChartWidth = $ChartDiameter + 20;
 $ChartHeight = $ChartDiameter + 20 + (($ChartFontHeight + 2) * count($ChartData));
 
@@ -105,14 +109,14 @@ $colorSlice[] = imagecolorallocate($image, 0x00, 0xCC, 0xCC);
 ** Dessiner chaque portion
 */
 $Degrees = 0;
-if ($ChartTotal>0)#impossible de divisé par zéro*
+if ($ChartTotal>0)#impossible de divisÃ© par zÃ©ro*
  for($index = 0; $index < count($ChartData); $index++){
-  if($ChartData[$index]>0){#evite de dessiné la ligne d'un pixel
+  if($ChartData[$index]>0){#evite de dessinÃ© la ligne d'un pixel
    $StartDegrees = (int)$Degrees;#round($Degrees);
    $Degrees += (int)round((($ChartData[$index]/$ChartTotal)*360));#ici*
    $EndDegrees = ($Degrees>360)?360:(int)$Degrees;#round($Degrees);
    
-   if($StartDegrees==$EndDegrees)#360&360 ou autre? (evite de remplir tout le cercle 360°)
+   if($StartDegrees==$EndDegrees)#360&360 ou autre? (evite de remplir tout le cercle 360Â°)
     continue;
 
    $CurrentColor = $colorSlice[$index/*%(count($colorSlice))*/];
@@ -132,7 +136,7 @@ if ($ChartTotal>0)#impossible de divisé par zéro*
     $EndDegrees,
     $CurrentColor);
 
-   //Tracer le début de la ligne à partir du centre
+   //Tracer le dÃ©but de la ligne Ã  partir du centre
    list($ArcX, $ArcY) = circle_point($StartDegrees, $ChartDiameter);
    imageline($image,
     $ChartCenterX,
@@ -209,12 +213,12 @@ imagefilltoborder($image,
  $colorBorder);
 
 
-//la légende
+//la lÃ©gende
 for($index = 0; $index < count($ChartData); $index++){
  $CurrentColor = $colorSlice[$index/*%(count($colorSlice))*/];
  $LineY = $ChartDiameter + 20 +  ($index*($ChartFontHeight+2));
 
- //la couleur des boîtes
+ //la couleur des boÃ®tes
  imagerectangle($image,
   10,
   $LineY,
@@ -233,13 +237,13 @@ for($index = 0; $index < count($ChartData); $index++){
   $ChartFont,
   20 + $ChartFontHeight,
   $LineY,
-  "$ChartLabel[$index]: $ChartData[$index]",
+  utf8_decode($ChartLabel[$index]).": $ChartData[$index]",# in utf-8 bad accents
   $colorText);
 }
 
-//arrière-plan
+//arriÃ¨re-plan
 imagefill($image, 0, 0, $colorBody);
 
 //afficher l'image
-header("Content-type: image/png");
+header("Content-type: image/png;");# charset=utf-8 not work
 imagepng($image);

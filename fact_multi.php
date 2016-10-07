@@ -1,19 +1,19 @@
 <?php 
 /*
  * Factux le facturier libre
- * Copyright (C) 2003-2004 Guy Hendrickx
+ * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
  * 
  * Licensed under the terms of the GNU  General Public License:
- * 		http://www.opensource.org/licenses/gpl-license.php
+ * 		http://opensource.org/licenses/GPL-3.0
  * 
  * For further information visit:
- * 		http://factux.sourceforge.net
+ * 		http://factux.free.fr
  * 
  * File Name: fact_multi.php
- * 	enregistrement de données de la facture
+ * 	enregistrement de donnÃ©es de la facture
  * 
- * * * Version:  1.1.5
- * * * * Modified: 23/07/2005
+ * * * Version:  5.0.0
+ * * * * Modified: 07/10/2016
  * 
  * File Authors:
  * 		Guy Hendrickx
@@ -110,7 +110,7 @@ foreach($_POST['client'] as $client){
   $sql1 = "INSERT INTO " . $tblpref ."facture(acompte, coment, client, date_deb, date_fin, date_fact, total_fact_h, total_fact_ttc, list_num) 
   VALUES ('$acompte', '$coment', '$client', '$debut', '$fin', '$date_fact', '$total_htva', '$total_ttc', '$list_num')";
   mysql_query($sql1) or die('Erreur SQL1 !<br>'.$sql1.'<br>'.mysql_error());
-  $num_fact = mysql_insert_id();//le numero de la facture créée
+  $num_fact = mysql_insert_id();//le numero de la facture crÃ©Ã©e
 
   $sql2 = "UPDATE " . $tblpref ."bon_comm SET fact='$num_fact' WHERE " . $tblpref ."bon_comm.client_num = '".$client."' AND " . $tblpref ."bon_comm.date >= '".$debut."' and " . $tblpref ."bon_comm.date <= '".$fin."'";
   mysql_query($sql2) or die('Erreur SQL2 !<br>'.$sql2.'<br>'.mysql_error());

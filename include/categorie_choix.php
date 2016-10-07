@@ -23,7 +23,7 @@ while($data = mysql_fetch_array($req)){
    }
    $article = "$data2[article] ".montant_financier($data2["prix_htva"])." / $data2[uni]";
    if ($data2["marge"]>1)
-    $article = "$data2[article] [".montant_financier($data2["prix_htva"])."] ".montant_financier($data2["prix_htva"]*$data2["marge"])." / $data2[uni]";#margé
+    $article = "$data2[article] [".montant_financier($data2["prix_htva"])."] ".montant_financier($data2["prix_htva"]*$data2["marge"])." / $data2[uni]";#margÃ©
    echo "articl['p$i']['$v'] = new Array('$data2[num]', '$article', '$el');\n";
    $v= $v+1;
   }
@@ -34,7 +34,7 @@ while($data = mysql_fetch_array($req)){
 $j = $i ;
 $sql3="SELECT * FROM `" . $tblpref ."article` WHERE cat = 0 and actif != 'non'";
 $req3 = mysql_query($sql3) or die('Erreur SQL3 !<br>'.$sql3.'<br>'.mysql_error());
-if(mysql_num_rows($req3)){#divers présent(s);
+if(mysql_num_rows($req3)){#divers prÃ©sent(s);
  echo "articl['p$j'] = new Array;\n";
  $v=0;
  $elc='';
@@ -46,7 +46,7 @@ if(mysql_num_rows($req3)){#divers présent(s);
   }
   $article = "$data3[article] ".montant_financier($data3["prix_htva"])." / $data3[uni]";
   if ($data3["marge"]>1)
-   $article = "$data3[article] [".montant_financier($data3["prix_htva"])."] ".montant_financier($data3["prix_htva"]*$data3["marge"])." / $data3[uni]";#margé
+   $article = "$data3[article] [".montant_financier($data3["prix_htva"])."] ".montant_financier($data3["prix_htva"]*$data3["marge"])." / $data3[uni]";#margÃ©
   echo "articl['p$j']['$v'] = new Array('$data3[num]', '$article', '$el');\n";
   $v= $v+1;
  }

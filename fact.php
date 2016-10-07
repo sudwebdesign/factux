@@ -1,19 +1,19 @@
 <?php 
 /*
  * Factux le facturier libre
- * Copyright (C) 2003-2004 Guy Hendrickx
+ * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
  * 
  * Licensed under the terms of the GNU  General Public License:
- * 		http://www.opensource.org/licenses/gpl-license.php
+ * 		http://opensource.org/licenses/GPL-3.0
  * 
  * For further information visit:
- * 		http://factux.sourceforge.net
+ * 		http://factux.free.fr
  * 
  * File Name: fact.php
- * 	enregistrement de données de la facture
+ * 	enregistrement de donnÃ©es de la facture
  * 
- * * * Version:  1.1.5
- * * * * Modified: 23/07/2005
+ * * * Version:  5.0.0
+ * * * * Modified: 07/10/2016
  * 
  * File Authors:
  * 		Guy Hendrickx
@@ -129,7 +129,7 @@ if (!isset($_POST['simuler'])){
  VALUES ('$acompte', '$coment', '$client', '$date_fact', '$total_htva', '$total_ttc', '$list_num')
  ";/**/
  mysql_query($sql1) or die('Erreur SQL1 !<br>'.$sql1.'<br>'.mysql_error());
- $num_fact = mysql_insert_id();//le numero de la facture créée
+ $num_fact = mysql_insert_id();//le numero de la facture crÃ©Ã©e
 
  $sql2 = "
  UPDATE " . $tblpref ."bon_comm 
@@ -148,7 +148,7 @@ if (!isset($_POST['simuler'])){
 <?php include_once("include/head.php"); echo (isset($_POST['simuler']))?"<h1>$lang_simu</h1>":'';?>
    <h2><?php echo "$lang_fact_enr $nom $nom2"; ?></h2>
    <table class="page boiteaction">
-    <caption><?php echo "$lang_facture $num_fact $lang_créée_pour $civ $nom"; ?></caption>
+    <caption><?php echo "$lang_facture $num_fact $lang_crÃ©Ã©e_pour $civ $nom"; ?></caption>
     <tr>
      <th><?php echo $lang_quanti; ?></th>
      <th><?php echo $lang_unite; ?></th>
@@ -167,7 +167,7 @@ $total_remise_htva = 0;
 while($data = mysql_fetch_array($req)){
  $quanti = $data['quanti'];
  $article = $data['article'];
- $tot_htva = $data['tot_art_htva'];#remisé & margé
+ $tot_htva = $data['tot_art_htva'];#remisÃ© & margÃ©
  $tot_tva = $data['to_tva_art'];
  $taux = $data['taux_tva'];
  $uni = $data['uni'];
@@ -175,7 +175,7 @@ while($data = mysql_fetch_array($req)){
  $date = $data['date'];
  $remise = $data['remise'];
 //+ calcul du montant de la remise #2015
- $prx_ht = ($data['p_u_jour']/$data['marge_jour']);#non margé
+ $prx_ht = ($data['p_u_jour']/$data['marge_jour']);#non margÃ©
  $tx_remise = (1-($data['remise']/100));#taux remise
 
  $remise_art_htva = ( $data['p_u_jour'] * $quanti ) - $tot_htva;

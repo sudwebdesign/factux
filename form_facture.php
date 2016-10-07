@@ -1,19 +1,19 @@
 <?php 
 /*
  * Factux le facturier libre
- * Copyright (C) 2003-2004 Guy Hendrickx
+ * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
  * 
  * Licensed under the terms of the GNU  General Public License:
- * 		http://www.opensource.org/licenses/gpl-license.php
+ * 		http://opensource.org/licenses/GPL-3.0
  * 
  * For further information visit:
- * 		http://factux.sourceforge.net
+ * 		http://factux.free.fr
  * 
  * File Name: form_facture.php
- * 	formulaire de création des factures
+ * 	formulaire de crÃ©ation des factures
  * 
- * * * Version:  1.1.5
- * * * * Modified: 23/07/2005
+ * * * Version:  5.0.0
+ * * * * Modified: 07/10/2016
  * 
  * File Authors:
  * 		Guy Hendrickx
@@ -84,19 +84,19 @@ $nom = $row["nom"];
       <td class='<?php echo couleur_alternee (); ?>'><?php echo $lang_date_deb; ?></td>
       <td class='<?php echo couleur_alternee (FALSE); ?>'>
        <input type="text" name="date_deb" value="<?php echo $date_deb; ?>" readonly="readonly"/>
-       <a href="#" onClick=" window.open('include/pop.calendrier.php?frm=formu&amp;ch=date_deb','calendrier','width=415,height=160,scrollbars=0').focus();"><img src="image/petit_calendrier.gif" border="0" alt="calendrier"/></a>
+       <a href="#" onClick=" window.open('include/pop.calendrier.php?frm=formu&amp;ch=date_deb','calendrier','width=460,height=170,scrollbars=0').focus();"><img src="image/petit_calendrier.gif" border="0" alt="calendrier"/></a>
       </td>
      </tr>
      <tr>
       <td class='<?php echo couleur_alternee (); ?>'><?php echo $lang_date_fin; ?></td>
       <td class='<?php echo couleur_alternee (FALSE); ?>'><input type="text" name="date_fin" value="<?php echo $date_fin; ?>" readonly="readonly"/>
-       <a href="#" onClick=" window.open('include/pop.calendrier.php?frm=formu&amp;ch=date_fin','calendrier','width=415,height=160,scrollbars=0').focus();"><img src="image/petit_calendrier.gif" border="0" alt="calendrier"/></a>
+       <a href="#" onClick=" window.open('include/pop.calendrier.php?frm=formu&amp;ch=date_fin','calendrier','width=460,height=170,scrollbars=0').focus();"><img src="image/petit_calendrier.gif" border="0" alt="calendrier"/></a>
       </td>
      </tr>
      <tr>
       <td class='<?php echo couleur_alternee (); ?>'><?php echo $lang_facture_date; ?></td>
       <td class='<?php echo couleur_alternee (FALSE); ?>'><input type="text" name="date_fact" value="<?php echo $date_fact; ?>" readonly="readonly"/>
-       <a href="#" onClick=" window.open('include/pop.calendrier.php?frm=formu&amp;ch=date_fact','calendrier','width=415,height=160,scrollbars=0').focus();"><img src="image/petit_calendrier.gif" border="0" alt="calendrier"/></a>
+       <a href="#" onClick=" window.open('include/pop.calendrier.php?frm=formu&amp;ch=date_fact','calendrier','width=460,height=170,scrollbars=0').focus();"><img src="image/petit_calendrier.gif" border="0" alt="calendrier"/></a>
       </td>
      </tr>
      <tr>

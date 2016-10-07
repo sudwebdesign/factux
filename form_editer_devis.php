@@ -1,19 +1,19 @@
 <?php 
 /*
  * Factux le facturier libre
- * Copyright (C) 2003-2004 Guy Hendrickx
+ * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
  * 
  * Licensed under the terms of the GNU  General Public License:
- * 		http://www.opensource.org/licenses/gpl-license.php
+ * 		http://opensource.org/licenses/GPL-3.0
  * 
  * For further information visit:
- * 		http://factux.sourceforge.net
+ * 		http://factux.free.fr
  * 
  * File Name: form_editer_devis.php
  * 	
  * 
- * * * Version:  1.1.5
- * * * * Modified: 23/07/2005
+ * * * Version:  5.0.0
+ * * * * Modified: 07/10/2016
  * 
  * File Authors:
  * 		Guy Hendrickx
@@ -79,7 +79,7 @@ while ( $row = mysql_fetch_array( $result2)) {
 ?> 
    </td>
    <td><input type="hidden" name="num_dev" value="<?php echo $num_dev; ?>" /></td>
-   <td><input type="submit" name="changer" value="changer"></td>
+   <td><input type="submit" name="changer" value="<?php echo $lang_changer_client; ?>"></td>
    <td colspan="3">&nbsp;</td>
   </tr>
  </table>
@@ -110,7 +110,7 @@ while($data = mysql_fetch_array($req5)){
  $num_cont = $data['num'];
  $remise=$data['remise'];
 //+ calcul du montant de la remise #2015
- $prx_ht = ($data['p_u_jour']/$data['marge_jour']);#non margé
+ $prx_ht = ($data['p_u_jour']/$data['marge_jour']);#non margÃ©
  $tx_remise = (1-($data['remise']/100));#taux remise
 
  $remise_art_htva = ( $data['p_u_jour'] * $quanti ) - $tot;
@@ -139,7 +139,7 @@ while($data = mysql_fetch_array($req5)){
      type="image" value="<?php echo $lang_editer; ?>"
      src="image/edit.gif"
      alt="<?php echo $lang_editer; ?>"
-     align="middle" border="0" onclick="submit()"
+     align="top" border="0" onclick="submit()"
     >
     <input type="hidden" name="num_cont" value="<?php echo $num_cont; ?>">
    </form>

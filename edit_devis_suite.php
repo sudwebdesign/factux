@@ -1,19 +1,19 @@
 <?php 
 /*
  * Factux le facturier libre
- * Copyright (C) 2003-2004 Guy Hendrickx
+ * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
  * 
  * Licensed under the terms of the GNU  General Public License:
- * 		http://www.opensource.org/licenses/gpl-license.php
+ * 		http://opensource.org/licenses/GPL-3.0
  * 
  * For further information visit:
- * 		http://factux.sourceforge.net
+ * 		http://factux.free.fr
  * 
  * File Name: fckconfig.js
  * 	Editor configuration settings.
  * 
- * * * Version:  1.1.5
- * * * * Modified: 23/07/2005
+ * * * Version:  5.0.0
+ * * * * Modified: 07/10/2016
  * 
  * File Authors:
  * 		Guy Hendrickx
@@ -43,11 +43,11 @@ if($article!=0&&$quanti!=''){
     $sql4="select marge FROM " . $tblpref ."article WHERE num = $article";
     $result=mysql_query($sql4) or die('Erreur SQL !<br>'.$sql4.'<br>'.mysql_error());
     $marge=mysql_result($result, 0);
-    //calcul du prix unitaire du jour (margé et remisé)#2015
+    //calcul du prix unitaire du jour (margÃ© et remisÃ©)#2015
     $prix_article=$prix_article * $marge;
     $total_htva = $prix_article * (1-($remise/100)) * $quanti;
     $mont_tva = $total_htva / 100 * $taux_tva ;
-    //inserer les données dans la table du contenu des devis.
+    //inserer les donnÃ©es dans la table du contenu des devis.
     mysql_select_db($db) or die ("Could not select $db database");
     $sql1 = "INSERT INTO " . $tblpref ."cont_dev( p_u_jour, quanti, article_num, dev_num, tot_art_htva, to_tva_art, remise, marge_jour) 
              VALUES ('$prix_article', '$quanti', '$article', '$num_dev', '$total_htva', '$mont_tva', '$remise', '$marge' )";

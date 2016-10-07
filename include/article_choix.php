@@ -10,7 +10,7 @@ while ($row = mysql_fetch_array( $result)) {
  $sel=(isset($cartmun)&&$cartmun==$row["num"])?'" selected="selected':'';
  $articl3 = "$row[article] ".montant_financier($row["prix_htva"])." / $row[uni]";
  if ($row["marge"]>1)
-  $articl3 = "$row[article] [".montant_financier($row["prix_htva"])."] ".montant_financier($row["prix_htva"]*$row["marge"])." / $row[uni]";#margé
+  $articl3 = "$row[article] [".montant_financier($row["prix_htva"])."] ".montant_financier($row["prix_htva"]*$row["marge"])." / $row[uni]";#margÃ©
 ?>
         <option value="<?php echo $row["num"].$sel; ?>"><?php echo $articl3; ?></option>
 <?php } ?>

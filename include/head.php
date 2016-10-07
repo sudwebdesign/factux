@@ -1,26 +1,26 @@
 <?php 
 /*
  * Factux le facturier libre
- * Copyright (C) 2003-2004 Guy Hendrickx
+ * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
  * 
  * Licensed under the terms of the GNU  General Public License:
- *   http://www.opensource.org/licenses/gpl-license.php
+ *   http://opensource.org/licenses/GPL-3.0
  * 
  * For further information visit:
- *   http://factux.sourceforge.net
+ *   http://factux.free.fr
  * 
  * File Name: head.php
  *  Fichier d'entete des pages.
  * 
- * * * Version:  1.1.5
- *  * * Modified: 23/07/2005
+ * * * Version:  5.0.0
+ *  * * Modified: 07/10/2016
  * 
  * File Authors:
  *   Guy Hendrickx
  *.
  */
 ?> 
-<!--- Factux le facturier libre, Copyright (C) 2003-2004 Guy Hendrickx, Licensed under the terms of the GNU  General Public License: http://www.opensource.org/licenses/gpl-license.php .For further information visit: http://factux.sourceforge.net -->
+<!--- Factux le facturier libre, Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles, Licensed under the terms of the GNU  General Public License: http://opensource.org/licenses/GPL-3.0 .For further information visit: http://factux.free.fr -->
 <?php 
 if (!file_exists("include/themes/$theme/menu.inc.php")){
 ////////////////menu par default////////////////////////////
@@ -124,7 +124,7 @@ preChargement();
  <li><a href="form_article.php"><?php echo $lang_creer; ?><span>&nbsp;;</span></a></li>
  <li><a href="lister_articles.php"><?php echo $lang_lister; ?><span>&nbsp;;</span></a></li>
  <?php if ($use_categorie =='y') { ?>
- <li><a href="lister_cat.php"><?php echo $lang_categorie ?>'s<span>&nbsp;;</span></a></li>
+ <li><a href="lister_cat.php"><?php echo $lang_categorie ?>s<span>&nbsp;;</span></a></li>
  <?php  } ?>
  <?php } ?>
  </ul>
@@ -215,7 +215,7 @@ if ($lot == 'y') {; ?>
 <script language="Javascript" type="text/javascript">
 centrer_menu=true;Chargement();
 //window.onresize=function(event){centrer_menu=true;Chargement();};//Never override the window.onresize function or native js functions
-window.addEventListener('resize', function(event){centrer_menu=true;Chargement();})//(cela se ressent en rapidité) http://stackoverflow.com/questions/641857/javascript-window-resize-event
+window.addEventListener('resize', function(event){centrer_menu=true;Chargement();})//(cela se ressent en rapiditÃ©) http://stackoverflow.com/questions/641857/javascript-window-resize-event
 </script>
 <?php
 /////////////////////////Fin du menu par default

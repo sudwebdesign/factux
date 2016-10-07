@@ -1,19 +1,19 @@
 <?php 
 /*
  * Factux le facturier libre
- * Copyright (C) 2003-2004 Guy Hendrickx
+ * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
  * 
  * Licensed under the terms of the GNU  General Public License:
- * 		http://www.opensource.org/licenses/gpl-license.php
+ * 		http://opensource.org/licenses/GPL-3.0
  * 
  * For further information visit:
- * 		http://factux.sourceforge.net
+ * 		http://factux.free.fr
  * 
  * File Name: fckconfig.js
  * 	Editor configuration settings.
  * 
- * * * Version:  1.1.5
- * * * * Modified: 23/07/2005
+ * * * Version:  5.0.0
+ * * * * Modified: 07/10/2016
  * 
  * File Authors:
  * 		Guy Hendrickx
@@ -62,6 +62,15 @@ if($login2=='' || $nom=='' || $prenom=='' || $mail=='' ){
 if($pass != $pass2){
  $message = "<h1>$lang_suite_edit_utilisateur_err_pass</h1>";
  include('edit_utilisateur.php'); // On inclus le formulaire d'identification
+ exit;
+}
+
+$sql = "SELECT * FROM " . $tblpref ."user WHERE email = '".$mail."' AND num != '".$num_user."'";
+$req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+$test = mysql_num_rows($req);
+if ($test > 0){ 
+ $message = "<h1>$lang_mail_exist</h1>";
+ include('edit_utilisateur.php');
  exit;
 }
 

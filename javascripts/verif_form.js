@@ -7,7 +7,7 @@ function verif_formulaire()
    document.artice.article.focus();
    return false;
   }if(document.artice.uni.value == "") {
-   alert("Veuillez entrer une unité!");
+   alert("Veuillez entrer une unitÃ©!");
    document.artice.uni.focus();
    return false;
   }

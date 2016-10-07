@@ -1,19 +1,19 @@
 <?php 
 /*
  * Factux le facturier libre
- * Copyright (C) 2003-2004 Guy Hendrickx
+ * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
  * 
  * Licensed under the terms of the GNU  General Public License:
- * 		http://www.opensource.org/licenses/gpl-license.php
+ * 		http://opensource.org/licenses/GPL-3.0
  * 
  * For further information visit:
- * 		http://factux.sourceforge.net
+ * 		http://factux.free.fr
  * 
  * File Name: lister_factures_non_reglees.php
- * 	liste les facture non reglées et permet de changer leur status de payement
+ * 	liste les facture non reglÃ©es et permet de changer leur status de payement
  * 
- * * * Version:  1.1.5
- * * * * Modified: 23/07/2005
+ * * * Version:  5.0.0
+ * * * * Modified: 07/10/2016
  * 
  * File Authors:
  * 		Guy Hendrickx
@@ -52,7 +52,7 @@ include_once("include/head.php");
 if(isset($message)&&$message!='') {
  echo $message;
 }
-if ($user_fact == 'n') { 
+if ($user_fact == 'n') {
  echo "<h1>$lang_facture_droit</h1>";
  exit;
 }
@@ -68,7 +68,7 @@ WHERE payement = 'non'
 $fact_irre
 $this_fact
 ";
-if ($user_fact == 'r') { 
+if ($user_fact == 'r') {
  $sql .= "
   and " . $tblpref ."client.permi LIKE '$user_num,' 
   or  " . $tblpref ."client.permi LIKE '%,$user_num,' 
@@ -115,13 +115,12 @@ while($data = mysql_fetch_array($req)){
  $num_client = $data['client'];
  $peri = $data['peri'];
  $pay = $data['payement'];
- $r1 = $data['r1'];
- $r2 = $data['r2'];
- $r3 = $data['r3'];
+ for ($i=1;$i<=3;$i++)
+  $r[$i] = ($data['r'.$i]=='non')?$lang_non:$data['r'.$i];
  if($c++ & 1){
   $line="0";
  }else{
-  $line="1"; 
+  $line="1";
  }
 ?>
      <tr class="texte<?php echo $line; ?>" onmouseover="this.className='highlight'" onmouseout="this.className='texte<?php echo $line; ?>'">
@@ -158,13 +157,13 @@ while($data = mysql_fetch_array($req)){
 <?php }else{ ?>
        <a href='payement_suite.php?num_fact=<?php echo $num; ?>' 
           onClick="return confirmDelete('<?php echo "$lang_regler_fact $num $lang_regler_fact2"; ?>')"><img border='0' src='image/ok.jpg' alt='<?php echo $lang_regler; ?>'></a> <?php
- if($pay!='non'){#irrécouvrables        
+ if($pay!='non'){#irrÃ©couvrables
        ?><img border='0' src='image/non.gif' width='16' alt='<?php echo $lang_irrecouvrable; ?>'>
 <?php }else{ 
        ?><a href='payement_suite.php?num_fact=<?php echo $num; ?>&amp;ir' 
             onClick="return confirmDelete('<?php echo "$lang_conf_carte_reg $num $lang_par $lang_irrecouvrable"; ?>')" ><img border='0' src='image/icon_cry.gif' alt='<?php echo $lang_irrecouvrable; ?>?'></a>
 <?php
- }/*#irrécouvrables (dsl pour les places des 2 ? >. Ça evite un trait noir disgracieu entre les 2 icones???)*/
+ }/*#irrÃ©couvrables (dsl pour les places des 2 ? >. Ã‡a evite un trait noir disgracieu entre les 2 icones???)*/
 } 
 ?>
       </td>
@@ -178,9 +177,9 @@ while($data = mysql_fetch_array($req)){
         <input type="image" src="image/prinfer.gif" style=" border: none; margin: 0;" alt="<?php echo $lang_imprimer; ?>" />
        </form>
       </td>
-     <td class='<?php echo couleur_alternee (FALSE,"c texte"); ?>'><?php echo $r1; ?></td>
-     <td class='<?php echo couleur_alternee (FALSE,"c texte"); ?>'><?php echo $r2; ?></td>
-     <td class='<?php echo couleur_alternee (FALSE,"c texte"); ?>'><?php echo $r3; ?></td>
+<?php for ($i=1;$i<=3;$i++): ?>
+     <td class='<?php echo couleur_alternee (FALSE,"c texte"); ?>'><?php echo $r[$i]; ?></td>
+<?php endfor ?>
     </tr>
 <?php
 }#fi while

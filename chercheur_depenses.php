@@ -1,19 +1,19 @@
 <?php 
 /*
  * Factux le facturier libre
- * Copyright (C) 2003-2004 Guy Hendrickx
+ * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
  * 
  * Licensed under the terms of the GNU  General Public License:
- * 		http://www.opensource.org/licenses/gpl-license.php
+ * 		http://opensource.org/licenses/GPL-3.0
  * 
  * For further information visit:
- * 		http://factux.sourceforge.net
+ * 		http://factux.free.fr
  * 
  * File Name: fckconfig.js
  * 	Editor configuration settings.
  * 
- * * * Version:  1.1.5
- * * * * Modified: 23/07/2005
+ * * * Version:  5.0.0
+ * * * * Modified: 07/10/2016
  * 
  * File Authors:
  * 		Guy Hendrickx
@@ -32,7 +32,7 @@ if ( isset ( $_POST['numero'] ) && $_POST['numero'] != '')//on verifie le numero
 	$requete .= " AND num='" . $_POST['numero'] . "'";
 if ( isset ( $_POST['mois'] ) && $_POST['mois'] != '')//on verifie le mois
 	$requete .= " AND MONTH(date)='" . $_POST['mois'] . "'";
-if ( isset ( $_POST['annee'] ) && $_POST['annee'] != '')//on verifie l'année
+if ( isset ( $_POST['annee'] ) && $_POST['annee'] != '')//on verifie l'annÃ©e
 	$requete .= " AND Year(date)='" . $_POST['annee'] . "'";
 if ( isset ( $_POST['jour'] ) && $_POST['jour'] != '')//on verifie le jour
 	$requete .= " AND DAYOFMONTH(date)='" . $_POST['jour'] . "'";

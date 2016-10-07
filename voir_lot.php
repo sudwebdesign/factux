@@ -1,19 +1,19 @@
 <?php 
 /*
  * Factux le facturier libre
- * Copyright (C) 2003-2004 Guy Hendrickx
+ * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
  * 
  * Licensed under the terms of the GNU  General Public License:
- * 		http://www.opensource.org/licenses/gpl-license.php
+ * 		http://opensource.org/licenses/GPL-3.0
  * 
  * For further information visit:
- * 		http://factux.sourceforge.net
+ * 		http://factux.free.fr
  * 
  * File Name: voir_lot.php
  * 	montre les lots
  * 
- * * * Version:  1.1.5
- * * * * Modified: 23/07/2005
+ * * * Version:  5.0.0
+ * * * * Modified: 07/10/2016
  * 
  * File Authors:
  * 		Guy Hendrickx
@@ -38,12 +38,12 @@ if ($user_com == 'n') {
  echo"<h1>$lang_commande_droit</h1>";
  exit;  
 }
-if ($num_lot == '0') { 
- echo"<h2>$lang_lot_zero</h2>";
-}
+if ($num_lot > '0') { 
+$mois_1=isset($_GET['mois_1'])?$_GET['mois_1']:date("m");
+$annee_1=isset($_GET['annee_1'])?$_GET['annee_1']:date("Y");
 ?>
    <table width='760' border='0' class='page' align='center'>
-    <caption><?php echo "Contenu du lot $num_lot"; ?></caption>
+    <caption><?php echo "$lang_cont_lot $num_lot"; ?></caption>
     <tr> 
      <th><?php echo $lang_ingred; ?></th>
      <th><?php echo $lang_fournisseur; ?></th>
@@ -71,15 +71,18 @@ while($data = mysql_fetch_array($req)){
   </td>
  <tr>
   <td class="page">
-   <a href="edit_lot.php?num=<?php echo $num_lot; ?>&amp;mois_1=<?php echo $_GET['mois_1']; ?>&amp;annee_1=<?php echo $_GET['annee_1']; ?>"><?php echo $lang_editer; ?></a>
+   <a href="edit_lot.php?num=<?php echo $num_lot; ?>&amp;mois_1=<?php echo $mois_1; ?>&amp;annee_1=<?php echo $annee_1; ?>"><?php echo $lang_editer; ?></a>
    &nbsp;&nbsp;
-   <a href="lister_lot.php?mois_1=<?php echo $_GET['mois_1']; ?>&amp;annee_1=<?php echo $_GET['annee_1']; ?>"><?php echo $lang_lister; ?></a>
+   <a href="lister_lot.php?mois_1=<?php echo $mois_1; ?>&amp;annee_1=<?php echo $annee_1; ?>"><?php echo $lang_lister; ?></a>
   </td>
  </tr>
  </tr>
  <tr> 
   <td>
 <?php
+}else{
+ echo"<h2>$lang_lot_zero</h2>";
+}
 $aide='admin';
 include("help.php");
 include_once("include/bas.php");

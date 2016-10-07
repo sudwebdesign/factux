@@ -1,19 +1,19 @@
 <?php 
 /*
  * Factux le facturier libre
- * Copyright (C) 2003-2004 Guy Hendrickx
+ * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
  * 
  * Licensed under the terms of the GNU  General Public License:
- * 		http://www.opensource.org/licenses/gpl-license.php
+ * 		http://opensource.org/licenses/GPL-3.0
  * 
  * For further information visit:
- * 		http://factux.sourceforge.net
+ * 		http://factux.free.fr
  * 
  * File Name: form_commande.php
  * 	Formulaire de saisie des commandes
  * 
- * * * Version:  1.1.5
- * * * * Modified: 23/07/2005
+ * * * Version:  5.0.0
+ * * * * Modified: 07/10/2016
  * 
  * File Authors:
  * 		Guy Hendrickx
@@ -59,7 +59,7 @@ $rqSql = "SELECT num_client, nom FROM " . $tblpref ."client WHERE actif != 'non'
 <?php 
   if ($liste_cli!='y') { 
    $rqSql="$rqSql order by nom";
-   $result = mysql_query( $rqSql ) or die( "Exécution requête impossible.");
+   $result = mysql_query( $rqSql ) or die( "ExÃ©cution requÃªte impossible.");
 ?> 
       <select name='listeclients'>
        <option value='0'><?php echo $lang_choisissez; ?></option>
@@ -79,7 +79,7 @@ $rqSql = "SELECT num_client, nom FROM " . $tblpref ."client WHERE actif != 'non'
     <td class="texte0"></td>
     <td class="texte0"><?php echo "date" ?> </td>
     <td class="texte0"><input type="text" name="date" value="<?php echo"$jour/$mois/$annee" ?>" readonly="readonly"/>
-     <a href="#" onClick=" window.open('include/pop.calendrier.php?frm=formu&amp;ch=date','calendrier','width=415,height=160,scrollbars=0').focus();"><img src="image/petit_calendrier.gif" alt="calendrier" border="0"/></a>
+     <a href="#" onClick=" window.open('include/pop.calendrier.php?frm=formu&amp;ch=date','calendrier','width=460,height=170,scrollbars=0').focus();"><img src="image/petit_calendrier.gif" alt="calendrier" border="0"/></a>
     </td>
     <td class="texte0"></td>
    </tr>

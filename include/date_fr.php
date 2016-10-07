@@ -11,8 +11,8 @@ $NumeroDuJour = date('d', $temps);
 
 
 // MOIS
-$mois = array('', 'Janvier', 'Février', 'Mars', 'Avril', 'Mai',
-'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre');
+$mois = array('', 'Janvier', 'FÃ©vrier', 'Mars', 'Avril', 'Mai',
+'Juin', 'Juillet', 'AoÃ»t', 'Septembre', 'Octobre', 'Novembre', 'DÃ©cembre');
 $mois_numero = date("m", $temps);
 //$mois_complet = $mois[$mois_numero];
 $mois_complet = $mois[($mois_numero - 0)];//new (devient integer)

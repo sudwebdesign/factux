@@ -1,19 +1,19 @@
 <?php 
 /*
  * Factux le facturier libre
- * Copyright (C) 2003-2004 Guy Hendrickx
+ * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
  * 
  * Licensed under the terms of the GNU  General Public License:
- * 		http://www.opensource.org/licenses/gpl-license.php
+ * 		http://opensource.org/licenses/GPL-3.0
  * 
  * For further information visit:
- * 		http://factux.sourceforge.net
+ * 		http://factux.free.fr
  * 
  * File Name: menu.inc.php
- * 	menu d'inclusion dans les themes personalisés
+ * 	menu d'inclusion dans les themes personalisÃ©s
  * 
- * * Version:  1.1.5
- * * * Modified: 23/07/2005
+ * * Version:  5.0.0
+ * * * Modified: 07/10/2016
  * 
  * File Authors:
  * 		Guy Hendrickx
@@ -634,7 +634,7 @@ function getPageOffsetTop(el) {
  <a class="menuItem" href="form_article.php"><?php echo $lang_creer ?></a>
  <a class="menuItem" href="lister_articles.php"><?php echo $lang_lister ?></a>
 <?php if ($use_categorie =='y') { ?>
- <a class="menuItem" href="lister_cat.php"><?php echo $lang_categorie ?>'s</a>
+ <a class="menuItem" href="lister_cat.php"><?php echo $lang_categorie ?>s</a>
 <?php  } 
 } ?>
 </div>

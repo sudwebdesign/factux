@@ -1,19 +1,19 @@
 <?php
 /*
  * Factux le facturier libre
- * Copyright (C) 2003-2004 Guy Hendrickx
+ * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
  * 
  * Licensed under the terms of the GNU  General Public License:
- * 		http://www.opensource.org/licenses/gpl-license.php
+ * 		http://opensource.org/licenses/GPL-3.0
  * 
  * For further information visit:
- * 		http://factux.sourceforge.net
+ * 		http://factux.free.fr
  * 
  * File Name: ca_annee_1.php
- * 	statisqiques annuelles decrtiquées par mois
+ * 	statisqiques annuelles decrtiquÃ©es par mois
  * 
- * * * Version:  1.1.5
- * * * * Modified: 23/07/2005
+ * * * Version:  5.0.0
+ * * * * Modified: 07/10/2016
  * 
  * File Authors:
  * 		Guy Hendrickx
@@ -34,7 +34,7 @@ $annee_1 = (isset($_POST['annee_1']))?$_POST['annee_1']:date('Y');
      <option value="<?php echo$i; ?>"<?php echo ($i==$annee_1)?' selected="selected"':''; ?>><?php echo $i; ?></option>
 <?php } ?>
     </select>
-    <input type="submit" />
+    <input type="submit" value="<?php echo $lang_envoyer; ?>" />
    </form>
   </td>
  </tr>
@@ -47,7 +47,7 @@ if ($user_stat== 'n'){
 }
 $liste_mois = calendrier_local_mois ();
 
-// initialisation à 0
+// initialisation Ã  0
 $recettes = array ();
 $depenses = array ();
 $resultat_net = array ();
@@ -71,7 +71,7 @@ while ($data = mysql_fetch_array($req)){
  $recettes [$numero_mois]["T.T.C"] = $data ["htva"] + $data ["tva"];
 }
 
-// Dépenses
+// DÃ©penses
 $sql2 = "
 SELECT MONTH(date) numero_mois, SUM(prix) htva
 FROM " . $tblpref ."depense
@@ -84,7 +84,7 @@ while ($data = mysql_fetch_array($req)){
  $depenses [$numero_mois] = $data;
 }
 
-// Résultat net
+// RÃ©sultat net
 reset ($liste_mois);
 while (list($numero_mois, $nom_mois) = each($liste_mois)){
  $resultat_net [$numero_mois] = $recettes [$numero_mois]["htva"]  - $depenses [$numero_mois]["htva"] ;
@@ -138,9 +138,9 @@ include("graph_ben.php");
  <tr>
   <th>
    <center>
-    <div style="display:inline-block;width:33%;">Commandé<br /><img src="graph2_ca.php?annee_1=<?php echo $annee_1; ?>"></div>
-    <div style="display:inline-block;width:33%;">Facturé<br /><img src="graph2_ca_fact.php?annee_1=<?php echo $annee_1; ?>"></div>
-    <div style="display:inline-block;width:33%;">Acquité<br /><img src="graph2_ca_payes.php?annee_1=<?php echo $annee_1; ?>"></div>
+    <div style="display:inline-block;width:33%;"><?php echo ucfirst($lang_commandÃ©); ?><br /><img src="graph2_ca.php?annee_1=<?php echo $annee_1; ?>"></div>
+    <div style="display:inline-block;width:33%;"><?php echo ucfirst($lang_facturÃ©); ?><br /><img src="graph2_ca_fact.php?annee_1=<?php echo $annee_1; ?>"></div>
+    <div style="display:inline-block;width:33%;"><?php echo ucfirst($lang_acquittÃ©); ?><br /><img src="graph2_ca_payes.php?annee_1=<?php echo $annee_1; ?>"></div>
    </center>
 <?php #include("graph_circulaire_annuel.php"); ?>
   </th>

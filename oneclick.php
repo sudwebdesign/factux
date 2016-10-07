@@ -1,19 +1,19 @@
 <?php 
 /*
  * Factux le facturier libre
- * Copyright (C) 2003-2004 Guy Hendrickx
+ * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
  * 
  * Licensed under the terms of the GNU  General Public License:
- * 		http://www.opensource.org/licenses/gpl-license.php
+ * 		http://opensource.org/licenses/GPL-3.0
  * 
  * For further information visit:
- * 		http://factux.sourceforge.net
+ * 		http://factux.free.fr
  * 
  * File Name: onclick.php
  * 	formulaire d'impression des factures multiples
  * 
- * * * Version:  1.1.5
- * * * * Modified: 23/07/2005
+ * * * Version:  5.0.0
+ * * * * Modified: 07/10/2016
  * 
  * File Authors:
  * 		Guy Hendrickx
@@ -45,7 +45,7 @@ $jour = date("d");
        </td>
        <td class='<?php echo couleur_alternee (FALSE); ?>'>
         <input type="text" name="oneclick" value="<?php echo "$jour/$mois/$annee" ?>" readonly="readonly"/>
-        <a href="#" onClick=" window.open('include/pop.calendrier.php?frm=form_facture&amp;ch=oneclick','calendrier','width=415,height=160,scrollbars=0').focus();">
+        <a href="#" onClick=" window.open('include/pop.calendrier.php?frm=form_facture&amp;ch=oneclick','calendrier','width=460,height=170,scrollbars=0').focus();">
          <img src="image/petit_calendrier.gif" alt="calendier"border="0"/>
         </a>
        </td>

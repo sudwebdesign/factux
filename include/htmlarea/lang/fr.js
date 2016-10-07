@@ -19,33 +19,33 @@ HTMLArea.I18N = {
 	tooltips: {
 		bold:           "Gras",
 		italic:         "Italique",
-		underline:      "Souligné",
-		strikethrough:  "Barré",
+		underline:      "SoulignÃ©",
+		strikethrough:  "BarrÃ©",
 		subscript:      "Subscript",
 		superscript:    "Superscript",
-		justifyleft:    "Aligné à gauche",
-		justifycenter:  "Centré",
-		justifyright:   "Aligné à droite",
-		justifyfull:    "Justifié",
-		orderedlist:    "Numérotation",
+		justifyleft:    "AlignÃ© Ã  gauche",
+		justifycenter:  "CentrÃ©",
+		justifyright:   "AlignÃ© Ã  droite",
+		justifyfull:    "JustifiÃ©",
+		orderedlist:    "NumÃ©rotation",
 		unorderedlist:  "Puces",
 		outdent:        "Augmenter le retrait",
 		indent:         "Diminuer le retrait",
 		forecolor:      "Couleur du texte",
 		hilitecolor:    "Couleur du fond",
 		horizontalrule: "Ligne horizontale",
-		createlink:     "Insérer un lien",
-		insertimage:    "Insérer une image",
-		inserttable:    "Insérer un tableau",
+		createlink:     "InsÃ©rer un lien",
+		insertimage:    "InsÃ©rer une image",
+		inserttable:    "InsÃ©rer un tableau",
 		htmlmode:       "Passer au code source HTML",
-		popupeditor:    "Agrandir l'éditeur",
-		about:          "A propos de cet éditeur",
-		showhelp:       "Aide sur l'éditeur",
+		popupeditor:    "Agrandir l'Ã©diteur",
+		about:          "A propos de cet Ã©diteur",
+		showhelp:       "Aide sur l'Ã©diteur",
 		textindicator:  "Style courant",
-		undo:           "Annule la dernière action",
-		redo:           "Refait la dernière action",
-		cut:            "Coupe la sélection",
-		copy:           "Copie la sélection",
+		undo:           "Annule la derniÃ¨re action",
+		redo:           "Refait la derniÃ¨re action",
+		cut:            "Coupe la sÃ©lection",
+		copy:           "Copie la sÃ©lection",
 		paste:          "Colle depuis le presse papiers"
 	},
 
@@ -56,7 +56,7 @@ HTMLArea.I18N = {
 
 	msg: {
 		"Path":         "Chemin",
-		"TEXT_MODE":    "Vous êtes en mode texte.  Utilisez le bouton [<>] pour revenir au mode WYSIWIG."
+		"TEXT_MODE":    "Vous Ãªtes en mode texte.  Utilisez le bouton [<>] pour revenir au mode WYSIWIG."
 /*
 		"IE-sucks-full-screen" :
 		// translate here
@@ -74,11 +74,11 @@ HTMLArea.I18N = {
 		"None (use implicit)"                               : "Non (ustiliser implicit)",
 		"OK"                                                : "Daccord",
 		"Other"                                             : "Autre",
-		"Same frame (_self)"                                : "Même cadre (_self)",
+		"Same frame (_self)"                                : "MÃªme cadre (_self)",
 		"Target:"                                           : "Cible:",
 		"Title (tooltip):"                                  : "Titre (tooltip):",
 		"Top frame (_top)"                                  : "Cadre du haut (_top)",
 		"URL:"                                              : "URL:",
-		"You must enter the URL where this link points to"  : "Entrer l'URL où ce lien doit diriger"
+		"You must enter the URL where this link points to"  : "Entrer l'URL oÃ¹ ce lien doit diriger"
 	}/**/
 };

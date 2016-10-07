@@ -1,19 +1,19 @@
 <?php
 /*
  * Factux le facturier libre
- * Copyright (C) 2003-2004 Guy Hendrickx
+ * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
  * 
  * Licensed under the terms of the GNU  General Public License:
- * 		http://www.opensource.org/licenses/gpl-license.php
+ * 		http://opensource.org/licenses/GPL-3.0
  * 
  * For further information visit:
- * 		http://factux.sourceforge.net
+ * 		http://factux.free.fr
  * 
  * File Name: fckconfig.js
  * 	Editor configuration settings.
  * 
- * * * Version:  1.1.5
- * * * * Modified: 23/07/2005
+ * * * Version:  5.0.0
+ * * * * Modified: 07/10/2016
  * 
  * File Authors:
  * 		Guy Hendrickx
@@ -83,7 +83,8 @@ if (isset($file)&&$file!=""){
  flush();
  $conn = mysql_connect($dbhost,$dbuser,$password) or die(mysql_error());
  $filename = $file;
- set_time_limit(1000);
+ if(!ini_get('safe_mode'))
+  set_time_limit(1000);#Warning: set_time_limit() [function.set-time-limit]: Cannot set time limit in safe mode
  $file=fread(fopen($path.$file, "r"), filesize($path.$file));
  $query=explode(";#%%\n",$file);
  for ($i=0;$i < count($query)-1;$i++) {

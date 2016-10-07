@@ -1,19 +1,19 @@
 <?php 
 /*
  * Factux le facturier libre
- * Copyright (C) 2003-2004 Guy Hendrickx
+ * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
  * 
  * Licensed under the terms of the GNU  General Public License:
- * 		http://www.opensource.org/licenses/gpl-license.php
+ * 		http://opensource.org/licenses/GPL-3.0
  * 
  * For further information visit:
- * 		http://factux.sourceforge.net
+ * 		http://factux.free.fr
  * 
  * File Name: fckconfig.js
  * 	Editor configuration settings.
  * 
- * * * Version:  1.1.5
- * * * * Modified: 23/07/2005
+ * * * Version:  5.0.0
+ * * * * Modified: 07/10/2016
  * 
  * File Authors:
  * 		Guy Hendrickx
@@ -39,16 +39,13 @@ if(!isset($login))
   $login = $_GET['login'];
 
 include ("head.php");
-$devis_auth = $auth_cli_devis;// permet l'affichage des devis et permet leurs transformation en commandes par le client
-$bon_auth = $auth_cli_bon;// permet l'affichage des bons de commnde
-$fact_auth = $auth_cli_fact;// permet l'afichage des factures
-if ($devis_auth == 'y') { 
+if ($auth_cli_devis == 'y') { // permet l'affichage des devis et permet leurs transformation en commandes par le client
  include ("lister_devis.php");echo"<br><br>";
 }
-if ($bon_auth == 'y') { 
+if ($auth_cli_bon == 'y') { // permet l'affichage des bons de commnde
  include ("lister_commandes.php");echo"<br><br>";
 }
-if ($fact_auth == 'y') { 
+if ($auth_cli_fact == 'y') { // permet l'afichage des factures
  include ("lister_factures.php");echo"<br><br>";
 }
 include ("compte_client.php");

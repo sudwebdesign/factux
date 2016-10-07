@@ -1,19 +1,19 @@
 <?php
 /*
  * Factux le facturier libre
- * Copyright (C) 2003-2004 Guy Hendrickx
+ * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
  * 
  * Licensed under the terms of the GNU  General Public License:
- * 		http://www.opensource.org/licenses/gpl-license.php
+ * 		http://opensource.org/licenses/GPL-3.0
  * 
  * For further information visit:
- * 		http://factux.sourceforge.net
+ * 		http://factux.free.fr
  * 
  * File Name: fckconfig.js
  * 	Editor configuration settings.
  * 
- * * * Version:  1.1.5
- * * * * Modified: 23/07/2005
+ * * * Version:  5.0.0
+ * * * * Modified: 07/10/2016
  * 
  * File Authors:
  * 		Guy Hendrickx
@@ -43,7 +43,7 @@ $pass_crypt = md5($pass);
 $sql7 = "INSERT INTO " . $tblpref ."user (login, pwd, nom, prenom, email, dev, com, fact, admin, dep, stat, art, cli) VALUES ('$login2', '$pass_crypt', '$nom', '$prenom', '$mail', 'y', 'y', 'y', 'y', 'y', 'y', 'y', 'y')";
 mysql_query($sql7) or die('Erreur SQL !<br>'.$sql7.'<br>'.mysql_error());
 
-$etape = "Étape N°6 : Enregister le logo de l'entreprise";
+$etape = "Ã‰tape NÂ°6 : Enregister le logo de l'entreprise";
 include_once('headers.php');
-echo "<h2>$prenom $nom est maintenant enregistré et a comme login : $login2 et comme mot de passe : $pass</h2>";
+echo "<h2>$prenom $nom est maintenant enregistrÃ© et a comme login : $login2 et comme mot de passe : $pass</h2>";
 include("upload.php");

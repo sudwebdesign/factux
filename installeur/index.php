@@ -1,19 +1,19 @@
 <?php 
 /*
  * Factux le facturier libre
- * Copyright (C) 2003-2004 Guy Hendrickx
+ * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
  * 
  * Licensed under the terms of the GNU  General Public License:
- *   http://www.opensource.org/licenses/gpl-license.php
+ *   http://opensource.org/licenses/GPL-3.0
  * 
  * For further information visit:
- *   http://factux.sourceforge.net
+ *   http://factux.free.fr
  * 
  * File Name: index.php
  *  Premiere page du script d'installation
  * 
- * * * Version:  1.1.5
- * * * * Modified: 23/07/2005
+ * * * Version:  5.0.0
+ * * * * Modified: 07/10/2016
  * 
  * File Authors:
  *   Guy Hendrickx
@@ -24,15 +24,15 @@
   <h3>Vous voici dans l'instalalleur de Factux.</h3>
   <p>Avant de commencer n'oubliez pas de receuillir les informations suivantes.</p>
   <ul>
-   <li>Les paramètres de connexion à votre base de données mysql.</li>
-   <li>Les coordonnées de la société qui utilisera Factux.</li>
-   <li>Le logo de la société qui utilisera Factux.</li>
+   <li>Les paramÃ¨tres de connexion Ã  votre base de donnÃ©es mysql.</li>
+   <li>Les coordonnÃ©es de la sociÃ©tÃ© qui utilisera Factux.</li>
+   <li>Le logo de la sociÃ©tÃ© qui utilisera Factux.</li>
   </ul>
   <hr><br>
 <?php
-$erreur = "Erreur, veuillez vérifier les droits en écriture sur ce fichier !!";
-$verif = "Vérification des droits d'écriture pour le répertoire";
-$verif2 = "Vérification des droits d'écriture pour le fichier";
+$erreur = "Erreur, veuillez vÃ©rifier les droits en Ã©criture sur ce fichier !!";
+$verif = "VÃ©rification des droits d'Ã©criture pour le rÃ©pertoire";
+$verif2 = "VÃ©rification des droits d'Ã©criture pour le fichier";
 $doss1 = "../include";
 $doss2 = "../dump";
 $doss4 = "../image";
@@ -45,7 +45,7 @@ $fich3 = "../include/configav.php";
 ?>
   <center>
    <table>
-    <caption>Vérification des droits.</caption>
+    <caption>VÃ©rification des droits.</caption>
 <?php
 echo "<tr><td>$verif $doss1 :</td><td>";
 if (is_writable("$doss1")) {
@@ -113,9 +113,9 @@ echo "
   <br>
 ";
 if (!is_writable ($doss1 )||!is_writable ($doss2) || !is_writable ($doss3) || !is_writable ($doss4) || !is_writable ($doss5) || !is_writable ($fich1) || !is_writable ($fich2)|| !is_writable ($fich3) ){
- echo "<h1>Veuiller vérifier les erreurs ci-dessus avant de poursuivre</h1>";
+ echo "<h1>Veuiller vÃ©rifier les erreurs ci-dessus avant de poursuivre</h1>";
 }else {
- echo "<h2>Tout est bien réglé ici.<br><a href='index2.php'>Étape Suivante</a></h2>";
+ echo "<h2>Tout est bien rÃ©glÃ© ici.<br><a href='index2.php'>Ã‰tape Suivante</a></h2>";
 }
 include_once("../include/bas_cli.php");
 ?> 

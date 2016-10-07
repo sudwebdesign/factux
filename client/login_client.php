@@ -1,33 +1,31 @@
 <?php 
 /*
  * Factux le facturier libre
- * Copyright (C) 2003-2004 Guy Hendrickx
+ * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
  * 
  * Licensed under the terms of the GNU  General Public License:
- * 		http://www.opensource.org/licenses/gpl-license.php
+ * 		http://opensource.org/licenses/GPL-3.0
  * 
  * For further information visit:
- * 		http://factux.sourceforge.net
+ * 		http://factux.free.fr
  * 
  * File Name: fckconfig.js
  * 	Editor configuration settings.
  * 
- * * * Version:  1.1.5
- * * * * Modified: 23/07/2005
+ * * * Version:  5.0.0
+ * * * * Modified: 07/10/2016
  * 
  * File Authors:
  * 		Guy Hendrickx
  *.
  */
+ini_set('session.save_path', '../include/session'); 
 $now='../';
 include_once("../include/config/common.php");
 include_once("../include/config/var.php");
-$lang=isset($_POST['lang'])?$_POST['lang']:"";
-$lang=(empty($lang))?$default_lang:$lang;#default_lg in common
+$lang=isset($_POST['lang'])?$_POST['lang']:$default_lang;#default_lg in common
 include_once("../include/language/$lang.php");
 include_once("../include/utils.php");
-include_once("../include/headers.php");
-include_once("../include/finhead.php");
 $login=isset($_POST['login'])?$_POST['login']:"";
 $pass=isset($_POST['pass'])?$_POST['pass']:"";	
 
@@ -47,9 +45,12 @@ if($data['pass'] != $pass_crypt){
  $message = "<h1>$lang_bad_log</h1>";
  include(@$from_cli.'login.php'); 
  exit;
+} else {
+ session_start();
+ $_SESSION['login'] = $login;
+ $_SESSION['lang'] = $lang; 
+ include_once("../include/headers.php");
+ include_once("../include/finhead.php");
+ include_once("client.php");
 }
-ini_set('session.save_path', '../include/session'); 
-session_start();
-session_register('login');
-session_register('lang');
-include_once("client.php");
+

@@ -1,19 +1,19 @@
 <?php
 /*
  * Factux le facturier libre
- * Copyright (C) 2003-2004 Guy Hendrickx
+ * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
  * 
  * Licensed under the terms of the GNU  General Public License:
- * 		http://www.opensource.org/licenses/gpl-license.php
+ * 		http://opensource.org/licenses/GPL-3.0
  * 
  * For further information visit:
- * 		http://factux.sourceforge.net
+ * 		http://factux.free.fr
  * 
  * File Name: upload.php
  * 	upload du logo de l'entreprise
  * 
- * * * Version:  1.1.5
- * * * * Modified: 23/07/2005
+ * * * Version:  5.0.0
+ * * * * Modified: 07/10/2016
  * 
  * File Authors:
  * 		Guy Hendrickx
@@ -21,9 +21,9 @@
  */
 //ini_set('post_max_size', '2048000000');51000 == 51ko
 //ini_set('upload_max_filesize', '2048000000');
-$etape = "Étape N°6 : Enregister le fichier contenant le logo de l'entreprise.";
+$etape = "Ã‰tape NÂ°6 : Enregister le fichier contenant le logo de l'entreprise.";
 include_once('headers.php');
-//Pour ne traiter que si un fichier est upLoadé
+//Pour ne traiter que si un fichier est upLoadÃ©
 if (isset($_FILES["monfichier"]["name"])) {
 /*   // Check $_FILES['monfichier']['error'] value. #http://php.net/manual/fr/features.file-upload.php#114004
     switch ($_FILES['monfichier']['error']) {
@@ -38,14 +38,14 @@ if (isset($_FILES["monfichier"]["name"])) {
             throw new RuntimeException('Unknown errors.');
     } 
 */
- //definition des chemins d'accès
+ //definition des chemins d'accÃ¨s
  $repertoireDestination = "../image/";
  $nomDestination = $_FILES["monfichier"]["name"];
  //upload du fichier
  if (is_uploaded_file($_FILES["monfichier"]["tmp_name"])) {
-  if (file_exists($repertoireDestination.$nomDestination)) {//Un fichier existe portant le même nom existe déjà => le supprimer
+  if (file_exists($repertoireDestination.$nomDestination)) {//Un fichier existe portant le mÃªme nom existe dÃ©jÃ  => le supprimer
    //unlink ($repertoireDestination.$nomDestination);
-   echo "<br><h1>Un fichier portant le même nom existe. Veuillez renommer votre fichier avant de l'uploader !</h1>";
+   echo "<br><h1>Un fichier portant le mÃªme nom existe. Veuillez renommer votre fichier avant de l'uploader !</h1>";
    include_once('form_upload.inc.php');
    exit();
   }
@@ -60,13 +60,13 @@ if (isset($_FILES["monfichier"]["name"])) {
    $autorize="ok";
   } 
   if (rename($_FILES["monfichier"]["tmp_name"],$repertoireDestination.$nomDestination)) {
-   echo "<br><h2>L'image ".$nomDestination." a bien été chargée dans le dossier : ".$repertoireDestination;
+   echo "<br><h2>L'image ".$nomDestination." a bien Ã©tÃ© chargÃ©e dans le dossier : ".$repertoireDestination;
    $nomDestination = '"'.$nomDestination.'";//fichier comportant le logo de l\'entreprise' . "\n";
    $monfichier = fopen("../include/config/var.php", "a"); 
    fwrite($monfichier, '$logo = '.$nomDestination);
    fclose($monfichier);
 ?>
-   <br>La configuration de factux est terminée, félicitations.<br>
+   <br>La configuration de factux est terminÃ©e, fÃ©licitations.<br>
    Voir la doc
    <a href="../doc/Utilisation-fr.html"
       onclick="window.open('','popup','width=500,height=220,top=200,left=150,toolbar=0,location=0,directories=0,status=0,menubar=1,scrollbars=1,resizable=1')" 
@@ -76,12 +76,12 @@ if (isset($_FILES["monfichier"]["name"])) {
 <?php
   }
   else {
-   echo "<br><h1>Le déplacement du fichier temporaire a échoué".
-   " vérifiez l'existence du répertoire ".$repertoireDestination."</h1>";
+   echo "<br><h1>Le dÃ©placement du fichier temporaire a Ã©chouÃ©".
+   " vÃ©rifiez l'existence du rÃ©pertoire ".$repertoireDestination."</h1>";
   }
  }
  else {
-  echo "<br><h1>Le fichier n'a pas été uploadé (trop volumineux ?)</h1>";
+  echo "<br><h1>Le fichier n'a pas Ã©tÃ© uploadÃ© (trop volumineux ?)</h1>";
   include_once('form_upload.inc.php');
  }
 }

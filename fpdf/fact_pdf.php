@@ -1,19 +1,19 @@
 <?php
 /*
  * Factux le facturier libre
- * Copyright (C) 2003-2004 Guy Hendrickx
+ * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
  * 
  * Licensed under the terms of the GNU  General Public License:
- *   http://www.opensource.org/licenses/gpl-license.php
+ *   http://opensource.org/licenses/GPL-3.0
  * 
  * For further information visit:
- *   http://factux.sourceforge.net
+ *   http://factux.free.fr
  * 
  * File Name: fact_pdf.php
  *  Fichier generant les factures au format pdf
  * 
- * * * Version:  1.1.5
- * * * * Modified: 23/07/2005
+ * * * Version:  5.0.0
+ * * * * Modified: 07/10/2016
  * 
  * File Authors:
  *   Guy Hendrickx
@@ -22,7 +22,7 @@
  *      Daemon2a Corse Informatique Assistance
  *              Le Facturier 2 beta 1
  *
- *      Création Informatique Ingles Thomas
+ *      CrÃ©ation Informatique Ingles Thomas
  *              Factux 10 years Remix.8.2015
  */
 session_cache_limiter('private');
@@ -155,7 +155,7 @@ class PDF extends PDF_MySQL_Table{
         }
     }
     function AutoPrint($dialog=false, $nb_impr){
-         //Ajoute du JavaScript pour lancer la boîte d'impression ou imprimer immediatement
+         //Ajoute du JavaScript pour lancer la boÃ®te d'impression ou imprimer immediatement
          $param=($dialog ? 'true' : 'false');
          $script=str_repeat("print($param);",$nb_impr);
          $this->IncludeJS($script);
@@ -165,6 +165,7 @@ class PDF extends PDF_MySQL_Table{
 
 $pdf=new PDF('p','mm','a4');
 $pdf->Open();
+$pdf->AddFont('DejaVu','','DejaVuSansCondensed.ttf',true);
 $toto="guy";
 $tot_tva_inc=0;
 $from_joint_where_client = "
@@ -174,9 +175,9 @@ $from_joint_where_client = "
  LEFT JOIN  " . $tblpref ."article on " . $tblpref ."article.num = " . $tblpref ."cont_bon.article_num
  WHERE " . $tblpref ."client.num_client = ";
 for ($o=0;$o<$g;$o++){
- $file = "facture_numero_$num[$o].pdf";
+ $file = "$lang_facture $num[$o].pdf";
  if($oneclick!='')
-  $file = "factures_du_$oneclick.pdf";
+  $file = "$lang_factures $lang_bon_cree2$oneclick.pdf";
 
  //on compte le nombre de lignes #prix_htva, date, quanti, article, tot_art_htva, to_tva_art, taux_tva, remise, uni, num_bon
  $sql = "
@@ -196,10 +197,10 @@ for ($o=0;$o<$g;$o++){
  $total_marge_htva = 0;
  $total_remise_htva = 0;
  while($data = mysql_fetch_array($req)){
-  $prx_a = $data['prix_htva'];#prix d'achat du jour#inutiliséici*4memo
+  $prx_a = $data['prix_htva'];#prix d'achat du jour#inutilisÃ©ici*4memo
   
-  $ttl_htva = $data['tot_art_htva'];#remisé & margé
-  $prx_v = $data['p_u_jour'];#margé & non remisé
+  $ttl_htva = $data['tot_art_htva'];#remisÃ© & margÃ©
+  $prx_v = $data['p_u_jour'];#margÃ© & non remisÃ©
   $qnt = $data['quanti'];
   $tx_remise = (1-($data['remise']/100));#taux
   $tx_marge = $data['marge_jour'];#taux
@@ -255,51 +256,52 @@ for ($o=0;$o<$g;$o++){
   $pdf->AddPage();
   $pdf->SetFillColor(255,255,255);
   //la date
-  $pdf->SetFont('Arial','B',10);
+  $pdf->SetFont('DejaVu','',10);
   $pdf->SetY(4);
   $pdf->SetX(120);
   $pdf->MultiCell(50,6,"$lang_date: $date_fact",1,'C',1);//
   //la grande cellule sous le tableau
-  $pdf->SetFont('Arial','B',6);
+  $pdf->SetFont('DejaVu','',6);
   $pdf->SetY(74);
   $pdf->SetX(10);
   $pdf->Cell(187,161,"",1,0,'C',1);
   //premiere celule le numero de fact
-  $pdf->SetFont('Arial','B',10);
+  $pdf->SetFont('DejaVu','',10);
   $pdf->SetY(11);
   $pdf->SetX(120);
   $pdf->Cell(65,6,"$lang_fact_num_ab $num[$o]",1,0,'C',1);
-  //deuxieme cellule les coordoné clients
-  $pdf->SetFont('Arial','B',10);
+  //deuxieme cellule les coordonÃ© clients
+  $pdf->SetFont('DejaVu','',10);
   $pdf->SetY(33);
   $pdf->SetX(120);
   $pdf->MultiCell(65,6,"$nom\n$nom2\n$rue\n$cp $ville",1,'C',1);
-  //cellule la tva client
-  $pdf->SetFont('Arial','B',10);
-  $pdf->SetY(18);
-  $pdf->SetX(120);
-  $pdf->MultiCell(65,6,"$num_tva",1,'C',1);
+  if($num_tva!=' '){//cellule la tva client
+   $pdf->SetFont('DejaVu','',10);
+   $pdf->SetY(18);
+   $pdf->SetX(120);
+   $pdf->MultiCell(65,6,"$num_tva",1,'C',1);
+  }
   //le logo
   $pdf->Image("../image/$logo",10,4,50,24,'jpg');
   $pdf->ln(20);
   //Troisieme cellule le slogan
-  $pdf->SetFont('Arial','B',15);
+  $pdf->SetFont('DejaVu','',15);
   $pdf->SetY(60);
   $pdf->SetX(10);
   $pdf->MultiCell(90,4,"$slogan",0,'C',0);
-  //Troisieme cellule les coordoné vendeur
-  $pdf->SetFont('Arial','B',8);
+  //Troisieme cellule les coordonÃ© vendeur
+  $pdf->SetFont('DejaVu','',8);
   $pdf->SetY(33);
   $pdf->SetX(10);
   $pdf->MultiCell(40,4,"$lang_dev_pdf_soc",1,'R',1);
-  //le cntenu des coordonées vendeur
-  $pdf->SetFont('Arial','',8);
+  //le cntenu des coordonÃ©es vendeur
+  $pdf->SetFont('DejaVu','',8);
   $pdf->SetY(33);
   $pdf->SetX(51);
   $pdf->MultiCell(50,4,"$entrep_nom\n$social\n $tel_vend\n $tva_vend \n$compte \n$mail",1,'L',1);//
   $pdf->Line(10,65,197,65);
   $pdf->ln(17);
-  //Le tableau : on définit les colonnes
+  //Le tableau : on dÃ©finit les colonnes
   $pdf->AddCol('num_bon',15,$lang_num_bon_ab,'L');
   $pdf->AddCol('date',16,$lang_date,'C');
   $pdf->AddCol('quanti',18,$lang_quantite,'R');
@@ -331,16 +333,16 @@ for ($o=0;$o<$g;$o++){
   $sql_table="$sql_table $suite_sql[$o] $suite2_sql";
   $pdf->Table("$sql_table",$prop);
 
-  //deuxieme cellule les coordonnées vendeurs 2
+  //deuxieme cellule les coordonnÃ©es vendeurs 2
   $pdf->SetFillColor(255,255,255);#$pdf->SetFillColor(243,244,251);
-  /*$pdf->SetFont('Arial','',8);
+  /*$pdf->SetFont('DejaVu','',8);
   $pdf->SetY(235);
   $pdf->SetX(5);
   $pdf->MultiCell(50,4,"$entrep_nom\n$social\n $tel_vend\n $tva_vend \n$compte \n$reg",0,'C',0);*/
   if($num_pa2 >= $nb_pa){
    if ($acompte == '0'){//aucun acompte
-    //Quatrieme cellule les enoncés de totaux
-    $pdf->SetFont('Arial','B',10);
+    //Quatrieme cellule les enoncÃ©s de totaux
+    $pdf->SetFont('DejaVu','',10);
     $pdf->SetTextColor(255, 0, 0);
     $pdf->SetY(235);
     $pdf->SetX(157);
@@ -351,45 +353,44 @@ for ($o=0;$o<$g;$o++){
     $pdf->SetTextColor(255, 0, 0);
     $pdf->MultiCell(40,4,montant_financier ($total_htva + $total_tva)."\n",1,'R',1);
     //Cinquieme cellule les totaux
-    $pdf->SetFont('Arial','B',10);
+    $pdf->SetFont('DejaVu','',9);
     $pdf->SetTextColor(0, 0, 0);
     $pdf->SetY(235);
     $pdf->SetX(117);
-    $pdf->MultiCell(40,4,"$lang_totaux ",1,'R',1);#$pdf->MultiCell(40,4,"$lang_total_h_tva: \n $lang_tot_tva: \n $lang_tot_ttc: ",1,'R',1);
+    $pdf->MultiCell(40,4,"$lang_totaux",1,'R',1);#$pdf->MultiCell(40,4,"$lang_total_h_tva: \n $lang_tot_tva: \n $lang_tot_ttc: ",1,'R',1);
    }else{//si un acompte est present
-    //Quatrieme cellule les enoncés de totaux
-    $pdf->SetFont('Arial','B',10);
+    //Quatrieme cellule les enoncÃ©s de totaux
+    $pdf->SetFont('DejaVu','',10);
     $pdf->SetY(235);
     $pdf->SetX(157);
     $pdf->MultiCell(40,4,montant_financier ($total_htva)."\n".montant_financier ($total_tva)."\n".montant_financier ($total_htva + $total_tva)."\n".montant_financier ($acompte)."\n",1,'R',1);
-    $pdf->SetFont('Arial','B',10);
+    $pdf->SetFont('DejaVu','',9);
     $pdf->SetTextColor(255, 0, 0);
     $pdf->SetY(251);
     $pdf->SetX(157);
     $pdf->MultiCell(40,4, montant_financier ($total_htva + $total_tva - $acompte)."\n",1,'R',1);
     //Cinquieme cellule les totaux
-    $pdf->SetFont('Arial','B',10);
+    $pdf->SetFont('DejaVu','',9);
     $pdf->SetTextColor(0, 0, 0);
     $pdf->SetY(235);
     $pdf->SetX(117);
-    $pdf->MultiCell(40,4,"$lang_totaux \n$lang_acompte: \n$lang_rest_pay: ",1,'R',1);#$pdf->MultiCell(40,4,"$lang_total_h_tva: \n $lang_tot_tva: \n $lang_tot_ttc: \n $lang_acompte: \n $lang_rest_pay: ",1,'R',1);
+    $pdf->MultiCell(40,4,"$lang_totaux\n$lang_acompte:\n$lang_rest_pay:",1,'R',1);#$pdf->MultiCell(40,4,"$lang_total_h_tva: \n $lang_tot_tva: \n $lang_tot_ttc: \n $lang_acompte: \n $lang_rest_pay: ",1,'R',1);
    }
    //la ventillation de la tva
-   $pdf->SetFont('Arial','B',8);
+   $pdf->SetFont('DejaVu','',8);
    $pdf->SetY(235);
    $pdf->SetX(10);
    $pdf->MultiCell(20,4,$lang_t_tva,1,'C',1);
 
-   $pdf->SetFont('Arial','B',8);
+   $pdf->SetFont('DejaVu','',8);
    $pdf->SetY(235);
    $pdf->SetX(30);
    $pdf->MultiCell(20,4,$lang_montant,1,'C',1);
 
-   $pdf->SetFont('Arial','B',8);
+   $pdf->SetFont('DejaVu','',8);
    $pdf->SetY(235);
    $pdf->SetX(50);
    $pdf->MultiCell(25,4,$lang_ba_imp,1,'C',1);
-
 
    $sql2="
    SELECT SUM(to_tva_art), SUM(tot_art_htva),taux_tva
@@ -412,11 +413,11 @@ for ($o=0;$o<$g;$o++){
    //fin ventillation
 
    if($total_remise_htva!=0){//Pour le total de la remise
-    $pdf->SetFont('Arial','B',8);
+    $pdf->SetFont('DejaVu','',8);
     $pdf->SetY(235);
     $pdf->SetX(83);
     $pdf->MultiCell(27,4,"$lang_total $lang_remise $lang_htva",1,'C',1);
-    $pdf->SetFont('Arial','B',8);
+    $pdf->SetFont('DejaVu','',8);
     $pdf->SetY(239);
     $pdf->SetX(83);
     $pdf->SetTextColor(0, 207, 0);
@@ -429,7 +430,7 @@ for ($o=0;$o<$g;$o++){
    
    $pdf->SetTextColor(0, 0, 0);
    //pour les commentaire
-   $pdf->SetFont('Arial','',8);
+   $pdf->SetFont('DejaVu','',8);
    $pdf->SetY(257);
    $pdf->SetX(10);
    $pdf->MultiCell(187,3,$coment,0,'L',0);
@@ -438,7 +439,7 @@ for ($o=0;$o<$g;$o++){
   $pdf->Line(10,266,197,266);
   
   //le pied de page
-  $pdf->SetFont('Arial','B',6);
+  $pdf->SetFont('DejaVu','',6);
   $pdf->SetY(268);
   $pdf->SetX(30);
   $pdf->MultiCell(160,4,"$entrep_nom $social Tel :$tel_vend \n$tva_vend $compte $reg",0,'C',0);
@@ -446,25 +447,24 @@ for ($o=0;$o<$g;$o++){
   $pdf->SetY(270);
   $pdf->SetX(10);
   if ($payement!='non') { 
-   $pdf->SetFont('Times','bui',10);
+   $pdf->SetFont('DejaVu','u',9);
    $pdf->MultiCell(60,3,"$lang_po_acquis".($date_pay!="00/00/0000"?"\n$lang_pay_le $date_pay":""),0,'C',0);  
-  }else{
-   //Pour l'échéance
-   $pdf->SetFont('Arial','B',12);
-   $pdf->MultiCell(160,4,$lang_echea." ".ucfirst(nombre_literal(30))." ".$lang_jours,0,'L',0);
+  }else{//Pour l'Ã©chÃ©ance
+   $pdf->SetFont('DejaVu','',12);
+   $pdf->MultiCell(160,4,$lang_echea." ".(($lang=='fr')?ucfirst(nombre_literal(30)):30)." ".$lang_jours,0,'L',0);//le total en toute lettre nombre_literal only in french
   }
   //le nombre de page
-  $pdf->SetFont('Arial','B',10);
+  $pdf->SetFont('DejaVu','',9);
   $pdf->SetY(270);
   $pdf->SetX(170);
   $pdf->MultiCell(30,4,"$lang_page $num_pa2 / $nb_pa\n",0,'L',0);
  }
  if($_POST['mail'] =='y'){
   $pdf->AddPage();
-  $pdf->SetFont('Arial','B',10);
+  $pdf->SetFont('DejaVu','',10);
   $pdf->SetY(10);
   $pdf->SetX(30);
-  $pdf->MultiCell(160,4,"Conditions génerales de vente\n",0,'C',0);
+  $pdf->MultiCell(160,4,"Conditions gÃ©nerales de vente\n",0,'C',0);
   $pdf->SetY(70);
   $pdf->SetX(10);
   $pdf->MultiCell(160,4,"$lang_condi_ven",0,'C',0);
@@ -491,7 +491,7 @@ if ($_POST['mail']=='y') {
  else
   echo "<html><h3 style='color:red;'>$lang_env_par_mail_non</h3><script>setTimeout(function(){window.location='../lister_factures.php'},2000);</script></html>";
 }else{
- echo "<html><script>window.location='$file';</script></html>";
+ echo "<html><script>window.location='".str_replace('+',' ',urlencode($file))."';</script></html>";
 }
 
 

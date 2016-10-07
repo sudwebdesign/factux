@@ -1,30 +1,32 @@
 <?php
 /*
  * Factux le facturier libre
- * Copyright (C) 2003-2004 Guy Hendrickx
+ * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
  * 
  * Licensed under the terms of the GNU  General Public License:
- * 		http://www.opensource.org/licenses/gpl-license.php
+ * 		http://opensource.org/licenses/GPL-3.0
  * 
  * For further information visit:
- * 		http://factux.sourceforge.net
+ * 		http://factux.free.fr
  * 
- * File Name: fr.php
- * 	fichier contenant les variables francophones
+ * File Name: en.php
+ * 	fichier contenant les variables anglaise
  * 
- * * Version:  1.1.5
- * * * Modified: 23/07/2005
+ * * Version:  5.0.0
+ * * * Modified: 07/10/2016
  * 
  * File Authors:
- * 		Guy Hendrickx
- *      english translation: Germinal Petit-Etienne
+ * 		Guy Hendrickx english translation: Germinal Petit-Etienne
  */
- 
 error_reporting(0);
-////variables ajoutées
+
+
+$lang_factux = "Factux - the libre invoice book revised in 2017";
+$lang_source_fac = "$lang_Factux<br />is a free open source software distributed by ";
 $lang_new_config_ok="Your new configuration is recorded";
 $lang_nbr_impression="number of print";
 $lang_choix_Impression="use the automatic print";
+////variables ajoutÃ©es
 $lang_lots ="Batches";
 $lang_choix_use_stock = "Use stocks plugin";
 $lang_administra = "Administration";
@@ -36,14 +38,14 @@ $lang_use_cat ="Use categories plugin";
 $lang_modif_par ="Change Factux parameters";
 $lang_cr_lot ="Create batch.";
 $lang_depenses_par_fournisseur ="Statistics by suppliers";
-$lang_conf_env = "Do you really want to send the invoice n°";
+$lang_conf_env = "Do you really want to send the invoice nÂ°";
 $lang_conf_env2= "by mail to the customer";
 $lang_conf_notif ="Do you really want to notify the customer";
 $lang_conf_notif2 ="the existence of the invoice";
 $lang_par ="by";
-$lang_conf_carte_reg ="Do you really want to pay the invoice n°";
-$lang_con_env_pdf="Do you really want to email the purchase order n°";
-$lang_con_env_notif="Do you really want to notify by mail the customer of the purchase order n°";
+$lang_conf_carte_reg ="Do you really want to pay the invoice nÂ°";
+$lang_con_env_pdf="Do you really want to email the purchase order nÂ°";
+$lang_con_env_notif="Do you really want to notify by mail the customer of the purchase order nÂ°";
 $lang_mode_paiement ="Payment means";
 $lang_carte_ban ="Credit Card";
 $lang_pay_ok =" paid ";
@@ -55,8 +57,8 @@ $lang_liquide ="Cash";
 $lang_status_pay = " Payment status ";
 $lang_pour_mont ="For an amount of";
 $lang_aj_au_bon = "Add purchase order";
-$lang_cré_fac_orph ="Create invoice from purchase order n°";
-$lang_num_dev ="Estimate n° ";
+$lang_crÃ©_fac_orph ="Create invoice from purchase order nÂ°";
+$lang_num_dev ="Estimate nÂ° ";
 $lang_tele = "Phone";
 $lang_fax = "Fax";
 $lang_civ = "Civil status";
@@ -70,19 +72,22 @@ $lang_stomin="Min. Stock";
 $lang_stomax="Max. Stock";
 $lang_stock_jour="Item updated";
 $lang_regler_fact2 ="with paid status ?";
-///Variables modifiées
+///Variables modifiÃ©es
 $lang_conf_effa ="Do you really want to delete this line from the delivering order?";
-$lang_con_effa = "Do you really want to delete the delivering order n°";
-$lang_regler_fact = "Do you really want to put the invoice n°";
+$lang_con_effa = "Do you really want to delete the delivering order nÂ°";
+$lang_regler_fact = "Do you really want to put the invoice nÂ°";
 $lang_art_effa= "Do you really want to delete this item";
-$lang_lot_inact= "Do you really want to unactivate the batch n°";
+$lang_lot_inact= "Do you really want to unactivate the batch nÂ°";
+$lang_lot_act= "Are you sure you want to reactivate the batch nÂ°";
 $lang_cli_effa = "Do you really want to delete the customer";
-$lang_eff_dev = "Do you really want to delete the estimate n°";
-$lang_convert_dev = "Do you really want to turn the estimate n°";
+$lang_eff_dev = "Do you really want to delete the estimate nÂ°";
+$lang_convert_dev = "Do you really want to turn the estimate nÂ°";
 $lang_convert_dev2 = "into a purchase order ?";
-$lang_dev_perd = "Do you really want to give the estimate n°";
+$lang_dev_perd = "Do you really want to give the estimate nÂ°";
 $lang_dev_perd2 ="a lost status ?";
-$lang_eff_conf_dep = "Do you really want to delete the expenditures n°";
+$lang_eff_conf_dep = "Do you really want to delete the expenditures nÂ°";
+////
+
 ////
 $lang_fi_b_c="Purchase order";
 $lang_facture="Invoice";
@@ -96,20 +101,19 @@ $lang_po_acquis = "For receipt";
 $lang_nouv_d="New invoice from ";
 $lang_nouv_add ="You have been adressed a new invoice from";
 $lang_salut_dist="You will find it as mail attachement\n Best regards";
+
 $lang_condi_ven = "Your saling conditions here";
 $lang_Lister_lots = "List batches";
 $lang_com_cont_lot = "The purchase orders which include the batch"; 
 $lang_lot = "batches";
-$lang_num_lot ="batch n°";
-$lang_lot_four = "supplier batch n°";
+$lang_num_lot ="batch nÂ°";
+$lang_lot_four = "supplier batch nÂ°";
 $lang_ingred = "Ingredient";
 $lang_produit = "Product";
 $lang_all_lots = "All batches";
 $lang_impo_del_util = "User deletion impossible. You first have to suppress administration rights";
 $lang_con_effa_utils = "Do you really want to delete this user?";
 $lang_rest_pay = "Balance to pay";
-
-
 $lang_acompte = "Down payement";
 $lang_ctrl = "You may choose several customers by keeping 'Ctrl' key down";
 $lang_choi_cli_utis = "Choose customers for this user";
@@ -130,13 +134,12 @@ $lang_val_actu = "Actual value";
 $lang_util_droit = "This user rights";
 $lang_utilisateur_editer = "Edit user";
 $lang_retirer = "Remove";
-$lang_multi_ctrl = "You may choose several customers by keeping 'Ctrl' key down";
+$lang_multi_select_ctrl = "You may choose several customers by keeping 'Ctrl' key down";
 $lang_ajou_cli_util = "Add customers for this user";
 $lang_oui = "yes";
 $lang_non = "no";
 $lang_restrint = "restricted";
 $lang_list_utl = "list users";
-
 
 $lang_client_droit = "You do not have the administration rights to manage customers, please contact the administrator if you think it's a mistake";
 $lang_article_droit = "You do not have the administration rights to manage items, please contact the administrator if you think it's a mistake";
@@ -183,9 +186,9 @@ $lang_pass_modif = "Password Modification";
 $lang_mail_li_up1= "Dear customer<br>your password has been updated by the administrator<br>Login:";
 $lang_mail_cli_up = "As this password is encrypted in our database, we don't have access to it if you're loosing it";
 $lang_ba_imp ="Taxable amount";
-$lang_fact_num_ab = "Invoice n°:";
+$lang_fact_num_ab = "Invoice nÂ°:";
 $lang_totaux = "net of VAT Total : \n VAT total: \n Total VAT included:";
-$lang_num_bon_ab = "Purchase order n°:";
+$lang_num_bon_ab = "Purchase order nÂ°:";
 $lang_de = "of";
 $lang_page = "Page";
 $lang_condi = "Invoicing at the end of the month\n  ";
@@ -197,7 +200,7 @@ $lang_bon_ajouter = "Add to purchase order";
 $lang_bon_editer = "Edit purchase order";
 $lang_dev_date = "Estimate date";
 $lang_ga_per = "Won/Lost";
-$lang_de_num = "Estimate n°";
+$lang_de_num = "Estimate nÂ°";
 $lang_ajo_com_dev = "Add comment on estimate";
 $lang_ajo_com_bo = "Add comment on purchase order (optional)";
 $lang_factpdf_penalites_conditions = " Terms and Conditions of Sale on back\n";
@@ -207,17 +210,15 @@ $lang_con_gag = "Do you really want to give this estimate a won status ?";
 $lang_con_effa_dev = "Do you really want to delete this estimate";
 $lang_mail_a = "mailed to:";
 $lang_benef = "Benefit";
-$lang_factux = "Factux the free invoice book v1.1.5";
 $lang_de_per = "Your estimate $num_dev has now the lost status";
 $lang_sup_li = "Do you really want to delete this line of the delivery order?";
 $lang_edit_bon = "Edit a purchase order";
 $lang_che_dep = "Find a Expenditure";
-$lang_no_dep = "Expenditure N°";
+$lang_no_dep = "Expenditure NÂ°";
 $lang_cli_jour = "Customer updated";
 $lang_noti_pa = "Password Notification sent";
 $lang_mai_cre = "Dear customer<br>Your password has been defined by the administrator<br>Login:";
 $lang_mai_cr_pa = " Password:";
-$lang_source_fac = "Factux is a free open source software distributed by ";
 $lang_mai_cre_enc = "<br><br>You may change this password online, but not your login. <br>This password is encrypted in our database.<br>If you loose it, please inform";
 $lang_pass_nou = "so that he can give you another one";
 $lang_cre_mo_pa = "Password creation";
@@ -255,6 +256,7 @@ $lang_back_ser = "Backup file has to be on server in the dump folder";
 $lang_nom_back = "backup file name: backup.sql";
 $lang_fi_back = "Create backup";
 $lang_con_dev_effa = "Do you really want to delete this estimate?";
+
 $lang_dep_choi = "You must either choose a supplier in the list or enter a new one!!!";
 $lang_dep_enr ="the expenditure has been counted";
 $lang_rappel = "Select invoices to be include with the recall";
@@ -287,7 +289,7 @@ $lang_complement = "Complement";
 $lang_rue="Street";
 $lang_code_postal="ZIP Code";
 $lang_ville="Town";
-$lang_numero_tva ="$lang_tva N°";
+$lang_numero_tva ="$lang_tva NÂ°";
 $lang_email = "e-mail";
 $lang_bc_base = "Database";
 $lang_annuler = "Cancel";
@@ -319,24 +321,24 @@ $lang_authentification_ok = "Authentification successfull.";
 $lang_bienvenue = "Welcome";
 $lang_facture_creer = "Create new invoice";
 $lang_date="Date";
-$lang_commande_numero = "Order n°";
+$lang_commande_numero = "Order nÂ°";
 $lang_commandes_non_facturees = "Uninvoiced orders";
 $lang_commandes_liste="Month's orders";
 $lang_choisissez="Choose";
 $lang_commandes_chercher = "Find an order";
-$lang_devis_numero="$lang_devis n°";
-$lang_numero="N°";
+$lang_devis_numero="$lang_devis nÂ°";
+$lang_numero="NÂ°";
 $lang_devis_date = "$lang_devis date";
 $lang_devis_perdus = "Lost $lang_devis list";
 $lang_devis_chercher = "Find a $lang_devis";
-$lang_devis_créer = "Create $lang_devis";
+$lang_devis_crÃ©er = "Create $lang_devis";
 $lang_devis_liste = "$lang_devis list";
 $lang_clients_existants = "Customer's list";
 $lang_client_accesprive = "Optional (to allow customer's zone access)<br>
 If you enter a login and a password, an email will be sent to inform the customer";
 $lang_articles_liste = "Items list";
 $lang_retablir = "Reset";
-$lang_devis_numero = "$lang_devis n°";
+$lang_devis_numero = "$lang_devis nÂ°";
 $lang_envoyer = "Send";
 $lang_outils = "Tools";
 $lang_articles = "Items";
@@ -384,10 +386,11 @@ $lang_enre = "Order registered";
 $lang_champ_oubli = "A field is missing.<br>$lang_editer the order to continue";
 $lang_nv_bon = "Create a new purchase order";
 $lang_bon_compr = "The purchase order of $nom includes:";
-$lang_li_tot = " $quanti $uni of $article for a total cost of $tot € ";
+$lang_li_tot = " $quanti $uni of $article for a total cost of $tot Â€ ";
+
 $lang_editer = "Modify";
 #$lang_suprimer = "Delete";
-$lang_som_tot = "For a total amount of <font size = 4>$total_bon € $lang_htva</font>";
+$lang_som_tot = "For a total amount of <font size = 4>$total_bon Â€ $lang_htva</font>";
 $lang_som_tot2 = "For a total amount of ";
 $lang_mont_tva = "and an amount of $lang_tva of ";
 $lang_ajou_bon = "Add to order";
@@ -414,8 +417,8 @@ $lang_cont_bon = "The purchase order of $nom includes";
 $lang_cont_devis = "The estimate of $nom includes";
 $lang_tot_de = "for a total amount of";
 $lang_bon_comp = "The estimate of $nom includes:";
-#$lang_pou_so_to = "for a total amount of <font size = 4>$total_bon € $lang_htva";
-#$lang_to_tva = "and a V.A.T. amount of <font size = 4>$total_tva € ";
+#$lang_pou_so_to = "for a total amount of <font size = 4>$total_bon Â€ $lang_htva";
+#$lang_to_tva = "and a V.A.T. amount of <font size = 4>$total_tva Â€ ";
 $lang_edi_cont_bon = "$lang_editer the content of an order";
 $lang_modifier = "Modify";
 $lang_err_fact = "Some purchase orders already belong to an expenditure.";
@@ -433,7 +436,7 @@ $lang_dev_effa = "Estimate deleted";
 $lang_societe = "Corporation";
 $lang_siege_social = "Adress";
 $lang_tel_fax = "Phone / Fax";
-$lang_numero_tva = "VAT N°";
+$lang_numero_tva = "VAT NÂ°";
 $lang_email = "e-mail";
 $lang_sortir = "Exit";
 $lang_factures_non_reglees_total = "Total";
@@ -487,6 +490,164 @@ $lang_devis_editer = "$lang_editer estimate";
 
 $code_langue = "en_US";
 
+//ajout 5.0.0  AUTOTRANSLATE by translandium
+$lang_le = "the";
+$lang_bon = "Purchase order";
+$lang_prix = "Price";
+$lang_remise = "Discount";
+$lang_marge = "Margin";
+$lang_enregistre = "registered";
+$lang_crÃ©Ã©e_pour = "created for";
+$lang_suite_edit_utilisateur_err_pass = "Error two passwords do not match";
+$lang_suite_edit_utilisateur_succes = "The new data of the user are well recorded";
+$lang_modifier_depense = "Edit an expense";
+$lang_del_utilisateur_succes = "All user information is deleted.";
+$lang_actif = "active";
+$lang_inactif = "inactive";
+$lang_rendre_actif = "make active";
+$lang_rendre_inactif = "make inactive";
+$lang_lot_maj = "Successful batch update";
+$lang_cat_maj = "Successful category update";
+$lang_cat_effa = "Are you sure you want to delete the category ";
+$lang_err_efa_cat = "This category understand items, you cannot remove it.";
+$lang_cat_eff = "The category $categorie was deleted.";
+$lang_echea = "Due to";
+$lang_num_fact = " invoice $lang_numero";
+$lang_simu = "Simulation";
 
+$lang_art_eff = "the article $article was deleted.";
+$lang_ga = "Won";
+$lang_perdu = "Lost";
+$lang_vers = "worms";
+$lang_divers = "various";
 
-?>
+$lang_voir_bons_du_lot = "See vouchers containing this batch";
+$lang_lot_cherche_lot = "Search lots by its lot number";
+$lang_lot_cherche_four = "Search from the batch provider";
+$lang_effacer_ligne_devis = "Wish really delete you this line of the quote?";
+$lang_dev_editer = "Edit the quote";
+$lang_env_par_mail = "Send by e-mail";
+$lang_env_par_mail_non = "Error, unsent e-mail!";
+$lang_edit_fact_n = "Edit the invoice No.";
+$lang_ajou_fact_n = "Add to invoice No.";
+$lang_ajouter = "Add";
+$lang_enter = "Enter";
+$lang_pay_le ="$lang_pay_ok $lang_le";
+$lang_dat_inva = " invalid $lang_date ";
+
+$lang_les_utl = "Users";
+$lang_id_or_mail_exist = "Error login/$lang_email already exists";
+$lang_mail_exist = "Error $lang_email already exists";
+
+$lang_admin = "Admin";
+$lang_gerer = "Manage";
+$lang_stat = "Stat";
+$lang_art = "art";
+$lang_point = "points";
+
+$lang_lot_zero = "Zero lot is empty because does not exist. <br /> create a lot and selected the when adding an item to the purchase order.";
+$lang_edit_lot = "Ã‰dit batch";
+$lang_cont_lot = "Content of batch";
+
+$lang_changer_client = "change the client";
+$lang_au_cli_choi = "No customer selected for adding!";
+
+$lang_convertir = "convert";
+$lang_irrecouvrable = "Bad";
+$lang_reglee = "set";
+$lang_prix_dachat = "Purchase price";
+$lang_coef_de_marge = "Coef of margin";
+$lang_pdv_mrg_ht = "Market without tax selling price";
+$lang_taux_marge = "Margin rates";
+
+$lang_notif_par_mail = "notify by email";
+$lang_facturer_ce_bon = "Charge this coupon";
+$lang_facture_lister = "List invoices";
+$lang_fact_enr = "Posted for customer invoice ";
+
+$lang_restore_backup = "Restore the current database... Please wait ;-)";
+$lang_telecharger = "Download";
+$lang_sauve = "Save";
+$lang_back_t_a_s = "tables to be backed up";
+$lang_back_resto = "Restoring backup";
+$lang_decompresser = "Extract";
+$lang_back_err = "No table has been saved";
+$lang_restore_err_dbinfo_file = "Cannot find the backup information, interrupted restore file";
+$lang_restore_err_crea_sql = "Unable to created the backup.sql file";
+$lang_restore_err_zip = "Unable to read the file compress (zip)";
+//download
+$lang_aucun_sql = "No backup.sql file present in the dump file.";
+$lang_err_c_zip = "Cannot create the compressed file ";
+$lang_err_f = "File error.";
+
+$lang_total_vente = "Total sales";
+$lang_dep_maj = "Expenditure update";
+$lang_dep_eff = "Expenditure cleared";
+
+$lang_premier = "first";
+$lang_deuxieme = "second";
+$lang_troisieme = "third";
+$lang_premier_rappel = "We have found that you had probably forgotten to pay the Bills below. \n Please rectify as soon as possible. \n Please accept Madam Sir expression of our respectful feelings.\nIf your payment was crossed this recall, please consider it as null and void.\n";
+$lang_deuxieme_rappel = "			 								Madam, Sir, despite our first reminder, you have still not set the Bills below.\nPlease credit our account endeans the eight days.\n Otherwise we would be obliged to apply our general terms of sale on the back of this document as well as on the back of all our invoices.\n			If your payment was crossed this recall, please consider it as null and void.\n";
+$lang_troisieme_rappel = "Third reminder";
+
+$lang_categorie_modif = "Modify a category";
+
+$lang_condi_ven = "Conditions of sale on the back";
+
+$lang_monnaie = "Euro";
+$lang_centime = "Penny";
+
+$lang_notifi_cli = "Notification email sent!";
+$lang_notifi_cli_non = "Sending email notification failed!";
+$lang_notifi_titre_bon = "New purchase order";
+$lang_notifi_message_bon = "A new purchase order is sent to you by <br>you can check by visiting the internet site with your login password <br>";
+$lang_notifi_titre_fact = "New invoice";
+$lang_notifi_message_fact = "A new invoice is sent to you by <br>you can view it by going to the website with your login password <br>";
+$lang_notifi_titre_dev = "New quote";
+$lang_notifi_message_dev = "A new quote is sent to you by <br>you can check by visiting the internet site with your login password <br>";
+
+#rapel
+$lang_envoyÃ©e_depuis = "sent from";
+$lang_email_envoyÃ© = "Well email";
+$lang_email_envoi_err = "An error occurred, unable to send e-mail!";
+
+#stats
+$lang_toutes = "all";
+$lang_tous = "all";
+$lang_dachat = "purchase";
+$lang_de_vente = "sales";
+$lang_au_reel = "The real (paid)";
+$lang_graph_cir = "Pie chart";
+$lang_evo_dep = "Expenditure";
+$lang_facturÃ© = "charged";
+$lang_commandÃ© = "ordered";
+$lang_acquittÃ© = "acquitted";
+$lang_encaissÃ© = "cashed";
+$lang_l_annÃ©e = "year";
+$lang_toutes_les_annÃ©es = "all years";
+
+#convert
+$lang_dÃ©ja_commandÃ© = "already ordered";
+
+#fpdf
+$lang_mail_client_bon_sujet = "Order of ";
+$lang_mail_client_bon_message = "a new purchase order was sent to you by. \n You will find attached to this e-mail. \n Greetings distinguished \n ";
+$lang_mail_client_dev_sujet = "Quote from ";
+$lang_mail_client_dev_message = "a new quote was sent to you by. \n You will find attached to this e-mail. \n Greetings distinguished \n";
+$lang_mail_client_fact_sujet = "New invoice from ";
+$lang_mail_client_fact_message = "A new Bill has been addressed. \nYou will find in attachment of e-mail sincerely \n ";
+
+#admin
+$lang_choix_auth_cli_devis = "Allow customers the display of quotes and their transformation into commands";
+$lang_choix_auth_cli_bon = "Allow clients the control display";
+$lang_choix_auth_cli_fact = "Allow clients view invoices";
+$lang_choix_first_art = "Choice of article default selected";
+$lang_choix_echeance_fact = "Expiry of the time limits for payment of the invoices";
+$lang_fi_innouvr = "Unable to open the file";
+$lang_fi_inedita = "Unable to write to the file";
+$lang_fi_lect_sl = "The file is inaccessible in writing";
+
+//installeur
+$lang_install_user_create = "This user will administrator rights and cannot be erased afterwards.";
+error_reporting(E_ERROR | E_WARNING | E_PARSE | E_NOTICE);#error_reporting(E_ALL);

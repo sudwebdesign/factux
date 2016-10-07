@@ -1,19 +1,19 @@
 <?php
 /*
  * Factux le facturier libre
- * Copyright (C) 2003-2004 Guy Hendrickx
+ * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
  * 
  * Licensed under the terms of the GNU  General Public License:
- * 		http://www.opensource.org/licenses/gpl-license.php
+ * 		http://opensource.org/licenses/GPL-3.0
  * 
  * For further information visit:
- * 		http://factux.sourceforge.net
+ * 		http://factux.free.fr
  * 
  * File Name: fckconfig.js
  * 	Editor configuration settings.
  * 
- * * * Version:  1.1.5
- * * * * Modified: 23/07/2005
+ * * * Version:  5.0.0
+ * * * * Modified: 07/10/2016
  * 
  * File Authors:
  * 		Guy Hendrickx
@@ -24,9 +24,9 @@ include_once("include/finhead.php");
 //pour le formulaire
 $mois_1 = isset($_GET['mois_1'])?$_GET['mois_1']:$lang_tous;#date("m")
 $annee_1 = isset($_GET['annee_1'])?$_GET['annee_1']:$lang_toutes;#date("Y")
-$ands = ($annee_1==$lang_toutes)?'':"WHERE YEAR(date) = $annee_1";#si année choisie
-$aw = (($annee_1==$lang_toutes&&$mois_1!=$lang_tous))?'WHERE':' AND';#si toutes années et mois choisi #idée GROUP BY DAY(date)
-$ands .= ($mois_1==$lang_tous)?'':"$aw MONTH(date) = $mois_1";#si année entiere
+$ands = ($annee_1==$lang_toutes)?'':"WHERE YEAR(date) = $annee_1";#si annÃ©e choisie
+$aw = (($annee_1==$lang_toutes&&$mois_1!=$lang_tous))?'WHERE':' AND';#si toutes annÃ©es et mois choisi #idÃ©e GROUP BY DAY(date)
+$ands .= ($mois_1==$lang_tous)?'':"$aw MONTH(date) = $mois_1";#si annÃ©e entiere
 ?>
 <table width="760" border="0" class="page" align="center">
  <tr>
@@ -49,7 +49,7 @@ $ands .= ($mois_1==$lang_tous)?'':"$aw MONTH(date) = $mois_1";#si année entiere
         <option value="<?php echo$i; ?>"<?php echo ($i==$annee_1)?' selected="selected"':''; ?>><?php echo $i; ?></option>
 <?php } ?>
       </select>
-      <input type="submit" value="<?php echo $lang_envoyer; ?>">
+      <input type="submit" value="<?php echo $lang_envoyer; ?>" />
      </form>
     </center>
    </td>
@@ -129,7 +129,7 @@ while ($data = mysql_fetch_array($req)){
    </tr>
 <?php } ?>
    <tr>
-    <td colspan="3" class='totalmontant'><?php echo $lang_total_h_tva; ?><br><?php echo "$lang_marge $lang_total_h_tva"; ?><br><?php echo "$lang_remise $lang_total_h_tva"; ?><br><?php echo "$lang_marge réele $lang_total_h_tva"; ?></td>
+    <td colspan="3" class='totalmontant'><?php echo $lang_total_h_tva; ?><br><?php echo "$lang_marge $lang_total_h_tva"; ?><br><?php echo "$lang_remise $lang_total_h_tva"; ?><br><?php echo "$lang_marge rÃ©ele $lang_total_h_tva"; ?></td>
     <td colspan="4" class='totaltexte'><?php echo montant_financier($total); ?><br><?php echo montant_financier($marge); ?><br><?php echo montant_financier($remise); ?><br><?php echo montant_financier($margereele); ?></td>
    </tr>
   </table> 

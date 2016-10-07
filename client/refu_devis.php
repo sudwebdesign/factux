@@ -1,19 +1,19 @@
 <?php 
 /*
  * Factux le facturier libre
- * Copyright (C) 2003-2004 Guy Hendrickx
+ * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
  * 
  * Licensed under the terms of the GNU  General Public License:
- * 		http://www.opensource.org/licenses/gpl-license.php
+ * 		http://opensource.org/licenses/GPL-3.0
  * 
  * For further information visit:
- * 		http://factux.sourceforge.net
+ * 		http://factux.free.fr
  * 
  * File Name: fckconfig.js
  * 	Editor configuration settings.
  * 
- * * * Version:  1.1.5
- * * * * Modified: 23/07/2005
+ * * * Version:  5.0.0
+ * * * * Modified: 07/10/2016
  * 
  * File Authors:
  * 		Guy Hendrickx
@@ -38,7 +38,7 @@ $login=isset($_GET['login'])?$_GET['login']:"";
  <tr>
   <td class="page" align="center">
    <table width="760" border="0" class="page" align="center">
-    <caption>Refuser le devis n° <?php echo "$num_dev"; ?></caption>
+    <caption>Refuser le devis nÂ° <?php echo "$num_dev"; ?></caption>
     <tr>
      <th><?php echo $lang_quantite ;?></th>
      <th><?php echo $lang_unite ;?></th>

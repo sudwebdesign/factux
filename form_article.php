@@ -1,19 +1,19 @@
 <?php 
 /*
  * Factux le facturier libre
- * Copyright (C) 2003-2004 Guy Hendrickx
+ * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
  * 
  * Licensed under the terms of the GNU  General Public License:
- *                 http://www.opensource.org/licenses/gpl-license.php
+ *                 http://opensource.org/licenses/GPL-3.0
  * 
  * For further information visit:
- *                 http://factux.sourceforge.net
+ *                 http://factux.free.fr
  * 
  * File Name: form_article
  *         Formulaire de saisie des articles
  * 
- * * * Version:  1.1.5
- * * * * Modified: 23/07/2005
+ * * * Version:  5.0.0
+ * * * * Modified: 07/10/2016
  * 
  * File Authors:
  *                 Guy Hendrickx
@@ -36,7 +36,7 @@ if ($user_art == 'n') {
  exit;  
 }
 ?>
-<script type="text/javascript" style="display:none;">//calcul du prix de vente HT margé
+<script type="text/javascript" style="display:none;">//calcul du prix de vente HT margÃ©
  function pht(frm){
   if(frm.elements["marge"].value>1){//calc
    var p = parseFloat(frm.elements["prix"].value * frm.elements["marge"].value).toFixed(2);//arrondir a 2 decimales
@@ -61,7 +61,7 @@ if ($user_art == 'n') {
        <td class='<?php echo couleur_alternee (FALSE); ?>'>
 <?php
 $rqSql = "SELECT id_cat, categorie FROM " . $tblpref ."categorie WHERE 1";
-$result = mysql_query( $rqSql ) or die( "Exécution requête impossible."); 
+$result = mysql_query( $rqSql ) or die( "ExÃ©cution requÃªte impossible."); 
 ?> 
         <select name='categorie'>
          <option value='0'><?php echo $lang_divers; ?></option>

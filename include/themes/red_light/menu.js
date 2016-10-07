@@ -1,13 +1,13 @@
 /* iubito's menu - http://iubito.free.fr/prog/menu.php - configuration du javascript */
 
 
-/* true = le menu sera vertical, à gauche.
+/* true = le menu sera vertical, Ã  gauche.
    false = le menu sera horizontal, en haut. */
 var vertical = false;
 
 /* TRES IMPORTANT !
 	Il faut mettre ici le nombre de menus, le script n'est pas capable de compter tout
-	seul ! :-p Donc si votre code va jusqu'à <p id="menu5"...> il faut mettre 5. */
+	seul ! :-p Donc si votre code va jusqu'Ã  <p id="menu5"...> il faut mettre 5. */
 	
 var nbmenu = 8;
 
@@ -17,17 +17,17 @@ var nbmenu = 8;
 	Centre horizontalement ou verticalement suivant le mode choisi. */
 var centrer_menu = true;
 
-/* On est obligé de définir une largeur pour les menus. */
+/* On est obligÃ© de dÃ©finir une largeur pour les menus. */
 var largeur_menu = 105;
 
-/* En mode vertical, on a besoin de connaître la hauteur de chaque menu.
-	Même si les "cases" ne sont pas dimensionnées en hauteur.
-	Ajustez cette variable si les menus sont trop rapprochés ou espacés en vertical. */
+/* En mode vertical, on a besoin de connaÃ®tre la hauteur de chaque menu.
+	MÃªme si les "cases" ne sont pas dimensionnÃ©es en hauteur.
+	Ajustez cette variable si les menus sont trop rapprochÃ©s ou espacÃ©s en vertical. */
 var hauteur_menu = 24;
 
 /* En mode horizontal.
 	Largeur des sous-menus, pour IE uniquement, les autres navigateurs respectent la largeur
-	auto. Mettez "auto" uniquement si vous êtes sûr d'avoir mis des &nbsp; à la place des
+	auto. Mettez "auto" uniquement si vous Ãªtes sÃ»r d'avoir mis des &nbsp; Ã  la place des
 	espace dans les items ! */
 var largeur_sous_menu = 105;
 
@@ -35,44 +35,44 @@ var largeur_sous_menu = 105;
 var espace_entre_menus = 1;
 
 
-/* position du menu par rapport au haut de l'écran ou de la page.
+/* position du menu par rapport au haut de l'Ã©cran ou de la page.
 	0 = le menu est tout en haut. en px */
 var top_menu = 2;
 /* En version horizontale.
-	position des sous-menus par rapport au haut de l'écran ou de la page. Il faut prévoir
-	la hauteur des menus, donc ne pas mettre 0 et faire "à tâton". en px */
+	position des sous-menus par rapport au haut de l'Ã©cran ou de la page. Il faut prÃ©voir
+	la hauteur des menus, donc ne pas mettre 0 et faire "Ã  tÃ¢ton". en px */
 var top_ssmenu = top_menu + 24;
 
 /* Position gauche du menu, en px. */
 var left_menu = 0;
 /* En version verticale.
-	Position des sous-menus par rapport au bord gauche de l'écran. */
+	Position des sous-menus par rapport au bord gauche de l'Ã©cran. */
 var left_ssmenu = largeur_menu+2;
 
 
-/* Quand la souris quitte un sous-menu, si le sous-menu disparait immédiatement,
-	cela gêne l'utilisateur. Alors on peut mettre un délai avant disparition du sous-menu.
+/* Quand la souris quitte un sous-menu, si le sous-menu disparait immÃ©diatement,
+	cela gÃªne l'utilisateur. Alors on peut mettre un dÃ©lai avant disparition du sous-menu.
 	500 ms c'est bien :-) */
 var delai = 650; // en milliseconde
 
 /* En version horizontale.
 	Comme le menu peut se superposer avec le texte de la page, il est possible de faire
-	descendre un peu la page (on augmente la marge du haut) pour aérer un peu la page,
+	descendre un peu la page (on augmente la marge du haut) pour aÃ©rer un peu la page,
 	une quarantaine de pixel c'est pas mal. en px*/
 var marge_en_haut_de_page = top_menu + 24;
 /* En version verticale.
-	On décale le document à droite pour pas que le menu le superpose. */
+	On dÃ©cale le document Ã  droite pour pas que le menu le superpose. */
 var marge_a_gauche_de_la_page = largeur_menu + 10;
 
 
-/* Mettez à true si vous souhaitez que le menu soit toujours visible.
-	Mettez false si vous ne le souhaitez pas, dans ce cas le menu "disparaîtra" quand vous
+/* Mettez Ã  true si vous souhaitez que le menu soit toujours visible.
+	Mettez false si vous ne le souhaitez pas, dans ce cas le menu "disparaÃ®tra" quand vous
 	descendrez dans la page. */
 var suivre_le_scroll=false;
 
 
 
-var timeout; //ne pas toucher, c'est pour déclarer la variable
+var timeout; //ne pas toucher, c'est pour dÃ©clarer la variable
 var agt = navigator.userAgent.toLowerCase();
 var isMac = (agt.indexOf('mac') != -1);
 var isOpera = (agt.indexOf("opera") != -1);
@@ -111,7 +111,7 @@ function preChargement()
 	if (document.getElementById("conteneurmenu"))
 	{
 		document.getElementById("conteneurmenu").style.visibility="hidden";
-		//IE5 mac a un bug : quand un texte est dans un élément de style float, il n'apparait pas.
+		//IE5 mac a un bug : quand un texte est dans un Ã©lÃ©ment de style float, il n'apparait pas.
 		/*if (isIE5mac)
 		{
 			document.getElementById("conteneurmenu").style="";
@@ -202,7 +202,7 @@ function Chargement() {
 		CacherMenus();
 	}
 
-	// comme on a évité le clignotement, maintenant on fait apparaître le menu ;-)
+	// comme on a Ã©vitÃ© le clignotement, maintenant on fait apparaÃ®tre le menu ;-)
 	document.getElementById("conteneurmenu").style.visibility = "visible";
 }
 

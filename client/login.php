@@ -38,6 +38,16 @@ if (isset($message)&&$message!='') {
       <option value="fr">Francais</option>
       <option value="en">English</option>
       <option value="nl">Neederlands</option>
+      <option value="es">Español (baby)</option>
+      <option value="es.m">Español (bing)</option>
+      <option value="it">Italiano (baby)</option>
+      <option value="it.m">Italiano (bing)</option>
+      <option value="de">Deutsch (baby)</option>
+      <option value="de.m">Deutsch (bing)</option>
+      <option value="pl">Polski (baby)</option>
+      <option value="pl.m">Polski (bing)</option>
+      <option value="el">Ελληνικά (baby)</option>
+      <option value="el.m">Ελληνικά (bing)</option>
      </select>
     </td> 
    </tr>

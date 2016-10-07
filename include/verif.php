@@ -1,32 +1,32 @@
 <?php
 /*
  * Factux le facturier libre
- * Copyright (C) 2003-2004 Guy Hendrickx
+ * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
  * 
  * Licensed under the terms of the GNU  General Public License:
- * 		http://www.opensource.org/licenses/gpl-license.php
+ * 		http://opensource.org/licenses/GPL-3.0
  * 
  * For further information visit:
- * 		http://factux.sourceforge.net
+ * 		http://factux.free.fr
  * 
  * File Name: verif.php
- * 	Fichier de création et verification de la session
+ * 	Fichier de crÃƒÂ©ation et verification de la session
  * 
- * * Version:  1.1.5
- * Modified: 11/04/2005
+ * * Version:  5.0.0
+ * Modified: 07/10/2016
  * 
  * File Authors:
  * 		Guy Hendrickx
  *.
  */
 ini_set('session.save_path', 'include/session');
-if(!isset($login)||$login=='')#Only in login.php?
-  session_start();#Notice: A session had already been started (in login.php on enter)
+if(session_id() === '')#(!isset($login)||$login=='')#Only in login.php?
+  session_start();#Warning: session_start() [function.session-start]: Cannot send session cache limiter - headers already sent (output started at /mnt/111/sdb/b/d/factux/demo/include/headers.php:30) in /mnt/111/sdb/b/d/factux/demo/include/verif.php on line 24
 $page_name = isset($page_name)?$page_name:'';#fix bon/devis_fin,...
 if(!isset($_SESSION['trucmuch']) || $_SESSION['trucmuch']==''){
  if(!strstr($page_name,'Log')&!strstr($page_name,'Index'))
   $message = "i";#interdit
- $login=1;#in verif emule login.php (evite de refaire sessions start et créer un fichier vide)
+ $login=1;#in verif emule login.php (evite de refaire sessions start et crÃ©er un fichier vide)
  include('logout.php');
  if (empty($_SESSION)===false)#count($_SESSION)>0
   session_destroy();

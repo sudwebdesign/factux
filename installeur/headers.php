@@ -1,30 +1,32 @@
 <?php 
 /*
  * Factux le facturier libre
- * Copyright (C) 2003-2015 Guy Hendrickx
+ * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
  * 
  * Licensed under the terms of the GNU  General Public License:
- * 		http://www.opensource.org/licenses/gpl-license.php
+ * 		http://opensource.org/licenses/GPL-3.0
  * 
  * For further information visit:
- * 		http://factux.sourceforge.net
+ * 		http://factux.free.fr
  * 
  * File Name: headers.php
  * 
  * 
- * * * Version:  1.1.5
- * * * * Modified: 23/09/2015
+ * * * Version:  5.0.0
+ * * * * Modified: 07/10/2016
  * 
  * File Authors:
- * 		Thomas
+ * 		Thomas Ingles
  */
- $etape=(isset($etape)?$etape:'Étape N°1 : Bienvenue et verification des droits des dossiers et fichiers interne de FactuX');
+ $etape=(isset($etape)?$etape:'Ã‰tape NÂ°1 : Bienvenue et verification des droits des dossiers et fichiers interne de Factux');
+ $default_lang=isset($default_lang)?$default_lang:'fr';
  include("../include/language/fr.php");
+ require_once("../include/0.php");#uptophp7 & apostrophe()
 ?>
 <!DOCTYPE html> 
 <html>
  <head>
-  <meta charset="ISO-8859-1"><?php #html5 ?>
+  <meta charset="UTF-8">
   <title>L'installeur de Factux : <?php echo $etape; ?></title>
   <link rel='stylesheet' type='text/css' href='../include/themes/light/style.css'>
   <link rel="shortcut icon" type="image/x-icon" href="../image/favicon.ico" >

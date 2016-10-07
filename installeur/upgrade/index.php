@@ -2,7 +2,7 @@
 <!DOCTYPE html> 
 <html>
 <head>
-<meta charset="ISO-8859-1"><?php #html5 ?>
+<meta charset="UTF-8"><?php #html5 ?>
 <title>Mise a niveau de Factux : verifier les droits des fichiers de configuration</title>
 
 
@@ -11,22 +11,22 @@
 </head><body>
 <?php
 echo '<center><img src="../../image/factux.gif" alt="">';
-echo '<h2>Mise à niveau de Factux 1.1.5 -->  FactuX5.10.5</h2><hr>';
-echo 'Vous voici dans le module de mise à niveau de Factux. Avant de commencer la mise à niveau <b>
-<font color=red>faite une sauvegarde de votre base de donnée </font></b><br> ';
+echo '<h2>Mise Ã  niveau de Factux 5.0.0 -->  FactuX5.0.0</h2><hr>';
+echo 'Vous voici dans le module de mise Ã  niveau de Factux. Avant de commencer la mise Ã  niveau <b>
+<font color=red>faite une sauvegarde de votre base de donnÃ©e </font></b><br> ';
 echo 'Si vous avez bien suivit les informations du fichier readme.txt vous avez:';
-echo '<ul><li>Décompressé l\'archive sur votre disque dur, sauvgardé les fichiers /include/common.php et /include/var.php,</li>';
-echo '<li>Téléversé les fichiers de l\'archive sur votre serveur en ayant au préalble fait place nette des fichiers de la version précedente de Factux</li>';
-echo '<li>Téléversé le fichier var.php dans le dossier /include/config/<br>
-(si des problemes se déclares avec le sigle € veulliez remplacer la ligne <code>$devise="&amp;euro;";</code> par <code>$devise="€";</code> avant de remplacer le fichier du serveur)</li>';
-echo '<li>Téléversé le fichier common.php dans le dossier /include/config/ </li>';
+echo '<ul><li>DÃ©compressÃ© l\'archive sur votre disque dur, sauvgardÃ© les fichiers /include/common.php et /include/var.php,</li>';
+echo '<li>TÃ©lÃ©versÃ© les fichiers de l\'archive sur votre serveur en ayant au prÃ©alble fait place nette des fichiers de la version prÃ©cedente de Factux</li>';
+echo '<li>TÃ©lÃ©versÃ© le fichier var.php dans le dossier /include/config/<br>
+(si des problemes se dÃ©clares avec le sigle Â€ veulliez remplacer la ligne <code>$devise="&amp;euro;";</code> par <code>$devise="Â€";</code> avant de remplacer le fichier du serveur)</li>';
+echo '<li>TÃ©lÃ©versÃ© le fichier common.php dans le dossier /include/config/ </li>';
 
-echo '<li>Si vous avez modifié les fichier fact_pdf.php ou bon_pdf.php 
+echo '<li>Si vous avez modifiÃ© les fichier fact_pdf.php ou bon_pdf.php 
 vous devrez malheureusement refaire ces modifications</li></ul>';
 
-$erreur = "Erreur veuiller vérifier les droits en écriture sur ce fichier !!";
-$verif = "Vérification des droits d'écriture pour le répertoire";
-$verif2 = "Vérification des droits d'écriture pour le fichier";
+$erreur = "Erreur veuiller vÃ©rifier les droits en Ã©criture sur ce fichier !!";
+$verif = "VÃ©rification des droits d'Ã©criture pour le rÃ©pertoire";
+$verif2 = "VÃ©rification des droits d'Ã©criture pour le fichier";
 $doss1 = "../../include";
 $doss2 = "../../dump";
 $doss4 = "../../image";
@@ -38,7 +38,7 @@ $fich3 = "../../include/configav.php";
 $error='0';
 
 echo "<br><hr><br><center><table>";
-echo"<caption>Vérification des droits.</caption>";
+echo"<caption>VÃ©rification des droits.</caption>";
 echo "<tr><td>$verif $doss1 :<td>";
 if (is_writable("$doss1")) {
  echo "<font color=green> OK</font></td></tr>";  
@@ -99,11 +99,11 @@ echo "</table></center>";
 if($error !='1'){
 ?>
 <br><hr><br><center>Si tout est correct si dessus et que vous avez bien suivit le readme.txt vous pouver continuer</br>
-je le répete <font color="red"> faite une sauvegarde de votre base de donnée avant de poursuivre</font><br>
-En cliquant sur un des boutons suivants, vos bases de données seront modifiées et Factux 1.1.5 pret à fonctionner.<br><br>
+je le rÃ©pete <font color="red"> faite une sauvegarde de votre base de donnÃ©e avant de poursuivre</font><br>
+En cliquant sur un des boutons suivants, vos bases de donnÃ©es seront modifiÃ©es et FactuX.5 pret Ã  fonctionner.<br><br>
 <b>ATTENTION</b><br>
-Les tables de votre base de données vont être profondément modifiées et vos anciennes sauvegardes seront des lors inutilisables.<br>
-Des la fin de la mise à jour verifier que vos anciennes factures sont correctes et faite une sauvegarde sur base de la nouvelle installation de Factux<br>
+Les tables de votre base de donnÃ©es vont Ãªtre profondÃ©ment modifiÃ©es et vos anciennes sauvegardes seront des lors inutilisables.<br>
+Des la fin de la mise Ã  jour verifier que vos anciennes factures sont correctes et faite une sauvegarde sur base de la nouvelle installation de Factux<br>
 <script type="text/javascript">
 function addquery(){
  var j = document.getElementById('j').value;
@@ -114,9 +114,9 @@ function addquery(){
  }
 }
 </script>
-<br>Vos factures sont en général réglées <input type="text" id="j" value="30" size="2" /> jours après leurs dates de facturation (date de payement)<br>
+<br>Vos factures sont en gÃ©nÃ©ral rÃ©glÃ©es <input type="text" id="j" value="30" size="2" /> jours aprÃ¨s leurs dates de facturation (date de payement)<br>
 <a onclick="addquery()" href='upgrade.php?daytopay='><button>continuer</button></a><br>
-<a onclick="addquery()" href='upgrade.php?devnet&amp;daytopay='><button>continuer et nettoyer les devis gagnés</button></a>
+<a onclick="addquery()" href='upgrade.php?devnet&amp;daytopay='><button>continuer et nettoyer les devis gagnÃ©s</button></a>
 </center>
 <?php
 }else{

@@ -1,19 +1,19 @@
 <?php 
 /*
  * Factux le facturier libre
- * Copyright (C) 2003-2004 Guy Hendrickx
+ * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
  * 
  * Licensed under the terms of the GNU  General Public License:
- * 		http://www.opensource.org/licenses/gpl-license.php
+ * 		http://opensource.org/licenses/GPL-3.0
  * 
  * For further information visit:
- * 		http://factux.sourceforge.net
+ * 		http://factux.free.fr
  * 
  * File Name: form_editer_bon.php
  * 	fomulaire pour editer les bons de commande
  * 
- * * Version:  1.1.4
- * * Modified: 25/04/2005
+ * * Version:  5.0.0
+ * * Modified: 07/10/2016
  * 
  * File Authors:
  * 		Guy Hendrickx
@@ -88,7 +88,7 @@ $nomcli = $row["nom"];
 ?> 
    </td>
    <td><input type="hidden" name="num_bon" value="<?php echo $num_bon; ?>" /></td>
-   <td><input type="submit" name="changer" value="changer"></td>
+   <td><input type="submit" name="changer" value="<?php echo $lang_changer_client; ?>"></td>
    <td colspan="3">&nbsp;</td>
   </tr>
  </table>
@@ -102,12 +102,12 @@ $nomcli = $row["nom"];
   <th><?php echo $lang_remise; ?></th>
   <th><?php echo $lang_montant_htva; ?></th>
 <?php if ($lot =='y') { ?>
-  <th><?php echo "N° lot"; ?></th>  
+  <th><?php echo $lang_num_lot; ?></th>  
 <?php } ?> 
   <th colspan="2"><?php echo $lang_action; ?></th>
  </tr>
 <?php
-//trouver le client correspodant devis à editer
+//trouver le client correspodant devis Ã  editer
 
 //trouver le contenu du bon
 $total_bon = 0.0;
@@ -125,7 +125,7 @@ while($data = mysql_fetch_array($req5)){
   $num_cont = $data['num'];
   $num_lot = $data['num_lot'];
 //+ calcul du montant de la remise #2015
- $prx_ht = ($data['p_u_jour']/$data['marge_jour']);#non margé
+ $prx_ht = ($data['p_u_jour']/$data['marge_jour']);#non margÃ©
  $tx_remise = (1-($data['remise']/100));#taux remise
 
  $remise_art_htva = ( $data['p_u_jour'] * $quanti ) - $tot;
@@ -151,7 +151,7 @@ while($data = mysql_fetch_array($req5)){
   <td class='<?php echo couleur_alternee (FALSE,"nombre"); ?>'><?php echo montant_financier($tot); ?></td>
 <?php if ($lot =='y') { ?>
   <td class='<?php echo couleur_alternee (FALSE,"c texte"); ?>'>
-   <a href="voir_lot.php?num=<?php echo"$num_lot";?>" target="_blank"><?php echo"$num_lot";?></a>
+   <a href="voir_lot.php?num=<?php echo $num_lot;?>" target="_blank"><?php echo $num_lot;?></a>
   </td>
 <?php } ?>  
   <td class='<?php echo couleur_alternee (FALSE,"c texte"); ?>'>
@@ -160,7 +160,7 @@ while($data = mysql_fetch_array($req5)){
      type="image" value="<?php echo $lang_editer; ?>"
      src="image/edit.gif"
      alt="<?php echo $lang_editer; ?>"
-     align="middle" 
+     align="top" 
      onclick="submit()"
     >
     <input type="hidden" name="num_cont" value="<?php echo $num_cont; ?>">

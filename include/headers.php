@@ -1,17 +1,45 @@
 <?php
+/*
+ * Factux le facturier libre
+ * Copyright (C) 2015 Thomas Ingles
+ * 
+ * Licensed under the terms of the GNU  General Public License:
+ * 		http://opensource.org/licenses/GPL-3.0
+ * 
+ * For further information visit:
+ * 		http://factux.free.fr
+ * 
+ * File Name: headers.php
+ * 	Editor configuration settings.
+ * 
+ * * * Version:  5.0.0
+ * * * * Modified: 07/10/2016
+ * 
+ * File Authors:
+ * 		Thomas Ingles
+ *.
+ */
+date_default_timezone_set('Europe/Paris');
 $here=(isset($now))?$now:'';#if client callin
-$page_name = ucfirst(str_replace(['_','.php'],[' ',''],basename($_SERVER['PHP_SELF'])));
+include_once($here."include/configav.php");
 include_once($here."include/config/common.php");
-$lang=(empty($lang))?$default_lang:$lang;#default_lg in common
+if(
+   !strstr($_SERVER['PHP_SELF'],'/client/')
+  &!strstr($_SERVER['PHP_SELF'],'login.php')
+  &!strstr($_SERVER['PHP_SELF'],'index.php')
+  &!strstr($_SERVER['PHP_SELF'],'logout.php')
+  )
+  require_once("include/verif.php");
+$lang=(!empty($_SESSION['lang']))?$_SESSION['lang']:isset($lang)?$lang:$default_lang;# (isset=fix lang espace client) default_lg in common
 include_once($here."include/config/var.php");
 include_once($here."include/language/$lang.php");
 include_once($here."include/utils.php");
-include_once($here."include/configav.php");
+$page_name = ucfirst(str_replace(array('_','.php'),array(' ',''),basename($_SERVER['PHP_SELF'])));
 ?><!DOCTYPE html>
 <html>
  <head>
-  <meta charset="ISO-8859-1">
-  <title><?php echo "$page_name - $lang_factux" ?></title>
+  <title><?php echo "Factux - $page_name" ?></title>
+  <meta charset="UTF-8">
   <link rel="stylesheet" type="text/css" href="<?php echo $here; ?>include/themes/<?php echo"$theme";?>/style.css">
   <link rel="shortcut icon" type="image/x-icon" href="<?php echo $here; ?>image/favicon.ico" >
   <style style='display:none;'>
@@ -50,6 +78,3 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 */ 
 </script>
-<?php
-if(!strstr($_SERVER['PHP_SELF'],'/client/')&!strstr($_SERVER['PHP_SELF'],'logout.php'))
- require_once("include/verif.php");

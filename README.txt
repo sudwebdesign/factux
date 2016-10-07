@@ -1,95 +1,95 @@
 #######################################################################
 
 
-Installation de FactuX5.10.5 sur votre serveur
+Installation de factux sur votre serveur
 
-Version X5.*
+Version 5.0.0
 
-Avant l'installation assurer vous de recuperer 
-1.l'adresse de votre base de donnée
-2.le mot de passe de l'utilisateur de votre base mysql
-3.le login de votre utilisateur mysql
-4.Si la base de donnée à été crée, le nom de cette base de donnée vide
-(si elle est inexistante et que vous avez les droits necessaires sur le serveur de base de donnée, Factux permet de la créer pour vous
-5.Toutes les info de votre entreprise (n° de tva, adresse, tel, registre de commerce...)
-6. une image du logo de votre entreprise au format jpg 
+Avant l'installation assurez-vous de rÃ©cupÃ©rer
+1. l'adresse de votre base de donnÃ©es mysql
+2. le mot de passe de l'utilisateur de votre base mysql
+3. l'identifiant de l'utilisateur de votre base mysql
+4. Si la base de donnÃ©es a Ã©tÃ© crÃ©Ã©e, le nom de cette base de donnÃ©es vide
+(si elle est inexistante et que vous avez les droits nÃ©cessaires sur le serveur de bases de donnÃ©es, Factux vous proposera de la crÃ©er pour vous)
+5. Toutes les infos de votre entreprise (nÂ° de tva, adresse, tel, registre de commerce...)
 
+DÃ©compressez le fichier zip dans un rÃ©pertoire accessible par apache
+VÃ©rifiez les droits des fichiers
+Tous les fichiers doivent Ãªtre lisibles par apache
 
-Decompressez le fichier dans un repertoire accecible par apache
-Verifier les droit des fichier (chmod)
-- Touts les fichier doivent etres lisibles par apache
-- Les repertoires 
-   /include 
-   /dump 
-   /image 	
-   /include/session
-   /fpdf
-   et le repertoire racine de Factux doivent permettre un droit d'ecriture par apache
+Les rÃ©pertoires
+/include
+/dump
+/image
+/fpdf
+/include/session
+et le rÃ©pertoire racine de Factux
 
-Pointez votre navigateur sur http://votre_hebergeur.org/factux/installeur/
-Suivez les instructions à l'ecran.
-Apres l'installation il faut effacer le repertoire installeur de l'arboressence de factux.
-(si vous ne le faites pas un message de rapel vous sera adressé et vous permettra de supprimer ce repertoire)
-Réduire les droit des fichiers :
-   /include/config/var.php
-   /include/config/common.php
-Ceux ci ne doivent etre accesible quen lecture par apache.
-Si Vous ne le faites pas un rappel vous seras adressé dans Factux
+doivent permettre un droit d'Ã©criture par apache
 
- Bugs et desiteratas sur http://
+Pointez votre navigateur sur http://votre_hebergeur.fr/mon_dossier_factux/installeur/
+Suivez les instructions Ã  l'Ã©cran.
 
-######################################################
+AprÃ¨s l'installation, il faut effacer le rÃ©pertoire "installeur" de l'arborescence de Factux (si vous ne le faites pas un message vous le rappellera)
 
-Upgrade de Factux
+RÃ©duire les droits des fichiers :
+/include/config/var.php
+/include/config/common.php
 
-Faites tout d'abord une sauvegarde de votre base de donnée 
-(en ligne de commande ou via phpmyadmin, adminer ou tout autre soft de gestion de mysql)
+Ceux-ci ne doivent Ãªtre accessibles qu'en lecture seule par apache.
+Si vous ne le faites pas, un rappel vous sera adressÃ© dans Factux
 
-Ensuite faite une sauvegade des fichiers suivant:
-   /include/config/common.php
-   /include/config/var.php
-   /image/votreficherlogo.jpg
+Bugs et desiderata sur ici mÃªme ou sur http://factux.free.fr
 
-Ceci fait, supprimer les fichiers de factux.1.1.5 de votre serveur ou déplacer lès dans un autre répertoire (au cas ou* ;-)
-Beaucoup de fichiers ont changer de nom, en écrasant simplement le dossier,
-des fichiers non usités resteraient sur le serveur risquant de créér des anomalies et failles de sécurité.
+############################################################
 
-decompresser l'archive et uploader les fichiers dans le repertoire de votre Factux ou si votre hebergeur le permet,
-téléversé l'archive avec leur webiciel de gestion de fichiers et décompressé là directement dans le dossier de Factux.
+Mise Ã  Niveau de Factux
 
-Verifier les droits comme pour l'installation (voir plus haut) 
-Si vous utliser l'euro comme devise:editer /include/config/var.php et remplacer $devise ="&euro;"; par $devise ="€";
-remplacer les fichiers vides :
-   /include/config/common.php
-   /include/config/var.php
-du serveur par les votres
-aisi que
-   /image/votreficherlogo.jpg
+Faites tout d'abord une sauvegarde de votre base de donnÃ©e (en ligne de commande ou avec l'utilitaire de Factux ou encore via phpmyadmin ou tout autre log(web)iciel de gestion de mysql)
 
-Pointez votre navigateur sur http://votre_hebergeur.org/factux/installeur/upgrade et suivez les instructions a l'ecran
-# Si vous avez modifié les fichier fact_pdf.php ou bon_pdf.php vous devrez malheureusement refaire ces modifications*
+Ensuite faites une sauvegarde des fichiers suivants :
+/include/config/common.php
+/include/config/var.php
+/image/votre_logo.jpg
 
-!!!!!!!!!!!!!Je ne suis en aucun cas responsable des pertes de données du à l'upgrade de Factux !!!!!!!!!!!!!
+Ceci fait, dÃ©compressez l'archive et envoyez les fichiers dans le rÃ©pertoire recevant Factux.
+
+Pour plus de sÃ©curitÃ© veuillez effacer (ou dÃ©placer/renommer) le dossier de l'ancien Factux (il y a eu du mÃ©nage et du renommage de fichiers).
+
+VÃ©rifiez les droits comme pour l'installation (voir plus haut)
+
+TÃ©lÃ©verser les fichiers
+/include/config/common.php
+/include/config/var.php
+/image/votre_logo.jpg
+
+Ouvrez votre navigateur et aller http://votre_hÃ©bergeur.fr/mon_dossier_factux/installeur/upgrade/
+Suivez les instructions Ã  lâ€™Ã©cran
+
+Si vous utilisez l'euro comme devise, vÃ©rifier dans /include/config/var.php si la variable $devise ="&euro;"; a bien Ã©tÃ© remplacÃ© par $devise ="â‚¬";
+Si vous avez modifiÃ© les fichiers fact_pdf.php ou bon_pdf.php vous devrez malheureusement refaire ces modifications
+
+!!!!!!!!!!!!! Je ne suis en aucun cas responsable des pertes de donnÃ©es dues Ã  la mise Ã  jour de Factux !!!!!!!!!!
 #####################################################
-Changelog 1.1.5 --> X5.10.5 révision des dix ans par thom@s
+Changelog 1.1.5 --> 5.0.0
 
-Chasse et pêche aux cafards
+Chasse et pÃªche aux cafards
 OSI concept 'One Space Indent'
 CISEN Concept 'Clean/Correct If See Error Now'
-Correction des entête des fichiers et intégration complete du système de thême
-Fichier et systeme de langue consolidé & augmenté (en français). #need #translator #english #nederlands #verification
-Fichiers non usités supprimés
+Correction des entÃªte des fichiers et intÃ©gration complete du systÃ¨me de thÃªme
+Fichier et systeme de langue consolidÃ© & augmentÃ© (en franÃ§ais). #need #translator #english #nederlands #verification
+Fichiers non usitÃ©s supprimÃ©s
 MAJ de l'installeur
 Integration d'un systeme remises* 
 Integration du coef de marge*
-MAJ des thêmes + 1 ajout
-MAJ de nombres litéraux
+MAJ des thÃªmes + 1 ajout
+MAJ de nombres litÃ©raux
 MAJ du systeme de gestion des articles*
-MAJ du systeme de gestion des factures non réglés*
-Module de gestion des catégories ajouté
-Révision des requettes SQL
-Reroutage de cerains point clé de Factux
-Réécrit en PHP 5.5, HTML5
+MAJ du systeme de gestion des factures non rÃ©glÃ©s*
+Module de gestion des catÃ©gories ajoutÃ©
+RÃ©vision des requettes SQL
+Reroutage de cerains point clÃ© de Factux
+RÃ©Ã©crit en PHP 5.5, HTML5
 Si PHP 7 une librairie de migration pour MariaDB & Mysql s'active #thx: dotpointer ;-)
 Validation du code selon les standards du w3c temps au point de vue css que html. 
 
@@ -102,11 +102,11 @@ Chasse aux bugs
 un module de themes et 4 themes
 le choix des categories
 l'integration du module lot
-le choix avancé des clients selon leur initiale
+le choix avancÃ© des clients selon leur initiale
 un systheme de choix de payement ds factures. 
 Ajout d'un module de stock
 La validation du code selon les standarts du w3c temps au point de vue css que html. 
-Ajout d'un sytheme permetant l'auto-impression des documents generés
+Ajout d'un sytheme permetant l'auto-impression des documents generÃ©s
 
 #####################################################
 changelog 1.1.3--> 1.1.4
@@ -114,30 +114,25 @@ changelog 1.1.3--> 1.1.4
 
 Chasse aux bugs
 Meilleure gestion des fichiers de language
-Possibilité d'imprimer les factures par lot
-Possibilité de generer les factures par lot
-Integration des fichiers de language nl.php et en.php (merci à Toine e Cass pour leur traductions respectives.)
-
-
-
-
+PossibilitÃ© d'imprimer les factures par lot
+PossibilitÃ© de generer les factures par lot
+Integration des fichiers de language nl.php et en.php (merci Ã  Toine e Cass pour leur traductions respectives.)
 
 #####################################################
-
 changelog 1.1.2--> 1.1.3
 
 #chasse aux bugs
-#Modification de la methode de création des bon, facture et devis en pdf ,il sont a present stocké temporairement sur le serveur et effacé par la suite.
-#Ajout d'un module permettant de gerer les utilisateur de Factux et ainsi leur donner les droits sur tout ou partie du facturier
+#Modification de la methode de crÃ©ation des bon, facture et devis en pdf ,il sont a present stockÃ© temporairement sur le serveur et effacÃ© par la suite.
+#Ajout d'un module permettant de gerer les utilisateur de Factux et ainssi leur donner les droits sur tout ou partie du facturier
 #Amelioration de la mailing liste avec l'ajout d'un editeur hml en ligne (disponible seulement avec mozilla ou mozilla-firefox)
-#ajout de la possibilitée d'envoyer les document par mail au format pdf.
-#Le client peut a present etre modifié apres la création du bon
+#ajout de la possibilitÃ©e d'envoyer les document par mail au format pdf.
+#Le client peut a present etre modifiÃ© apres la crÃ©ation du bon
 #amelioration de l'installeur
-#Possibilitée de voir les statistiques des années précedentes
+#PossibilitÃ©e de voir les statistiques des annÃ©es prÃ©cedentes
 #a  jout d'un favicon (juste pour faire joli ;))
-# Ajout d'un module de lot (principalement pour les commercants horeca soumit à la tracabilitée.
+# Ajout d'un module de lot (principalement pour les commercants horeca soumit Ã  la tracabilitÃ©e.
 Ce module n'est pas actif par default.
-#ajout d'un calendrier en javascrip pour un facilitée de prise de date.
+#ajout d'un calendrier en javascrip pour un facilitÃ©e de prise de date.
 
 
 
@@ -145,18 +140,18 @@ Changelog 1 -->1.1
 
 #  chasse aux bugs .
 # Ajout de gifs et autre images afin d'embellir l'interface.
-# Modification des styles css et ajout de classes dans les tableaux afin de facilité la lisibilitée des tableaux. 
+# Modification des styles css et ajout de classes dans les tableaux afin de facilitÃ© la lisibilitÃ©e des tableaux. 
 # Ajout d'un nouveau module de statistiques permettant de voir l'evolution du chiffre d'affaire d'un client par mois. (ok)
-# Achevement de l'internationalisation de l'interface (et publication du fichier language afin de de demander des contribution au niveau de la traduction).(50% effectué)
+# Achevement de l'internationalisation de l'interface (et publication du fichier language afin de de demander des contribution au niveau de la traduction).(50% effectuÃ©)
 # Ajout d'un module de devis. 
-# Possibilitée d'éditer et de suprimer les dépenses. )
-# Meilleur gestion des fournisseurs dans les fichier de dépense. 
+# PossibilitÃ©e d'Ã©diter et de suprimer les dÃ©penses. )
+# Meilleur gestion des fournisseurs dans les fichier de dÃ©pense. 
 # La version 1.1 devrait etre compatible avec les serveur qui sont sur register_global Off (mouveau standart d'instalation de php). 
-# Integration d'un modules de backup et restauration des bases de données. 
+# Integration d'un modules de backup et restauration des bases de donnÃ©es. 
 # Amelioration de l'installeur avec verification des droits d'ecriture dans les fichiers necessaires.Propose aussi l'upload du logo de l'entreprise(ok)
-# Intégration d'un menu dropdown avec image en lieu et place des icones atuels. 
+# IntÃ©gration d'un menu dropdown avec image en lieu et place des icones atuels. 
 # Ajout d'un module permettant aux clients de voir et d'imprimer leus factures, devis et bons de commande en ligne. 
-# Ajout d'une mailing liste basée sur les adresses email des client. permetant par exemple d' envoyer vos promos ou fermetures anuelles à vos cients. 
+# Ajout d'une mailing liste basÃ©e sur les adresses email des client. permetant par exemple d' envoyer vos promos ou fermetures anuelles Ã  vos cients. 
 
 
 Changelog beta -->1 stable

@@ -1,19 +1,19 @@
 <?php 
 /*
  * Factux le facturier libre
- * Copyright (C) 2003-2004 Guy Hendrickx
+ * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
  * 
  * Licensed under the terms of the GNU  General Public License:
- *   http://www.opensource.org/licenses/gpl-license.php
+ *   http://opensource.org/licenses/GPL-3.0
  * 
  * For further information visit:
- *   http://factux.sourceforge.net
+ *   http://factux.free.fr
  * 
  * File Name: edit_fact.php
  *  Permet l'edition des factures.
  * 
- * * * Version:  1.1.5
- * * * * Modified: 23/07/2005
+ * * * Version:  5.0.0
+ * * * * Modified: 07/10/2016
  * 
  * File Authors:
  *   Guy Hendrickx
@@ -81,7 +81,7 @@ foreach ($list_num as $num_bon){
        <form action="fpdf/bon_pdf.php" method="post" enctype="multipart/form-data" target="_blank">
         <input type="hidden" name="num_bon" value="<?php echo $num_bon; ?>" />
         <input type="hidden" name="user" value="adm">
-        <input type="image" src="image/printer.gif" alt="imprimer" />
+        <input type="image" src="image/printer.gif" alt="<?php echo $lang_imprimer; ?>" />
        </form>
       </td>
       <td class='<?php echo couleur_alternee (FALSE, "c texte"); ?>'>

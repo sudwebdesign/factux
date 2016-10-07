@@ -64,7 +64,7 @@ preChargement();
   <li><a href="form_article.php"><?php echo $lang_creer ?><span>&nbsp;;</span></a></li>
   <li><a href="lister_articles.php"><?php echo $lang_lister ?><span>&nbsp;;</span></a></li>
 <?php if ($use_categorie =='y') { ?>
-  <li><a href="lister_cat.php"><?php echo $lang_categorie ?>'s<span>&nbsp;;</span></a></li>
+  <li><a href="lister_cat.php"><?php echo $lang_categorie ?>s<span>&nbsp;;</span></a></li>
 <?php  } ?>
 <?php } ?>
  </ul>
@@ -123,5 +123,5 @@ preChargement();
 <script language="Javascript" type="text/javascript">
 centrer_menu=true;Chargement();
 //window.onresize=function(event){centrer_menu=true;Chargement();};//Never override the window.onresize function or native js functions
-window.addEventListener('resize', function(event){centrer_menu=true;Chargement();})//(cela se ressent en rapidité) http://stackoverflow.com/questions/641857/javascript-window-resize-event
+window.addEventListener('resize', function(event){centrer_menu=true;Chargement();})//(cela se ressent en rapiditÃ©) http://stackoverflow.com/questions/641857/javascript-window-resize-event
 </script>

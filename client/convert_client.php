@@ -1,19 +1,19 @@
 <?php 
 /*
  * Factux le facturier libre
- * Copyright (C) 2003-2004 Guy Hendrickx
+ * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
  * 
  * Licensed under the terms of the GNU  General Public License:
- * 		http://www.opensource.org/licenses/gpl-license.php
+ * 		http://opensource.org/licenses/GPL-3.0
  * 
  * For further information visit:
- * 		http://factux.sourceforge.net
+ * 		http://factux.free.fr
  * 
  * File Name: fckconfig.js
  * 	Editor configuration settings.
  * 
- * * * Version:  1.1.5
- * * * * Modified: 23/07/2005
+ * * * Version:  5.0.0
+ * * * * Modified: 07/10/2016
  * 
  * File Authors:
  * 		Guy Hendrickx
@@ -34,7 +34,7 @@ $message=isset($_POST['message'])?$_POST['message']:"";
 $jour = date("d");
 $mois = date("m");
 $annee = date("Y");
-//on recpere les donnée de devis
+//on recpere les donnÃ©e de devis
 $sql0 = "SELECT * FROM " . $tblpref ."devis WHERE num_dev = $num_dev";
 $req = mysql_query($sql0) or die('Erreur SQL !<br>'.$sql0.'<br>'.mysql_error());
 while($data = mysql_fetch_array($req)){
@@ -46,7 +46,7 @@ while($data = mysql_fetch_array($req)){
  $resu = $data['resu'];
 }
 if ($resu>0){#f5
- $message= "<h2>$lang_devis $lang_déja_commandé ($resu)</h2>";
+ $message= "<h2>$lang_devis $lang_dÃ©ja_commandÃ© ($resu)</h2>";
  include_once("client.php");
  exit;
 }
@@ -86,7 +86,7 @@ $header = 'From: '.$from."\n"
  .'Content-Type: text/html; charset= ISO-8859-1'."\n"
  .'Content-Transfer-Encoding: 7bit'."\n\n";
 if(mail($to,$subject,$message,$header))
- echo "<h2>$lang_email_envoyé</h2>";
+ echo "<h2>$lang_email_envoyÃ©</h2>";
 else
  echo "<h1>$lang_email_envoi_err</h1>";
 include_once("client.php");

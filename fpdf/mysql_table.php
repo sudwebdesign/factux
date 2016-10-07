@@ -1,8 +1,8 @@
 <?php
-include_once ('fpdf.php');
+include_once ('tfpdf.php');
 include_once ('../include/utils.php');
 
-class PDF_MySQL_Table extends FPDF{
+class PDF_MySQL_Table extends tFPDF{
  var $ProcessingTable=false;
  var $aCols=array();
  var $TableX;
@@ -11,13 +11,14 @@ class PDF_MySQL_Table extends FPDF{
  var $ColorIndex;
 
  function Header(){
-  //Imprime l'en-tête du tableau si nécessaire
+  //Imprime l'en-tÃªte du tableau si nÃ©cessaire
   if($this->ProcessingTable)
    $this->TableHeader();
  }
 
  function TableHeader(){//parametre de l'entete du tableau
-  $this->SetFont('Arial','B',10);
+  $this->AddFont('DejaVu','','DejaVuSansCondensed.ttf',true);
+  $this->SetFont('DejaVu','',10);
   $this->SetX($this->TableX);
   $fill=!empty($this->HeaderColor);
   if($fill)
@@ -77,16 +78,16 @@ class PDF_MySQL_Table extends FPDF{
  }
 
  function Table($query,$prop=array()){
-  //Exécute la requête
-  $res=mysql_query($query) or die('Erreur: '.mysql_error()."<br/>Requête: $query");
-  //Ajoute toutes les colonnes si aucune n'a été définie
+  //ExÃ©cute la requÃªte
+  $res=mysql_query($query) or die('Erreur: '.mysql_error()."<br/>RequÃªte: $query");
+  //Ajoute toutes les colonnes si aucune n'a Ã©tÃ© dÃ©finie
   if(count($this->aCols)==0)
   {
    $nb=mysql_num_fields($res);
    for($i=0;$i<$nb;$i++)
     $this->AddCol();
   }
-  //Détermine les noms des colonnes si non spécifiés
+  //DÃ©termine les noms des colonnes si non spÃ©cifiÃ©s
   foreach($this->aCols as $i=>$col){
    if($col['c']==''){
     if(is_string($col['f']))
@@ -95,7 +96,7 @@ class PDF_MySQL_Table extends FPDF{
      $this->aCols[$i]['c']=ucfirst(mysql_field_name($res,$col['f']));
    }
   }
-  //Traite les propriétés
+  //Traite les propriÃ©tÃ©s
   if(!isset($prop['width']))
    $prop['width']=0;
   if($prop['width']==0)
@@ -116,11 +117,11 @@ class PDF_MySQL_Table extends FPDF{
   $this->RowColors=array($prop['color1'],$prop['color2']);
   //Calcule les largeurs des colonnes
   $this->CalcWidths($prop['width'],$prop['align']);
-  //Imprime l'en-tête
+  //Imprime l'en-tÃªte
   if(!isset($prop['entete']))
    $this->TableHeader();
   //Imprime les lignes
-  $this->SetFont('Arial','',8);//police des lignes du tableau
+  $this->SetFont('DejaVu','',8);//police des lignes du tableau
   $this->ColorIndex=0;
   $this->ProcessingTable=true;
   while($row=mysql_fetch_array($res)){

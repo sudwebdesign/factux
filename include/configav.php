@@ -1,9 +1,9 @@
 <?php
-$lot='n';
+$lot='y';
 $liste_cli='y';
 $use_categorie ='y';
 $use_payement ='y';
-$theme='darck';
+$theme='light';
 $use_stock='y';
 $autoprint='n';
 $nbr_impr='';

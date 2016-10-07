@@ -4,29 +4,29 @@
 *Copyright  (C) 2003-2005 Guy Hendrickx
 *
 Licensed under the terms of the GNU General Public licence:
-*              http://www.opensource.org/licenses/gpl-license.php
+*              http://opensource.org/licenses/GPL-3.0
 *
 * For further information visit:
-*              http://factux.sourceforge.net
+*              http://factux.free.fr
 *
-*File Name: nl.php
-*   bestand bevattende de nederlandstalige variabels
-*   Nederlandstalige versie en correcties :@ ant.maes"AT"free.fr
-*
- * * Version:  1.1.5
- * * * Modified: 23/07/2005
+*File Name: nl.php (b)
+*   bestand bevattende de nederlandstalige variabels  Nederlandstalige versie en correcties :@ ant.maes"AT"free.fr
+* 
+ * * Version:  5.0.0
+ * * * Modified: 07/10/2016
 *
 * File Authors:
 *           Guy Hendricks
-*.
 */
-
-
 error_reporting(0);
-////Toegevoegde variabelen
+
+
+$lang_factux = "Factux de vrije fakturier Revision 2017";
+$lang_source_fac = "$lang_factux<br />is een Open source programma verdeeld door ";
 $lang_new_config_ok="Your new configuration is recorded";
 $lang_nbr_impression="Aantal afdrukken";
 $lang_choix_Impression="Gebruik het automatish afprinten"; 
+////Toegevoegde variabelen
 $lang_lots ="Loten";
 $lang_choix_use_stock = "Gebruik de vooraadmodule";
 $lang_administra = "Administratie";
@@ -38,14 +38,14 @@ $lang_use_cat ="Kies de kategoriemodule";
 $lang_modif_par ="Wijzig de parameters van Factux";
 $lang_cr_lot ="Maak een nieuw lot.";
 $lang_depenses_par_fournisseur ="Statistieken per leverancier";
-$lang_conf_env = "Bent u zeker van het verzenden van faktuur n°";
+$lang_conf_env = "Bent u zeker van het verzenden van faktuur nÂ°";
 $lang_conf_env2= "Per E-mail aan klant";
 $lang_conf_notif ="wilt u de klant ervan";
 $lang_conf_notif2 ="op de hoogte brengen van het bestaan van de faktuur ";
 $lang_par ="per";
-$lang_conf_carte_reg ="Bent u zeker van het regelen van faktuur n°";
-$lang_con_env_pdf="Bent u zeker van het verzenden per E-mail van bestelbon n°";
-$lang_con_env_notif="Bent u er zeker van om de klant per E-mail te verwittigen van de bestelbon n°";
+$lang_conf_carte_reg ="Bent u zeker van het regelen van faktuur nÂ°";
+$lang_con_env_pdf="Bent u zeker van het verzenden per E-mail van bestelbon nÂ°";
+$lang_con_env_notif="Bent u er zeker van om de klant per E-mail te verwittigen van de bestelbon nÂ°";
 $lang_mode_paiement ="Betalingswijze";
 $lang_carte_ban ="Bankkaart";
 $lang_pay_ok ="vereffend";
@@ -57,8 +57,8 @@ $lang_liquide = "Cash";
 $lang_status_pay = "Betalingsstatuut";
 $lang_Pour_mont ="Voor een bedrag van";
 $lang_aj_au_bon = "Een andere bestelbon bijvoegen";
-$lang_cré_fac_orph ="Een nieuwe faktuur maken uitgaande van bestelbon n°";
-$lang_num_dev ="Bestek N°";
+$lang_crÃ©_fac_orph ="Een nieuwe faktuur maken uitgaande van bestelbon nÂ°";
+$lang_num_dev ="Bestek NÂ°";
 $lang_tele = "Telefoon";
 $lang_fax = "Fax";
 $lang_civ = "Burgelijke stand";
@@ -68,26 +68,26 @@ $lang_categorie_ajout= "Een categorie bijvoegen";
 $lang_categorie ="Categorie";   
 $lang_err_ancien_mdp ="uw oud paswoord is foutief, gelieve het te willen herzien";
 $lang_stock="Vooraad";
-$lang_stomin="Mininmumvooraad";
-$lang_stomax="Maximumvooraad";
+$lang_stomin="Mini";
+$lang_stomax="Maxi";
 $lang_stock_jour="Artikel";
 $lang_regler_fact2 ="ge-Update naar het status geregeld";
 ///Gewijzigde variabelen
 $lang_conf_effa ="Wenst u werkelijk deze lijn uit de bestelbon te wissen ?";
-$lang_con_effa = "Wenst u werkelijk het uitwissen van de bestelbon n°";
-$lang_regler_fact = "Bent u er zeker van de faktuur n° uit te wissen ?";
+$lang_con_effa = "Wenst u werkelijk het uitwissen van de bestelbon nÂ°";
+$lang_regler_fact = "Bent u er zeker van de faktuur nÂ° uit te wissen ?";
 $lang_art_effa= "Bent u er zeker van het artikel uit te wissen ?";
-$lang_lot_inact= "Bent u zeker van het desaktiveren van het lot n°";
+$lang_lot_inact= "Bent u zeker van het desaktiveren van het lot nÂ°";
 $lang_cli_effa = "Bent u er zeker van deze klant uit te wissen ?";
-$lang_eff_dev = "Bent u zeker van het uitwissen van het bestek n°";
-$lang_convert_dev = "Bent u zeker van het omzetten van het bestek n°";
+$lang_eff_dev = "Bent u zeker van het uitwissen van het bestek nÂ°";
+$lang_convert_dev = "Bent u zeker van het omzetten van het bestek nÂ°";
 $lang_convert_dev2 = "in bestelbon ?";
-$lang_dev_perd = " Bent u er zeker van het bestek n°";
+$lang_dev_perd = " Bent u er zeker van het bestek nÂ°";
 $lang_dev_perd2 =" in het status verloren te zetten?";
-$lang_eff_conf_dep = "Bent u zeker van het uitwissen van uitgave n°";
+$lang_eff_conf_dep = "Bent u zeker van het uitwissen van uitgave nÂ°";
 ////
 
-
+////
 $lang_fi_b_c="Bestelbon"; 
 $lang_facture="Factuur";
 $lang_fact_mu_err = "Geen enkel factuur werd gekreerd op ";
@@ -101,8 +101,7 @@ $lang_nouv_d="Nieuw factuur van ";
 $lang_nouv_add ="Een nieuwe factuur werd u toegezonden door";
 $lang_salut_dist="U vind ze bijgevoegd als bijlage van mail\n Met viendelijke groeten"; 
 
-$lang_cond_ven = "Hier uw verkoopsvoorwaarden \n tweede lijn \n derde lijn 
-\n";
+$lang_cond_ven = "Hier uw verkoopsvoorwaarden \n tweede lijn \n derde lijn \n";
 $lang_Lister_lots = "Maak een lijst van de loten";
 $lang_com_cont_lot = "De bestelbons die het lot bevat";
 $lang_lot = "Loten";
@@ -135,13 +134,12 @@ $lang_val_actu = "Huidige waarde";
 $lang_util_droit = "De rechten van deze gebruiker";
 $lang_utilisateur_editer = "Een gebruiker editeren";
 $lang_retirer = "Verwijderen";
-$lang_multi_ctrl = "U kunt verschillende klanten tegelijk kiezen door op de Ctrl toets van uw klavier te drukken";
+$lang_multi_select_ctrl = "U kunt verschillende klanten tegelijk kiezen door op de Ctrl toets van uw klavier te drukken";
 $lang_ajou_cli_util = "Voeg een klant toe aan deze gebruiker";
 $lang_oui = "ja";
 $lang_non = "nee";
 $lang_restrint = "beperkt";
 $lang_list_utl = "Maak een gebruikerslijst";
-
 
 $lang_client_droit = "U bezit de nodige rechten niet om klanten te beheren, kontakteer de beheerder indien u denkt dat er iets foutief is";
 $lang_article_droit = "U bezit de nodige rechten niet om artikels te beheren, kontakteer de beheerder indien u denkt dat er iets foutief is";
@@ -151,7 +149,6 @@ $lang_facture_droit = "U bezit de nodige rechten niet om fakturen te beheren, ko
 $lang_commande_droit = "U bezit de nodige rechten niet om bestelbons te beheren, kontakteer de beheerder indien u denkt dat er iets foutief is .";
 $lang_devis_droit = "U bezit de nodige rechten niet om bestekken te beheren, kontakteer de beheerder indien u denkt dat er iets foutief is";
 $lang_admin_droit = "U bezit de nodige rechten niet, u moet beheerder zijn om deze pagina te bezichtigen";
-
 
 $lang_mdp_jour = "Uw password is nu ge-updated ";
 $lang_dif_mail_mdp = "Modifikatie van u password";
@@ -189,14 +186,14 @@ $lang_pass_modif = "Verandering van uw password";
 $lang_mail_li_up1= "Geachte klant<br>Uw password werd door de beheerder geupdated<br>Login:";
 $lang_mail_cli_up = "Vermits dit password gekodeerd is opgenomen in onze databank, is het ons onmogelijk u dit te bezorgen bij verlies";
 $lang_ba_imp ="Belastbare basis";
-$lang_fact_num_ab = "Faktuur n°:";
-$lang_totaux = "Totaal exclusief btw: \n Totaal btw: \n Totaal btw inbegrepen:";
-$lang_num_bon_ab = "Bon n°:";
+$lang_fact_num_ab = "Faktuur nÂ°:";
+$lang_totaux = "Totaal exclusief btw:\nTotaal btw:\nTotaal btw inbegrepen:";
+$lang_num_bon_ab = "Bon nÂ°:";
 $lang_de = "van";
 $lang_page = "Pagina";
-$lang_condi = "Facturation à suivre fin de mois\n De faktuur zal op het einde van de maand toe gestuurd worden\n";
+$lang_condi = "Facturation Ã  suivre fin de mois\n De faktuur zal op het einde van de maand toe gestuurd worden\n";
 $lang_prix_htva = "Prijs excl.BT.W";
-$lang_dev_pdf_soc = "Société\nSiège social/Sociaal zetel\n Tel/Fax\n T.V.A/B.T.W\n Banque/Bank\n email";
+$lang_dev_pdf_soc = "SociÃ©tÃ©\nSiÃ¨ge social/Sociaal zetel\n Tel/Fax\n T.V.A/B.T.W\n Banque/Bank\n email";
 $lang_ajo_fact = "Voeg een opmerking aan deze faktuur (facultatief)";
 $lang_cli_effa = "Bent u er zeker van deze klant te willen verwijderen";
 $lang_art_effa = "Bent u er zeker van dit artikkel te willen verwijderen ?";
@@ -205,7 +202,7 @@ $lang_bon_ajouter = "Voeg aan deze bon";
 $lang_bon_editer = "Editeer deze bon";
 $lang_dev_date = "Datum van het bestek";
 $lang_ga_per = "Gewonnen/Verloren";
-$lang_de_num = "Bestek n°";
+$lang_de_num = "Bestek nÂ°";
 $lang_dev_perd = "Bent u er zeker van dit bestek als verloren te aanzien ?";
 $lang_convert_dev = "Bent u er zeker van dit bestek als bestelbon te aanzien?";
 $lang_eff_dev = "Bent u er zeker van dit bestek te willen uitwissen ?";
@@ -218,17 +215,15 @@ $lang_con_gag = "Bent u er zeker van dit bestek als gewonnen te aanzien ?";
 $lang_con_effa_dev = "Bent u er zeker van dit bestek te willen uitwissen ?";
 $lang_mail_a = "mail verzonden aan:";
 $lang_benef = "Winst";
-$lang_factux = "Factux de vrije fakturier V 1.1.5";
 $lang_de_per = "Uw bestek $num_dev is nu als verloren aanzien";
 $lang_sup_li = "Wenst u werkelijk deze aligna van de leveringsbon uit te wissen ?";
 $lang_edit_bon = "Editeer een bestelbon";
 $lang_che_dep = "Zoek een uitgave";
-$lang_no_dep = "Uitgave n°";
+$lang_no_dep = "Uitgave nÂ°";
 $lang_cli_jour = "De klant werd ge-updated";
 $lang_noti_pa = "Notificatie van het password verzonden ";
-$lang_mai_cre = "Geachte klant<br>Uw password werd door de beheerder gekrëeerd <br>Login:";
+$lang_mai_cre = "Geachte klant<br>Uw password werd door de beheerder gekrÃ«eerd <br>Login:";
 $lang_mai_cr_pa = " Password:";
-$lang_source_fac = "Factux is een Open source programma verdeeld door ";
 $lang_mai_cre_enc = "<br><br>u kan dit password nu veranderen maar niet de login. <br>Dit password is gekodeerd opgenomen in onze gegevensbank.<br>Bij verlies, gelieve te verwittigen l ";
 $lang_pass_nou = "Die u een nieuwe zal verschaffen ";
 $lang_cre_mo_pa = "Kreatie van uw password";
@@ -266,6 +261,7 @@ $lang_back_ser = "Het Backup moet zich op de server bevinden in het dump bestand
 $lang_nom_back = "Naam van het backup bestand: backup.sql";
 $lang_fi_back = "Maak een Backup";
 $lang_regler_fact = "Bent u er zeker van deze faktuur als geregeld te aanzien ? ";
+
 $lang_con_dev_effa = "Wenst u werkelijk dit bestek uit te wissen ?";
 $lang_con_effa = "Wenst u werkelijk deze bestelbon uit te wissen ?";
 $lang_dep_choi = "U dient oftewel een leverancier uit de lijst te kiezen, oftewel een nieuwe aan te brengen  !!!";
@@ -300,7 +296,7 @@ $lang_complement = "Omschrijving";
 $lang_rue="Straat";
 $lang_code_postal="Postkode";
 $lang_ville="Stad";
-$lang_numero_tva ="$lang_tva N°";
+$lang_numero_tva ="$lang_tva NÂ°";
 $lang_email = "e-mail";
 $lang_bc_base = "Databank";
 $lang_annuler = "Annuleren";
@@ -332,24 +328,24 @@ $lang_authentification_ok = "Authentificatie gelukt.";
 $lang_bienvenue = "Welkom";
 $lang_facture_creer = "Een nieuw faktuur maken";
 $lang_date="Datum";
-$lang_commande_numero = "Bestellings  n°";
+$lang_commande_numero = "Bestellings  nÂ°";
 $lang_commandes_non_facturees = "Niet gefaktureerde bestellingen";
 $lang_commandes_liste="Bestellingen van de maand";
 $lang_choisissez="Maak uw keuze";
 $lang_commandes_chercher = "Zoek een bestelling";
-$lang_devis_numero="$lang_devis n°";
-$lang_numero="N°";
+$lang_devis_numero="$lang_devis nÂ°";
+$lang_numero="NÂ°";
 $lang_devis_date = "Data van het $lang_devis";
 $lang_devis_perdus = "Lijst van de verloren $lang_devis";
 $lang_devis_chercher = "Zoek een $lang_devis";
-$lang_devis_créer = "Maak een nieuw $lang_devis";
+$lang_devis_crÃ©er = "Maak een nieuw $lang_devis";
 $lang_devis_liste = "Lijst van de  $lang_devis";
 $lang_clients_existants = "Klantenlijst";
 $lang_client_accesprive = "Optioneel (om toegang te verschaffen tot het klantengedeelte )<br>
 Indien u een login en password invult, dan zal de klant hiervan per mail op de hoogte gebracht worden.";
 $lang_articles_liste = "Artikelenlijst";
 $lang_retablir = "Herstellen";
-$lang_devis_numero = "$lang_devis n°";
+$lang_devis_numero = "$lang_devis nÂ°";
 $lang_envoyer = "Verzenden";
 $lang_outils = "Utilitys";
 $lang_articles = "Artikelen";
@@ -397,10 +393,11 @@ $lang_enre = "Bon ingeschreven";
 $lang_champ_oubli = "U bent vergeten een vak in te vullen.<br>$lang_editer de bon om verder te gaan";
 $lang_nv_bon = "Maak een nieuwe bestelbon";
 $lang_bon_compr = "De bestelbon van  $nom bevat:";
-$lang_li_tot = " $quanti $uni van $article voor een totaal van $tot ¤ ";
+$lang_li_tot = " $quanti $uni van $article voor een totaal van $tot Â¤ ";
+
 $lang_editer = "Veranderen";
 #$lang_suprimer = "Deleten";
-$lang_som_tot = "Voor een totale som van <font size = 4>$total_bon ¤ $lang_htva</font>";
+$lang_som_tot = "Voor een totale som van <font size = 4>$total_bon Â¤ $lang_htva</font>";
 $lang_som_tot2 = "Voor een totale som van ";
 $lang_mont_tva = "en een bedrag van $lang_tva van ";
 $lang_ajou_bon = "Voeg aan deze bon toe";
@@ -427,8 +424,8 @@ $lang_cont_bon = "De bestelbon $nom bevat ";
 $lang_cont_devis = "Het bestek $nom bevat "; 
 $lang_tot_de = "voor een totaal van";
 $lang_bon_comp = "De bestelbon $nom bevat:";
-#$lang_pou_so_to = "Voor een totale som van <font size = 4>$total_bon ¤ $lang_htva";
-#$lang_to_tva = " en een B.T.W bedrag van<font size = 4>$total_tva ¤ ";
+#$lang_pou_so_to = "Voor een totale som van <font size = 4>$total_bon Â¤ $lang_htva";
+#$lang_to_tva = " en een B.T.W bedrag van<font size = 4>$total_tva Â¤ ";
 $lang_edi_cont_bon = "$lang_editer de inhoud van een bon";
 $lang_modifier = "Verander";
 $lang_err_fact = "Sommige bestelbons behoren reeds tot een faktuur.";
@@ -447,7 +444,7 @@ $lang_dev_effa = "Het bestek is wel degelijk uitgewist";
 $lang_societe = "Maatschappij";
 $lang_siege_social = "Adres";
 $lang_tel_fax = "Tel / Fax";
-$lang_numero_tva = "B.T.W n° ";
+$lang_numero_tva = "B.T.W nÂ° ";
 $lang_email = "e-mail";
 $lang_sortir = "Logout";
 $lang_factures_non_reglees_total = "Totaal";
@@ -460,7 +457,7 @@ $lang_tot_tva = "Totaal $lang_tva";
 $lang_date_bon = "Datum van de bon";
 $lang_impri = "Printen";
 $lang_total = "Totaal";
-$lang_total_annee = "$lang_total van het l&apsannée";
+$lang_total_annee = "$lang_total van het l&apsannÃ©e";
 $lang_total_mois = "$lang_total van de maand";
 $lang_tot_ttc = "$lang_totaal $lang_ttc";
 $lang_tou_fact = "Alle fakturen";
@@ -501,6 +498,164 @@ $lang_devis_editer = "$lang_editer het bestek";
 
 $code_langue = "nl_NL";
 
+//ajout 5.0.0 // AUTOTRANSLATE by babylon
+$lang_le = "De";
+$lang_bon = "Inkooporder";
+$lang_prix = "Prijs";
+$lang_remise = "Korting";
+$lang_marge = "Winstmarge";
+$lang_enregistre = "Geregistreerd";
+$lang_crÃ©Ã©e_pour = "Gemaakt voor";
+$lang_suite_edit_utilisateur_err_pass = "Fout bij de twee wachtwoorden komen niet overeen";
+$lang_suite_edit_utilisateur_succes = "De nieuwe gegevens van de gebruiker zijn geregistreerd";
+$lang_modifier_depense = "Bewerk een last";
+$lang_del_utilisateur_succes = "Alle gegevens van de gebruiker worden gewist.";
+$lang_actif = "Actief";
+$lang_inactif = "Inactief";
+$lang_rendre_actif = "Actief maken";
+$lang_rendre_inactif = "Inactief maken";
+$lang_lot_maj = "Succesvolle update van de partij";
+$lang_cat_maj = "Succesvolle update van de categorie";
+$lang_cat_effa = "Weet u zeker dat u wilt verwijderen in de categorie";
+$lang_err_efa_cat = "Deze categorie kan begrip opbrengen voor de artikelen, kunt u niet verwijderen.";
+$lang_cat_eff = "De categorie $categorie is verwijderd.";
+$lang_echea = "Deadline";
+$lang_num_fact = "$lang_numero de factuur";#Van
+$lang_simu = "Simulatie";
 
+$lang_art_eff = "Het artikel $article werd geschrapt.";
+$lang_ga = "Won";
+$lang_perdu = "Verloren";
+$lang_vers = "Naar";
+$lang_divers = "Verschillende";
 
-?>
+$lang_voir_bons_du_lot = "Zie de goede die deze partij";
+$lang_lot_cherche_lot = "Zoek een goed door haar batch NO.";
+$lang_lot_cherche_four = "Zoeken vanuit de partij leverancier";
+$lang_effacer_ligne_devis = "Wenst u werkelijk deze regel doorhalen van de offerte?";
+$lang_dev_editer = "Bewerk de offerte";
+$lang_env_par_mail = "Verzenden per e-mail";
+$lang_env_par_mail_non = "Fout e-mail is niet verzonden!";
+$lang_edit_fact_n = "Bewerk het factuurnummer";
+$lang_ajou_fact_n = "Voeg de factuur nr.";
+$lang_ajouter = "Toevoegen";
+$lang_enter = "Voer";
+$lang_pay_le = "$lang_pay_ok $lang_le";
+$lang_dat_inva = "$lang_date Ongeldig";
+
+$lang_les_utl = "Gebruikers";
+$lang_id_or_mail_exist = "Fout bij het inloggen/$lang_email bestaat al";
+$lang_mail_exist = "Fout bij het $lang_email bestaat al";
+
+$lang_admin = "Admin";
+$lang_gerer = "Beheren";
+$lang_stat = "Cito";
+$lang_art = "Art";
+$lang_point = "Punten";
+
+$lang_lot_zero = "De batch nul is leeg omdat onbestaande. <br />een batchbestand en geselecteerd wanneer u een item wilt toevoegen aan de order.";
+$lang_edit_lot = "Het bewerken van een partij";
+$lang_cont_lot = "Inhoud van de partij";
+
+$lang_changer_client = "Wijzig de client";
+$lang_au_cli_choi = "Geen enkele klant geselecteerd voor het toevoegen!";
+
+$lang_convertir = "Converteren";
+$lang_irrecouvrable = "Oninbare";
+$lang_reglee = "Stel";
+$lang_prix_dachat = "Aankoopprijs";
+$lang_coef_de_marge = "Coef van marge";
+$lang_pdv_mrg_ht = "Verkoopprijs exclusief btw marge";
+$lang_taux_marge = "Percentage";
+
+$lang_notif_par_mail = "Hou per e-mail";
+$lang_facturer_ce_bon = "Deze factuur goed";
+$lang_facture_lister = "Lijst van de facturen";
+$lang_fact_enr = "Factuur wordt opgeslagen voor de klant";
+
+$lang_restore_backup = "Bezig met herstel database... Wacht ; -)";
+$lang_telecharger = "Download";
+$lang_sauve = "Opslaan";
+$lang_back_t_a_s = "De tabellen op te slaan";
+$lang_back_resto = "Back-up en herstel";
+$lang_decompresser = "Uittreksel";
+$lang_back_err = "Geen tabel is opgeslagen";
+$lang_restore_err_dbinfo_file = "Kan het bestand niet vinden op backup informatie, onderbroken herstellen";
+$lang_restore_err_crea_sql = "Kan het bestand niet maken backup.sql";
+$lang_restore_err_zip = "Kan niet lezen van het gecomprimeerde bestand (.zip)";
+//download
+$lang_aucun_sql = "No file backup.sql in de dump-folder.";
+$lang_err_c_zip = "Niet dat u het gecomprimeerde bestand";
+$lang_err_f = "Bestandsfout.";
+
+$lang_total_vente = "Totale omzet";
+$lang_dep_maj = "Uitgaven update";
+$lang_dep_eff = "Uitgaven gewist";
+
+$lang_premier = "Eerste";
+$lang_deuxieme = "Tweede";
+$lang_troisieme = "Derde";
+$lang_premier_rappel = "Wij hebben geconstateerd dat u had waarschijnlijk vergeten de facturen als hieronder.\n	Dank u vriendelijk om op zijn vroegst.\n	Accepteer Mevrouw Mr. uiting aan onze gevoelens van respect.\n	Als uw betaling had gekruist deze herinnering, overweeg dan als nietig.";
+$lang_deuxieme_rappel = "Mevrouw, Mijnheer,\n																			 ondanks onze eerste herinnering nog niet betaald de facturen vermeld.\n	Dank u vriendelijk creditering van onze rekening binnen acht dagen.\n	Anders zouden wij nu in de verplichting zich te houden aan onze verkoopvoorwaarden gelegen aan de achterzijde van dit document alsmede aan de achterzijde van al onze facturen.\n							 Indien uw betaling waren overgestoken deze herinnering, overweeg dan als nietig.";
+$lang_troisieme_rappel = "Derde herinnering";
+
+$lang_categorie_modif = "Een categorie bewerken";
+
+$lang_condi_ven = "Verkoopvoorwaarden aan de achterzijde";
+
+$lang_monnaie = "Euro";
+$lang_centime = "Penny";
+
+$lang_notifi_cli = "Notificatie e-mail gestuurd!";
+$lang_notifi_cli_non = "Toezending van de aanmelding e-mail mislukt!";
+$lang_notifi_titre_bon = "Nieuwe bestelling";
+$lang_notifi_message_bon = "Een nieuwe bestelling naar u is verzonden door <br>u kunt raadplegen in jullie op de website met uw login wachtwoord<br>";
+$lang_notifi_titre_fact = "Nieuwe factuur";
+$lang_notifi_message_fact = "Een nieuwe factuur wordt toegestuurd door <br>u kunt raadplegen in deze op de internetsite met uw login wachtwoord<br>";
+$lang_notifi_titre_dev = "Nieuwe offerte";
+$lang_notifi_message_dev = "Een nieuwe offerte naar u is verzonden door <br>u kunt raadplegen in deze op de internetsite met uw login wachtwoord<br>";
+
+#rapel
+$lang_envoyÃ©e_depuis = "Verzonden door";
+$lang_email_envoyÃ© = "E-Mail goed verzonden";
+$lang_email_envoi_err = "Er is een fout opgetreden, niet om het e-mailbericht te verzenden!";
+
+#stats
+$lang_toutes = "Alle";
+$lang_tous = "Alle";
+$lang_dachat = "Aankoopdatum";
+$lang_de_vente = "Verkoopvoorwaarden";
+$lang_au_reel = "De echte (betaalde)";
+$lang_graph_cir = "Cirkeldiagram";
+$lang_evo_dep = "Evolutie van de uitgaven";
+$lang_facturÃ© = "gefactureerd";
+$lang_commandÃ© = "besteld";
+$lang_acquittÃ© = "vrijgesproken";
+$lang_encaissÃ© = "geÃ¯nd";
+$lang_l_annÃ©e = "de'jaar";
+$lang_toutes_les_annÃ©es = "alle jaren";
+
+#convert
+$lang_dÃ©ja_commandÃ© = "Al het commando";
+
+#fpdf
+$lang_mail_client_bon_sujet = "Goede beheersing van";
+$lang_mail_client_bon_message = "Een nieuwe bestelling is naar u verzonden door .\n	U vindt in de bijlage bij deze e-mail.\n	Hoogachtend";
+$lang_mail_client_dev_sujet = "Citaat van";
+$lang_mail_client_dev_message = "Een nieuwe offerte is adres door .\n	U vindt in de bijlage bij deze e-mail.\n	Hoogachtend";
+$lang_mail_client_fact_sujet = "Nieuwe factuur van";
+$lang_mail_client_fact_message = "Een nieuwe factuur u heeft zo ontgoocheld aangepakt door .\n	U vindt in de bijlage van een e-mail\n	groeten onderscheiden";
+
+#admin
+$lang_choix_auth_cli_devis = "Laat klanten de weergave van noteringen en de omvorming ervan tot opdrachten";
+$lang_choix_auth_cli_bon = "Laat klanten de weergave van opdrachten.";
+$lang_choix_auth_cli_fact = "Laat klanten de advertenties van facturen";
+$lang_choix_first_art = "Keuze van artikel standaard geselecteerd";
+$lang_choix_echeance_fact = "Looptijd van de termijnen voor betaling van facturen";
+$lang_fi_innouvr = "Het bestand niet openen";
+$lang_fi_inedita = "Kan niet schrijven naar het bestand";
+$lang_fi_lect_sl = "Het bestand is ontoegankelijk te maken";
+
+//installeur
+$lang_install_user_create = "Dit zal de gebruiker beheerdersrechten hebt en kan niet worden verwijderd door de Intel Health Care Management Suite.";
+error_reporting(E_ERROR | E_WARNING | E_PARSE | E_NOTICE);#error_reporting(E_ALL);

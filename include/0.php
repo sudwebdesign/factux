@@ -1,7 +1,7 @@
 <?php
 ###4 change (') simple quote &#39; to Right single quotation mark &#146; &rsquo; ::: http://ascii-code.com/
 function apostrophe($str){
- return str_replace(chr(39),chr(146),$str);#tips iso-8859-1
+ return str_replace(chr(39),'’',$str);#tips iso = chr(146)
 }
 # go to php7
 if (version_compare(phpversion(),'7', '>='))

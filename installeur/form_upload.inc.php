@@ -5,8 +5,8 @@ Celui-ci doit obligatoirement etre au format jpg et son nom ne doit contenir ni 
 </p>
 <h2><form enctype="multipart/form-data" action="upload.php" method="post">
   <input type="hidden" name="MAX_FILE_SIZE" value="100000" />
-   Transfère le fichier <input type="file" name="monfichier" />
-  <input type="submit" value="envoyer"/>
+   TransfÃ¨re le fichier <input type="file" name="monfichier" />
+  <input type="submit" name="Submit" value="<?php echo $lang_envoyer; ?>" />
  </form>
 </h2>
 <br>

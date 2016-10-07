@@ -1,19 +1,19 @@
 <?php
 /*
  * Factux le facturier libre
- * Copyright (C) 2003-2004 Guy Hendrickx
+ * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
  * 
  * Licensed under the terms of the GNU  General Public License:
- * 		http://www.opensource.org/licenses/gpl-license.php
+ * 		http://opensource.org/licenses/GPL-3.0
  * 
  * For further information visit:
- * 		http://factux.sourceforge.net
+ * 		http://factux.free.fr
  * 
  * File Name: fckconfig.js
  * 	Editor configuration settings.
  * 
- * * * Version:  1.1.5
- * * * * Modified: 23/07/2005
+ * * * Version:  5.0.0
+ * * * * Modified: 07/10/2016
  * 
  * File Authors:
  * 		Guy Hendrickx
@@ -23,6 +23,7 @@ require_once("include/verif.php");
 include_once("include/config/common.php");
 include_once("include/config/var.php");
 include_once("include/language/$lang.php");
+include_once("include/utils.php");
 $mail_admin = "$mail";
 $nom=isset($_POST['nom'])?apostrophe($_POST['nom']):"";
 $nom_sup=isset($_POST['nom_sup'])?apostrophe($_POST['nom_sup']):"";
@@ -52,11 +53,11 @@ if($nom=='' || $rue=='' || $ville=='' || $code_post=='' || $num_tva==''){
  exit;
 }
 if ($login !=''){
-$sql = "SELECT * FROM " . $tblpref ."client WHERE login = '".$login."'";
+$sql = "SELECT * FROM " . $tblpref ."client WHERE login = '".$login."' OR mail = '".$mail_cli."'";
 $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 $test = mysql_num_rows($req);
  if ($test > 0) { 
-  $message = "<h1> $lang_er_mo_pa</h1>";
+  $message = "<h1>$lang_id_or_mail_exist</h1>";
   include('form_client.php');
   exit;
  }
@@ -67,13 +68,9 @@ $message='';
 if ($login!='' and $pass2 !='' and $mail_cli !=''){ 
  $to = "$mail_cli";
  $from = "$mail_admin" ;
- $subject2 = "$lang_cre_mo_pa" ;
- $message =  "$lang_mai_cre $login <br>$lang_mai_cr_pa $pass2 <br>$lang_mai_cre_enc <a href=mailto:'".$mail_admin."'>$lang_admini</a> $lang_pass_nou"; 
- $header = 'From: '.$from."\n"
-  .'MIME-Version: 1.0'."\n"
-  .'Content-Type: text/html; charset= ISO-8859-1'."\n"
-  .'Content-Transfer-Encoding: 7bit'."\n\n";
- if(mail($to,$subject2,$message,$header))
+ $subject = "$lang_cre_mo_pa" ;
+ $message =  "$lang_mai_cre $login <br>$lang_mai_cr_pa $pass2 <br>$lang_mai_cre_enc <a href='mailto:".$mail_admin."'>$lang_admini</a> $lang_pass_nou";
+ if(courriel($to,$subject,$message,$from,$logo))#mail($to,$subject,$message,$header)
   $message = "<h2>$lang_noti_pa</h2>";
  else
   $message = "<h1>$lang_notifi_cli_non</h1>";
