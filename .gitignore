@@ -3,3 +3,4 @@ include/config/var.php
 include/session/*
 fpdf/*.pdf
 dbinfo.php
+/nbproject/private/
