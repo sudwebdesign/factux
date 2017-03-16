@@ -30,18 +30,18 @@
       <caption>Paramètres d'installation :</caption>
       <tr>
        <td>Utilisateur (login) de la base de données mysql</td>
-       <td><input name="un" type="text" id="article" maxlength="40"></td>
+       <td><input name="un" type="text" id="article" placeholder="root" maxlength="40"></td>
       </tr>
       <tr>
        <td>Mot de passe de l'utilisateur mysql</td>
-       <td><input name="deux" type="password"  ></td>
+       <td><input name="deux" type="password" placeholder="&ldè8#8dT" ></td>
       </tr>
       <tr>
        <td>Nom de la base de donnée mysql</td>
-       <td><input name="trois" type="text" ></td>
+       <td><input name="trois" type="text" placeholder="factux" ></td>
       <tr>
        <td>Adresse de la base de données mysql (adresse ip ou non d'hôte)</td>
-       <td><input name="quatre" type="text" ></td>
+       <td><input name="quatre" type="text" placeholder="localhost"></td>
       <tr>
        <td>Langage par défaut de l'interface et des factures<br>Les autres langages seront disponibles via un menu</td>
        <td>
