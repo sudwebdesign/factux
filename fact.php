@@ -21,7 +21,17 @@
  */
 include_once("include/headers.php");
 include_once("include/finhead.php");
-
+?>
+<table width="760" border="0" class="page" align="center">
+ <tr>
+  <td class="page" align="center">
+<?php
+include_once("include/head.php");
+if ($user_fact == 'n') {
+ echo "<h1>$lang_facture_droit</h1>";
+ include_once("include/bas.php");
+ exit;
+}
 $acompte=isset($_POST['acompte'])?$_POST['acompte']+0.00:0.00;
 $date_deb=isset($_POST['date_deb'])?$_POST['date_deb']:"";
 $date_fin=isset($_POST['date_fin'])?$_POST['date_fin']:"";
@@ -40,10 +50,6 @@ $debut = "$annee_deb-$mois_deb-$jour_deb" ;
 $fin = "$annee_f-$mois_f-$jour_f" ;
 $date_fact ="$annee_fact-$mois_fact-$jour_fact";
 
-if ($user_admin != 'y'){
- echo "<h1>$lang_admin_droit</h1>";
- exit;
-}
 $sql = " SELECT civ, nom, nom2 From " . $tblpref ."client WHERE num_client = $client ";
 $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 while($data = mysql_fetch_array($req)){
@@ -140,11 +146,7 @@ if (!isset($_POST['simuler'])){
  mysql_query($sql2) or die('Erreur SQL2 !<br>'.$sql2.'<br>'.mysql_error());
 }else
  $num_fact = $lang_simu;
-?>
-<table width="760" border="0" class="page" align="center">
- <tr>
-  <td class="page" align="center">
-<?php include_once("include/head.php"); echo (isset($_POST['simuler']))?"<h1>$lang_simu</h1>":'';?>
+ echo (isset($_POST['simuler']))?"<h1>$lang_simu</h1>":'';?>
    <h2><?php echo "$lang_fact_enr $nom $nom2"; ?></h2>
    <table class="page boiteaction">
     <caption><?php echo "$lang_facture $num_fact $lang_créée_pour $civ $nom"; ?></caption>
