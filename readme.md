@@ -1,8 +1,8 @@
 ![Factux](http://factux.free.fr/goodies/factux.png)
-#Factux 
-## v5.0.0
-##Le facturier libre
-##The free/libre invoicer
+# Factux révision 2017
+## v5.0.1
+## Le facturier libre
+## The free/libre invoicer
 
 Factux est un webiciel PHP multilingue libre auto-hébergé pour une TPE/PME
 Il est utile dans la vente de services, produits et marchandises, pour la gestion des dépenses, devis, bons de commandes, factures et l'encaissement de la clientelle.
@@ -15,15 +15,15 @@ Il s'agit d'une version révisé, amélioré, plus rapide et sécurisé de [Fact
 J'ai fait de mon mieux pour que la mise a niveau de Factux 1.1.5 vers celle-ci soit possible sans encombre.
 
 
-###Documentation
+### Documentation
 La documentation de Factux se trouve dans le dossier /doc et aussi sur le [site de Factux](http://factux.free.fr).
 
-##Spécifications
+## Spécifications
 1. PHP 5.1.6 et plus (php 7 ready)
 2. Base de données MariaDB/MySQL
 3. Serveur web Linux / Windows (Apache de préférence)
 
-##Instructions d'installation 
+## Instructions d'installation 
 1. Téléverser tout les fichiers se trouvant dans le dossier 'factux' dans votre serveur web.
 2. S'assurerr que les dossiers suivant soit autorisés en écriture (0755 or 0777)
    - /
@@ -37,22 +37,22 @@ La documentation de Factux se trouve dans le dossier /doc et aussi sur le [site 
 
 Plus d'informations ce trouve dans le README.txt
 
-##Translations
+## Translations
 Factux is translated in French, English, Neederland, Español*, Italiano*, Deutsch*, Polski* & Ελληνικά*
 *Translated by a Robots with 2 choices and this is translate helper for human in native language (use a file comparator).
 
 Maybe ready for all country with tax (or not) and money symbol (Exemple French T.V.A. and €)
 
 
-#English
+# English
 Factux is a web-apps self-hosted open source solution built with PHP for managing your epxpendures, estimates, order, invoices, clients and payments. 
 
-##Requirements
+## Requirements
 1. PHP 5.1.6 and above (php 7 ready)
 2. MariaDB/MySQL database
 3. Linux / Windows web server (Apache preferred)
 
-##Installation Instructions
+## Installation Instructions
 1. Upload all the files INSIDE the 'factux' folder onto your web server.
 2. Ensure the following folders are writable (0755 or 0777)
    - /
@@ -66,19 +66,18 @@ Factux is a web-apps self-hosted open source solution built with PHP for managin
 
 Rem: the installator is only in french, but is a classical type of install (todo)
 
-### License
+## License
 
-# This program is free software; you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation; either version 3 of the License, or
-# (at your option) any later version.
-#
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with this program; if not, write to the Free Software
-# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 3 of the License, or
+(at your option) any later version.
 
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.

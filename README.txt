@@ -3,7 +3,7 @@
 
 Installation de factux sur votre serveur
 
-Version 5.0.0
+Version 5.0.1
 
 Avant l'installation assurez-vous de récupérer
 1. l'adresse de votre base de données mysql
