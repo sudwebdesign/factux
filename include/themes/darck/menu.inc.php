@@ -539,40 +539,40 @@ function getPageOffsetTop(el) {
 
 <!-- Menu bar. -->
 <div class="menuBar">
-<a class="menuButton"
+ <a class="menuButton"
     href="#"
     onclick="return buttonClick(event, 'DevisMenu');"
     onmouseover="buttonMouseover(event, 'DevisMenu');"><?php echo $lang_devis_pluriel; ?></a>
-<a class="menuButton"
+ <a class="menuButton"
     href="#"
     onclick="return buttonClick(event, 'CommandesMenu');"
     onmouseover="buttonMouseover(event, 'CommandesMenu');"><?php echo $lang_commandes; ?></a>
-<a class="menuButton"
+ <a class="menuButton"
     href="#"
     onclick="return buttonClick(event, 'FacturesMenu');"
     onmouseover="buttonMouseover(event, 'FacturesMenu');"><?php echo $lang_factures; ?></a>
-<a class="menuButton"
+ <a class="menuButton"
     href="#"
     onclick="return buttonClick(event, 'DepensesMenu');"
     onmouseover="buttonMouseover(event, 'DepensesMenu');"><?php echo $lang_depenses; ?></a>
-<a class="menuButton"
+ <a class="menuButton"
     href="#"
     onclick="return buttonClick(event, 'ArticlesMenu');"
     onmouseover="buttonMouseover(event, 'ArticlesMenu');"><?php echo $lang_articles; ?></a>
-<a class="menuButton"
+ <a class="menuButton"
     href="#"
     onclick="return buttonClick(event, 'ClientsMenu');"
     onmouseover="buttonMouseover(event, 'ClientsMenu');"><?php echo $lang_clients; ?></a>
-<a class="menuButton"
+ <a class="menuButton"
     href="#"
     onclick="return buttonClick(event, 'StatsMenu');"
     onmouseover="buttonMouseover(event, 'StatsMenu');"><?php echo $lang_statistiques; ?></a>
-<a class="menuButton"
+ <a class="menuButton"
     href="#"
     onclick="return buttonClick(event, 'OutilsMenu');"
     onmouseover="buttonMouseover(event, 'OutilsMenu');"><?php echo $lang_outils; ?></a>
-<?php if ($lot == 'y') { ?>
-<a class="menuButton"
+ <?php if ($lot == 'y') { ?>
+ <a class="menuButton"
     href="#"
     onclick="return buttonClick(event, 'LotsMenu');"
     onmouseover="buttonMouseover(event, 'LotsMenu');"><?php echo $lang_lots; ?></a>

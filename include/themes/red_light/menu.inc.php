@@ -1,6 +1,29 @@
+<?php 
+/*
+ * Factux le facturier libre
+ * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
+ * 
+ * Licensed under the terms of the GNU  General Public License:
+ *   http://opensource.org/licenses/GPL-3.0
+ * 
+ * For further information visit:
+ *   http://factux.free.fr
+ * 
+ * File Name: head.php
+ *  Fichier d'entete des pages.
+ * 
+ * * * Version:  5.0.0
+ *  * * Modified: 10/06/2017
+ * 
+ * File Authors:
+ *   Guy Hendrickx
+ *.
+ */
+?> 
+<!--- Factux le facturier libre, Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles, Licensed under the terms of the GNU  General Public License: http://opensource.org/licenses/GPL-3.0 .For further information visit: http://factux.free.fr -->
 <?php
 if ($lot == 'y') { 
-echo"<script language=\"javascript\" src=\"include/themes/$theme/menu_lot.js\" type=\"text/javascript\"></script>";  
+echo"<script language=\"javascript\" src=\"include/themes/$theme/menu_lot.js\" type=\"text/javascript\"></script>";
 }else
 echo"<script language=\"javascript\" src=\"include/themes/$theme/menu.js\" type=\"text/javascript\"></script>";
 ?> 

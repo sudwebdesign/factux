@@ -13,7 +13,7 @@
  *  Fichier d'entete des pages.
  * 
  * * * Version:  5.0.0
- *  * * Modified: 07/10/2016
+ *  * * Modified: 10/06/2017
  * 
  * File Authors:
  *   Guy Hendrickx
@@ -33,34 +33,34 @@ else
 <script language="Javascript" type="text/javascript">
 preChargement();
 </script>
-    <p id="menu1" class="menu"
+<p id="menu1" class="menu"
   onmouseover="MontrerMenu('ssmenu1');"
   onmouseout="CacherDelai();">
-      <a href="#" onfocus="MontrerMenu('ssmenu1');"><img border ="0" src="image/devis.gif" alt="devis"><br>
+  <a href="#" onfocus="MontrerMenu('ssmenu1');"><img border="0" src="image/devis.gif" alt="devis"><br>
     <?php echo $lang_devis_pluriel; ?><span>&nbsp;:</span></a>
-    </p>
-    <ul id="ssmenu1" class="ssmenu"
+</p>
+<ul id="ssmenu1" class="ssmenu"
   onmouseover="AnnulerCacher();"
   onmouseout="CacherDelai();"
-    >
+>
   <?php if ($user_dev != 'n') {; ?>
  <li><a href="form_devis.php"><?php echo $lang_creer; ?><span>&nbsp;;</span></a></li>
  <li><a href="lister_devis.php"><?php echo $lang_lister; ?><span>.</span></a></li>
  <li><a href="chercher_devis.php"><?php echo $lang_cherc; ?><span>.</span></a></li>
  <li><a href="devis_non_commandes.php"><?php echo $lang_non_com; ?><span>.</span></a></li>
  <?php }; ?>
-    </ul>
+</ul>
 
- <p id="menu2" class="menu"
+<p id="menu2" class="menu"
   onmouseover="MontrerMenu('ssmenu2');"
   onmouseout="CacherDelai();">
-      <a href="#" onfocus="MontrerMenu('ssmenu2');"><img border ="0" src="image/commande.gif" alt="Commande"><br>
+  <a href="#" onfocus="MontrerMenu('ssmenu2');"><img border="0" src="image/commande.gif" alt="Commande"><br>
    <?php echo $lang_commandes; ?><span>&nbsp;:</span></a>
-    </p>
-    <ul id="ssmenu2" class="ssmenu"
+</p>
+<ul id="ssmenu2" class="ssmenu"
   onmouseover="AnnulerCacher();"
   onmouseout="CacherDelai();"
-    >
+>
   <?php if ($user_com != 'n') {; ?>
  <li><a href="form_commande.php"><?php echo $lang_creer; ?><span>&nbsp;;</span></a></li>
  <li><a href="lister_commandes.php"><?php echo $lang_lister; ?><span>&nbsp;;</span></a></li>
@@ -69,16 +69,16 @@ preChargement();
  <?php }; ?>
  </ul>
 
-    <p id="menu3" class="menu"
+<p id="menu3" class="menu"
   onmouseover="MontrerMenu('ssmenu3');"
   onmouseout="CacherDelai();">
-      <a href="#" onfocus="MontrerMenu('ssmenu3');"><img border ="0" src="image/facture.gif" alt="facture"><br>
+  <a href="#" onfocus="MontrerMenu('ssmenu3');"><img border="0" src="image/facture.gif" alt="facture"><br>
    <?php echo $lang_factures; ?><span>&nbsp;:</span></a>
-    </p>
-    <ul id="ssmenu3" class="ssmenu"
+</p>
+<ul id="ssmenu3" class="ssmenu"
   onmouseover="AnnulerCacher();"
   onmouseout="CacherDelai();"
-    >
+>
  <?php if ($user_fact != 'n') {; ?>
  <li><a href="form_facture.php"><?php echo $lang_creer; ?><span>&nbsp;;</span></a></li>
  <li><a href="lister_factures.php"><?php echo $lang_lister; ?><span>.</span></a></li>
@@ -86,40 +86,39 @@ preChargement();
  <li><a href="lister_factures_non_reglees.php"><?php echo $lang_non_reg; ?><span>.</span></a></li>
  <li><a href="form_multi_facture.php"><?php echo $lang_fact_multi; ?><span>&nbsp;;</span></a></li>
  <li><a href="oneclick.php"><?php echo $lang_imp_multi; ?><span>&nbsp;;</span></a></li>
-     <?php }; ?>
-    </ul>
+ <?php }; ?>
+</ul>
 
-    <p id="menu4" class="menu"
+<p id="menu4" class="menu"
   onmouseover="MontrerMenu('ssmenu4');"
   onmouseout="CacherDelai();">
   <a href="#" onfocus="MontrerMenu('ssmenu4');"><img border="0" src="image/depense.gif" alt="depense"><br>
   <?php echo $lang_depenses; ?><span>&nbsp;:</span></a>
-    </p>
-    <ul id="ssmenu4" class="ssmenu"
+</p>
+<ul id="ssmenu4" class="ssmenu"
   onmouseover="AnnulerCacher();"
   onmouseout="CacherDelai();"
-    >
-  <?php if ($user_dep != 'n') {; ?>
+>
+<?php if ($user_dep != 'n') {; ?>
  <li><a href="form_depenses.php"><?php echo $lang_creer; ?><span>&nbsp;;</span></a></li>
  <li><a href="lister_depenses.php"><?php echo $lang_lister; ?><span>&nbsp;;</span></a></li>
  <li><a href="chercher_depenses.php"><?php echo $lang_cherc; ?><span>&nbsp;;</span></a></li>
  <?php if ($user_stat != 'n') {; ?>
  <li><a href="graph_depense.php"><?php echo $lang_depenses_par_fournisseur; ?><span>&nbsp;;</span></a></li>
  <li><a href="graph_depenses.php"><?php echo $lang_depenses_par_fournisseur_mois; ?><span>&nbsp;;</span></a></li>
-    <?php }
+<?php }
   }; ?>
-    </ul>
-
-    <p id="menu5" class="menu"
+</ul>
+<p id="menu5" class="menu"
   onmouseover="MontrerMenu('ssmenu5');"
   onmouseout="CacherDelai();">
-  <a href="#" onfocus="MontrerMenu('ssmenu5');"><img border ="0" src="image/article.gif" alt="article"><br>
+  <a href="#" onfocus="MontrerMenu('ssmenu5');"><img border="0" src="image/article.gif" alt="article"><br>
   <?php echo $lang_articles; ?><span>&nbsp;:</span></a>
-    </p>
+</p>
   <ul id="ssmenu5" class="ssmenu"
   onmouseover="AnnulerCacher();"
   onmouseout="CacherDelai();"
-    >
+>
   <?php if ($user_art != 'n') { ?>
  <li><a href="form_article.php"><?php echo $lang_creer; ?><span>&nbsp;;</span></a></li>
  <li><a href="lister_articles.php"><?php echo $lang_lister; ?><span>&nbsp;;</span></a></li>
@@ -129,37 +128,37 @@ preChargement();
  <?php } ?>
  </ul>
 
-    <p id="menu6" class="menu"
+<p id="menu6" class="menu"
   onmouseover="MontrerMenu('ssmenu6');"
   onmouseout="CacherDelai();">
-  <a href="#" onfocus="MontrerMenu('ssmenu5');"><img border ="0" src="image/client.gif" alt="client"><br>
+  <a href="#" onfocus="MontrerMenu('ssmenu5');"><img border="0" src="image/client.gif" alt="client"><br>
   <?php echo $lang_clients; ?><span>&nbsp;:</span></a>
-    </p>
+</p>
   <ul id="ssmenu6" class="ssmenu"
   onmouseover="AnnulerCacher();"
   onmouseout="CacherDelai();"
-    >
+>
  <?php if ($user_cli != 'n') {; ?>
  <li><a href="form_client.php"><?php echo $lang_creer; ?><span>&nbsp;;</span></a></li>
  <li><a href="lister_clients.php"><?php echo $lang_lister; ?><span>&nbsp;;</span></a></li>
  <?php }; ?>
  </ul>
 
-    <p id="menu8" class="menu"
+<p id="menu8" class="menu"
   onmouseover="MontrerMenu('ssmenu8');"
   onmouseout="CacherDelai();">
   <a href="#" onfocus="MontrerMenu('ssmenu8');"><img border="0" src="image/outils.gif" alt="outils"><br>
   <?php echo $lang_outils; ?><span>&nbsp;:</span></a>
-    </p>
-    <ul id="ssmenu8" class="ssmenu"
+</p>
+<ul id="ssmenu8" class="ssmenu"
   onmouseover="AnnulerCacher();"
   onmouseout="CacherDelai();"
-    >
+>
   <?php
   if ($user_admin == 'y'){; ?>
  <li><a href="form_utilisateurs.php"><?php echo $lang_aj_utl; ?><span>&nbsp;;</span></a></li>
-  <li><a href="lister_utilisateurs.php"><?php echo $lang_list_utl; ?><span>&nbsp;;</span></a></li>
-  <li><a href="form_mailing.php"><?php echo $lang_infolettre; ?><span>&nbsp;;</span></a></li>
+ <li><a href="lister_utilisateurs.php"><?php echo $lang_list_utl; ?><span>&nbsp;;</span></a></li>
+ <li><a href="form_mailing.php"><?php echo $lang_infolettre; ?><span>&nbsp;;</span></a></li>
  <li><a href="form_backup.php"><?php echo $lang_back_men; ?><span>&nbsp;;</span></a></li>
  <li><a href="admin.php"><?php echo $lang_administra; ?><span>&nbsp;;</span></a></li>
  
@@ -171,13 +170,13 @@ preChargement();
 
  </ul>
 
-    <p id="menu7" class="menu"
+<p id="menu7" class="menu"
   onmouseover="MontrerMenu('ssmenu7');"
   onmouseout="CacherDelai();">
-      <a href="#" onfocus="MontrerMenu('ssmenu7');"><img border ="0" src="image/stat.gif" alt="stats"><br>
+  <a href="#" onfocus="MontrerMenu('ssmenu7');"><img border="0" src="image/stat.gif" alt="stats"><br>
    <?php echo $lang_statistiques; ?> <span>&nbsp;:</span></a>
-    </p>
-    <ul id="ssmenu7" class="ssmenu"
+</p>
+<ul id="ssmenu7" class="ssmenu"
   onmouseover="AnnulerCacher();"
   onmouseout="CacherDelai();"
   >
@@ -191,24 +190,24 @@ preChargement();
  <li><a href="graph_depense.php"><?php echo $lang_depenses_par_fournisseur; ?><span>.</span></a></li>
  <li><a href="graph_depenses.php"><?php echo $lang_depenses_par_fournisseur_mois; ?><span>&nbsp;;</span></a></li>
  <?php }; ?>
-    </ul>
+</ul>
 <?php
 if ($lot == 'y') {; ?>
-    <p id="menu9" class="menu"
+<p id="menu9" class="menu"
   onmouseover="MontrerMenu('ssmenu9');"
   onmouseout="CacherDelai();">
-      <a href="#" onfocus="MontrerMenu('ssmenu9');"><img border ='0' src='image/facture.gif' alt='facture' ><br>
+  <a href="#" onfocus="MontrerMenu('ssmenu9');"><img border ='0' src='image/facture.gif' alt='facture' ><br>
    <?php echo $lang_lots; ?><span>&nbsp;:</span></a>
-    </p>
-    <ul id="ssmenu9" class="ssmenu"
+</p>
+<ul id="ssmenu9" class="ssmenu"
   onmouseover="AnnulerCacher();"
   onmouseout="CacherDelai();">
  <?php if ($user_fact != 'n') {; ?>
  <li><a href="form_lot.php"><?php echo $lang_creer; ?><span>.</span></a></li>
  <li><a href="lister_lot.php"><?php echo $lang_lister; ?><span>&nbsp;</span></a></li>
  <li><a href="chercher_lots.php"><?php echo $lang_cherc; ?><span>.</span></a></li>
-    <?php }; ?>
-    </ul>
+<?php }; ?>
+</ul>
 <?php } ?> 
 </div>
 <div id="texte"></div>
@@ -225,13 +224,13 @@ window.addEventListener('resize', function(event){centrer_menu=true;Chargement()
 #require ("include/del_pdf.php");
 $filename = 'installeur';
 if (file_exists($filename))
-    echo "<center><h1>$lang_erreur_insta</h1></center>";
+ echo "<center><h1>$lang_erreur_insta</h1></center>";
 if (is_writable("include/config/var.php"))
-    echo "<center><h1>$lang_erreur_var</h1></center>";
+ echo "<center><h1>$lang_erreur_var</h1></center>";
 if (is_writable("include/config/common.php"))
-    echo "<center><h1> $lang_erreur_common</h1></center>";
+ echo "<center><h1>$lang_erreur_common</h1></center>";
 if (file_exists('dump/backup.sql'))
-    echo "<center><h1>$lang_erreur_backup</h1></center>";
+ echo "<center><h1>$lang_erreur_backup</h1></center>";
 ?>
 <noscript><h1 style="font-size:207%;">FactOops, Javascript innactif.</h1></noscript>
 <center><?php include_once("javascripts/date.js"); ?></center>
