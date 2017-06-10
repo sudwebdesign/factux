@@ -225,10 +225,10 @@ window.addEventListener('resize', function(event){centrer_menu=true;Chargement()
 $filename = 'installeur';
 if (file_exists($filename))
  echo "<center><h1>$lang_erreur_insta</h1></center>";
-if (is_writable("include/config/var.php"))
+/*if (is_writable("include/config/var.php"))
  echo "<center><h1>$lang_erreur_var</h1></center>";
 if (is_writable("include/config/common.php"))
- echo "<center><h1>$lang_erreur_common</h1></center>";
+ echo "<center><h1>$lang_erreur_common</h1></center>";*/
 if (file_exists('dump/backup.sql'))
  echo "<center><h1>$lang_erreur_backup</h1></center>";
 ?>
