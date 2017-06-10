@@ -141,14 +141,14 @@ $lang_non = "non";
 $lang_restrint = "restreint";
 $lang_list_utl = "Lister les utilisateurs";
 
-$lang_client_droit = "Vous n'avez pas les droit necessaire pour gere les clients contactez l'administrateur si vous penser qu'il y as erreur";
-$lang_article_droit = "Vous n'avez pas les droits necessaires pour gerer les articles contacter l'administrateur si vous penser qu'il y as erreur";
+$lang_client_droit = "Vous n'avez pas les droits nécessaires pour gérer les clients contactez l'administrateur si vous penser qu'il y as erreur";
+$lang_article_droit = "Vous n'avez pas les droits nécessaires pour gérer les articles contacter l'administrateur si vous penser qu'il y as erreur";
 $lang_statistique_droit = "Vous n'avez pas les droits necessaire pour voir les statistiques contactez l'administrateur si vous pensez qu'il y as erreur";
-$lang_depense_droit = "Vous n'avez pas les droit pour gere les dépenses contacter l'administrateur si vou pensez qu'il y as erreur";
-$lang_facture_droit = "Vous n'avez pas les droits necessaire pour gerer les factures contactez l'administrateur si vous pensez qu'il y as erreur.";
-$lang_commande_droit = "Vous n'avez pas les droit necessaire pour gerer les bons de commandes contactez l'administrateur si vous pensez qu'il y as erreur.";
-$lang_devis_droit = "Vous n'avez pas les droits necessaires pour gerer les devis contactez l'administrateur si vous pensez qu'il y as erreur";
-$lang_admin_droit = "vous n'avez pas les droit necessaire il faut etre administrateur pour pouvoir acceder a cette page";
+$lang_depense_droit = "Vous n'avez pas les droits pour gerer les dépenses contacter l'administrateur si vou pensez qu'il y as erreur";
+$lang_facture_droit = "Vous n'avez pas les droits nécessaires pour gérer les factures contactez l'administrateur si vous pensez qu'il y as erreur.";
+$lang_commande_droit = "Vous n'avez pas les droits nécessaires pour gérer les bons de commandes contactez l'administrateur si vous pensez qu'il y as erreur.";
+$lang_devis_droit = "Vous n'avez pas les droits nécessaires pour gérer les devis contactez l'administrateur si vous pensez qu'il y as erreur";
+$lang_admin_droit = "vous n'avez pas les droits necessaire il faut etre administrateur pour pouvoir acceder a cette page";
 
 $lang_mdp_jour = "Votre mot de passe a ete mis a jour ";
 $lang_dif_mail_mdp = "Modification  de votre mot de passe";
