@@ -25,7 +25,14 @@ include_once("include/finhead.php");
 <table width="760" border="0" class="page" align="center">
  <tr>
   <td class="page" align="center">
-<?php include_once("include/head.php"); ?>
+<?php
+include_once("include/head.php");
+if ($user_com == 'n') { 
+ echo"<h1>$lang_commande_droit</h1>";
+ include_once("include/bas.php");
+ exit;
+}
+?>
    <center>
     <form action="chercheur_lots.php" method="post">
      <table class="page" border="0" align="center">
