@@ -27,12 +27,13 @@ include_once("include/finhead.php");
   <td class="page" align="center">
 <?php
 include_once("include/head.php");
+if ($user_com == 'n') { 
+ echo"<h1>$lang_commande_droit</h1>";
+ include_once("include/bas.php");
+ exit;
+}
 if (isset($message)&&$message!='') { 
  echo $message; $message='';
-}
-if ($user_com == 'n') { 
-  echo"<h1>$lang_commande_droit</h1>";
-  exit;  
 }
 $jour = date("d");
 $mois = date("m");

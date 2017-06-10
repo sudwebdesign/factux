@@ -28,12 +28,13 @@ include_once("include/finhead.php");
   <td class="page" align="center">
 <?php
 include_once("include/head.php");
+if ($user_dev == 'n') {
+ echo "<h1>$lang_devis_droit</h1>";
+ include_once("include/bas.php");
+ exit;
+}
 if (isset($message)&&$message!='') { 
  echo $message;
-}
-if ($user_dev == 'n') {
-    echo "<h1>$lang_devis_droit</h1>";
-    exit;  
 }
 $sql = "
 SELECT login, mail, num_dev, tot_htva, tot_tva, DATE_FORMAT(date,'%d/%m/%Y') AS date_aff, date, nom

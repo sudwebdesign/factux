@@ -29,7 +29,8 @@ include_once("include/finhead.php");
 include_once("include/head.php"); 
 if ($user_com == 'n') { 
  echo"<h1>$lang_commande_droit</h1>";
- exit;  
+ include_once("include/bas.php");
+ exit;
 }
 $num_get=isset($_GET['num'])?$_GET['num']:"";
 //POUR LE RETOUR

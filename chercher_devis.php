@@ -28,8 +28,9 @@ include_once("include/finhead.php");
 <?php 
 include_once("include/head.php");
 if ($user_dev == 'n') {
-    echo "<h1>$lang_devis_droit</h1>"; 
-    exit;  
+ echo "<h1>$lang_devis_droit</h1>"; 
+ include_once("include/bas.php");
+ exit;
 }
 $rqSql = "SELECT num_client, nom FROM " . $tblpref ."client WHERE 1";
 if ($user_dev == 'r'){

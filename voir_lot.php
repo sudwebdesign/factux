@@ -21,13 +21,6 @@
  */
 include_once("include/headers.php");
 include_once("include/finhead.php");
-$num_lot=isset($_GET['num'])?$_GET['num']:"";
-$sql = "
-SELECT ingr, fourn, fourn_lot 
-FROM " . $tblpref ."cont_lot 
-WHERE num_lot = $num_lot
-";
-$req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 ?>
 <table width="760" border="0" class="page" align="center">
  <tr>
@@ -36,8 +29,18 @@ $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 include_once("include/head.php");
 if ($user_com == 'n') { 
  echo"<h1>$lang_commande_droit</h1>";
- exit;  
+ include_once("include/bas.php");
+ exit;
 }
+$num_lot=isset($_GET['num'])?$_GET['num']:"";
+$sql = "
+SELECT ingr, fourn, fourn_lot 
+FROM " . $tblpref ."cont_lot 
+WHERE num_lot = $num_lot
+";
+$req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+?>
+<?php
 if ($num_lot > '0') { 
 $mois_1=isset($_GET['mois_1'])?$_GET['mois_1']:date("m");
 $annee_1=isset($_GET['annee_1'])?$_GET['annee_1']:date("Y");

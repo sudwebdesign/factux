@@ -21,9 +21,6 @@
  */
 include_once("include/headers.php");
 include_once("include/finhead.php");
-//pour le formulaire
-$mois_1=isset($_POST['mois_1'])?$_POST['mois_1']:date("m");
-$annee_1=isset($_POST['annee_1'])?$_POST['annee_1']:date("Y");
 ?>
 <table width="760" border="0" class="page" align="center">
  <tr>
@@ -32,8 +29,12 @@ $annee_1=isset($_POST['annee_1'])?$_POST['annee_1']:date("Y");
 include_once("include/head.php");
 if ($user_stat== 'n') { 
  echo"<h1>$lang_statistique_droit</h1>";
- exit;  
+ include_once("include/bas.php");
+ exit;
 }
+//pour le formulaire
+$mois_1=isset($_POST['mois_1'])?$_POST['mois_1']:date("m");
+$annee_1=isset($_POST['annee_1'])?$_POST['annee_1']:date("Y");
 $calendrier = calendrier_local_mois ();
 ?>
    <form action="graph_depenses.php" method="post">

@@ -28,12 +28,13 @@ include_once("include/finhead.php");
   <td class="page" align="center">
 <?php
 include_once("include/head.php");
-if (isset($message)&&$message!='') { 
- echo $message; $message='';#onlyHere
-}
 if ($user_art == 'n') { 
  echo "<h1>$lang_article_droit</h1>";
- exit;  
+ include_once("include/bas.php");
+ exit;
+}
+if (isset($message)&&$message!='') { 
+ echo $message; $message='';#onlyHere
 }
 ?>
 <script type="text/javascript" style="display:none;">//calcul du prix de vente HT margé

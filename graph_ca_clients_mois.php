@@ -31,7 +31,8 @@ $annee_1=isset($_POST['annee_1'])?$_POST['annee_1']:date("Y");
 include_once("include/head.php");
 if ($user_stat== 'n') { 
  echo"<h1>$lang_statistique_droit</h1>";
- exit;  
+ include_once("include/bas.php");
+ exit;
 }
 ?>
   <form action="graph_ca_clients_mois.php" method="post"> 

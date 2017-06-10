@@ -30,6 +30,7 @@ include_once("include/head.php");
 if ($user_fact == 'n') { 
  echo "<h1>$lang_facture_droit</h1>";
  exit;
+ include_once("include/bas.php");
 }
 $rqSql = "SELECT num_client, nom FROM " . $tblpref ."client WHERE 1";
 if ($user_fact == 'r') { 

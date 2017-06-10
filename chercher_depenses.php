@@ -28,8 +28,9 @@ include_once("include/utils.php");
 <?php 
 include_once("include/head.php");
 if ($user_dep == 'n') { 
-    echo "<h1>$lang_depense_droit</h1>";
-    exit;
+ echo "<h1>$lang_depense_droit</h1>";
+ include_once("include/bas.php");
+ exit;
 }
 ?> 
    <form name="form_rec_dep" method="post" action="chercheur_depenses.php">

@@ -31,6 +31,7 @@ $num_fact=isset($_GET['num_fact'])?$_GET['num_fact']:"";
 include_once("include/head.php");
 if ($user_fact == 'n') {
  echo "<h1>$lang_facture_droit</h1>";
+ include_once("include/bas.php");
  exit;
 }
 $sql = "

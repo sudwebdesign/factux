@@ -30,7 +30,8 @@ include_once("include/finhead.php");
 include_once("include/head.php");
 if ($user_dev == 'n') {
  echo "<h1>$lang_devis_droit</h1>"; 
- exit;  
+ include_once("include/bas.php");
+ exit;
 }
 $num_dev=isset($_GET['num_dev'])?$_GET['num_dev']:"";
 if ($num_dev !='') { 

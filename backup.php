@@ -12,6 +12,7 @@ flush();
 require_once("include/head.php");
 if ($user_admin != 'y') { 
  echo "<h1>$lang_admin_droit</h1>";
+ include_once("include/bas.php");
  exit;
 }
 # Table backup from MySql PHP Backup

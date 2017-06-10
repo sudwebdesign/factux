@@ -26,7 +26,14 @@ $annee_1 = (isset($_POST['annne_1']))?$_POST['annne_1']:date('Y');
 <table width="760" border="0" class="page" align="center">
  <tr>
   <td class="page" align="center">
-<?php include_once("include/head.php"); ?>
+<?php
+include_once("include/head.php");
+if ($user_stat == 'n'){ 
+ echo"<h1>$lang_statistique_droit</h1>";
+ include_once("include/bas.php");
+ exit;
+}
+?>
    <form action="graph_ca_clients.php" method="post" name="annee">
 <?php echo $lang_annee; ?>: 
     <select name="annne_1">
@@ -40,11 +47,7 @@ $annee_1 = (isset($_POST['annne_1']))?$_POST['annne_1']:date('Y');
  </tr>
  <tr>
   <td class="page" align="center">
-<?php 
-if ($user_stat == 'n'){ 
- echo"<h1>$lang_statistique_droit</h1>";
- exit;  
-}
+<?php
 $sql = "SELECT * FROM " . $tblpref ."client";
 $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql2.'<br>'.mysql_error());
 $nb = mysql_num_rows($req);

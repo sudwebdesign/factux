@@ -31,6 +31,11 @@ $coment=isset($_POST['coment'])?apostrophe($_POST['coment']):"";
   <td class="page" align="center">
 <?php
 include_once("include/head.php");
+if ($user_fact == 'n') { 
+ echo "<h1>$lang_facture_droit</h1>";
+ include_once("include/bas.php");
+ exit;
+}
 if($date_deb==''|| $date_fin=='' || $date_fact=='' || !isset($_POST['client']) ){
  $message= "<h1>$lang_oubli_champ</h1>";
  include('form_multi_facture.php');

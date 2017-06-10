@@ -125,6 +125,7 @@ if (isset($message)&&$message!='') {
 }
 if ($user_admin != 'y') { 
  echo "<h1>$lang_admin_droit";
+ include_once("include/bas.php");
  exit;
 }
 ?>

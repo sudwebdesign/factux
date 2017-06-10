@@ -98,7 +98,7 @@ if($oneclick!=''){
  $g=0;
  if ($nb_fact=='0') { 
   echo"$lang_fact_mu_err $oneclick";
-  exit;  
+  exit;
  }
  $suite_sql=array();
  while($datad = mysql_fetch_array($reqd)){ 

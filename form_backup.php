@@ -28,8 +28,9 @@ include_once("include/finhead.php");
 <?php 
 require_once("include/head.php");
 if ($user_admin != 'y') {
-  echo "<h1>$lang_admin_droit</h1>";
-  exit;
+ echo "<h1>$lang_admin_droit</h1>";
+ include_once("include/bas.php");
+ exit;
 }
 $page = explode("/", getenv('SCRIPT_NAME'));#split("/", getenv('SCRIPT_NAME'));#Deprecated
 $n = count($page)-1; 

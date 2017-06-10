@@ -30,16 +30,17 @@ $annee = date("Y");
 <table width="760" border="0" class="page" align="center">
  <tr>
   <td class="page" align="center">
-<?php include_once("include/head.php"); ?>
-   <center>
-    <form name="formu" method="post" action="fact_bon_orph_suite.php" >
-     <table width="460" border="0" class="page" align="center">
-<?php 
+<?php
+include_once("include/head.php");
 if ($user_fact == 'n') { 
  echo"<h1>$lang_facture_droit</h1>";
+ include_once("include/bas.php");
  exit;
 }
 ?>
+   <center>
+    <form name="formu" method="post" action="fact_bon_orph_suite.php" >
+     <table width="460" border="0" class="page" align="center">
       <caption><?php echo "$lang_cré_fac_orph $lang_numero $num"; ?></caption>
       <tr>
        <td class="texte0"><?php echo "date" ?></td>

@@ -19,9 +19,18 @@
  * 		Guy Hendrickx
  *.
  */
-if ($user_art == 'n') { 
+if (!isset($user_art) OR $user_art == 'n') { 
+ include_once("include/headers.php");
+ include_once("include/finhead.php");
+?>
+<table width="760" border="0" class="page" align="center">
+ <tr>
+  <td class="page" align="center">
+<?php
+ include_once("include/head.php");
  echo "<h1>$lang_article_droit</h1>";
- exit;  
+ include_once("include/bas.php");
+ exit;
 }
 ?>
    <form action="categorie_new.php" method="post">

@@ -49,12 +49,13 @@ include_once("include/finhead.php");
   <td class="page" align="center">
 <?php
 include_once("include/head.php");
-if(isset($message)&&$message!='') {
- echo $message;
-}
 if ($user_fact == 'n') {
  echo "<h1>$lang_facture_droit</h1>";
+ include_once("include/bas.php");
  exit;
+}
+if(isset($message)&&$message!='') {
+ echo $message;
 }
 $this_fact=isset($_GET['num'])?"AND num=$_GET[num]":'';
 $fact_irre=isset($_GET['ir'])?"OR payement = 'Irrecouvrable'":'';

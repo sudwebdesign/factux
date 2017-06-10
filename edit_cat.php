@@ -49,8 +49,9 @@ include_once("include/finhead.php");
 <?php
 include_once("include/head.php");
 if ($user_com == 'n') { 
-  echo"<h1>$lang_commande_droit</h1>";
-  exit;  
+ echo"<h1>$lang_commande_droit</h1>";
+ include_once("include/bas.php");
+ exit;
 }
 $id_cat=isset($_GET['id_cat'])?$_GET['id_cat']:"";
 $sql = "

@@ -33,8 +33,9 @@ if($num_lot==''){
 <?php
 include_once("include/head.php");
 if ($user_com == 'n') { 
-  echo"<h1>$lang_commande_droit</h1>";
-  exit;  
+ echo"<h1>$lang_commande_droit</h1>";
+ include_once("include/bas.php");
+ exit;
 }
 if(!is_int($num_lot)){
   echo "<h1>*Erreur $lang_num_lot! Utiliser uniquement les chiffres.</h1>";

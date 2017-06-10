@@ -21,6 +21,17 @@
  */
 include_once("include/headers.php");
 include_once("include/finhead.php");
+if ($user_fact == 'n') { 
+?>
+<table width="760" border="0" class="page" align="center">
+ <tr>
+  <td class="page" align="center">
+<?php
+ include_once("include/head.php");
+ echo "<h1>$lang_facture_droit</h1>";
+ include_once("include/bas.php");
+ exit;
+}
 $date_fact=isset($_POST['date_fact'])?$_POST['date_fact']:"";
 $list_num=isset($_POST['bon_sup'])?$_POST['bon_sup']:"";
 $acompte=isset($_POST['acompte'])?(integer)$_POST['acompte']:"";

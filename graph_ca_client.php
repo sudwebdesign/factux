@@ -28,8 +28,9 @@ include_once("include/finhead.php");
 <?php 
 include_once("include/head.php");
 if ($user_stat== 'n') { 
-  echo"<h1>$lang_statistique_droit</h1>";
-  exit;  
+ echo"<h1>$lang_statistique_droit</h1>";
+ include_once("include/bas.php");
+ exit;
 }
 $annee_1=isset($_POST['annee_1'])?$_POST['annee_1']:"";
 $client=isset($_POST['client'])?$_POST['client']:"";

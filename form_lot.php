@@ -26,6 +26,13 @@ include_once("include/finhead.php");
  <tr>
   <td class="page" align="center">
 <?php include_once("include/head.php"); ?>
+<?php
+if ($user_com == 'n') { 
+ echo"<h1>$lang_commande_droit</h1>";
+ include_once("include/bas.php");
+ exit;
+}
+?>
    <form action="insert_lot.php" method="post" name="lot" id="lot"  >
     <table class="page boiteaction">
      <caption><?php echo "$lang_cr_lot"; ?></caption>

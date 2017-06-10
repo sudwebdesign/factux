@@ -27,12 +27,13 @@ include_once("include/finhead.php");
   <td class="page" align="center">
 <?php
 include_once("include/head.php");
-if (isset($message)&&$message!='') { 
- echo $message; $message='';
-}
 if ($user_dev == 'n') {
  echo "<h1>$lang_devis_droit</h1>"; 
- exit;  
+ include_once("include/bas.php");
+ exit;
+}
+if (isset($message)&&$message!='') { 
+ echo $message; $message='';
 }
 $rqSql = "SELECT num_client, nom FROM " . $tblpref ."client WHERE actif != 'non'";
 if ($user_dev == 'r') { 

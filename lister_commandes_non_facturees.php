@@ -30,7 +30,8 @@ include_once("include/finhead.php");
 include_once("include/head.php");
 if ($user_com == 'n') { 
  echo"<h1>$lang_commande_droit</h1>";
- exit;  
+ include_once("include/bas.php");
+ exit;
 }
 $sql = "
 SELECT client_num, num_bon, tot_htva, tot_tva, nom, date, DATE_FORMAT(date,'%d/%m/%Y') AS date_aff 

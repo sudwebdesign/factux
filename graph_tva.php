@@ -31,6 +31,7 @@ $fact=(isset($_POST['fact']))?$_POST['fact']:null;
 include_once("include/head.php");
 if ($user_stat== 'n'){
  echo"<h1>$lang_statistique_droit</h1>";
+ include_once("include/bas.php");
  exit;
 }
 

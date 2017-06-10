@@ -28,12 +28,13 @@ include_once("include/finhead.php");
   <td class="page" align="center">
 <?php
 include_once("include/head.php");
-if (isset($message)&&$message!='') { 
-  echo$message; $message='';
-}
 if ($user_cli == 'n') { 
  echo"<h1>$lang_client_droit</h1>";
- exit;  
+ include_once("include/bas.php");
+ exit;
+}
+if (isset($message)&&$message!='') { 
+  echo$message; $message='';
 }
 $sql = " SELECT * FROM " . $tblpref ."client WHERE actif != 'non' ";
 if ( isset ( $_GET['ordre'] ) && $_GET['ordre'] != ''){
