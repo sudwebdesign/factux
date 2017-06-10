@@ -12,8 +12,8 @@
  * File Name: bon.php
  *  Editor configuration settings.
  * 
- * * Version:  5.0.0
- * * * * Modified: 07/10/2016
+ * * * Version:  5.0.1
+ * * * * Modified: 10/06/2017
  * 
  * File Authors:
  *   Guy Hendrickx
@@ -28,12 +28,12 @@ include_once("include/finhead.php");
 <?php
 $client=isset($_POST['listeclients'])?$_POST['listeclients']:"";
 $date=isset($_POST['date'])?$_POST['date']:"";
-list($jour, $mois,$annee) = preg_split('/\//', $date, 3);
 if($client=='0'||$client==''){# '' si select client vide (aucun client enregisté)
  $message="<h1>$lang_choix_client</h1>";
  include('form_commande.php');
  exit;
 }
+list($jour, $mois,$annee) = preg_split('/\//', $date, 3);
 
 $sql_nom = "SELECT  nom, nom2 FROM " . $tblpref ."client WHERE num_client = $client";
 $req = mysql_query($sql_nom) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());

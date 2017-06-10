@@ -12,8 +12,8 @@
  * File Name: fact.php
  * 	enregistrement de données de la facture
  * 
- * * * Version:  5.0.0
- * * * * Modified: 07/10/2016
+ * * * Version:  5.0.1
+ * * * * Modified: 10/06/2017
  * 
  * File Authors:
  * 		Guy Hendrickx
@@ -24,24 +24,23 @@ include_once("include/finhead.php");
 
 $acompte=isset($_POST['acompte'])?$_POST['acompte']+0.00:0.00;
 $date_deb=isset($_POST['date_deb'])?$_POST['date_deb']:"";
-list($jour_deb, $mois_deb,$annee_deb) = preg_split('/\//', $date_deb, 3);
 $date_fin=isset($_POST['date_fin'])?$_POST['date_fin']:"";
-list($jour_f, $mois_f,$annee_f) = preg_split('/\//', $date_fin, 3);
 $date_fact=isset($_POST['date_fact'])?$_POST['date_fact']:"";
-list($jour_fact, $mois_fact,$annee_fact) = preg_split('/\//', $date_fact, 3);
 $client=isset($_POST['listeclients'])?$_POST['listeclients']:"";
 $coment=isset($_POST['coment'])?apostrophe($_POST['coment']):"";
-$debut = "$annee_deb-$mois_deb-$jour_deb" ;
-$fin = "$annee_f-$mois_f-$jour_f" ;
-$date_fact ="$annee_fact-$mois_fact-$jour_fact";
-
 if($client=='' || $date_deb==''|| $date_fin=='' || $date_fact=='' ){
  $message= "<h1>$lang_oubli_champ</h1>";
  include('form_facture.php');
  exit;
 }
+list($jour_deb, $mois_deb,$annee_deb) = preg_split('/\//', $date_deb, 3);
+list($jour_f, $mois_f,$annee_f) = preg_split('/\//', $date_fin, 3);
+list($jour_fact, $mois_fact,$annee_fact) = preg_split('/\//', $date_fact, 3);
+$debut = "$annee_deb-$mois_deb-$jour_deb" ;
+$fin = "$annee_f-$mois_f-$jour_f" ;
+$date_fact ="$annee_fact-$mois_fact-$jour_fact";
 
-if ($user_admin != 'y'){ 
+if ($user_admin != 'y'){
  echo "<h1>$lang_admin_droit</h1>";
  exit;
 }

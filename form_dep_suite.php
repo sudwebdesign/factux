@@ -12,8 +12,8 @@
  * File Name: fckconfig.js
  * 	Editor configuration settings.
  * 
- * * * Version:  5.0.0
- * * * * Modified: 07/10/2016
+ * * * * Version:  5.0.1
+ * * * * Modified: 10/06/2017
  * 
  * File Authors:
  * 		Guy Hendrickx
@@ -29,18 +29,18 @@ $fournisseur=isset($_POST['fournisseur'])?$_POST['fournisseur']:"";#select
 $prix=isset($_POST['prix'])?$_POST['prix']:"";
 $tx_tva=isset($_POST['tva'])?$_POST['tva']:"";
 $date=isset($_POST['date'])?$_POST['date']:"";
-list($jour, $mois,$annee) = preg_split('/\//', $date, 3);
 
 if($lib==''|| $prix=='' || $tx_tva==''){
  $message = "<h1>$lang_oublie_champ</h1>";
  include('form_depenses.php');
  exit;
 }
-if($fourn=='' and $fournisseur=='default'){ 
+if($fourn=='' and $fournisseur=='default'){
  $message = "<h1>$lang_dep_choi</h1>";
  include('form_depenses.php');
- exit;  
+ exit;
 }
+list($jour, $mois,$annee) = preg_split('/\//', $date, 3);
 //calcul du montant de la tva
 $mont_tva = ($prix * ($tx_tva /100));
 

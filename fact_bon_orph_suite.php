@@ -12,8 +12,8 @@
  * File Name: fact_bon_orph_suite.php
  * 	enregistrement de données de la facture a partir d'un bon orphelin
  * 
- * * * Version:  5.0.0
- * * * * Modified: 07/10/2016
+ * * * * Version:  5.0.1
+ * * * * Modified: 10/06/2017
  * 
  * File Authors:
  * 		Guy Hendrickx
@@ -22,15 +22,20 @@
 include_once("include/headers.php");
 include_once("include/finhead.php");
 $date_fact=isset($_POST['date_fact'])?$_POST['date_fact']:"";
-list($jour_fact, $mois_fact,$annee_fact) = preg_split('/\//', $date_fact, 3);
-$date_fact ="$annee_fact-$mois_fact-$jour_fact";
 $list_num=isset($_POST['bon_sup'])?$_POST['bon_sup']:"";
 $acompte=isset($_POST['acompte'])?(integer)$_POST['acompte']:"";
 $coment=isset($_POST['coment'])?apostrophe($_POST['coment']):"";
 $num=isset($_POST['num'])?$_POST['num']:"";
 $client=isset($_POST['client'])?$_POST['client']:"";
 
-#if reload page (f5) && $fact=='ok'
+if($client=='' || $list_num==''|| $num=='' || $date_fact=='' ){#if reload page (f5) && $fact=='ok'
+ $message= "<h1>$lang_oubli_champ</h1>";
+ include('form_facture.php');
+ exit;
+}
+list($jour_fact, $mois_fact,$annee_fact) = preg_split('/\//', $date_fact, 3);
+$date_fact ="$annee_fact-$mois_fact-$jour_fact";
+
 $sql = "
 SELECT * FROM " . $tblpref ."bon_comm 
 WHERE client_num = '".$client."' 

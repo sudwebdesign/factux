@@ -22,15 +22,9 @@
 include_once("include/headers.php");
 $acompte=isset($_POST['acompte'])?$_POST['acompte']:"";
 $date_deb=isset($_POST['date_deb'])?$_POST['date_deb']:"";
-list($jour_deb, $mois_deb,$annee_deb) = preg_split('/\//', $date_deb, 3);
 $date_fin=isset($_POST['date_fin'])?$_POST['date_fin']:"";
-list($jour_f, $mois_f,$annee_f) = preg_split('/\//', $date_fin, 3);
 $date_fact=isset($_POST['date_fact'])?$_POST['date_fact']:"";
-list($jour_fact, $mois_fact,$annee_fact) = preg_split('/\//', $date_fact, 3);
 $coment=isset($_POST['coment'])?apostrophe($_POST['coment']):"";
-$debut = "$annee_deb-$mois_deb-$jour_deb" ;
-$fin = "$annee_f-$mois_f-$jour_f" ;
-$date_fact ="$annee_fact-$mois_fact-$jour_fact";
 ?>
 <table width="760" border="0" class="page" align="center">
  <tr>
@@ -43,6 +37,12 @@ if($date_deb==''|| $date_fin=='' || $date_fact=='' || !isset($_POST['client']) )
  exit;
 }
 $message='';
+list($jour_deb, $mois_deb,$annee_deb) = preg_split('/\//', $date_deb, 3);
+list($jour_f, $mois_f,$annee_f) = preg_split('/\//', $date_fin, 3);
+list($jour_fact, $mois_fact,$annee_fact) = preg_split('/\//', $date_fact, 3);
+$debut = "$annee_deb-$mois_deb-$jour_deb" ;
+$fin = "$annee_f-$mois_f-$jour_f" ;
+$date_fact ="$annee_fact-$mois_fact-$jour_fact";
 foreach($_POST['client'] as $client){
  $sql = " SELECT * From " . $tblpref ."client WHERE num_client = $client ";
  $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());

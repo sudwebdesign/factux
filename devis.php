@@ -12,8 +12,8 @@
  * File Name: fckconfig.js
  *   Editor configuration settings.
  * 
- * * * Version:  5.0.0
- * * * * Modified: 07/10/2016
+ * * * * Version:  5.0.1
+ * * * * Modified: 10/06/2017
  * 
  * File Authors:
  *     Guy Hendrickx
@@ -23,12 +23,12 @@ include_once("include/headers.php");
 include_once("include/finhead.php");
 $client=isset($_POST['listeclients'])?$_POST['listeclients']:"";
 $date=isset($_POST['date'])?$_POST['date']:"";
-list($jour, $mois,$annee) = preg_split('/\//', $date, 3);
 if($client=='0'||$client==''){# '' si select client vide (aucun client enregisté)
  $message = "<h1>$lang_choix_client</h1>";
  include('form_devis.php');
  exit;
 }
+list($jour, $mois,$annee) = preg_split('/\//', $date, 3);
 ?>
 <table width="760" border="0" class="page" align="center">
  <tr>
