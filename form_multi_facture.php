@@ -106,10 +106,9 @@ while ( $row = mysql_fetch_array( $result)) {
       <th colspan="2" ><?php echo $lang_ajo_fact ?></th>
      </tr>
      <tr>
-     <td class="submit" colspan="2"><textarea name="coment" cols="45" rows="3"></textarea></td>
-     </tr>
-     <tr>
       <td class="submit" colspan="2">
+       <textarea name="coment" cols="45" rows="3"></textarea>
+       <br />
        <input type="submit" name="Submit" value="<?php echo $lang_facture_creer_bouton; ?>">
       </td>
      </tr>
