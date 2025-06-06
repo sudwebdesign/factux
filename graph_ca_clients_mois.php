@@ -87,7 +87,7 @@ $pourcentage = avec_virgule ($tot / $total * 100.00, 2);//number_format( round( 
 ?>
    <tr> 
     <td class='<?php echo couleur_alternee (); ?>'><?php echo $nom; ?></td>
-    <td class='<?php echo couleur_alternee (FALSE); ?>'> <?php echo stat_baton_horizontal("$pourcentage %",2); ?></td>
+    <td class='<?php echo couleur_alternee (FALSE); ?>'> <?php echo stat_baton_horizontal($pourcentage, 2); ?> %</td>
     <td class='<?php echo couleur_alternee (FALSE, "nombre"); ?>'><?php echo montant_financier($tot); ?></td>
    </tr>
 <?php } ?>

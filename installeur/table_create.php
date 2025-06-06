@@ -41,7 +41,7 @@ if(function_exists(\'mysql_set_charset\'))//connexion en utf-8 maintenant
  mysql_set_charset(\'utf8\', $cdb);
 else
  mysql_query("SET NAMES \'utf8\'", $cdb);//before 5.2.3
-mysql_query("SET character_set_results = \'utf8\', character_set_client = \'utf8\', character_set_connection = \'utf8\', character_set_database = \'utf8\', character_set_server = \'utf8\', collation-server = \'utf8_general_ci\'");
+mysql_query("SET character_set_results = \'utf8\', character_set_client = \'utf8\', character_set_connection = \'utf8\', character_set_database = \'utf8\', character_set_server = \'utf8\'"); // , collation-server = \'utf8_general_ci\'
 ';
 $monfichier = fopen($now."include/config/common.php", "a+");
 fwrite($monfichier, $connect);

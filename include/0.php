@@ -5,7 +5,7 @@ function apostrophe($str){
 }
 # go to php7
 if (version_compare(phpversion(),'7', '>='))
- include_once('include/7mysql.php');#non testé
+ include_once(__DIR__ . '/7mysql.php');#non testé (Fixed) TEP
 // Fix for removed Session functions http://php.net/manual/en/function.session-register.php#96241
 if(version_compare(phpversion(),'5.4.0','>=')){#function fix_session_register(){
  function session_register(){#DEPRECATED as of PHP 5.3.0 and REMOVED as of PHP 5.4.0

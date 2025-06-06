@@ -42,7 +42,7 @@ if(function_exists(\'mysql_set_charset\'))//connexion en utf-8 maintenant
  mysql_set_charset(\'utf8\', $cdb);
 else
  mysql_query("SET NAMES \'utf8\'", $cdb);//before 5.2.3
-mysql_query("SET character_set_results = \'utf8\', character_set_client = \'utf8\', character_set_connection = \'utf8\', character_set_database = \'utf8\', character_set_server = \'utf8\', collation-server = \'utf8_general_ci\'");
+mysql_query("SET character_set_results = \'utf8\', character_set_client = \'utf8\', character_set_connection = \'utf8\', character_set_database = \'utf8\', character_set_server = \'utf8\'"); // , collation-server = \'utf8_general_ci\'
 ';
 #backup
 file_put_contents($now."include/config/common.old_".time().".php",str_ireplace('<?php','<?php exit;//Laisser tel quel ou supprimer ce fichier du serveur',file_get_contents($now."include/config/common.php"))); 

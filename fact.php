@@ -32,7 +32,7 @@ if ($user_fact == 'n') {
  include_once("include/bas.php");
  exit;
 }
-$acompte=isset($_POST['acompte'])?$_POST['acompte']+0.00:0.00;
+$acompte=floatval(isset($_POST['acompte'])?$_POST['acompte']:"");
 $date_deb=isset($_POST['date_deb'])?$_POST['date_deb']:"";
 $date_fin=isset($_POST['date_fin'])?$_POST['date_fin']:"";
 $date_fact=isset($_POST['date_fact'])?$_POST['date_fact']:"";

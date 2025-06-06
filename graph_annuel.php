@@ -54,8 +54,8 @@ $liste_mois = calendrier_local_mois ();
 $recettes = array ();
 $depenses = array ();
 $resultat_net = array ();
-reset ($liste_mois);
-while (list ($numero_mois, $nom_mois) = each ($liste_mois))  {
+//~ reset ($liste_mois);
+foreach($liste_mois as $numero_mois => $nom_mois){
  $recettes [$numero_mois] = array ("htva" => 0.0, "tva" => 0.0, "T.T.C" => 0.0);
  $depenses [$numero_mois] = array ("htva" => 0.0, "tva" => 0.0, "T.T.C" => 0.0);
  $resultat_net [$numero_mois] = 0.0;
@@ -88,8 +88,8 @@ while ($data = mysql_fetch_array($req)){
 }
 
 // Résultat net
-reset ($liste_mois);
-while (list($numero_mois, $nom_mois) = each($liste_mois)){
+//~ reset ($liste_mois);
+foreach($liste_mois as $numero_mois => $nom_mois){
  $resultat_net [$numero_mois] = $recettes [$numero_mois]["htva"]  - $depenses [$numero_mois]["htva"] ;
 }
 ?>
@@ -104,9 +104,9 @@ while (list($numero_mois, $nom_mois) = each($liste_mois)){
   <th rowspan="14" width="200px"><img src="graph2_ca_ttc.php?annee_1=<?php echo $annee_1; ?>"></th>
  </tr>
 <?php
-reset ($liste_mois);
+//~ reset ($liste_mois);
 $de=$ca=$cat=$re=0;
-while (list ($numero_mois, $nom_mois) = each ($liste_mois)){
+foreach($liste_mois as $numero_mois => $nom_mois){
  $de+=$depenses [$numero_mois]["htva"];
  $ca+=$recettes [$numero_mois]["htva"];
  $cat+=$recettes [$numero_mois]["T.T.C"];

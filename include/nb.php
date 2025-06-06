@@ -69,14 +69,14 @@ function nombre_literal($nombre, $partie_entiere=ENTIER, $virgule=VIRGULE, $devi
  // on fait de cette valeur un nombre
  $nombre = preg_replace("/[^,0-9]/", "", $nombre);
  if ($nombre == ""){ return "$zro"; }
- $parties = split($virgule, $nombre);#$parties = split("," , $nombre);
+ $parties = explode($virgule, $nombre);#$parties = split("," , $nombre);
  $nombre = array_shift($parties);
  if (count($parties) > 0) { $nombre .= $virgule.implode("", $parties);}#{ $nombre .= ",".implode("", $parties);}
- 
 
- $les_centaines = floor($nombre / 100);
- $les_dizaines = floor(($nombre - $les_centaines * 100) / 10);
- $lunite = ($nombre - $les_centaines * 100 - $les_dizaines * 10);
+ $nmbr = intval($nombre); // Fix Warning: A non-numeric value encountered (Lgn: 77 78 & 79)
+ $les_centaines = floor($nmbr / 100); //                           o : floor($nombre / 100);
+ $les_dizaines = floor(($nmbr - $les_centaines * 100) / 10); //    o : floor(($nombre - $les_centaines * 100) / 10);
+ $lunite = ($nmbr - $les_centaines * 100 - $les_dizaines * 10); // o : ($nombre - $les_centaines * 100 - $les_dizaines * 10);
 
  // cas de la virgule
  if (preg_match('~'.$virgule.'~', $nombre)){#2015 [strstr($virgule, $nombre)#not work???] #if (ereg(',', $nombre)){

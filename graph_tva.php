@@ -55,8 +55,8 @@ if ($user_stat== 'n'){
 $liste_mois = calendrier_local_mois ();$recettes = array ();
 $depenses = array ();
 $resultat_net = array ();
-reset ($liste_mois);
-while (list ($numero_mois, $nom_mois) = each ($liste_mois)){
+//~ reset ($liste_mois);
+foreach($liste_mois as $numero_mois => $nom_mois){
  $recettes [$numero_mois] = array ("htva" => 0.0, "tva" => 0.0, "ttc" => 0.0);
  $depenses [$numero_mois] = array ("htva" => 0.0, "tva" => 0.0, "ttc" => 0.0);
  #$avoirs [$numero_mois] = array ("htva" => 0.0, "tva" => 0.0, "ttc" => 0.0);
@@ -120,9 +120,9 @@ while ($dataAv = mysql_fetch_array($reqAv)){
 */
 // Résultat net
 
-reset ($liste_mois);
+//~ reset ($liste_mois);
 $re=$de=$av=0;
-while (list ($numero_mois, $nom_mois) = each ($liste_mois)){
+foreach($liste_mois as $numero_mois => $nom_mois){
  $resultat_net[$numero_mois] = $recettes[$numero_mois]["tva"] - $depenses[$numero_mois]["tva"];/* + $avoirs[$numero_mois]["tva"]*/
  $re += $recettes[$numero_mois]["tva"];
  $de += $depenses[$numero_mois]["tva"];
@@ -143,8 +143,8 @@ if($fact)//réelles
     <th><?php echo "$lang_tva $lang_total_mois"; ?></th>
    </tr>
 <?php
-reset ($liste_mois);
-while (list ($numero_mois, $nom_mois) = each ($liste_mois)){
+//~ reset ($liste_mois);
+foreach($liste_mois as $numero_mois => $nom_mois){
 ?>
    <tr>
     <td class='<?php echo couleur_alternee (); ?>'><?php echo ucfirst ($nom_mois); ?></td>

@@ -55,7 +55,7 @@ $calendrier = calendrier_local_mois ();
 $sql2 = "SELECT SUM(prix)FROM " . $tblpref ."depense WHERE MONTH(date) = $mois_1 AND YEAR(date) = $annee_1 ";
 $req = mysql_query($sql2) or die('Erreur SQL !<br>'.$sql2.'<br>'.mysql_error());
 while ($data = mysql_fetch_array($req)){
-    $total_gene = $data['SUM(prix)'];
+    $total_gene = floatval($data['SUM(prix)']);
 }
 ?>
 <table class='page boiteaction'>
@@ -74,7 +74,7 @@ while($data = mysql_fetch_array($req)){
  $four = $data['fournisseur'];
  $total = $data['SUM(prix)'];
  $prix = $data['SUM(prix)'];
- $tot = ($total*100)/$total_gene;
+ $tot = $total_gene?($total*100)/$total_gene:0; // Fix divideperzero
  $barre = floor($tot)*3;
 ?>
  <tr>
@@ -99,7 +99,7 @@ while($data = mysql_fetch_array($req)){
 $sql2 = "SELECT SUM(prix) FROM " . $tblpref ."depense WHERE YEAR(date) = $annee_1";
 $req = mysql_query($sql2) or die('Erreur SQL !<br>'.$sql2.'<br>'.mysql_error());
 while ($data = mysql_fetch_array($req)){
- $total_gene = $data['SUM(prix)'];
+ $total_gene = floatval($data['SUM(prix)']);
 }
 ?>
 <table class='page boiteaction'>
@@ -118,7 +118,7 @@ while($data = mysql_fetch_array($req)){
  $four = $data['fournisseur'];
  $total = $data['SUM(prix)'];
  $prix = $data['SUM(prix)'];
- $tot = ($total*100)/$total_gene;
+ $tot = $total_gene?($total*100)/$total_gene:0; // fix / 0
  $barre = floor($tot)*3;
 ?>
     <tr>

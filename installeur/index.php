@@ -112,10 +112,20 @@ echo "
   </center>
   <br>
 ";
-if (!is_writable ($doss1 )||!is_writable ($doss2) || !is_writable ($doss3) || !is_writable ($doss4) || !is_writable ($doss5) || !is_writable ($fich1) || !is_writable ($fich2)|| !is_writable ($fich3) ){
- echo "<h1>Veuiller vérifier les erreurs ci-dessus avant de poursuivre</h1>";
-}else {
+if (
+ is_writable ($doss1)
+ && is_writable ($doss2)
+ && is_writable ($doss3)
+ && is_writable ($doss4)
+ && is_writable ($doss5)
+ && is_writable ($doss6)
+ && is_writable ($fich1)
+ && is_writable ($fich2)
+ && is_writable ($fich3)
+){
  echo "<h2>Tout est bien réglé ici.<br><a href='index2.php'>Étape Suivante</a></h2>";
+}else {
+ echo "<h1>Veuiller vérifier les erreurs ci-dessus avant de poursuivre</h1>";
 }
 include_once("../include/bas_cli.php");
 ?> 

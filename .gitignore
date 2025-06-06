@@ -2,5 +2,10 @@ include/config/common.php
 include/config/var.php
 include/session/*
 fpdf/*.pdf
+dump/*.sql
+dump/*.gz
+image/*
 dbinfo.php
+patches/
 /nbproject/private/
+.bugs/*

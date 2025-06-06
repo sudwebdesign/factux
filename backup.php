@@ -54,11 +54,11 @@ function get_def($dbname, $table) {
  $result = mysql_db_query($dbname, "SHOW FIELDS FROM $table",$conn) or die("Table $table not existing in database");
  while($row = mysql_fetch_array($result)) {
   $def .= "  $row[Field] $row[Type]";
-  if ($row["Default"] != "")
+  if ($row["Default"] !== null) // Fix 2025
    $def .= " DEFAULT '$row[Default]'";
   if ($row["Null"] != "YES")
    $def .= " NOT NULL";
-  if ($row['Extra'] != "")
+  if ($row["Extra"] != "")
    $def .= " $row[Extra]";
    $def .= ",\n";
  }
@@ -72,14 +72,14 @@ function get_def($dbname, $table) {
    $index[$kname] = array();
   $index[$kname][] = $row['Column_name'];
  }
- while(list($x, $columns) = @each($index)) {
+ foreach($index as $x => $columns){
   $def .= ",\n";
   if($x == "PRIMARY")
-   $def .= "  PRIMARY KEY (" . implode($columns, ", ") . ")";
+   $def .= "  PRIMARY KEY (" . implode(", ", $columns) . ")";
   else if (substr($x,0,6) == "UNIQUE")
-   $def .= "  UNIQUE ".substr($x,7)." (" . implode($columns, ", ") . ")";
+   $def .= "  UNIQUE ".substr($x,7)." (" . implode(", ", $columns) . ")";
   else
-   $def .= "  KEY $x (" . implode($columns, ", ") . ")";
+   $def .= "  KEY $x (" . implode(", ", $columns) . ")";
  }
  $def .= "\n);#%%";
  return (stripslashes($def));

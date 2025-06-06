@@ -19,9 +19,10 @@
  * 		Guy Hendrickx
  *.
  */
-ini_set('session.save_path', 'include/session');
-if(session_id() === '')#(!isset($login)||$login=='')#Only in login.php?
-  session_start();#Warning: session_start() [function.session-start]: Cannot send session cache limiter - headers already sent (output started at /mnt/111/sdb/b/d/factux/demo/include/headers.php:30) in /mnt/111/sdb/b/d/factux/demo/include/verif.php on line 24
+if(session_id() === '') { # ( !isset($login)||$login=='')#Only in login.php?
+ ini_set('session.save_path', 'include/session');
+ session_start();#Warning: session_start() [function.session-start]: Cannot send session cache limiter - headers already sent (output started at /mnt/111/sdb/b/d/factux/demo/include/headers.php:30) in /mnt/111/sdb/b/d/factux/demo/include/verif.php on line 24
+}
 $page_name = isset($page_name)?$page_name:'';#fix bon/devis_fin,...
 if(!isset($_SESSION['trucmuch']) || $_SESSION['trucmuch']==''){
  if(!strstr($page_name,'Log')&!strstr($page_name,'Index'))

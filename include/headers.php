@@ -30,7 +30,7 @@ if(
   &!strstr($_SERVER['PHP_SELF'],'logout.php')
   )
   require_once("include/verif.php");
-$lang=(!empty($_SESSION['lang']))?$_SESSION['lang']:isset($lang)?$lang:$default_lang;# (isset=fix lang espace client) default_lg in common
+$lang=(!empty($_SESSION['lang'])?$_SESSION['lang']:(isset($lang)?$lang:$default_lang));# (isset=fix lang espace client) default_lg in common Fix PHP Fatal error:  Unparenthesized `a ? b : c ? d : e` is not supported. Use either `(a ? b : c) ? d : e` or `a ? b : (c ? d : e)` in /var/www/0.src.facturiers/factux/include/headers.php on line 33
 include_once($here."include/config/var.php");
 include_once($here."include/language/$lang.php");
 include_once($here."include/utils.php");

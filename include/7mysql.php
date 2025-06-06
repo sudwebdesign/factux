@@ -430,7 +430,13 @@ if (!extension_loaded('mysql')) {
 	# resource mysql_list_tables ( string $database [, resource $link_identifier = NULL ] )
 	# SQL Query: SHOW TABLES FROM sometable
 	function mysql_list_tables ($database_name, $table_name, $link_identifier = NULL) {
-		return mysql_query('SHOW TABLES FROM "'.mysql_real_escape_string($database_name).'"', mysql_ensure_link($link_identifier));
+		return mysql_query('SHOW TABLES FROM '.mysql_real_escape_string($database_name), mysql_ensure_link($link_identifier));
+	}
+
+	# mysql_tablename - Return table name from mysql_list_tables
+	# string mysql_tablename(resource result, int);
+	function mysql_tablename ($result, $i) {
+		return mysql_result($result , $i); // while ($row = mysql_fetch_row($result)) echo "Table: {$row[0]}\n";
 	}
 
 	# mysql_num_fields - Get number of fields in result

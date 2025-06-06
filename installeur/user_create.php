@@ -28,16 +28,16 @@
       <form action="register.php" method="post" name="utilisateur" id="utilisateur">
        <table bgcolor="#FFFFCC" border="1" cellspacing="0" cellpadding="0">
         <tr>
-         <td><?php echo $lang_utilisateur_nom; ?></td>
-         <td><input name="login2" type="text" id="login2"></td>
-        </tr>
-        <tr>
          <td><?php echo $lang_nom; ?></td>
          <td><input name="nom" type="text" id="nom"></td>
         </tr>
         <tr>
          <td><?php echo $lang_prenom; ?></td>
          <td><input name="prenom" type="text" id="prenom"></td>
+        </tr>
+        <tr>
+         <td><?php echo $lang_utilisateur_nom; ?></td>
+         <td><input name="login2" type="text" id="login2"></td>
         </tr>
         <tr>
          <td><?php echo $lang_motdepasse; ?></td>

@@ -33,18 +33,17 @@ $sql = "SELECT SUM( tot_htva ) FROM " . $tblpref ."bon_comm WHERE YEAR( date ) =
 $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 $total= mysql_result($req,0);
 
-reset ($liste_mois);
-while (list ($numero_mois, $nom_mois) = each ($liste_mois)){
+//~ reset ($liste_mois);
+foreach($liste_mois as $numero_mois => $nom_mois){
  $tot = $recettes[$numero_mois]["htva"];
  $pourcentage = ($total)?round($tot / $total * 100):0;#Unwarning: Division by zero  $pourcentage = number_format( round( ($tot*100)/$total), 0, ",", " "); 
 ?>
   <tr>
    <td class='<?php echo couleur_alternee (); ?>'><?php echo ucfirst ($nom_mois); ?></td>
-   <td class='<?php echo couleur_alternee (FALSE); ?>'><?php echo stat_baton_horizontal("$pourcentage %"); ?></td>
+   <td class='<?php echo couleur_alternee (FALSE); ?>'><?php echo stat_baton_horizontal($pourcentage); ?> %</td>
    <td class='<?php echo couleur_alternee (FALSE, "nombre"); ?>'><?php echo montant_financier ($recettes[$numero_mois]["htva"]); ?></td>
   </tr>
 <?php
-
 }
 ?>
   <tr>

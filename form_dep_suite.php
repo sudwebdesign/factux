@@ -26,8 +26,8 @@ include_once("include/language/$lang.php");
 $lib=isset($_POST['lib'])?apostrophe($_POST['lib']):"";
 $fourn=isset($_POST['fourn'])?apostrophe($_POST['fourn']):"";#new
 $fournisseur=isset($_POST['fournisseur'])?$_POST['fournisseur']:"";#select
-$prix=isset($_POST['prix'])?$_POST['prix']:"";
-$tx_tva=isset($_POST['tva'])?$_POST['tva']:"";
+$prix=floatval(isset($_POST['prix'])?$_POST['prix']:"");
+$tx_tva=floatval(isset($_POST['tva'])?$_POST['tva']:"");
 $date=isset($_POST['date'])?$_POST['date']:"";
 
 if($lib==''|| $prix=='' || $tx_tva==''){

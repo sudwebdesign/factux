@@ -141,7 +141,7 @@ class PDF extends PDF_MySQL_Table{
             $this->_out('/Names <</JavaScript '.($this->n_js).' 0 R>>');
         }
     }
-    function AutoPrint($dialog=false, $nb_impr){
+    function AutoPrint($dialog=false, $nb_impr=1){
          //Ajoute du JavaScript pour lancer la boîte d'impression ou imprimer immediatement
          $param=($dialog ? 'true' : 'false');
          $script=str_repeat("print($param);",$nb_impr);

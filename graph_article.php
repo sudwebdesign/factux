@@ -116,7 +116,7 @@ while ($data = mysql_fetch_array($req)){
 ?>
    <tr class='texte<?php echo $line; ?>' onmouseover="this.className='highlight'" onmouseout="this.className='texte<?php echo $line; ?>'">
     <td class='<?php echo couleur_alternee (); ?>'><b title="<?php echo "$lang_numero $num"; ?>"><?php echo $art; ?></b></td>
-    <td class='<?php echo couleur_alternee (FALSE); ?>' width='261'><?php echo stat_baton_horizontal("$pourcentage %", 2); ?></td>
+    <td class='<?php echo couleur_alternee (FALSE); ?>' width='261'><?php echo stat_baton_horizontal($pourcentage, 2); ?> %</td>
     <td class='<?php echo couleur_alternee (FALSE); ?>'><?php echo "$quanti $uni "; ?></td>
     <td class='<?php echo couleur_alternee (FALSE, "nombre"); ?>'><?php echo montant_financier($tot); ?>&nbsp;</td>
     <td class='<?php echo couleur_alternee (FALSE, "nombre"); ?>'><?php echo montant_financier($prix_achat); ?></td>

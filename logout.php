@@ -20,9 +20,10 @@
  *.
  */
 include_once("include/config/common.php");
-ini_set('session.save_path', 'include/session');
-if(session_id() === '')#if(basename($_SERVER['SCRIPT_FILENAME'])==basename(__FILE__))#elle meme
+if(session_id() === ''){#if(basename($_SERVER['SCRIPT_FILENAME'])==basename(__FILE__))#elle meme
+ ini_set('session.save_path', 'include/session');
  session_start();
+}
 $_SESSION['trucmuch'] = '';#session_register('login');
 $_SESSION['lang'] = ''; 
 unset($_SESSION['trucmuch'],$_SESSION['lang']);

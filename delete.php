@@ -31,7 +31,7 @@ $path = str_replace("$page.$extension",'', $_SERVER['DOCUMENT_ROOT'].$_SERVER['P
 if (file_exists($path."dbinfo.php")) {
    $dir=opendir($path."dump/"); 
    while ($fl = readdir ($dir)) { 
-       if ($fl != "." && $fl != ".." &&  (eregi("\.sql",$fl) || eregi("\.gz",$fl))){ 
+       if ($fl != "." && $fl != ".." &&  (preg_match("~\.(sql|gz)$~",$fl))){ 
          unlink($path."dump/".$fl); // del all sql and gz
        }
    } 

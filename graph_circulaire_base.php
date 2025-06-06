@@ -56,7 +56,7 @@ $ChartLabel = isset($ChartLabel)?$ChartLabel:$m;#array("Janvier", "Février", "M
 //détermine le total de toutes les valeurs
 $ChartTotal = 0;
 for($index = 0; $index < count($ChartData); $index++){
- $ChartTotal += $ChartData[$index];
+ $ChartTotal += intval($ChartData[$index]); // Fatal error: Uncaught TypeError: Unsupported operand types: int + string
 }
 
 //déterminer la taille du graphique
@@ -237,7 +237,8 @@ for($index = 0; $index < count($ChartData); $index++){
   $ChartFont,
   20 + $ChartFontHeight,
   $LineY,
-  utf8_decode($ChartLabel[$index]).": $ChartData[$index]",# in utf-8 bad accents
+  //~ utf8_decode($ChartLabel[$index]).": $ChartData[$index]",# in utf-8 bad accents
+  mb_convert_encoding($ChartLabel[$index], 'ISO-8859-1', 'UTF-8').": $ChartData[$index]",# in utf-8 bad accents
   $colorText);
 }
 

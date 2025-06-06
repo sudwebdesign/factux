@@ -28,7 +28,7 @@ function couleur_alternee ($alterne=TRUE, $type="texte")
 
 function stat_baton_horizontal($valeur,$largeur = 3, $image = "image/barre.jpg",  $font=2)
 {
-  $barre = round($valeur) * $largeur;
+  $barre = round(floatval($valeur)) * $largeur;
   return '<img src="'.$image.'" width="'.$barre.'" height="10" alt="barre"><font size='.$font.'>'. $valeur.'</font>';
 }
 
@@ -40,21 +40,18 @@ function parseCSS($filename){
   $css=preg_replace("/[\s, ]+/", "", $css); 
   $css_class = preg_split("/}/", $css); 
   
-  while (list($key, $val) = each ($css_class)) 
-  { 
-  $aCSSObj=preg_split("/{/", $val); 
-  $a=preg_split("/;/", $aCSSObj[1]); 
-  while(list($key, $val0) = each ($a)) 
-  { 
-  if($val0 !='') 
-  { 
-  $aCSSSub=preg_split("/:/", $val0); 
-  $aCSSItem[$aCSSSub[0]]=$aCSSSub[1]; 
-  } 
-  } 
-  $aCSS[$aCSSObj[0]]=$aCSSItem; 
-  unset($aCSSItem); 
-  } 
+  foreach($css_class as $key => $val){
+   $aCSSObj=preg_split("/{/", $val);
+   $a=preg_split("/;/", $aCSSObj[1]);
+   foreach($a as $key => $val0){
+    if($val0 !=''){
+     $aCSSSub=preg_split("/:/", $val0);
+     $aCSSItem[$aCSSSub[0]]=$aCSSSub[1];
+    }
+   }
+   $aCSS[$aCSSObj[0]]=$aCSSItem;
+   unset($aCSSItem);
+  }
   
   unset($css); 
   unset($css_class); 

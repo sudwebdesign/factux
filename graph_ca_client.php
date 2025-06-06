@@ -81,7 +81,7 @@ while ( $row = mysql_fetch_array( $result)) {
  <tr>
   <td>
 <?php
-if($client==0)
+if(empty($client))
   goto fin;
 
 $sql = "SELECT nom from " . $tblpref ."client WHERE num_client = $client";
@@ -123,7 +123,7 @@ for ($i=1;$i<=12;$i++){
 ?>
     <tr>
       <td class='<?php echo couleur_alternee (); ?>'><?php echo $calendrier [$i]; ?></td>
-      <td class='<?php echo couleur_alternee (FALSE); ?>'><?php echo stat_baton_horizontal("$pourcentage%"); ?></td>  
+      <td class='<?php echo couleur_alternee (FALSE); ?>'><?php echo stat_baton_horizontal($pourcentage); ?> %</td>  
       <td class='<?php echo couleur_alternee (FALSE,"nombre"); ?>'><?php echo montant_financier ($tot); ?></td>
     </tr>
 <?php

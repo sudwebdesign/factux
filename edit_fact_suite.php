@@ -53,8 +53,8 @@ WHERE 1
 $sql="$sql $suite_sql";
 $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 $data = mysql_fetch_array($req);
-$total_fact_h = $data['SUM(tot_htva)'];
-$tva = $data['SUM(tot_tva)'];
+$total_fact_h = floatval($data['SUM(tot_htva)']);
+$tva = floatval($data['SUM(tot_tva)']);
 $total_fact_ttc =($total_fact_h + $tva ) ;
  
 $list_num=serialize($tableau4);//
