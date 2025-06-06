@@ -37,7 +37,7 @@ $date_deb=isset($_POST['date_deb'])?$_POST['date_deb']:"";
 $date_fin=isset($_POST['date_fin'])?$_POST['date_fin']:"";
 $date_fact=isset($_POST['date_fact'])?$_POST['date_fact']:"";
 $client=isset($_POST['listeclients'])?$_POST['listeclients']:"";
-$coment=isset($_POST['coment'])?apostrophe($_POST['coment']):"";
+$coment=isset($_POST['coment'])?$_POST['coment']:"";
 if($client=='' || $date_deb==''|| $date_fin=='' || $date_fact=='' ){
  $message= "<h1>$lang_oubli_champ</h1>";
  include('form_facture.php');

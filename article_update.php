@@ -26,14 +26,14 @@ include_once("include/language/$lang.php");
 $nom=isset($_POST['nom'])?$_POST['nom']:"";
 $num=isset($_POST['num'])?$_POST['num']:"";
 $prix=floatval(isset($_POST['prix'])?$_POST['prix']:"");
-$commentaire=isset($_POST['commentaire'])?apostrophe($_POST['commentaire']):"";###
+$commentaire=isset($_POST['commentaire'])?$_POST['commentaire']:"";###
 $marge=floatval(isset($_POST['marge'])?$_POST['marge']:"");
 $stock=floatval(isset($_POST['stock'])?$_POST['stock']:"");
 $max=floatval(isset($_POST['max'])?$_POST['max']:"");
 $min=floatval(isset($_POST['min'])?$_POST['min']:"");
 $categorie=intval(isset($_POST['categorie'])?$_POST['categorie']:"");
 
-$article=isset($_POST['article'])?apostrophe($_POST['article']):"";### ‘	&#145;	&lsquo;	Left single quotation mark ::: 4 change Single quote (') http://ascii-code.com/
+$article=isset($_POST['article'])?$_POST['article']:"";### ‘	&#145;	&lsquo;	Left single quotation mark ::: 4 change Single quote (') http://ascii-code.com/
 $uni=isset($_POST['uni'])?$_POST['uni']:"";
 $taux_tva=floatval(isset($_POST['taux_tva'])?$_POST['taux_tva']:"");
 $set='';

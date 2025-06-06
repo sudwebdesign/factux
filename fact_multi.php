@@ -24,7 +24,7 @@ $acompte=isset($_POST['acompte'])?$_POST['acompte']:"";
 $date_deb=isset($_POST['date_deb'])?$_POST['date_deb']:"";
 $date_fin=isset($_POST['date_fin'])?$_POST['date_fin']:"";
 $date_fact=isset($_POST['date_fact'])?$_POST['date_fact']:"";
-$coment=isset($_POST['coment'])?apostrophe($_POST['coment']):"";
+$coment=isset($_POST['coment'])?$_POST['coment']:"";
 ?>
 <table width="760" border="0" class="page" align="center">
  <tr>

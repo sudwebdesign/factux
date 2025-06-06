@@ -26,7 +26,7 @@ include_once("include/language/$lang.php");
 $tot_ht=isset($_POST['tot_ht'])?$_POST['tot_ht']:"";
 $tot_tva=isset($_POST['tot_tva'])?$_POST['tot_tva']:"";
 $dev_num=isset($_POST['dev_num'])?$_POST['dev_num']:"";
-$coment=isset($_POST['coment'])?apostrophe($_POST['coment']):"";
+$coment=isset($_POST['coment'])?$_POST['coment']:"";
 
 $sql2 = "UPDATE " . $tblpref ."devis SET tot_htva='".$tot_ht."'  WHERE num_dev = $dev_num";
 mysql_query($sql2) OR die("<p>Erreur Mysql1<br/>$sql2<br/>".mysql_error()."</p>");

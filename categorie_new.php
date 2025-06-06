@@ -23,7 +23,7 @@ require_once("include/verif.php");
 include_once("include/config/common.php");
 include_once("include/config/var.php");
 include_once("include/language/$lang.php");
-$categorie=isset($_POST['categorie'])?apostrophe($_POST['categorie']):"";
+$categorie=isset($_POST['categorie'])?$_POST['categorie']:"";
 $sql = "INSERT INTO " . $tblpref ."categorie(categorie) VALUES ('$categorie')";
 if($categorie!=''&&$categorie!=$lang_divers){
  mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());

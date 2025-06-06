@@ -22,3 +22,25 @@ if(version_compare(phpversion(),'5.4.0','>=')){#function fix_session_register(){
  }
 }
 #if (!function_exists('session_register')) fix_session_register();
+// 2025
+function unQuote($content) {
+ # On traite un tableau
+ if(is_array($content)) {
+  $new_content = array();
+  foreach($content as $k=>$v) { # On parcourt le tableau
+   if(is_array($v)) {
+    $new_content[$k] = array();
+    foreach($v as $key=>$val)
+     $new_content[$k][$key] = unQuote($val);
+   } else {
+    $new_content[$k] = apostrophe($v);
+   }
+  }
+  return $new_content;
+ }
+
+ # On traite une chaine
+ return apostrophe($content);
+}
+# Echappement des caractères
+if($_SERVER['REQUEST_METHOD'] == 'POST') $_POST = unQuote($_POST);

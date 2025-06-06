@@ -26,7 +26,7 @@ include_once("include/language/$lang.php");
 $tot_ht=isset($_POST['tot_ht'])?$_POST['tot_ht']:"";
 $tot_tva=isset($_POST['tot_tva'])?$_POST['tot_tva']:"";
 $bon_num=isset($_POST['bon_num'])?$_POST['bon_num']:"";
-$coment=isset($_POST['coment'])?apostrophe($_POST['coment']):"";
+$coment=isset($_POST['coment'])?$_POST['coment']:"";
 
 $sql2 = "UPDATE " . $tblpref ."bon_comm SET tot_htva='".$tot_ht."'  WHERE num_bon = $bon_num";
 mysql_query($sql2) OR die("<p>Erreur Mysql<br/>$sql2<br/>".mysql_error()."</p>");

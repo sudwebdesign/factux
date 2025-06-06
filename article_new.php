@@ -23,11 +23,11 @@ require_once("include/verif.php");
 include_once("include/config/common.php");
 include_once("include/config/var.php");
 include_once("include/language/$lang.php");
-$article=isset($_POST['article'])?apostrophe($_POST['article']):"";### ‘	&#145;	&lsquo;	Left single quotation mark ::: 4 change Single quote (') http://ascii-code.com/
+$article=isset($_POST['article'])?$_POST['article']:"";### ‘	&#145;	&lsquo;	Left single quotation mark ::: 4 change Single quote (') http://ascii-code.com/
 $uni=isset($_POST['uni'])?$_POST['uni']:"";
 $prix=floatval(isset($_POST['prix'])?$_POST['prix']:"");
 $taux_tva=floatval(isset($_POST['taux_tva'])?$_POST['taux_tva']:"");
-$commentaire=isset($_POST['commentaire'])?apostrophe($_POST['commentaire']):"";###
+$commentaire=isset($_POST['commentaire'])?$_POST['commentaire']:"";###
 $stock=floatval(isset($_POST['stock'])?$_POST['stock']:"");
 $stomin=floatval(isset($_POST['stomin'])?$_POST['stomin']:"");
 $stomax=floatval(isset($_POST['stomax'])?$_POST['stomax']:"");

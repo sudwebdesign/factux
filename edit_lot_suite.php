@@ -91,9 +91,9 @@ $num_cont_bon_11=isset($_POST['num_cont_bon_11'])?$_POST['num_cont_bon_11']:"";
 */
 }
 for ($i=1; $i<13; $i++) {
- $o = isset($_POST["ing_$i"])?apostrophe($_POST["ing_$i"]):"";
- $a = isset($_POST["four_$i"])?apostrophe($_POST["four_$i"]):"";
- $b = isset($_POST["lot_four_$i"])?apostrophe($_POST["lot_four_$i"]):"";
+ $o = isset($_POST["ing_$i"])?$_POST["ing_$i"]:"";
+ $a = isset($_POST["four_$i"])?$_POST["four_$i"]:"";
+ $b = isset($_POST["lot_four_$i"])?$_POST["lot_four_$i"]:"";
  $c = isset($_POST["num_cont_bon_$i"])?$_POST["num_cont_bon_$i"]:"";
 #echo "$o $a $b $c <br>";
  if($o !=''and $c !=''){#if($o !=''and $c !=''){

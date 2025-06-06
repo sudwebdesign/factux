@@ -20,7 +20,7 @@
  *.
  */
 include_once("include/headers.php");
-$categorie=isset($_POST['categorie'])?apostrophe($_POST['categorie']):"";
+$categorie=isset($_POST['categorie'])?$_POST['categorie']:"";
 $id_cat=isset($_POST['id_cat'])?$_POST['id_cat']:"";
 if($id_cat!=""&&$categorie!=""){#MAJ
  $sql = "SELECT categorie FROM " . $tblpref ."categorie WHERE id_cat = $id_cat";

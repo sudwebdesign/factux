@@ -35,7 +35,7 @@ if ($user_fact == 'n') {
 $date_fact=isset($_POST['date_fact'])?$_POST['date_fact']:"";
 $list_num=isset($_POST['bon_sup'])?$_POST['bon_sup']:"";
 $acompte=isset($_POST['acompte'])?(integer)$_POST['acompte']:"";
-$coment=isset($_POST['coment'])?apostrophe($_POST['coment']):"";
+$coment=isset($_POST['coment'])?$_POST['coment']:"";
 $num=isset($_POST['num'])?$_POST['num']:"";
 $client=isset($_POST['client'])?$_POST['client']:"";
 
