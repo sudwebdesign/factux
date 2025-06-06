@@ -1,20 +1,20 @@
-<?php 
+<?php
 /*
  * Factux le facturier libre
  * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
- * 
+ *
  * Licensed under the terms of the GNU  General Public License:
  * 		http://opensource.org/licenses/GPL-3.0
- * 
+ *
  * For further information visit:
  * 		http://factux.free.fr
- * 
+ *
  * File Name: form_editer_devis.php
- * 	
- * 
+ *
+ *
  * * * Version:  5.0.0
  * * * * Modified: 07/10/2016
- * 
+ *
  * File Authors:
  * 		Guy Hendrickx
  *.
@@ -29,7 +29,7 @@ $nom = $data['nom'];#htmlentities($data['nom'], ENT_QUOTES);
 $coment = $data['coment'];
 $sql = "
 SELECT " . $tblpref ."cont_dev.num, quanti, remise, p_u_jour, marge_jour, uni, article, tot_art_htva, to_tva_art tva
-FROM " . $tblpref ."cont_dev 
+FROM " . $tblpref ."cont_dev
 LEFT JOIN " . $tblpref ."article on " . $tblpref ."cont_dev.article_num = " . $tblpref ."article.num
 WHERE dev_num = $num_dev
 ";
@@ -37,20 +37,20 @@ $req5 = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 
 //chang_cli.php
 $rqSql = "
-SELECT num_client, nom 
-FROM " . $tblpref ."client 
+SELECT num_client, nom
+FROM " . $tblpref ."client
 WHERE actif != 'non'
 ";
 
-if ($user_dev == 'r') { 
+if ($user_dev == 'r') {
   $rqSql .= "
-  and (" . $tblpref ."client.permi LIKE '$user_num,' 
-  or  " . $tblpref ."client.permi LIKE '%,$user_num,' 
-  or  " . $tblpref ."client.permi LIKE '%,$user_num,%' 
-  or  " . $tblpref ."client.permi LIKE '$user_num,%')  
-";  
+  and (" . $tblpref ."client.permi LIKE '$user_num,'
+  or  " . $tblpref ."client.permi LIKE '%,$user_num,'
+  or  " . $tblpref ."client.permi LIKE '%,$user_num,%'
+  or  " . $tblpref ."client.permi LIKE '$user_num,%')
+";
 }
-$result2 = mysql_query( $rqSql ) or die('Erreur SQL !<br>'.$rqSql.'<br>'.mysql_error());	     
+$result2 = mysql_query( $rqSql ) or die('Erreur SQL !<br>'.$rqSql.'<br>'.mysql_error());
 ?>
 <form action="chang_cli.php" method="post" name="formu">
  <table class="page boiteaction">
@@ -58,11 +58,11 @@ $result2 = mysql_query( $rqSql ) or die('Erreur SQL !<br>'.$rqSql.'<br>'.mysql_e
   <tr>
    <td><?php echo $lang_changer_client; ?></td>
    <td>
-<?php 
-if ($liste_cli!='y') { 
+<?php
+if ($liste_cli!='y') {
  $rqSql="$rqSql order by nom";
  $result = mysql_query( $rqSql ) or die('Erreur SQL !<br>'.$rqSql.'<br>'.mysql_error());
-?> 
+?>
   <select name='listeclients'>
 <?php
 while ( $row = mysql_fetch_array( $result2)) {
@@ -72,11 +72,11 @@ while ( $row = mysql_fetch_array( $result2)) {
    <option value="<?php echo $numcli; ?>"<?php echo ($numcli==$num)?' selected="selected"':''; ?>><?php echo $nomcli; ?></option>
 <?php } ?>
   </select>
-<?php 
+<?php
 }else{
  include_once("include/choix_cli.php");
 }
-?> 
+?>
    </td>
    <td><input type="hidden" name="num_dev" value="<?php echo $num_dev; ?>" /></td>
    <td><input type="submit" name="changer" value="<?php echo $lang_changer_client; ?>"></td>
@@ -124,7 +124,7 @@ while($data = mysql_fetch_array($req5)){
  if($c++ & 1){
   $line="0";
  }else{
-  $line="1"; 
+  $line="1";
  }
 ?>
  <tr class="texte<?php echo $line; ?>" onmouseover="this.className='highlight'" onmouseout="this.className='texte<?php echo $line; ?>'">
@@ -145,7 +145,7 @@ while($data = mysql_fetch_array($req5)){
    </form>
   </td>
   <td class="<?php echo couleur_alternee (FALSE,"c texte"); ?>">
-   <a href="delete_cont_dev.php?num_cont=<?php echo $num_cont; ?>&amp;num_dev=<?php echo $num_dev; ?>&amp;nom=<?php echo $nom; ?>" 
+   <a href="delete_cont_dev.php?num_cont=<?php echo $num_cont; ?>&amp;num_dev=<?php echo $num_dev; ?>&amp;nom=<?php echo $nom; ?>"
       onClick='return confirmDelete("<?php echo $lang_effacer_ligne_devis; ?>")'>
     <img border="0" src="image/delete.jpg" alt="<?php echo $lang_effacer; ?>">
    </a>
@@ -168,13 +168,13 @@ $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
  <form name="formu2" method="post" action="edit_devis_suite.php">
   <table class="page boiteaction">
    <caption><?php echo "$lang_devis_ajouter $lang_numero $num_dev"; ?></caption>
-   <tr> 
-    <td class="texte0"><?php echo $lang_article; ?></td> 
+   <tr>
+    <td class="texte0"><?php echo $lang_article; ?></td>
     <td class="texte0">
 <?php include("include/article_choix.php"); ?>
     </td>
    </tr>
-   <tr> 
+   <tr>
     <td class="texte0"><?php echo $lang_quantite; ?></td>
     <td class="texte0" colspan="6">
      <input name="quanti" type="text" id="quanti" size="6">
@@ -184,11 +184,11 @@ $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
     <td class="texte0"><?php echo $lang_remise;?></td>
     <td class="texte0" colspan="6"><input name="remise" type="text" id="remise" size="6">%</td>
    </tr>
-   <tr> 
+   <tr>
     <td class="submit" colspan="7">
     <input type="submit" name="Submit2" value="<?php echo $lang_devis_ajouter; ?>">
      <input name="nom" type="hidden" id="nom" value="<?php echo $nom; ?>">
-     <input name="num_dev" type="hidden" id="nom" value="<?php echo $num_dev; ?>"> 
+     <input name="num_dev" type="hidden" id="nom" value="<?php echo $num_dev; ?>">
     </td>
    </tr>
   </table>
@@ -198,13 +198,13 @@ $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
  <table class="page boiteaction">
   <caption><?php echo"$lang_devis_enregistrer $lang_numero $num_dev"; ?></caption>
   <tr>
-   <th><?php echo $lang_ajo_com_dev; ?></th>    
+   <th><?php echo $lang_ajo_com_dev; ?></th>
   </tr>
   <tr>
    <td class="submit">
-    <textarea name="coment" cols="45" rows="3"><?php echo $coment; ?></textarea><br> 
+    <textarea name="coment" cols="45" rows="3"><?php echo $coment; ?></textarea><br>
     <input type="submit" name="Submit" value="<?php echo $lang_ter_enr; ?>">
-   </td>    
+   </td>
   </tr>
  </table>
  <input type="hidden" name="tot_ht" value="<?php echo $total_dev; ?>">

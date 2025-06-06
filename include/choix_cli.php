@@ -44,24 +44,24 @@ function filltheselect(liste, choix){
 }
 
 function raz(liste){
- l=document.formu.elements[liste].length; 
-  for (i=l; i>=0; i--) 
+ l=document.formu.elements[liste].length;
+  for (i=l; i>=0; i--)
    document.formu.elements[liste].options[i]=null;
-}    
+}
 </script>
- 
-<select id="cluster" name="listelettres" 
-        onChange='javascript:filltheselect(this.name, this.value)'> 
-   <script type="text/javascript"> 
-   for (i=0; i<lettres.length; i++) 
-      document.write("<option value='" +lettres[i][0]+ "'" +lettres[i][2]+ ">" +lettres[i][1] + "</option>"); 
-   </script> 
+
+<select id="cluster" name="listelettres"
+        onChange='javascript:filltheselect(this.name, this.value)'>
+   <script type="text/javascript">
+   for (i=0; i<lettres.length; i++)
+      document.write("<option value='" +lettres[i][0]+ "'" +lettres[i][2]+ ">" +lettres[i][1] + "</option>");
+   </script>
 </select>
 
-<select id="cluster2" name="listeclients" 
-        onChange='javascript:filltheselect(this.name, this.value)'> 
-   <script type="text/javascript"> 
-   for (i=0; i<clients["<?php echo $selettre; ?>"].length; i++) 
-      document.write("<option value='" +clients["<?php echo $selettre; ?>"][i][0]+ "'" +clients["<?php echo $selettre; ?>"][i][2]+ ">" +clients["<?php echo $selettre; ?>"][i][1] + "</option>"); 
-   </script> 
+<select id="cluster2" name="listeclients"
+        onChange='javascript:filltheselect(this.name, this.value)'>
+   <script type="text/javascript">
+   for (i=0; i<clients["<?php echo $selettre; ?>"].length; i++)
+      document.write("<option value='" +clients["<?php echo $selettre; ?>"][i][0]+ "'" +clients["<?php echo $selettre; ?>"][i][2]+ ">" +clients["<?php echo $selettre; ?>"][i][1] + "</option>");
+   </script>
 </select>

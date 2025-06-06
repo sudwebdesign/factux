@@ -78,7 +78,7 @@ TableOperations.I18N = {
 	"The right-hand side only":			  "Pouze pravá strana",
 	"The top and bottom sides only":		  "Pouze horní a dolní strana",
 	"The top side only":				  "Pouze horní strana",
-	"Top":                                            "Nahoru",	
+	"Top":                                            "Nahoru",
 	"Unset color":                                    "Zrušit barvu",
 	"Vertical align":                                 "Svislé zarovnání",
 	"Width":					  "Šířka",

@@ -1,20 +1,20 @@
-<?php 
+<?php
 /*
  * Factux le facturier libre
  * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
- * 
+ *
  * Licensed under the terms of the GNU  General Public License:
  * 		http://opensource.org/licenses/GPL-3.0
- * 
+ *
  * For further information visit:
  * 		http://factux.free.fr
- * 
+ *
  * File Name: form_commande.php
  * 	Formulaire de saisie des commandes
- * 
+ *
  * * * Version:  5.0.0
  * * * * Modified: 07/10/2016
- * 
+ *
  * File Authors:
  * 		Guy Hendrickx
  *.
@@ -27,12 +27,12 @@ include_once("include/finhead.php");
   <td class="page" align="center">
 <?php
 include_once("include/head.php");
-if ($user_com == 'n') { 
+if ($user_com == 'n') {
  echo"<h1>$lang_commande_droit</h1>";
  include_once("include/bas.php");
  exit;
 }
-if (isset($message)&&$message!='') { 
+if (isset($message)&&$message!='') {
  echo $message; $message='';
 }
 $jour = date("d");
@@ -40,28 +40,28 @@ $mois = date("m");
 $annee = date("Y");
 
 $rqSql = "SELECT num_client, nom FROM " . $tblpref ."client WHERE actif != 'non'";
-if ($user_com == 'r') { 
+if ($user_com == 'r') {
 $rqSql = "SELECT num_client, nom FROM " . $tblpref ."client WHERE actif != 'non'
- and (" . $tblpref ."client.permi LIKE '$user_num,' 
- or  " . $tblpref ."client.permi LIKE '%,$user_num,' 
- or  " . $tblpref ."client.permi LIKE '%,$user_num,%' 
- or  " . $tblpref ."client.permi LIKE '$user_num,%')  
-";  
+ and (" . $tblpref ."client.permi LIKE '$user_num,'
+ or  " . $tblpref ."client.permi LIKE '%,$user_num,'
+ or  " . $tblpref ."client.permi LIKE '%,$user_num,%'
+ or  " . $tblpref ."client.permi LIKE '$user_num,%')
+";
 }
 ?>
 <form name="formu" method="post" action="bon.php" onSubmit="return verif_formulaire()">
  <center>
   <table border='0' class='page' align='center'>
    <caption><?php echo "$lang_cre_bon"; ?></caption>
-   <tr> 
+   <tr>
     <td class="texte0"></td>
     <td class="texte0"><?php echo "$lang_client";?></td>
     <td class="texte0">
-<?php 
-  if ($liste_cli!='y') { 
+<?php
+  if ($liste_cli!='y') {
    $rqSql="$rqSql order by nom";
    $result = mysql_query( $rqSql ) or die( "Exécution requête impossible.");
-?> 
+?>
       <select name='listeclients'>
        <option value='0'><?php echo $lang_choisissez; ?></option>
 <?php
@@ -71,12 +71,12 @@ $rqSql = "SELECT num_client, nom FROM " . $tblpref ."client WHERE actif != 'non'
 ?>
        <option value='<?php echo $numclient; ?>'><?php echo $nom; ?></option>
 <?php } ?>
-      </select> 
+      </select>
 <?php }else{include_once("include/choix_cli.php"); } ?>
      </td>
      <td class="texte0"></td>
    </tr>
-   <tr> 
+   <tr>
     <td class="texte0"></td>
     <td class="texte0"><?php echo "date" ?> </td>
     <td class="texte0"><input type="text" name="date" value="<?php echo"$jour/$mois/$annee" ?>" readonly="readonly"/>

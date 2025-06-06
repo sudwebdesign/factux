@@ -1,4 +1,4 @@
-<?php 
+<?php
 $now='../';
 include_once("../include/config/common.php");
 include_once("../include/config/var.php");
@@ -10,7 +10,7 @@ include_once("../include/headers.php");
 <?php
 if (isset($message)&&$message!='') {
  $message = ($message=="i")?"<h1>$lang_interdit</h1>":$message;
- echo "<div>$message</div>\n"; 
+ echo "<div>$message</div>\n";
 }
 ?>
  <p><?php echo $lang_factux ?></p>
@@ -30,7 +30,7 @@ if (isset($message)&&$message!='') {
     <td class="boiteaction"><?php echo $lang_mai_cr_pa ?></td>
     <td class="boiteaction"><input type="password" name="pass" maxlength="30"></td>
    </tr>
-   <tr> 
+   <tr>
     <td class="boiteaction">Langue</td>
     <td class="boiteaction">
      <select name="lang">
@@ -49,7 +49,7 @@ if (isset($message)&&$message!='') {
       <option value="el">Ελληνικά (baby)</option>
       <option value="el.m">Ελληνικά (bing)</option>
      </select>
-    </td> 
+    </td>
    </tr>
    <tr>
     <td class="boiteaction"><a href="../index.php"><?php echo $lang_en_admi; ?></a></td>

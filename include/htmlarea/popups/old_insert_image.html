@@ -36,8 +36,8 @@ function Init() {
   var htmlSelectionControl = "Control";
   var globalDoc = window.dialogArguments;
   var grngMaster = globalDoc.selection.createRange();
-  
-  // event handlers  
+
+  // event handlers
   document.body.onkeypress = _CloseOnEsc;
   btnOK.onclick = new Function("btnOKClick()");
 
@@ -79,10 +79,10 @@ function btnOKClick() {
   var htmlSelectionControl = "Control";
   var globalDoc = window.dialogArguments;
   var grngMaster = globalDoc.selection.createRange();
-  
+
   // error checking
 
-  if (!txtFileName.value || txtFileName.value == "http://") { 
+  if (!txtFileName.value || txtFileName.value == "http://") {
     alert("Image URL must be specified.");
     txtFileName.focus();
     return;
@@ -108,7 +108,7 @@ function btnOKClick() {
     grngMaster.execCommand('Delete');
     grngMaster = globalDoc.selection.createRange();
   }
-    
+
   idstr = "\" id=\"556e697175657e537472696e67";     // new image creation ID
   if (!txtFileName.fImageLoaded) {
     grngMaster.execCommand("InsertImage", false, idstr);
@@ -139,15 +139,15 @@ function btnOKClick() {
   if (txtFileName.value.length > 2040) {
     txtFileName.value = txtFileName.value.substring(0,2040);
   }
-  
+
   elmImage.src = txtFileName.value;
-  
+
   if (txtHorizontal.value != "") { elmImage.hspace = parseInt(txtHorizontal.value); }
   else                           { elmImage.hspace = 0; }
 
   if (txtVertical.value != "") { elmImage.vspace = parseInt(txtVertical.value); }
   else                         { elmImage.vspace = 0; }
-  
+
   elmImage.alt = txtAltText.value;
 
   if (txtBorder.value != "") { elmImage.border = parseInt(txtBorder.value); }

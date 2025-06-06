@@ -1,27 +1,27 @@
-<?php 
+<?php
 /*
  * Factux le facturier libre
  * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
- * 
+ *
  * Licensed under the terms of the GNU  General Public License:
  * 		http://opensource.org/licenses/GPL-3.0
- * 
+ *
  * For further information visit:
  * 		http://factux.free.fr
- * 
+ *
  * File Name: index2.php
  * 	suite de l'installation choix et enregistrement des parametres.
- * 
+ *
  * * * Version:  5.0.0
  * * * * Modified: 07/10/2016
- * 
+ *
  * File Authors:
  * 		Guy Hendrickx
  *.
  */
  $etape = "Étape N°2 : Informations de connexion à la Base de données mysql";
  include_once('headers.php');
-?> 
+?>
   <h3>Les paramètres de connexion à votre base de données mysql.</h3>
   <hr><br>
    <form action="setup.php" method="post" name="artice" id="artice">
@@ -72,11 +72,11 @@
      </table>
     </center>
    </form>
-<?php include_once("../include/bas_cli.php"); ?> 
+<?php include_once("../include/bas_cli.php"); ?>
   </td>
  </tr>
 </table>
 </body>
 </html>
 
- 
+

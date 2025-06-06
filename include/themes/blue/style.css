@@ -4,42 +4,42 @@ body {
 font-size:small;
 color:black;
 	}
-	
-	
-.input { 
-background-color: #ffefd5 ; 
-font-family: arial, helvetica, sans-serif ; 
+
+
+.input {
+background-color: #ffefd5 ;
+font-family: arial, helvetica, sans-serif ;
 color: red ;
 }
 
-.option  { 
+.option  {
 background-color: #ffefd5 ;
 cursor: pointer;
- 
+
 }
 
-.select { 
-background-color: 
-#ffefd5 ; 
+.select {
+background-color:
+#ffefd5 ;
 }
 
-.textarea { 
-background-color: #ffefd5 ; 
-color: red ; 
+.textarea {
+background-color: #ffefd5 ;
+color: red ;
 }
 
-.button { font-family: arial, helvetica, sans-serif ; 
+.button { font-family: arial, helvetica, sans-serif ;
 border-width: 2pt ;
- font-size: 16pt ; 
- color: black ; 
- top: 250px ; 
- background-color: #f5deb3 ; 
+ font-size: 16pt ;
+ color: black ;
+ top: 250px ;
+ background-color: #f5deb3 ;
  }
 
- 
-.left50{float:left;width:50%;} 
- 
- 
+
+.left50{float:left;width:50%;}
+
+
 .libelle {
 	background-color: #CAE3FF;
 	text-align: left;
@@ -66,8 +66,8 @@ td {
 	padding:4px;
 	vertical-align: middle;
 	border: 0px;
-	
-	
+
+
 }
 td.highlight {
 	font-family:verdana, sans-serif;
@@ -77,7 +77,7 @@ td.highlight {
 	padding:4px;
 	vertical-align: middle;
 	border: 1Opx ;
-	
+
 }
 td.highlight.login {
 	font-family:verdana, sans-serif;
@@ -87,7 +87,7 @@ td.highlight.login {
 	padding:4px;
 	vertical-align: middle;
 	border: 1Opx ;
-	
+
 }
 /*//#efefef;*/
 
@@ -104,7 +104,7 @@ border-spacing: 0px ;
 border:thin solid #BBBBBB;
 text-align:center;
 }
-	
+
 h1 {
 font-family:arial, sans-serif;
 font-size:small;
@@ -198,7 +198,7 @@ border-color:black;
 border-style:solid;
 border-width:0px;
 text-align:left;
-border-spacing: 1px 
+border-spacing: 1px
 }
 
 tr {
@@ -222,12 +222,12 @@ font-family:verdana, sans-serif;
 	border: 0px ;
 	background-color: #EEEEFF;/*#ECECDC*/
 	border-color:grey;
-	
+
 }
 .rien {
-border-style:solid; 
-border-width:0px; 
-border-color:black; 
+border-style:solid;
+border-width:0px;
+border-color:black;
 background-color:transparent;
 }
 rien.rien2 {
@@ -363,7 +363,7 @@ th {
 	color:#000066;
 	font-weight: bold;
 	text-align: center;
-	
+
 }
 th a:link{
 	background-color: transparent;
@@ -406,11 +406,11 @@ font-size:small;
 	font-weight: bold;
 text-align:right;
 	background-color: #ECECDC;
-}	
+}
 .boiteaction td, form, input {
  /*padding: 0;*/
  margin: 0;
-} 
+}
 /***** menu CSS *****/
 @media print {
 /*A l'impression on cache le menu, marche au moins pour IE, Moz et Opéra.*/
@@ -437,7 +437,7 @@ margin aussi */
 	text-align:center;
 	background:#333399;
 	border-color:#000066;
-	
+
 }
 .ssmenu {
 	background:#333399;
@@ -488,7 +488,7 @@ margin aussi */
 	}
 
 
-	
+
 /*
 Bref... pour résumer, ce qu'il y a à modifier à la base, c'est :
 - couleurs, police, bordure et largeur des menu et ssmenu.

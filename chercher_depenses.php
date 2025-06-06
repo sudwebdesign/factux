@@ -1,20 +1,20 @@
-<?php 
+<?php
 /*
  * Factux le facturier libre
  * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
- * 
+ *
  * Licensed under the terms of the GNU  General Public License:
  * 		http://opensource.org/licenses/GPL-3.0
- * 
+ *
  * For further information visit:
  * 		http://factux.free.fr
- * 
+ *
  * File Name: chercher_depenses.php
  * 	Formulaire de recherche pour les depenses
- * 
+ *
  * * * Version:  5.0.0
  * * * * Modified: 07/10/2016
- * 
+ *
  * File Authors:
  * 		Guy Hendrickx
  *.
@@ -25,14 +25,14 @@ include_once("include/utils.php");
 <table width="760" border="0" class="page" align="center">
  <tr>
   <td class="page" align="center">
-<?php 
+<?php
 include_once("include/head.php");
-if ($user_dep == 'n') { 
+if ($user_dep == 'n') {
  echo "<h1>$lang_depense_droit</h1>";
  include_once("include/bas.php");
  exit;
 }
-?> 
+?>
    <form name="form_rec_dep" method="post" action="chercheur_depenses.php">
     <center>
      <table class="page" border="0" align="center">
@@ -97,12 +97,12 @@ while ( $row = mysql_fetch_array( $result)){
 <?php
 $aide='depenses';
 include("help.php");
-include_once("include/bas.php"); 
+include_once("include/bas.php");
 ?>
   </td>
  </tr>
 </table>
 <?php if(strstr($_SERVER['SCRIPT_FILENAME'],__FILE__)){?>
 </body>
-</html> 
+</html>
 <?php }

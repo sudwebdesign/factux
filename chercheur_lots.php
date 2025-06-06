@@ -1,20 +1,20 @@
-<?php 
+<?php
 /*
  * Factux le facturier libre
  * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
- * 
+ *
  * Licensed under the terms of the GNU  General Public License:
  * 		http://opensource.org/licenses/GPL-3.0
- * 
+ *
  * For further information visit:
  * 		http://factux.free.fr
- * 
+ *
  * File Name: chercheur_lots.php
  * 	resultat d'une recherche de lot
- * 
+ *
  * * * Version:  5.0.0
  * * * * Modified: 07/10/2016
- * 
+ *
  * File Authors:
  * 		Guy Hendrickx
  *.
@@ -32,7 +32,7 @@ if($num_lot==''){
   <td class="page" align="center">
 <?php
 include_once("include/head.php");
-if ($user_com == 'n') { 
+if ($user_com == 'n') {
  echo"<h1>$lang_commande_droit</h1>";
  include_once("include/bas.php");
  exit;
@@ -46,18 +46,18 @@ if(!is_int($num_lot)){
 $sql = "
 SELECT mail, login, num_client, num_bon, tot_htva, tot_tva, nom, fact,
 DATE_FORMAT(date,'%d/%m/%Y') AS date,(tot_htva + tot_tva) as ttc
-FROM " . $tblpref ."bon_comm 
+FROM " . $tblpref ."bon_comm
 LEFT JOIN " . $tblpref ."cont_bon on " . $tblpref ."bon_comm.num_bon = " . $tblpref ."cont_bon.bon_num
-LEFT JOIN " . $tblpref ."client on " . $tblpref ."bon_comm.client_num = num_client  
+LEFT JOIN " . $tblpref ."client on " . $tblpref ."bon_comm.client_num = num_client
 WHERE `num_lot` = $num_lot
 ";
 
-if ($user_com == 'r'){ 
+if ($user_com == 'r'){
 $sql .= "
-and " . $tblpref ."client.permi LIKE '$user_num,' 
-or  " . $tblpref ."client.permi LIKE '%,$user_num,' 
-or  " . $tblpref ."client.permi LIKE '%,$user_num,%' 
-or  " . $tblpref ."client.permi LIKE '$user_num,%' 
+and " . $tblpref ."client.permi LIKE '$user_num,'
+or  " . $tblpref ."client.permi LIKE '%,$user_num,'
+or  " . $tblpref ."client.permi LIKE '%,$user_num,%'
+or  " . $tblpref ."client.permi LIKE '$user_num,%'
 ";
 }
 
@@ -71,7 +71,7 @@ $num_lot=($num_lot==-1)?'*':$lang_numero.$num_lot;
   <center>
    <table class='page boiteaction'>
     <caption><?php echo "$lang_com_cont_lot $num_lot"; ?></caption>
-     <tr> 
+     <tr>
       <th><?php echo $lang_numero; ?></th>
       <th><?php echo $lang_client; ?></th>
       <th><?php echo $lang_date; ?></th>
@@ -87,7 +87,7 @@ while($data = mysql_fetch_array($req)){
  $tva = $data['tot_tva'];
  $date = $data['date'];
  $nom = $data['nom'];
- $nom_html = htmlentities(urlencode ($nom)); 
+ $nom_html = htmlentities(urlencode ($nom));
  $num_client = $data['num_client'];
  $mail = $data['mail'];
  $login = $data['login'];
@@ -103,7 +103,7 @@ while($data = mysql_fetch_array($req)){
      <td class='<?php echo couleur_alternee (FALSE,"nombre"); ?>'><?php echo montant_financier($ttc); ?></td>
      <td class='<?php echo couleur_alternee (FALSE,"c texte"); ?>'>
 <?php if ($fact == "0") {?>
-      <a href='edit_bon.php?num_bon=<?php echo "$num_bon"; ?>&amp;nom=<?php echo $nom_html; ?>'> 
+      <a href='edit_bon.php?num_bon=<?php echo "$num_bon"; ?>&amp;nom=<?php echo $nom_html; ?>'>
        <img border="0" src="image/edit.gif" alt="<?php echo $lang_editer; ?>">
       </a>
 <?php }else{ ?>
@@ -114,7 +114,7 @@ while($data = mysql_fetch_array($req)){
      </td>
      <td class='<?php echo couleur_alternee (FALSE,"c texte"); ?>'>
 <?php if ($fact == "0") {?>
-      <a href='delete_bon.php?num_bon=<?php echo $num_bon; ?>&amp;nom=<?php echo $nom_html; ?>' 
+      <a href='delete_bon.php?num_bon=<?php echo $num_bon; ?>&amp;nom=<?php echo $nom_html; ?>'
          onClick="return confirmDelete('<?php echo $lang_con_effa.$num_bon; ?> ?')">
        <img border="0" src="image/delete.jpg" alt="<?php echo $lang_effacer; ?>">
       </a>
@@ -138,7 +138,7 @@ while($data = mysql_fetch_array($req)){
      </td>
      <td class='<?php echo couleur_alternee (FALSE,"c texte"); ?>'>
 <?php if ($mail != '' and $login !='') { ?>
-      <a href='notifi_cli.php?type=comm&amp;mail=<?php echo"$mail"; ?>' 
+      <a href='notifi_cli.php?type=comm&amp;mail=<?php echo"$mail"; ?>'
          onClick="return confirmDelete('<?php echo $lang_con_env_notif.$num_bon; ?> ?')">
        <img src='image/mail.gif' border='0' alt='mail'>
       </a>
@@ -146,7 +146,7 @@ while($data = mysql_fetch_array($req)){
      </td>
      <td class='<?php echo couleur_alternee (FALSE,"c texte"); ?>'>
 <?php if ($mail != '' ) {?>
-      <form action="fpdf/bon_pdf.php" method="post" 
+      <form action="fpdf/bon_pdf.php" method="post"
             onClick="return confirmDelete('<?php echo $lang_con_env_pdf.$num_bon; ?> ?')">
        <input type="hidden" name="num_bon" value="<?php echo $num_bon; ?>" />
        <input type="hidden" name="nom" value="<?php echo $nom; ?>" />
@@ -156,9 +156,9 @@ while($data = mysql_fetch_array($req)){
        <input type="image" src="image/pdf.gif" alt="<?php echo $lang_env_par_mail; ?>" />
       </form>
 <?php }else{ ?><img src='image/spacer.gif' width='15' height='15' border='0' alt='space'><?php } ?>
-     </td> 
+     </td>
     </tr>
-<?php }#fi while ?> 
+<?php }#fi while ?>
     <tr><td colspan="10" class="td2"></td></tr>
    </table>
   </center>

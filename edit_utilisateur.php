@@ -1,20 +1,20 @@
-<?php 
+<?php
 /*
  * Factux le facturier libre
  * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
- * 
+ *
  * Licensed under the terms of the GNU  General Public License:
  *     http://opensource.org/licenses/GPL-3.0
- * 
+ *
  * For further information visit:
  *     http://factux.free.fr
- * 
+ *
  * File Name: fckconfig.js
  * 	Editor configuration settings.
- * 
+ *
  * * * Version:  5.0.0
  * * * * Modified: 07/10/2016
- * 
+ *
  * File Authors:
  *     Guy Hendrickx
  *.
@@ -33,10 +33,10 @@ include_once("include/head.php");
 if (isset($message)&&$message!='') {
  echo $message;
 }
-if ($user_admin != 'y') { 
+if ($user_admin != 'y') {
   echo "<h1>$lang_admin_droit</h1>";
   exit;
-} 
+}
 $sql = " SELECT * FROM " . $tblpref ."user WHERE num = $num_user ";
 $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 while($data = mysql_fetch_array($req)){
@@ -58,29 +58,29 @@ while($data = mysql_fetch_array($req)){
    <form action="edit_utilisateur_suite.php" method="post" name="utilisateur" id="utilisateur">
     <table class='page boiteaction'>
      <caption><?php echo $lang_utilisateur_editer; ?></caption>
-     <tr> 
+     <tr>
       <td class='<?php echo couleur_alternee (); ?>'><?php echo $lang_utilisateur_nom; ?></td>
       <td class='<?php echo couleur_alternee (FALSE); ?>'><b><?php echo $login ?></b>
        <input type="hidden" name="login2" value="<?php echo $login ?>" />
       </td>
      </tr>
-     <tr> 
+     <tr>
       <td class='<?php echo couleur_alternee (); ?>'> <?php echo $lang_nom; ?></td>
       <td class='<?php echo couleur_alternee (FALSE); ?>'><input name="nom" type="text" id="nom" value="<?php echo $nom ?>" maxlength="10" /></td>
      </tr>
-     <tr> 
+     <tr>
       <td class='<?php echo couleur_alternee (); ?>'><?php echo $lang_prenom; ?></td>
       <td class='<?php echo couleur_alternee (FALSE); ?>'><input name="prenom" type="text" id="prenom" value="<?php echo $prenom ?>" maxlength="20" /></td>
      </tr>
-     <tr> 
+     <tr>
       <td class='<?php echo couleur_alternee (); ?>'><?php echo $lang_motdepasse; ?></td>
       <td class='<?php echo couleur_alternee (FALSE); ?>'><input name="pass" type="password" id="pass" maxlength="30" /></td>
      </tr>
-     <tr> 
+     <tr>
       <td class='<?php echo couleur_alternee (); ?>'><?php echo $lang_mot_de_passe; ?></td>
       <td class='<?php echo couleur_alternee (FALSE); ?>'><input name="pass2" type="password" id="pass2" maxlength="30" /></td>
      </tr>
-     <tr> 
+     <tr>
       <td class='<?php echo couleur_alternee (); ?>'><?php echo $lang_mail; ?></td>
       <td class='<?php echo couleur_alternee (FALSE); ?>'><input name="mail" type="text" id="mail" value="<?php echo $mail ?>" maxlength="30" /></td>
      </tr>
@@ -164,11 +164,11 @@ while($data = mysql_fetch_array($req)){
       </td>
      </tr>
      <tr>
-      <td class="submit" colspan="3"> 
+      <td class="submit" colspan="3">
        <input type="submit" name="Submit" value="<?php echo $lang_modifier; ?>" />
        &nbsp;&nbsp;
        <input name="reset" type="reset" id="reset" value="<?php echo $lang_val_actu; ?>" />
-       <input type="hidden" name="num_user" value="<?php echo $num_user ?>" /> 
+       <input type="hidden" name="num_user" value="<?php echo $num_user ?>" />
       </td>
      </tr>
     </table>
@@ -177,8 +177,8 @@ while($data = mysql_fetch_array($req)){
  </tr>
  <tr>
   <td>
-<?php 
-if ($fact == 'r' || $com == 'r' || $dev == 'r' ){ 
+<?php
+if ($fact == 'r' || $com == 'r' || $dev == 'r' ){
 	include("edit_choix_cli.php");
 	include("lister_clients_restreint.php");
 
@@ -187,7 +187,7 @@ if ($fact == 'r' || $com == 'r' || $dev == 'r' ){
  </tr>
  <tr>
   <td>
-<?php 
+<?php
 }#fi fact,com,dev
 $aide='utilisateurs';
 include("help.php");

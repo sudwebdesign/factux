@@ -1,20 +1,20 @@
-<?php 
+<?php
 /*
  * Factux le facturier libre
  * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
- * 
+ *
  * Licensed under the terms of the GNU  General Public License:
  * 		http://opensource.org/licenses/GPL-3.0
- * 
+ *
  * For further information visit:
  * 		http://factux.free.fr
- * 
+ *
  * File Name: graph_ca_clients.php
  * 	Statistiques du chiffre d'affaire par clients
- * 
+ *
  * * * Version:  5.0.0
  * * * * Modified: 07/10/2016
- * 
+ *
  * File Authors:
  * 		Guy Hendrickx
  *.
@@ -28,14 +28,14 @@ $annee_1 = (isset($_POST['annne_1']))?$_POST['annne_1']:date('Y');
   <td class="page" align="center">
 <?php
 include_once("include/head.php");
-if ($user_stat == 'n'){ 
+if ($user_stat == 'n'){
  echo"<h1>$lang_statistique_droit</h1>";
  include_once("include/bas.php");
  exit;
 }
 ?>
    <form action="graph_ca_clients.php" method="post" name="annee">
-<?php echo $lang_annee; ?>: 
+<?php echo $lang_annee; ?>:
     <select name="annne_1">
 <?php for ($i=date("Y");$i>=date("Y")-13;$i--){?>
      <option value="<?php echo$i; ?>"<?php echo ($i==$annee_1)?' selected="selected"':''; ?>><?php echo $i; ?></option>
@@ -64,17 +64,17 @@ $nb = mysql_num_rows($req);
 $sql = "
 SELECT SUM(tot_htva)
 FROM " . $tblpref ."bon_comm
-WHERE YEAR(date) = $annee_1 
+WHERE YEAR(date) = $annee_1
 ";
 $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 $data = mysql_fetch_array($req);
 $total = $data['SUM(tot_htva)'];
 
 $sql = "
-SELECT SUM(tot_htva), nom 
-FROM " . $tblpref ."bon_comm 
-LEFT JOIN " . $tblpref ."client on client_num = num_client 
-WHERE YEAR(date) = $annee_1 
+SELECT SUM(tot_htva), nom
+FROM " . $tblpref ."bon_comm
+LEFT JOIN " . $tblpref ."client on client_num = num_client
+WHERE YEAR(date) = $annee_1
 GROUP BY nom ";
 $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 while ($data = mysql_fetch_array($req)){
@@ -88,7 +88,7 @@ $pourcentage = avec_virgule ((($tot*100)/$total), 2);
      <td class='<?php echo couleur_alternee (FALSE, "nombre"); ?>'><?php echo montant_financier($tot); ?></td>
     </tr>
 <?php } ?>
-    <tr> 
+    <tr>
      <td class='totalmontant'>&nbsp;</td>
      <td class='totaltexte'><?php echo $lang_total; ?></td>
      <td class='totalmontant'><?php echo montant_financier ($total); ?></td>

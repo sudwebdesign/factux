@@ -1,26 +1,26 @@
-<?php 
+<?php
 /*
  * Factux le facturier libre
  * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
- * 
+ *
  * Licensed under the terms of the GNU  General Public License:
  * 		http://opensource.org/licenses/GPL-3.0
- * 
+ *
  * For further information visit:
  * 		http://factux.free.fr
- * 
+ *
  * File Name: form_depense.php
  * 	formulaire de saisie des depenses
- * 
+ *
  * * * Version:  5.0.0
  * * * * Modified: 07/10/2016
- * 
+ *
  * File Authors:
  * 		Guy Hendrickx
  *.
  */
 include_once("include/headers.php");
-include_once("include/finhead.php"); 
+include_once("include/finhead.php");
 $jour = date("d");
 $mois = date("m");
 $annee = date("Y");
@@ -30,12 +30,12 @@ $annee = date("Y");
   <td class="page" align="center">
 <?php
 include_once("include/head.php");
-if ($user_dep == 'n') { 
+if ($user_dep == 'n') {
  echo "<h1>$lang_depense_droit</h1>";
  include_once("include/bas.php");
  exit;
 }
-if (isset($message)&&$message!='') { 
+if (isset($message)&&$message!='') {
  echo $message;$message='';#no propagation
 }
 $rqSql = "SELECT * FROM " . $tblpref ."depense GROUP by fournisseur ORDER BY fournisseur";
@@ -44,7 +44,7 @@ $result = mysql_query( $rqSql ) or die( "Ex&eacute;cution requ&ecirc;te impossib
    <form action="form_dep_suite.php" method="post" name="depense" id="depense">
     <table class="page boiteaction">
      <caption><?php echo $lang_depense_ajouter; ?></caption>
-     <tr> 
+     <tr>
       <td class="texte0"><?php echo "$lang_fournisseur" ?>:</td>
       <td class="texte0">
        <select name='fournisseur'>
@@ -65,7 +65,7 @@ while ( $row = mysql_fetch_array( $result)){
      <tr>
       <td class="texte0" > <?php echo $lang_libelle; ?>: </td>
       <td colspan="4" class="texte0" >
-       <input name="lib" type="text" id="lib" size="50" maxlength="50"> 
+       <input name="lib" type="text" id="lib" size="50" maxlength="50">
       </td>
      </tr>
      <tr>

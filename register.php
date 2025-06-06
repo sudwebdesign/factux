@@ -1,20 +1,20 @@
-<?php 
+<?php
 /*
  * Factux le facturier libre
  * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
- * 
+ *
  * Licensed under the terms of the GNU  General Public License:
  * 		http://opensource.org/licenses/GPL-3.0
- * 
+ *
  * For further information visit:
  * 		http://factux.free.fr
- * 
+ *
  * File Name: fckconfig.js
  * 	Editor configuration settings.
- * 
+ *
  * * * Version:  5.0.0
  * * * * Modified: 07/10/2016
- * 
+ *
  * File Authors:
  * 		Guy Hendrickx
  *.
@@ -39,11 +39,11 @@ $art=isset($_POST['art'])?$_POST['art']:'';
 $cli=isset($_POST['cli'])?$_POST['cli']:'';
 $admin=isset($_POST['admin'])?$_POST['admin']:'';
 
-if ($admin == 'y') { 
+if ($admin == 'y') {
  $dev = 'y';
  $com = 'y';
  $fact = 'y';
- $dep = 'y'; 
+ $dep = 'y';
  $stat = 'y';
  $art = 'y';
  $cli = 'y';
@@ -63,7 +63,7 @@ if($pass != $pass2){
 $sql = "SELECT * FROM " . $tblpref ."user WHERE login = '".$login2."' OR email = '".$mail."'";
 $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 $test = mysql_num_rows($req);
-if ($test > 0){ 
+if ($test > 0){
  $message = "<h1>$lang_id_or_mail_exist</h1>";
  include('form_utilisateurs.php');
  exit;
@@ -73,14 +73,14 @@ $pass_crypt = md5($pass);
 
 mysql_select_db($db) or die ("Could not select $db database");
 $sql7 = "
-INSERT INTO " . $tblpref ."user (login, pwd, nom, prenom, email, dev, com, fact, dep, stat, art, cli, admin) 
+INSERT INTO " . $tblpref ."user (login, pwd, nom, prenom, email, dev, com, fact, dep, stat, art, cli, admin)
 VALUES ('$login2', '$pass_crypt', '$nom', '$prenom', '$mail', '$dev', '$com', '$fact', '$dep', '$stat', '$art', '$cli', '$admin')
 ";
 mysql_query($sql7) or die('Erreur SQL !<br>'.$sql7.'<br>'.mysql_error());
 $message = "<h2>$prenom $nom $lang_est_enr $login2 .</h2>";
-if ($dev == 'r' || $com == 'r' ||$fact == 'r'){ 
+if ($dev == 'r' || $com == 'r' ||$fact == 'r'){
  $message = "<h1>$lang_don_rest $login2 $lang_choi_cli_enr</h1>";
- include_once("form_choisir_client.php");  
+ include_once("form_choisir_client.php");
 }else{
  include('form_utilisateurs.php');
 }

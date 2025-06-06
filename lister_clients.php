@@ -1,20 +1,20 @@
-<?php 
+<?php
 /*
  * Factux le facturier libre
  * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
- * 
+ *
  * Licensed under the terms of the GNU  General Public License:
  *   http://opensource.org/licenses/GPL-3.0
- * 
+ *
  * For further information visit:
  *   http://factux.free.fr
- * 
+ *
  * File Name: lister_clients.php
  *  liste les clients et permet de multiples action sur les clients
- * 
+ *
  * * * Version:  5.0.0
  * * * * Modified: 07/10/2016
- * 
+ *
  * File Authors:
  *   Guy Hendrickx
  *.
@@ -28,12 +28,12 @@ include_once("include/finhead.php");
   <td class="page" align="center">
 <?php
 include_once("include/head.php");
-if ($user_cli == 'n') { 
+if ($user_cli == 'n') {
  echo"<h1>$lang_client_droit</h1>";
  include_once("include/bas.php");
  exit;
 }
-if (isset($message)&&$message!='') { 
+if (isset($message)&&$message!='') {
   echo$message; $message='';
 }
 $sql = " SELECT * FROM " . $tblpref ."client WHERE actif != 'non' ";
@@ -79,7 +79,7 @@ while($data = mysql_fetch_array($req)){
   if($c++ & 1){
    $line="0";
   }else{
-   $line="1"; 
+   $line="1";
   }
 ?>
     <tr class="texte<?php echo $line; ?>" onmouseover="this.className='highlight'" onmouseout="this.className='texte<?php echo $line; ?>'">
@@ -101,7 +101,7 @@ while($data = mysql_fetch_array($req)){
       </a>
      </td>
      <td class='<?php echo couleur_alternee (FALSE,"c texte"); ?>'>
-      <a href='del_client.php?num=<?php echo "$num"; ?>' 
+      <a href='del_client.php?num=<?php echo "$num"; ?>'
        onClick="return confirmDelete('<?php echo $lang_cli_effa.$nom_html; ?>?')">
        <img border='0' src='image/delete.jpg' alt='<?php echo $lang_supprimer; ?>'>
       </a>
@@ -119,9 +119,9 @@ $aide='client';
 include("help.php");
 include_once("include/bas.php");
 if(!strstr($_SERVER['SCRIPT_FILENAME'],__FILE__)){#autre qu'elle meme
- echo"\n  </td>\n </tr>\n</table>\n"; 
+ echo"\n  </td>\n </tr>\n</table>\n";
 }
-?> 
+?>
   </td>
  </tr>
 </table>

@@ -1,20 +1,20 @@
-<?php 
+<?php
 /*
  * Factux le facturier libre
  * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
- * 
+ *
  * Licensed under the terms of the GNU  General Public License:
  *   http://opensource.org/licenses/GPL-3.0
- * 
+ *
  * For further information visit:
  *   http://factux.free.fr
- * 
+ *
  * File Name: fckconfig.js
  * 	Editor configuration settings.
- * 
+ *
  * * * Version:  5.0.0
  * * * * Modified: 07/10/2016
- * 
+ *
  * File Authors:
  *   Guy Hendrickx
  *.
@@ -27,38 +27,38 @@ include_once("include/finhead.php");
   <td class="page" align="center">
 <?php
 include_once("include/head.php");
-if (isset($message)&&$message!='') { 
- echo $message; 
+if (isset($message)&&$message!='') {
+ echo $message;
 }
-if ($user_admin != 'y') { 
+if ($user_admin != 'y') {
  echo "<h1>$lang_admin_droit</h1>";
  exit;
 }
-?> 
+?>
    <form action="register.php" method="post" name="utilisateur" id="utilisateur">
     <table class='page boiteaction'>
      <caption><?php echo $lang_utilisateur_ajouter; ?></caption>
-     <tr> 
+     <tr>
       <td class='<?php echo couleur_alternee (); ?>'><?php echo $lang_utilisateur_nom; ?></td>
       <td class='<?php echo couleur_alternee (FALSE); ?>'><input name="login2" type="text" id="login2" maxlength="10" /></td>
      </tr>
-     <tr> 
+     <tr>
       <td class='<?php echo couleur_alternee (); ?>'> <?php echo $lang_nom; ?></td>
       <td class='<?php echo couleur_alternee (FALSE); ?>'><input name="nom" type="text" id="nom" maxlength="20" /></td>
      </tr>
-     <tr> 
+     <tr>
       <td class='<?php echo couleur_alternee (); ?>'><?php echo $lang_prenom; ?></td>
       <td class='<?php echo couleur_alternee (FALSE); ?>'><input name="prenom" type="text" id="prenom" maxlength="20" /></td>
      </tr>
-     <tr> 
+     <tr>
       <td class='<?php echo couleur_alternee (); ?>'><?php echo $lang_motdepasse; ?></td>
       <td class='<?php echo couleur_alternee (FALSE); ?>'><input name="pass" type="password" id="pass" maxlength="30" /></td>
      </tr>
-     <tr> 
+     <tr>
       <td class='<?php echo couleur_alternee (); ?>'><?php echo $lang_mot_de_passe; ?></td>
       <td class='<?php echo couleur_alternee (FALSE); ?>'><input name="pass2" type="password" id="pass2" maxlength="30" /></td>
      </tr>
-     <tr> 
+     <tr>
       <td class='<?php echo couleur_alternee (); ?>'><?php echo $lang_mail; ?></td>
       <td class='<?php echo couleur_alternee (FALSE); ?>'><input name="mail" type="text" id="mail" maxlength="30" /></td>
      </tr>

@@ -1,20 +1,20 @@
-<?php 
+<?php
 /*
  * Factux le facturier libre
  * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
- * 
+ *
  * Licensed under the terms of the GNU  General Public License:
  *   http://opensource.org/licenses/GPL-3.0
- * 
+ *
  * For further information visit:
  *   http://factux.free.fr
- * 
+ *
  * File Name: fckconfig.js
  *  Editor configuration settings.
- * 
+ *
  * * * Version:  5.0.0
  * * * * Modified: 07/10/2016
- * 
+ *
  * File Authors:
  *   Guy Hendrickx
  *.
@@ -29,12 +29,12 @@ include_once("include/finhead.php");
 <?php
 include_once("include/head.php");
 if ($user_dev == 'n') {
- echo "<h1>$lang_devis_droit</h1>"; 
+ echo "<h1>$lang_devis_droit</h1>";
  include_once("include/bas.php");
  exit;
 }
 $num_dev=isset($_GET['num_dev'])?$_GET['num_dev']:"";
-if ($num_dev !='') { 
+if ($num_dev !='') {
  $sql2 = "UPDATE " . $tblpref ."devis SET resu = '-1' WHERE num_dev = $num_dev";
  mysql_query($sql2) or die('Erreur SQL2 !<br>'.$sql2.'<br>'.mysql_error());
  echo "<p>$lang_de_per</p>";
@@ -53,15 +53,15 @@ if ($num_dev !='') {
      </tr>
 <?php
 $sql = "
-SELECT num_dev, tot_htva, tot_tva, DATE_FORMAT(date,'%d/%m/%Y') AS date, nom 
-FROM " . $tblpref ."devis 
-LEFT JOIN " . $tblpref ."client on " . $tblpref ."devis.client_num = num_client 
+SELECT num_dev, tot_htva, tot_tva, DATE_FORMAT(date,'%d/%m/%Y') AS date, nom
+FROM " . $tblpref ."devis
+LEFT JOIN " . $tblpref ."client on " . $tblpref ."devis.client_num = num_client
 WHERE num_dev >0 AND resu = '-1'";
-if ($user_dev == 'r') { 
+if ($user_dev == 'r') {
 $sql .= "
-AND " . $tblpref ."client.permi LIKE '$user_num,' 
-or  " . $tblpref ."client.permi LIKE '%,$user_num,' 
-or  " . $tblpref ."client.permi LIKE '%,$user_num,%' 
+AND " . $tblpref ."client.permi LIKE '$user_num,'
+or  " . $tblpref ."client.permi LIKE '%,$user_num,'
+or  " . $tblpref ."client.permi LIKE '%,$user_num,%'
 or  " . $tblpref ."client.permi LIKE '$user_num,%'";
 }
 $sql .= "
@@ -78,7 +78,7 @@ while($data = mysql_fetch_array($req)){
  if($c++ & 1){
   $line="0";
  }else{
-  $line="1"; 
+  $line="1";
  }
 ?>
      <tr class="texte<?php echo $line; ?>" onmouseover="this.className='highlight'" onmouseout="this.className='texte<?php echo $line; ?>'">
@@ -88,7 +88,7 @@ while($data = mysql_fetch_array($req)){
       <td class='<?php echo couleur_alternee (FALSE, "nombre"); ?>'><?php echo montant_financier($total); ?></td>
       <td class='<?php echo couleur_alternee (FALSE, "nombre"); ?>'><?php echo montant_financier($ttc); ?></td>
       <td class='<?php echo couleur_alternee (FALSE, "c texte"); ?>'>
-       <a href="delete_dev.php?num_dev=<?php echo $num_dev; ?>&amp;nom=<?php echo $nom; ?>" 
+       <a href="delete_dev.php?num_dev=<?php echo $num_dev; ?>&amp;nom=<?php echo $nom; ?>"
          onClick='return confirmDelete("<?php echo "$lang_con_dev_effa"; ?>")'>
         <img border='0' src='image/delete.jpg' alt='<?php echo $lang_effacer; ?>'>
        </a>

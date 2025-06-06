@@ -1,20 +1,20 @@
-<?php 
+<?php
 /*
  * Factux le facturier libre
  * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
- * 
+ *
  * Licensed under the terms of the GNU  General Public License:
  * 		http://opensource.org/licenses/GPL-3.0
- * 
+ *
  * For further information visit:
  * 		http://factux.free.fr
- * 
+ *
  * File Name: lister_lot.php
  * 	liste tout les lots actifs et inactifs
- * 
+ *
  * * * Version:  5.0.0
  * * * * Modified: 07/10/2016
- * 
+ *
  * File Authors:
  * 		Guy Hendrickx
  *.
@@ -28,13 +28,13 @@ include_once("include/finhead.php");
    <td class="page" align="center">
 <?php
 include_once("include/head.php");
-if ($user_com == 'n'){ 
+if ($user_com == 'n'){
  $message="<h1>$lang_commande_droit</h1>";
  include_once("include/bas.php");
  exit;
 }
-if (isset($message)&&$message!='') { 
- echo $message;  
+if (isset($message)&&$message!='') {
+ echo $message;
 }
 
 //pour le formulaire
@@ -46,7 +46,7 @@ $ands .= ($mois_1==$lang_tous)?'':"$aw MONTH(date) = $mois_1";#si année entiere
 $calendrier = calendrier_local_mois ();
 
 $sql = "
-SELECT num, prod, actif, DATE_FORMAT(date,'%d/%m/%Y') AS date_aff, date 
+SELECT num, prod, actif, DATE_FORMAT(date,'%d/%m/%Y') AS date_aff, date
 FROM " . $tblpref ."lot
 $ands
 ";
@@ -87,7 +87,7 @@ $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
       <td class="submit" colspan="4">
        <input type="submit" value="<?php echo $lang_lister; ?>">
       </td>
-     </tr>        
+     </tr>
     </table>
    </center>
   </form>
@@ -95,7 +95,7 @@ $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
   <center>
    <table class='page boiteaction'>
     <caption><?php naviguer("lister_lot.php?ordre=".@$_GET['ordre'],$mois_1,$annee_1,$lang_all_lots); ?></caption>
-    <tr> 
+    <tr>
       <th><a href="lister_lot.php?ordre=num&amp;mois_1=<?php echo $mois_1; ?>&amp;annee_1=<?php echo $annee_1; ?>"><?php echo "$lang_lot $lang_numero"; ?></a></th>
       <th><a href="lister_lot.php?ordre=prod&amp;mois_1=<?php echo $mois_1; ?>&amp;annee_1=<?php echo $annee_1; ?>"><?php echo $lang_produit; ?></a></th>
       <th><a href="lister_lot.php?ordre=date&amp;mois_1=<?php echo $mois_1; ?>&amp;annee_1=<?php echo $annee_1; ?>"><?php echo $lang_date; ?></a></th>
@@ -114,12 +114,12 @@ while($data = mysql_fetch_array($req)){
   $line=1;
  }
 ?>
-     <tr class="texte<?php echo $line; ?>" onmouseover="this.className='highlight'" onmouseout="this.className='texte<?php echo $line ?>'"> 
+     <tr class="texte<?php echo $line; ?>" onmouseover="this.className='highlight'" onmouseout="this.className='texte<?php echo $line ?>'">
       <td class='<?php echo couleur_alternee (); ?>'><?php echo $num; ?></td>
       <td class='<?php echo couleur_alternee (FALSE); ?>'><?php echo $prod; ?></td>
       <td class='<?php echo couleur_alternee (FALSE,"c texte"); ?>'><?php echo $date; ?></td>
       <td class='<?php echo couleur_alternee (FALSE,"c texte"); ?>'>
-       <a href="edit_lot.php?num=<?php echo $num; ?>&amp;mois_1=<?php echo $mois_1; ?>&amp;annee_1=<?php echo $annee_1; ?>"> 
+       <a href="edit_lot.php?num=<?php echo $num; ?>&amp;mois_1=<?php echo $mois_1; ?>&amp;annee_1=<?php echo $annee_1; ?>">
         <img border="0" alt="<?php echo $lang_editer; ?>" src="image/edit.gif">
        </a>
       </td>
@@ -129,7 +129,7 @@ while($data = mysql_fetch_array($req)){
           onClick="return confirmDelete('<?php echo "$lang_lot_inact $num ?"; ?>');"><?php echo $lang_actif; ?>
        </a>
       </td>
-<?php } else { ?> 
+<?php } else { ?>
       <td class='<?php echo couleur_alternee (FALSE,"c texte"); ?>'>
        <a href="activer_lot.php?num=<?php echo $num; ?>&amp;acte=oui&amp;mois_1=<?php echo $mois_1; ?>&amp;annee_1=<?php echo $annee_1; ?>" title="<?php echo $lang_rendre_actif; ?>"
           onClick="return confirmDelete('<?php echo "$lang_lot_act $num ?"; ?>');"><?php echo $lang_inactif; ?>
@@ -153,7 +153,7 @@ $aide='lots';
 include("help.php");
 include_once("include/bas.php");
 if(!strstr($_SERVER['SCRIPT_FILENAME'],__FILE__)){#autre qu'elle meme
- echo"\n  </td>\n </tr>\n</table>\n"; 
+ echo"\n  </td>\n </tr>\n</table>\n";
 }
 ?>
   </td>

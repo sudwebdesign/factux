@@ -1,20 +1,20 @@
-<?php 
+<?php
 /*
  * Factux le facturier libre
  * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
- * 
+ *
  * Licensed under the terms of the GNU  General Public License:
  * 		http://opensource.org/licenses/GPL-3.0
- * 
+ *
  * For further information visit:
  * 		http://factux.free.fr
- * 
+ *
  * File Name: edit_lot_suite.php
  * 	Insertions des lots dans la table apres edition
- * 
+ *
  * * * Version:  5.0.0
  * * * * Modified: 07/10/2016
- * 
+ *
  * File Authors:
  * 		Guy Hendrickx
  *.
@@ -32,11 +32,11 @@ $date_jour= $annee-$mois-$jour ;
 $prod=isset($_POST['prod'])?$_POST['prod']:"";
 $num_lot=isset($_POST['num_lot'])?$_POST['num_lot']:"";
 if(1!=1){
-/* 
+/*
 $ing_1 =isset($_POST['ing_1'])?$_POST['ing_1']:"";
 $four_1=isset($_POST['four_1'])?$_POST['four_1']:"";
-$lot_four_1=isset($_POST['lot_four_1'])?$_POST['lot_four_1']:"";  
-$num_cont_bon_1=isset($_POST['num_cont_bon_1'])?$_POST['num_cont_bon_1']:"";  
+$lot_four_1=isset($_POST['lot_four_1'])?$_POST['lot_four_1']:"";
+$num_cont_bon_1=isset($_POST['num_cont_bon_1'])?$_POST['num_cont_bon_1']:"";
 
 
 $ing_2 =isset($_POST['ing_2'])?$_POST['ing_2']:"";

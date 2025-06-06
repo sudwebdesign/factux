@@ -1,20 +1,20 @@
-<?php 
+<?php
 /*
  * Factux le facturier libre
  * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
- * 
+ *
  * Licensed under the terms of the GNU  General Public License:
  * 		http://opensource.org/licenses/GPL-3.0
- * 
+ *
  * For further information visit:
  * 		http://factux.free.fr
- * 
+ *
  * File Name: fckconfig.js
  * 	Editor configuration settings.
- * 
+ *
  * * * Version:  5.0.0
  * * * * Modified: 07/10/2016
- * 
+ *
  * File Authors:
  * 		Guy Hendrickx
  *.
@@ -31,7 +31,7 @@ $article=isset($_POST['article'])?$_POST['article']:"";
 $remise=isset($_POST['remise'])?$_POST['remise']:"";
 
 if($article!=0&&$quanti!=''){
-    //on recupere le prix htva		
+    //on recupere le prix htva
     $sql2 = "SELECT prix_htva FROM " . $tblpref ."article WHERE num = $article";
     $result = mysql_query($sql2) or die('Erreur SQL1 !<br>'.$sql2.'<br>'.mysql_error());
     $prix_article = mysql_result($result, 0);
@@ -49,7 +49,7 @@ if($article!=0&&$quanti!=''){
     $mont_tva = $total_htva / 100 * $taux_tva ;
     //inserer les données dans la table du contenu des devis.
     mysql_select_db($db) or die ("Could not select $db database");
-    $sql1 = "INSERT INTO " . $tblpref ."cont_dev( p_u_jour, quanti, article_num, dev_num, tot_art_htva, to_tva_art, remise, marge_jour) 
+    $sql1 = "INSERT INTO " . $tblpref ."cont_dev( p_u_jour, quanti, article_num, dev_num, tot_art_htva, to_tva_art, remise, marge_jour)
              VALUES ('$prix_article', '$quanti', '$article', '$num_dev', '$total_htva', '$mont_tva', '$remise', '$marge' )";
     mysql_query($sql1) or die('Erreur SQL3 !<br>'.$sql1.'<br>'.mysql_error());
 }else

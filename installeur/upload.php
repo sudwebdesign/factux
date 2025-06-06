@@ -2,19 +2,19 @@
 /*
  * Factux le facturier libre
  * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
- * 
+ *
  * Licensed under the terms of the GNU  General Public License:
  * 		http://opensource.org/licenses/GPL-3.0
- * 
+ *
  * For further information visit:
  * 		http://factux.free.fr
- * 
+ *
  * File Name: upload.php
  * 	upload du logo de l'entreprise
- * 
+ *
  * * * Version:  5.0.0
  * * * * Modified: 07/10/2016
- * 
+ *
  * File Authors:
  * 		Guy Hendrickx
  *.
@@ -36,7 +36,7 @@ if (isset($_FILES["monfichier"]["name"])) {
             throw new RuntimeException('Exceeded filesize limit.');
         default:
             throw new RuntimeException('Unknown errors.');
-    } 
+    }
 */
  //definition des chemins d'accès
  $repertoireDestination = "../image/";
@@ -50,7 +50,7 @@ if (isset($_FILES["monfichier"]["name"])) {
    exit();
   }
   ///////////////////////
-  //$extention_autorize="jpg|jpe|jpeg"; 
+  //$extention_autorize="jpg|jpe|jpeg";
   $extention_fichier=substr(strrchr($nomDestination,'.'),1);
   if ($extention_fichier!='jpg'&& $extention_fichier!='jpe'&&$extention_fichier!='jpeg'){
    echo"<br><h1>Le logo doit absolument etre au format jpg (extention .jpg, jpeg, jpe) </h1>";
@@ -58,21 +58,21 @@ if (isset($_FILES["monfichier"]["name"])) {
    exit();
   }else{
    $autorize="ok";
-  } 
+  }
   if (rename($_FILES["monfichier"]["tmp_name"],$repertoireDestination.$nomDestination)) {
    echo "<br><h2>L'image ".$nomDestination." a bien été chargée dans le dossier : ".$repertoireDestination;
    $nomDestination = '"'.$nomDestination.'";//fichier comportant le logo de l\'entreprise' . "\n";
-   $monfichier = fopen("../include/config/var.php", "a"); 
+   $monfichier = fopen("../include/config/var.php", "a");
    fwrite($monfichier, '$logo = '.$nomDestination);
    fclose($monfichier);
 ?>
    <br>La configuration de factux est terminée, félicitations.<br>
    Voir la doc
    <a href="../doc/Utilisation-fr.html"
-      onclick="window.open('','popup','width=500,height=220,top=200,left=150,toolbar=0,location=0,directories=0,status=0,menubar=1,scrollbars=1,resizable=1')" 
+      onclick="window.open('','popup','width=500,height=220,top=200,left=150,toolbar=0,location=0,directories=0,status=0,menubar=1,scrollbars=1,resizable=1')"
       target="popup">
     <img src="../image/help.png" border="0" alt="aide" title="aide"></a><br>
-   <a href="../index.php">Entrez<br><img src="../image/factux.gif" border="0" alt="Entrez dans Factux" title="Entrez dans Factux"></a></h2> 
+   <a href="../index.php">Entrez<br><img src="../image/factux.gif" border="0" alt="Entrez dans Factux" title="Entrez dans Factux"></a></h2>
 <?php
   }
   else {
@@ -91,7 +91,7 @@ else{
 //var_dump($_FILES);
 //Fin de ISSET et de l'installeur
 include_once("../include/bas_cli.php");
-?> 
+?>
   </td>
  </tr>
 </table>

@@ -2,19 +2,19 @@
 /*
  * Factux le facturier libre
  * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
- * 
+ *
  * Licensed under the terms of the GNU  General Public License:
  * 		http://opensource.org/licenses/GPL-3.0
- * 
+ *
  * For further information visit:
  * 		http://factux.free.fr
- * 
+ *
  * File Name: fckconfig.js
  * 	Editor configuration settings.
- * 
+ *
  * * Version:  5.0.0
  * * * Modified: 07/10/2016
- * 
+ *
  * File Authors:
  * 		Guy Hendrickx
  *.
@@ -55,14 +55,14 @@ function thespecialchars ($str){
  if (version_compare(phpversion(), '5.4', '<'))
   return htmlspecialchars($str, ENT_COMPAT , ini_get("default_charset"));
  else
-  return htmlspecialchars($str, ENT_COMPAT | ENT_HTML401 | ENT_SUBSTITUTE, ini_get("default_charset"), FALSE); 
+  return htmlspecialchars($str, ENT_COMPAT | ENT_HTML401 | ENT_SUBSTITUTE, ini_get("default_charset"), FALSE);
 }
 function courriel($a,$sujet,$mess,$de,$logo){//inspiré de : https://openclassrooms.com/courses/e-mail-envoyer-un-e-mail-en-php
  if (!preg_match("#^[a-z0-9._-]+@(hotmail|live|msn).[a-z]{2,4}$#", $a)) // On filtre les serveurs qui présentent des bogues.
   $cr = "\r\n";
  else
   $cr = "\n";
- 
+
  //~ $mess = utf8_decode(str_replace('€','',$mess));//Failed with errno=32 Broken pipe
  //~ $mess = utf8_decode(str_replace('€','euro',$mess));//Failed with errno=32 Broken pipe
  $mess = iconv("UTF-8", "CP1252", $mess);#http://php.net/manual/fr/function.utf8-decode.php#88488
@@ -97,9 +97,9 @@ function courriel($a,$sujet,$mess,$de,$logo){//inspiré de : https://openclassro
  $message.= "Content-Transfer-Encoding: 8bit".$cr;
  $message.= $cr.$message_txt.$cr;
  //==========
-  
+
  $message.= $cr."--".$boundary_alt.$cr;
-  
+
  //=====Ajout du message au format HTML.
  $message.= "Content-Type: text/html; charset=\"ISO-8859-1\"".$cr;
  $message.= "Content-Transfer-Encoding: 8bit".$cr;
@@ -115,8 +115,8 @@ function courriel($a,$sujet,$mess,$de,$logo){//inspiré de : https://openclassro
  $message.= "Content-Transfer-Encoding: base64".$cr;
  $message.= "Content-Disposition: attachment; filename=\"$logo\"".$cr;
  $message.= $cr.$attachement.$cr.$cr;
- $message.= $cr."--".$boundary."--".$cr; 
- //========== 
+ $message.= $cr."--".$boundary."--".$cr;
+ //==========
  //=====Envoi de l'e-mail.
  return (mail($a,$sujet,$message,$header))?true:false;
 }

@@ -1,20 +1,20 @@
-<?php 
+<?php
 /*
  * Factux le facturier libre
  * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
- * 
+ *
  * Licensed under the terms of the GNU  General Public License:
  *   http://opensource.org/licenses/GPL-3.0
- * 
+ *
  * For further information visit:
  *   http://factux.free.fr
- * 
+ *
  * File Name: lister_factures.php
- *  
- * 
+ *
+ *
  * * * Version:  5.0.0
  * * * * Modified: 07/10/2016
- * 
+ *
  * File Authors:
  *   Guy Hendrickx
  *.
@@ -28,12 +28,12 @@ include_once("include/finhead.php");
   <td class="page" align="center">
 <?php
 include_once("include/head.php");
-if ($user_fact == 'n') { 
+if ($user_fact == 'n') {
  echo "<h1>$lang_facture_droit</h1>";
  include_once("include/bas.php");
  exit;
 }
-if (isset($message)&&$message!='') { 
+if (isset($message)&&$message!='') {
  echo $message;
 }
 //pour le formulaire
@@ -44,25 +44,25 @@ $ands .= ($mois_1==$lang_tous)?'':" AND MONTH(date_fact) = $mois_1";#si année e
 $calendrier = calendrier_local_mois ();
 
 $sql = "
-SELECT mail, login, date_fact, 
+SELECT mail, login, date_fact,
 DATE_FORMAT(date_fact,'%d/%m/%Y') AS date_aff,
 DATE_FORMAT(date_pay,'%d/%m/%Y') AS date_reglee,
-total_fact_ttc, payement, num_client, date_deb, 
+total_fact_ttc, payement, num_client, date_deb,
 DATE_FORMAT(date_deb,'%d/%m/%Y') AS date_deb2, date_fin,
 DATE_FORMAT(date_fin,'%d/%m/%Y') AS date_fin2, num, nom,
 TO_DAYS(NOW()) - TO_DAYS(date_fact) AS peri
-FROM " . $tblpref ."facture 
+FROM " . $tblpref ."facture
 LEFT JOIN " . $tblpref ."client on client = num_client
 WHERE num >0".$ands;
 //ORDER BY 'num' DESC
 
-if ($user_fact == 'r') { 
+if ($user_fact == 'r') {
 $sql .= "
-and " . $tblpref ."client.permi LIKE '$user_num,' 
-or  " . $tblpref ."client.permi LIKE '%,$user_num,' 
-or  " . $tblpref ."client.permi LIKE '%,$user_num,%' 
-or  " . $tblpref ."client.permi LIKE '$user_num,%' 
-";  
+and " . $tblpref ."client.permi LIKE '$user_num,'
+or  " . $tblpref ."client.permi LIKE '%,$user_num,'
+or  " . $tblpref ."client.permi LIKE '%,$user_num,%'
+or  " . $tblpref ."client.permi LIKE '$user_num,%'
+";
 //ORDER BY 'num' DESC
 }
 if ( isset ( $_GET['ordre'] ) && $_GET['ordre'] != ''){
@@ -100,7 +100,7 @@ $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
        <td class="submit" colspan="4">
         <input type="submit" value='<?php echo $lang_lister; ?>'>
        </td>
-      </tr>        
+      </tr>
      </table>
     </form>
    </center>
@@ -108,7 +108,7 @@ $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
   <center>
    <table class='page boiteaction'>
     <caption><?php naviguer("lister_factures.php?ordre=".@$_GET['ordre'],$mois_1,$annee_1,$lang_tou_fact); ?></caption>
-    <tr> 
+    <tr>
      <th><a href="lister_factures.php?ordre=num&amp;mois_1=<?php echo $mois_1; ?>&amp;annee_1=<?php echo $annee_1; ?>"><?php echo $lang_numero; ?></a></th>
      <th><a href="lister_factures.php?ordre=nom&amp;mois_1=<?php echo $mois_1; ?>&amp;annee_1=<?php echo $annee_1; ?>"><?php echo $lang_client; ?></a></th>
      <th><a href="lister_factures.php?ordre=date_fact&amp;mois_1=<?php echo $mois_1; ?>&amp;annee_1=<?php echo $annee_1; ?>"><?php echo $lang_date; ?></a></th>
@@ -152,7 +152,7 @@ while($data = mysql_fetch_array($req)){
       <td class='<?php echo couleur_alternee (FALSE); ?>'><?php echo $client; ?></td>
       <td class='<?php echo couleur_alternee (FALSE,"c texte"); ?>'><?php echo $date_fact; ?></td>
       <td class='<?php echo couleur_alternee (FALSE,"nombre"); ?>'><?php echo montant_financier($total); ?></td>
-      <td class='<?php echo couleur_alternee (FALSE,"c texte"); ?>'><?php echo $pay; ?></td> 
+      <td class='<?php echo couleur_alternee (FALSE,"c texte"); ?>'><?php echo $pay; ?></td>
       <td class='<?php echo couleur_alternee (FALSE,"c texte"); ?>'>
        <a href="edit_fact.php?num_fact=<?php echo"$num"; ?>">
         <img src="image/fact.gif" border="0" alt="<?php echo $lang_editer; ?>">
@@ -171,7 +171,7 @@ while($data = mysql_fetch_array($req)){
 <?php if ($mail != '' and $login != '') { ?>
       <td class='<?php echo couleur_alternee (FALSE,"c texte"); ?>'>
        <a href='notifi_cli.php?type=fact&amp;mail=<?php echo "$mail"; ?>'>
-        <img src='image/mail.gif' alt='mail' border='0' 
+        <img src='image/mail.gif' alt='mail' border='0'
              onClick="return confirmDelete('<?php echo"$lang_conf_notif $client $lang_conf_notif2 $num ?"; ?>')">
        </a>
       </td>
@@ -185,7 +185,7 @@ if ($mail != '') {
         <input type="hidden" name="client" value="<?php echo $num_client ?>" />
         <input type="hidden" name="debut" value="<?php echo $debut2 ?>" />
         <input type="hidden" name="fin" value="<?php echo $fin2 ?>" />
-        <input type="hidden" name="num" value="<?php echo $num ?>" /> 
+        <input type="hidden" name="num" value="<?php echo $num ?>" />
         <input type="hidden" name="user" value="adm" />
         <input type="hidden" name="mail" value="y" />
         <input type="image" src="image/pdf.gif" style="border:none;margin:0;" alt="<?php echo $lang_env_par_mail ?>" />

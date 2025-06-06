@@ -1,20 +1,20 @@
-<?php 
+<?php
 /*
  * Factux le facturier libre
  * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
- * 
+ *
  * Licensed under the terms of the GNU  General Public License:
  * 		http://opensource.org/licenses/GPL-3.0
- * 
+ *
  * For further information visit:
  * 		http://factux.free.fr
- * 
+ *
  * File Name: chercheur_factures.php
  * 	resultat de la recherche des factures
- * 
+ *
  * * * Version:  5.0.0
  * * * * Modified: 07/10/2016
- * 
+ *
  * File Authors:
  * 		Guy Hendrickx
  *.
@@ -22,8 +22,8 @@
 include_once("include/headers.php");
 include_once("include/finhead.php");
 $tri=isset($_POST['tri'])?$_POST['tri']:"";
-$requete = "SELECT *, TO_DAYS(NOW()) - TO_DAYS(date_fact) AS peri FROM " . $tblpref ."facture 
-LEFT JOIN " . $tblpref ."client on " . $tblpref ."facture.client = num_client 
+$requete = "SELECT *, TO_DAYS(NOW()) - TO_DAYS(date_fact) AS peri FROM " . $tblpref ."facture
+LEFT JOIN " . $tblpref ."client on " . $tblpref ."facture.client = num_client
 WHERE num >0";
 //on verifie le client
 if(isset($_POST['listeclients']) && $_POST['listeclients']!='')
@@ -65,9 +65,9 @@ if($use_payement =='y'){
 }
 if ($user_fact == 'r'){
 $requete .="
-and " . $tblpref ."client.permi LIKE '$user_num,' 
-or  " . $tblpref ."client.permi LIKE '%,$user_num,' 
-or  " . $tblpref ."client.permi LIKE '%,$user_num,%' 
+and " . $tblpref ."client.permi LIKE '$user_num,'
+or  " . $tblpref ."client.permi LIKE '%,$user_num,'
+or  " . $tblpref ."client.permi LIKE '%,$user_num,%'
 or  " . $tblpref ."client.permi LIKE '$user_num,%' ";
 }
 //
@@ -136,7 +136,7 @@ while($data = mysql_fetch_array($req)){
       <td class='<?php echo couleur_alternee (FALSE,"c texte"); ?>'>
        <a href="edit_fact.php?num_fact=<?php echo $num;?>">
         <img src="image/fact.gif" border="0" alt="<?php echo $lang_editer; ?>" />
-       </a>   
+       </a>
       </td>
      </tr>
 <?php } ?>

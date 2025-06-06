@@ -1,20 +1,20 @@
-<?php 
+<?php
 /*
  * Factux le facturier libre
  * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
- * 
+ *
  * Licensed under the terms of the GNU  General Public License:
  * 		http://opensource.org/licenses/GPL-3.0
- * 
+ *
  * For further information visit:
  * 		http://factux.free.fr
- * 
+ *
  * File Name: fckconfig.js
  * 	Editor configuration settings.
- * 
+ *
  * * * Version:  5.0.0
  * * * * Modified: 07/10/2016
- * 
+ *
  * File Authors:
  * 		Guy Hendrickx
  *.
@@ -26,12 +26,12 @@ if(basename($_SERVER['PHP_SELF'])==basename(__FILE__)){
 <table width="760" border="0" class="page" align="center">
  <tr>
   <td class="page" align="center">
-<?php 
- require_once("include/head.php"); 
+<?php
+ require_once("include/head.php");
 }
 ?>
 <table class="page boiteaction" align="center">
-<?php 
+<?php
 $annee_1 = isset($annee_1)?$annee_1:date("Y");
 echo "
 <caption>$lang_statistiques_annee $annee_1 $lang_encaissé</caption>
@@ -47,8 +47,8 @@ echo "
 for ($i=1;$i<=12;$i++){
  $sql = "
  SELECT SUM(total_fact_h), SUM(total_fact_ttc), SUM(acompte), payement
- FROM " . $tblpref ."facture 
- WHERE MONTH(date_fact) = '$i' 
+ FROM " . $tblpref ."facture
+ WHERE MONTH(date_fact) = '$i'
  AND YEAR(date_fact) = $annee_1;
  ";
  $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
@@ -57,17 +57,17 @@ for ($i=1;$i<=12;$i++){
   $entre[$i] = $data['SUM(total_fact_h)'];
   $totva[$i] = $data['SUM(total_fact_ttc)'] - $data['SUM(total_fact_h)'];
  }else{
-  $entre[$i] = $data['SUM(acompte)']; 
+  $entre[$i] = $data['SUM(acompte)'];
   $totva[$i] = 0;
 }
- 
- 
+
+
 
 
  $sql = "
  SELECT SUM(prix)
  FROM " . $tblpref ."depense
- WHERE MONTH(date) = $i 
+ WHERE MONTH(date) = $i
  AND YEAR(date) = $annee_1
  ";
  $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());

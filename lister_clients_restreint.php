@@ -2,31 +2,31 @@
 /*
  * Factux le facturier libre
  * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
- * 
+ *
  * Licensed under the terms of the GNU  General Public License:
  * 		http://opensource.org/licenses/GPL-3.0
- * 
+ *
  * For further information visit:
  * 		http://factux.free.fr
- * 
+ *
  * File Name: fckconfig.js
  * 	Editor configuration settings.
- * 
+ *
  * * * Version:  5.0.0
  * * * * Modified: 07/10/2016
- * 
+ *
  * File Authors:
  * 		Guy Hendrickx
  *.
  */
 $sql = "
 SELECT nom, num_client
-FROM " . $tblpref ."client 
+FROM " . $tblpref ."client
 WHERE 1
-and " . $tblpref ."client.permi LIKE '$num_user,' 
-or  " . $tblpref ."client.permi LIKE '%,$num_user,' 
-or  " . $tblpref ."client.permi LIKE '%,$num_user,%' 
-or  " . $tblpref ."client.permi LIKE '$num_user,%' 
+and " . $tblpref ."client.permi LIKE '$num_user,'
+or  " . $tblpref ."client.permi LIKE '%,$num_user,'
+or  " . $tblpref ."client.permi LIKE '%,$num_user,%'
+or  " . $tblpref ."client.permi LIKE '$num_user,%'
 ORDER BY " . $tblpref ."client.nom DESC
 ";
 $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
@@ -48,7 +48,7 @@ while($data = mysql_fetch_array($req)){
  if($c++ & 1){
   $line="0";
  }else{
-  $line="1"; 
+  $line="1";
  }
 ?>
   <tr class="texte<?php echo $line; ?>" onmouseover="this.className='highlight'" onmouseout="this.className='texte<?php echo $line; ?>'">

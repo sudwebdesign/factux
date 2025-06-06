@@ -8,16 +8,16 @@ flush();
 <table width="760" border="0" class="page" align="center">
  <tr>
   <td class="page" align="center">
-<?php 
+<?php
 require_once("include/head.php");
-if ($user_admin != 'y') { 
+if ($user_admin != 'y') {
  echo "<h1>$lang_admin_droit</h1>";
  include_once("include/bas.php");
  exit;
 }
 # Table backup from MySql PHP Backup
 $conn = @mysql_connect($dbhost,$dbuser,$dbpass);
-if ($conn==false) 
+if ($conn==false)
  die("password / user or database name wrong");
 $x=$_SERVER['SERVER_SOFTWARE'];
 if (strpos($x,"Win32")!=0) {
@@ -42,7 +42,7 @@ fwrite ($fp2,$copyr);
 fclose ($fp2);
 //chmod($path . "backup." . date('m-d-Y ') . ".sql", 0777);
 
-if(file_exists($path . "backup.gz")) 
+if(file_exists($path . "backup.gz"))
  unlink($path."backup.gz");
 $recreate = 0;
 
@@ -113,7 +113,7 @@ if (!preg_match("~/restore\.~",$_SERVER['PHP_SELF'])) {#deprecated (!eregi("/res
   $tables = mysql_list_tables($dbname,$conn);
   $num_tables = @mysql_num_rows($tables);
   $i = 0;
-  while($i < $num_tables) { 
+  while($i < $num_tables) {
    $table = mysql_tablename($tables, $i);
    $table = ltrim($table);
    $newfile .= get_def($dbname,$table);
@@ -121,7 +121,7 @@ if (!preg_match("~/restore\.~",$_SERVER['PHP_SELF'])) {#deprecated (!eregi("/res
    $newfile .= get_content($dbname,$table);
    $newfile .= "\n\n";
    $i++;
-  }	
+  }
  } else {
   $i=0;
   $tables=explode(";",$table_names);
@@ -133,19 +133,19 @@ if (!preg_match("~/restore\.~",$_SERVER['PHP_SELF'])) {#deprecated (!eregi("/res
     $newfile .= "\n\n";
     $i++;
    }
-  }    
+  }
  }
  $fp = fopen ($path."backup.$filetype","a");
  fwrite ($fp,$newfile);
  fwrite ($fp,"# Valid end of backup For Factux from MySql PHP Backup\n");
  fclose ($fp);
 }
-?> 
+?>
    <center>
     <table class="page" width="80%">
      <caption><?php echo $lang_back_titr; ?></caption>
      <tr>
-      <td class="texte0" height="215" valign="top"> 
+      <td class="texte0" height="215" valign="top">
        <p><?php echo $lang_back_ok; ?><img alt="<?php echo $lang_oui; ?>" src="image/oui.gif"></p>
        <br />
 <?php
@@ -154,7 +154,7 @@ if (!preg_match("~/restore\.~",$_SERVER['PHP_SELF'])) {#deprecated (!eregi("/res
       $count = $num_tables;
     } else {
       $count = count($tables);
-    }   
+    }
     if ($count != 0 ) {
       $i=0;
       while ($i < $count) {
@@ -170,10 +170,10 @@ if (!preg_match("~/restore\.~",$_SERVER['PHP_SELF'])) {#deprecated (!eregi("/res
     }
     echo $lang_back_lon2;
 ?>
-       
+
       </td>
      </tr>
-     <tr> 
+     <tr>
       <td class="c texte0" height="27" >
        <b><a href="main.php"><br><?php echo $lang_back_ret; ?></a></b>
       </td>
@@ -188,7 +188,7 @@ if (!preg_match("~/restore\.~",$_SERVER['PHP_SELF'])) {#deprecated (!eregi("/res
 $aide='backups';
 include("help.php");
 include_once("include/bas.php");
-?> 
+?>
   </td>
  </tr>
 </table>

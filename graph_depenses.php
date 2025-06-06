@@ -1,20 +1,20 @@
-<?php 
+<?php
 /*
  * Factux le facturier libre
  * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
- * 
+ *
  * Licensed under the terms of the GNU  General Public License:
  * 		http://opensource.org/licenses/GPL-3.0
- * 
+ *
  * For further information visit:
  * 		http://factux.free.fr
- * 
+ *
  * File Name: fckconfig.js
  * 	Editor configuration settings.
- * 
+ *
  * * * Version:  5.0.0
  * * * * Modified: 07/10/2016
- * 
+ *
  * File Authors:
  * 		Guy Hendrickx
  *.
@@ -27,7 +27,7 @@ include_once("include/finhead.php");
   <td class="page" align="center">
 <?php
 include_once("include/head.php");
-if ($user_stat== 'n') { 
+if ($user_stat== 'n') {
  echo"<h1>$lang_statistique_droit</h1>";
  include_once("include/bas.php");
  exit;
@@ -38,7 +38,7 @@ $annee_1=isset($_POST['annee_1'])?$_POST['annee_1']:date("Y");
 $calendrier = calendrier_local_mois ();
 ?>
    <form action="graph_depenses.php" method="post">
-    <?php echo $lang_choisissez; ?> 
+    <?php echo $lang_choisissez; ?>
     <select name="mois_1">
 <?php for ($i=1;$i<=12;$i++){?>
      <option value="<?php echo $i; ?>"<?php echo ($i==$mois_1)?' selected="selected"':''; ?>><?php echo ucfirst($calendrier [$i]); ?></option>
@@ -49,7 +49,7 @@ $calendrier = calendrier_local_mois ();
      <option value="<?php echo $i; ?>"<?php echo ($i==$annee_1)?' selected="selected"':''; ?>><?php echo $i; ?></option>
 <?php } ?>
     </select>
-    <input type="submit" value='<?php echo $lang_envoyer; ?>'> 
+    <input type="submit" value='<?php echo $lang_envoyer; ?>'>
    </form>
    <br>
 <?php
@@ -70,7 +70,7 @@ $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 ?>
    <table class='page boiteaction'>
     <caption><?php echo "$lang_depenses_tri_par_fournisseur $mois_1 $annee_1"; ?></caption>
-    <tr> 
+    <tr>
      <th><?php echo $lang_fournisseur; ?></th>
      <th><?php echo $lang_total_htva; ?></th>
      <th><?php echo $lang_tot_tva; ?></th>
@@ -86,14 +86,14 @@ while($data = mysql_fetch_array($req)){
  $ttva+=$tva;
  $tttc+=$ttc;
 ?>
-    <tr> 
+    <tr>
      <td class='<?php echo couleur_alternee (); ?>'><?php echo $four; ?></td>
      <td class='<?php echo couleur_alternee (FALSE,"nombre"); ?>'><?php echo montant_financier ($total); ?></td>
      <td class='<?php echo couleur_alternee (FALSE,"nombre"); ?>'><?php echo montant_financier ($tva); ?></td>
      <td class='<?php echo couleur_alternee (FALSE,"nombre"); ?>'><?php echo montant_financier ($ttc); ?></td>
     </tr>
 <?php } ?>
-    <tr> 
+    <tr>
      <td class="totalmontant"><?php echo $lang_total; ?></td>
      <td class="totalmontant"><?php echo montant_financier ($total_gene); ?></td>
      <td class="totalmontant"><?php echo montant_financier ($ttva); ?></td>

@@ -2,19 +2,19 @@
 /* fait partie de stats2.2.php
  * Factux le facturier libre
  * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
- * 
+ *
  * Licensed under the terms of the GNU  General Public License:
  * 		http://opensource.org/licenses/GPL-3.0
- * 
+ *
  * For further information visit:
  * 		http://factux.free.fr
- * 
+ *
  * File Name: graph2_client.php
  * 	parametrage d'appel du camembert ca / client.
- * 
+ *
  * * * Version:  5.0.0
  * * * * Modified: 07/10/2016
- * 
+ *
  * File Authors:
  * 		Guy Hendrickx
  *
@@ -33,7 +33,7 @@ $ands .= ($mois_1==$lang_tous)?'':"$aw MONTH(date) = $mois_1";#si année entiere
 //pour le total
 $sql = "
 SELECT SUM(tot_art_htva)
-FROM " . $tblpref ."cont_bon 
+FROM " . $tblpref ."cont_bon
 LEFT JOIN " . $tblpref ."bon_comm on bon_num = num_bon
 $ands
 ";
@@ -43,7 +43,7 @@ $data = mysql_fetch_array($req);
 $total = $data['SUM(tot_art_htva)'];
 
 $sql = "
-SELECT " . $tblpref ."article.num, 
+SELECT " . $tblpref ."article.num,
 SUM(tot_art_htva) AS tot_art_htva,
 SUM(quanti) AS nombre,
 p_u_jour,
@@ -53,9 +53,9 @@ SUM((p_u_jour * quanti) - tot_art_htva) AS remise,
 date,
 article,
 uni
-FROM  " . $tblpref ."cont_bon 
-LEFT JOIN " . $tblpref ."bon_comm on bon_num = num_bon 
-LEFT JOIN " . $tblpref ."article on " . $tblpref ."article.num = article_num 
+FROM  " . $tblpref ."cont_bon
+LEFT JOIN " . $tblpref ."bon_comm on bon_num = num_bon
+LEFT JOIN " . $tblpref ."article on " . $tblpref ."article.num = article_num
 $ands
 GROUP BY article
 ";//ORDER BY tot_art_htva DESC

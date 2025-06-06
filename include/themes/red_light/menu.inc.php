@@ -1,32 +1,32 @@
-<?php 
+<?php
 /*
  * Factux le facturier libre
  * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
- * 
+ *
  * Licensed under the terms of the GNU  General Public License:
  *   http://opensource.org/licenses/GPL-3.0
- * 
+ *
  * For further information visit:
  *   http://factux.free.fr
- * 
+ *
  * File Name: head.php
  *  Fichier d'entete des pages.
- * 
+ *
  * * * Version:  5.0.0
  *  * * Modified: 10/06/2017
- * 
+ *
  * File Authors:
  *   Guy Hendrickx
  *.
  */
-?> 
+?>
 <!--- Factux le facturier libre, Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles, Licensed under the terms of the GNU  General Public License: http://opensource.org/licenses/GPL-3.0 .For further information visit: http://factux.free.fr -->
 <?php
-if ($lot == 'y') { 
+if ($lot == 'y') {
 echo"<script language=\"javascript\" src=\"include/themes/$theme/menu_lot.js\" type=\"text/javascript\"></script>";
 }else
 echo"<script language=\"javascript\" src=\"include/themes/$theme/menu.js\" type=\"text/javascript\"></script>";
-?> 
+?>
 <div id="conteneurmenu" style="margin-top: 24px;">
 <script language="Javascript" type="text/javascript">
 preChargement();
@@ -140,7 +140,7 @@ preChargement();
   <li><a href="chercher_lots.php"><?php echo $lang_cherc; ?><span>.</span></a></li>
 <?php } ?>
  </ul>
-<?php } ?> 
+<?php } ?>
 </div>
 <div id="texte"></div>
 <script language="Javascript" type="text/javascript">

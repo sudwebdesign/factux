@@ -2,19 +2,19 @@
 /*
  * Factux le facturier libre
  * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
- * 
+ *
  * Licensed under the terms of the GNU  General Public License:
  * 		http://opensource.org/licenses/GPL-3.0
- * 
+ *
  * For further information visit:
  * 		http://factux.free.fr
- * 
+ *
  * File Name: fckconfig.js
  * 	Editor configuration settings.
- * 
+ *
  * * * Version:  5.0.0
  * * * * Modified: 07/10/2016
- * 
+ *
  * File Authors:
  * 		Guy Hendrickx
  *.
@@ -32,7 +32,7 @@ include_once("include/head.php");
 extract ($_REQUEST);
 if (!file_exists("dbinfo.php"))
  die($lang_restore_err_dbinfo_file);
-include "dbinfo.php"; 
+include "dbinfo.php";
 $password = $dbpass;
 #js hide TuxInWork #2015 ?>
    <script type="text/javascript">document.getElementById('message_backup').style='display:none !important';</script>
@@ -41,9 +41,9 @@ $password = $dbpass;
      <caption><?php echo $lang_back_ti_re; ?></caption>
 <?php if (!isset($file)) { ?>
      <tr><td class="texte0" valign="top">&nbsp;</td></tr>
-<?php } ?>    
-     <tr> 
-      <td class="texte0"> 
+<?php } ?>
+     <tr>
+      <td class="texte0">
 <?php
 $x=$_SERVER['SERVER_SOFTWARE'];
 if (strpos($x,"Win32")!=0) {
@@ -65,10 +65,10 @@ if (isset($file)&&$file!=""){
   $zp = gzopen("dump/$file", "rb");
   if(!$fp) {
    die($lang_restore_err_crea_sql);
-  }    
+  }
   if(!$zp) {
    die($lang_restore_err_zip);
-  }    
+  }
   while(!gzeof($zp)){
    $data=gzgets($zp, 8192);// buffer php
    fwrite($fp,$data);
@@ -102,10 +102,10 @@ if (isset($file)&&$file!=""){
 <?php } ?>
       </td>
      </tr>
-     <tr> 
+     <tr>
       <td class='texte0'>
        <table class="page" width="625" cellspacing="0">
-        <tr> 
+        <tr>
          <td class="texte0" width="125" align="center"><font size="2"><u><i><?php echo $lang_fichier; ?></i></u></font></td>
          <td class="texte0" width="125" align="center"><font size="2"><u><i><?php echo $lang_tai; ?></i></u></font></td>
          <td class="texte0" width="125" align="center"><font size="2"><u><i><?php echo $lang_date; ?></i></u></font></td>
@@ -113,10 +113,10 @@ if (isset($file)&&$file!=""){
          <td class="texte0" width="125"><font size="2">&nbsp;</font></td>
         </tr>
 <?php
-	$dir=opendir($path); 
+	$dir=opendir($path);
 while ($file = readdir ($dir)) {
     #if ($file != "." && $file != ".." &&  (eregi("\.sql",$file) || eregi("\.gz",$file))){ #deprecated
- if ($file != "." && $file != ".." && (preg_match("~\.sql~",$file) || preg_match("~\.gz~",$file))){#strtr ? 
+ if ($file != "." && $file != ".." && (preg_match("~\.sql~",$file) || preg_match("~\.gz~",$file))){#strtr ?
   if (preg_match("~\.sql~",$file)) {#deprecated (eregi("\.sql",$file) ) {
 ?>
         <tr>
@@ -133,17 +133,17 @@ while ($file = readdir ($dir)) {
          <td class='texte0'><?php echo date("d-m-Y",filemtime($path.$file)); ?></td>
          <td class='texte0'><a href="restore.php?file=<?php echo $file; ?>"><?php echo $lang_decompresser; ?></a></td>
          <td class='texte0'></td>
-        </tr> 
+        </tr>
 <?php
   }
- } 
+ }
 }
 	closedir($dir);
 ?>
        </table>
       </td>
      </tr>
-     <tr> 
+     <tr>
       <td class='texte0' height="20" valign="top">
        <p><br><b><a href="main.php"><?php echo $lang_back_ret; ?></a></b></p>
       </td>

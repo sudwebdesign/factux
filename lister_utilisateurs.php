@@ -1,20 +1,20 @@
-<?php 
+<?php
 /*
  * Factux le facturier libre
  * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
- * 
+ *
  * Licensed under the terms of the GNU  General Public License:
  *   http://opensource.org/licenses/GPL-3.0
- * 
+ *
  * For further information visit:
  *   http://factux.free.fr
- * 
+ *
  * File Name: lister_utilisateurs.php
  *  crée la liste des utilisateurs
- * 
+ *
  * * * Version:  5.0.0
  * * * * Modified: 07/10/2016
- * 
+ *
  * File Authors:
  *   Guy Hendrickx
  *.
@@ -28,13 +28,13 @@ include_once("include/finhead.php");
   <td class="page" align="center">
 <?php
 include_once("include/head.php");
-if ($user_admin != 'y'){ 
+if ($user_admin != 'y'){
  echo "<h1>$lang_admin_droit</h1>";
  include_once("include/bas.php");
  exit;
 }
-if (isset($message)&&$message!='') { 
- echo $message; 
+if (isset($message)&&$message!='') {
+ echo $message;
 }
 $sql = " SELECT * FROM " . $tblpref ."user WHERE 1 ORDER BY `nom` ASC";
 $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
@@ -96,7 +96,7 @@ while($data = mysql_fetch_array($req)){
  if($nombre & 1){
   $line="0";
  }else{
-  $line="1"; 
+  $line="1";
  }
 ?>
    <tr class="texte<?php echo $line; ?>" onmouseover="this.className='highlight'" onmouseout="this.className='texte<?php echo $line; ?>'">
@@ -117,7 +117,7 @@ while($data = mysql_fetch_array($req)){
      </a>
     </td>
     <td class='<?php echo couleur_alternee (FALSE,"c texte"); ?>'>
-     <a href="del_utilisateur.php?num_user=<?php echo $num_user ?>" 
+     <a href="del_utilisateur.php?num_user=<?php echo $num_user ?>"
         onClick='return confirmDelete("<?php echo $lang_con_effa_utils; ?>")'>
       <img src="image/delete.jpg" border="0" alt="<?php echo $lang_supprimer ;?>">
      </a>
@@ -132,12 +132,12 @@ while($data = mysql_fetch_array($req)){
  </tr>
  <tr>
   <td>
-<?php 
+<?php
 $aide = 'utilisateurs';
 include("help.php");
 include_once("include/bas.php");
 if(!strstr($_SERVER['SCRIPT_FILENAME'],__FILE__)){#autre qu'elle meme
- echo"\n  </td>\n </tr>\n</table>\n"; 
+ echo"\n  </td>\n </tr>\n</table>\n";
 }
 ?>
   </td>

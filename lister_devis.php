@@ -1,20 +1,20 @@
-<?php 
+<?php
 /*
  * Factux le facturier libre
  * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
- * 
+ *
  * Licensed under the terms of the GNU  General Public License:
  *   http://opensource.org/licenses/GPL-3.0
- * 
+ *
  * For further information visit:
  *   http://factux.free.fr
- * 
+ *
  * File Name: lister_devis.php
  *  Liste les devis et permet de multiples actions
- * 
+ *
  * * * Version:  5.0.0
  * * * * Modified: 07/10/2016
- * 
+ *
  * File Authors:
  *   Guy Hendrickx
  *.
@@ -33,25 +33,25 @@ if ($user_dev == 'n') {
  include_once("include/bas.php");
  exit;
 }
-if (isset($message)&&$message!='') { 
+if (isset($message)&&$message!='') {
  echo $message;
 }
 $sql = "
 SELECT login, mail, num_dev, tot_htva, tot_tva, DATE_FORMAT(date,'%d/%m/%Y') AS date_aff, date, nom
-FROM " . $tblpref ."devis 
+FROM " . $tblpref ."devis
 LEFT JOIN " . $tblpref ."client on " . $tblpref ."devis.client_num = num_client
 WHERE num_dev > 0 AND resu = '0'
 ";
-if ($user_dev == 'r') { 
+if ($user_dev == 'r') {
  $sql = "
   SELECT login, mail, num_dev, tot_htva, tot_tva, DATE_FORMAT(date,'%d/%m/%Y') AS date, nom
-  FROM " . $tblpref ."devis 
+  FROM " . $tblpref ."devis
   LEFT JOIN " . $tblpref ."client on " . $tblpref ."devis.client_num = num_client
-  WHERE num_dev > 0 AND resu = '0' 
-  and " . $tblpref ."client.permi LIKE '$user_num,' 
-  or  " . $tblpref ."client.permi LIKE '%,$user_num,' 
-  or  " . $tblpref ."client.permi LIKE '%,$user_num,%' 
-  or  " . $tblpref ."client.permi LIKE '$user_num,%' 
+  WHERE num_dev > 0 AND resu = '0'
+  and " . $tblpref ."client.permi LIKE '$user_num,'
+  or  " . $tblpref ."client.permi LIKE '%,$user_num,'
+  or  " . $tblpref ."client.permi LIKE '%,$user_num,%'
+  or  " . $tblpref ."client.permi LIKE '$user_num,%'
   ";
 };
 if ( isset ( $_GET['ordre'] ) && $_GET['ordre'] != ''){
@@ -84,7 +84,7 @@ while($data = mysql_fetch_array($req)){
  $nom_html = urlencode($nom);
  $login = $data['login'];
  $mail = $data['mail'];
- $ttc = $total + $tva ; 
+ $ttc = $total + $tva ;
 // $nom = $data['nom'];#htmlentities($data['nom'], ENT_QUOTES);
  if($c++ & 1){
   $line="0";
@@ -99,17 +99,17 @@ while($data = mysql_fetch_array($req)){
       <td class='<?php echo couleur_alternee (FALSE,"nombre"); ?>'><?php echo montant_financier ($total); ?></td>
       <td class='<?php echo couleur_alternee (FALSE,"nombre"); ?>'><?php echo montant_financier ($ttc); ?></td>
       <td class='<?php echo couleur_alternee (FALSE,"c texte"); ?>'>
-       <a href="edit_devis.php?num_dev=<?php echo $num_dev; ?>&amp;nom=<?php echo $nom_html; ?>"> 
+       <a href="edit_devis.php?num_dev=<?php echo $num_dev; ?>&amp;nom=<?php echo $nom_html; ?>">
         <img src="image/edit.gif" align="middle" border="0" alt="<?php echo $lang_editer; ?>">
        </a>
       </td>
       <td class='<?php echo couleur_alternee (FALSE,"c texte"); ?>'>
-       <a href="delete_dev.php?num_dev=<?php echo $num_dev; ?>&amp;nom=<?php echo $nom_html; ?>" 
+       <a href="delete_dev.php?num_dev=<?php echo $num_dev; ?>&amp;nom=<?php echo $nom_html; ?>"
           onClick="return confirmDelete('<?php echo"$lang_eff_dev $num_dev ?"; ?>')">
         <img src="image/delete.jpg" align="middle" border="0" alt="<?php echo $lang_supprimer; ?>">
        </a>
       </td>
-      <td class='<?php echo couleur_alternee (FALSE,"c texte"); ?>'> 
+      <td class='<?php echo couleur_alternee (FALSE,"c texte"); ?>'>
        <form action="fpdf/devis_pdf.php" method="post" target="_blank">
         <input type="hidden" name="num_dev" value="<?php echo $num_dev; ?>" />
         <input type="hidden" name="nom" value="<?php echo $nom; ?>" />
@@ -118,7 +118,7 @@ while($data = mysql_fetch_array($req)){
        </form>
       </td>
 <?php if ($mail != '' and $login != '') { ?>
-      <td class='<?php echo couleur_alternee (FALSE,"c texte"); ?>'> 
+      <td class='<?php echo couleur_alternee (FALSE,"c texte"); ?>'>
        <a href="notifi_cli.php?type=devis&amp;mail=<?php echo $mail; ?>">
         <img src="image/mail.gif" align="middle" alt="mail" border="0"/>
        </a>
@@ -127,7 +127,7 @@ while($data = mysql_fetch_array($req)){
       <td class='<?php echo couleur_alternee (FALSE); ?>'>&nbsp;</td>
 <?php
 }
-if($mail != ''){ 
+if($mail != ''){
 ?>
       <td class='<?php echo couleur_alternee (FALSE,"c texte"); ?>'>
        <form action="fpdf/devis_pdf.php" method="post" target="_blank">
@@ -137,10 +137,10 @@ if($mail != ''){
         <input type="hidden" name="mail" value="y" />
         <input type="image" src="image/pdf.gif" align="middle" style="border:none;margin:0;" alt="<?php echo $lang_envoyer; ?>" />
        </form>
-      </td>  
+      </td>
 <?php }else{ ?>
       <td class='<?php echo couleur_alternee (FALSE); ?>'>&nbsp;</td>
-<?php } ?> 
+<?php } ?>
       <td class='<?php echo couleur_alternee (FALSE,"c texte"); ?>'>
        <a href="convert.php?num_dev=<?php echo $num_dev; ?>"
           onClick="return confirmDelete('<?php echo"$lang_convert_dev $num_dev $lang_convert_dev2 "; ?>')">
@@ -167,7 +167,7 @@ $aide = $lang_devis;
 include("help.php");
 include_once("include/bas.php");
 if(!strstr($_SERVER['SCRIPT_FILENAME'],__FILE__)){#autre qu'elle meme
- echo"\n  </td>\n </tr>\n</table>\n"; 
+ echo"\n  </td>\n </tr>\n</table>\n";
 }
 ?>
  </td>

@@ -1,20 +1,20 @@
-<?php 
+<?php
 /*
  * Factux le facturier libre
  * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
- * 
+ *
  * Licensed under the terms of the GNU  General Public License:
  * 		http://opensource.org/licenses/GPL-3.0
- * 
+ *
  * For further information visit:
  * 		http://factux.free.fr
- * 
+ *
  * File Name: fckconfig.js
  * 	Editor configuration settings.
- * 
+ *
  * * * Version:  5.0.0
  * * * * Modified: 07/10/2016
- * 
+ *
  * File Authors:
  * 		Guy Hendrickx
  *.
@@ -23,7 +23,7 @@ include_once("include/headers.php");
 include_once("include/finhead.php");
 $tri=isset($_POST['tri'])?$_POST['tri']:"";
 $requete = "
-SELECT DATE_FORMAT(date,'%d/%m/%Y')as date, num, prix, lib, fournisseur 
+SELECT DATE_FORMAT(date,'%d/%m/%Y')as date, num, prix, lib, fournisseur
 FROM " . $tblpref ."depense WHERE 1";
 
 if ( isset ( $_POST['fournisseur'] ) && $_POST['fournisseur'] != '')//on verifie le client
@@ -38,7 +38,7 @@ if ( isset ( $_POST['jour'] ) && $_POST['jour'] != '')//on verifie le jour
 	$requete .= " AND DAYOFMONTH(date)='" . $_POST['jour'] . "'";
 if ( isset ( $_POST['montant'] ) && $_POST['montant'] != '')//on verifie le montant
 	$requete .= " AND trim(prix)='" . $_POST['montant'] . "'";
-$requete .= " ORDER BY $tri";  
+$requete .= " ORDER BY $tri";
 ?>
 <table width="760" border="0" class="page" align="center">
  <tr>
@@ -88,4 +88,4 @@ include("chercher_depenses.php");
  </tr>
 </table>
 </body>
-</html> 
+</html>

@@ -80,7 +80,7 @@ Correction des entête des fichiers et intégration complete du système de thê
 Fichier et systeme de langue consolidé & augmenté (en français). #need #translator #english #nederlands #verification
 Fichiers non usités supprimés
 MAJ de l'installeur
-Integration d'un systeme remises* 
+Integration d'un systeme remises*
 Integration du coef de marge*
 MAJ des thêmes + 1 ajout
 MAJ de nombres litéraux
@@ -91,7 +91,7 @@ Révision des requettes SQL
 Reroutage de cerains point clé de Factux
 Réécrit en PHP 5.5, HTML5
 Si PHP 7 une librairie de migration pour MariaDB & Mysql s'active #thx: dotpointer ;-)
-Validation du code selon les standards du w3c temps au point de vue css que html. 
+Validation du code selon les standards du w3c temps au point de vue css que html.
 
 *from older factux fork, #thx devs.
 
@@ -103,14 +103,14 @@ un module de themes et 4 themes
 le choix des categories
 l'integration du module lot
 le choix avancé des clients selon leur initiale
-un systheme de choix de payement ds factures. 
+un systheme de choix de payement ds factures.
 Ajout d'un module de stock
-La validation du code selon les standarts du w3c temps au point de vue css que html. 
+La validation du code selon les standarts du w3c temps au point de vue css que html.
 Ajout d'un sytheme permetant l'auto-impression des documents generés
 
 #####################################################
 changelog 1.1.3--> 1.1.4
-	 
+
 
 Chasse aux bugs
 Meilleure gestion des fichiers de language
@@ -140,18 +140,18 @@ Changelog 1 -->1.1
 
 #  chasse aux bugs .
 # Ajout de gifs et autre images afin d'embellir l'interface.
-# Modification des styles css et ajout de classes dans les tableaux afin de facilité la lisibilitée des tableaux. 
+# Modification des styles css et ajout de classes dans les tableaux afin de facilité la lisibilitée des tableaux.
 # Ajout d'un nouveau module de statistiques permettant de voir l'evolution du chiffre d'affaire d'un client par mois. (ok)
 # Achevement de l'internationalisation de l'interface (et publication du fichier language afin de de demander des contribution au niveau de la traduction).(50% effectué)
-# Ajout d'un module de devis. 
+# Ajout d'un module de devis.
 # Possibilitée d'éditer et de suprimer les dépenses. )
-# Meilleur gestion des fournisseurs dans les fichier de dépense. 
-# La version 1.1 devrait etre compatible avec les serveur qui sont sur register_global Off (mouveau standart d'instalation de php). 
-# Integration d'un modules de backup et restauration des bases de données. 
+# Meilleur gestion des fournisseurs dans les fichier de dépense.
+# La version 1.1 devrait etre compatible avec les serveur qui sont sur register_global Off (mouveau standart d'instalation de php).
+# Integration d'un modules de backup et restauration des bases de données.
 # Amelioration de l'installeur avec verification des droits d'ecriture dans les fichiers necessaires.Propose aussi l'upload du logo de l'entreprise(ok)
-# Intégration d'un menu dropdown avec image en lieu et place des icones atuels. 
-# Ajout d'un module permettant aux clients de voir et d'imprimer leus factures, devis et bons de commande en ligne. 
-# Ajout d'une mailing liste basée sur les adresses email des client. permetant par exemple d' envoyer vos promos ou fermetures anuelles à vos cients. 
+# Intégration d'un menu dropdown avec image en lieu et place des icones atuels.
+# Ajout d'un module permettant aux clients de voir et d'imprimer leus factures, devis et bons de commande en ligne.
+# Ajout d'une mailing liste basée sur les adresses email des client. permetant par exemple d' envoyer vos promos ou fermetures anuelles à vos cients.
 
 
 Changelog beta -->1 stable

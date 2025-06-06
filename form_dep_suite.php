@@ -2,19 +2,19 @@
 /*
  * Factux le facturier libre
  * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
- * 
+ *
  * Licensed under the terms of the GNU  General Public License:
  * 		http://opensource.org/licenses/GPL-3.0
- * 
+ *
  * For further information visit:
  * 		http://factux.free.fr
- * 
+ *
  * File Name: fckconfig.js
  * 	Editor configuration settings.
- * 
+ *
  * * * * Version:  5.0.1
  * * * * Modified: 10/06/2017
- * 
+ *
  * File Authors:
  * 		Guy Hendrickx
  *.
@@ -51,6 +51,6 @@ if($fournisseur =='default'){
 }else{
  $sql1 = "INSERT INTO " . $tblpref ."depense(fournisseur, lib, prix, tx_tva, mont_tva, date) VALUES ('$fournisseur', '$lib', '$prix', '$tx_tva', '$mont_tva', '$annee-$mois-$jour')";
  mysql_query($sql1) or die('Erreur SQL !<br>'.$sql1.'<br>'.mysql_error());
- $message ="<h2>$lang_dep_enr</h2>";  
+ $message ="<h2>$lang_dep_enr</h2>";
 }
 include("form_depenses.php");

@@ -2,19 +2,19 @@
 /*
  * Factux le facturier libre
  * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
- * 
+ *
  * Licensed under the terms of the GNU  General Public License:
  * 		http://opensource.org/licenses/GPL-3.0
- * 
+ *
  * For further information visit:
  * 		http://factux.free.fr
- * 
+ *
  * File Name: en.php
  * 	fichier contenant les variables anglaise
- * 
+ *
  * * Version:  5.0.0
  * * * Modified: 07/10/2016
- * 
+ *
  * File Authors:
  * 		Guy Hendrickx english translation: Germinal Petit-Etienne
  */
@@ -104,7 +104,7 @@ $lang_salut_dist="You will find it as mail attachement\n Best regards";
 
 $lang_condi_ven = "Your saling conditions here";
 $lang_Lister_lots = "List batches";
-$lang_com_cont_lot = "The purchase orders which include the batch"; 
+$lang_com_cont_lot = "The purchase orders which include the batch";
 $lang_lot = "batches";
 $lang_num_lot ="batch n°";
 $lang_lot_four = "supplier batch n°";
@@ -118,7 +118,7 @@ $lang_acompte = "Down payement";
 $lang_ctrl = "You may choose several customers by keeping 'Ctrl' key down";
 $lang_choi_cli_utis = "Choose customers for this user";
 $lang_choi_cli_enr = "You now have to choose which customers he may manage";
-$lang_don_rest = "You gave limited rights to this user"; 
+$lang_don_rest = "You gave limited rights to this user";
 $lang_est_enr = "is now registered with this login:";
 $lang_ret_cli_util = "Remove a customer to this user";
 $lang_admi_modu = "Administration rights allow access to all the other modules";

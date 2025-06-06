@@ -1,20 +1,20 @@
-<?php 
+<?php
 /*
  * Factux le facturier libre
  * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
- * 
+ *
  * Licensed under the terms of the GNU  General Public License:
  * 		http://opensource.org/licenses/GPL-3.0
- * 
+ *
  * For further information visit:
  * 		http://factux.free.fr
- * 
+ *
  * File Name: fact_multi.php
  * 	enregistrement de données de la facture
- * 
+ *
  * * * Version:  5.0.0
  * * * * Modified: 07/10/2016
- * 
+ *
  * File Authors:
  * 		Guy Hendrickx
  *.
@@ -31,7 +31,7 @@ $coment=isset($_POST['coment'])?$_POST['coment']:"";
   <td class="page" align="center">
 <?php
 include_once("include/head.php");
-if ($user_fact == 'n') { 
+if ($user_fact == 'n') {
  echo "<h1>$lang_facture_droit</h1>";
  include_once("include/bas.php");
  exit;
@@ -58,10 +58,10 @@ foreach($_POST['client'] as $client){
  }
 
  $sql = "
- SELECT * FROM " . $tblpref ."bon_comm 
- WHERE client_num = '".$client."' 
- AND " . $tblpref ."bon_comm.date >= '".$debut."' 
- AND " . $tblpref ."bon_comm.date <= '".$fin."' 
+ SELECT * FROM " . $tblpref ."bon_comm
+ WHERE client_num = '".$client."'
+ AND " . $tblpref ."bon_comm.date >= '".$debut."'
+ AND " . $tblpref ."bon_comm.date <= '".$fin."'
  AND fact > 0";# = 'ok'
 
  $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
@@ -79,10 +79,10 @@ foreach($_POST['client'] as $client){
  }
 
  $sql = "
- SELECT SUM(tot_htva), SUM(tot_tva) 
+ SELECT SUM(tot_htva), SUM(tot_tva)
  FROM " . $tblpref ."bon_comm
  WHERE " . $tblpref ."bon_comm.client_num = '".$client."'
- AND " . $tblpref ."bon_comm.date >= '".$debut."' 
+ AND " . $tblpref ."bon_comm.date >= '".$debut."'
  AND " . $tblpref ."bon_comm.date <= '".$fin."'";
 
  $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
@@ -100,10 +100,10 @@ foreach($_POST['client'] as $client){
  if($error !='1'and $error2 != '1'){
   //nouvelle methode
   $sql = "
-  SELECT num_bon 
-  FROM " . $tblpref ."bon_comm 
-  WHERE " . $tblpref ."bon_comm.client_num = '".$client."' 
-  AND " . $tblpref ."bon_comm.date >= '".$debut."' 
+  SELECT num_bon
+  FROM " . $tblpref ."bon_comm
+  WHERE " . $tblpref ."bon_comm.client_num = '".$client."'
+  AND " . $tblpref ."bon_comm.date >= '".$debut."'
   AND " . $tblpref ."bon_comm.date <= '".$fin."'";
   $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
   unset($list_num);
@@ -112,14 +112,14 @@ foreach($_POST['client'] as $client){
   }
   $list_num = serialize($list_num);
   //on enregistre le contenu de la facture
-  $sql1 = "INSERT INTO " . $tblpref ."facture(acompte, coment, client, date_deb, date_fin, date_fact, total_fact_h, total_fact_ttc, list_num) 
+  $sql1 = "INSERT INTO " . $tblpref ."facture(acompte, coment, client, date_deb, date_fin, date_fact, total_fact_h, total_fact_ttc, list_num)
   VALUES ('$acompte', '$coment', '$client', '$debut', '$fin', '$date_fact', '$total_htva', '$total_ttc', '$list_num')";
   mysql_query($sql1) or die('Erreur SQL1 !<br>'.$sql1.'<br>'.mysql_error());
   $num_fact = mysql_insert_id();//le numero de la facture créée
 
   $sql2 = "UPDATE " . $tblpref ."bon_comm SET fact='$num_fact' WHERE " . $tblpref ."bon_comm.client_num = '".$client."' AND " . $tblpref ."bon_comm.date >= '".$debut."' and " . $tblpref ."bon_comm.date <= '".$fin."'";
   mysql_query($sql2) or die('Erreur SQL2 !<br>'.$sql2.'<br>'.mysql_error());
-  
+
   $message .= "
      <h2>$lang_fact_enr $nom $nom2
       <form action='fpdf/fact_pdf.php' method='post' target='_blank' class='img'>
@@ -128,7 +128,7 @@ foreach($_POST['client'] as $client){
        <input type='hidden' name='user' value='adm' />
        <input type='image' src='image/prinfer.gif' alt='$lang_imprimer $lang_fact_num_ab $num_fact' />
       </form>
-     </h2>\n";  
+     </h2>\n";
  }
 }
 echo $message;

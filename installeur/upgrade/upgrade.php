@@ -1,4 +1,4 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8"><?php #html5 ?>
@@ -45,8 +45,8 @@ else
 mysql_query("SET character_set_results = \'utf8\', character_set_client = \'utf8\', character_set_connection = \'utf8\', character_set_database = \'utf8\', character_set_server = \'utf8\'"); // , collation-server = \'utf8_general_ci\'
 ';
 #backup
-file_put_contents($now."include/config/common.old_".time().".php",str_ireplace('<?php','<?php exit;//Laisser tel quel ou supprimer ce fichier du serveur',file_get_contents($now."include/config/common.php"))); 
-$monfichier = fopen($now."include/config/common.php", "w+"); 
+file_put_contents($now."include/config/common.old_".time().".php",str_ireplace('<?php','<?php exit;//Laisser tel quel ou supprimer ce fichier du serveur',file_get_contents($now."include/config/common.php")));
+$monfichier = fopen($now."include/config/common.php", "w+");
 fwrite($monfichier, "\xEF\xBB\xBF".''.$type.''.$com.'$user= '.$un.'$pwd= '.$deux.'$db= '.$trois.'$host= '.$quatre.'$default_lang= '.$cinq.'$tblpref= '.$six.$sept.$connect);
 fclose($monfichier);
 ?>
@@ -77,7 +77,7 @@ $six = '"'.$six.'";//Registre de commerce de l\'entreprise' . "\n";
 $sept = '"'.$sept.'";//adresse email' . "\n";
 $huit = '"'.$huit.'";//devise utilisée par Factux' . "\n";
 $neuf = '"'.$logo.'";//fichier comportant le logo de l\'entreprise' . "\n";
-$monfichier = fopen($now."include/config/var.php", "w+"); 
+$monfichier = fopen($now."include/config/var.php", "w+");
 fwrite($monfichier, "\xEF\xBB\xBF".''.$type.''.$com.'$entrep_nom= '.$zero.'$social= '.$un.'$tel_vend= '.$deux.'$tva_vend= '.$trois.'$compte= '.$quatre.'$slogan= '.$cinq.'$reg= '.$six.'$mail= '.$sept.'$devise= '.$huit.'$logo = '.$neuf);
 fclose($monfichier);
 ?>
@@ -174,7 +174,7 @@ if (is_writable($filename)){
 <p><?php
 $sql = "
 SELECT num_dev, tot_htva, tot_tva, DATE_FORMAT(date,'%d/%m/%Y') AS date_aff
-FROM " . $tblpref ."devis 
+FROM " . $tblpref ."devis
 WHERE resu = 'per'
 ORDER BY num_dev ASC
 ";
@@ -185,7 +185,7 @@ while($data = mysql_fetch_array($req)){
  $total = $data['tot_htva'];
  $tva = $data['tot_tva'];
  $date = $data['date_aff'];
- $c++; 
+ $c++;
 echo "$lang_devis $lang_numero $num_dev <br>";
 }
 echo "<br>Nombre $lang_total $lang_de $lang_devis $lang_perdu dans la base : $c<br>";
@@ -198,7 +198,7 @@ Vérification<br>
 
 $sql = "
 SELECT num_dev, tot_htva, tot_tva, DATE_FORMAT(date,'%d/%m/%Y') AS date_aff
-FROM " . $tblpref ."devis 
+FROM " . $tblpref ."devis
 WHERE resu = '-1'
 ORDER BY num_dev ASC
 ";
@@ -209,7 +209,7 @@ while($data = mysql_fetch_array($req)){
  $total = $data['tot_htva'];
  $tva = $data['tot_tva'];
  $date = $data['date_aff'];
- $d++; 
+ $d++;
  echo "$lang_devis $lang_numero $num_dev $date ($lang_total $total $lang_htva) à jour <br>";
 }
 echo "<br>Nombre total de devis perdu à jour dans la base : $d<br>Verif des devis : ";
@@ -219,7 +219,7 @@ echo ($c==$d)?"tout semble correct ;-)":"Une disparité de nombre entre les orig
 <p><?php
 $sql = "
 SELECT num_dev, tot_htva, tot_tva, DATE_FORMAT(date,'%d/%m/%Y') AS date_aff
-FROM " . $tblpref ."devis 
+FROM " . $tblpref ."devis
 WHERE resu = 'ok'
 ORDER BY num_dev ASC
 ";
@@ -230,7 +230,7 @@ while($data = mysql_fetch_array($req)){
  $total = $data['tot_htva'];
  $tva = $data['tot_tva'];
  $date = $data['date_aff'];
- $c++; 
+ $c++;
  echo "$lang_devis $lang_ga $lang_numero $num_dev $date ($lang_total $total $lang_htva)";
  if(isset($_GET['devnet'])){
   $sql1 = "DELETE FROM " . $tblpref ."cont_dev WHERE dev_num = '".$num_dev."'";
@@ -271,7 +271,7 @@ $req=mysql_query($sql) or die('<h1>Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 $c=0;
 while($data = mysql_fetch_array($req)){
  $num_dev = $data['dev_num'];
- $c++; 
+ $c++;
  echo "$lang_devis $lang_numero $num_dev inexistant, données orphelines effacés<br>";
  $sql1 = "DELETE FROM " . $tblpref ."cont_dev WHERE dev_num = '".$num_dev."'";
  mysql_query($sql1) or die('<h1>Erreur SQL !<br>'.$sql1.'<br>'.mysql_error());
@@ -296,7 +296,7 @@ $req=mysql_query($sql) or die('<h1>Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 $c=0;
 while($data = mysql_fetch_array($req)){
  $num_bon = $data['bon_num'];
- $c++; 
+ $c++;
  $sql1 = "DELETE FROM " . $tblpref ."cont_bon WHERE bon_num = '".$num_bon."'";
  mysql_query($sql1) or die('<h1>Erreur SQL !<br>'.$sql1.'<br>'.mysql_error());
  echo "$lang_bon $lang_numero $num_bon inexistant, données orphelines effacés<br>";
@@ -318,8 +318,8 @@ pseudo code
 				mettre fact avec le numéro de la facture
 */
 $sql = "
-SELECT num, list_num, client  
-FROM " . $tblpref ."facture 
+SELECT num, list_num, client
+FROM " . $tblpref ."facture
 WHERE num >= 0
 ";
 $req = mysql_query($sql) or die('<h1>Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
@@ -417,8 +417,8 @@ Réalisé</p>
 <p>
 <?php
 $sql = "
-SELECT num, date_fact  
-FROM " . $tblpref ."facture 
+SELECT num, date_fact
+FROM " . $tblpref ."facture
 WHERE payement != 'non';
 ";
 $req = mysql_query($sql) or die('<h1>Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
@@ -443,7 +443,7 @@ Si tout est correct faite une sauvegarde immediatement, vos anciens backups éta
 </p>
 <h2>La mise à niveau de Factux est terminée, félicitations.<br>
 <a href="../../doc/Utilisation-fr.html"
-   onclick="window.open('','popup','width=500,height=220,top=200,left=150,toolbar=0,location=0,directories=0,status=0,menubar=1,scrollbars=1,resizable=1')" 
+   onclick="window.open('','popup','width=500,height=220,top=200,left=150,toolbar=0,location=0,directories=0,status=0,menubar=1,scrollbars=1,resizable=1')"
    target="popup">Voir la doc<br><img src="../../image/help.png" border="0" alt="aide" title="aide"></a><br>
-<a href="../../index.php">Entrez<br><img src="../../image/factux.gif" border="0" alt="Entrez dans Factux" title="Entrez dans Factux"></a></h2> 
+<a href="../../index.php">Entrez<br><img src="../../image/factux.gif" border="0" alt="Entrez dans Factux" title="Entrez dans Factux"></a></h2>
 </body></html>

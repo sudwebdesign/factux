@@ -1,39 +1,39 @@
-<?php 
+<?php
 /*
  * Factux le facturier libre
  * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
- * 
+ *
  * Licensed under the terms of the GNU  General Public License:
  * 		http://opensource.org/licenses/GPL-3.0
- * 
+ *
  * For further information visit:
  * 		http://factux.free.fr
- * 
+ *
  * File Name: lister_commandes.php
  * 	liste les commandes et permet de multiples actions
- * 
+ *
  * * * Version:  5.0.0
  * * * * Modified: 07/10/2016
- * 
+ *
  * File Authors:
  * 		Guy Hendrickx
  *.
  */
 include_once("include/headers.php");
-?><script type="text/javascript" src="javascripts/confdel.js"></script><?php 
+?><script type="text/javascript" src="javascripts/confdel.js"></script><?php
 include_once("include/finhead.php");
-?> 
+?>
 <table width="760" class="page" align="center">
  <tr>
   <td class="page" align="center">
-<?php 
+<?php
 include_once("include/head.php");
-if ($user_com == 'n') { 
+if ($user_com == 'n') {
  echo "<h1>$lang_commande_droit</h1>";
  include_once("include/bas.php");
  exit;
 }
-if (isset($message)&&$message!='') { 
+if (isset($message)&&$message!='') {
  echo $message; $message='';
 }
 //pour le formulaire
@@ -48,17 +48,17 @@ $calendrier = calendrier_local_mois ();
 $sql = "
 SELECT mail, login, num_client, num_bon, tot_htva, tot_tva, nom, fact, date,
 DATE_FORMAT(date,'%d/%m/%Y') AS date_aff,(tot_htva + tot_tva) as ttc
-FROM " . $tblpref ."bon_comm 
-LEFT JOIN " . $tblpref ."client on " . $tblpref ."bon_comm.client_num = num_client 
+FROM " . $tblpref ."bon_comm
+LEFT JOIN " . $tblpref ."client on " . $tblpref ."bon_comm.client_num = num_client
 $whr
 ";
 
-if ($user_com == 'r'){ 
+if ($user_com == 'r'){
 $sql .= "
-and " . $tblpref ."client.permi LIKE '$user_num,' 
-or  " . $tblpref ."client.permi LIKE '%,$user_num,' 
-or  " . $tblpref ."client.permi LIKE '%,$user_num,%' 
-or  " . $tblpref ."client.permi LIKE '$user_num,%' 
+and " . $tblpref ."client.permi LIKE '$user_num,'
+or  " . $tblpref ."client.permi LIKE '%,$user_num,'
+or  " . $tblpref ."client.permi LIKE '%,$user_num,%'
+or  " . $tblpref ."client.permi LIKE '$user_num,%'
 ";
 }
 
@@ -97,14 +97,14 @@ $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
        <td class="submit" colspan="4">
         <input type="submit" value='<?php echo $lang_lister; ?>'>
        </td>
-      </tr>        
+      </tr>
      </table>
     </form>
    </center>
   <br>
   <table class='page boiteaction'>
    <caption><?php naviguer("lister_commandes.php?ordre=".@$_GET['ordre'],$mois_1,$annee_1,$lang_commandes_liste); ?></caption>
-    <tr> 
+    <tr>
      <th><a href="lister_commandes.php?ordre=num_bon&amp;mois_1=<?php echo $mois_1; ?>&amp;annee_1=<?php echo $annee_1; ?>"><?php echo $lang_numero; ?></a></th>
      <th><a href="lister_commandes.php?ordre=nom&amp;mois_1=<?php echo $mois_1; ?>&amp;annee_1=<?php echo $annee_1; ?>"><?php echo $lang_client; ?></a></th>
      <th><a href="lister_commandes.php?ordre=date&amp;mois_1=<?php echo $mois_1; ?>&amp;annee_1=<?php echo $annee_1; ?>"><?php echo $lang_date; ?></a></th>
@@ -120,7 +120,7 @@ while($data = mysql_fetch_array($req)){
  $tva = $data['tot_tva'];
  $date = $data['date_aff'];
  $nom = $data['nom'];
- $nom_html = htmlentities(urlencode ($nom)); 
+ $nom_html = htmlentities(urlencode ($nom));
  $num_client = $data['num_client'];
  $mail = $data['mail'];
  $login = $data['login'];
@@ -136,7 +136,7 @@ while($data = mysql_fetch_array($req)){
      <td class='<?php echo couleur_alternee (FALSE,"nombre"); ?>'><?php echo montant_financier($ttc); ?></td>
      <td class='<?php echo couleur_alternee (FALSE,"c texte"); ?>'>
 <?php if ($fact == "0") {?>
-      <a href='edit_bon.php?num_bon=<?php echo "$num_bon"; ?>&amp;nom=<?php echo $nom_html; ?>'> 
+      <a href='edit_bon.php?num_bon=<?php echo "$num_bon"; ?>&amp;nom=<?php echo $nom_html; ?>'>
        <img border="0" src="image/edit.gif" alt="<?php echo $lang_editer; ?>">
       </a>
 <?php }else{ ?>
@@ -147,7 +147,7 @@ while($data = mysql_fetch_array($req)){
      </td>
      <td class='<?php echo couleur_alternee (FALSE,"c texte"); ?>'>
 <?php if ($fact == "0") {?>
-      <a href='delete_bon.php?num_bon=<?php echo $num_bon; ?>&amp;nom=<?php echo $nom_html; ?>' 
+      <a href='delete_bon.php?num_bon=<?php echo $num_bon; ?>&amp;nom=<?php echo $nom_html; ?>'
          onClick="return confirmDelete('<?php echo $lang_con_effa.$num_bon; ?> ?')">
        <img border="0" src="image/delete.jpg" alt="<?php echo $lang_effacer; ?>">
       </a>
@@ -171,7 +171,7 @@ while($data = mysql_fetch_array($req)){
      </td>
      <td class='<?php echo couleur_alternee (FALSE,"c texte"); ?>'>
 <?php if ($mail != '' and $login !='') { ?>
-      <a href='notifi_cli.php?type=comm&amp;mail=<?php echo"$mail"; ?>' 
+      <a href='notifi_cli.php?type=comm&amp;mail=<?php echo"$mail"; ?>'
          onClick="return confirmDelete('<?php echo $lang_con_env_notif.$num_bon; ?> ?')">
        <img src='image/mail.gif' border='0' alt='mail'>
       </a>
@@ -179,7 +179,7 @@ while($data = mysql_fetch_array($req)){
      </td>
      <td class='<?php echo couleur_alternee (FALSE,"c texte"); ?>'>
 <?php if ($mail != '' ) {?>
-      <form action="fpdf/bon_pdf.php" method="post" 
+      <form action="fpdf/bon_pdf.php" method="post"
             onClick="return confirmDelete('<?php echo $lang_con_env_pdf.$num_bon; ?> ?')">
        <input type="hidden" name="num_bon" value="<?php echo $num_bon; ?>" />
        <input type="hidden" name="nom" value="<?php echo $nom; ?>" />
@@ -191,7 +191,7 @@ while($data = mysql_fetch_array($req)){
 <?php }else{ ?><img src='image/spacer.gif' width='15' height='15' border='0' alt='space'><?php } ?>
      </td>
     </tr>
-<?php } ?> 
+<?php } ?>
     <tr><td colspan="10" class="td2"></td></tr>
    </table>
   </td>
@@ -205,9 +205,9 @@ include_once("include/bas.php");
 ?>
   </table>
 <?php
-$file = basename($_SERVER['PHP_SELF']); 
-if ($file!=basename(__FILE__)){#($file=="form_commande.php" or $file=="login.php".....) 
-echo"</table>";  
+$file = basename($_SERVER['PHP_SELF']);
+if ($file!=basename(__FILE__)){#($file=="form_commande.php" or $file=="login.php".....)
+echo"</table>";
 }
 ?>
 </body>

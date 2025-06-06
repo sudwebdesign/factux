@@ -2,19 +2,19 @@
 /*
  * Factux le facturier libre
  * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
- * 
+ *
  * Licensed under the terms of the GNU  General Public License:
  * 		http://opensource.org/licenses/GPL-3.0
- * 
+ *
  * For further information visit:
  * 		http://factux.free.fr
- * 
+ *
  * File Name: fckconfig.js
  * 	Editor configuration settings.
- * 
+ *
  * * * Version:  5.0.0
  * * * * Modified: 07/10/2016
- * 
+ *
  * File Authors:
  * 		Guy Hendrickx
  *
@@ -30,8 +30,8 @@ if(isset($_POST['user'])&&$_POST['user']=='adm'){
 }
  $now='../';
 include_once("../include/config/common.php");
-require_once("../include/config/var.php");	
-require_once("../include/configav.php");	
+require_once("../include/config/var.php");
+require_once("../include/configav.php");
 require_once("../include/language/$lang.php");
 
 define('FPDF_FONTPATH','font/');
@@ -39,7 +39,7 @@ require_once('mysql_table.php');
 
 $_POST['mail']=isset($_POST['mail'])?$_POST['mail']:"n";
 $num_dev=(isset($_POST['num_dev']))?$_POST['num_dev']:"";
-$nom=(isset($_POST['nom']))?$_POST['nom']:"";	 
+$nom=(isset($_POST['nom']))?$_POST['nom']:"";
 
 $slogan = stripslashes($slogan);
 $entrep_nom= stripslashes($entrep_nom);
@@ -48,13 +48,13 @@ $tel_vend= stripslashes($tel_vend);
 $tva_vend= stripslashes($tva_vend);
 $compte= stripslashes($compte);
 $reg= stripslashes($reg);
-$mail= stripslashes($mail);		
+$mail= stripslashes($mail);
 
 //on compte le nombre de ligne
 $sql = "
-SELECT " . $tblpref ."cont_dev.num, quanti, uni, article, p_u_jour, marge_jour, remise, tot_art_htva 
-FROM " . $tblpref ."cont_dev 
-LEFT JOIN " . $tblpref ."article on " . $tblpref ."cont_dev.article_num = " . $tblpref ."article.num 
+SELECT " . $tblpref ."cont_dev.num, quanti, uni, article, p_u_jour, marge_jour, remise, tot_art_htva
+FROM " . $tblpref ."cont_dev
+LEFT JOIN " . $tblpref ."article on " . $tblpref ."cont_dev.article_num = " . $tblpref ."article.num
 WHERE  dev_num = $num_dev";
 $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql2.'<br>'.mysql_error());
 $nb_li = mysql_num_rows($req);
@@ -80,7 +80,7 @@ while($data = mysql_fetch_array($req)){
 }
 //pour la date
 $sql = "
-select coment, tot_htva, tot_tva, DATE_FORMAT(date,'%d/%m/%Y') AS date_2 
+select coment, tot_htva, tot_tva, DATE_FORMAT(date,'%d/%m/%Y') AS date_2
 from " . $tblpref ."devis where num_dev = $num_dev";
 $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 $data = mysql_fetch_array($req);
@@ -91,9 +91,9 @@ $coment = $data['coment'];
 $tot_tva_inc = $total_htva + $total_tva ;
 //pour le nom de client
 $sql1 = "
-SELECT mail, nom, nom2, rue, ville, cp, num_tva 
-FROM " . $tblpref ."client 
-LEFT JOIN " . $tblpref ."devis on client_num = num_client 
+SELECT mail, nom, nom2, rue, ville, cp, num_tva
+FROM " . $tblpref ."client
+LEFT JOIN " . $tblpref ."devis on client_num = num_client
 WHERE  num_dev = $num_dev";
 $req = mysql_query($sql1) or die('Erreur SQL !<br>'.$sql1.'<br>'.mysql_error());
 while($data = mysql_fetch_array($req)){
@@ -231,10 +231,10 @@ for ($i=0;$i<$nb_pa;$i++){
  'align' =>'L',
  'padding'=>2);
  $pdf->Table("
- SELECT " . $tblpref ."cont_dev.num, quanti, remise, uni, article, taux_tva, prix_htva, p_u_jour, tot_art_htva 
- FROM " . $tblpref ."cont_dev 
- LEFT JOIN " . $tblpref ."article on " . $tblpref ."cont_dev.article_num = " . $tblpref ."article.num 
- WHERE  dev_num = $num_dev 
+ SELECT " . $tblpref ."cont_dev.num, quanti, remise, uni, article, taux_tva, prix_htva, p_u_jour, tot_art_htva
+ FROM " . $tblpref ."cont_dev
+ LEFT JOIN " . $tblpref ."article on " . $tblpref ."cont_dev.article_num = " . $tblpref ."article.num
+ WHERE  dev_num = $num_dev
  LIMIT $nb, 31",$prop);
 
  $pdf->SetFillColor(255,255,255);
@@ -250,7 +250,7 @@ for ($i=0;$i<$nb_pa;$i++){
   $pdf->SetX(117);
   $pdf->MultiCell(40,4,"$lang_totaux",1,'R',1);#$pdf->MultiCell(40,4,"$lang_total_h_tva: \n $lang_tot_tva: \n $lang_tot_ttc: ",1,'R',1);
   $pdf->Line(10,266,197,266);
-  
+
   if($lang=='fr'){//le total en toute lettre nombre_literal only in french
    $pdf->SetFont('DejaVu','',8);
    $pdf->SetY(249);
@@ -277,18 +277,18 @@ for ($i=0;$i<$nb_pa;$i++){
   #$pdf->SetY(244);
   #$pdf->SetX(83);
   #$pdf->MultiCell(27,5,montant_financier ($total_marge_htva),1,'R',1);#o
-  
+
   $pdf->SetTextColor(0, 0, 0);
  }
- 
- 
+
+
  //les coordonnées vendeurs 2
  /*$pdf->SetFillColor(255,255,255);
  $pdf->SetFont('DejaVu','',8);
  $pdf->SetY(240);
  $pdf->SetX(15);
  $pdf->MultiCell(35,4,"$social\n $tel_vend\n $tva_vend \n$compte \n$reg",0,'C',0);*/
- 
+
  //Place libre pour la signature
  $pdf->SetFont('DejaVu','',10);
  $pdf->SetY(239);
@@ -328,7 +328,7 @@ if($autoprint=='y' and $_POST['mail']!='y' and $_POST['user']=='adm'){
 
 //Sauvegarde du PDF dans le fichier
 $file=$lang_devis."_".$num_dev.".pdf";#2015
-$pdf->Output($file); 
+$pdf->Output($file);
 
 if ($_POST['mail']=='y') {
  $to = "$mail_client";

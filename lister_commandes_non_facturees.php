@@ -1,20 +1,20 @@
-<?php 
+<?php
 /*
  * Factux le facturier libre
  * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
- * 
+ *
  * Licensed under the terms of the GNU  General Public License:
  *   http://opensource.org/licenses/GPL-3.0
- * 
+ *
  * For further information visit:
  *   http://factux.free.fr
- * 
+ *
  * File Name: lister_commandes_non_facturees.php
  *  liste les bons de commande orphelins
- * 
+ *
  * * * Version:  5.0.0
  * * * * Modified: 07/10/2016
- * 
+ *
  * File Authors:
  *   Guy Hendrickx
  *.
@@ -28,22 +28,22 @@ include_once("include/finhead.php");
   <td class="page" align="center">
 <?php
 include_once("include/head.php");
-if ($user_com == 'n') { 
+if ($user_com == 'n') {
  echo"<h1>$lang_commande_droit</h1>";
  include_once("include/bas.php");
  exit;
 }
 $sql = "
-SELECT client_num, num_bon, tot_htva, tot_tva, nom, date, DATE_FORMAT(date,'%d/%m/%Y') AS date_aff 
-FROM " . $tblpref ."bon_comm 
-LEFT JOIN " . $tblpref ."client on " . $tblpref ."bon_comm.client_num = num_client 
+SELECT client_num, num_bon, tot_htva, tot_tva, nom, date, DATE_FORMAT(date,'%d/%m/%Y') AS date_aff
+FROM " . $tblpref ."bon_comm
+LEFT JOIN " . $tblpref ."client on " . $tblpref ."bon_comm.client_num = num_client
 WHERE fact='0'";
-if ($user_com == 'r') { 
+if ($user_com == 'r') {
 $sql .= "
-  and " . $tblpref ."client.permi LIKE '$user_num,' 
-  or  " . $tblpref ."client.permi LIKE '%,$user_num,' 
-  or  " . $tblpref ."client.permi LIKE '%,$user_num,%' 
-  or  " . $tblpref ."client.permi LIKE '$user_num,%'";  
+  and " . $tblpref ."client.permi LIKE '$user_num,'
+  or  " . $tblpref ."client.permi LIKE '%,$user_num,'
+  or  " . $tblpref ."client.permi LIKE '%,$user_num,%'
+  or  " . $tblpref ."client.permi LIKE '$user_num,%'";
 }
 if ( isset ( $_GET['ordre'] ) && $_GET['ordre'] != ''){
  $sql .= " ORDER BY " . $_GET['ordre'] . " DESC";
@@ -87,12 +87,12 @@ while($data = mysql_fetch_array($req)){
       <td class='<?php echo couleur_alternee (FALSE,"nombre"); ?>'><?php echo montant_financier($total); ?></td>
       <td class='<?php echo couleur_alternee (FALSE,"nombre"); ?>'><?php echo montant_financier($tva); ?></td>
       <td class='<?php echo couleur_alternee (FALSE,"c texte"); ?>'>
-       <a href="edit_bon.php?num_bon=<?php echo $num_bon; ?>&amp;nom=<?php echo $nom_html; ?>"> 
+       <a href="edit_bon.php?num_bon=<?php echo $num_bon; ?>&amp;nom=<?php echo $nom_html; ?>">
         <img border="0" src="image/edit.gif" alt="<?php echo $lang_editer; ?>">
        </a>
       </td>
       <td class='<?php echo couleur_alternee (FALSE,"c texte"); ?>'>
-       <a href="<?php echo "delete_bon.php?num_bon=$num_bon&amp;nom=$nom_html"?>" 
+       <a href="<?php echo "delete_bon.php?num_bon=$num_bon&amp;nom=$nom_html"?>"
          onClick="return confirmDelete('<?php echo $lang_con_effa.$num_bon; ?>')">
         <img border="0" src="image/delete.jpg" alt="<?php echo $lang_effacer; ?>">
        </a>
@@ -100,7 +100,7 @@ while($data = mysql_fetch_array($req)){
       <td class='<?php echo couleur_alternee (FALSE,"c texte"); ?>'>
        <form action="fpdf/bon_pdf.php" method="post" target="_blank" >
         <input type="hidden" name="num_bon" value="<?php echo $num_bon ?>" />
-        <input type="hidden" name="nom" value="<?php echo $nom ?>" /> 
+        <input type="hidden" name="nom" value="<?php echo $nom ?>" />
         <input type="hidden" name="user" value="adm" />
         <input type="image" src="image/printer.gif" style="border:none;margin:0;" alt="<?php echo $lang_imprimer; ?>" />
        </form>

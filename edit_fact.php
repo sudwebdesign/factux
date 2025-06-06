@@ -1,20 +1,20 @@
-<?php 
+<?php
 /*
  * Factux le facturier libre
  * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
- * 
+ *
  * Licensed under the terms of the GNU  General Public License:
  *   http://opensource.org/licenses/GPL-3.0
- * 
+ *
  * For further information visit:
  *   http://factux.free.fr
- * 
+ *
  * File Name: edit_fact.php
  *  Permet l'edition des factures.
- * 
+ *
  * * * Version:  5.0.0
  * * * * Modified: 07/10/2016
- * 
+ *
  * File Authors:
  *   Guy Hendrickx
  *.
@@ -35,9 +35,9 @@ if ($user_fact == 'n') {
  exit;
 }
 $sql = "
-SELECT list_num,nom,client  
-FROM " . $tblpref ."facture 
-LEFT JOIN " . $tblpref ."client on " . $tblpref ."facture.client = num_client 
+SELECT list_num,nom,client
+FROM " . $tblpref ."facture
+LEFT JOIN " . $tblpref ."client on " . $tblpref ."facture.client = num_client
 WHERE num = $num_fact
 ";
 $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
@@ -45,8 +45,8 @@ $data = mysql_fetch_array($req);
 $list_num = unserialize($data['list_num']);
 $num_client= $data['client'];
 $nom = $data['nom'];
-$nom_html = htmlentities(urlencode ($nom)); 
-?>  
+$nom_html = htmlentities(urlencode ($nom));
+?>
    <center>
     <table class='page boiteaction'>
      <caption><?php echo "$lang_edit_fact_n $num_fact $lang_de $nom"; ?></caption>
@@ -55,13 +55,13 @@ $nom_html = htmlentities(urlencode ($nom));
       <th><?php echo $lang_date; ?></th>
       <th><?php echo $lang_montant_ttc; ?></th>
       <th colspan="3"><?php echo $lang_action; ?></th>
-     </tr> 
+     </tr>
 <?php
 $totttc=0;
 $c=0;
 foreach ($list_num as $num_bon){
  $sql="
- SELECT DATE_FORMAT(date,'%d/%m/%Y') AS date, tot_htva, tot_tva from " . $tblpref ."bon_comm 
+ SELECT DATE_FORMAT(date,'%d/%m/%Y') AS date, tot_htva, tot_tva from " . $tblpref ."bon_comm
  WHERE num_bon = '$num_bon'
  ";
  $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
@@ -112,9 +112,9 @@ foreach ($list_num as $num_bon){
     </table>
    </center>";
 <?php
-$sql = "SELECT num_bon, tot_htva, tot_tva, nom, num_client, DATE_FORMAT(date,'%d/%m/%Y') AS date 
-FROM " . $tblpref ."bon_comm 
-LEFT JOIN " . $tblpref ."client on " . $tblpref ."bon_comm.client_num = num_client 
+$sql = "SELECT num_bon, tot_htva, tot_tva, nom, num_client, DATE_FORMAT(date,'%d/%m/%Y') AS date
+FROM " . $tblpref ."bon_comm
+LEFT JOIN " . $tblpref ."client on " . $tblpref ."bon_comm.client_num = num_client
 WHERE fact='0' AND client_num = '$num_client'
 ORDER BY " . $tblpref ."bon_comm.`num_bon` DESC";
 ?>
@@ -145,7 +145,7 @@ $line=($c++ & 1)?0:1;
       <td class='<?php echo couleur_alternee (FALSE); ?>'><?php echo $date; ?></td>
       <td class='<?php echo couleur_alternee (FALSE, "nombre"); ?>'><?php echo montant_financier($ttc); ?></td>
       <td class='<?php echo couleur_alternee (FALSE, "c texte"); ?>'>
-       <a href='edit_bon.php?num_bon=<?php echo "$num_bon"; ?>&amp;nom=<?php echo $nom_html; ?>'> 
+       <a href='edit_bon.php?num_bon=<?php echo "$num_bon"; ?>&amp;nom=<?php echo $nom_html; ?>'>
         <img border="0" src="image/edit.gif" alt="<?php echo $lang_editer; ?>">
        </a>
       </td>

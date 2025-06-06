@@ -1,20 +1,20 @@
-<?php 
+<?php
 /*
  * Factux le facturier libre
  * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
- * 
+ *
  * Licensed under the terms of the GNU  General Public License:
  * 		http://opensource.org/licenses/GPL-3.0
- * 
+ *
  * For further information visit:
  * 		http://factux.free.fr
- * 
+ *
  * File Name: lister_commandes_non_facturees.php
  * 	liste les bons de commande orphelins
- * 
+ *
  * * * Version:  5.0.0
  * * * * Modified: 07/10/2016
- * 
+ *
  * File Authors:
  * 		Guy Hendrickx
  *.
@@ -32,7 +32,7 @@ $annee = date("Y");
   <td class="page" align="center">
 <?php
 include_once("include/head.php");
-if ($user_fact == 'n') { 
+if ($user_fact == 'n') {
  echo"<h1>$lang_facture_droit</h1>";
  include_once("include/bas.php");
  exit;
@@ -53,10 +53,10 @@ if ($user_fact == 'n') {
       </tr>
 <?php
 $rqSql = "
-SELECT  num_bon, tot_htva, tot_tva, DATE_FORMAT(date,'%d/%m/%Y') AS date 
-FROM " . $tblpref ."bon_comm 
+SELECT  num_bon, tot_htva, tot_tva, DATE_FORMAT(date,'%d/%m/%Y') AS date
+FROM " . $tblpref ."bon_comm
 WHERE fact='0'
-AND client_num ='$client' 
+AND client_num ='$client'
 AND num_bon !='$num'
 ORDER BY " . $tblpref ."bon_comm.`num_bon` DESC
 ";
@@ -101,7 +101,7 @@ $date = $row["date"];
  </tr>
  <tr>
   <td>
-<?php include_once("include/bas.php"); ?> 
+<?php include_once("include/bas.php"); ?>
   </td>
  </tr>
 </table>

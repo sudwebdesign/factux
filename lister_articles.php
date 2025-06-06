@@ -1,20 +1,20 @@
-<?php 
+<?php
 /*
  * Factux le facturier libre
  * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
- * 
+ *
  * Licensed under the terms of the GNU  General Public License:
  * 		http://opensource.org/licenses/GPL-3.0
- * 
+ *
  * For further information visit:
  * 		http://factux.free.fr
- * 
+ *
  * File Name: lister_article.php
  * 	liste les article et donne acces a differentes actions
- * 
+ *
  * * * Version:  5.0.0
  * * * * Modified: 07/10/2016
- * 
+ *
  * File Authors:
  * 		Guy Hendrickx
  *.
@@ -28,17 +28,17 @@ include_once("include/finhead.php");
   <td class="page" align="center">
 <?php
 include_once("include/head.php");
-if ($user_art == 'n') { 
+if ($user_art == 'n') {
  echo "<h1>$lang_article_droit</h1>";
  include_once("include/bas.php");
  exit;
 }
-if (isset($message)&&$message!='') { 
- echo $message; 
+if (isset($message)&&$message!='') {
+ echo $message;
 }
 $sql = "
-SELECT * 
-FROM " . $tblpref ."article 
+SELECT *
+FROM " . $tblpref ."article
 LEFT JOIN " . $tblpref ."categorie ON " . $tblpref ."categorie.id_cat = " . $tblpref ."article.cat
 WHERE actif != 'non' ";
 if ( isset ( $_GET['ordre'] ) && $_GET['ordre'] != ''){
@@ -51,7 +51,7 @@ $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
   <center>
    <table class="page boiteaction">
    <caption><?php echo $lang_articles_liste; ?></caption>
-   <tr> 
+   <tr>
     <th><a href="lister_articles.php?ordre=article"><?php echo $lang_article; ?></a></th>
 <?php
 if ($use_categorie =='y'){ ?>
@@ -84,7 +84,7 @@ while($data = mysql_fetch_array($req)){
  $stock = $data['stock'];
  $min = $data['stomin'];
  $max = $data['stomax'];
- if ($stock <= $min || $stock >= $max){ 
+ if ($stock <= $min || $stock >= $max){
   $stock="<b style='color:red;'>$stock</b>";
  }
  if($c++ & 1){
@@ -113,7 +113,7 @@ while($data = mysql_fetch_array($req)){
      </a>
     </td>
     <td class='<?php echo couleur_alternee (FALSE,"c texte"); ?>'>
-     <a href="delete_article.php?article=<?php echo $num; ?>" 
+     <a href="delete_article.php?article=<?php echo $num; ?>"
         onClick="return confirmDelete('<?php echo $lang_art_effa.$article; ?>?');">
       <img border="0" alt="<?php echo $lang_supprimer; ?>" src="image/delete.jpg">
      </a>
@@ -134,7 +134,7 @@ $aide = 'article';
 include("help.php");
 include_once("include/bas.php");
 if(!strstr($_SERVER['SCRIPT_FILENAME'],__FILE__)){#autre qu'elle meme
- echo"\n  </td>\n </tr>\n</table>\n"; 
+ echo"\n  </td>\n </tr>\n</table>\n";
 }
 ?>
    </td>

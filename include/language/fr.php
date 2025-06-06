@@ -2,19 +2,19 @@
 /*
  * Factux le facturier libre
  * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
- * 
+ *
  * Licensed under the terms of the GNU  General Public License:
  * 		http://opensource.org/licenses/GPL-3.0
- * 
+ *
  * For further information visit:
  * 		http://factux.free.fr
- * 
+ *
  * File Name: fr.php
  * 	fichier contenant les variables francophones
- * 
+ *
  * * Version:  5.0.0
  * * * Modified: 07/10/2016
- * 
+ *
  * File Authors:
  * 		Guy Hendrickx
  */
@@ -104,7 +104,7 @@ $lang_salut_dist="Vous la trouverez en piece jointe de ce courriel\n Salutations
 
 $lang_condi_ven = "Conditions de vente au verso";# Algemene verkoopsvoorwaarden, zie keerzijde.
 $lang_Lister_lots = "Lister les lots";
-$lang_com_cont_lot = "Les bons de commandes qui contiennent le lot"; 
+$lang_com_cont_lot = "Les bons de commandes qui contiennent le lot";
 $lang_lot = "lots";
 $lang_num_lot ="N° de lot";
 $lang_lot_four = "N° de lot fournisseur ";
@@ -118,7 +118,7 @@ $lang_acompte = "Acompte";
 #$lang_ctrl = "Vous pouver choisir plusieurs clients en enfoncant la touche 'Ctrl' de votre clavier";#unused.2015
 $lang_choi_cli_utis = "Choisir les clients pour cet utilisateur";
 $lang_choi_cli_enr = "Veuillez à present choisir les clients qu'il pourra gérer";
-$lang_don_rest = "vous aver donné des droits restreints a l'utilisateur"; 
+$lang_don_rest = "vous aver donné des droits restreints a l'utilisateur";
 $lang_est_enr = "est maintenant enregistré et a comme login:";
 $lang_ret_cli_util = "Retirer un client de cet utilisateur";
 $lang_admi_modu = "Les droits d'administration donnent l'acces a tout les autres modules";
@@ -528,13 +528,13 @@ $lang_les_utl = "Les utilisateurs";
 $lang_id_or_mail_exist = "Erreur le login/$lang_email existe déjà";
 $lang_mail_exist = "Erreur le $lang_email existe déjà";
 
-$lang_admin = "admin"; 
+$lang_admin = "admin";
 $lang_gerer = "gerer";
-$lang_stat = "stat"; 
+$lang_stat = "stat";
 $lang_art = "art";
 $lang_point = "points";
 
-$lang_lot_zero = "Le lot zéro est vide car inexistant.<br />Créer un lot et sélèctionné le lors d'ajout d'un article au bon de commande."; 
+$lang_lot_zero = "Le lot zéro est vide car inexistant.<br />Créer un lot et sélèctionné le lors d'ajout d'un article au bon de commande.";
 $lang_edit_lot = "Éditer un lot";
 $lang_cont_lot = "Contenu du lot";
 
@@ -588,7 +588,7 @@ $lang_notifi_cli = "Courriel de notification envoyé !";
 $lang_notifi_cli_non = "Envoi du Courriel de notification Echoué!";
 $lang_notifi_titre_bon = "Nouveau bon de commande";
 $lang_notifi_message_bon = "Un nouveau bon de commade vous est adressé par $entrep_nom <br>vous pouvez le consulter en vous rendant sur le site internet avec votre login mot de passe<br>$entrep_nom";
-$lang_notifi_titre_fact = "Nouvelle facture";  
+$lang_notifi_titre_fact = "Nouvelle facture";
 $lang_notifi_message_fact = "Une nouvelle facture vous est adressé par $entrep_nom <br>vous pouvez la consulter en vous rendant sur le site internet avec votre login mot de passe<br>$entrep_nom";
 $lang_notifi_titre_dev = "Nouveau devis";
 $lang_notifi_message_dev = "Un nouveau devis vous est adressé par $entrep_nom <br>vous pouvez le consulter en vous rendant sur le site internet avec votre login mot de passe<br>$entrep_nom";

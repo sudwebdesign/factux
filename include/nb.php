@@ -2,19 +2,19 @@
 /*
  * Factux le facturier libre
  * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
- * 
+ *
  * Licensed under the terms of the GNU  General Public License:
  *   http://opensource.org/licenses/GPL-3.0
- * 
+ *
  * For further information visit:
  *   http://factux.free.fr
- * 
+ *
  * File Name: fckconfig.js
  *  Editor configuration settings.
- * 
+ *
  * * Version:  5.0.0
  * * * Modified: 07/10/2016
- * 
+ *
  * File Authors:
  *   Guy Hendrickx
  *.
@@ -35,18 +35,18 @@ function avec_virgule ($number, $decimales=2){
 }
 /**** l10n ready
  * Titre : Ecrire des nombres en literal (toutes lettres)
- * Auteur : Damien Seguy 
+ * Auteur : Damien Seguy
  * Email : dams@nexen.net
  * Url : www.nexen.net/
  * up to php5 : Thomas factux.free.fr 2015
  * Description : nombre_literal ecrit en toute lettre des nombres.
  * Les nombres peuvent être entier, a virgule, mais positif, ecrit uniquement en chiffres et avec une vrai virgule (coma).
- 
- * Avertissement : Cette librairie de fonctions PHP est distribuee avec l'espoir 
- * qu'elle sera utile, mais elle l'est SANS AUCUNE GARANTIE; sans meme la garantie de 
+
+ * Avertissement : Cette librairie de fonctions PHP est distribuee avec l'espoir
+ * qu'elle sera utile, mais elle l'est SANS AUCUNE GARANTIE; sans meme la garantie de
  * COMMERCIALISATION ou d'UTILITE POUR UN BUT QUELCONQUE.
- * Elle est librement redistribuable tant que la presente licence, ainsi que les credits des 
- * auteurs respectifs de chaque fonctions sont laisses ensembles. 
+ * Elle est librement redistribuable tant que la presente licence, ainsi que les credits des
+ * auteurs respectifs de chaque fonctions sont laisses ensembles.
  * En aucun cas, Nexen.net ne pourra etre tenu responsable de quelques consequences que ce soit
  * de l'utilisation ou la mésutilisation de ces fonctions PHP.
 ****/
@@ -81,7 +81,7 @@ function nombre_literal($nombre, $partie_entiere=ENTIER, $virgule=VIRGULE, $devi
  // cas de la virgule
  if (preg_match('~'.$virgule.'~', $nombre)){#2015 [strstr($virgule, $nombre)#not work???] #if (ereg(',', $nombre)){
   list($e, $d) = explode($virgule, $nombre);#list($e, $d) = explode(",", $nombre);
-  $r = nombre_literal($e);;  
+  $r = nombre_literal($e);;
   $z = substr("$d", 0, strlen($d) - strlen(intval($d)));
   $rc = nombre_literal(intval($d));
   # Si on utilise des devis, on affiche "zéro" et non "zéro zéro" après la virgule
@@ -97,7 +97,7 @@ function nombre_literal($nombre, $partie_entiere=ENTIER, $virgule=VIRGULE, $devi
    $decimale = ((($d!=00)&&($d!=01))?$decimale.S:$decimale);#pluriel
    $r = $r.$partie_entiere." $devise ".ET." ".$z.$centimes." ".$decimale;
   return ucfirst($r);#retour final
- } 
+ }
 
  // calcul
  $r = "";
@@ -115,10 +115,10 @@ function nombre_literal($nombre, $partie_entiere=ENTIER, $virgule=VIRGULE, $devi
     $r = preg_replace("~ ~", " ".ET." ", $r);#2015:str_replace(" ", " et ", $r) #ereg_replace(" ", " et ", $r);
    }
   } else if ( in_array($les_dizaines, array(7,9))){
-   $r .= $dizaine[$les_dizaines-1]." ".$unite[$lunite+10]; 
+   $r .= $dizaine[$les_dizaines-1]." ".$unite[$lunite+10];
    if (($lunite==1) && ($les_dizaines == 7)){
     $r = preg_replace("~ ~", " ".ET." ", $r);#2015:str_replace(" ", " et ", $r) #ereg_replace(" ", " et ", $r);
-   } 
+   }
   }
   // pour les centaines :
   if ($les_centaines > 1) {
@@ -132,7 +132,7 @@ function nombre_literal($nombre, $partie_entiere=ENTIER, $virgule=VIRGULE, $devi
    $r = CENT." ".$r;
   }
  } else  if ($nombre < 1000000000000000000000) {
- // cela couvre largement les nombres classiques. 
+ // cela couvre largement les nombres classiques.
   $bloc = array();
   while($nombre > 0) {
    $milliers = floor($nombre / 1000);
@@ -152,9 +152,9 @@ function nombre_literal($nombre, $partie_entiere=ENTIER, $virgule=VIRGULE, $devi
       $rc = "";
     }
     if (in_array($t, array("",$millier[1])) || ($rc == $unite[1]))
-     $s = ""; 
+     $s = "";
     $r = $rc." $t$s ".$r;
-   }  
+   }
   }
  }
  return trim($r.$partie_entiere);

@@ -1,20 +1,20 @@
-<?php 
+<?php
 /*
  * Factux le facturier libre
  * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
- * 
+ *
  * Licensed under the terms of the GNU  General Public License:
  * 		http://opensource.org/licenses/GPL-3.0
- * 
+ *
  * For further information visit:
  * 		http://factux.free.fr
- * 
+ *
  * File Name: fckconfig.js
  * 	Editor configuration settings.
- * 
+ *
  * * * Version:  5.0.0
  * * * * Modified: 07/10/2016
- * 
+ *
  * File Authors:
  * 		Guy Hendrickx
  *.
@@ -27,7 +27,7 @@ $annee_1=isset($_POST['annee_1'])?$_POST['annee_1']:date('Y');
 <table width="760" border="0" class="page" align="center">
  <tr>
   <td class="page" align="center">
-<?php 
+<?php
 include_once("include/head.php");
 $calendrier = calendrier_local_mois ();
 ?>
@@ -50,7 +50,7 @@ $calendrier = calendrier_local_mois ();
       </tr>
      </table>
     </form>
-<?php 
+<?php
 //stats mensuelles
 $sql2 = "SELECT SUM(prix)FROM " . $tblpref ."depense WHERE MONTH(date) = $mois_1 AND YEAR(date) = $annee_1 ";
 $req = mysql_query($sql2) or die('Erreur SQL !<br>'.$sql2.'<br>'.mysql_error());
@@ -140,7 +140,7 @@ while($data = mysql_fetch_array($req)){
   <td>
 <?php
 include_once("include/bas.php");
-?> 
+?>
  </td>
 </tr>
 </table>

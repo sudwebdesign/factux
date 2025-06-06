@@ -9,12 +9,12 @@ PHP doesn't have it. You can change that back or whatever though =).
 Finally, I added an extra "\n" before the message text gets added into the
 MIME output because otherwise the message text wasn't showing up.
 /*
-note: someone mentioned a command-line utility called 'mutt' that 
+note: someone mentioned a command-line utility called 'mutt' that
 can mail attachments.
 */
-/* 
+/*
 If chunk_split works on your system, change the call to my_chunk_split
-to chunk_split 
+to chunk_split
 */
 /* Note: if you don't have base64_encode on your sytem it will not work */
 
@@ -27,7 +27,7 @@ class CMailFile {
  var $mime_headers;
  var $mime_boundary = "--==================_846811060==_";
  var $smtp_headers;
- 
+
  function CMailFile($subject,$to,$from,$msg,$filename,$mimetype = "application/octet-stream", $mime_filename = false) {
   $this->subject = $subject;
   $this->addr_to = $to;
@@ -41,12 +41,12 @@ class CMailFile {
   $encoded = $this->encode_file($filename);
   if ($mime_filename) $filename = $mime_filename;
   $out = "--" . $this->mime_boundary . "\n";
-  $out = $out . "Content-type: " . $mimetype . "; name=\"$filename\";\n";  
+  $out = $out . "Content-type: " . $mimetype . "; name=\"$filename\";\n";
   $out = $out . "Content-Transfer-Encoding: base64\n";
   $out = $out . "Content-disposition: attachment; filename=\"$filename\"\n\n";
   $out = $out . $encoded . "\n";
   $out = $out . "--" . $this->mime_boundary . "--" . "\n";
-  return $out; 
+  return $out;
 // added -- to notify email client attachment is done
  }
 
@@ -55,13 +55,13 @@ class CMailFile {
    $fd = fopen($sourcefile, "r");
    $contents = fread($fd, filesize($sourcefile));
    $encoded = my_chunk_split(base64_encode($contents));
-   fclose($fd); 
+   fclose($fd);
   }
   return $encoded;
  }
 
  function sendfile() {
-  $headers = $this->smtp_headers . $this->mime_headers;  
+  $headers = $this->smtp_headers . $this->mime_headers;
   $message = $this->text_body . $this->text_encoded;
   if(mail($this->addr_to,$this->subject,$message,$headers))
    return true;

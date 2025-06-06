@@ -7,7 +7,7 @@
 # 2013-09-25 - updated with is_mysql_resource() and bugfixes
 # 2013-09-26 19:23 - adding some more function wrappers
 # 2013-10-24 23:16:41 - bugfix, mysql_connect used invalid error functions
-# 2013-11-11 - updated mysql_result() contributed by marc17 (GitHub) 
+# 2013-11-11 - updated mysql_result() contributed by marc17 (GitHub)
 # 2014-02-16 - updated mysql_result() contributed by marc17 (GitHub)
 
 # BEWARE, mysql constants are directly translated to mysqli, so the actual value may differ
@@ -22,7 +22,7 @@ function is_mysql_resource($result) {
 
     # or if mysqli is loaded, try to check object
 	if (extension_loaded('mysqli')) return is_object($result);
-	
+
 	die('Fatal error, mysqli extension not loaded.');
 }
 
@@ -36,7 +36,7 @@ if (!extension_loaded('mysql')) {
 
 	# a list of connections, used to get the last one
 	$mysql_links = array();
-	
+
 	# our own constants to reach default connection values in INI file
 	define('MYSQL_DEFAULT_HOST', ini_get("mysql.default_host"));
 	define('MYSQL_DEFAULT_USER', ini_get("mysql.default_user"));
@@ -47,27 +47,27 @@ if (!extension_loaded('mysql')) {
 	# MySQL client constants
 	define('MYSQL_CLIENT_COMPRESS', MYSQLI_CLIENT_COMPRESS);		# Use compression protocol
 	define('MYSQL_CLIENT_IGNORE_SPACE', MYSQLI_CLIENT_IGNORE_SPACE);	# Allow space after function names
-	define('MYSQL_CLIENT_INTERACTIVE', MYSQLI_CLIENT_INTERACTIVE);		# Allow interactive_timeout seconds 
-										# (instead of wait_timeout ) of 
+	define('MYSQL_CLIENT_INTERACTIVE', MYSQLI_CLIENT_INTERACTIVE);		# Allow interactive_timeout seconds
+										# (instead of wait_timeout ) of
 										# inactivity before closing the connection.
-	define('MYSQL_CLIENT_SSL', MYSQLI_CLIENT_SSL);				# Use SSL encryption. This flag is only 
-										# available with version 4.x of the MySQL 
-										# client library or newer. Version 3.23.x is 
-										# bundled both with PHP 4 and Windows binaries 
+	define('MYSQL_CLIENT_SSL', MYSQLI_CLIENT_SSL);				# Use SSL encryption. This flag is only
+										# available with version 4.x of the MySQL
+										# client library or newer. Version 3.23.x is
+										# bundled both with PHP 4 and Windows binaries
 										# of PHP 5.
 
 	# mysql_fetch_array() uses a constant for the different types of result arrays. The following constants are defined:
 
 	# MySQL fetch constants
-	define('MYSQL_ASSOC', MYSQLI_ASSOC);	# Columns are returned into the array having 
+	define('MYSQL_ASSOC', MYSQLI_ASSOC);	# Columns are returned into the array having
 						# the fieldname as the array index.
 
-	define('MYSQL_BOTH', MYSQLI_BOTH);	# Columns are returned into the array having 
-						# both a numerical index and the fieldname as 
+	define('MYSQL_BOTH', MYSQLI_BOTH);	# Columns are returned into the array having
+						# both a numerical index and the fieldname as
 						# the array index.
 
-	define('MYSQL_NUM', MYSQLI_NUM);	# Columns are returned into the array having a 
-						# numerical index to the fields. This index 
+	define('MYSQL_NUM', MYSQLI_NUM);	# Columns are returned into the array having a
+						# numerical index to the fields. This index
 						# starts with 0, the first field in the result.
 
 	# --- helper functions ---------------------------------------------------------------------------------------------------
@@ -115,11 +115,11 @@ if (!extension_loaded('mysql')) {
 	function mysql_close($link = NULL) {
 		global $mysql_links;
 		$link = mysql_ensure_link($link);
-		
+
 		$thread_id = isset($link->thread_id) && is_numeric($link->thread_id) ? $link->thread_id : false;
-		
+
 		$result = mysqli_close($link);
-		
+
 		# did the removal suceed and and we have thread id
 		if ($result && $thread_id) {
 			# walk the links
@@ -132,9 +132,9 @@ if (!extension_loaded('mysql')) {
 					break;
 				}
 			}
-		
+
 		}
-		
+
 	}
 
 	# mysql_connect - Open a connection to a MySQL Server
@@ -260,10 +260,10 @@ if (!extension_loaded('mysql')) {
 		if (is_numeric($field_offset)) {
 			# then seek to that
 			mysqli_field_seek($result, $field_offset);
-		}	
+		}
 		return mysqli_fetch_field($result);
 	}
-	
+
 	# mysql_fetch_lengths - Get the length of each output in a result
 	# array mysql_fetch_lengths ( resource $result )
 	# array mysqli_fetch_lengths ( mysqli_result $result )
@@ -290,7 +290,7 @@ if (!extension_loaded('mysql')) {
 	function mysql_fetch_row ($result) {
 		return mysqli_fetch_row($result);
 	}
-	
+
 	# mysql_field_flags - Get the flags associated with the specified field in a result
 	# string mysql_field_flags ( resource $result , int $field_offset )
 	# mysqli_fetch_field_direct() [flags]
@@ -300,8 +300,8 @@ if (!extension_loaded('mysql')) {
 		if (!is_object($tmp)) return false;
 		$tmp = (array)$tmp;
 		return isset($tmp['flags']) ? $tmp['flags'] : false;
-	}	
-	
+	}
+
 	# mysql_field_len - Returns the length of the specified field
 	# int mysql_field_len ( resource $result , int $field_offset )
 	# mysqli_fetch_field_direct() [length]
@@ -311,8 +311,8 @@ if (!extension_loaded('mysql')) {
 		if (!is_object($tmp)) return false;
 		$tmp = (array)$tmp;
 		return isset($tmp['length']) ? $tmp['length'] : false;
-	}	
-	
+	}
+
 	# mysql_field_name - Get the name of the specified field in a result
 	# string mysql_field_name ( resource $result , int $field_offset )
 	# mysqli_fetch_field_direct() [name] or [orgname]
@@ -323,7 +323,7 @@ if (!extension_loaded('mysql')) {
 		$tmp = (array)$tmp;
 		return isset($tmp['name']) ? $tmp['name'] : false;
 	}
-	
+
 	# mysql_field_seek - Set result pointer to a specified field offset
 	# bool mysql_field_seek ( resource $result , int $field_offset )
 	# bool mysqli_field_seek ( mysqli_result $result , int $fieldnr )
@@ -340,18 +340,18 @@ if (!extension_loaded('mysql')) {
 		if (!is_object($tmp)) return false;
 		$tmp = (array)$tmp;
 		return isset($tmp['table']) ? $tmp['table'] : false;
-	}	
+	}
 
 	# mysql_field_type - Get the type of the specified field in a result
 	# string mysql_field_type ( resource $result , int $field_offset )
-	# mysqli_fetch_field_direct() [type] 
+	# mysqli_fetch_field_direct() [type]
 	# -> object mysqli_fetch_field_direct ( mysqli_result $result , int $fieldnr )
 	function mysql_field_type($result, $field_offset) {
 		$tmp = mysqli_fetch_field_direct($result, $field_offset);
 		if (!is_object($tmp)) return false;
 		$tmp = (array)$tmp;
 		return isset($tmp['type']) ? $tmp['type'] : false;
-	}	
+	}
 
 	# mysql_free_result - Free result memory
 	# bool mysql_free_result ( resource $result )
@@ -449,7 +449,7 @@ if (!extension_loaded('mysql')) {
 		if ($tmp === false) return false;
 		return count($tmp);
 	}
-	
+
 	# mysql_num_rows - Get number of rows in result
 	# int mysql_num_rows ( resource $result )
 	# int mysqli_num_rows ( mysqli_result $result )
@@ -463,7 +463,7 @@ if (!extension_loaded('mysql')) {
 	function mysql_pconnect($server = MYSQL_DEFAULT_HOST, $username = MYSQL_DEFAULT_USER, $password = MYSQL_DEFAULT_PASSWORD, $client_flags = 0) {
 		return mysql_connect('p:'.$server, $username, $password, true, $client_flags);
 	}
-	
+
 	# mysql_ping - Ping a server connection or reconnect if there is no connection
 	# bool mysql_ping ([ resource $link_identifier = NULL ] )
 	# bool mysqli_ping ( mysqli $link )
@@ -492,7 +492,7 @@ if (!extension_loaded('mysql')) {
 		# try to seek position
 		if (mysqli_data_seek($result, $row) === false) return false;
 
-		$row = mysqli_fetch_array($result); 
+		$row = mysqli_fetch_array($result);
 
 		if (!isset($row[$field])) return false;
 

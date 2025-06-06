@@ -19,11 +19,11 @@ var objname        = 'editor'; // name of this editor
 
 //  DOMViewerObj = config;
 //  DOMViewerName = 'config';
-//  window.open('/innerHTML/domviewer.htm');  
+//  window.open('/innerHTML/domviewer.htm');
 
 /* ---------------------------------------------------------------------- *\
-  Function    : 
-  Description : 
+  Function    :
+  Description :
 \* ---------------------------------------------------------------------- */
 
 function _CloseOnEsc() {
@@ -41,7 +41,7 @@ function _CloseOnEsc() {
 \* ---------------------------------------------------------------------- */
 
 function cloneObject(obj) {
-  var newObj          = new Object; 
+  var newObj          = new Object;
 
   // check for array objects
   if (obj.constructor.toString().indexOf('function Array(') == 1) {
@@ -53,7 +53,7 @@ function cloneObject(obj) {
     if (typeof node == 'object') { newObj[n] = cloneObject(node); }
     else                         { newObj[n] = node; }
   }
-  
+
   return newObj;
 }
 
@@ -89,7 +89,7 @@ function init() {
 
   // change image url to be relative to current path
   config.imgURL = "../images/";
-  
+
   // generate editor and resize it
   editor_generate('editor', config);
   resize_editor();

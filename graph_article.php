@@ -2,19 +2,19 @@
 /*
  * Factux le facturier libre
  * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
- * 
+ *
  * Licensed under the terms of the GNU  General Public License:
  * 		http://opensource.org/licenses/GPL-3.0
- * 
+ *
  * For further information visit:
  * 		http://factux.free.fr
- * 
+ *
  * File Name: fckconfig.js
  * 	Editor configuration settings.
- * 
+ *
  * * * Version:  5.0.0
  * * * * Modified: 07/10/2016
- * 
+ *
  * File Authors:
  * 		Guy Hendrickx
  *#included in & end of ca_articles.php
@@ -67,11 +67,11 @@ $ands .= ($mois_1==$lang_tous)?'':"$aw MONTH(date) = $mois_1";#si année entiere
        <th><?php echo "$lang_prix $lang_de_vente"; ?></th>
        <th> </th>
      </tr>
-<?php 
+<?php
 //pour le total
 $sql = "
 SELECT SUM(tot_art_htva)
-FROM " . $tblpref ."cont_bon 
+FROM " . $tblpref ."cont_bon
 LEFT JOIN " . $tblpref ."bon_comm on bon_num = num_bon
 $ands
 ";
@@ -81,7 +81,7 @@ $data = mysql_fetch_array($req);
 $total = $data['SUM(tot_art_htva)'];
 
 $sql = "
-SELECT " . $tblpref ."article.num, 
+SELECT " . $tblpref ."article.num,
 SUM(tot_art_htva) AS tot_art_htva,
 SUM(quanti) AS nombre,
 p_u_jour,
@@ -91,9 +91,9 @@ SUM((p_u_jour * quanti) - tot_art_htva) AS remise,
 date,
 article,
 uni
-FROM  " . $tblpref ."cont_bon 
-LEFT JOIN " . $tblpref ."bon_comm on bon_num = num_bon 
-LEFT JOIN " . $tblpref ."article on " . $tblpref ."article.num = article_num 
+FROM  " . $tblpref ."cont_bon
+LEFT JOIN " . $tblpref ."bon_comm on bon_num = num_bon
+LEFT JOIN " . $tblpref ."article on " . $tblpref ."article.num = article_num
 $ands
 GROUP BY article
 ORDER BY tot_art_htva DESC";
@@ -132,7 +132,7 @@ while ($data = mysql_fetch_array($req)){
     <td colspan="3" class='totalmontant'><?php echo $lang_total_h_tva; ?><br><?php echo "$lang_marge $lang_total_h_tva"; ?><br><?php echo "$lang_remise $lang_total_h_tva"; ?><br><?php echo "$lang_marge réele $lang_total_h_tva"; ?></td>
     <td colspan="4" class='totaltexte'><?php echo montant_financier($total); ?><br><?php echo montant_financier($marge); ?><br><?php echo montant_financier($remise); ?><br><?php echo montant_financier($margereele); ?></td>
    </tr>
-  </table> 
+  </table>
   </td>
  </tr>
  <tr>
@@ -145,7 +145,7 @@ while ($data = mysql_fetch_array($req)){
  <tr>
   <td>
 <?php
-$aide='stats'; 
+$aide='stats';
 include("help.php");
 include_once("include/bas.php");
 ?>

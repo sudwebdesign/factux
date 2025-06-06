@@ -1,20 +1,20 @@
-<?php 
+<?php
 /*
  * Factux le facturier libre
  * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
- * 
+ *
  * Licensed under the terms of the GNU  General Public License:
  * 		http://opensource.org/licenses/GPL-3.0
- * 
+ *
  * For further information visit:
  * 		http://factux.free.fr
- * 
+ *
  * File Name: fckconfig.js
  * 	Editor configuration settings.
- * 
+ *
  * * * Version:  5.0.0
  * * * * Modified: 07/10/2016
- * 
+ *
  * File Authors:
  * 		Guy Hendrickx
  *.
@@ -42,12 +42,12 @@ $admin=isset($_POST['admin'])?$_POST['admin']:""
 ;
 #evitelesdéconvenues 2015
 if($num_user == 1)
- $admin = 'y';#protection du 1er utilisateur (les champs sont tous a non) #wip in editer_utilisteur.php 
-if ($admin == 'y'){ 
+ $admin = 'y';#protection du 1er utilisateur (les champs sont tous a non) #wip in editer_utilisteur.php
+if ($admin == 'y'){
  $dev = "y";
  $com = "y";
  $fact = "y";
- $dep = "y"; 
+ $dep = "y";
  $stat = "y";
  $art = "y";
  $cli = "y";
@@ -68,41 +68,41 @@ if($pass != $pass2){
 $sql = "SELECT * FROM " . $tblpref ."user WHERE email = '".$mail."' AND num != '".$num_user."'";
 $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 $test = mysql_num_rows($req);
-if ($test > 0){ 
+if ($test > 0){
  $message = "<h1>$lang_mail_exist</h1>";
  include('edit_utilisateur.php');
  exit;
 }
 
-if ($pass != '') { 
+if ($pass != '') {
  $pass_crypt = md5($pass);
- $sql7 = "UPDATE " . $tblpref ."user 
- SET `pwd` = '".$pass_crypt."', 
- `nom` = '".$nom."', 
- `prenom` = '".$prenom."', 
- `email` = '".$mail."', 
- `dev` = '".$dev."', 
- `com` = '".$com."', 
- `fact` = '".$fact."', 
- `dep` = '".$dep."', 
- `stat` = '".$stat."', 
- `art` = '".$art."', 
- `cli` = '".$cli."', 
+ $sql7 = "UPDATE " . $tblpref ."user
+ SET `pwd` = '".$pass_crypt."',
+ `nom` = '".$nom."',
+ `prenom` = '".$prenom."',
+ `email` = '".$mail."',
+ `dev` = '".$dev."',
+ `com` = '".$com."',
+ `fact` = '".$fact."',
+ `dep` = '".$dep."',
+ `stat` = '".$stat."',
+ `art` = '".$art."',
+ `cli` = '".$cli."',
  `admin` = '".$admin."'
  WHERE `num` = '".$num_user."'";
 }
 if ($pass == '') {
- $sql7 = "UPDATE " . $tblpref ."user 
- SET `nom` = '".$nom."', 
- `prenom` = '".$prenom."', 
- `email` = '".$mail."', 
- `dev` = '".$dev."', 
- `com` = '".$com."', 
- `fact` = '".$fact."', 
- `dep` = '".$dep."', 
- `stat` = '".$stat."', 
- `art` = '".$art."', 
- `cli` = '".$cli."', 
+ $sql7 = "UPDATE " . $tblpref ."user
+ SET `nom` = '".$nom."',
+ `prenom` = '".$prenom."',
+ `email` = '".$mail."',
+ `dev` = '".$dev."',
+ `com` = '".$com."',
+ `fact` = '".$fact."',
+ `dep` = '".$dep."',
+ `stat` = '".$stat."',
+ `art` = '".$art."',
+ `cli` = '".$cli."',
  `admin` = '".$admin."'
  WHERE `num` = '".$num_user."'";
 }

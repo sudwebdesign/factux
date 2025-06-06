@@ -1,20 +1,20 @@
-<?php 
+<?php
 /*
  * Factux le facturier libre
  * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
- * 
+ *
  * Licensed under the terms of the GNU  General Public License:
  * 		http://opensource.org/licenses/GPL-3.0
- * 
+ *
  * For further information visit:
  * 		http://factux.free.fr
- * 
+ *
  * File Name: form_lot.php
  * 	Formulaire de creation des lots
- * 
+ *
  * * * Version:  5.0.0
  * * * * Modified: 07/10/2016
- * 
+ *
  * File Authors:
  * 		Guy Hendrickx
  *.
@@ -27,20 +27,20 @@ include_once("include/finhead.php");
   <td class="page" align="center">
 <?php
 include_once("include/head.php");
-if ($user_admin != 'y') { 
+if ($user_admin != 'y') {
  echo "<h1>$lang_admin_droit</h1>";
  include_once("include/bas.php");
  exit;
 }
-if (isset($message)&&$message!='') { 
- echo $message; 
+if (isset($message)&&$message!='') {
+ echo $message;
 }
 ?>
    <form action="admin_modif.php" method="post" name="formu2">
     <table class='page boiteaction'>
      <caption><?php echo $lang_modif_par; ?></caption>
-     <tr> 
-      <td class="td2"><?php echo $lang_use_cat; ?></td> 
+     <tr>
+      <td class="td2"><?php echo $lang_use_cat; ?></td>
       <td class="texte1">
         <select name="choix_use_cat">
           <option <?php if($use_categorie =='y'){echo"selected";}?> value="y"><?php echo $lang_oui; ?></option>
@@ -127,7 +127,7 @@ function montrer_cacher(laCase,value,leCalk,leCalk2){
       <td class="td2"><?php echo $lang_choix_theme; ?></td>
       <td class="texte1">
         <select name="choix_theme">
-<?php 
+<?php
 if ($handle = opendir('include/themes')){
  while (false !== ($file = readdir($handle))) {
   if ($file != "." && $file != ".." && is_dir("include/themes/$file")) {
@@ -141,7 +141,7 @@ if ($handle = opendir('include/themes')){
  }
  closedir($handle);
 }
-?> 
+?>
         </select>
       </td>
      </tr>

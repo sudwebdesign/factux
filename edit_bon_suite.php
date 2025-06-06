@@ -1,20 +1,20 @@
-<?php 
+<?php
 /*
  * Factux le facturier libre
  * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
- * 
+ *
  * Licensed under the terms of the GNU  General Public License:
  * 		http://opensource.org/licenses/GPL-3.0
- * 
+ *
  * For further information visit:
  * 		http://factux.free.fr
- * 
+ *
  * File Name: edit_bon_suite.php
- * 	
- * 
+ *
+ *
  * * * Version:  5.0.0
  * * * * Modified: 07/10/2016
- * 
+ *
  * File Authors:
  * 		Guy Hendrickx
  *.
@@ -31,7 +31,7 @@ $quanti=isset($_POST['quanti'])?$_POST['quanti']:"";
 $num_lot=isset($_POST['lot'])?$_POST['lot']:"";
 $remise=isset($_POST['remise'])?$_POST['remise']:"";
 if($article!=0&&$quanti!=''){
-    //on recupere le prix htva		
+    //on recupere le prix htva
     $sql2 = "SELECT prix_htva FROM " . $tblpref ."article WHERE num = $article";
     $result = mysql_query($sql2) or die('Erreur SQL !<br>'.$sql2.'<br>'.mysql_error());
     $prix_article = mysql_result($result, 0);
@@ -48,10 +48,10 @@ if($article!=0&&$quanti!=''){
     $total_htva = $prix_article * (1-($remise/100)) * $quanti;
     $mont_tva = $total_htva / 100 * $taux_tva ;
     //inserer les données dans la table du contenu des bons.
-    $sql1 = "INSERT INTO " . $tblpref ."cont_bon(p_u_jour, quanti, article_num, bon_num, tot_art_htva, to_tva_art, num_lot, remise, marge_jour) 
+    $sql1 = "INSERT INTO " . $tblpref ."cont_bon(p_u_jour, quanti, article_num, bon_num, tot_art_htva, to_tva_art, num_lot, remise, marge_jour)
              VALUES ('$prix_article', '$quanti', '$article', '$num_bon', '$total_htva', '$mont_tva', '$num_lot', '$remise', '$marge')";
     mysql_query($sql1) or die('Erreur SQL !<br>'.$sql1.'<br>'.mysql_error());
-    
+
     //on decremente le stock
     $sql12 = "UPDATE `" . $tblpref ."article` SET `stock` = (stock - $quanti) WHERE `num` = '$article'";
     mysql_query($sql12) or die('Erreur SQL !<br>'.$sql12.'<br>'.mysql_error());

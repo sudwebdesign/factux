@@ -1,20 +1,20 @@
-<?php 
+<?php
 /*
  * Factux le facturier libre
  * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
- * 
+ *
  * Licensed under the terms of the GNU  General Public License:
  *   http://opensource.org/licenses/GPL-3.0
- * 
+ *
  * For further information visit:
  *   http://factux.free.fr
- * 
+ *
  * File Name: bon.php
  *  Editor configuration settings.
- * 
+ *
  * * * Version:  5.0.1
  * * * * Modified: 10/06/2017
- * 
+ *
  * File Authors:
  *   Guy Hendrickx
  *.
@@ -56,7 +56,7 @@ $num_bon = mysql_insert_id();//le numero de bon créé
       </td>
 <?php if ($lot=='y') { ?>
        <td class="texte0"><?php echo $lang_lot; ?></td>
-<?php 
+<?php
 $rqSql = "SELECT num, prod FROM " . $tblpref ."lot WHERE actif != 'non' ORDER BY num";
 $result = mysql_query( $rqSql ) or die('Erreur SQL !<br>'.$rqSql.'<br>'.mysql_error());
 ?>
@@ -71,8 +71,8 @@ while ($row = mysql_fetch_array($result)) {
          <option value='<?php echo $num; ?>'><?php echo "$num $prod "; ?></option>
 <?php } ?>
        </select>
-       </td>  
-<?php } ?> 
+       </td>
+<?php } ?>
       </tr>
       <tr>
        <td class="texte0"><?php echo $lang_quanti; ?> </td>

@@ -2,19 +2,19 @@
 /*
  * Factux le facturier libre
  * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
- * 
+ *
  * Licensed under the terms of the GNU  General Public License:
  * 		http://opensource.org/licenses/GPL-3.0
- * 
+ *
  * For further information visit:
  * 		http://factux.free.fr
- * 
+ *
  * File Name: fckconfig.js
  * 	Editor configuration settings.
- * 
+ *
  * * * Version:  5.0.0
  * * * * Modified: 07/10/2016
- * 
+ *
  * File Authors:
  * 		Guy Hendrickx
  *.ATTENTION EN UTF-8 LE SIGLE EURO EST INCONNU, ENFIN SI :  C'EST CURIEUX
@@ -45,7 +45,7 @@ $six = '"'.$six.'";//Registre de commerce de l\'entreprise' . "\n";
 $sept = '"'.$sept.'";//adresse email' . "\n";
 $huit = '"'.$huit.'";//devise utilisée par Factux' . "\n";
 
-$monfichier = fopen("../include/config/var.php", "w+"); 
+$monfichier = fopen("../include/config/var.php", "w+");
 fwrite($monfichier, ''.$type.''.$com.'$entrep_nom= '.$zero.'$social= '.$un.'$tel_vend= '.$deux.'$tva_vend= '.$trois.'$compte= '.$quatre.'$slogan= '.$cinq.'$reg= '.$six.'$mail= '.$sept.'$devise= '.$huit);
 fclose($monfichier);
 ?><br><br>
@@ -58,7 +58,7 @@ fclose($monfichier);
      <h2>Si l'installeur de Factux doit la créer, <a href='db_create.php'>cliquez ici</a></h2>
      <hr>
    </center>
-<?php include_once("../include/bas_cli.php"); ?> 
+<?php include_once("../include/bas_cli.php"); ?>
   </td>
  </tr>
 </table>

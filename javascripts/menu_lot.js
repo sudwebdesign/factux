@@ -8,7 +8,7 @@ var vertical = false;
 /* TRES IMPORTANT !
 	Il faut mettre ici le nombre de menus, le script n'est pas capable de compter tout
 	seul ! :-p Donc si votre code va jusqu'à <p id="menu5"...> il faut mettre 5. */
-	
+
 var nbmenu = 9;
 
 
@@ -100,7 +100,7 @@ window.onscroll = function()
 				if (document.getElementById("ssmenu"+i))//undefined
 					document.getElementById("ssmenu"+i).style.top = document.body.scrollTop
 							+(((i-1)*(hauteur_menu+espace_entre_menus))+1+top_menu)+"px";
-					
+
 			}
 		}
 	}
@@ -139,12 +139,12 @@ function Chargement() {
 	if(blnOk)
 	{
 		trimespaces();
-		
+
 		with(document.body.style) {
 			if (!vertical) marginTop=marge_en_haut_de_page;
 			else		   marginLeft=marge_a_gauche_de_la_page;
 		}
-		
+
 		if (centrer_menu) {
 			if (!vertical) {
 				var largeur_totale = (largeur_menu * nbmenu) + (espace_entre_menus * (nbmenu-1));

@@ -2,19 +2,19 @@
 /*
  * Factux le facturier libre
  * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
- * 
+ *
  * Licensed under the terms of the GNU  General Public License:
  * 		http://opensource.org/licenses/GPL-3.0
- * 
+ *
  * For further information visit:
  * 		http://factux.free.fr
- * 
+ *
  * File Name: fckconfig.js
  * 	Editor configuration settings.
- * 
+ *
  * * * Version:  5.0.0
  * * * * Modified: 07/10/2016
- * 
+ *
  * File Authors:
  * 		Guy Hendrickx
  *.
@@ -57,22 +57,22 @@ if($nom=='' || $rue=='' || $ville=='' || $code_post=='' || $num_tva==''){
  exit;
 }
 
-if ($login !='') { 
+if ($login !='') {
  $sql = "SELECT * FROM " . $tblpref ."client WHERE login = '".$login."'";
  $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
  $test = mysql_num_rows($req);
- if ($test > 0) { 
+ if ($test > 0) {
   $message = "<h1>$lang_er_mo_pa</h1>";
   include('edit_client.php');
   exit;
  }
 }
 
-if ($mail_cli !='') { 
+if ($mail_cli !='') {
  $sql = "SELECT * FROM " . $tblpref ."client WHERE mail = '".$mail_cli."' AND num_client != '".$num."'";
  $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
  $test = mysql_num_rows($req);
- if ($test > 0){ 
+ if ($test > 0){
   $message = "<h1>$lang_mail_exist</h1>";
   include('edit_client.php');
   exit;
@@ -90,11 +90,11 @@ if($pass2 !='' and $login != ''){
 if($pass2 !='' and $login2 != ''){
  $sql2 = "UPDATE " . $tblpref ."client SET login='" . $login2 . "', pass='" . $pass . "' WHERE num_client = '" . $num . "'";
  mysql_query($sql2) OR die("<p>Erreur Mysql<br/>$sql2<br/>".mysql_error()."</p>");
- 
+
  $to = "$mail_cli";
  $from = "$mail_admin" ;
  $subject = "$lang_pass_modif" ;
- $mess =  "$lang_mail_li_up1 $login2 Mot de passe: $pass2</b><br>$lang_mail_cli_up<br> "; 
+ $mess =  "$lang_mail_li_up1 $login2 Mot de passe: $pass2</b><br>$lang_mail_cli_up<br> ";
  if(courriel($to,$subject,$mess,$from,$logo))#if(mail($to,$subject,$message_mail,$header))
   $message = "<h2>$lang_notif_env $mail_cli</h2>";
  else

@@ -23,7 +23,7 @@ La documentation de Factux se trouve dans le dossier /doc et aussi sur le [site 
 2. Base de données MariaDB/MySQL
 3. Serveur web Linux / Windows (Apache de préférence)
 
-## Instructions d'installation 
+## Instructions d'installation
 1. Téléverser tout les fichiers se trouvant dans le dossier 'factux' dans votre serveur web.
 2. S'assurerr que les dossiers suivant soit autorisés en écriture (0755 or 0777)
    - /
@@ -45,7 +45,7 @@ Maybe ready for all country with tax (or not) and money symbol (Exemple French T
 
 
 # English
-Factux is a web-apps self-hosted open source solution built with PHP for managing your epxpendures, estimates, order, invoices, clients and payments. 
+Factux is a web-apps self-hosted open source solution built with PHP for managing your epxpendures, estimates, order, invoices, clients and payments.
 
 ## Requirements
 1. PHP 5.1.6 and above (php 7 ready)

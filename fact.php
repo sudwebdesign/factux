@@ -1,20 +1,20 @@
-<?php 
+<?php
 /*
  * Factux le facturier libre
  * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
- * 
+ *
  * Licensed under the terms of the GNU  General Public License:
  * 		http://opensource.org/licenses/GPL-3.0
- * 
+ *
  * For further information visit:
  * 		http://factux.free.fr
- * 
+ *
  * File Name: fact.php
  * 	enregistrement de données de la facture
- * 
+ *
  * * * Version:  5.0.1
  * * * * Modified: 10/06/2017
- * 
+ *
  * File Authors:
  * 		Guy Hendrickx
  *.
@@ -59,10 +59,10 @@ while($data = mysql_fetch_array($req)){
 }
 
 $sql = "
-SELECT * FROM " . $tblpref ."bon_comm 
-WHERE client_num = '".$client."' 
-AND " . $tblpref ."bon_comm.date >= '".$debut."' 
-AND " . $tblpref ."bon_comm.date <= '".$fin."' 
+SELECT * FROM " . $tblpref ."bon_comm
+WHERE client_num = '".$client."'
+AND " . $tblpref ."bon_comm.date >= '".$debut."'
+AND " . $tblpref ."bon_comm.date <= '".$fin."'
 AND fact != '0'";#AND fact = 'ok'
 
 $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
@@ -76,10 +76,10 @@ if(isset($fact)&&$fact!='0'){#$fact=='ok'
  exit;
 }
 $sql = "
-SELECT SUM(tot_htva), SUM(tot_tva) 
-FROM " . $tblpref ."bon_comm 
-WHERE " . $tblpref ."bon_comm.client_num = '".$client."' 
-AND " . $tblpref ."bon_comm.date >= '".$debut."' 
+SELECT SUM(tot_htva), SUM(tot_tva)
+FROM " . $tblpref ."bon_comm
+WHERE " . $tblpref ."bon_comm.client_num = '".$client."'
+AND " . $tblpref ."bon_comm.date >= '".$debut."'
 AND " . $tblpref ."bon_comm.date <= '".$fin."'
 ";
 
@@ -97,10 +97,10 @@ if($total_htva==''){
 
 //nouvelle methode
 $sql = "
-SELECT num_bon 
-FROM " . $tblpref ."bon_comm 
-WHERE " . $tblpref ."bon_comm.client_num = '".$client."' 
-AND " . $tblpref ."bon_comm.date >= '".$debut."' 
+SELECT num_bon
+FROM " . $tblpref ."bon_comm
+WHERE " . $tblpref ."bon_comm.client_num = '".$client."'
+AND " . $tblpref ."bon_comm.date >= '".$debut."'
 AND " . $tblpref ."bon_comm.date <= '".$fin."'
 ";
 
@@ -116,11 +116,11 @@ for($m=1; $m<count($list_num); $m++){
 
 //On afiche le resultat
 $sql9 = "
-SELECT date, quanti, article, remise, p_u_jour, marge_jour, tot_art_htva, to_tva_art, taux_tva, uni, num_bon 
-FROM " . $tblpref ."client 
-LEFT JOIN " . $tblpref ."bon_comm on " . $tblpref ."client.num_client = " . $tblpref ."bon_comm.client_num 
-LEFT join " . $tblpref ."cont_bon on " . $tblpref ."bon_comm.num_bon = " . $tblpref ."cont_bon.bon_num  
-LEFT JOIN  " . $tblpref ."article on " . $tblpref ."article.num = " . $tblpref ."cont_bon.article_num 
+SELECT date, quanti, article, remise, p_u_jour, marge_jour, tot_art_htva, to_tva_art, taux_tva, uni, num_bon
+FROM " . $tblpref ."client
+LEFT JOIN " . $tblpref ."bon_comm on " . $tblpref ."client.num_client = " . $tblpref ."bon_comm.client_num
+LEFT join " . $tblpref ."cont_bon on " . $tblpref ."bon_comm.num_bon = " . $tblpref ."cont_bon.bon_num
+LEFT JOIN  " . $tblpref ."article on " . $tblpref ."article.num = " . $tblpref ."cont_bon.article_num
 WHERE " . $tblpref ."client.num_client = '".$client."'
 ";
 $sql9="$sql9 $suite_sql";
@@ -137,10 +137,10 @@ if (!isset($_POST['simuler'])){
  $num_fact = mysql_insert_id();//le numero de la facture créée
 
  $sql2 = "
- UPDATE " . $tblpref ."bon_comm 
- SET fact = '$num_fact' 
- WHERE " . $tblpref ."bon_comm.client_num = '".$client."' 
- AND " . $tblpref ."bon_comm.date >= '".$debut."' 
+ UPDATE " . $tblpref ."bon_comm
+ SET fact = '$num_fact'
+ WHERE " . $tblpref ."bon_comm.client_num = '".$client."'
+ AND " . $tblpref ."bon_comm.date >= '".$debut."'
  AND " . $tblpref ."bon_comm.date <= '".$fin."'
  ";
  mysql_query($sql2) or die('Erreur SQL2 !<br>'.$sql2.'<br>'.mysql_error());
@@ -161,7 +161,7 @@ if (!isset($_POST['simuler'])){
      <th><?php echo $lang_num_bon; ?></th>
      <th><?php echo $lang_date_bon; ?></th>
     </tr>
-<?php 
+<?php
 
 $total_marge_htva = 0;
 $total_remise_htva = 0;

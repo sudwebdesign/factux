@@ -1,20 +1,20 @@
-<?php 
+<?php
 /*
  * Factux le facturier libre
  * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
- * 
+ *
  * Licensed under the terms of the GNU  General Public License:
  * 		http://opensource.org/licenses/GPL-3.0
- * 
+ *
  * For further information visit:
  * 		http://factux.free.fr
- * 
+ *
  * File Name: fckconfig.js
  * 	Editor configuration settings.
- * 
+ *
  * * * Version:  5.0.0
  * * * * Modified: 07/10/2016
- * 
+ *
  * File Authors:
  * 		Guy Hendrickx
  *.
@@ -64,7 +64,7 @@ while($data = mysql_fetch_array($req)){
 }
 $from = "$mail" ;
 $subject = "$lang_dif_mail_mdp" ;
-$message =  "Cher client<br>$lang_mdp_jour<br><b>Login: $login $lang_mai_cr_pa $pass_new2</b><br>$lang_mai_cre_enc<br> "; 
+$message =  "Cher client<br>$lang_mdp_jour<br><b>Login: $login $lang_mai_cr_pa $pass_new2</b><br>$lang_mai_cre_enc<br> ";
 $header = 'From: '.$from."\n"
  .'MIME-Version: 1.0'."\n"
  .'Content-Type: text/html; charset= ISO-8859-1'."\n"

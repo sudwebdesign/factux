@@ -2,19 +2,19 @@
 /*
  * Factux le facturier libre
  * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
- * 
+ *
  * Licensed under the terms of the GNU  General Public License:
  * 		http://opensource.org/licenses/GPL-3.0
- * 
+ *
  * For further information visit:
  * 		http://factux.free.fr
- * 
+ *
  * File Name: fckconfig.js
  * 	Editor configuration settings.
- * 
+ *
  * * * Version:  5.0.0
  * * * * Modified: 07/10/2016
- * 
+ *
  * File Authors:
  * 		Guy Hendrickx
  *.
@@ -38,7 +38,7 @@ $req = mysql_query($sql);
 ?>
 <table class="page boiteaction">
  <caption><?php echo $lang_factures; ?></caption>
-  <tr> 
+  <tr>
    <th><?php echo $lang_numero; ?></th>
    <th><?php echo $lang_date; ?></th>
    <th><?php echo $lang_tot_ttc; ?></th>
@@ -64,12 +64,12 @@ while($data = mysql_fetch_array($req)){
   case "non":$pay=$lang_non_pay;break;
  }
 ?>
- <tr> 
+ <tr>
   <td class='<?php echo couleur_alternee (); ?>'><?php echo $num; ?></td>
   <td class='<?php echo couleur_alternee (FALSE, "c texte"); ?>'><?php echo $date_fact; ?></td>
   <td class='<?php echo couleur_alternee (FALSE, "nombre"); ?>'><?php echo montant_financier($total); ?></td>
   <td class='<?php echo couleur_alternee (FALSE, "c texte"); ?>'><?php echo $pay; ?></td>
-  <td class='<?php echo couleur_alternee (FALSE, "c texte"); ?>'> 
+  <td class='<?php echo couleur_alternee (FALSE, "c texte"); ?>'>
   <form action="../fpdf/fact_pdf.php" method="post" target="_blank">
     <input type="hidden" name="client" value="<?php echo $num_client; ?>" />
     <input type="hidden" name="debut" value="<?php echo $debut2; ?>" />

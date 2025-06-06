@@ -78,7 +78,7 @@ TableOperations.I18N = {
 	"The right-hand side only":			  "Doar partea din dreapta",
 	"The top and bottom sides only":		  "Partea de sus si cea de jos",
 	"The top side only":				  "Doar partea de sus",
-	"Top":                                            "Sus",	
+	"Top":                                            "Sus",
 	"Unset color":                                    "Dezactivează culoarea",
 	"Vertical align":                                 "Aliniere pe verticală",
 	"Width":					  "Lăţime",

@@ -1,20 +1,20 @@
-<?php 
+<?php
 /*
  * Factux le facturier libre
  * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
- * 
+ *
  * Licensed under the terms of the GNU  General Public License:
  * 		http://opensource.org/licenses/GPL-3.0
- * 
+ *
  * For further information visit:
  * 		http://factux.free.fr
- * 
+ *
  * File Name: mailing.php
  * 	formulaire de la mailing list
- * 
+ *
  * * * Version:  5.0.0
  * * * * Modified: 07/10/2016
- * 
+ *
  * File Authors:
  * 		Guy Hendrickx
  *.
@@ -52,7 +52,7 @@ function initEditor() {
 
   // BEGIN: code that adds a custom button
   // uncomment it to test
-  var cfg = editor.config; 
+  var cfg = editor.config;
 	function clickHandler(editor, buttonId) {
   switch (buttonId) {
     case "my-toc":
@@ -120,10 +120,10 @@ function highlight() {
 <td class="page" align="center">
 <?php
 include_once("include/head.php");
-if (isset($message)&&$message!='') { 
+if (isset($message)&&$message!='') {
  echo $message; $message='';
 }
-if ($user_admin != 'y') { 
+if ($user_admin != 'y') {
  echo "<h1>$lang_admin_droit";
  include_once("include/bas.php");
  exit;
@@ -139,7 +139,7 @@ if ($user_admin != 'y') {
 	  <td class="texte0"><input type="text" name="titre"></tr>
     <tr>
       <td class="texte0"><?php echo  "$lang_mailing_list_message"; ?></td>
-	  <td class="texte0">	 
+	  <td class="texte0">
 		<textarea id="ta" name="message" style="width:100%" rows="20" cols="80"></textarea>
 		</td>
 	  </tr>

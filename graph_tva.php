@@ -2,19 +2,19 @@
 /*
  * Factux le facturier libre
  * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
- * 
+ *
  * Licensed under the terms of the GNU  General Public License:
  * 		http://opensource.org/licenses/GPL-3.0
- * 
+ *
  * For further information visit:
  * 		http://factux.free.fr
- * 
+ *
  * File Name: graph_tva.php
  * 	statisqiques annuelles decrtiquées par mois
- * 
+ *
  * * * Version:  5.0.0
  * * * * Modified: 07/10/2016
- * 
+ *
  * File Authors:
  * 		Guy Hendrickx
  *.
@@ -44,7 +44,7 @@ if ($user_stat== 'n'){
      <option value="<?php echo$i; ?>"<?php echo ($i==$annee_1)?' selected="selected"':''; ?>><?php echo $i; ?></option>
 <?php } ?>
     </select>
-     <input type="submit" value="<?php echo $lang_envoyer; ?>" /><input alt="<?php echo $lang_au_reel; ?>" type="checkbox" name="fact"<?php echo ($fact)?' checked="checked"':''; ?> /> 
+     <input type="submit" value="<?php echo $lang_envoyer; ?>" /><input alt="<?php echo $lang_au_reel; ?>" type="checkbox" name="fact"<?php echo ($fact)?' checked="checked"':''; ?> />
    </form>
   </td>
  </tr>
@@ -104,7 +104,7 @@ while ($data = mysql_fetch_array($req)){
 
 /*//Avoirs OK 3.04
 $sqlAv = "
-SELECT  MONTH(date_avoir) numero_mois, SUM(total_avoir_ht) htva, SUM(total_avoir_tva) tva, " . $tblpref ."client.num_tva 
+SELECT  MONTH(date_avoir) numero_mois, SUM(total_avoir_ht) htva, SUM(total_avoir_tva) tva, " . $tblpref ."client.num_tva
 FROM " . $tblpref ."avoir
 LEFT JOIN " . $tblpref ."client ON " . $tblpref ."client.num_client = " . $tblpref ."avoir.num_client
 ".(($annee_1!=$lang_toutes)?"WHERE YEAR(date_avoir) = $annee_1":"")."

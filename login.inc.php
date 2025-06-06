@@ -1,26 +1,26 @@
-<?php 
+<?php
 /*
  * Factux le facturier libre
  * Copyright (C) 2003-2004 Hendrickx
- * 
+ *
  * Licensed under the terms of the GNU  General Public License:
  * 		http://opensource.org/licenses/GPL-3.0
- * 
+ *
  * For further information visit:
  * 		http://factux.free.fr
- * 
+ *
  * File Name: login.php.inc
  * 	Editor configuration settings.
- * 
+ *
  * * * Version:  5.0.0
  * Modified: 07/10/2016
- * 
+ *
  * File Authors:
  * 		Hendrickx Guy
  *.
  */
 include_once("include/config/common.php");
-include_once("include/config/var.php"); 
+include_once("include/config/var.php");
 $lang=isset($_POST['lang'])?$_POST['lang']:"";
 $lang=(empty($lang))?$default_lang:$lang;#default_lg in common
 include_once("include/language/$lang.php");
@@ -44,7 +44,7 @@ else
 <?php
 if (isset($message)&&$message!='') {
  $message = ($message=="i")?"<h1>$lang_interdit</h1>":$message;
- echo "<div>$message</div>\n"; 
+ echo "<div>$message</div>\n";
 }
 ?>
  <p><?php echo $lang_factux; ?></p>
@@ -64,7 +64,7 @@ if (isset($message)&&$message!='') {
     <td class="boiteaction"><?php echo $lang_mai_cr_pa ?></td>
     <td class="boiteaction"><input type="password" name="pass" maxlength="30"></td>
    </tr>
-   <tr> 
+   <tr>
     <td class="boiteaction">Langue</td>
     <td class="boiteaction">
      <select name="lang">
@@ -83,7 +83,7 @@ if (isset($message)&&$message!='') {
       <option value="el">Ελληνικά (baby)</option>
       <option value="el.m">Ελληνικά (bing)</option>
      </select>
-    </td> 
+    </td>
    </tr>
    <tr>
     <td class="boiteaction"><a href="<?php echo @$now; ?>client/index.php"><?php echo $lang_en_cli; ?></a></td>

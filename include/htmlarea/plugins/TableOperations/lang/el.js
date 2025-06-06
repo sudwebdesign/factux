@@ -69,7 +69,7 @@ TableOperations.I18N = {
 	"The right-hand side only":			  "Η δεξιά πλευρά μόνο",
 	"The top and bottom sides only":		  "Οι πάνω και κάτω πλευρές μόνο",
 	"The top side only":				  "Η πάνω πλευρά μόνο",
-	"Top":                                            "Πάνω",	
+	"Top":                                            "Πάνω",
 	"Unset color":                                    "Αναίρεση χρώματος",
 	"Vertical align":                                 "Κατακόρυφη στοίχηση",
 	"Width":					  "Πλάτος",

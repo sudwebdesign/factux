@@ -2,18 +2,18 @@
 /*
  * Factux le facturier libre
  * Copyright (C) 2015 Thomas Ingles
- * 
+ *
  * Licensed under the terms of the GNU  General Public License:
  * 		http://opensource.org/licenses/GPL-3.0
- * 
+ *
  * For further information visit:
  * 		http://factux.free.fr
- * 
+ *
  * File Name: pop.marge.php
- * 
+ *
  * * Version:  5.0.0
  * * * Modified: 07/10/2016
- * 
+ *
  * File Authors:
  *  Thomas Ingles
  *.
@@ -27,7 +27,7 @@
  * toujours mieux de personnaliser un peu le truc)
  */
 ini_set('session.save_path', '../include/session');
-session_cache_limiter('private'); 
+session_cache_limiter('private');
 session_start();
 
 $frm = $_GET["frm"];
@@ -225,7 +225,7 @@ i{cursor:pointer;}
      <br />    <br />
      <br />
      <p>
-     Le coef de <i onClick="margenue('nue',600,1);" title="Voir marge nue">marge</i> est utilisé afin de<br /> 
+     Le coef de <i onClick="margenue('nue',600,1);" title="Voir marge nue">marge</i> est utilisé afin de<br />
      récupérer la TVA déboursé a l'achat du/des produit/s.<br />
      Pour ainsi l'inclure dans le prix de vente<br />Toutes TAXEs Comprises des acheteurs finaux.<br />
      D'ailleur voici la formule pour trouver le coef de <i onClick="margenue('sex',600,1);" title="Voir marge sexy">marge</i> courrament usité :
@@ -295,7 +295,7 @@ var prix_vente_ttc2 = prix_achat.value * coefttc;
   var prixvente = window.opener.document.<?php echo $frm ?>.elements['prixvente'];
   var tauxmarge = window.opener.document.<?php echo $frm ?>.elements['tauxmarge'];
   var prix = window.opener.document.<?php echo $frm; ?>.elements['prix'];
-  //Écrire les nouvelles valeurs 
+  //Écrire les nouvelles valeurs
   <?php echo $champ; ?>.value = val;
   prixvente.value = '<?php echo $prix_vente_ht.$devise; ?>';
   tauxmarge.value = '<?php echo  $tauxmarge; ?>%';
@@ -310,7 +310,7 @@ var prix_vente_ttc2 = prix_achat.value * coefttc;
    prixvente.type = "text";
    tauxmarge.type = "text";
   }
-<?php if ($frm=="newart"){?> 
+<?php if ($frm=="newart"){?>
   window.opener.document.<?php echo $frm; ?>.elements['taux_tva'].value = document.egram.elements['tv'].value;
 <?php } ?>
 /* \/1 4 memory only

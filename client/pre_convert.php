@@ -1,20 +1,20 @@
-<?php 
+<?php
 /*
  * Factux le facturier libre
  * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
- * 
+ *
  * Licensed under the terms of the GNU  General Public License:
  * 		http://opensource.org/licenses/GPL-3.0
- * 
+ *
  * For further information visit:
  * 		http://factux.free.fr
- * 
+ *
  * File Name: fckconfig.js
  * 	Editor configuration settings.
- * 
+ *
  * * * Version:  5.0.0
  * * * * Modified: 07/10/2016
- * 
+ *
  * File Authors:
  * 		Guy Hendrickx
  *.
@@ -30,7 +30,7 @@ include_once("../include/finhead.php");
 
 $num_dev=isset($_GET['num_dev'])?$_GET['num_dev']:"";
 $login=isset($_GET['login'])?$_GET['login']:"";
-?> 
+?>
 <table width="760" border="0" class="page" align="center">
  <tr>
   <td class="page" align="center">
@@ -49,16 +49,16 @@ $login=isset($_GET['login'])?$_GET['login']:"";
     </tr>
 <?php
 $sql2 = "
-SELECT " . $tblpref ."cont_dev.num, uni, quanti, article, tot_art_htva 
-FROM " . $tblpref ."cont_dev 
-LEFT JOIN " . $tblpref ."article on " . $tblpref ."cont_dev.article_num = " . $tblpref ."article.num 
+SELECT " . $tblpref ."cont_dev.num, uni, quanti, article, tot_art_htva
+FROM " . $tblpref ."cont_dev
+LEFT JOIN " . $tblpref ."article on " . $tblpref ."cont_dev.article_num = " . $tblpref ."article.num
 WHERE  dev_num = \"$num_dev\"";
 $req = mysql_query($sql2) or die('Erreur SQL2 !<br>'.$sql2.'<br>'.mysql_error());
 while($data = mysql_fetch_array($req)){
     $num_cont = $data['num'];
 ?>
     <tr>
-     <td class ='<?php echo couleur_alternee (TRUE, "nombre"); ?>'><?php echo $data['quanti']; ?> 
+     <td class ='<?php echo couleur_alternee (TRUE, "nombre"); ?>'><?php echo $data['quanti']; ?>
      <td class ='<?php echo couleur_alternee (FALSE); ?>'><?php echo $data['uni'];  ?>
      <td class ='<?php echo couleur_alternee (FALSE); ?>'><?php echo $data['article']; ?>
      <td class ='<?php echo couleur_alternee (FALSE, "nombre"); ?>'><?php echo "$data[tot_art_htva] $devise" ?>
@@ -75,7 +75,7 @@ $sql = " SELECT SUM(to_tva_art) FROM " . $tblpref ."cont_dev WHERE dev_num = \"$
 $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 while($data = mysql_fetch_array($req)){
     $total_tva = $data['SUM(to_tva_art)'];
-}?>    
+}?>
    <tr>
     <td class='totalmontant' colspan='3'><?php echo $lang_total_htva; ?><br><?php echo $lang_tot_tva; ?><br><?php echo $lang_tot_ttc; ?></td>
     <td class='totalmontant'><?php echo montant_financier($total_bon); ?><br><?php echo montant_financier($total_tva); ?><br><?php echo montant_financier($total_bon+$total_tva); ?></td>

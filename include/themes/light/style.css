@@ -8,38 +8,38 @@ img{
 border: none;
 margin: 0;
 border-radius: 9px;
-}		
-	
-.input{ 
-background-color: #ffefd5 ; 
-font-family: arial, helvetica, sans-serif ; 
+}
+
+.input{
+background-color: #ffefd5 ;
+font-family: arial, helvetica, sans-serif ;
 color: red ;
 }
 
-option{ 
+option{
 background-color: #ffefd5 ;
 cursor: pointer;
- 
+
 }
 submit{
-background-color: transparent; 
+background-color: transparent;
 }
-select{ 
+select{
 background-color: #fff; /*#ffefd5*/
 }
 
-.textarea{ 
-background-color: #ffefd5 ; 
-color: red ; 
+.textarea{
+background-color: #ffefd5 ;
+color: red ;
 }
 
 td > a > img, input[type="image"]{
  border-radius: 9px;
 }
 
-.left50{float:left;width:50%;} 
+.left50{float:left;width:50%;}
 
- 
+
 .libelle {
 	background-color: #CAE3FF;
 	text-align: left;
@@ -70,9 +70,9 @@ td {
  border-radius: 9px;
 }
 td.highlight {
-	
+
 	color:#000000;
-	text-align: left;	
+	text-align: left;
 }
 /*//#efefef;*/
 
@@ -88,7 +88,7 @@ border-spacing: 0px ;
 border:thin solid #BBBBBB;
 text-align:center;
 }
-	
+
 h1 {
 font-family:arial, sans-serif;
 font-size:small;
@@ -182,7 +182,7 @@ border-color:black;
 border-style:solid;
 border-width:0px;
 text-align:left;
-border-spacing: 1px 
+border-spacing: 1px
 }
 
 tr {
@@ -192,7 +192,7 @@ tr {
 	vertical-align: middle;
 	border: 0px;
 	background-color:rgba(207,207,207,0.207);/*#ffffee;*/
-	
+
 }
 tr.highlight{
 font-family:verdana, sans-serif;
@@ -201,12 +201,12 @@ font-family:verdana, sans-serif;
 	border: 0px ;
  background-color: rgba(207,207,207,0.41);/*#cfcfcf;*//*background-color: rgba(255,255,255,0.27);#bfbfbf;*/
 	border-radius: 9px;
-	
+
 }
 .rien {
-border-style:solid; 
-border-width:0px; 
-border-color:black; 
+border-style:solid;
+border-width:0px;
+border-color:black;
 background-color:transparent;
 }
 rien.rien2 {
@@ -263,7 +263,7 @@ background-color:transparent;
 	width:100%;/*ba*/
 	text-align:center;
 	border:1px;
-	
+
 
 }
 
@@ -379,11 +379,11 @@ font-size:small;
 	font-weight: bold;
 text-align:right;
 	background-color:rgba(252,252,252,0.41);/*#DDDDDD;*/
-}	
+}
 .boiteaction td, form, input {
  /*padding: 0;*/
  margin: 0;
-} 
+}
 /***** menu CSS *****/
 @media print {
 /*A l'impression on cache le menu, marche au moins pour IE, Moz et Opéra.*/
@@ -410,7 +410,7 @@ margin aussi */
 	text-align:center;
 	background:#b62819;
 	border-color:rgba(207,207,207,0.207);/*#ffffee;*/
-	
+
 }
 .ssmenu {
 	background:#b62819;
@@ -461,7 +461,7 @@ margin aussi */
 	}
 
 
-	
+
 /*
 Bref... pour résumer, ce qu'il y a à modifier à la base, c'est :
 - couleurs, police, bordure et largeur des menu et ssmenu.

@@ -43,7 +43,7 @@ HTMLArea.I18N = {
 		lefttoright:          "Fra venstre mot høyre",
 		righttoleft:          "Fra høyre mot venstre"
 	},
-    
+
 	buttons: {
 		"ok":           "OK",
 		"cancel":       "Avbryt"
@@ -54,8 +54,8 @@ HTMLArea.I18N = {
 		"TEXT_MODE":    "Du er i tekstmodus  Klikk på [<>] for å gå tilbake til WYSIWIG.",
                 "IE-sucks-full-screen" :
 		// translate here
-                "Visning i eget vindu har kjente problemer med Internet Explorer, " + 
-                "på grunn av problemer med denne nettleseren. Mulige problemer er et uryddig " + 
+                "Visning i eget vindu har kjente problemer med Internet Explorer, " +
+                "på grunn av problemer med denne nettleseren. Mulige problemer er et uryddig " +
                 "skjermbilde, manglende editorfunksjoner og/eller at nettleseren crasher. Hvis du bruker Windows 95 eller Windows 98 " +
                 "er det også muligheter for at Windows will crashe.\n\n" +
                 "Trykk 'OK' hvis du vil bruke visning i eget vindu på tross av denne advarselen."

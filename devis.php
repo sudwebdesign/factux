@@ -1,20 +1,20 @@
-<?php 
+<?php
 /*
  * Factux le facturier libre
  * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
- * 
+ *
  * Licensed under the terms of the GNU  General Public License:
  *     http://opensource.org/licenses/GPL-3.0
- * 
+ *
  * For further information visit:
  *     http://factux.free.fr
- * 
+ *
  * File Name: fckconfig.js
  *   Editor configuration settings.
- * 
+ *
  * * * * Version:  5.0.1
  * * * * Modified: 10/06/2017
- * 
+ *
  * File Authors:
  *     Guy Hendrickx
  *.
@@ -52,13 +52,13 @@ $num_dev = mysql_insert_id();//le numero du devis créé
    <center>
     <table class="page boiteaction">
       <caption><?php echo "$lang_donne_devis $lang_numero $num_dev $lang_de $nom"; ?></caption>
-      <tr> 
+      <tr>
        <td class="texte0"><?php echo $lang_article; ?></td>
        <td class="texte0">
 <?php include("include/article_choix.php"); ?>
        </td>
       </tr>
-      <tr> 
+      <tr>
        <td class="texte0"><?php echo $lang_quanti; ?></td>
        <td class="texte0"><input name='quanti' type='text' id='quanti' size='6'></td>
       </tr>
@@ -66,7 +66,7 @@ $num_dev = mysql_insert_id();//le numero du devis créé
        <td class="texte0"><?php echo $lang_remise; ?></td>
        <td class="texte0"><input name="remise" type="text" id="remise" size="6">%</td>
       </tr>
-      <tr> 
+      <tr>
        <td class="submit" colspan="2"><input type="submit" name="Submit" value='<?php echo $lang_valid; ?>'></td>
       </tr>
      </table>

@@ -1,20 +1,20 @@
-<?php 
+<?php
 /*
  * Factux le facturier libre
  * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
- * 
+ *
  * Licensed under the terms of the GNU  General Public License:
  * 		http://opensource.org/licenses/GPL-3.0
- * 
+ *
  * For further information visit:
  * 		http://factux.free.fr
- * 
+ *
  * File Name: fckconfig.js
  * 	Editor configuration settings.
- * 
+ *
  * * * Version:  5.0.0
  * * * * Modified: 07/10/2016
- * 
+ *
  * File Authors:
  * 		Guy Hendrickx
  *.
@@ -30,15 +30,15 @@ $email =isset($_GET['mail'])?$_GET['mail']:"";
   <td class="page" align="center">
 <?php
 include_once("include/head.php");
-if ($type == 'comm') { 
+if ($type == 'comm') {
 $titre = $lang_notifi_titre_bon;
 $message = $lang_notifi_message_bon;
 }
-if ($type == 'fact') { 
-$titre = $lang_notifi_titre_fact;  
+if ($type == 'fact') {
+$titre = $lang_notifi_titre_fact;
 $message = $lang_notifi_message_fact;
 }
-if ($type == 'devis') { 
+if ($type == 'devis') {
 $titre = $lang_notifi_titre_dev;
 $message = $lang_notifi_message_dev;
 }
@@ -59,9 +59,9 @@ else
 if ($type == 'comm') {
 include_once("lister_commandes.php");
 }
-if ($type == 'fact') { 
+if ($type == 'fact') {
 include_once("lister_factures.php");
 }
-if ($type == 'devis') { 
+if ($type == 'devis') {
 include_once("lister_devis.php");
 }

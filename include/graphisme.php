@@ -2,19 +2,19 @@
 /*
  * Factux le facturier libre
  * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
- * 
+ *
  * Licensed under the terms of the GNU  General Public License:
  * 		http://opensource.org/licenses/GPL-3.0
- * 
+ *
  * For further information visit:
  * 		http://factux.free.fr
- * 
+ *
  * File Name: fckconfig.js
  * 	Editor configuration settings.
- * 
+ *
  * * Version:  5.0.0
  * * * Modified: 07/10/2016
- * 
+ *
  * File Authors:
  * 		Guy Hendrickx
  *.
@@ -32,14 +32,14 @@ function stat_baton_horizontal($valeur,$largeur = 3, $image = "image/barre.jpg",
   return '<img src="'.$image.'" width="'.$barre.'" height="10" alt="barre"><font size='.$font.'>'. $valeur.'</font>';
 }
 
-function parseCSS($filename){ 
- $fp=fopen($filename, "r"); 
-  $css = fread($fp, filesize ($filename)); 
-  fclose($fp); 
-  
-  $css=preg_replace("/[\s, ]+/", "", $css); 
-  $css_class = preg_split("/}/", $css); 
-  
+function parseCSS($filename){
+ $fp=fopen($filename, "r");
+  $css = fread($fp, filesize ($filename));
+  fclose($fp);
+
+  $css=preg_replace("/[\s, ]+/", "", $css);
+  $css_class = preg_split("/}/", $css);
+
   foreach($css_class as $key => $val){
    $aCSSObj=preg_split("/{/", $val);
    $a=preg_split("/;/", $aCSSObj[1]);
@@ -52,14 +52,14 @@ function parseCSS($filename){
    $aCSS[$aCSSObj[0]]=$aCSSItem;
    unset($aCSSItem);
   }
-  
-  unset($css); 
-  unset($css_class); 
-  unset($aCSSSub); 
-  unset($aCSSItem); 
-  unset($aCSSObj); 
-  
-  return $aCSS; 
-  
+
+  unset($css);
+  unset($css_class);
+  unset($aCSSSub);
+  unset($aCSSItem);
+  unset($aCSSObj);
+
+  return $aCSS;
+
 }
 ?>

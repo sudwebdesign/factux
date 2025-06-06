@@ -1,20 +1,20 @@
-<?php 
+<?php
 /*
  * Factux le facturier libre
  * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
- * 
+ *
  * Licensed under the terms of the GNU  General Public License:
  * 		http://opensource.org/licenses/GPL-3.0
- * 
+ *
  * For further information visit:
  * 		http://factux.free.fr
- * 
+ *
  * File Name: edit_art.php
  * 	Permet de modifier certains parametres des articles.
- * 
+ *
  * * * Version:  5.0.0
  * * * * Modified: 07/10/2016
- * 
+ *
  * File Authors:
  * 		Guy Hendrickx
  *.
@@ -25,7 +25,7 @@ $article=isset($_GET['article'])?$_GET['article']:"";
 $sql = "
 SELECT " . $tblpref ."article.num,
 article,prix_htva,taux_tva,commentaire,marge,uni,stock,stomin,stomax,categorie,id_cat,SUM(quanti)
-FROM " . $tblpref ."article 
+FROM " . $tblpref ."article
 LEFT JOIN " . $tblpref ."categorie on " . $tblpref ."article.cat = " . $tblpref ."categorie.id_cat
 LEFT JOIN " . $tblpref ."cont_bon on " . $tblpref ."article.num = " . $tblpref ."cont_bon.article_num
 WHERE " . $tblpref ."article.num=$article";
@@ -61,7 +61,7 @@ while($data = mysql_fetch_array($req)){
        <th><?php echo $lang_uni_art; ?></th>
        <th><?php echo $lang_ttva; ?></th>
       </tr>
-      <tr> 
+      <tr>
        <td class="c texte0"><input name="article" type="text" id="article" size="40" maxlength="40" value='<?php echo $article; ?>'></td>
        <td class="c texte0"><input name="uni" type="text" id="uni" size="8" maxlength="8" value='<?php echo $uni; ?>'></td>
        <td class="c texte0"><input name="taux_tva" type="text" id="taux_tva" size="5" maxlength="5" value="<?php echo $tva; ?>"> %</td>
@@ -77,7 +77,7 @@ while($data = mysql_fetch_array($req)){
        <td class="c texte0">
 <?php  if ($use_categorie =='y') {
 $rqSql = "SELECT id_cat, categorie FROM " . $tblpref ."categorie WHERE 1";
-$result = mysql_query( $rqSql ) or die( "Exécution requête impossible.");  
+$result = mysql_query( $rqSql ) or die( "Exécution requête impossible.");
 ?>
         <select name='categorie'>
          <option value=''><?php echo $lang_divers; ?></option>
@@ -101,23 +101,23 @@ while ( $row = mysql_fetch_array( $result)) {
          "
         >
          <input <?php echo ($marge==1)?'':'size="3" '; ?>
-          name="marge" 
-          type="text" 
-          value="<?php echo $marge; ?>" 
+          name="marge"
+          type="text"
+          value="<?php echo $marge; ?>"
           title="<?php echo $lang_coef_de_marge; ?>"
           readonly="readonly"
          >
          <input <?php echo ($marge==1)?'type="hidden" ':'type="text" '; ?>
-          name="prixvente" 
-          size="6" 
-          value="<?php echo montant_financier($prix*$marge); ?>" 
+          name="prixvente"
+          size="6"
+          value="<?php echo montant_financier($prix*$marge); ?>"
           title="<?php echo $lang_pdv_mrg_ht; ?> (<?php echo $devise; ?>)"
           readonly="readonly"
          >
          <input <?php echo ($marge==1)?'type="hidden" ':'type="text" '; ?>
-          name="tauxmarge" 
-          size="4" 
-          value="<?php echo montant_taux((1-(1/$marge))*100); ?>" 
+          name="tauxmarge"
+          size="4"
+          value="<?php echo montant_taux((1-(1/$marge))*100); ?>"
           title="<?php echo $lang_taux_marge; ?> (%)"
           readonly="readonly"
          >

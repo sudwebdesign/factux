@@ -1,25 +1,25 @@
-<?php 
+<?php
 /*
  * Factux le facturier libre
  * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
- * 
+ *
  * Licensed under the terms of the GNU  General Public License:
  * 		http://opensource.org/licenses/GPL-3.0
- * 
+ *
  * For further information visit:
  * 		http://factux.free.fr
- * 
+ *
  * File Name: menu.inc.php
  * 	menu d'inclusion dans les themes personalisés
- * 
+ *
  * * Version:  5.0.0
  * * * Modified: 07/10/2016
- * 
+ *
  * File Authors:
  * 		Guy Hendrickx
  *.
  */
- ?> 
+ ?>
 
 <script type="text/javascript">
 
@@ -419,7 +419,7 @@ function menuInit(menu) {
       }
     }
     if (textEl != null && arrowEl != null) {
-      textEl.style.paddingRight = (itemWidth 
+      textEl.style.paddingRight = (itemWidth
         - (textEl.offsetWidth + arrowEl.offsetWidth)) + "px";
 
       // For Opera, remove the negative right margin to fix a display bug.
@@ -635,7 +635,7 @@ function getPageOffsetTop(el) {
  <a class="menuItem" href="lister_articles.php"><?php echo $lang_lister ?></a>
 <?php if ($use_categorie =='y') { ?>
  <a class="menuItem" href="lister_cat.php"><?php echo $lang_categorie ?>s</a>
-<?php  } 
+<?php  }
 } ?>
 </div>
 <!-- clients -->

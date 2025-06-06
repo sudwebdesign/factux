@@ -1,20 +1,20 @@
-<?php 
+<?php
 /*
  * Factux le facturier libre
  * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
- * 
+ *
  * Licensed under the terms of the GNU  General Public License:
  * 		http://opensource.org/licenses/GPL-3.0
- * 
+ *
  * For further information visit:
  * 		http://factux.free.fr
- * 
+ *
  * File Name: chercher_factures.php
  * 	formulaire de recherche des factures
- * 
+ *
  * * * Version:  5.0.0
  * * * * Modified: 07/10/2016
- * 
+ *
  * File Authors:
  * 		Guy Hendrickx
  *.
@@ -27,33 +27,33 @@ include_once("include/finhead.php");
   <td class="page" align="center">
 <?php
 include_once("include/head.php");
-if ($user_fact == 'n') { 
+if ($user_fact == 'n') {
  echo "<h1>$lang_facture_droit</h1>";
  exit;
  include_once("include/bas.php");
 }
 $rqSql = "SELECT num_client, nom FROM " . $tblpref ."client WHERE 1";
-if ($user_fact == 'r') { 
-$rqSql = "SELECT num_client, nom FROM " . $tblpref ."client 
-WHERE " . $tblpref ."client.permi LIKE '$user_num,' 
-or " . $tblpref ."client.permi LIKE '%,$user_num,' 
-or " . $tblpref ."client.permi LIKE '%,$user_num,%' 
-or " . $tblpref ."client.permi LIKE '$user_num,%' 
-";  
+if ($user_fact == 'r') {
+$rqSql = "SELECT num_client, nom FROM " . $tblpref ."client
+WHERE " . $tblpref ."client.permi LIKE '$user_num,'
+or " . $tblpref ."client.permi LIKE '%,$user_num,'
+or " . $tblpref ."client.permi LIKE '%,$user_num,%'
+or " . $tblpref ."client.permi LIKE '$user_num,%'
+";
 }
 ?>
   <form name="formu" method="post" action="chercheur_factures.php">
    <center>
     <table class="page" border="0" align="center">
      <caption><?php echo $lang_factures_chercher; ?></caption>
-      <tr> 
+      <tr>
        <td class="texte1"><?php echo $lang_client; ?></td>
        <td class="texte1" colspan="5">
-<?php 
-if ($liste_cli!='y') { 
+<?php
+if ($liste_cli!='y') {
 $rqSql="$rqSql order by nom";
 $result = mysql_query( $rqSql ) or die( "Exécution requête impossible.");
-?> 
+?>
         <select name='listeclients'>
          <option value=""><?php echo $lang_choisissez; ?></option>
 <?php
@@ -63,11 +63,11 @@ $nom = $row["nom"];
 ?>
          <option value='<?php echo "$numclient" ?>'><?php echo $nom; ?></option>
 <?php } ?>
-        </select> 
+        </select>
 <?php }else{ ?>
        <script type="text/javascript" src="javascripts/montrer_cacher.js"></script>
        <input type="checkbox" checked name="list_client" onclick="montrer_cacher(this,'cluster','cluster2')">
-<?php 
+<?php
 include_once("include/choix_cli.php");
 }
 ?>
@@ -123,7 +123,7 @@ include_once("include/choix_cli.php");
       </tr>
       <tr>
        <td class="submit" colspan="6">
-        <input type="submit" name="submit" value="<?php echo $lang_rech ?>"> 
+        <input type="submit" name="submit" value="<?php echo $lang_rech ?>">
        </td>
       </tr>
      </table>

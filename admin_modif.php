@@ -1,34 +1,34 @@
-<?php 
+<?php
 /*
  * Factux le facturier libre
  * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
- * 
+ *
  * Licensed under the terms of the GNU  General Public License:
  * 		http://opensource.org/licenses/GPL-3.0
- * 
+ *
  * For further information visit:
  * 		http://factux.free.fr
- * 
+ *
  * File Name: admin_modif.php
  * 	Enregistrement des parametres: configav.php
- * 
+ *
  * * Version:  5.0.0
  * * * * Modified: 07/10/2016
- * 
+ *
  * File Authors:
  * 		Guy Hendrickx
  *.
  */
-require_once("include/verif.php");	 
+require_once("include/verif.php");
 include_once("include/config/common.php");
 include_once("include/config/var.php");
 include_once("include/language/$lang.php");
-if ($user_admin !='y') { 
+if ($user_admin !='y') {
  echo "<h1>$lang_admin_droit</h1>";
  exit;
 }
 if (empty($_POST)) {#acces direct
- include("admin.php"); 
+ include("admin.php");
  exit;
 }
 
@@ -105,12 +105,12 @@ $texte.="\n";
 if (is_writable($filename)){
  if (!$handle = fopen($filename, 'w+')){
   echo "$lang_fi_innouvr ($filename).";
-  include("admin.php"); 
+  include("admin.php");
   exit;
  }
  if (fwrite($handle, $texte) === FALSE){
   $message= "<h1>$lang_fi_inedita ($filename).</h1>";
-  include("admin.php"); 
+  include("admin.php");
   exit;
  }
  fclose($handle);
@@ -118,5 +118,5 @@ if (is_writable($filename)){
  include("admin.php");
 }else{
  $message= "<h1>$lang_fi_lect_sl ($filename).</h1>";
- include("admin.php"); 
+ include("admin.php");
 }

@@ -1,20 +1,20 @@
-<?php 
+<?php
 /*
  * Factux le facturier libre
  * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
- * 
+ *
  * Licensed under the terms of the GNU  General Public License:
  *     http://opensource.org/licenses/GPL-3.0
- * 
+ *
  * For further information visit:
  *     http://factux.free.fr
- * 
+ *
  * File Name: fckconfig.js
  *   Editor configuration settings.
- * 
+ *
  * * * Version:  5.0.0
  * * * * Modified: 07/10/2016
- * 
+ *
  * File Authors:
  *     Guy Hendrickx
  *.
@@ -23,9 +23,9 @@ include_once("include/headers.php");
 ?><script type="text/javascript" src="javascripts/confdel.js"></script><?php
 include_once("include/finhead.php");
 
-$requete = "SELECT DATE_FORMAT(date,'%d/%m/%Y')as date, num_dev, tot_htva, tot_tva, resu, nom 
-FROM " . $tblpref ."devis 
-LEFT JOIN " . $tblpref ."client on " . $tblpref ."devis.client_num = num_client 
+$requete = "SELECT DATE_FORMAT(date,'%d/%m/%Y')as date, num_dev, tot_htva, tot_tva, resu, nom
+FROM " . $tblpref ."devis
+LEFT JOIN " . $tblpref ."client on " . $tblpref ."devis.client_num = num_client
 WHERE num_dev > 0";
 
 if ( isset ( $_POST['listeclients'] ) && $_POST['listeclients'] != '')//on verifie le client
@@ -41,13 +41,13 @@ if ( isset ( $_POST['jour'] ) && $_POST['jour'] != '')//on verifie le jour
 if ( isset ( $_POST['montant'] ) && $_POST['montant'] != '')//on verifie le montant
   $requete .= " AND trim(" . $tblpref ."devis.tot_htva)='" . $_POST['montant'] . "'";
 if ($user_dev == 'r'){
-  $requete .=" AND " . $tblpref ."client.permi LIKE '$user_num,' 
-    OR  " . $tblpref ."client.permi LIKE '%,$user_num,' 
-    OR  " . $tblpref ."client.permi LIKE '%,$user_num,%' 
+  $requete .=" AND " . $tblpref ."client.permi LIKE '$user_num,'
+    OR  " . $tblpref ."client.permi LIKE '%,$user_num,'
+    OR  " . $tblpref ."client.permi LIKE '%,$user_num,%'
     OR  " . $tblpref ."client.permi LIKE '$user_num,%' ";
 }
 $tri=isset($_POST['tri'])?$_POST['tri']:"";
-$requete .= " ORDER BY $tri";  
+$requete .= " ORDER BY $tri";
 
 ?>
 <table width="760" border="0" class="page" align="center">
@@ -95,7 +95,7 @@ while($data = mysql_fetch_array($req)){
     <td class='<?php echo couleur_alternee (FALSE); ?>'>&nbsp;</td>
 <?php } ?>
     <td class='<?php echo couleur_alternee (FALSE,"c texte"); ?>'>
-     <a href="delete_dev.php?num_dev=<?php echo $num_dev; ?>&amp;nom=<?php echo $nom; ?>" 
+     <a href="delete_dev.php?num_dev=<?php echo $num_dev; ?>&amp;nom=<?php echo $nom; ?>"
         onClick="return confirmDelete('<?php echo"$lang_eff_dev $num_dev ?"; ?>')">
       <img border="0" src="image/delete.jpg">
      </a>
@@ -116,7 +116,7 @@ while($data = mysql_fetch_array($req)){
       </a>
     </td>
     <td class='<?php echo couleur_alternee (FALSE,"c texte"); ?>'>
-     <a href="devis_non_commandes.php?num_dev=<?php echo $num_dev; ?>" title="<?php echo $lang_perdu; ?>" 
+     <a href="devis_non_commandes.php?num_dev=<?php echo $num_dev; ?>" title="<?php echo $lang_perdu; ?>"
         onClick="return confirmDelete('<?php echo"$lang_dev_perd $num_dev $lang_dev_perd2 "; ?>')">
       <img border="0" src="image/icon_cry.gif">
      </a>

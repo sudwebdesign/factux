@@ -2,19 +2,19 @@
 /*
  * Factux le facturier libre
  * Copyright (C) 2015 Thomas Ingles
- * 
+ *
  * Licensed under the terms of the GNU  General Public License:
  * 		http://opensource.org/licenses/GPL-3.0
- * 
+ *
  * For further information visit:
  * 		http://factux.free.fr
- * 
+ *
  * File Name: pl.php
  * 	fichier contenant les variables polonaise
- * 
+ *
  * * Version:  5.0.0
  * * * Modified: 07/10/2016
- * 
+ *
  * File Authors:
  * 		Thomas Ingles
  */
@@ -280,7 +280,7 @@ $lang_devis_perdre = "Porzucić";
 $lang_imprimer = "Drukuj";
 $lang_supprimer = "Usuń";
 $lang_client_modifier = " klient";
-$lang_tva = "VAT";#PODATKU 
+$lang_tva = "VAT";#PODATKU
 $lang_commandes_lister = "Lista komend";
 $lang_gagne_perdu = "Wyniki";
 $lang_articles_liste = "Lista artykułów";

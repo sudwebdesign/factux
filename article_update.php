@@ -1,20 +1,20 @@
-<?php 
+<?php
 /*
  * Factux le facturier libre
  * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
- * 
+ *
  * Licensed under the terms of the GNU  General Public License:
  * 		http://opensource.org/licenses/GPL-3.0
- * 
+ *
  * For further information visit:
  * 		http://factux.free.fr
- * 
+ *
  * File Name: article_update.php
  * 	saisie de la modification d'un article
- * 
+ *
  * * Version:  5.0.0
  * * * * Modified: 07/10/2016
- * 
+ *
  * File Authors:
  * 		Guy Hendrickx
  *.
@@ -43,25 +43,25 @@ if($article!="")#jamais commandé
 ";
 if($uni!="")#jamais commandé
  $set.=",
-`uni`='".$uni."'  
+`uni`='".$uni."'
 ";
 if($taux_tva!="")#jamais commandé
  $set.=",
-`taux_tva`='".$taux_tva."'  
+`taux_tva`='".$taux_tva."'
 ";
 
 $sql2 = "
-UPDATE " . $tblpref ."article 
-SET 
+UPDATE " . $tblpref ."article
+SET
 `prix_htva`='".$prix."',
 `commentaire`='".$commentaire."',
 `marge`='".$marge."',
 `stock`='".$stock."',
 `stomin`='".$min."',
 `stomax`='".$max."',
-`cat`='".$categorie."' 
-$set 
-WHERE num ='".$num."' 
+`cat`='".$categorie."'
+$set
+WHERE num ='".$num."'
 LIMIT 1
 ";
 

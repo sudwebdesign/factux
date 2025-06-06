@@ -41,7 +41,7 @@ HTMLArea.I18N = {
 		copy:           "Kopieren",
 		paste:          "Einfuegen"
 	},
-  
+
  buttons: {
 		"ok":           "OK",
 		"cancel":       "Abbrechen"

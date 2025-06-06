@@ -78,7 +78,7 @@ TableOperations.I18N = {
 	"The right-hand side only":			  "The right-hand side only",
 	"The top and bottom sides only":		  "The top and bottom sides only",
 	"The top side only":				  "The top side only",
-	"Top":                                            "Top",	
+	"Top":                                            "Top",
 	"Unset color":                                    "Unset color",
 	"Vertical align":                                 "Vertical align",
 	"Width":					  "Width",

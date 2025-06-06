@@ -1,20 +1,20 @@
-<?php 
+<?php
 /*
  * Factux le facturier libre
  * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
- * 
+ *
  * Licensed under the terms of the GNU  General Public License:
  * 		http://opensource.org/licenses/GPL-3.0
- * 
+ *
  * For further information visit:
  * 		http://factux.free.fr
- * 
+ *
  * File Name: fckconfig.js
  * 	Editor configuration settings.
- * 
+ *
  * * * Version:  5.0.0
  * * * * Modified: 07/10/2016
- * 
+ *
  * File Authors:
  * 		Guy Hendrickx
  *.
@@ -24,7 +24,7 @@ if(!isset($num_client))
 ?>
  <form action="client_update.php" method="post" name="client" id="client" onSubmit="return verif_formulaire()">
   <table class="page boiteaction">
-    <caption><?php echo $lang_chng_mdp; ?></caption> 
+    <caption><?php echo $lang_chng_mdp; ?></caption>
     <tr>
       <td class="texte0"><?php echo $lang_login; ?></td>
       <td class="texte0"><b><?php echo $login ?></b></td>
@@ -42,8 +42,8 @@ if(!isset($num_client))
       <td class="texte0"><input name = "pass_new2" type = "password" maxlength="40" /></td>
     </tr>
     <tr>
-      <td class="submit" colspan="3"> 
-        <input type="submit" value="<?php echo $lang_motdepasse_changer; ?>" /> 
+      <td class="submit" colspan="3">
+        <input type="submit" value="<?php echo $lang_motdepasse_changer; ?>" />
         <input type="reset" value="<?php echo $lang_annuler; ?>" />
         <input name="login" type="hidden" id="login" value="<?php echo $login; ?>" />
       </td>
@@ -51,6 +51,6 @@ if(!isset($num_client))
   </table>
   <input name="num_client" type="hidden" value='<?php echo $num_client; ?>'>
 </form>
-<a href='logout.php'><h2><?php echo $lang_sortir; ?></h2></a> 
+<a href='logout.php'><h2><?php echo $lang_sortir; ?></h2></a>
 <?php
 include_once("../include/bas_cli.php");

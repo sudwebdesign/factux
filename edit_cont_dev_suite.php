@@ -2,19 +2,19 @@
 /*
  * Factux le facturier libre
  * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
- * 
+ *
  * Licensed under the terms of the GNU  General Public License:
  * 		http://opensource.org/licenses/GPL-3.0
- * 
+ *
  * For further information visit:
  * 		http://factux.free.fr
- * 
+ *
  * File Name: fckconfig.js
  * 	Editor configuration settings.
- * 
+ *
  * * * Version:  5.0.0
  * * * * Modified: 07/10/2016
- * 
+ *
  * File Authors:
  * 		Guy Hendrickx
  *.
@@ -39,8 +39,8 @@ $prix_article=$prix_article * $marge;
 $total_htva = $prix_article * (1-($remise/100)) * $quanti;
 $mont_tva = $total_htva / 100 * $taux_tva ;
 
-$sql2 = "UPDATE " . $tblpref ."cont_dev 
-         SET p_u_jour='".$prix_article."', quanti='".$quanti."', article_num='".$article."', tot_art_htva='".$total_htva."', to_tva_art='".$mont_tva."', remise='".$remise."', marge_jour='".$marge."' 
+$sql2 = "UPDATE " . $tblpref ."cont_dev
+         SET p_u_jour='".$prix_article."', quanti='".$quanti."', article_num='".$article."', tot_art_htva='".$total_htva."', to_tva_art='".$mont_tva."', remise='".$remise."', marge_jour='".$marge."'
          WHERE num = '".$num_cont."'";
 mysql_query($sql2) OR die("<p>Erreur Mysql<br/>$sql2<br/>".mysql_error()."</p>");
 

@@ -2,19 +2,19 @@
 /*
  * Factux le facturier libre
  * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
- * 
+ *
  * Licensed under the terms of the GNU  General Public License:
  * 		http://opensource.org/licenses/GPL-3.0
- * 
+ *
  * For further information visit:
  * 		http://factux.free.fr
- * 
+ *
  * File Name: fckconfig.js
  * 	Editor configuration settings.
- * 
+ *
  * * * Version:  5.0.0
  * * * * Modified: 07/10/2016
- * 
+ *
  * File Authors:
  * 		Guy Hendrickx
  *.
@@ -22,21 +22,21 @@
 include_once("include/headers.php");
 include_once("include/finhead.php");
 $page = explode("/", getenv('SCRIPT_NAME'));
-$n = count($page)-1; 
-$page = $page[$n]; 
+$n = count($page)-1;
+$page = $page[$n];
 $page = explode(".", $page, 2);
 $extension = $page[1];
 $page = $page[0];
 $path = str_replace("$page.$extension",'', $_SERVER['DOCUMENT_ROOT'].$_SERVER['PHP_SELF']);
 if (file_exists($path."dbinfo.php")) {
-   $dir=opendir($path."dump/"); 
-   while ($fl = readdir ($dir)) { 
-       if ($fl != "." && $fl != ".." &&  (preg_match("~\.(sql|gz)$~",$fl))){ 
+   $dir=opendir($path."dump/");
+   while ($fl = readdir ($dir)) {
+       if ($fl != "." && $fl != ".." &&  (preg_match("~\.(sql|gz)$~",$fl))){
          unlink($path."dump/".$fl); // del all sql and gz
        }
-   } 
-   closedir($dir); 
-   unlink($path."dbinfo.php"); 
+   }
+   closedir($dir);
+   unlink($path."dbinfo.php");
 }
 ?>
 <table width="760" border="0" class="page" align="center">
@@ -46,17 +46,17 @@ if (file_exists($path."dbinfo.php")) {
    <center>
     <table class="page" width="80%" border="0" cellspacing="0" >
      <caption><?php echo "$lang_back_utili" ?></caption>
-     <tr> 
+     <tr>
       <td class='texte0' valign="top">
        <p><?php echo $lang_back_effac; ?><img alt="<?php echo $lang_oui; ?>" src="image/oui.gif"></p>
-       <font size="2"> 
+       <font size="2">
         <br>
         <?php echo "$lang_back_upl" ?><br>
         <br>
        </font>
       </td>
      </tr>
-     <tr> 
+     <tr>
       <td class='c texte0' height="40" valign="top">
        <b><a href="form_backup.php"><br><?php echo $lang_back_ret; ?></a></b>
       </td>

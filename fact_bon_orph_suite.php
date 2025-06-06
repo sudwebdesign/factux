@@ -2,26 +2,26 @@
 /*
  * Factux le facturier libre
  * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
- * 
+ *
  * Licensed under the terms of the GNU  General Public License:
  * 		http://opensource.org/licenses/GPL-3.0
- * 
+ *
  * For further information visit:
  * 		http://factux.free.fr
- * 
+ *
  * File Name: fact_bon_orph_suite.php
  * 	enregistrement de données de la facture a partir d'un bon orphelin
- * 
+ *
  * * * * Version:  5.0.1
  * * * * Modified: 10/06/2017
- * 
+ *
  * File Authors:
  * 		Guy Hendrickx
  *.
  */
 include_once("include/headers.php");
 include_once("include/finhead.php");
-if ($user_fact == 'n') { 
+if ($user_fact == 'n') {
 ?>
 <table width="760" border="0" class="page" align="center">
  <tr>
@@ -48,9 +48,9 @@ list($jour_fact, $mois_fact,$annee_fact) = preg_split('/\//', $date_fact, 3);
 $date_fact ="$annee_fact-$mois_fact-$jour_fact";
 
 $sql = "
-SELECT * FROM " . $tblpref ."bon_comm 
-WHERE client_num = '".$client."' 
-AND " . $tblpref ."bon_comm.num_bon = '".$num."' 
+SELECT * FROM " . $tblpref ."bon_comm
+WHERE client_num = '".$client."'
+AND " . $tblpref ."bon_comm.num_bon = '".$num."'
 AND fact != '0'";
 $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 while($data = mysql_fetch_array($req)){
@@ -81,27 +81,27 @@ $suite_sql="and " . $tblpref ."bon_comm.num_bon ='$list_num[0]'";
 for($m=1; $m<count($list_num); $m++){
  $suite_sql .= " or " . $tblpref ."bon_comm.num_bon ='$list_num[$m]'";
 }
-$sql9 = "SELECT date, quanti, article, remise, prix_htva, p_u_jour, tot_art_htva, to_tva_art, taux_tva, uni, num_bon 
-FROM " . $tblpref ."client 
-LEFT JOIN " . $tblpref ."bon_comm on " . $tblpref ."client.num_client = " . $tblpref ."bon_comm.client_num 
-LEFT JOIN " . $tblpref ."cont_bon on " . $tblpref ."bon_comm.num_bon = " . $tblpref ."cont_bon.bon_num  
-LEFT JOIN  " . $tblpref ."article on " . $tblpref ."article.num = " . $tblpref ."cont_bon.article_num 
-WHERE " . $tblpref ."client.num_client = '".$client."'"; 
+$sql9 = "SELECT date, quanti, article, remise, prix_htva, p_u_jour, tot_art_htva, to_tva_art, taux_tva, uni, num_bon
+FROM " . $tblpref ."client
+LEFT JOIN " . $tblpref ."bon_comm on " . $tblpref ."client.num_client = " . $tblpref ."bon_comm.client_num
+LEFT JOIN " . $tblpref ."cont_bon on " . $tblpref ."bon_comm.num_bon = " . $tblpref ."cont_bon.bon_num
+LEFT JOIN  " . $tblpref ."article on " . $tblpref ."article.num = " . $tblpref ."cont_bon.article_num
+WHERE " . $tblpref ."client.num_client = '".$client."'";
 $sql9="$sql9 $suite_sql";
 $req = mysql_query($sql9) or die('Erreur SQL9 !<br>'.$sql9.'<br>'.mysql_error());
 
 /*//OLD
-$sql = " SELECT SUM(tot_htva), SUM(tot_tva) 
-		FROM " . $tblpref ."bon_comm 
-		 WHERE " . $tblpref ."bon_comm.client_num = '".$client."'*/ 
+$sql = " SELECT SUM(tot_htva), SUM(tot_tva)
+		FROM " . $tblpref ."bon_comm
+		 WHERE " . $tblpref ."bon_comm.client_num = '".$client."'*/
 
 //NEW Version CALUL TVA A LA FIN
-$sql = "SELECT SUM(tot_art_htva), SUM(to_tva_art) 
-FROM " . $tblpref ."client 
-LEFT JOIN " . $tblpref ."bon_comm on " . $tblpref ."client.num_client = " . $tblpref ."bon_comm.client_num 
-LEFT JOIN " . $tblpref ."cont_bon on " . $tblpref ."bon_comm.num_bon = " . $tblpref ."cont_bon.bon_num  
-LEFT JOIN  " . $tblpref ."article on " . $tblpref ."article.num = " . $tblpref ."cont_bon.article_num 
-WHERE " . $tblpref ."client.num_client = '".$client."'"; 
+$sql = "SELECT SUM(tot_art_htva), SUM(to_tva_art)
+FROM " . $tblpref ."client
+LEFT JOIN " . $tblpref ."bon_comm on " . $tblpref ."client.num_client = " . $tblpref ."bon_comm.client_num
+LEFT JOIN " . $tblpref ."cont_bon on " . $tblpref ."bon_comm.num_bon = " . $tblpref ."cont_bon.bon_num
+LEFT JOIN  " . $tblpref ."article on " . $tblpref ."article.num = " . $tblpref ."cont_bon.article_num
+WHERE " . $tblpref ."client.num_client = '".$client."'";
 
 $sql="$sql $suite_sql GROUP BY bon_num";
 $req2 = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
@@ -115,7 +115,7 @@ if($total_htva==''){
  include('form_facture.php');
  exit;
 }
-if (!isset($_POST['simuler'])){	
+if (!isset($_POST['simuler'])){
  $list_num=serialize($list_num);//
  $sql1 = "
  INSERT INTO " . $tblpref ."facture(acompte, coment, client, date_fact, total_fact_h, total_fact_ttc, list_num)
@@ -182,7 +182,7 @@ while($data = mysql_fetch_array($req)){
      <td class='<?php echo couleur_alternee (FALSE,"nombre"); ?>'><?php echo $num_bon; ?></td>
      <td class='<?php echo couleur_alternee (FALSE,"c texte"); ?>'><?php echo $date; ?></td>
     </tr>
-<?php } 
+<?php }
 $rest = $total_htva + $total_tva - $acompte;
 ?>
     <tr>

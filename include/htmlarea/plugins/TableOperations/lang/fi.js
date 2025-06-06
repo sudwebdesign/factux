@@ -48,7 +48,7 @@ TableOperations.I18N = {
 	"TO-row-prop":					  "Rivin asetukset",
 	"TO-row-split":					  "Jaa rivi",
 	"TO-table-prop":				  "Taulukon asetukset",
-	"Top":                                            "Ylös",	
+	"Top":                                            "Ylös",
 	"Table Properties":				  "Taulukon asetukset",
 	"The bottom side only":				  "Ainoastaan alapuolelle",
 	"The left-hand side only":			  "Ainoastaan vasenreuna",

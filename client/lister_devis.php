@@ -2,19 +2,19 @@
  /*
  * Factux le facturier libre
  * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
- * 
+ *
  * Licensed under the terms of the GNU  General Public License:
  * 		http://opensource.org/licenses/GPL-3.0
- * 
+ *
  * For further information visit:
  * 		http://factux.free.fr
- * 
+ *
  * File Name: fckconfig.js
  * 	Editor configuration settings.
- * 
+ *
  * * * Version:  5.0.0
  * * * * Modified: 07/10/2016
- * 
+ *
  * File Authors:
  * 		Guy Hendrickx
  *.
@@ -29,17 +29,17 @@ include_once("../include/config/var.php");
 include_once("../include/utils.php");
 $sql3 = "
 SELECT num_dev, tot_htva, tot_tva, DATE_FORMAT(date,'%d/%m/%Y') AS date, nom
-FROM " . $tblpref ."devis 
+FROM " . $tblpref ."devis
 LEFT JOIN " . $tblpref ."client  on " . $tblpref ."devis.client_num = num_client
-WHERE client_num = '".$num_client."' 
-AND resu = '0' 
+WHERE client_num = '".$num_client."'
+AND resu = '0'
 ORDER BY " . $tblpref ."devis.num_dev DESC
 ";
 $req3 = mysql_query($sql3) or die('Erreur SQL3 !<br>'.$sql3.'<br>'.mysql_error());
 ?>
 <table class="page boiteaction">
  <caption><?php echo $lang_devis_pluriel; ?></caption>
- <tr> 
+ <tr>
   <th><?php echo $lang_numero; ?></th>
   <th><?php echo $lang_date; ?></th>
   <th><?php echo $lang_total_h_tva; ?></th>
@@ -57,7 +57,7 @@ while($data = mysql_fetch_array($req3)){
  $nom = $data['nom'];
  $ttc = $total + $tva ;
 ?>
- <tr> 
+ <tr>
   <td class="<?php echo couleur_alternee (); ?>"><?php echo $num_dev; ?></td>
   <td class="<?php echo couleur_alternee (FALSE, "c texte"); ?>"><?php echo $date; ?></td>
   <td class="<?php echo couleur_alternee (FALSE, "nombre"); ?>"><?php echo montant_financier ($total); ?></td>

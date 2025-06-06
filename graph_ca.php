@@ -1,20 +1,20 @@
-<?php 
+<?php
 /*
  * Factux le facturier libre
  * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
- * 
+ *
  * Licensed under the terms of the GNU  General Public License:
  *   http://opensource.org/licenses/GPL-3.0
- * 
+ *
  * For further information visit:
  *   http://factux.free.fr
- * 
+ *
  * File Name: graph_ca.php
  *  graphique suivant le chiffre d'affaire
- * 
+ *
  * * * Version:  5.0.0
  * * * * Modified: 07/10/2016
- * 
+ *
  * File Authors:
  *   Guy Hendrickx
  *.incluse dans graph_annuel
@@ -36,7 +36,7 @@ $total= mysql_result($req,0);
 //~ reset ($liste_mois);
 foreach($liste_mois as $numero_mois => $nom_mois){
  $tot = $recettes[$numero_mois]["htva"];
- $pourcentage = ($total)?round($tot / $total * 100):0;#Unwarning: Division by zero  $pourcentage = number_format( round( ($tot*100)/$total), 0, ",", " "); 
+ $pourcentage = ($total)?round($tot / $total * 100):0;#Unwarning: Division by zero  $pourcentage = number_format( round( ($tot*100)/$total), 0, ",", " ");
 ?>
   <tr>
    <td class='<?php echo couleur_alternee (); ?>'><?php echo ucfirst ($nom_mois); ?></td>

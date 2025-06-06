@@ -1,5 +1,5 @@
 <?php
-if ($use_categorie !='y') { 
+if ($use_categorie !='y') {
   $rqSql = "SELECT num, article, prix_htva, marge, uni FROM " . $tblpref ."article WHERE actif != 'non' ORDER BY article, prix_htva asc";
   $result = mysql_query( $rqSql ) or die('Erreur SQL !<br>'.$rqSql.'<br>'.mysql_error());
 ?>
@@ -17,4 +17,4 @@ while ($row = mysql_fetch_array( $result)) {
        </select>
 <?php
 }else
- include("include/categorie_choix.php"); 
+ include("include/categorie_choix.php");

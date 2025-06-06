@@ -2,19 +2,19 @@
 /*
  * Factux le facturier libre
  * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
- * 
+ *
  * Licensed under the terms of the GNU  General Public License:
  * 		http://opensource.org/licenses/GPL-3.0
- * 
+ *
  * For further information visit:
  * 		http://factux.free.fr
- * 
+ *
  * File Name: fckconfig.js
  * 	Editor configuration settings.
- * 
+ *
  * * * Version:  5.0.0
  * * * * Modified: 07/10/2016
- * 
+ *
  * File Authors:
  * 		Guy Hendrickx
  *.
@@ -40,13 +40,13 @@ $client=isset($_GET['client'])?$_GET['client']:"";
        </select>
       </td>
      </tr>
-<?php 
+<?php
 $rqSql = "
-SELECT TO_DAYS(NOW()) - TO_DAYS(date_fact) AS peri, client, date_deb, date_fin, total_fact_ttc, num, nom, DATE_FORMAT(date_fact,'%d/%m/%Y') AS date_fact 
-FROM " . $tblpref ."facture 
-LEFT JOIN " . $tblpref ."client on " . $tblpref ."facture.client = " . $tblpref ."client.num_client 
-WHERE payement = 'non' 
-AND " . $tblpref ."client.num_client = $client 
+SELECT TO_DAYS(NOW()) - TO_DAYS(date_fact) AS peri, client, date_deb, date_fin, total_fact_ttc, num, nom, DATE_FORMAT(date_fact,'%d/%m/%Y') AS date_fact
+FROM " . $tblpref ."facture
+LEFT JOIN " . $tblpref ."client on " . $tblpref ."facture.client = " . $tblpref ."client.num_client
+WHERE payement = 'non'
+AND " . $tblpref ."client.num_client = $client
 ORDER BY peri DESC
 ";
 $result = mysql_query( $rqSql ) or die('Erreur SQL !<br>'. $rqSql.'<br>'.mysql_error());

@@ -2,19 +2,19 @@
 /*
  * Factux le facturier libre
  * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
- * 
+ *
  * Licensed under the terms of the GNU  General Public License:
  *   http://opensource.org/licenses/GPL-3.0
- * 
+ *
  * For further information visit:
  *   http://factux.free.fr
- * 
+ *
  * File Name: fact_pdf.php
  *  Fichier generant les factures au format pdf
- * 
+ *
  * * * Version:  5.0.0
  * * * * Modified: 07/10/2016
- * 
+ *
  * File Authors:
  *   Guy Hendrickx
  *.
@@ -26,8 +26,8 @@
  *              Factux 10 years Remix.8.2015
  */
 session_cache_limiter('private');
-if(isset($_POST['user'])&&$_POST['user']=='adm'){ 
- require_once("../include/verif2.php");  
+if(isset($_POST['user'])&&$_POST['user']=='adm'){
+ require_once("../include/verif2.php");
 }else{
  $from_cli='../client/';
  require_once("../include/verif_client.php");
@@ -87,7 +87,7 @@ if(is_array($list_num)&&isset($list_num[0])){
 }
 $suite_sql=array(0=>$suite_sql);
 if($oneclick!=''){
- $sql2 ="SELECT * FROM " . $tblpref ."facture WHERE `date_fact` = '$oneclick'"; 
+ $sql2 ="SELECT * FROM " . $tblpref ."facture WHERE `date_fact` = '$oneclick'";
  $reqd = mysql_query($sql2) or die('Erreur SQL !<br>'.$sql2.'<br>'.mysql_error());
  $nb_fact = mysql_num_rows($reqd);
  unset($client);
@@ -96,12 +96,12 @@ if($oneclick!=''){
  unset($num);
  unset($suite_sql);
  $g=0;
- if ($nb_fact=='0') { 
+ if ($nb_fact=='0') {
   echo"$lang_fact_mu_err $oneclick";
   exit;
  }
  $suite_sql=array();
- while($datad = mysql_fetch_array($reqd)){ 
+ while($datad = mysql_fetch_array($reqd)){
   $debut[]= $datad['date_deb'];
   $guy=$datad['client'];
   $fin[]=$datad['date_fin'];
@@ -113,7 +113,7 @@ if($oneclick!=''){
   for($m=1; $m<count($list_num); $m++){
    $suite_sql[$g] .= " or " . $tblpref ."bon_comm.num_bon ='$list_num[$m]'";
   }
-  $g=$g+1; 
+  $g=$g+1;
  }
 }
 ////
@@ -169,9 +169,9 @@ $pdf->AddFont('DejaVu','','DejaVuSansCondensed.ttf',true);
 $toto="guy";
 $tot_tva_inc=0;
 $from_joint_where_client = "
- FROM " . $tblpref ."client 
+ FROM " . $tblpref ."client
  LEFT JOIN " . $tblpref ."bon_comm on " . $tblpref ."client.num_client = " . $tblpref ."bon_comm.client_num
- LEFT JOIN " . $tblpref ."cont_bon on " . $tblpref ."bon_comm.num_bon = " . $tblpref ."cont_bon.bon_num  
+ LEFT JOIN " . $tblpref ."cont_bon on " . $tblpref ."bon_comm.num_bon = " . $tblpref ."cont_bon.bon_num
  LEFT JOIN  " . $tblpref ."article on " . $tblpref ."article.num = " . $tblpref ."cont_bon.article_num
  WHERE " . $tblpref ."client.num_client = ";
 for ($o=0;$o<$g;$o++){
@@ -183,7 +183,7 @@ for ($o=0;$o<$g;$o++){
  $sql = "
  SELECT prix_htva, p_u_jour, quanti, tot_art_htva, marge_jour, remise
  $from_joint_where_client'".$client[$o]."'
- "; 
+ ";
  // AND " . $tblpref ."bon_comm.date >= '".$debut[$o]."' and " . $tblpref ."bon_comm.date <= '".$fin[$o]."'";
  $sql ="$sql $suite_sql[$o]";
 
@@ -198,7 +198,7 @@ for ($o=0;$o<$g;$o++){
  $total_remise_htva = 0;
  while($data = mysql_fetch_array($req)){
   $prx_a = $data['prix_htva'];#prix d'achat du jour#inutiliséici*4memo
-  
+
   $ttl_htva = $data['tot_art_htva'];#remisé & margé
   $prx_v = $data['p_u_jour'];#margé & non remisé
   $qnt = $data['quanti'];
@@ -211,7 +211,7 @@ for ($o=0;$o<$g;$o++){
   $total_remise_htva += $remise_art_htva;
   $total_marge_htva += $marge_art_htva;
  }
- 
+
  $sql = "
  SELECT payement, coment, acompte, DATE_FORMAT(date_fact,'%d/%m/%Y') AS date_2, DATE_FORMAT(date_pay,'%d/%m/%Y') AS date_pay
  FROM " . $tblpref ."facture
@@ -225,7 +225,7 @@ for ($o=0;$o<$g;$o++){
  $date_pay= $data['date_pay'];
 
  //pour les totaux
- $sql = "SELECT SUM(tot_art_htva), SUM(to_tva_art) 
+ $sql = "SELECT SUM(tot_art_htva), SUM(to_tva_art)
  $from_joint_where_client'".$client[$o]."'";
  //AND " . $tblpref ."bon_comm.date >= '".$debut[$o]."' and " . $tblpref ."bon_comm.date <= '".$fin[$o]."'";
  $sql ="$sql $suite_sql[$o]";
@@ -234,7 +234,7 @@ for ($o=0;$o<$g;$o++){
  $total_htva = $data["SUM(tot_art_htva)"];
  $total_tva = $data["SUM(to_tva_art)"];
  $tot_tva_inc = $tot_tva_inc + $total_htva;
-  
+
  //pour le nom de client
  $sql1 = "SELECT mail, nom, nom2, rue, ville, cp, num_tva FROM " . $tblpref ."client WHERE  num_client = $client[$o]";
  $req = mysql_query($sql1) or die('Erreur SQL !<br>'.$sql1.'<br>'.mysql_error());
@@ -327,8 +327,8 @@ for ($o=0;$o<$g;$o++){
    'align' =>'L',
    'padding'=>2
   );
-  $sql_table = "SELECT p_u_jour, DATE_FORMAT(date,'%d/%m/%Y') AS date, quanti, remise, article, tot_art_htva, to_tva_art, taux_tva, uni, num_bon 
-  $from_joint_where_client'".$client[$o]."'"; 
+  $sql_table = "SELECT p_u_jour, DATE_FORMAT(date,'%d/%m/%Y') AS date, quanti, remise, article, tot_art_htva, to_tva_art, taux_tva, uni, num_bon
+  $from_joint_where_client'".$client[$o]."'";
   $suite2_sql = "LIMIT $nb, 31";
   $sql_table="$sql_table $suite_sql[$o] $suite2_sql";
   $pdf->Table("$sql_table",$prop);
@@ -394,10 +394,10 @@ for ($o=0;$o<$g;$o++){
 
    $sql2="
    SELECT SUM(to_tva_art), SUM(tot_art_htva),taux_tva
-   $from_joint_where_client'".$client[$o]."'"; 
+   $from_joint_where_client'".$client[$o]."'";
    $suite3_sql=" GROUP BY taux_tva";
    $sql2="$sql2 $suite_sql[$o] $suite3_sql";
-   ///echo"$sql2<br>";   
+   ///echo"$sql2<br>";
    ////$resu = mysql_query( $sql2 ) or die('Erreur SQL !<br>'.$sql2.'<br>'.mysql_error());
    $pdf->AddCol('taux_tva',20,$lang_taux_tva,'R');
    $pdf->AddCol('SUM(to_tva_art)',20,$lang_mont_tva,'R');
@@ -427,7 +427,7 @@ for ($o=0;$o<$g;$o++){
    #$pdf->SetY(244);
    #$pdf->SetX(83);
    #$pdf->MultiCell(27,5,montant_financier ($total_marge_htva),1,'R',1);#o
-   
+
    $pdf->SetTextColor(0, 0, 0);
    //pour les commentaire
    $pdf->SetFont('DejaVu','',8);
@@ -437,7 +437,7 @@ for ($o=0;$o<$g;$o++){
   }
 
   $pdf->Line(10,266,197,266);
-  
+
   //le pied de page
   $pdf->SetFont('DejaVu','',6);
   $pdf->SetY(268);
@@ -446,9 +446,9 @@ for ($o=0;$o<$g;$o++){
 
   $pdf->SetY(270);
   $pdf->SetX(10);
-  if ($payement!='non') { 
+  if ($payement!='non') {
    $pdf->SetFont('DejaVu','u',9);
-   $pdf->MultiCell(60,3,"$lang_po_acquis".($date_pay!="00/00/0000"?"\n$lang_pay_le $date_pay":""),0,'C',0);  
+   $pdf->MultiCell(60,3,"$lang_po_acquis".($date_pay!="00/00/0000"?"\n$lang_pay_le $date_pay":""),0,'C',0);
   }else{//Pour l'échéance
    $pdf->SetFont('DejaVu','',12);
    $pdf->MultiCell(160,4,$lang_echea." ".(($lang=='fr')?ucfirst(nombre_literal(30)):30)." ".$lang_jours,0,'L',0);//le total en toute lettre nombre_literal only in french
@@ -473,7 +473,7 @@ for ($o=0;$o<$g;$o++){
 if($autoprint=='y' and $_POST['mail']!='y' and $_POST['user']=='adm'){
  $pdf->AutoPrint(false, $nbr_impr);
 }
-$pdf->Output($file); 
+$pdf->Output($file);
 
 if ($_POST['mail']=='y') {
  $to = $mail_client;
@@ -495,4 +495,4 @@ if ($_POST['mail']=='y') {
 }
 
 
-?> 
+?>

@@ -1,20 +1,20 @@
-<?php 
+<?php
 /*
  * Factux le facturier libre
  * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
- * 
+ *
  * Licensed under the terms of the GNU  General Public License:
  * 		http://opensource.org/licenses/GPL-3.0
- * 
+ *
  * For further information visit:
  * 		http://factux.free.fr
- * 
+ *
  * File Name: lister_factures_non_reglees.php
  * 	liste les facture non reglées et permet de changer leur status de payement
- * 
+ *
  * * * Version:  5.0.0
  * * * * Modified: 07/10/2016
- * 
+ *
  * File Authors:
  * 		Guy Hendrickx
  *.
@@ -63,7 +63,7 @@ $fact_uri=isset($_GET['ir'])?"&amp;ir":'';
 $sql = "
 SELECT TO_DAYS(NOW()) - TO_DAYS(date_fact) AS peri, client,r1, r2, r3,  date_deb, date_fin,
 total_fact_ttc, payement, num, nom, nom2, DATE_FORMAT(date_fact,'%d/%m/%Y') AS date_aff, date_fact
-FROM " . $tblpref ."facture 
+FROM " . $tblpref ."facture
 LEFT JOIN " . $tblpref ."client on " . $tblpref ."facture.client = " . $tblpref ."client.num_client
 WHERE payement = 'non'
 $fact_irre
@@ -71,11 +71,11 @@ $this_fact
 ";
 if ($user_fact == 'r') {
  $sql .= "
-  and " . $tblpref ."client.permi LIKE '$user_num,' 
-  or  " . $tblpref ."client.permi LIKE '%,$user_num,' 
-  or  " . $tblpref ."client.permi LIKE '%,$user_num,%' 
+  and " . $tblpref ."client.permi LIKE '$user_num,'
+  or  " . $tblpref ."client.permi LIKE '%,$user_num,'
+  or  " . $tblpref ."client.permi LIKE '%,$user_num,%'
   or  " . $tblpref ."client.permi LIKE '$user_num,%'
-";  
+";
 }
 $drdre='';
 if ( isset ( $_GET['ordre'] ) && $_GET['ordre'] != ''){
@@ -90,7 +90,7 @@ $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 ?>
    <table class='page boiteaction'>
     <caption><?php echo $lang_factures_non_reglees; ?></caption>
-    <tr> 
+    <tr>
      <th><a href="lister_factures_non_reglees.php?ordre=num<?php echo $fact_uri; ?>"><?php echo $lang_numero; ?></a></th>
      <th><a href="lister_factures_non_reglees.php?ordre=nom<?php echo $fact_uri; ?>"><?php echo $lang_client; ?></a></th>
      <th><a href="lister_factures_non_reglees.php?ordre=date_fact<?php echo $fact_uri; ?>"><?php echo $lang_date; ?></a></th>
@@ -133,12 +133,12 @@ while($data = mysql_fetch_array($req)){
       <td class='<?php echo couleur_alternee (FALSE,"c texte"); ?>'>
 <?php if($use_payement =='y'){ ?>
        <form action="payement_suite.php" id="payement<?php echo $num;?>" method="post" name="payement<?php echo "$num";?>">
-        <select name="methode" 
+        <select name="methode"
                 onchange="
                 if(this.value != -1){
                  if(dr = regler_fact('<?php echo $lang_conf_carte_reg; ?>'
-                 + forms['payement<?php echo $num; ?>'].elements['num'].value 
-                 +' <?php echo $lang_par; ?> '+ this.value + ' <?php echo $lang_bon_cree2; ?>', 
+                 + forms['payement<?php echo $num; ?>'].elements['num'].value
+                 +' <?php echo $lang_par; ?> '+ this.value + ' <?php echo $lang_bon_cree2; ?>',
                  forms['payement<?php echo $num; ?>'].elements['date_pay'].value)){
                   forms['payement<?php echo $num; ?>'].elements['date_pay'].value = dr;
                   forms['payement<?php echo $num; ?>'].submit();
@@ -156,16 +156,16 @@ while($data = mysql_fetch_array($req)){
         <input type="submit" name="envoi" style="display: none" />
        </form>
 <?php }else{ ?>
-       <a href='payement_suite.php?num_fact=<?php echo $num; ?>' 
+       <a href='payement_suite.php?num_fact=<?php echo $num; ?>'
           onClick="return confirmDelete('<?php echo "$lang_regler_fact $num $lang_regler_fact2"; ?>')"><img border='0' src='image/ok.jpg' alt='<?php echo $lang_regler; ?>'></a> <?php
  if($pay!='non'){#irrécouvrables
        ?><img border='0' src='image/non.gif' width='16' alt='<?php echo $lang_irrecouvrable; ?>'>
-<?php }else{ 
-       ?><a href='payement_suite.php?num_fact=<?php echo $num; ?>&amp;ir' 
+<?php }else{
+       ?><a href='payement_suite.php?num_fact=<?php echo $num; ?>&amp;ir'
             onClick="return confirmDelete('<?php echo "$lang_conf_carte_reg $num $lang_par $lang_irrecouvrable"; ?>')" ><img border='0' src='image/icon_cry.gif' alt='<?php echo $lang_irrecouvrable; ?>?'></a>
 <?php
  }/*#irrécouvrables (dsl pour les places des 2 ? >. Ça evite un trait noir disgracieu entre les 2 icones???)*/
-} 
+}
 ?>
       </td>
       <td class='<?php echo couleur_alternee (FALSE,"c texte"); ?>'>
@@ -186,7 +186,7 @@ while($data = mysql_fetch_array($req)){
 }#fi while
 
 $sql = "
-SELECT SUM(total_fact_ttc) FROM " . $tblpref ."facture 
+SELECT SUM(total_fact_ttc) FROM " . $tblpref ."facture
 LEFT JOIN " . $tblpref ."client on " . $tblpref ."facture.client = " . $tblpref ."client.num_client
 WHERE payement = 'non'
 $fact_irre
@@ -197,7 +197,7 @@ $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 while($data = mysql_fetch_array($req)){
  $tot = $data['SUM(total_fact_ttc)'];
 ?>
-    <tr> 
+    <tr>
      <td colspan="2" class="totaltexte"><?php echo $lang_factures_non_reglees_total; ?></td>
      <td colspan="2" class="totalmontant"><?php echo montant_financier($tot) ; ?></td>
      <td class="totalmontant" colspan="6"><a href="lister_factures_non_reglees.php?ordre=<?php echo $drdre; ?>&amp;ir"><?php echo "$lang_voir $lang_irrecouvrable"; ?></td>

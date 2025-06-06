@@ -1,20 +1,20 @@
-<?php 
+<?php
 /*
  * Factux le facturier libre
  * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
- * 
+ *
  * Licensed under the terms of the GNU  General Public License:
  * 		http://opensource.org/licenses/GPL-3.0
- * 
+ *
  * For further information visit:
  * 		http://factux.free.fr
- * 
+ *
  * File Name: ca_paeclient_1mois.php
  * 	Donne les statistiques de chiffre d'affaire par mois
- * 
+ *
  * * * Version:  5.0.0
  * * * * Modified: 07/10/2016
- * 
+ *
  * File Authors:
  * 		Guy Hendrickx
  *.
@@ -29,13 +29,13 @@ $annee_1=isset($_POST['annee_1'])?$_POST['annee_1']:date("Y");
   <td class="page" align="center">
 <?php
 include_once("include/head.php");
-if ($user_stat== 'n') { 
+if ($user_stat== 'n') {
  echo"<h1>$lang_statistique_droit</h1>";
  include_once("include/bas.php");
  exit;
 }
 ?>
-  <form action="graph_ca_clients_mois.php" method="post"> 
+  <form action="graph_ca_clients_mois.php" method="post">
    <select name="mois_1">
 <?php
 $calendrier = calendrier_local_mois ();
@@ -55,14 +55,14 @@ foreach ($calendrier as $numero_mois => $nom_mois){
    <button type="submit"><?php echo $lang_envoyer; ?></button>
   </form>
   <br>
-<?php 
+<?php
 $sql = "SELECT num_client FROM " . $tblpref ."client";
 $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql2.'<br>'.mysql_error());
 $nb = mysql_num_rows($req);
 ?>
   <table class='page boiteaction'>
    <caption><?php echo "$lang_ca_par_client_1mois $mois_1/$annee_1" ?></caption>
-   <tr> 
+   <tr>
     <th><?php echo $lang_client; ?></th>
     <th width="380"><?php echo $lang_pourcentage;?></th>
     <th><?php echo "$lang_total_mois $mois_1/$annee_1"; ?></th>
@@ -73,10 +73,10 @@ $sql = "SELECT SUM(tot_htva)FROM " . $tblpref ."bon_comm WHERE MONTH(date)= $moi
 $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 $data = mysql_fetch_array($req);
 $total = $data['SUM(tot_htva)'];
-$sql = "SELECT SUM(tot_htva) AS tot_htva, nom FROM  " . $tblpref ."bon_comm 
-RIGHT JOIN " . $tblpref ."client on client_num = num_client 
-WHERE Year(date)=$annee_1 
-AND MONTH(date)=$mois_1 
+$sql = "SELECT SUM(tot_htva) AS tot_htva, nom FROM  " . $tblpref ."bon_comm
+RIGHT JOIN " . $tblpref ."client on client_num = num_client
+WHERE Year(date)=$annee_1
+AND MONTH(date)=$mois_1
 GROUP BY nom
 ORDER BY tot_htva DESC";
 $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
@@ -85,13 +85,13 @@ $nom = $data['nom'];
 $tot = $data['tot_htva'];
 $pourcentage = avec_virgule ($tot / $total * 100.00, 2);//number_format( round( ($tot*100.000)/$total), 3, ",", " ");
 ?>
-   <tr> 
+   <tr>
     <td class='<?php echo couleur_alternee (); ?>'><?php echo $nom; ?></td>
     <td class='<?php echo couleur_alternee (FALSE); ?>'> <?php echo stat_baton_horizontal($pourcentage, 2); ?> %</td>
     <td class='<?php echo couleur_alternee (FALSE, "nombre"); ?>'><?php echo montant_financier($tot); ?></td>
    </tr>
 <?php } ?>
-   <tr> 
+   <tr>
     <td class="totalmontant"></td>
     <td class="totaltexte"><?php echo $lang_total; ?></td>
     <td class="totalmontant"><?php echo montant_financier($total); ?></td>
@@ -99,7 +99,7 @@ $pourcentage = avec_virgule ($tot / $total * 100.00, 2);//number_format( round( 
   </table>
   </td>
  </tr>
- <tr> 
+ <tr>
   <td>
 <?php
 $aide='stats';

@@ -78,7 +78,7 @@ TableOperations.I18N = {
 	"The right-hand side only":							"Kun i venstre side",
 	"The top and bottom sides only":					"Kun i top og bund",
 	"The top side only":								"Kun i toppen",
-	"Top":												"Top",	
+	"Top":												"Top",
 	"Unset color":										"Farve ikke valgt",
 	"Vertical align":									"Vertikal placering",
 	"Width":											"Bredde",

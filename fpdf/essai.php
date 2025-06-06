@@ -1,27 +1,27 @@
-<?php 
+<?php
 /*
  * Factux le facturier libre
  * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
- * 
+ *
  * Licensed under the terms of the GNU  General Public License:
  * 		http://opensource.org/licenses/GPL-3.0
- * 
+ *
  * For further information visit:
  * 		http://factux.free.fr
- * 
+ *
  * File Name: fckconfig.js
  * 	Editor configuration settings.
- * 
+ *
  * * * Version:  5.0.0
  * * * * Modified: 07/10/2016
- * 
+ *
  * File Authors:
  * 		Guy Hendrickx
  *.
  */
 $coul_date = "255,238,204";
 exit;#créer un fichier de base pour générer un bon de commande avec fpdf
-$fichier = fopen("fpdf/essai_pdf.php", "w+"); 
+$fichier = fopen("fpdf/essai_pdf.php", "w+");
 //#inutilisé #pour memo
 $a= '<?php' . "\n" .
 'include_once("bon_pdf.inc.test.php");' ."\n" .
@@ -39,46 +39,46 @@ $a= '<?php' . "\n" .
  '$pdf->SetFont("DejaVu","",10);' . "\n" .
  '$pdf->SetY(4);' . "\n" .
  '$pdf->SetX(135);' . "\n" .
- 
+
  '$pdf->MultiCell(50,6,"$lang_date: $date_bon",1,C,1);' . "\n" .
- 
+
  '$pdf->Image("../image/$logo",10,8,0, 0,"jpg");' . "\n" .
- 
+
  '$pdf->SetFont("DejaVu","",15);' . "\n" .
  '$pdf->SetY(45);' . "\n" .
  '$pdf->SetX(10);' . "\n" .
  '$pdf->MultiCell(71,4,"$slogan",0,C,0);' . "\n" .
- 
+
  '$pdf->SetFont("DejaVu","",10);' . "\n" .
  '$pdf->SetY(27);' . "\n" .
  '$pdf->SetX(120);' . "\n" .
  '$pdf->MultiCell(65,6,"$nom \n $nom2 \n $rue \n $cp  $ville \n ",1,C,1);' . "\n" .
- 
+
  '$pdf->SetFont("DejaVu","",8);' . "\n" .
  '$pdf->SetY(70);' . "\n" .
  '$pdf->SetX(10);' . "\n" .
  '$pdf->MultiCell(40,4,"$lang_dev_pdf_soc",1,R,1);' . "\n" .
- 
+
  '$pdf->SetFont("DejaVu","",8);' . "\n" .
  '$pdf->SetY(70);' . "\n" .
  '$pdf->SetX(51);' . "\n" .
  '$pdf->MultiCell(50,4,"$entrep_nom\n$social\n $tel\n $tva_vend \n$compte \n$mail",1,L,1);' . "\n" .
  '$pdf->Line(20,65,200,65);' . "\n" .
- 
+
  '$pdf->SetFont("DejaVu","",10);' . "\n" .
  '$pdf->SetY(85);' . "\n" .
  '$pdf->SetX(120);' . "\n" .
  '$pdf->Cell(65,6,"$lang_num_bon_ab $num_bon",1,0,"C",1);' . "\n" .
- 
+
  '$pdf->SetFont("DejaVu","",10);' . "\n" .
  '$pdf->SetY(70);' . "\n" .
  '$pdf->SetX(120);' . "\n" .
  '$pdf->MultiCell(65,6,"$lang_tva: $num_tva",1,C,1);' . "\n" .
- 
+
  '$pdf->SetY(105);' . "\n" .
  '$pdf->SetX(12);' . "\n" .
  '$pdf->Cell(186,95,"",1,0,"C",1);' . "\n" .
- 
+
  '$pdf->AddCol("quanti",16,"$lang_quanti","C");' . "\n" .
  '$pdf->AddCol("uni",15,"$lang_unite","C");' . "\n" .
  '$pdf->AddCol("article",70,"$lang_article","C");' . "\n" .
@@ -101,7 +101,7 @@ $a= '<?php' . "\n" .
  '$pdf->SetY(238);' . "\n" .
  '$pdf->SetX(110);' . "\n" .
  '$pdf->MultiCell(40,10,"$lang_po_rec",1,C,1);' . "\n" .
- 
+
  '$pdf->SetFont("DejaVu","",10);' . "\n" .
  '$pdf->SetY(238);' . "\n" .
  '$pdf->SetX(148);' . "\n" .
@@ -113,40 +113,40 @@ $a= '<?php' . "\n" .
  '$pdf->SetY(200);' . "\n" .
  '$pdf->SetX(158);' . "\n" .
  '$pdf->MultiCell(40,4,"$total_htva $devise\n $total_tva $devise\n $tot_tva_inc $devise ",1,C,1);' . "\n" .
- 
+
  '$pdf->SetFont("DejaVu","",10);' . "\n" .
  '$pdf->SetY(200);' . "\n" .
  '$pdf->SetX(118);' . "\n" .
  '$pdf->MultiCell(40,4,"$lang_totaux",1,R,1);' . "\n" .
  '$pdf->Line(20,266,200,266);' . "\n" .
- 
+
  '$pdf->SetFont("DejaVu","",10);' . "\n" .
  '$pdf->SetY(217);' . "\n" .
  '$pdf->SetX(10);' . "\n" .
  '$pdf->MultiCell(190,4,"$coment",0,C,0);' . "\n" .
  '   }' . "\n" .
- 
+
  '$pdf->SetFont("DejaVu","",10);' . "\n" .
  '$pdf->SetY(268);' . "\n" .
  '$pdf->SetX(30);' . "\n" .
  '$pdf->MultiCell(160,4,"$lang_condi",0,C,0);' . "\n" .
- 
+
  '$pdf->SetFont("DejaVu","",10);' . "\n" .
  '$pdf->SetY(260);' . "\n" .
  '$pdf->SetX(30);' . "\n" .
  '$pdf->MultiCell(160,4,"$lang_page $num_pa2 $lang_de $nb_pa\n",0,C,0);' . "\n" .
  '}' . "\n" .
- 
+
  '$file=basename(tempnam(getcwd(),"tmp"));' . "\n" .
  'rename($file,$file.".pdf");' . "\n" .
  '$file.=".pdf";' . "\n" .
- 
+
  '$pdf->Output($file);' . "\n" .
  'echo "<HTML><SCRIPT>window.location=' . "'". '$file'. "';". '</SCRIPT></HTML>";' . "\n" .
  '?> ' . "\n" ;
- 
+
 $ecrire= "$a";
 fwrite($fichier,$ecrire );
 fclose($fichier);
 
-?> 
+?>

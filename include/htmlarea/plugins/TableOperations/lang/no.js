@@ -79,7 +79,7 @@ TableOperations.I18N = {
 	"The right-hand side only":			"Høyresiden kun",
 	"The top and bottom sides only":	"The top and bottom sides only",
 	"The top side only":				"Overkanten kun",
-	"Top":                          "Overkant",	
+	"Top":                          "Overkant",
 	"Unset color":                  "Ikke-bestemt farge",
 	"Vertical align":               "Vertikal justering",
 	"Width":					  	"Bredde",

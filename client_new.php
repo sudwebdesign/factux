@@ -2,19 +2,19 @@
 /*
  * Factux le facturier libre
  * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
- * 
+ *
  * Licensed under the terms of the GNU  General Public License:
  * 		http://opensource.org/licenses/GPL-3.0
- * 
+ *
  * For further information visit:
  * 		http://factux.free.fr
- * 
+ *
  * File Name: fckconfig.js
  * 	Editor configuration settings.
- * 
+ *
  * * * Version:  5.0.0
  * * * * Modified: 07/10/2016
- * 
+ *
  * File Authors:
  * 		Guy Hendrickx
  *.
@@ -56,7 +56,7 @@ if ($login !=''){
 $sql = "SELECT * FROM " . $tblpref ."client WHERE login = '".$login."' OR mail = '".$mail_cli."'";
 $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 $test = mysql_num_rows($req);
- if ($test > 0) { 
+ if ($test > 0) {
   $message = "<h1>$lang_id_or_mail_exist</h1>";
   include('form_client.php');
   exit;
@@ -65,7 +65,7 @@ $test = mysql_num_rows($req);
 $sql1 = "INSERT INTO " . $tblpref ."client(nom, nom2, rue, ville, cp, num_tva, login, pass, mail, civ, tel, fax) VALUES ('$nom', '$nom_sup', '$rue', '$ville', '$code_post', '$num_tva', '$login', '$pass', '$mail_cli', '$civ', '$tel', '$fax')";
 mysql_query($sql1) or die('Erreur SQL !<br>'.$sql1.'<br>'.mysql_error());
 $message='';
-if ($login!='' and $pass2 !='' and $mail_cli !=''){ 
+if ($login!='' and $pass2 !='' and $mail_cli !=''){
  $to = "$mail_cli";
  $from = "$mail_admin" ;
  $subject = "$lang_cre_mo_pa" ;

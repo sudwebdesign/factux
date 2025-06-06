@@ -11,7 +11,7 @@ Licensed under the terms of the GNU General Public licence:
 *
 *File Name: nl.php (b)
 *   bestand bevattende de nederlandstalige variabels  Nederlandstalige versie en correcties :@ ant.maes"AT"free.fr
-* 
+*
  * * Version:  5.0.0
  * * * Modified: 07/10/2016
 *
@@ -25,7 +25,7 @@ $lang_factux = "Factux de vrije fakturier Revision 2017";
 $lang_source_fac = "$lang_factux<br />is een Open source programma verdeeld door ";
 $lang_new_config_ok="Your new configuration is recorded";
 $lang_nbr_impression="Aantal afdrukken";
-$lang_choix_Impression="Gebruik het automatish afprinten"; 
+$lang_choix_Impression="Gebruik het automatish afprinten";
 ////Toegevoegde variabelen
 $lang_lots ="Loten";
 $lang_choix_use_stock = "Gebruik de vooraadmodule";
@@ -65,7 +65,7 @@ $lang_civ = "Burgelijke stand";
 $lang_nouv_categorie = "Nieuwe toegevoegde categorie";
 $lang_cat_nom ="naam van de categorie";
 $lang_categorie_ajout= "Een categorie bijvoegen";
-$lang_categorie ="Categorie";   
+$lang_categorie ="Categorie";
 $lang_err_ancien_mdp ="uw oud paswoord is foutief, gelieve het te willen herzien";
 $lang_stock="Vooraad";
 $lang_stomin="Mini";
@@ -88,7 +88,7 @@ $lang_eff_conf_dep = "Bent u zeker van het uitwissen van uitgave n°";
 ////
 
 ////
-$lang_fi_b_c="Bestelbon"; 
+$lang_fi_b_c="Bestelbon";
 $lang_facture="Factuur";
 $lang_fact_mu_err = "Geen enkel factuur werd gekreerd op ";
 $lang_imp_multi = "Meerdere afdrukken";
@@ -99,7 +99,7 @@ $lang_deflang = "Standaardtaal";
 $lang_po_acquis = "Voor betaald";
 $lang_nouv_d="Nieuw factuur van ";
 $lang_nouv_add ="Een nieuwe factuur werd u toegezonden door";
-$lang_salut_dist="U vind ze bijgevoegd als bijlage van mail\n Met viendelijke groeten"; 
+$lang_salut_dist="U vind ze bijgevoegd als bijlage van mail\n Met viendelijke groeten";
 
 $lang_cond_ven = "Hier uw verkoopsvoorwaarden \n tweede lijn \n derde lijn \n";
 $lang_Lister_lots = "Maak een lijst van de loten";
@@ -421,7 +421,7 @@ $lang_continuer = "Ga verder";
 $lang_err_edi_bon = "Deze bon maakt geen enkel deel uit van een faktuur, je kan deze niet $lang_editer.";
 $lang_edi_bon = "$lang_editer een leveringsbon.";
 $lang_cont_bon = "De bestelbon $nom bevat ";
-$lang_cont_devis = "Het bestek $nom bevat "; 
+$lang_cont_devis = "Het bestek $nom bevat ";
 $lang_tot_de = "voor een totaal van";
 $lang_bon_comp = "De bestelbon $nom bevat:";
 #$lang_pou_so_to = "Voor een totale som van <font size = 4>$total_bon ¤ $lang_htva";

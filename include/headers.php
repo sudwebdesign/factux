@@ -2,19 +2,19 @@
 /*
  * Factux le facturier libre
  * Copyright (C) 2015 Thomas Ingles
- * 
+ *
  * Licensed under the terms of the GNU  General Public License:
  * 		http://opensource.org/licenses/GPL-3.0
- * 
+ *
  * For further information visit:
  * 		http://factux.free.fr
- * 
+ *
  * File Name: headers.php
  * 	Editor configuration settings.
- * 
+ *
  * * * Version:  5.0.0
  * * * * Modified: 07/10/2016
- * 
+ *
  * File Authors:
  * 		Thomas Ingles
  *.
@@ -76,5 +76,5 @@ document.addEventListener('DOMContentLoaded', function () {
     // ...interesting launched before windows.onload ;-)
     console.log(window.document.all); console.log(getElementsByAttribute(window.document,'*', 'href'));
 });
-*/ 
+*/
 </script>

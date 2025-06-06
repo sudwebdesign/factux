@@ -3,7 +3,7 @@
    var csChaine;
    var nDay, nJour, nMois, nAnnee;
    var dtJour;
-   var NomMois = new Array (<?php   
+   var NomMois = new Array (<?php
 
 $calendrier = calendrier_local_mois3 ();
 
@@ -11,7 +11,7 @@ foreach ($calendrier as $numero_mois => $nom_mois){
    echo"'";
    echo ucfirst($nom_mois);
    echo"'";
-   echo","; 
+   echo",";
 }
 $calendrier = calendrier_local_mois2 ();
 foreach ($calendrier as $numero_mois => $nom_mois){
@@ -20,7 +20,7 @@ foreach ($calendrier as $numero_mois => $nom_mois){
    echo"'";
 }
 ?>);
-   var NomJour = new Array(<?php 
+   var NomJour = new Array(<?php
 
 $calendrier = calendrier_local_jour ();
 foreach ($calendrier as $numero_jour => $nom_jour){

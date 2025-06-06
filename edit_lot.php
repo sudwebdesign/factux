@@ -1,20 +1,20 @@
-<?php 
+<?php
 /*
  * Factux le facturier libre
  * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
- * 
+ *
  * Licensed under the terms of the GNU  General Public License:
  * 		http://opensource.org/licenses/GPL-3.0
- * 
+ *
  * For further information visit:
  * 		http://factux.free.fr
- * 
+ *
  * File Name: edit_lot.php
  * 	Formulaire d'edition des lots
- * 
+ *
  * * * Version:  5.0.0
  * * * * Modified: 07/10/2016
- * 
+ *
  * File Authors:
  * 		Guy Hendrickx
  *.
@@ -26,8 +26,8 @@ include_once("include/finhead.php");
  <tr>
   <td class="page" align="center">
 <?php
-include_once("include/head.php"); 
-if ($user_com == 'n') { 
+include_once("include/head.php");
+if ($user_com == 'n') {
  echo"<h1>$lang_commande_droit</h1>";
  include_once("include/bas.php");
  exit;
@@ -37,15 +37,15 @@ $num_get=isset($_GET['num'])?$_GET['num']:"";
 $mois_1=isset($_GET['mois_1'])?$_GET['mois_1']:date("m");
 $annee_1=isset($_GET['annee_1'])?$_GET['annee_1']:date("Y");
 
-$sql1 = "SELECT prod 
+$sql1 = "SELECT prod
 FROM " . $tblpref ."lot
 WHERE num = $num_get";
 $req1 = mysql_query($sql1) or die('Erreur SQL1 !<br>'.$sql1.'<br>'.mysql_error());
 $data = mysql_fetch_array($req1);
 $produit= $data['prod'];
 $sql = "
-SELECT ingr, fourn, fourn_lot, num 
-FROM " . $tblpref ."cont_lot 
+SELECT ingr, fourn, fourn_lot, num
+FROM " . $tblpref ."cont_lot
 WHERE num_lot= $num_get
 ";
 $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error())
@@ -53,20 +53,20 @@ $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error())
    <form action="edit_lot_suite.php" method="post" name="lot" id="lot">
     <table class="page boiteaction">
      <caption><?php echo $lang_edit_lot; ?></caption>
-     <tr> 
+     <tr>
       <th colspan="3" align="center"><?php echo $lang_produit; ?></th>
      </tr>
-     <tr> 
+     <tr>
       <td class="texte1"><input name="num_lot" type="hidden" value="<?php echo $num_get; ?>"></td>
-      <td class="texte1"><input name="prod" type="text" id="prod" size="27" maxlength="25" value="<?php echo $produit ?>"></td> 
+      <td class="texte1"><input name="prod" type="text" id="prod" size="27" maxlength="25" value="<?php echo $produit ?>"></td>
       <td class="texte1"></td>
      </tr>
-     <tr> 
+     <tr>
       <th><?php echo $lang_ingred; ?></th>
       <th><?php echo $lang_fournisseur; ?></th>
       <th><?php echo $lang_lot_four; ?></th>
      </tr>
-<?php 
+<?php
 $tab_fourn[] = 0;
 $tab_ingr[] = 0;
 $tab_fourn_lot[] = 0;
@@ -83,7 +83,7 @@ while($data = mysql_fetch_array($req)){
 }
 for ($i=1; $i<13; $i++) {
 ?>
-     <tr class='<?php echo couleur_alternee (); ?>'> 
+     <tr class='<?php echo couleur_alternee (); ?>'>
       <td>
        <input name="<?php echo "ing_$i" ?>" type="text" size="27" maxlength="20" value='<?php echo @$tab_ingr[$i]; ?>' />
       </td>
@@ -95,7 +95,7 @@ for ($i=1; $i<13; $i++) {
        <input name="<?php echo "num_cont_bon_$i";?>" type="hidden" value='<?php echo @$tab_num[$i]; ?>' />
       </td>
      </tr>
-<?php } ?> 
+<?php } ?>
      <tr>
       <td colspan="3" class="submit">
        <center>
@@ -112,7 +112,7 @@ for ($i=1; $i<13; $i++) {
   </td>
  </tr>
  <tr>
-  <td>   
+  <td>
 <?php
 $aide='lots';
 include("help.php");

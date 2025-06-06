@@ -2,19 +2,19 @@
 /*
  * Factux le facturier libre
  * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
- * 
+ *
  * Licensed under the terms of the GNU  General Public License:
  * 		http://opensource.org/licenses/GPL-3.0
- * 
+ *
  * For further information visit:
  * 		http://factux.free.fr
- * 
+ *
  * File Name: fckconfig.js
  * 	Editor configuration settings.
- * 
+ *
  * * * Version:  5.0.0
  * * * * Modified: 07/10/2016
- * 
+ *
  * File Authors:
  * 		Guy Hendrickx
  *.
@@ -52,11 +52,11 @@ $sql12 = "UPDATE `" . $tblpref ."article` SET `stock` = (stock - $quanti) WHERE 
 mysql_query($sql12) or die('Erreur SQL !<br>'.$sql12.'<br>'.mysql_error());
 
 ////////////////
-$sql2 = "UPDATE " . $tblpref ."cont_bon 
-SET p_u_jour='".$prix_article."', num_lot='".$num_lot."', quanti='".$quanti."', article_num='".$article."', tot_art_htva='".$total_htva."', to_tva_art='".$mont_tva."', remise='".$remise."', marge_jour='".$marge."'  
+$sql2 = "UPDATE " . $tblpref ."cont_bon
+SET p_u_jour='".$prix_article."', num_lot='".$num_lot."', quanti='".$quanti."', article_num='".$article."', tot_art_htva='".$total_htva."', to_tva_art='".$mont_tva."', remise='".$remise."', marge_jour='".$marge."'
 WHERE num = '".$num_cont."'";
 mysql_query($sql2) OR die("<p>Erreur SQL!<br/>$sql2<br/>".mysql_error()."</p>");
-  
+
 $num_bon=$bon_num;#!important
 include_once("edit_bon.php");
- 
+

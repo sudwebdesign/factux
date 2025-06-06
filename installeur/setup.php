@@ -2,19 +2,19 @@
 /*
  * Factux le facturier libre
  * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
- * 
+ *
  * Licensed under the terms of the GNU  General Public License:
  * 		http://opensource.org/licenses/GPL-3.0
- * 
+ *
  * For further information visit:
  * 		http://factux.free.fr
- * 
+ *
  * File Name: fckconfig.js
  * 	Editor configuration settings.
- * 
+ *
  * * * Version:  5.0.0
  * * * * Modified: 07/10/2016
- * 
+ *
  * File Authors:
  * 		Guy Hendrickx
  *.
@@ -45,7 +45,7 @@ $cinq = '"'.$cinq.'";//la langue de l\'interface et des factures créées par Fa
 $six = '"'.$six.'";//prefixe des tables ' . "\n";
 $sept = 'require_once(@$now."include/0.php");#uptophp7 & apostrophe()'."\n";
 
-$monfichier = fopen("../include/config/common.php", "w+"); 
+$monfichier = fopen("../include/config/common.php", "w+");
 
 fwrite($monfichier, ''.$type.''.$com.'$user= '.$un.'$pwd= '.$deux.'$db= '.$trois.'$host= '.$quatre.'$default_lang= '.$cinq.'$tblpref= '.$six.$sept);
 fclose($monfichier);

@@ -1,20 +1,20 @@
-<?php 
+<?php
 /*
  * Factux le facturier libre
  * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
- * 
+ *
  * Licensed under the terms of the GNU  General Public License:
  * 		http://opensource.org/licenses/GPL-3.0
- * 
+ *
  * For further information visit:
  * 		http://factux.free.fr
- * 
+ *
  * File Name: fckconfig.js
  * 	Editor configuration settings.
- * 
+ *
  * * * Version:  5.0.0
  * * * * Modified: 07/10/2016
- * 
+ *
  * File Authors:
  * 		Guy Hendrickx
  *.
@@ -28,13 +28,13 @@ include_once("include/finhead.php");
   <td class="page" align="center">
 <?php
 include_once("include/head.php");
-if ($user_dep == 'n'){ 
+if ($user_dep == 'n'){
  echo "<h1>$lang_depense_droit</h1>";
  include_once("include/bas.php");
  exit;
 }
-if (isset($message)&&$message!=''){ 
- echo $message; 
+if (isset($message)&&$message!=''){
+ echo $message;
 }
 //pour le formulaire
 $mois_1=isset($_GET['mois_1'])?$_GET['mois_1']:date("m");
@@ -46,8 +46,8 @@ $ands .= ($mois_1==$lang_tous)?'':"$aw MONTH(date) = $mois_1";#si année entiere
 $calendrier = calendrier_local_mois ();
 
 $sql = "
-SELECT num, lib, fournisseur, prix, DATE_FORMAT(date,'%d/%m/%Y') AS date_aff, date 
-FROM " . $tblpref ."depense  
+SELECT num, lib, fournisseur, prix, DATE_FORMAT(date,'%d/%m/%Y') AS date_aff, date
+FROM " . $tblpref ."depense
 $ands
 ";
 if ( isset ( $_GET['ordre'] ) && $_GET['ordre'] != ''){
@@ -86,7 +86,7 @@ $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
        <td class="submit" colspan="4">
         <input type="submit" value='<?php echo $lang_lister; ?>'>
        </td>
-      </tr>        
+      </tr>
      </table>
     </form>
    </center>
@@ -94,7 +94,7 @@ $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
    <center>
     <table class='page boiteaction'>
      <caption><?php naviguer("lister_depenses.php?ordre=".@$_GET['ordre'],$mois_1,$annee_1,$lang_depenses_liste); ?></caption>
-     <tr> 
+     <tr>
       <th><a href="lister_depenses.php?ordre=num&amp;mois_1=<?php echo $mois_1; ?>&amp;annee_1=<?php echo $annee_1; ?>"><?php echo $lang_numero; ?></a></th>
       <th><a href="lister_depenses.php?ordre=fournisseur&amp;mois_1=<?php echo $mois_1; ?>&amp;annee_1=<?php echo $annee_1; ?>"><?php echo $lang_fournisseur; ?></a></th>
       <th><a href="lister_depenses.php?ordre=date&amp;mois_1=<?php echo $mois_1; ?>&amp;annee_1=<?php echo $annee_1; ?>"><?php echo $lang_date; ?></a></th>
@@ -129,9 +129,9 @@ while($data = mysql_fetch_array($req))
        </a>
       </td>
       <td class='<?php echo couleur_alternee (FALSE,"c texte"); ?>'>
-       <a href="delete_dep.php?num=<?php echo $num; ?>" 
+       <a href="delete_dep.php?num=<?php echo $num; ?>"
         onClick="return confirmDelete('<?php echo"$lang_eff_conf_dep $num ?"; ?>')"
-        > 
+        >
         <img src="image/delete.jpg" border="0" alt="<?php echo $lang_effacer; ?>">
        </a>
       </td>
@@ -152,7 +152,7 @@ $aide='depense';
 include("help.php");
 include_once("include/bas.php");
 if(!strstr($_SERVER['SCRIPT_FILENAME'],__FILE__)){#autre qu'elle meme
- echo"\n  </td>\n </tr>\n</table>\n"; 
+ echo"\n  </td>\n </tr>\n</table>\n";
 }
 ?>
   </td>

@@ -1,20 +1,20 @@
-<?php 
+<?php
 /*
  * Factux le facturier libre
  * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
- * 
+ *
  * Licensed under the terms of the GNU  General Public License:
  * 		http://opensource.org/licenses/GPL-3.0
- * 
+ *
  * For further information visit:
  * 		http://factux.free.fr
- * 
+ *
  * File Name: voir_lot.php
  * 	montre les lots
- * 
+ *
  * * * Version:  5.0.0
  * * * * Modified: 07/10/2016
- * 
+ *
  * File Authors:
  * 		Guy Hendrickx
  *.
@@ -27,27 +27,27 @@ include_once("include/finhead.php");
   <td class="page" align="center">
 <?php
 include_once("include/head.php");
-if ($user_com == 'n') { 
+if ($user_com == 'n') {
  echo"<h1>$lang_commande_droit</h1>";
  include_once("include/bas.php");
  exit;
 }
 $num_lot=isset($_GET['num'])?$_GET['num']:"";
 $sql = "
-SELECT ingr, fourn, fourn_lot 
-FROM " . $tblpref ."cont_lot 
+SELECT ingr, fourn, fourn_lot
+FROM " . $tblpref ."cont_lot
 WHERE num_lot = $num_lot
 ";
 $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 ?>
 <?php
-if ($num_lot > '0') { 
+if ($num_lot > '0') {
 $mois_1=isset($_GET['mois_1'])?$_GET['mois_1']:date("m");
 $annee_1=isset($_GET['annee_1'])?$_GET['annee_1']:date("Y");
 ?>
    <table width='760' border='0' class='page' align='center'>
     <caption><?php echo "$lang_cont_lot $num_lot"; ?></caption>
-    <tr> 
+    <tr>
      <th><?php echo $lang_ingred; ?></th>
      <th><?php echo $lang_fournisseur; ?></th>
      <th><?php echo $lang_lot_four; ?></th>
@@ -69,7 +69,7 @@ while($data = mysql_fetch_array($req)){
      <td class='<?php echo couleur_alternee (FALSE); ?>'><?php echo $fourn; ?></td>
      <td class='<?php echo couleur_alternee (FALSE); ?>'><?php echo $fourn_lot; ?></td>
     </tr>
-<?php } ?> 
+<?php } ?>
    </table>
   </td>
  <tr>
@@ -80,7 +80,7 @@ while($data = mysql_fetch_array($req)){
   </td>
  </tr>
  </tr>
- <tr> 
+ <tr>
   <td>
 <?php
 }else{

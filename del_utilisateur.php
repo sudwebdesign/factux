@@ -1,20 +1,20 @@
-<?php 
+<?php
 /*
  * Factux le facturier libre
  * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
- * 
+ *
  * Licensed under the terms of the GNU  General Public License:
  * 		http://opensource.org/licenses/GPL-3.0
- * 
+ *
  * For further information visit:
  * 		http://factux.free.fr
- * 
+ *
  * File Name: del_utilisateurs.php
  * 	verification et efacage des utilisateurs
- * 
+ *
  * * * Version:  5.0.0
  * * * * Modified: 07/10/2016
- * 
+ *
  * File Authors:
  * 		Guy Hendrickx
  *.
@@ -31,9 +31,9 @@ while($data = mysql_fetch_array($req)){
  $admin = $data['admin'];
 }
 $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
-if ($admin == 'y') { 
+if ($admin == 'y') {
  $message = "<h1>$lang_impo_del_util</h1>";
- if($num_user == 1)#evitelesdéconvenues 
+ if($num_user == 1)#evitelesdéconvenues
   $message .= "<h2>Oops, super admin ;)</h2>";#fixin edit_utilisateur_suite.php #2015
  include_once("lister_utilisateurs.php");
  exit;
@@ -41,12 +41,12 @@ if ($admin == 'y') {
 #from lister_client_restreint.php #2015
 $sql = "
 SELECT num_client
-FROM " . $tblpref ."client 
+FROM " . $tblpref ."client
 WHERE 1
-and " . $tblpref ."client.permi LIKE '$num_user,' 
-or  " . $tblpref ."client.permi LIKE '%,$num_user,' 
-or  " . $tblpref ."client.permi LIKE '%,$num_user,%' 
-or  " . $tblpref ."client.permi LIKE '$num_user,%' 
+and " . $tblpref ."client.permi LIKE '$num_user,'
+or  " . $tblpref ."client.permi LIKE '%,$num_user,'
+or  " . $tblpref ."client.permi LIKE '%,$num_user,%'
+or  " . $tblpref ."client.permi LIKE '$num_user,%'
 ORDER BY " . $tblpref ."client.nom DESC
 ";
 $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());

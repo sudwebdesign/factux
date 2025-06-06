@@ -2,19 +2,19 @@
 /*
  * Factux le facturier libre
  * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
- * 
+ *
  * Licensed under the terms of the GNU  General Public License:
  * 		http://opensource.org/licenses/GPL-3.0
- * 
+ *
  * For further information visit:
  * 		http://factux.free.fr
- * 
+ *
  * File Name: bon_pdf.php
  * 	generation des bons de commande au format pdf.
- * 
+ *
  * * * Version:  5.0.0
  * * * * Modified: 07/10/2016
- * 
+ *
  * File Authors:
  * 		Guy Hendrickx
  *
@@ -22,7 +22,7 @@
  *              Factux 10 years Remix.8.2015
  */
 
-require_once("bon_pdf.inc.php"); 
+require_once("bon_pdf.inc.php");
 //page 1
 
 class PDF extends PDF_MySQL_Table{
@@ -130,10 +130,10 @@ for ($i=0;$i<$nb_pa;$i++){
 
  //Le tableau : on définit les colonnes
  $pdf->AddCol('quanti',15,"$lang_quanti",'R');
-  
+
  if($lot=='y'){
   $pdf->AddCol('uni',10,"$lang_unite",'L');
-  $pdf->AddCol('article',63,"$lang_article",'L');	
+  $pdf->AddCol('article',63,"$lang_article",'L');
   $pdf->AddCol('num_lot',18,"$lang_num_lot",'L');
   if($total_remise_htva!=0){
    $pdf->AddCol('taux_tva',15,"$lang_tva",'R');
@@ -146,7 +146,7 @@ for ($i=0;$i<$nb_pa;$i++){
   }
  }else{
   $pdf->AddCol('uni',15,"$lang_unite",'L');
-  $pdf->AddCol('article',71,"$lang_article",'L');	
+  $pdf->AddCol('article',71,"$lang_article",'L');
   if($total_remise_htva!=0){
    $pdf->AddCol('taux_tva',20,"$lang_t_tva",'R');
    $pdf->AddCol('p_u_jour',25,"$lang_prix_htva",'R');
@@ -167,10 +167,10 @@ for ($i=0;$i<$nb_pa;$i++){
   'padding'=>2
  );
  $pdf->Table(
- "SELECT " . $tblpref ."cont_bon.num, num_lot, quanti, remise, uni, article, taux_tva, p_u_jour, tot_art_htva 
- FROM " . $tblpref ."cont_bon 
- LEFT JOIN " . $tblpref ."article on " . $tblpref ."cont_bon.article_num = " . $tblpref ."article.num 
- WHERE  bon_num = $num_bon 
+ "SELECT " . $tblpref ."cont_bon.num, num_lot, quanti, remise, uni, article, taux_tva, p_u_jour, tot_art_htva
+ FROM " . $tblpref ."cont_bon
+ LEFT JOIN " . $tblpref ."article on " . $tblpref ."cont_bon.article_num = " . $tblpref ."article.num
+ WHERE  bon_num = $num_bon
  LIMIT $nb, 31",
  $prop
  );
@@ -187,7 +187,7 @@ $pdf->SetFillColor(255,255,255);#$pdf->SetFillColor(255,238,204);
   $pdf->SetX(116);
   $pdf->MultiCell(40,4,"$lang_totaux",1,'R',1);
   $pdf->Line(10,266,196,266);
-  
+
   if($lang=='fr'){//le total en toute lettre nombre_literal only in french
    $pdf->SetFont('DejaVu','',9);
    $pdf->SetY(248);
@@ -214,7 +214,7 @@ $pdf->SetFillColor(255,255,255);#$pdf->SetFillColor(255,238,204);
   #$pdf->SetY(244);
   #$pdf->SetX(83);
   #$pdf->MultiCell(27,5,montant_financier ($total_marge_htva),1,'R',1);#o
-  
+
   $pdf->SetTextColor(0, 0, 0);
  }
 
@@ -246,7 +246,7 @@ $pdf->SetFillColor(255,255,255);#$pdf->SetFillColor(255,238,204);
  $pdf->SetY(238);
  $pdf->SetX(148);
  $pdf->MultiCell(40,10,"\n\n",1,'C',1);*/
-} 
+}
 
 if($_POST['mail'] =='y'){
  $pdf->AddPage();
@@ -264,7 +264,7 @@ if($autoprint=='y' and $_POST['mail']!='y' and $_POST['user']=='adm'){
 }
 //Sauvegarde du PDF dans le fichier
 $file="$lang_fi_b_c $num_bon.pdf";#exit;
-$pdf->Output($file);    
+$pdf->Output($file);
 //Redirection JavaScript
 //echo "<html><script>window.location='$file';</script></html>";
 if ($_POST['mail']=='y') {
@@ -282,7 +282,7 @@ if ($_POST['mail']=='y') {
   echo "<html><script>window.location='../lister_commandes.php';</script></html>";
  else
   echo "<html><h3 style='color:red;'>$lang_env_par_mail_non</h3><script>setTimeout(function(){window.location='../lister_commandes.php'},2000);</script></html>";
-} else { 
+} else {
  echo "<html><script>window.location='".str_replace('+',' ',urlencode($file))."';</script></html>";
 }
-?> 
+?>

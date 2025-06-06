@@ -1,20 +1,20 @@
-<?php 
+<?php
 /*
  * Factux le facturier libre
  * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
- * 
+ *
  * Licensed under the terms of the GNU  General Public License:
  * 		http://opensource.org/licenses/GPL-3.0
- * 
+ *
  * For further information visit:
  * 		http://factux.free.fr
- * 
+ *
  * File Name: fckconfig.js
  * 	Editor configuration settings.
- * 
+ *
  * * * Version:  5.0.0
  * * * * Modified: 07/10/2016
- * 
+ *
  * File Authors:
  * 		Guy Hendrickx
  *.
@@ -52,7 +52,7 @@ while($data = mysql_fetch_array($req)){
     $num_cont = $data['num'];
 ?>
    <tr>
-    <td class ='<?php echo couleur_alternee (TRUE, "nombre"); ?>'><?php echo $data['quanti']; ?> 
+    <td class ='<?php echo couleur_alternee (TRUE, "nombre"); ?>'><?php echo $data['quanti']; ?>
     <td class ='<?php echo couleur_alternee (FALSE); ?>'><?php echo $data['uni']; ?>
     <td class ='<?php echo couleur_alternee (FALSE); ?>'><?php echo $data['article']; ?>
     <td class ='<?php echo couleur_alternee (FALSE, "nombre"); ?>'><?php echo "$data[tot_art_htva] $devise"; ?>

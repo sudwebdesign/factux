@@ -1,20 +1,20 @@
-<?php 
+<?php
 /*
  * Factux le facturier libre
  * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
- * 
+ *
  * Licensed under the terms of the GNU  General Public License:
  *     http://opensource.org/licenses/GPL-3.0
- * 
+ *
  * For further information visit:
  *     http://factux.free.fr
- * 
+ *
  * File Name: chercher_commandes.php
  *   formulaire de recherche des commandes
- * 
+ *
  * * * Version:  5.0.0
  * * * * Modified: 07/10/2016
- * 
+ *
  * File Authors:
  *     Guy Hendrickx
  *.
@@ -25,35 +25,35 @@ include_once("include/finhead.php");
 <table width="760" border="0" class="page" align="center">
  <tr>
   <td class="page" align="center">
-<?php 
+<?php
 include_once("include/head.php");
-if ($user_com == 'n') { 
+if ($user_com == 'n') {
  echo"<h1>$lang_commande_droit</h1>";
  include_once("include/bas.php");
  exit;
 }
 $rqSql = "SELECT num_client, nom FROM " . $tblpref ."client WHERE 1";
-if ($user_com == 'r') { 
-$rqSql = "SELECT num_client, nom FROM " . $tblpref ."client 
-  WHERE " . $tblpref ."client.permi LIKE '$user_num,' 
-  or  " . $tblpref ."client.permi LIKE '%,$user_num,' 
-  or  " . $tblpref ."client.permi LIKE '%,$user_num,%' 
-  or  " . $tblpref ."client.permi LIKE '$user_num,%' 
-  ";  
+if ($user_com == 'r') {
+$rqSql = "SELECT num_client, nom FROM " . $tblpref ."client
+  WHERE " . $tblpref ."client.permi LIKE '$user_num,'
+  or  " . $tblpref ."client.permi LIKE '%,$user_num,'
+  or  " . $tblpref ."client.permi LIKE '%,$user_num,%'
+  or  " . $tblpref ."client.permi LIKE '$user_num,%'
+  ";
 }
 ?>
    <form name="formu" method="post" action="chercheur_commandes.php">
     <center>
      <table class="page" border="0" align="center">
       <caption><?php echo $lang_commandes_chercher; ?></caption>
-      <tr> 
+      <tr>
        <td class="texte1"><?php echo $lang_client; ?></td>
        <td class="texte1" colspan="5">
-<?php 
-if ($liste_cli!='y') { 
+<?php
+if ($liste_cli!='y') {
 $rqSql="$rqSql order by nom";
 $result = mysql_query( $rqSql ) or die('Erreur SQL !<br>'.$rqSql.'<br>'.mysql_error());
-?> 
+?>
         <select name="listeclients">
          <option value=''><?php echo $lang_choisissez; ?></option>
 <?php
@@ -69,16 +69,16 @@ $nom = $row["nom"];
 <?php }else{?>
         <script type="text/javascript" src="javascripts/montrer_cacher.js"></script>
         <input type="checkbox" checked name="list_client" onClick="montrer_cacher(this,'cluster','cluster2')">
-<?php        
+<?php
 include_once("include/choix_cli.php");
-} 
-?> 
+}
+?>
        </td>
       </tr>
       <tr>
        <td class="texte0"> <?php echo $lang_num_bon; ?></td>
        <td class="texte0" colspan="5">
-        <input name="numero" type="text" id="numero" value="" size="2" > 
+        <input name="numero" type="text" id="numero" value="" size="2" >
        </td>
       </tr>
       <tr>
@@ -114,7 +114,7 @@ include_once("include/choix_cli.php");
  </tr>
  <tr>
   <td>
-<?php 
+<?php
 $aide='bon';
 include("help.php");
 include_once("include/bas.php");
@@ -124,5 +124,5 @@ include_once("include/bas.php");
 </table>
 <?php if(strstr($_SERVER['SCRIPT_FILENAME'],__FILE__)){?>
 </body>
-</html> 
+</html>
 <?php }
