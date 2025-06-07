@@ -28,8 +28,8 @@ $article=isset($_POST['article'])?$_POST['article']:"";
 $nom=isset($_POST['nom'])?$_POST['nom']:"";
 $num_bon=isset($_POST['num_bon'])?$_POST['num_bon']:"";
 $quanti=isset($_POST['quanti'])?$_POST['quanti']:"";
-$num_lot=isset($_POST['lot'])?$_POST['lot']:"";
-$remise=isset($_POST['remise'])?$_POST['remise']:"";
+$num_lot=intval(isset($_POST['lot'])?$_POST['lot']:"");
+$remise=floatval(isset($_POST['remise'])?$_POST['remise']:"");
 if($article!=0&&$quanti!=''){
     //on recupere le prix htva
     $sql2 = "SELECT prix_htva FROM " . $tblpref .('article WHERE num = ' . $article);

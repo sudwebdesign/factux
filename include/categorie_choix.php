@@ -10,7 +10,7 @@ $i=0;
 $s = 'p0';
 $sc = 'p0';
 while($data = mysql_fetch_array($req)){
- $sql2 = "SELECT * FROM `" . $tblpref .sprintf("article` WHERE cat = %s and actif != 'non'", $data[id_cat]);
+ $sql2 = "SELECT * FROM `" . $tblpref .sprintf("article` WHERE cat = %s and actif != 'non'", $data["id_cat"]);
  $req2 = mysql_query($sql2) or die('Erreur SQL2 !<br>'.$sql2.'\n'.mysql_error());
  if(mysql_num_rows($req2)){
   $v=0;
@@ -24,14 +24,14 @@ while($data = mysql_fetch_array($req)){
        $elc = ' selected="selected"';
        $s='p'.$i;
    }
-   $article = $data2[article] . ' '.montant_financier($data2["prix_htva"]).(' / ' . $data2[uni]);
+   $article = $data2["article"] . ' '.montant_financier($data2["prix_htva"]).(' / ' . $data2["uni"]);
    if ($data2["marge"]>1) {
-       $article = $data2[article] . ' ['.montant_financier($data2["prix_htva"])."] ".montant_financier($data2["prix_htva"]*$data2["marge"]).(' / ' . $data2[uni]);
+       $article = $data2["article"] . ' ['.montant_financier($data2["prix_htva"])."] ".montant_financier($data2["prix_htva"]*$data2["marge"]).(' / ' . $data2["uni"]);
    }#margé
-   echo "articl['p{$i}']['{$v}'] = new Array('$data2[num]', '{$article}', '{$el}');\n";
+   echo "articl['p{$i}']['{$v}'] = new Array('{$data2['num']}', '{$article}', '{$el}');\n";
    $v += 1;
   }
-  echo "catego[{$i}] = new Array('p{$i}', '$data[categorie]', '{$elc}');\n";
+  echo "catego[{$i}] = new Array('p{$i}', '{$data['categorie']}', '{$elc}');\n";
   $i += 1;
  }
 }

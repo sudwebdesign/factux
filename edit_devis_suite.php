@@ -28,7 +28,7 @@ $nom=isset($_POST['nom'])?$_POST['nom']:"";
 $num_dev=isset($_POST['num_dev'])?$_POST['num_dev']:"";
 $quanti=isset($_POST['quanti'])?$_POST['quanti']:"";
 $article=isset($_POST['article'])?$_POST['article']:"";
-$remise=isset($_POST['remise'])?$_POST['remise']:"";
+$remise=floatval(isset($_POST['remise'])?$_POST['remise']:"");
 
 if($article!=0&&$quanti!=''){
     //on recupere le prix htva

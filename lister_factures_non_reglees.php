@@ -57,7 +57,7 @@ if ($user_fact == 'n') {
 if(isset($message)&&$message!='') {
  echo $message;
 }
-$this_fact=isset($_GET['num'])?'AND num=' . $_GET[num]:'';
+$this_fact=isset($_GET['num'])?'AND num=' . $_GET['num']:'';
 $fact_irre=isset($_GET['ir'])?"OR payement = 'Irrecouvrable'":'';
 $fact_uri=isset($_GET['ir'])?"&amp;ir":'';
 $sql = "

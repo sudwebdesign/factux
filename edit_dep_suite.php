@@ -25,7 +25,7 @@ include_once(__DIR__ . "/include/config/var.php");
 include_once(__DIR__ . sprintf('/include/language/%s.php', $lang));
 $lib=isset($_POST['lib'])?$_POST['lib']:"";
 $four=isset($_POST['four'])?$_POST['four']:"";
-$prix=isset($_POST['prix'])?$_POST['prix']:"";
+$prix=floatval(isset($_POST['prix'])?$_POST['prix']:"");
 $num=isset($_POST['num'])?$_POST['num']:"";
 $sql2 = "UPDATE " . $tblpref ."depense SET lib = '".$lib."' , fournisseur = '".$four."' , prix = '".$prix.sprintf("' WHERE num = %s ", $num);
 mysql_query($sql2) || die(sprintf('<p>Erreur Mysql<br/>%s<br/>', $sql2).mysql_error()."</p>");
