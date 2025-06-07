@@ -19,11 +19,11 @@
  * 		Guy Hendrickx
  *.
  */
-require_once("include/verif.php");
-include_once("include/config/common.php");
-include_once("include/config/var.php");
-include_once("include/language/$lang.php");
-include_once("include/utils.php");
+require_once(__DIR__ . "/include/verif.php");
+include_once(__DIR__ . "/include/config/common.php");
+include_once(__DIR__ . "/include/config/var.php");
+include_once(__DIR__ . sprintf('/include/language/%s.php', $lang));
+include_once(__DIR__ . "/include/utils.php");
 $mois = date("m");
 $annee = date("Y");
 $jour =date("d");
@@ -90,30 +90,35 @@ $lot_four_11=isset($_POST['lot_four_11'])?$_POST['lot_four_11']:"";
 $num_cont_bon_11=isset($_POST['num_cont_bon_11'])?$_POST['num_cont_bon_11']:"";
 */
 }
+
 for ($i=1; $i<13; $i++) {
- $o = isset($_POST["ing_$i"])?$_POST["ing_$i"]:"";
- $a = isset($_POST["four_$i"])?$_POST["four_$i"]:"";
- $b = isset($_POST["lot_four_$i"])?$_POST["lot_four_$i"]:"";
- $c = isset($_POST["num_cont_bon_$i"])?$_POST["num_cont_bon_$i"]:"";
+ $o = isset($_POST['ing_' . $i])?$_POST['ing_' . $i]:"";
+ $a = isset($_POST['four_' . $i])?$_POST['four_' . $i]:"";
+ $b = isset($_POST['lot_four_' . $i])?$_POST['lot_four_' . $i]:"";
+ $c = isset($_POST['num_cont_bon_' . $i])?$_POST['num_cont_bon_' . $i]:"";
 #echo "$o $a $b $c <br>";
- if($o !=''and $c !=''){#if($o !=''and $c !=''){
-  $sql2 = "UPDATE " . $tblpref ."cont_lot SET ingr='{$o}', fourn='{$a}', fourn_lot='{$b}' WHERE num = '{$c}'";
-  mysql_query($sql2) OR die("<p>Erreur Mysql<br/>$sql2<br/>".mysql_error()."</p>");
+ if($o != '' && $c != ''){#if($o !=''and $c !=''){
+  $sql2 = "UPDATE " . $tblpref .sprintf("cont_lot SET ingr='%s', fourn='%s', fourn_lot='%s' WHERE num = '%s'", $o, $a, $b, $c);
+  mysql_query($sql2) || die(sprintf('<p>Erreur Mysql<br/>%s<br/>', $sql2).mysql_error()."</p>");
  }
- if($o !=''and $c ==''){#if($o !=''and $c ==''){
-  $sql3 = "INSERT INTO " . $tblpref ."cont_lot(num_lot, ingr, fourn, fourn_lot) VALUES ('$num_lot', '{$o}', '{$a}', '{$b}')";
-  mysql_query($sql3) OR die("<p>Erreur Mysql<br/>$sql3<br/>".mysql_error()."</p>");
+
+ if($o != '' && $c == ''){#if($o !=''and $c ==''){
+  $sql3 = "INSERT INTO " . $tblpref .sprintf("cont_lot(num_lot, ingr, fourn, fourn_lot) VALUES ('%s', '%s', '%s', '%s')", $num_lot, $o, $a, $b);
+  mysql_query($sql3) || die(sprintf('<p>Erreur Mysql<br/>%s<br/>', $sql3).mysql_error()."</p>");
  }
- if($o =='' and $b=='' and $a =='' and $c !=''){#if($o =='' and $b=='' and $a =='' and $c !=''){
-  echo"ligne {$c} a suprimer";
-  $sql5="DELETE FROM " . $tblpref ."cont_lot WHERE num = '{$c}'";
-  mysql_query($sql5) OR die("<p>Erreur Mysql<br/>$sql5<br/>".mysql_error()."</p>");
+
+ if($o == '' && $b == '' && $a == '' && $c != ''){#if($o =='' and $b=='' and $a =='' and $c !=''){
+  echo sprintf('ligne %s a suprimer', $c);
+  $sql5="DELETE FROM " . $tblpref .sprintf("cont_lot WHERE num = '%s'", $c);
+  mysql_query($sql5) || die(sprintf('<p>Erreur Mysql<br/>%s<br/>', $sql5).mysql_error()."</p>");
  }
-}//fin for
-$sql4 = "UPDATE " . $tblpref ."lot SET prod ='{$prod}' WHERE num = '{$num_lot}'";
-mysql_query($sql4) OR die("<p>Erreur Mysql<br/>$sql4<br/>".mysql_error()."</p>");
-$message="<h2>$lang_lot_maj $prod</h2>";
+}
+
+//fin for
+$sql4 = "UPDATE " . $tblpref .sprintf("lot SET prod ='%s' WHERE num = '%s'", $prod, $num_lot);
+mysql_query($sql4) || die(sprintf('<p>Erreur Mysql<br/>%s<br/>', $sql4).mysql_error()."</p>");
+$message=sprintf('<h2>%s %s</h2>', $lang_lot_maj, $prod);
 //RETOUR
 $_GET['mois_1']=$_POST['mois_1'];
 $_GET['annee_1']=$_POST['annee_1'];
-include("lister_lot.php");
+include(__DIR__ . "/lister_lot.php");

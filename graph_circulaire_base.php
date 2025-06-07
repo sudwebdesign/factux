@@ -19,7 +19,7 @@
  * 		Guy Hendrickx
  *.
  */
-require_once("include/verif.php");
+require_once(__DIR__ . "/include/verif.php");
 /*
 ** Graphique sectoriel au format GIF
 */
@@ -28,18 +28,18 @@ require_once("include/verif.php");
 /*
 ** Convertir les degrés en radians
 */
-function radians($degrees){
- return($degrees * (pi()/180.0));
+function radians($degrees): float{
+ return($degrees * (M_PI/180.0));
 }
 
 /*
 ** prendre x,y dans le cercle,
 ** centre = 0,0
 */
-function circle_point($degrees, $diameter){
+function circle_point($degrees, $diameter): array{
  $x = cos(radians($degrees)) * ($diameter/2);
  $y = sin(radians($degrees)) * ($diameter/2);
- return (array($x, $y));
+ return ([$x, $y]);
 }
 
 //remplir les paramètres
@@ -47,15 +47,17 @@ $ChartDiameter = isset($ChartDiameter)?$ChartDiameter:200;
 $ChartFont = isset($ChartFont)?$ChartFont:3;
 $ChartFontHeight = imagefontheight($ChartFont);
 
-include('include/lang_days_months.php');
+include(__DIR__ . '/include/lang_days_months.php');
 for ($i=0;$i<=11;$i++){
  $m[$i] = $jm[$i][$_SESSION['lang']];
 }
-$ChartData = isset($ChartData)?$ChartData:array("$entre[1]", "$entre[2]", "$entre[3]", "$entre[4]", "$entre[5]", "$entre[6]", "$entre[7]", "$entre[8]", "$entre[9]", "$entre[10]", "$entre[11]", "$entre[12]");
+
+$ChartData = isset($ChartData)?$ChartData:[$entre[1], $entre[2], $entre[3], $entre[4], $entre[5], $entre[6], $entre[7], $entre[8], $entre[9], $entre[10], $entre[11], $entre[12]];
 $ChartLabel = isset($ChartLabel)?$ChartLabel:$m;#array("Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Decembre")
 //détermine le total de toutes les valeurs
 $ChartTotal = 0;
-for($index = 0; $index < count($ChartData); $index++){
+$counter = count($ChartData);
+for($index = 0; $index < $counter; $index++){
  $ChartTotal += intval($ChartData[$index]); // Fatal error: Uncaught TypeError: Unsupported operand types: int + string
 }
 
@@ -109,62 +111,68 @@ $colorSlice[] = imagecolorallocate($image, 0x00, 0xCC, 0xCC);
 ** Dessiner chaque portion
 */
 $Degrees = 0;
-if ($ChartTotal>0)#impossible de divisé par zéro*
- for($index = 0; $index < count($ChartData); $index++){
-  if($ChartData[$index]>0){#evite de dessiné la ligne d'un pixel
-   $StartDegrees = (int)$Degrees;#round($Degrees);
-   $Degrees += (int)round((($ChartData[$index]/$ChartTotal)*360));#ici*
-   $EndDegrees = ($Degrees>360)?360:(int)$Degrees;#round($Degrees);
+if ($ChartTotal>0) {
+    #impossible de divisé par zéro*
+    $counter = count($ChartData);
+    #impossible de divisé par zéro*
+    for($index = 0; $index < $counter; $index++){
+     if($ChartData[$index]>0){#evite de dessiné la ligne d'un pixel
+      $StartDegrees = $Degrees;#round($Degrees);
+      $Degrees += (int)round((($ChartData[$index]/$ChartTotal)*360));#ici*
+      $EndDegrees = ($Degrees>360)?360:$Degrees;#round($Degrees);
 
-   if($StartDegrees==$EndDegrees)#360&360 ou autre? (evite de remplir tout le cercle 360°)
-    continue;
+      if ($StartDegrees==$EndDegrees) {
+          #360&360 ou autre? (evite de remplir tout le cercle 360°)
+          continue;
+      }
 
-   $CurrentColor = $colorSlice[$index/*%(count($colorSlice))*/];
+      $CurrentColor = $colorSlice[$index/*%(count($colorSlice))*/];
 
-   /*var_dump($image,
-    $StartDegrees,
-    $EndDegrees,
-    $CurrentColor);*/
+      /*var_dump($image,
+       $StartDegrees,
+       $EndDegrees,
+       $CurrentColor);*/
 
-   //dessiner un arc
-   imagearc($image,
-    $ChartCenterX,
-    $ChartCenterY,
-    $ChartDiameter,
-    $ChartDiameter,
-    $StartDegrees,
-    $EndDegrees,
-    $CurrentColor);
+      //dessiner un arc
+      imagearc($image,
+       $ChartCenterX,
+       $ChartCenterY,
+       $ChartDiameter,
+       $ChartDiameter,
+       $StartDegrees,
+       $EndDegrees,
+       $CurrentColor);
 
-   //Tracer le début de la ligne à partir du centre
-   list($ArcX, $ArcY) = circle_point($StartDegrees, $ChartDiameter);
-   imageline($image,
-    $ChartCenterX,
-    $ChartCenterY,
-    floor($ChartCenterX + $ArcX),
-    floor($ChartCenterY + $ArcY),
-    $CurrentColor);
+      //Tracer le début de la ligne à partir du centre
+      list($ArcX, $ArcY) = circle_point($StartDegrees, $ChartDiameter);
+      imageline($image,
+       $ChartCenterX,
+       $ChartCenterY,
+       floor($ChartCenterX + $ArcX),
+       floor($ChartCenterY + $ArcY),
+       $CurrentColor);
 
 
-   //dessiner la fin de la ligne
-   list($ArcX, $ArcY) = circle_point($EndDegrees, $ChartDiameter);
-   imageline($image,
-    $ChartCenterX,
-    $ChartCenterY,
-    ceil($ChartCenterX + $ArcX),
-    ceil($ChartCenterY + $ArcY),
-    $CurrentColor);
+      //dessiner la fin de la ligne
+      list($ArcX, $ArcY) = circle_point($EndDegrees, $ChartDiameter);
+      imageline($image,
+       $ChartCenterX,
+       $ChartCenterY,
+       ceil($ChartCenterX + $ArcX),
+       ceil($ChartCenterY + $ArcY),
+       $CurrentColor);
 
-   //remplir les portions
-   $MidPoint = round((($EndDegrees - $StartDegrees)/2) +  $StartDegrees);
-   list($ArcX, $ArcY) = circle_point($MidPoint, $ChartDiameter/2);
-   imagefilltoborder($image,
-    floor($ChartCenterX + $ArcX),
-    floor($ChartCenterY + $ArcY),
-    $CurrentColor,
-    $CurrentColor);
-  }
- }
+      //remplir les portions
+      $MidPoint = round((($EndDegrees - $StartDegrees)/2) +  $StartDegrees);
+      list($ArcX, $ArcY) = circle_point($MidPoint, $ChartDiameter/2);
+      imagefilltoborder($image,
+       floor($ChartCenterX + $ArcX),
+       floor($ChartCenterY + $ArcY),
+       $CurrentColor,
+       $CurrentColor);
+     }
+    }
+}
 
 #exit;
 //la bordure
@@ -211,10 +219,12 @@ imagefilltoborder($image,
  $ChartCenterY,
  $colorBorder,
  $colorBorder);
+//la légende
+$counter = count($ChartData);
 
 
 //la légende
-for($index = 0; $index < count($ChartData); $index++){
+for($index = 0; $index < $counter; $index++){
  $CurrentColor = $colorSlice[$index/*%(count($colorSlice))*/];
  $LineY = $ChartDiameter + 20 +  ($index*($ChartFontHeight+2));
 
@@ -238,7 +248,7 @@ for($index = 0; $index < count($ChartData); $index++){
   20 + $ChartFontHeight,
   $LineY,
   //~ utf8_decode($ChartLabel[$index]).": $ChartData[$index]",# in utf-8 bad accents
-  mb_convert_encoding($ChartLabel[$index], 'ISO-8859-1', 'UTF-8').": $ChartData[$index]",# in utf-8 bad accents
+  mb_convert_encoding($ChartLabel[$index], 'ISO-8859-1', 'UTF-8').(': ' . $ChartData[$index]),# in utf-8 bad accents
   $colorText);
 }
 

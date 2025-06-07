@@ -19,25 +19,25 @@
  *     Guy Hendrickx
  *.
  */
-if(!isset($num_user))
- if(isset($_GET['num_user']))
-  $num_user=$_GET['num_user'];#if redirected with get
-include_once("include/headers.php");
-include_once("include/finhead.php");
+if (!isset($num_user) && isset($_GET['num_user'])) {
+    $num_user=$_GET['num_user'];
+}#if redirected with get
+include_once(__DIR__ . "/include/headers.php");
+include_once(__DIR__ . "/include/finhead.php");
 ?>
 <table width="760" border="0" class="page" align="center">
  <tr>
   <td class="page" align="center">
 <?php
-include_once("include/head.php");
+include_once(__DIR__ . "/include/head.php");
 if (isset($message)&&$message!='') {
  echo $message;
 }
 if ($user_admin != 'y') {
-  echo "<h1>$lang_admin_droit</h1>";
+  echo sprintf('<h1>%s</h1>', $lang_admin_droit);
   exit;
 }
-$sql = " SELECT * FROM " . $tblpref ."user WHERE num = $num_user ";
+$sql = " SELECT * FROM " . $tblpref .sprintf('user WHERE num = %s ', $num_user);
 $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 while($data = mysql_fetch_array($req)){
  $nom = $data['nom'];
@@ -179,8 +179,8 @@ while($data = mysql_fetch_array($req)){
   <td>
 <?php
 if ($fact == 'r' || $com == 'r' || $dev == 'r' ){
-	include("edit_choix_cli.php");
-	include("lister_clients_restreint.php");
+	include(__DIR__ . "/edit_choix_cli.php");
+	include(__DIR__ . "/lister_clients_restreint.php");
 
 ?>
   </td>
@@ -190,8 +190,8 @@ if ($fact == 'r' || $com == 'r' || $dev == 'r' ){
 <?php
 }#fi fact,com,dev
 $aide='utilisateurs';
-include("help.php");
-include_once("include/bas.php");
+include(__DIR__ . "/help.php");
+include_once(__DIR__ . "/include/bas.php");
 ?>
    </td>
   </tr>

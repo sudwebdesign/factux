@@ -19,12 +19,12 @@
  * 		Guy Hendrickx
  *.
  */
-include_once("include/headers.php");
+include_once(__DIR__ . "/include/headers.php");
 $titre=isset($_POST['titre'])?$_POST['titre']:"";
 $message=isset($_POST['message'])?$_POST['message']:"";
 if(empty($titre)&&$message=='&nbsp;'){
- $message = "<h1>$lang_oubli_champ</h1>";
- include_once("form_mailing.php");
+ $message = sprintf('<h1>%s</h1>', $lang_oubli_champ);
+ include_once(__DIR__ . "/form_mailing.php");
  exit;
 }
 ?>
@@ -32,13 +32,13 @@ if(empty($titre)&&$message=='&nbsp;'){
  <tr>
   <td class="page" align="center">
 <?php
-include_once("include/head.php");
+include_once(__DIR__ . "/include/head.php");
 $titre = stripslashes($titre);
 $meText = stripslashes($message);
 $message = $meText."\n";
 $message = nl2br($message);
-$from = "\"$entrep_nom\"<$mail>" ;//From: MonNom <monmon@monsite.com>\n"
-$subject = "$titre" ;
+$from = sprintf('"%s"<%s>', $entrep_nom, $mail) ;//From: MonNom <monmon@monsite.com>\n"
+$subject = $titre ;
 ?>
    <table class="page boiteaction">
     <caption><?php echo $lang_mail_a; ?></caption>
@@ -51,13 +51,13 @@ while($data = mysql_fetch_array($req)){
   $nom2 = $data['nom2'];
 ?>
     <tr>
-     <td><a alt="mailto:<?php echo $to; ?>" href='mailto:<?php echo "$to?subject=".apostrophe($titre)."&amp;body=".strip_tags(str_replace("<br />","%0d%0a",apostrophe($meText))); ?>'><?php echo "$nom $nom2"; ?></a></td>
-     <td><?php echo(courriel($to,$subject,$message,$from,$logo))?"$lang_email_envoyé":"$lang_email_envoi_err";?></td>
+     <td><a alt="mailto:<?php echo $to; ?>" href='mailto:<?php echo $to . '?subject='.apostrophe($titre)."&amp;body=".strip_tags(str_replace("<br />","%0d%0a",apostrophe($meText))); ?>'><?php echo sprintf('%s %s', $nom, $nom2); ?></a></td>
+     <td><?php echo(courriel($to,$subject,$message,$from,$logo))?$lang_email_envoyé:$lang_email_envoi_err;?></td>
     </tr>
 <?php } ?>
    </table>
 <?php
-include_once("include/bas.php");
+include_once(__DIR__ . "/include/bas.php");
 ?>
   </td>
  </tr>

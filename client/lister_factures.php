@@ -19,13 +19,14 @@
  * 		Guy Hendrickx
  *.
  */
-if(!isset($num_client))
- header("Location:index.php");
+if (!isset($num_client)) {
+    header("Location:index.php");
+}
 
-include_once("../include/config/common.php");
-include_once("../include/language/$lang.php");
-include_once("../include/config/var.php");
-include_once("../include/utils.php");
+include_once(__DIR__ . "/../include/config/common.php");
+include_once(__DIR__ . sprintf('/../include/language/%s.php', $lang));
+include_once(__DIR__ . "/../include/config/var.php");
+include_once(__DIR__ . "/../include/utils.php");
 $sql = "
 SELECT num, DATE_FORMAT(date_fact,'%d/%m/%Y') AS date_fact,  total_fact_ttc,
 payement, date_deb, DATE_FORMAT(date_deb,'%d/%m/%Y') AS date_deb2, date_fin,
@@ -55,13 +56,27 @@ while($data = mysql_fetch_array($req)){
   $total = $data['total_fact_ttc'];
   $date_fact = $data['date_fact'];
  switch ($pay) {
-  case "carte":$pay=$lang_carte_ban;break;
-  case "Especes":$pay=$lang_liquide;break;
-  case "ok":$pay=$lang_pay_ok;break;
-  case "Cheque":$pay=$lang_paypal;break;
-  case "virement":$pay=$lang_virement;break;
-  case "visa":$pay=$lang_visa;break;
-  case "non":$pay=$lang_non_pay;break;
+  case "carte":
+   $pay=$lang_carte_ban;
+  break;
+  case "Especes":
+   $pay=$lang_liquide;
+  break;
+  case "ok":
+   $pay=$lang_pay_ok;
+  break;
+  case "Cheque":
+   $pay=$lang_paypal;
+  break;
+  case "virement":
+   $pay=$lang_virement;
+  break;
+  case "visa":
+   $pay=$lang_visa;
+  break;
+  case "non":
+   $pay=$lang_non_pay;
+  break;
  }
 ?>
  <tr>

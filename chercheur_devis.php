@@ -19,41 +19,53 @@
  *     Guy Hendrickx
  *.
  */
-include_once("include/headers.php");
+include_once(__DIR__ . "/include/headers.php");
 ?><script type="text/javascript" src="javascripts/confdel.js"></script><?php
-include_once("include/finhead.php");
+include_once(__DIR__ . "/include/finhead.php");
 
 $requete = "SELECT DATE_FORMAT(date,'%d/%m/%Y')as date, num_dev, tot_htva, tot_tva, resu, nom
 FROM " . $tblpref ."devis
 LEFT JOIN " . $tblpref ."client on " . $tblpref ."devis.client_num = num_client
 WHERE num_dev > 0";
 
-if ( isset ( $_POST['listeclients'] ) && $_POST['listeclients'] != '')//on verifie le client
-  $requete .= " AND num_client='" . $_POST['listeclients'] . "'";
-if ( isset ( $_POST['numero'] ) && $_POST['numero'] != '')//on verifie le numero
-  $requete .= " AND num_dev='" . $_POST['numero'] . "'";
-if ( isset ( $_POST['mois'] ) && $_POST['mois'] != '')//on verifie le mois
-  $requete .= " AND MONTH(date)='" . $_POST['mois'] . "'";
-if ( isset ( $_POST['annee'] ) && $_POST['annee'] != '')//on verifie l'année
-  $requete .= " AND Year(date)='" . $_POST['annee'] . "'";
-if ( isset ( $_POST['jour'] ) && $_POST['jour'] != '')//on verifie le jour
-  $requete .= " AND DAYOFMONTH(date)='" . $_POST['jour'] . "'";
-if ( isset ( $_POST['montant'] ) && $_POST['montant'] != '')//on verifie le montant
-  $requete .= " AND trim(" . $tblpref ."devis.tot_htva)='" . $_POST['montant'] . "'";
+if (isset ( $_POST['listeclients'] ) && $_POST['listeclients'] != '') {
+    //on verifie le client
+    $requete .= " AND num_client='" . $_POST['listeclients'] . "'";
+}
+if (isset ( $_POST['numero'] ) && $_POST['numero'] != '') {
+    //on verifie le numero
+    $requete .= " AND num_dev='" . $_POST['numero'] . "'";
+}
+if (isset ( $_POST['mois'] ) && $_POST['mois'] != '') {
+    //on verifie le mois
+    $requete .= " AND MONTH(date)='" . $_POST['mois'] . "'";
+}
+if (isset ( $_POST['annee'] ) && $_POST['annee'] != '') {
+    //on verifie l'année
+    $requete .= " AND Year(date)='" . $_POST['annee'] . "'";
+}
+if (isset ( $_POST['jour'] ) && $_POST['jour'] != '') {
+    //on verifie le jour
+    $requete .= " AND DAYOFMONTH(date)='" . $_POST['jour'] . "'";
+}
+if (isset ( $_POST['montant'] ) && $_POST['montant'] != '') {
+    //on verifie le montant
+    $requete .= " AND trim(" . $tblpref ."devis.tot_htva)='" . $_POST['montant'] . "'";
+}
 if ($user_dev == 'r'){
-  $requete .=" AND " . $tblpref ."client.permi LIKE '$user_num,'
-    OR  " . $tblpref ."client.permi LIKE '%,$user_num,'
-    OR  " . $tblpref ."client.permi LIKE '%,$user_num,%'
-    OR  " . $tblpref ."client.permi LIKE '$user_num,%' ";
+  $requete .=" AND " . $tblpref ."client.permi LIKE '{$user_num},'
+    OR  " . $tblpref ."client.permi LIKE '%,{$user_num},'
+    OR  " . $tblpref ."client.permi LIKE '%,{$user_num},%'
+    OR  " . $tblpref .sprintf("client.permi LIKE '%s,%%' ", $user_num);
 }
 $tri=isset($_POST['tri'])?$_POST['tri']:"";
-$requete .= " ORDER BY $tri";
+$requete .= ' ORDER BY ' . $tri;
 
 ?>
 <table width="760" border="0" class="page" align="center">
  <tr>
   <td class="page" align="center">
-<?php include_once("include/head.php"); ?>
+<?php include_once(__DIR__ . "/include/head.php"); ?>
 <center>
  <table class='page boiteaction'>
   <caption><?php echo $lang_res_rech; ?></caption>
@@ -96,7 +108,7 @@ while($data = mysql_fetch_array($req)){
 <?php } ?>
     <td class='<?php echo couleur_alternee (FALSE,"c texte"); ?>'>
      <a href="delete_dev.php?num_dev=<?php echo $num_dev; ?>&amp;nom=<?php echo $nom; ?>"
-        onClick="return confirmDelete('<?php echo"$lang_eff_dev $num_dev ?"; ?>')">
+        onClick="return confirmDelete('<?php echo sprintf('%s %s ?', $lang_eff_dev, $num_dev); ?>')">
       <img border="0" src="image/delete.jpg">
      </a>
     </td>
@@ -111,13 +123,13 @@ while($data = mysql_fetch_array($req)){
 <?php if ($resu =='0'){ ?>
     <td class='<?php echo couleur_alternee (FALSE,"c texte"); ?>'>
       <a href="convert.php?num_dev=<?php echo $num_dev; ?>" title="<?php echo $lang_convertir; ?>"
-         onClick="return confirmDelete('<?php echo"$lang_convert_dev $num_dev $lang_convert_dev2 "; ?>')">
+         onClick="return confirmDelete('<?php echo sprintf('%s %s %s ', $lang_convert_dev, $num_dev, $lang_convert_dev2); ?>')">
        <img border="0" src= 'image/icon_lol.gif'>
       </a>
     </td>
     <td class='<?php echo couleur_alternee (FALSE,"c texte"); ?>'>
      <a href="devis_non_commandes.php?num_dev=<?php echo $num_dev; ?>" title="<?php echo $lang_perdu; ?>"
-        onClick="return confirmDelete('<?php echo"$lang_dev_perd $num_dev $lang_dev_perd2 "; ?>')">
+        onClick="return confirmDelete('<?php echo sprintf('%s %s %s ', $lang_dev_perd, $num_dev, $lang_dev_perd2); ?>')">
       <img border="0" src="image/icon_cry.gif">
      </a>
     </td>
@@ -134,7 +146,7 @@ while($data = mysql_fetch_array($req)){
  </table>
 </center>
 <?php
-include_once("chercher_devis.php");
+include_once(__DIR__ . "/chercher_devis.php");
 ?>
   </td>
  </tr>

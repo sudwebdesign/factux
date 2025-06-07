@@ -19,17 +19,17 @@
  * 		Guy Hendrickx
  *.
  */
-include_once("include/headers.php");
-include_once("include/finhead.php");
+include_once(__DIR__ . "/include/headers.php");
+include_once(__DIR__ . "/include/finhead.php");
 ?>
 <table width="760" border="0" class="page" align="center">
  <tr>
   <td class="page" align="center">
 <?php
-include_once("include/head.php");
+include_once(__DIR__ . "/include/head.php");
 if ($user_com == 'n') {
- echo"<h1>$lang_commande_droit</h1>";
- include_once("include/bas.php");
+ echo sprintf('<h1>%s</h1>', $lang_commande_droit);
+ include_once(__DIR__ . "/include/bas.php");
  exit;
 }
 $num_get=isset($_GET['num'])?$_GET['num']:"";
@@ -38,15 +38,15 @@ $mois_1=isset($_GET['mois_1'])?$_GET['mois_1']:date("m");
 $annee_1=isset($_GET['annee_1'])?$_GET['annee_1']:date("Y");
 
 $sql1 = "SELECT prod
-FROM " . $tblpref ."lot
-WHERE num = $num_get";
+FROM " . $tblpref .('lot
+WHERE num = ' . $num_get);
 $req1 = mysql_query($sql1) or die('Erreur SQL1 !<br>'.$sql1.'<br>'.mysql_error());
 $data = mysql_fetch_array($req1);
 $produit= $data['prod'];
 $sql = "
 SELECT ingr, fourn, fourn_lot, num
 FROM " . $tblpref ."cont_lot
-WHERE num_lot= $num_get
+WHERE num_lot= {$num_get}
 ";
 $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error())
 ?>
@@ -85,14 +85,14 @@ for ($i=1; $i<13; $i++) {
 ?>
      <tr class='<?php echo couleur_alternee (); ?>'>
       <td>
-       <input name="<?php echo "ing_$i" ?>" type="text" size="27" maxlength="20" value='<?php echo @$tab_ingr[$i]; ?>' />
+       <input name="<?php echo 'ing_' . $i ?>" type="text" size="27" maxlength="20" value='<?php echo @$tab_ingr[$i]; ?>' />
       </td>
       <td>
-       <input name="<?php echo "four_$i" ?>" type="text"  size="27" maxlength="15" value='<?php echo @$tab_fourn[$i]; ?>' />
+       <input name="<?php echo 'four_' . $i ?>" type="text"  size="27" maxlength="15" value='<?php echo @$tab_fourn[$i]; ?>' />
       </td>
       <td>
-       <input name="<?php echo "lot_four_$i" ?>" type="text" size="27" maxlength="20" value='<?php echo @$tab_fourn_lot[$i]; ?>' />
-       <input name="<?php echo "num_cont_bon_$i";?>" type="hidden" value='<?php echo @$tab_num[$i]; ?>' />
+       <input name="<?php echo 'lot_four_' . $i ?>" type="text" size="27" maxlength="20" value='<?php echo @$tab_fourn_lot[$i]; ?>' />
+       <input name="<?php echo 'num_cont_bon_' . $i;?>" type="hidden" value='<?php echo @$tab_num[$i]; ?>' />
       </td>
      </tr>
 <?php } ?>
@@ -115,8 +115,8 @@ for ($i=1; $i<13; $i++) {
   <td>
 <?php
 $aide='lots';
-include("help.php");
-include_once("include/bas.php");
+include(__DIR__ . "/help.php");
+include_once(__DIR__ . "/include/bas.php");
 ?>
   </td>
  </tr>

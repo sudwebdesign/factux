@@ -19,24 +19,24 @@
  * 		Guy Hendrickx
  *.
  */
-include_once("include/headers.php");
-include_once("include/finhead.php");
+include_once(__DIR__ . "/include/headers.php");
+include_once(__DIR__ . "/include/finhead.php");
 ?>
 <table width="760" border="0" class="page" align="center">
  <tr>
   <td class="page" align="center">
 <?php
-include_once("include/head.php");
+include_once(__DIR__ . "/include/head.php");
 if ($user_com == 'n') {
- echo"<h1>$lang_commande_droit</h1>";
- include_once("include/bas.php");
+ echo sprintf('<h1>%s</h1>', $lang_commande_droit);
+ include_once(__DIR__ . "/include/bas.php");
  exit;
 }
 $num_lot=isset($_GET['num'])?$_GET['num']:"";
 $sql = "
 SELECT ingr, fourn, fourn_lot
 FROM " . $tblpref ."cont_lot
-WHERE num_lot = $num_lot
+WHERE num_lot = {$num_lot}
 ";
 $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 ?>
@@ -46,7 +46,7 @@ $mois_1=isset($_GET['mois_1'])?$_GET['mois_1']:date("m");
 $annee_1=isset($_GET['annee_1'])?$_GET['annee_1']:date("Y");
 ?>
    <table width='760' border='0' class='page' align='center'>
-    <caption><?php echo "$lang_cont_lot $num_lot"; ?></caption>
+    <caption><?php echo sprintf('%s %s', $lang_cont_lot, $num_lot); ?></caption>
     <tr>
      <th><?php echo $lang_ingred; ?></th>
      <th><?php echo $lang_fournisseur; ?></th>
@@ -58,11 +58,7 @@ while($data = mysql_fetch_array($req)){
   $ingr = $data['ingr'];
   $fourn = $data['fourn'];
   $fourn_lot = $data['fourn_lot'];
- if($c++ & 1){
-  $line="0";
- }else{
-  $line="1";
- }
+ $line = $c++ & 1 ? "0" : "1";
 ?>
     <tr class="texte<?php echo $line; ?>" onmouseover="this.className='highlight'" onmouseout="this.className='texte<?php echo $line; ?>'">
      <td class='<?php echo couleur_alternee (); ?>'><?php echo $ingr; ?></td>
@@ -84,11 +80,11 @@ while($data = mysql_fetch_array($req)){
   <td>
 <?php
 }else{
- echo"<h2>$lang_lot_zero</h2>";
+ echo sprintf('<h2>%s</h2>', $lang_lot_zero);
 }
 $aide='admin';
-include("help.php");
-include_once("include/bas.php");
+include(__DIR__ . "/help.php");
+include_once(__DIR__ . "/include/bas.php");
 ?>
   </td>
  </tr>

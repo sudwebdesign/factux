@@ -19,17 +19,17 @@
  * 		Guy Hendrickx
  *.
  */
-include_once("include/headers.php");
-include_once("include/finhead.php");
+include_once(__DIR__ . "/include/headers.php");
+include_once(__DIR__ . "/include/finhead.php");
 ?>
 <table width="760" border="0" class="page" align="center">
  <tr>
   <td class="page" align="center">
 <?php
-include_once("include/head.php");
+include_once(__DIR__ . "/include/head.php");
 if ($user_fact == 'n') {
- echo "<h1>$lang_facture_droit</h1>";
- include_once("include/bas.php");
+ echo sprintf('<h1>%s</h1>', $lang_facture_droit);
+ include_once(__DIR__ . "/include/bas.php");
  exit;
 }
 $mois = date("m");
@@ -45,7 +45,7 @@ $jour = date("d");
         <input type="hidden" name="user" value="adm" /><?php echo $lang_facture_date; ?>
        </td>
        <td class='<?php echo couleur_alternee (FALSE); ?>'>
-        <input type="text" name="oneclick" value="<?php echo "$jour/$mois/$annee" ?>" readonly="readonly"/>
+        <input type="text" name="oneclick" value="<?php echo sprintf('%s/%s/%s', $jour, $mois, $annee) ?>" readonly="readonly"/>
         <a href="#" onClick=" window.open('include/pop.calendrier.php?frm=form_facture&amp;ch=oneclick','calendrier','width=460,height=170,scrollbars=0').focus();">
          <img src="image/petit_calendrier.gif" alt="calendier"border="0"/>
         </a>
@@ -65,8 +65,8 @@ $jour = date("d");
   <td>
 <?php
 $aide = 'oneclick';
-include("help.php");
-include_once("include/bas.php");
+include(__DIR__ . "/help.php");
+include_once(__DIR__ . "/include/bas.php");
 ?>
   </td>
  </tr>

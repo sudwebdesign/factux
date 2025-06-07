@@ -19,16 +19,16 @@
  * 		Guy Hendrickx
  *.
  */
-require_once("include/verif.php");
-include_once("include/config/common.php");
-include_once("include/config/var.php");
-include_once("include/language/$lang.php");
+require_once(__DIR__ . "/include/verif.php");
+include_once(__DIR__ . "/include/config/common.php");
+include_once(__DIR__ . "/include/config/var.php");
+include_once(__DIR__ . sprintf('/include/language/%s.php', $lang));
 $num_dev=isset($_GET['num_dev'])?$_GET['num_dev']:"";
 $jour = date("d");
 $mois = date("m");
 $annee = date("Y");
 //on recpere les donnée de devis
-$sql0 = "SELECT * FROM " . $tblpref ."devis WHERE num_dev = $num_dev";
+$sql0 = "SELECT * FROM " . $tblpref .('devis WHERE num_dev = ' . $num_dev);
 $req = mysql_query($sql0) or die('Erreur SQL !<br>'.$sql0.'<br>'.mysql_error());
 while($data = mysql_fetch_array($req)){
  $num_dev = $data['num_dev'];
@@ -38,20 +38,22 @@ while($data = mysql_fetch_array($req)){
  $tot_tva = $data['tot_tva'];
  $resu = $data['resu'];
 }
+
 if ($resu>0){
- $message= "<h2>$lang_devis $lang_déja_commandé ($resu)</h2>";
- include_once("lister_commandes.php");
+ $message= sprintf('<h2>%s %s (%s)</h2>', $lang_devis, $lang_déja_commandé, $resu);
+ include_once(__DIR__ . "/lister_commandes.php");
  exit;
 }
+
 //on les reinjecte dans la base bon_comm
-$sql1 = "INSERT INTO " . $tblpref ."bon_comm ( client_num, date, tot_htva, tot_tva ) VALUES ( $client_num, '$annee-$mois-$jour', $tot_htva, $tot_tva )";
-mysql_query($sql1) or die('Erreur SQL !<br>'.$sql1.'<br>'.mysql_error());
+$sql1 = "INSERT INTO " . $tblpref .sprintf("bon_comm ( client_num, date, tot_htva, tot_tva ) VALUES ( %s, '%s-%s-%s', %s, %s )", $client_num, $annee, $mois, $jour, $tot_htva, $tot_tva);
+mysql_query($sql1) || die('Erreur SQL !<br>'.$sql1.'<br>'.mysql_error());
 $num_bon = mysql_insert_id();//le numero de bon
 
-$sql2 = "UPDATE " . $tblpref ."devis SET resu='$num_bon' WHERE num_dev= $num_dev";
-mysql_query($sql2) or die('Erreur SQL !<br>'.$sql2.'<br>'.mysql_error());
+$sql2 = "UPDATE " . $tblpref .sprintf("devis SET resu='%s' WHERE num_dev= %s", $num_bon, $num_dev);
+mysql_query($sql2) || die('Erreur SQL !<br>'.$sql2.'<br>'.mysql_error());
 
-$sql3 = "SELECT * FROM " . $tblpref ."cont_dev WHERE dev_num = $num_dev";
+$sql3 = "SELECT * FROM " . $tblpref .('cont_dev WHERE dev_num = ' . $num_dev);
 $req = mysql_query($sql3) or die('Erreur SQL !<br>'.$sql3.'<br>'.mysql_error());
 while($data = mysql_fetch_array($req)){
  $article_num = $data['article_num'];
@@ -61,11 +63,12 @@ while($data = mysql_fetch_array($req)){
  $p_u_jour = $data['p_u_jour'];
  $marge = $data['marge_jour'];
  $remise = $data['remise'];
- $sql4 = "INSERT INTO " . $tblpref ."cont_bon(bon_num, p_u_jour, article_num, quanti, tot_art_htva, to_tva_art, remise, marge_jour) VALUES ('$num_bon', '$p_u_jour', '$article_num', '$quanti', '$tot_art_htva', '$to_tva_art', '$remise', '$marge')";
- mysql_query($sql4) or die('Erreur SQL !<br>'.$sql4.'<br>'.mysql_error());
+ $sql4 = "INSERT INTO " . $tblpref .sprintf("cont_bon(bon_num, p_u_jour, article_num, quanti, tot_art_htva, to_tva_art, remise, marge_jour) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')", $num_bon, $p_u_jour, $article_num, $quanti, $tot_art_htva, $to_tva_art, $remise, $marge);
+ mysql_query($sql4) || die('Erreur SQL !<br>'.$sql4.'<br>'.mysql_error());
  //on decremente le stock
- $sql12 = "UPDATE `" . $tblpref ."article` SET `stock` = (stock - $quanti) WHERE `num` = '$article_num'";
- mysql_query($sql12) or die('Erreur SQL12 !<br>'.$sql12.'<br>'.mysql_error());
+ $sql12 = "UPDATE `" . $tblpref .sprintf("article` SET `stock` = (stock - %s) WHERE `num` = '%s'", $quanti, $article_num);
+ mysql_query($sql12) || die('Erreur SQL12 !<br>'.$sql12.'<br>'.mysql_error());
 }
-$message= "<h2>$lang_dev_cov $lang_numero $num_bon <form action='fpdf/bon_pdf.php' method='post' target= '_blank' class='img'><input type='hidden' name='num_bon' value='$num_bon' /><input type='hidden' name='user' value='adm'><input type='image' src='image/printer.gif' alt='$lang_imprimer' /></form></h2>";
-include_once("lister_devis.php");
+
+$message= sprintf("<h2>%s %s %s <form action='fpdf/bon_pdf.php' method='post' target= '_blank' class='img'><input type='hidden' name='num_bon' value='%s' /><input type='hidden' name='user' value='adm'><input type='image' src='image/printer.gif' alt='%s' /></form></h2>", $lang_dev_cov, $lang_numero, $num_bon, $num_bon, $lang_imprimer);
+include_once(__DIR__ . "/lister_devis.php");

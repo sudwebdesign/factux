@@ -27,5 +27,5 @@ $_SESSION['trucmuch'] = '';#session_register('login');
 $_SESSION['lang'] = '';
 unset($_SESSION['trucmuch'],$_SESSION['lang']);
 session_destroy();
-require ("../include/del_pdf.php");
-include("login.php");
+require (__DIR__ . "/../include/del_pdf.php");
+include(__DIR__ . "/login.php");

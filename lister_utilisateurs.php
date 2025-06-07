@@ -19,18 +19,18 @@
  *   Guy Hendrickx
  *.
  */
-include_once("include/headers.php");
+include_once(__DIR__ . "/include/headers.php");
 ?><script type="text/javascript" src="javascripts/confdel.js"></script><?php
-include_once("include/finhead.php");
+include_once(__DIR__ . "/include/finhead.php");
 ?>
 <table width="760" border="0" class="page" align="center">
  <tr>
   <td class="page" align="center">
 <?php
-include_once("include/head.php");
+include_once(__DIR__ . "/include/head.php");
 if ($user_admin != 'y'){
- echo "<h1>$lang_admin_droit</h1>";
- include_once("include/bas.php");
+ echo sprintf('<h1>%s</h1>', $lang_admin_droit);
+ include_once(__DIR__ . "/include/bas.php");
  exit;
 }
 if (isset($message)&&$message!='') {
@@ -46,14 +46,14 @@ $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
     <th><?php echo $lang_nom; ?></th>
     <th><?php echo $lang_prenom; ?></th>
     <th><?php echo $lang_login; ?></th>
-    <th><?php echo "$lang_admin?"; ?></th>
-    <th><?php echo "$lang_gerer $lang_devis?"; ?></th>
-    <th><?php echo "$lang_gerer $lang_commandes?"; ?></th>
-    <th><?php echo "$lang_gerer $lang_factures?"; ?></th>
-    <th><?php echo "$lang_gerer $lang_depenses?"; ?></th>
-    <th><?php echo "$lang_voir $lang_stat?"; ?></th>
-    <th><?php echo "$lang_gerer $lang_art?"; ?></th>
-    <th><?php echo "$lang_gerer $lang_clients?"; ?></th>
+    <th><?php echo $lang_admin . '?'; ?></th>
+    <th><?php echo sprintf('%s %s?', $lang_gerer, $lang_devis); ?></th>
+    <th><?php echo sprintf('%s %s?', $lang_gerer, $lang_commandes); ?></th>
+    <th><?php echo sprintf('%s %s?', $lang_gerer, $lang_factures); ?></th>
+    <th><?php echo sprintf('%s %s?', $lang_gerer, $lang_depenses); ?></th>
+    <th><?php echo sprintf('%s %s?', $lang_voir, $lang_stat); ?></th>
+    <th><?php echo sprintf('%s %s?', $lang_gerer, $lang_art); ?></th>
+    <th><?php echo sprintf('%s %s?', $lang_gerer, $lang_clients); ?></th>
     <th colspan="2"><?php echo $lang_action; ?></th>
    </tr>
 <?php
@@ -92,12 +92,8 @@ while($data = mysql_fetch_array($req)){
   if ($admin == 'y') { $admin = $lang_oui ; }
   if ($admin == 'n') { $admin = $lang_non ; }
  $num_user = $data['num'];
- $nombre = $nombre +1;
- if($nombre & 1){
-  $line="0";
- }else{
-  $line="1";
- }
+ $nombre += 1;
+ $line = $nombre & 1 ? "0" : "1";
 ?>
    <tr class="texte<?php echo $line; ?>" onmouseover="this.className='highlight'" onmouseout="this.className='texte<?php echo $line; ?>'">
     <td class='<?php echo couleur_alternee (); ?>'><b><?php echo $nom; ?></b></td>
@@ -134,8 +130,8 @@ while($data = mysql_fetch_array($req)){
   <td>
 <?php
 $aide = 'utilisateurs';
-include("help.php");
-include_once("include/bas.php");
+include(__DIR__ . "/help.php");
+include_once(__DIR__ . "/include/bas.php");
 if(!strstr($_SERVER['SCRIPT_FILENAME'],__FILE__)){#autre qu'elle meme
  echo"\n  </td>\n </tr>\n</table>\n";
 }

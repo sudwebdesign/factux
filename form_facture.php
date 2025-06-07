@@ -19,43 +19,45 @@
  * 		Guy Hendrickx
  *.
  */
-include_once("include/headers.php");
-include_once("include/finhead.php");?>
+include_once(__DIR__ . "/include/headers.php");
+include_once(__DIR__ . "/include/finhead.php");?>
 <table width="760" border="0" class="page" align="center">
  <tr>
   <td class="page" align="center">
 <?php
-include_once("include/head.php");
+include_once(__DIR__ . "/include/head.php");
 if ($user_fact == 'n') {
- echo "<h1>$lang_facture_droit</h1>";
- include_once("include/bas.php");
+ echo sprintf('<h1>%s</h1>', $lang_facture_droit);
+ include_once(__DIR__ . "/include/bas.php");
  exit;
 }
 if (isset($message)&&$message!='') {
- echo $message; $message='';
+ echo $message;
+ $message='';#onlyHere
 }
 
 $rqSql = "SELECT num_client, nom FROM " . $tblpref ."client WHERE actif != 'non'";
 if ($user_fact == 'r') {
 $rqSql .= "
-and (" . $tblpref ."client.permi LIKE '$user_num,'
-or  " . $tblpref ."client.permi LIKE '%,$user_num,'
-or  " . $tblpref ."client.permi LIKE '%,$user_num,%'
-or  " . $tblpref ."client.permi LIKE '$user_num,%')
+and (" . $tblpref ."client.permi LIKE '{$user_num},'
+or  " . $tblpref ."client.permi LIKE '%,{$user_num},'
+or  " . $tblpref ."client.permi LIKE '%,{$user_num},%'
+or  " . $tblpref ."client.permi LIKE '{$user_num},%')
 ";
 }
 $mois = date("m");
 $annee = date("Y");
 $jour = date("d");
 $acompte=isset($_POST['acompte'])?$_POST['acompte']:"";
-$date_deb=isset($_POST['date_deb'])?$_POST['date_deb']:"1/$mois/$annee";
-$date_fin=isset($_POST['date_fin'])?$_POST['date_fin']:"$jour/$mois/$annee";
-$date_fact=isset($_POST['date_fact'])?$_POST['date_fact']:"$jour/$mois/$annee";
+$date_deb=isset($_POST['date_deb'])?$_POST['date_deb']:sprintf('1/%s/%s', $mois, $annee);
+$date_fin=isset($_POST['date_fin'])?$_POST['date_fin']:sprintf('%s/%s/%s', $jour, $mois, $annee);
+$date_fact=isset($_POST['date_fact'])?$_POST['date_fact']:sprintf('%s/%s/%s', $jour, $mois, $annee);
 $coment=isset($_POST['coment'])?$_POST['coment']:"";
 
 $num="";
-if(isset($_POST['simuler']))
- $num=isset($client)?$client:"";
+if (isset($_POST['simuler'])) {
+    $num=isset($client)?$client:"";
+}
 ?>
    <form name="formu" method="post" action="fact.php">
     <table border='0' class='page' align='center'>
@@ -65,7 +67,7 @@ if(isset($_POST['simuler']))
       <td class="texte0">
 <?php
 if ($liste_cli!='y') {
-$rqSql="$rqSql order by nom";
+$rqSql .= ' order by nom';
 $result = mysql_query( $rqSql ) or die('Erreur SQL !<br>'.$rqSql.'<br>'.mysql_error());
 ?>
        <select name='listeclients'>
@@ -78,7 +80,7 @@ $nom = $row["nom"];
         <option value='<?php echo $numclient; ?>'<?php echo ($num==$numclient)?" selected='selected'":''; ?>><?php echo $nom; ?></option>
 <?php } ?>
        </select>
-<?php }else{ include_once("include/choix_cli.php");} ?>
+<?php }else{ include_once(__DIR__ . "/include/choix_cli.php");} ?>
       </td>
      </tr>
      <tr>
@@ -121,4 +123,4 @@ $nom = $row["nom"];
  <tr>
   <td>
 <?php
-include_once("lister_factures.php");
+include_once(__DIR__ . "/lister_factures.php");

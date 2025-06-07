@@ -64,13 +64,13 @@
       </tr>
       <tr>
        <td><input type="submit" name="Submit" value="<?php echo $lang_envoyer; ?>" /></td>
-       <td><input type="reset" name=reset" value="<?php echo $lang_retablir; ?>"></td>
+       <td><input type="reset" name="reset" value="<?php echo $lang_retablir; ?>"></td>
       </tr>
      </table>
     </form>
    </center>
    <br><hr>
-<?php include_once("../include/bas_cli.php"); ?>
+<?php include_once(__DIR__ . "/../include/bas_cli.php"); ?>
   </td>
  </tr>
 </table>

@@ -19,16 +19,17 @@
  * 		Guy Hendrickx
  *.
  */
-require_once("include/verif.php");
-include_once("include/config/common.php");
-include_once("include/config/var.php");
-include_once("include/language/$lang.php");
+require_once(__DIR__ . "/include/verif.php");
+include_once(__DIR__ . "/include/config/common.php");
+include_once(__DIR__ . "/include/config/var.php");
+include_once(__DIR__ . sprintf('/include/language/%s.php', $lang));
 if ($user_admin !='y') {
- echo "<h1>$lang_admin_droit</h1>";
+ echo sprintf('<h1>%s</h1>', $lang_admin_droit);
  exit;
 }
-if (empty($_POST)) {#acces direct
- include("admin.php");
+
+if ($_POST === []) {#acces direct
+ include(__DIR__ . "/admin.php");
  exit;
 }
 
@@ -46,77 +47,79 @@ $choix_auth_cli_fact=isset($_POST['choix_auth_cli_fact'])?$_POST['choix_auth_cli
 $choix_first_art=isset($_POST['choix_first_art'])?$_POST['article']:0;
 $choix_echeance_fact=isset($_POST['choix_echeance_fact'])?$_POST['choix_echeance_fact']:30;
 
-$filename = 'include/configav.php';
+$filename = __DIR__ . '/include/configav.php';
 $texte='<?php';
 $texte.="\n";
 $texte.='$lot=\'';
 $texte.=$choix_use_lot;
-$texte.='\';';
+$texte.="';";
 $texte.="\n";
 $texte.='$liste_cli=\'';
 $texte.=$choix_use_liste_cli;
-$texte.='\';';
+$texte.="';";
 $texte.="\n";
 $texte.='$use_categorie =\'';
 $texte.=$choix_use_cat;
-$texte.='\';';
+$texte.="';";
 $texte.="\n";
 $texte.='$use_payement =\'';
 $texte.=$choix_use_payement;
-$texte.='\';';
+$texte.="';";
 $texte.="\n";
 $texte.='$theme=\'';
 $texte.=$choix_theme;
-$texte.='\';';
+$texte.="';";
 $texte.="\n";
 $texte.='$use_stock=\'';
 $texte.=$choix_use_stock;
-$texte.='\';';
+$texte.="';";
 $texte.="\n";
 $texte.='$autoprint=\'';
 $texte.=$choix_impression;
-$texte.='\';';
+$texte.="';";
 $texte.="\n";
 $texte.='$nbr_impr=\'';
 $texte.=$nbr_impression;
-$texte.='\';';
+$texte.="';";
 $texte.="\n";
 $texte.='$auth_cli_devis=\'';
 $texte.=$choix_auth_cli_devis;
-$texte.='\';';
+$texte.="';";
 $texte.="\n";
 $texte.='$auth_cli_bon=\'';
 $texte.=$choix_auth_cli_bon;
-$texte.='\';';
+$texte.="';";
 $texte.="\n";
 $texte.='$auth_cli_fact=\'';
 $texte.=$choix_auth_cli_fact;
-$texte.='\';';
+$texte.="';";
 $texte.="\n";
 $texte.='$first_art=\'';
 $texte.=$choix_first_art;
-$texte.='\';';
+$texte.="';";
 $texte.="\n";
 $texte.='$echeance_fact=\'';
 $texte.=$choix_echeance_fact;
-$texte.='\';';
+$texte.="';";
 $texte.="\n";
 
 if (is_writable($filename)){
  if (!$handle = fopen($filename, 'w+')){
-  echo "$lang_fi_innouvr ($filename).";
-  include("admin.php");
+  echo sprintf('%s (%s).', $lang_fi_innouvr, $filename);
+  include(__DIR__ . "/admin.php");
   exit;
  }
+
  if (fwrite($handle, $texte) === FALSE){
-  $message= "<h1>$lang_fi_inedita ($filename).</h1>";
-  include("admin.php");
+  $message= sprintf('<h1>%s (%s).</h1>', $lang_fi_inedita, $filename);
+  include(__DIR__ . "/admin.php");
   exit;
  }
+
  fclose($handle);
- $message="<h2>$lang_new_config_ok</h2>";
- include("admin.php");
+ $message=sprintf('<h2>%s</h2>', $lang_new_config_ok);
+ include(__DIR__ . "/admin.php");
 }else{
- $message= "<h1>$lang_fi_lect_sl ($filename).</h1>";
- include("admin.php");
+ $message= sprintf('<h1>%s (%s).</h1>', $lang_fi_lect_sl, $filename);
+ include(__DIR__ . "/admin.php");
 }

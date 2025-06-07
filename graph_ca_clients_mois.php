@@ -19,8 +19,8 @@
  * 		Guy Hendrickx
  *.
  */
-include_once("include/headers.php");
-include_once("include/finhead.php");
+include_once(__DIR__ . "/include/headers.php");
+include_once(__DIR__ . "/include/finhead.php");
 $mois_1=isset($_POST['mois_1'])?$_POST['mois_1']:date("m");
 $annee_1=isset($_POST['annee_1'])?$_POST['annee_1']:date("Y");
 ?>
@@ -28,10 +28,10 @@ $annee_1=isset($_POST['annee_1'])?$_POST['annee_1']:date("Y");
  <tr>
   <td class="page" align="center">
 <?php
-include_once("include/head.php");
+include_once(__DIR__ . "/include/head.php");
 if ($user_stat== 'n') {
- echo"<h1>$lang_statistique_droit</h1>";
- include_once("include/bas.php");
+ echo sprintf('<h1>%s</h1>', $lang_statistique_droit);
+ include_once(__DIR__ . "/include/bas.php");
  exit;
 }
 ?>
@@ -61,22 +61,22 @@ $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql2.'<br>'.mysql_error());
 $nb = mysql_num_rows($req);
 ?>
   <table class='page boiteaction'>
-   <caption><?php echo "$lang_ca_par_client_1mois $mois_1/$annee_1" ?></caption>
+   <caption><?php echo sprintf('%s %s/%s', $lang_ca_par_client_1mois, $mois_1, $annee_1) ?></caption>
    <tr>
     <th><?php echo $lang_client; ?></th>
     <th width="380"><?php echo $lang_pourcentage;?></th>
-    <th><?php echo "$lang_total_mois $mois_1/$annee_1"; ?></th>
+    <th><?php echo sprintf('%s %s/%s', $lang_total_mois, $mois_1, $annee_1); ?></th>
    </tr>
 <?php
 //pour le total
-$sql = "SELECT SUM(tot_htva)FROM " . $tblpref ."bon_comm WHERE MONTH(date)= $mois_1 AND Year(date)=$annee_1 ";
+$sql = "SELECT SUM(tot_htva)FROM " . $tblpref .sprintf('bon_comm WHERE MONTH(date)= %s AND Year(date)=%s ', $mois_1, $annee_1);
 $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 $data = mysql_fetch_array($req);
 $total = $data['SUM(tot_htva)'];
 $sql = "SELECT SUM(tot_htva) AS tot_htva, nom FROM  " . $tblpref ."bon_comm
 RIGHT JOIN " . $tblpref ."client on client_num = num_client
-WHERE Year(date)=$annee_1
-AND MONTH(date)=$mois_1
+WHERE Year(date)={$annee_1}
+AND MONTH(date)={$mois_1}
 GROUP BY nom
 ORDER BY tot_htva DESC";
 $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
@@ -103,8 +103,8 @@ $pourcentage = avec_virgule ($tot / $total * 100.00, 2);//number_format( round( 
   <td>
 <?php
 $aide='stats';
-include("help.php");
-include_once("include/bas.php");
+include(__DIR__ . "/help.php");
+include_once(__DIR__ . "/include/bas.php");
 ?>
   </td>
  </tr>

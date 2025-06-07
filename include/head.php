@@ -22,12 +22,13 @@
 ?>
 <!--- Factux le facturier libre, Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles, Licensed under the terms of the GNU  General Public License: http://opensource.org/licenses/GPL-3.0 .For further information visit: http://factux.free.fr -->
 <?php
-if (!file_exists("include/themes/$theme/menu.inc.php")){
+if (!file_exists(sprintf('include/themes/%s/menu.inc.php', $theme))){
 ////////////////menu par default////////////////////////////
-if ($lot == 'y')
- echo'<script language="javascript" src="javascripts/menu_lot.js" type="text/javascript"></script>';
-else
- echo'<script language="javascript" src="javascripts/menu.js" type="text/javascript"></script>';
+if ($lot == 'y') {
+    echo'<script language="javascript" src="javascripts/menu_lot.js" type="text/javascript"></script>';
+} else {
+    echo'<script language="javascript" src="javascripts/menu.js" type="text/javascript"></script>';
+}
 ?>
 <div id="conteneurmenu" style="margin-top: 69px;">
 <script language="Javascript" type="text/javascript">
@@ -219,19 +220,21 @@ window.addEventListener('resize', function(event){centrer_menu=true;Chargement()
 <?php
 /////////////////////////Fin du menu par default
 }else{
- include_once("include/themes/$theme/menu.inc.php");
+ include_once(__DIR__ . sprintf('/themes/%s/menu.inc.php', $theme));
 }
 #require ("include/del_pdf.php");
 $filename = 'installeur';
-if (file_exists($filename))
- echo "<center><h1>$lang_erreur_insta</h1></center>";
+if (file_exists($filename)) {
+    echo sprintf('<center><h1>%s</h1></center>', $lang_erreur_insta);
+}
 /*if (is_writable("include/config/var.php"))
  echo "<center><h1>$lang_erreur_var</h1></center>";
 if (is_writable("include/config/common.php"))
  echo "<center><h1>$lang_erreur_common</h1></center>";*/
-if (file_exists('dump/backup.sql'))
- echo "<center><h1>$lang_erreur_backup</h1></center>";
+if (file_exists('dump/backup.sql')) {
+    echo sprintf('<center><h1>%s</h1></center>', $lang_erreur_backup);
+}
 ?>
 <noscript><h1 style="font-size:207%;">FactOops, Javascript innactif.</h1></noscript>
-<center><?php include_once("javascripts/date.js"); ?></center>
+<center><?php include_once(__DIR__ . "/../javascripts/date.js"); ?></center>
 <hr>

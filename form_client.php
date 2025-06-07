@@ -19,21 +19,22 @@
  * 		Guy Hendrickx
  *.
  */
-include_once("include/headers.php");
-include_once("include/finhead.php");
+include_once(__DIR__ . "/include/headers.php");
+include_once(__DIR__ . "/include/finhead.php");
 ?>
 <table width="760" border="0" class="page" align="center">
  <tr>
   <td class="page" align="center">
 <?php
-include_once("include/head.php");
+include_once(__DIR__ . "/include/head.php");
 if ($user_cli == 'n') {
- echo"<h1>$lang_client_droit</h1>";
- include_once("include/bas.php");
+ echo sprintf('<h1>%s</h1>', $lang_client_droit);
+ include_once(__DIR__ . "/include/bas.php");
  exit;
 }
 if(isset($message)&&$message!='') {
- echo $message;$message='';
+ echo $message;
+ $message='';#onlyHere
 }
 ?>
    <center>
@@ -110,4 +111,4 @@ if(isset($message)&&$message!='') {
  <tr>
   <td>
 <?php
-include("lister_clients.php");
+include(__DIR__ . "/lister_clients.php");

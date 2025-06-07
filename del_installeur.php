@@ -19,7 +19,7 @@
  * 		Guy Hendrickx
  *.
  */
-function deldir($dir){
+function deldir(string $dir): bool{
  $dh=opendir($dir);
  while ($file=readdir($dh)){
   if($file!="." && $file!=".."){
@@ -31,6 +31,7 @@ function deldir($dir){
    }
   }
  }
+
  closedir($dh);
  if(rmdir($dir)){
   return true;
@@ -38,8 +39,10 @@ function deldir($dir){
   return false;
  }
 }
+
 if($_GET['util']== 'del'){
 deldir("installeur");
 }
-include("lister_commandes.php");
+
+include(__DIR__ . "/lister_commandes.php");
 unlink(__FILE__);

@@ -22,7 +22,7 @@ error_reporting(0);
 
 
 $lang_factux = "Factux - fatturazione gratuito revisione 2017";#Factux - l'emittente di fatture Revisione//Factux - la Directory Biller gratuita Revisione 2015//Factux - l'emittente della fattura la revisione 2015
-$lang_source_fac = "$lang_factux Webiciel open source gratuito <br />derivato da <a href='http://sourceforge.net/projects/factux/' target='_blank'>Factux 1.1.5</a> <br />riscrive e distribuito da";
+$lang_source_fac = $lang_factux . " Webiciel open source gratuito <br />derivato da <a href='http://sourceforge.net/projects/factux/' target='_blank'>Factux 1.1.5</a> <br />riscrive e distribuito da";
 $lang_new_config_ok = "La nuova configurazione viene salvata";
 $lang_nbr_impression = "Il numero di impressioni";
 $lang_choix_Impression = "Stampa automatica";
@@ -192,7 +192,7 @@ $lang_totaux = "Totale IVA esclusa: \n Totale IVA: \n Totale IVA inclusa:";
 $lang_num_bon_ab = "Buon N°:";
 $lang_de = "Da";
 $lang_page = "Pagina";
-$lang_condi = "$entrep_nom $social Tel :$tel_vend \n$tva_vend $compte $reg";
+$lang_condi = "{$entrep_nom} {$social} Tel :{$tel_vend} \n{$tva_vend} {$compte} {$reg}";
 $lang_prix_htva = "Prezzo H.T.V.A";
 $lang_dev_pdf_soc = "Azienda sede Tel / Fax e-mail IVA banca";
 $lang_ajo_fact = "Aggiungi un commento sulla fattura (opzionale)";
@@ -231,14 +231,14 @@ $lang_evo_ca = "Evoluzione del C.A.";
 $lang_periode = "Periodo";
 $lang_dep_htva = "Spesa IVA esclusa";
 $lang_bc_login = "Nome del database";
-$lang_back_upl = "Se si desidera ripristinare questo backup: <br />1.televerser il file nella discarica di tuo $lang_factux  <br /> 2. executer il backup utilità e selezionare l'opzione di ripristinare un backup";
+$lang_back_upl = sprintf("Se si desidera ripristinare questo backup: <br />1.televerser il file nella discarica di tuo %s  <br /> 2. executer il backup utilità e selezionare l'opzione di ripristinare un backup", $lang_factux);
 $lang_back_effac = "L'eliminazione della richiesta di backup è andato bene";
 $lang_back_utili = "Factux backup";
 $lang_voir = "Vedi";
 $lang_rest = "Ripristino";
 $lang_tai = "Dimensioni";
 $lang_fichier = "File";
-$lang_back_restO2 = "Se nessun errore si è verificato mentre i dati sono stati ristrutturati. Questo strumento ripristina solo i backup creati da $lang_factux ";
+$lang_back_restO2 = sprintf('Se nessun errore si è verificato mentre i dati sono stati ristrutturati. Questo strumento ripristina solo i backup creati da %s ', $lang_factux);
 $lang_back_resto = "Ripristino backup";
 $lang_back_ext = "Estratti dal file di backup";
 $lang_back_ti_re = "Factux backup: ripristinare un backup";
@@ -345,10 +345,10 @@ $lang_commandes = "Comandi";
 $lang_clients = "Clienti";
 $lang_depenses = "Spese";
 $lang_htva = "H.T.";
-$lang_depenses_htva = "Spese $lang_htva";
-$lang_ca_htva = "Fatturato $lang_htva";#IVA escl.
+$lang_depenses_htva = 'Spese ' . $lang_htva;
+$lang_ca_htva = 'Fatturato ' . $lang_htva;#IVA escl.
 $lang_ttc = "IVA Inc.";#INCLUSA
-$lang_ca_ttc = "C.A. $lang_ttc";
+$lang_ca_ttc = 'C.A. ' . $lang_ttc;
 
 $lang_statistiques_basees_bons = "Le statistiche si basano su ordini.";
 $lang_statistiques_par_client = "Statistiche dettagliate client";
@@ -525,8 +525,8 @@ $lang_pay_le = "Impostare il";
 $lang_dat_inva = "Data non valida";
 
 $lang_les_utl = "Utenti";
-$lang_id_or_mail_exist = "Errore login/$lang_email esiste già";
-$lang_mail_exist = "Errore $lang_email esiste già";
+$lang_id_or_mail_exist = sprintf('Errore login/%s esiste già', $lang_email);
+$lang_mail_exist = sprintf('Errore %s esiste già', $lang_email);
 
 $lang_admin = "Admin";
 $lang_gerer = "il gestore";

@@ -19,20 +19,20 @@
  * 		Guy Hendrickx
  *.
  */
-include_once("include/headers.php");
-include_once("include/finhead.php");
+include_once(__DIR__ . "/include/headers.php");
+include_once(__DIR__ . "/include/finhead.php");
 $num_cont=isset($_POST['num_cont'])?$_POST['num_cont']:"";
 $sql = "
 SELECT * FROM " . $tblpref ."cont_dev
 LEFT JOIN " . $tblpref ."article on " . $tblpref ."cont_dev.article_num = " . $tblpref ."article.num
-WHERE  " . $tblpref ."cont_dev.num = $num_cont";
+WHERE  " . $tblpref .('cont_dev.num = ' . $num_cont);
 $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 ?>
 <table width="760" border="0" class="page" align="center">
  <tr>
   <td class="page" align="center">
 <?php
-include_once("include/head.php");
+include_once(__DIR__ . "/include/head.php");
 while($data = mysql_fetch_array($req)){
  $quanti = $data['quanti'];
  $article = $data['article'];
@@ -46,11 +46,11 @@ while($data = mysql_fetch_array($req)){
 ?>
 <form name="formu2" method="post" action="edit_cont_dev_suite.php">
   <table class="page boiteaction">
-    <caption><?php echo "$lang_edi_cont_devis"; ?></caption>
+    <caption><?php echo $lang_edi_cont_devis; ?></caption>
     <tr>
       <td class="texte0"><?php echo $lang_article; ?></td>
       <td class="texte0">
-<?php include("include/article_choix.php"); ?>
+<?php include(__DIR__ . "/include/article_choix.php"); ?>
      </td>
     </tr>
     <tr>
@@ -79,8 +79,8 @@ while($data = mysql_fetch_array($req)){
  <td>
 <?php
 $aide='devis';
-include("help.php");
-include_once("include/bas.php");
+include(__DIR__ . "/help.php");
+include_once(__DIR__ . "/include/bas.php");
 ?>
  </td>
 </tr>

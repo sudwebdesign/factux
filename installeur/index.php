@@ -19,7 +19,7 @@
  *   Guy Hendrickx
  *.
  */
- include('headers.php');
+ include(__DIR__ . '/headers.php');
 ?>
   <h3>Vous voici dans l'instalalleur de Factux.</h3>
   <p>Avant de commencer n'oubliez pas de receuillir les informations suivantes.</p>
@@ -47,65 +47,65 @@ $fich3 = "../include/configav.php";
    <table>
     <caption>Vérification des droits.</caption>
 <?php
-echo "<tr><td>$verif $doss1 :</td><td>";
-if (is_writable("$doss1")) {
-echo "<font color='green'>$lang_oui</font></td></tr>";
+echo sprintf('<tr><td>%s %s :</td><td>', $verif, $doss1);
+if (is_writable($doss1)) {
+echo sprintf("<font color='green'>%s</font></td></tr>", $lang_oui);
 } else {
-echo "<font color='red'> $erreur</font></td></tr>";
+echo sprintf("<font color='red'> %s</font></td></tr>", $erreur);
 }
-echo "<tr><td>$verif $doss2 :</td><td>";
-if (is_writable("$doss2")) {
-echo "<font color='green'>$lang_oui</font></td></tr>";
+echo sprintf('<tr><td>%s %s :</td><td>', $verif, $doss2);
+if (is_writable($doss2)) {
+echo sprintf("<font color='green'>%s</font></td></tr>", $lang_oui);
 } else {
-echo "<font color='red'> $erreur</font></td></tr>";
-}
-
-echo "<tr><td>$verif $doss3 :</td><td>";
-if (is_writable("$doss3")) {
-echo "<font color='green'>$lang_oui</font></td></tr>";
-} else {
-echo "<font color='red'> $erreur</font></td></tr>";
-}
-echo "<tr><td>$verif $doss4 :</td><td>";
-if (is_writable("$doss4")) {
-echo "<font color='green'>$lang_oui</font></td></tr>";
-} else {
-echo "<font color='red'> $erreur</font></td></tr>";
+echo sprintf("<font color='red'> %s</font></td></tr>", $erreur);
 }
 
-echo "<tr><td>$verif $doss5 :</td><td>";
-if (is_writable("$doss5")) {
-echo "<font color='green'>$lang_oui</font></td></tr>";
+echo sprintf('<tr><td>%s %s :</td><td>', $verif, $doss3);
+if (is_writable($doss3)) {
+echo sprintf("<font color='green'>%s</font></td></tr>", $lang_oui);
 } else {
-echo "<font color='red'> $erreur</font></td></tr>";
+echo sprintf("<font color='red'> %s</font></td></tr>", $erreur);
+}
+echo sprintf('<tr><td>%s %s :</td><td>', $verif, $doss4);
+if (is_writable($doss4)) {
+echo sprintf("<font color='green'>%s</font></td></tr>", $lang_oui);
+} else {
+echo sprintf("<font color='red'> %s</font></td></tr>", $erreur);
 }
 
-echo "<tr><td>$verif $doss6 :</td><td>";
-if (is_writable("$doss6")) {
-echo "<font color='green'>$lang_oui</font></td></tr>";
+echo sprintf('<tr><td>%s %s :</td><td>', $verif, $doss5);
+if (is_writable($doss5)) {
+echo sprintf("<font color='green'>%s</font></td></tr>", $lang_oui);
 } else {
-echo "<font color='red'> $erreur</font></td></tr>";
+echo sprintf("<font color='red'> %s</font></td></tr>", $erreur);
 }
 
-echo "<tr><td>$verif2 $fich1 :</td><td>";
-if (is_writable("$fich1")) {
-echo "<font color='green'>$lang_oui</font></td></tr>";
+echo sprintf('<tr><td>%s %s :</td><td>', $verif, $doss6);
+if (is_writable($doss6)) {
+echo sprintf("<font color='green'>%s</font></td></tr>", $lang_oui);
 } else {
-echo "<font color='red'> $erreur</font></td></tr>";
+echo sprintf("<font color='red'> %s</font></td></tr>", $erreur);
 }
 
-echo "<tr><td>$verif2 $fich2 :</td><td>";
-if (is_writable("$fich2")) {
-echo "<font color='green'>$lang_oui</font></td></tr>";
+echo sprintf('<tr><td>%s %s :</td><td>', $verif2, $fich1);
+if (is_writable($fich1)) {
+echo sprintf("<font color='green'>%s</font></td></tr>", $lang_oui);
 } else {
-echo "<font color='red'> $erreur</font></td></tr>";
+echo sprintf("<font color='red'> %s</font></td></tr>", $erreur);
 }
 
-echo "<tr><td>$verif2 $fich3 :</td><td>";
-if (is_writable("$fich3")) {
-echo "<font color='green'>$lang_oui</font></td></tr>";
+echo sprintf('<tr><td>%s %s :</td><td>', $verif2, $fich2);
+if (is_writable($fich2)) {
+echo sprintf("<font color='green'>%s</font></td></tr>", $lang_oui);
 } else {
-echo "<font color='red'> $erreur</font></td></tr>";
+echo sprintf("<font color='red'> %s</font></td></tr>", $erreur);
+}
+
+echo sprintf('<tr><td>%s %s :</td><td>', $verif2, $fich3);
+if (is_writable($fich3)) {
+echo sprintf("<font color='green'>%s</font></td></tr>", $lang_oui);
+} else {
+echo sprintf("<font color='red'> %s</font></td></tr>", $erreur);
 }
 echo "
    </table>
@@ -127,7 +127,7 @@ if (
 }else {
  echo "<h1>Veuiller vérifier les erreurs ci-dessus avant de poursuivre</h1>";
 }
-include_once("../include/bas_cli.php");
+include_once(__DIR__ . "/../include/bas_cli.php");
 ?>
   </td>
  </tr>

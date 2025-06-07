@@ -19,13 +19,13 @@
  *     Guy Hendrickx
  *.
  */
-include_once("include/headers.php");
-include_once("include/finhead.php");
+include_once(__DIR__ . "/include/headers.php");
+include_once(__DIR__ . "/include/finhead.php");
 $client=isset($_POST['listeclients'])?$_POST['listeclients']:"";
 $date=isset($_POST['date'])?$_POST['date']:"";
 if($client=='0'||$client==''){# '' si select client vide (aucun client enregisté)
- $message = "<h1>$lang_choix_client</h1>";
- include('form_devis.php');
+ $message = sprintf('<h1>%s</h1>', $lang_choix_client);
+ include(__DIR__ . '/form_devis.php');
  exit;
 }
 list($jour, $mois,$annee) = preg_split('/\//', $date, 3);
@@ -34,28 +34,28 @@ list($jour, $mois,$annee) = preg_split('/\//', $date, 3);
  <tr>
   <td class="page" align="center">
 <?php
-$sql_nom = "SELECT nom, nom2 FROM " . $tblpref ."client WHERE num_client = $client";
+$sql_nom = "SELECT nom, nom2 FROM " . $tblpref .('client WHERE num_client = ' . $client);
 $req = mysql_query($sql_nom) or die('Erreur SQL !<br>'.$sql_nom.'<br>'.mysql_error());
 while($data = mysql_fetch_array($req)){
   $nom = $data['nom'];
 #  $nom = htmlentities($nom, ENT_QUOTES);
   $nom2 = $data['nom2'];
-  $phrase = "$lang_bon_cree";
-  $message = "$phrase $nom $nom2 $lang_bon_cree2 $date";
+  $phrase = $lang_bon_cree;
+  $message = sprintf('%s %s %s %s %s', $phrase, $nom, $nom2, $lang_bon_cree2, $date);
 }
 
-$sql1 = "INSERT INTO " . $tblpref ."devis(client_num, date) VALUES ('$client', '$annee-$mois-$jour')";
-mysql_query($sql1) or die('Erreur SQL !<br>'.$sql1.'<br>'.mysql_error());
+$sql1 = "INSERT INTO " . $tblpref .sprintf("devis(client_num, date) VALUES ('%s', '%s-%s-%s')", $client, $annee, $mois, $jour);
+mysql_query($sql1) || die('Erreur SQL !<br>'.$sql1.'<br>'.mysql_error());
 $num_dev = mysql_insert_id();//le numero du devis créé
 ?>
   <form name='formu2' method='post' action='edit_devis_suite.php'>
    <center>
     <table class="page boiteaction">
-      <caption><?php echo "$lang_donne_devis $lang_numero $num_dev $lang_de $nom"; ?></caption>
+      <caption><?php echo sprintf('%s %s %s %s %s', $lang_donne_devis, $lang_numero, $num_dev, $lang_de, $nom); ?></caption>
       <tr>
        <td class="texte0"><?php echo $lang_article; ?></td>
        <td class="texte0">
-<?php include("include/article_choix.php"); ?>
+<?php include(__DIR__ . "/include/article_choix.php"); ?>
        </td>
       </tr>
       <tr>
@@ -80,8 +80,8 @@ $num_dev = mysql_insert_id();//le numero du devis créé
   <td>
 <?php
 $aide='devis';
-include("help.php");
-include_once("include/bas.php");
+include(__DIR__ . "/help.php");
+include_once(__DIR__ . "/include/bas.php");
 ?>
   </td>
  </tr>

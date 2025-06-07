@@ -19,13 +19,16 @@
  * 		Guy Hendrickx
  *.
  */
-require_once("include/verif.php");
-include_once("include/config/common.php");
-include_once("include/config/var.php");
-include_once("include/language/$lang.php");
+require_once(__DIR__ . "/include/verif.php");
+include_once(__DIR__ . "/include/config/common.php");
+include_once(__DIR__ . "/include/config/var.php");
+include_once(__DIR__ . sprintf('/include/language/%s.php', $lang));
 $num=isset($_GET['num'])?$_GET['num']:"";
-mysql_select_db($db) or die ("Could not select $db database");
+if (!mysql_select_db($db)) {
+    die (sprintf('Could not select %s database', $db));
+}
+
 $sql1 = "DELETE FROM " . $tblpref ."depense WHERE num = '".$num."'";
-mysql_query($sql1) or die('Erreur SQL !<br>'.$sql1.'<br>'.mysql_error());
-$message = "<h2>$lang_dep_eff</h2>";
-include("lister_depenses.php");
+mysql_query($sql1) || die('Erreur SQL !<br>'.$sql1.'<br>'.mysql_error());
+$message = sprintf('<h2>%s</h2>', $lang_dep_eff);
+include(__DIR__ . "/lister_depenses.php");

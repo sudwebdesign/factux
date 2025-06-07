@@ -19,9 +19,9 @@
  * 		Guy Hendrickx
  *.
  */
-include_once("include/headers.php");
+include_once(__DIR__ . "/include/headers.php");
 ?><script type="text/javascript" src="javascripts/confdel.js"></script><?php
-include_once("include/finhead.php");
+include_once(__DIR__ . "/include/finhead.php");
 if (!isset($dev_num) /*&& $dev_num ==''*/) {
  $num_dev=isset($_GET['num_dev'])?$_GET['num_dev']:"";
 }
@@ -34,7 +34,7 @@ $nom=isset($_GET['article'])?$_GET['article']:"";
 if (isset($message)&&$message!='') {
  echo $message;
 }
-include ("form_editer_devis.php");
+include (__DIR__ . "/form_editer_devis.php");
 ?>
   </td>
  </tr>
@@ -42,8 +42,8 @@ include ("form_editer_devis.php");
   <td>
 <?php
 $aide='devis';
-include("help.php");
-include("include/bas.php");
+include(__DIR__ . "/help.php");
+include(__DIR__ . "/include/bas.php");
 ?>
   </td>
  </tr>

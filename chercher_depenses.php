@@ -19,17 +19,17 @@
  * 		Guy Hendrickx
  *.
  */
-include_once("include/headers.php");
-include_once("include/utils.php");
+include_once(__DIR__ . "/include/headers.php");
+include_once(__DIR__ . "/include/utils.php");
 ?>
 <table width="760" border="0" class="page" align="center">
  <tr>
   <td class="page" align="center">
 <?php
-include_once("include/head.php");
+include_once(__DIR__ . "/include/head.php");
 if ($user_dep == 'n') {
- echo "<h1>$lang_depense_droit</h1>";
- include_once("include/bas.php");
+ echo sprintf('<h1>%s</h1>', $lang_depense_droit);
+ include_once(__DIR__ . "/include/bas.php");
  exit;
 }
 ?>
@@ -68,7 +68,7 @@ while ( $row = mysql_fetch_array( $result)){
        <td class="texte1"><input name="annee" type="text" id="annee" size="4"></td>
       </tr>
       <tr>
-       <td class="texte0"><?php echo "$lang_prix $lang_htva"; ?></td>
+       <td class="texte0"><?php echo sprintf('%s %s', $lang_prix, $lang_htva); ?></td>
        <td class="texte0" colspan="5"><input name="montant" type="text" id="montant"></td>
       </tr>
       <tr>
@@ -78,7 +78,7 @@ while ( $row = mysql_fetch_array( $result)){
          <option value="fournisseur"><?php echo $lang_fournisseur; ?></option>
          <option value="num"><?php echo $lang_no_dep; ?></option>
          <option value="date"><?php echo $lang_date; ?></option>
-         <option value="prix"><?php  echo "$lang_prix $lang_htva"; ?></option>
+         <option value="prix"><?php  echo sprintf('%s %s', $lang_prix, $lang_htva); ?></option>
         </select>
        </td>
       </tr>
@@ -96,8 +96,8 @@ while ( $row = mysql_fetch_array( $result)){
   <td>
 <?php
 $aide='depenses';
-include("help.php");
-include_once("include/bas.php");
+include(__DIR__ . "/help.php");
+include_once(__DIR__ . "/include/bas.php");
 ?>
   </td>
  </tr>

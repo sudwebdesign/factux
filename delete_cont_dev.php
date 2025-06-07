@@ -19,14 +19,14 @@
  * 		Guy Hendrickx
  *.
  */
-include_once("include/verif.php");
-include_once("include/config/common.php");
-include_once("include/config/var.php");
-include_once("include/language/$lang.php");
+include_once(__DIR__ . "/include/verif.php");
+include_once(__DIR__ . "/include/config/common.php");
+include_once(__DIR__ . "/include/config/var.php");
+include_once(__DIR__ . sprintf('/include/language/%s.php', $lang));
 $num_cont=isset($_GET['num_cont'])?$_GET['num_cont']:"";
 $num_dev=isset($_GET['num_dev'])?$_GET['num_dev']:"";
 $nom=isset($_GET['nom'])?$_GET['nom']:"";
 $sql1 = "DELETE FROM " . $tblpref ."cont_dev WHERE num = '".$num_cont."'";
-mysql_query($sql1) or die('Erreur SQL !<br>'.$sql1.'<br>'.mysql_error());
-$message = "<h2>$lang_li_effa</h2>";
-include("edit_devis.php");
+mysql_query($sql1) || die('Erreur SQL !<br>'.$sql1.'<br>'.mysql_error());
+$message = sprintf('<h2>%s</h2>', $lang_li_effa);
+include(__DIR__ . "/edit_devis.php");

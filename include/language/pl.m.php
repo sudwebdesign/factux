@@ -22,7 +22,7 @@ error_reporting(0);
 
 
 $lang_factux = "Factux - rozliczeniowych wolna wersja 2017";#Factux - rozliczeniowego wolna wersja 2015 / Factux - katalogu Biller Darmowe 2015 rewizji / Factux - rozliczeniowego wolny rewizja 2015
-$lang_source_fac = "$lang_factux Webiciel open source<br />pochodną <a href='http://sourceforge.net/projects/factux/' target='_blank' > Factux 1.1.5</a> <br />przepisuje i dystrybuowane przez";
+$lang_source_fac = $lang_factux . ' Webiciel open source<br />pochodną <a href=\'http://sourceforge.net/projects/factux/\' target=\'_blank\' > Factux 1.1.5</a> <br />przepisuje i dystrybuowane przez';
 $lang_new_config_ok = "Nowa konfiguracja jest zapisywana";
 $lang_nbr_impression = "Liczba wyświetleń";
 $lang_choix_Impression = "Użyj automatycznego drukowania";
@@ -192,7 +192,7 @@ $lang_totaux = "Kwota bez podatku VAT:\nVAT:\ncałkowity podatek VAT:";# zawarty
 $lang_num_bon_ab = "Dobre N°:";
 $lang_de = "z";
 $lang_page = "Strona";
-$lang_condi = "$entrep_nom $social Tel :$tel_vend \n$tva_vend $compte $reg";
+$lang_condi = "{$entrep_nom} {$social} Tel :{$tel_vend} \n{$tva_vend} {$compte} {$reg}";
 $lang_prix_htva = "Cena H.T.V.A";
 $lang_dev_pdf_soc = " Centrala\n Firma\n Tel/Faxl\n V.A.T.\n Banku\n e-mai";
 $lang_ajo_fact = "Dodaj komentarz na fakturze (opcjonalnie)";
@@ -231,14 +231,14 @@ $lang_evo_ca = "Kształtowanie się ok.";
 $lang_periode = "Okres";
 $lang_dep_htva = "Wydatków z wyłączeniem podatku VAT";
 $lang_bc_login = "Nazwa bazy danych";
-$lang_back_upl = "Jeśli chcesz przywracanie kopii zapasowej: <br />1.televerser plik zrzutu $lang_factux <br /> 2. executer narzędzie kopia zapasowa, a następnie wybierz opcję przywracanie kopia zapasowa";
+$lang_back_upl = sprintf('Jeśli chcesz przywracanie kopii zapasowej: <br />1.televerser plik zrzutu %s <br /> 2. executer narzędzie kopia zapasowa, a następnie wybierz opcję przywracanie kopia zapasowa', $lang_factux);
 $lang_back_effac = "Usuwanie kopii zapasowej żądania poszło dobrze";
 $lang_back_utili = "Factux kopia zapasowa";
 $lang_voir = "Zobacz";
 $lang_rest = "Odnawiać zapas towarów";
 $lang_tai = "Rozmiar";
 $lang_fichier = "Pliku";
-$lang_back_restO2 = "Jeśli błąd nie wystąpił a Twoje dane zostały przywrócone. To narzędzie przywraca tylko kopie zapasowe utworzone od $lang_factux";
+$lang_back_restO2 = 'Jeśli błąd nie wystąpił a Twoje dane zostały przywrócone. To narzędzie przywraca tylko kopie zapasowe utworzone od ' . $lang_factux;
 $lang_back_resto = "Przywracanie kopia zapasowa";
 $lang_back_ext = "Wyodrębniony z pliku backup.sql";
 $lang_back_ti_re = "Factux zapasowa: przywracanie kopia zapasowa";
@@ -289,7 +289,7 @@ $lang_complement = "-Dodatek";
 $lang_rue = "Ulica";
 $lang_code_postal = "Kod pocztowy";
 $lang_ville = "Miasto";
-$lang_numero_tva = "NR $lang_tva";
+$lang_numero_tva = 'NR ' . $lang_tva;
 $lang_email = "E-mail";
 $lang_bc_base = "Bazy danych";
 $lang_annuler = "Anuluj";
@@ -345,10 +345,10 @@ $lang_commandes = "Polecenia";
 $lang_clients = "Klienci";
 $lang_depenses = "Wydatki";
 $lang_htva = "netto";#bez VAT
-$lang_depenses_htva = "Wydatki $lang_htva";
-$lang_ca_htva = "Obroty $lang_htva";
+$lang_depenses_htva = 'Wydatki ' . $lang_htva;
+$lang_ca_htva = 'Obroty ' . $lang_htva;
 $lang_ttc = "T.T.C";#WŁĄCZNIE Z PODATKU
-$lang_ca_ttc = "C.A. $lang_ttc";
+$lang_ca_ttc = 'C.A. ' . $lang_ttc;
 
 $lang_statistiques_basees_bons = "Statystyki opierają się na zamówienia.";
 $lang_statistiques_par_client = "Klienta szczegółowe statystyki";
@@ -435,8 +435,8 @@ $lang_factures_non_reglees_total = "Całkowity";
 $lang_prix_h_tva = "Cena H.T.";
 $lang_total_h_tva = "Razem H.T.";
 $lang_total_ttc = "Całkowita ttc";
-$lang_taux_tva = "% $lang_tva";
-$lang_tot_tva = "Całkowity podatek $lang_tva";
+$lang_taux_tva = '% ' . $lang_tva;
+$lang_tot_tva = 'Całkowity podatek ' . $lang_tva;
 $lang_date_bon = "Data odcinka";
 $lang_impri = "Drukuj";
 $lang_total = "Ogółem";
@@ -525,8 +525,8 @@ $lang_pay_le = "Ustaw";
 $lang_dat_inva = "Nieprawidłowa data";
 
 $lang_les_utl = "Użytkownicy";
-$lang_id_or_mail_exist = "Istnieje już błąd logowania/$lang_email";
-$lang_mail_exist = "Istnieje już błąd $lang_email";
+$lang_id_or_mail_exist = 'Istnieje już błąd logowania/' . $lang_email;
+$lang_mail_exist = 'Istnieje już błąd ' . $lang_email;
 
 $lang_admin = "admin";
 $lang_gerer = "zarządzanie";

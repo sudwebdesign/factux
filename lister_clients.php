@@ -19,22 +19,23 @@
  *   Guy Hendrickx
  *.
  */
-include_once("include/headers.php");
+include_once(__DIR__ . "/include/headers.php");
 ?><script type="text/javascript" src="javascripts/confdel.js"></script><?php
-include_once("include/finhead.php");
+include_once(__DIR__ . "/include/finhead.php");
 ?>
 <table width="760" border="0" class="page" align="center">
  <tr>
   <td class="page" align="center">
 <?php
-include_once("include/head.php");
+include_once(__DIR__ . "/include/head.php");
 if ($user_cli == 'n') {
- echo"<h1>$lang_client_droit</h1>";
- include_once("include/bas.php");
+ echo sprintf('<h1>%s</h1>', $lang_client_droit);
+ include_once(__DIR__ . "/include/bas.php");
  exit;
 }
 if (isset($message)&&$message!='') {
-  echo$message; $message='';
+ echo$message;
+ $message='';#onlyHere
 }
 $sql = " SELECT * FROM " . $tblpref ."client WHERE actif != 'non' ";
 if ( isset ( $_GET['ordre'] ) && $_GET['ordre'] != ''){
@@ -76,11 +77,7 @@ while($data = mysql_fetch_array($req)){
   $civ = $data['civ'];
   $tel = $data['tel'];
   $fax = $data['fax'];
-  if($c++ & 1){
-   $line="0";
-  }else{
-   $line="1";
-  }
+  $line = $c++ & 1 ? "0" : "1";
 ?>
     <tr class="texte<?php echo $line; ?>" onmouseover="this.className='highlight'" onmouseout="this.className='texte<?php echo $line; ?>'">
      <td class='<?php echo couleur_alternee (); ?>'><?php echo $civ; ?></td>
@@ -93,15 +90,15 @@ while($data = mysql_fetch_array($req)){
      <td class='<?php echo couleur_alternee (FALSE); ?>'><?php echo $tel; ?></td>
      <td class='<?php echo couleur_alternee (FALSE); ?>'><?php echo $fax; ?></td>
      <td class='<?php echo couleur_alternee (FALSE,"c texte"); ?>'>
-      <a href="mailto:<?php echo $mail; ?>" ><?php echo "$mail"; ?></a>
+      <a href="mailto:<?php echo $mail; ?>" ><?php echo $mail; ?></a>
      </td>
      <td class='<?php echo couleur_alternee (FALSE,"c texte"); ?>'>
-      <a href='edit_client.php?num=<?php echo "$num" ?>'>
+      <a href='edit_client.php?num=<?php echo $num ?>'>
        <img border='0' src='image/edit.gif' alt='<?php echo $lang_editer; ?>'>
       </a>
      </td>
      <td class='<?php echo couleur_alternee (FALSE,"c texte"); ?>'>
-      <a href='del_client.php?num=<?php echo "$num"; ?>'
+      <a href='del_client.php?num=<?php echo $num; ?>'
        onClick="return confirmDelete('<?php echo $lang_cli_effa.$nom_html; ?>?')">
        <img border='0' src='image/delete.jpg' alt='<?php echo $lang_supprimer; ?>'>
       </a>
@@ -116,8 +113,8 @@ while($data = mysql_fetch_array($req)){
   <td>
 <?php
 $aide='client';
-include("help.php");
-include_once("include/bas.php");
+include(__DIR__ . "/help.php");
+include_once(__DIR__ . "/include/bas.php");
 if(!strstr($_SERVER['SCRIPT_FILENAME'],__FILE__)){#autre qu'elle meme
  echo"\n  </td>\n </tr>\n</table>\n";
 }

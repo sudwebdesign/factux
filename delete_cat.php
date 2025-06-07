@@ -19,30 +19,32 @@
  * 		Guy Hendrickx
  *.
  */
-include_once("include/verif.php");
-include_once("include/config/common.php");
-include_once("include/config/var.php");
-include_once("include/language/$lang.php");
+include_once(__DIR__ . "/include/verif.php");
+include_once(__DIR__ . "/include/config/common.php");
+include_once(__DIR__ . "/include/config/var.php");
+include_once(__DIR__ . sprintf('/include/language/%s.php', $lang));
 $id_cat=isset($_GET['id_cat'])?$_GET['id_cat']:"";
 $categorie=isset($_GET['categorie'])?$_GET['categorie']:"";
-$sql = "SELECT actif FROM " . $tblpref ."article WHERE cat = $id_cat";
+$sql = "SELECT actif FROM " . $tblpref .('article WHERE cat = ' . $id_cat);
 $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 while($data = mysql_fetch_array($req)){
  $actif = $data['actif'];
 }
+
 if(isset($actif)&&$actif==''){
- $message = "<h1>$lang_err_efa_cat</h1>";
- include('lister_cat.php');
+ $message = sprintf('<h1>%s</h1>', $lang_err_efa_cat);
+ include(__DIR__ . '/lister_cat.php');
  exit;
 }
+
 /* idée option
 $sql = "UPDATE " . $tblpref ."article SET actif='non' WHERE cat = '".$id_cat."'";
 mysql_query($sql) OR die("<p>Erreur Mysql<br/>$sql<br/>".mysql_error()."</p>");
 */
 $sql = "UPDATE " . $tblpref ."article SET cat='' WHERE cat = '".$id_cat."'";
-mysql_query($sql) OR die("<p>Erreur Mysql<br/>$sql<br/>".mysql_error()."</p>");
+mysql_query($sql) || die(sprintf('<p>Erreur Mysql<br/>%s<br/>', $sql).mysql_error()."</p>");
 
 $sql = "DELETE FROM " . $tblpref ."categorie WHERE id_cat = '".$id_cat."'";
-mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
-$message= "<h2>$lang_cat_eff</h2>";
-include('lister_cat.php');
+mysql_query($sql) || die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+$message= sprintf('<h2>%s</h2>', $lang_cat_eff);
+include(__DIR__ . '/lister_cat.php');

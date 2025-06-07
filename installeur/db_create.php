@@ -20,6 +20,6 @@
  *.
  */
 $etape = "Étape N°4 : Initialiser la base de données, créer la base, les tables et l'utilisateur primaire";
-include('headers.php');
+include(__DIR__ . '/headers.php');
 $sqldbc = "yep";
-include("table_create.php");
+include(__DIR__ . "/table_create.php");

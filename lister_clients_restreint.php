@@ -23,10 +23,10 @@ $sql = "
 SELECT nom, num_client
 FROM " . $tblpref ."client
 WHERE 1
-and " . $tblpref ."client.permi LIKE '$num_user,'
-or  " . $tblpref ."client.permi LIKE '%,$num_user,'
-or  " . $tblpref ."client.permi LIKE '%,$num_user,%'
-or  " . $tblpref ."client.permi LIKE '$num_user,%'
+and " . $tblpref ."client.permi LIKE '{$num_user},'
+or  " . $tblpref ."client.permi LIKE '%,{$num_user},'
+or  " . $tblpref ."client.permi LIKE '%,{$num_user},%'
+or  " . $tblpref ."client.permi LIKE '{$num_user},%'
 ORDER BY " . $tblpref ."client.nom DESC
 ";
 $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
@@ -45,11 +45,7 @@ $c=0;
 while($data = mysql_fetch_array($req)){
  $num = $data['num_client'];
  $nom = $data['nom'];
- if($c++ & 1){
-  $line="0";
- }else{
-  $line="1";
- }
+ $line = $c++ & 1 ? "0" : "1";
 ?>
   <tr class="texte<?php echo $line; ?>" onmouseover="this.className='highlight'" onmouseout="this.className='texte<?php echo $line; ?>'">
    <td width='75%' class='<?php echo couleur_alternee (); ?>'><?php echo $nom; ?></td>
@@ -65,4 +61,4 @@ while($data = mysql_fetch_array($req)){
   <tr><td colspan="2" class="td2"></td></tr>
  </table>
 </div>
-<?php } ?>
+<?php }

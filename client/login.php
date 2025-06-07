@@ -1,16 +1,16 @@
 <?php
 $now='../';
-include_once("../include/config/common.php");
-include_once("../include/config/var.php");
-$lang = (!isset($lang))?$default_lang:$lang;#default_lg in common
-include_once("../include/language/$lang.php");
-include_once("../include/headers.php");
+include_once(__DIR__ . "/../include/config/common.php");
+include_once(__DIR__ . "/../include/config/var.php");
+$lang = (isset($lang))?$lang:$default_lang;#default_lg in common
+include_once(__DIR__ . sprintf('/../include/language/%s.php', $lang));
+include_once(__DIR__ . "/../include/headers.php");
 ?>
 <div align="center">
 <?php
 if (isset($message)&&$message!='') {
- $message = ($message=="i")?"<h1>$lang_interdit</h1>":$message;
- echo "<div>$message</div>\n";
+ $message = ($message=="i")?sprintf('<h1>%s</h1>', $lang_interdit):$message;
+ echo "<div>{$message}</div>\n";
 }
 ?>
  <p><?php echo $lang_factux ?></p>

@@ -19,8 +19,8 @@
  * 		Guy Hendrickx
  *.
  */
-include_once("include/headers.php");
-include_once("include/finhead.php");
+include_once(__DIR__ . "/include/headers.php");
+include_once(__DIR__ . "/include/finhead.php");
 $mois_1=isset($_POST['mois_1'])?$_POST['mois_1']:date('m');
 $annee_1=isset($_POST['annee_1'])?$_POST['annee_1']:date('Y');
 ?>
@@ -28,7 +28,7 @@ $annee_1=isset($_POST['annee_1'])?$_POST['annee_1']:date('Y');
  <tr>
   <td class="page" align="center">
 <?php
-include_once("include/head.php");
+include_once(__DIR__ . "/include/head.php");
 $calendrier = calendrier_local_mois ();
 ?>
    <form action="graph_depense.php" method="post">
@@ -52,16 +52,16 @@ $calendrier = calendrier_local_mois ();
     </form>
 <?php
 //stats mensuelles
-$sql2 = "SELECT SUM(prix)FROM " . $tblpref ."depense WHERE MONTH(date) = $mois_1 AND YEAR(date) = $annee_1 ";
+$sql2 = "SELECT SUM(prix)FROM " . $tblpref .sprintf('depense WHERE MONTH(date) = %s AND YEAR(date) = %s ', $mois_1, $annee_1);
 $req = mysql_query($sql2) or die('Erreur SQL !<br>'.$sql2.'<br>'.mysql_error());
 while ($data = mysql_fetch_array($req)){
     $total_gene = floatval($data['SUM(prix)']);
 }
 ?>
 <table class='page boiteaction'>
- <caption><?php echo "$lang_depenses_tri_par_fournisseur ($mois_1/$annee_1)"; ?></caption>
+ <caption><?php echo sprintf('%s (%s/%s)', $lang_depenses_tri_par_fournisseur, $mois_1, $annee_1); ?></caption>
 <?php
-$sql = "SELECT fournisseur, SUM(prix) FROM " . $tblpref ."depense WHERE MONTH(date) = $mois_1  AND YEAR(date) = $annee_1 GROUP BY fournisseur";
+$sql = "SELECT fournisseur, SUM(prix) FROM " . $tblpref .sprintf('depense WHERE MONTH(date) = %s  AND YEAR(date) = %s GROUP BY fournisseur', $mois_1, $annee_1);
 $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 ?>
  <tr>
@@ -96,16 +96,16 @@ while($data = mysql_fetch_array($req)){
 <br>
 <?php
 //stats annuelles
-$sql2 = "SELECT SUM(prix) FROM " . $tblpref ."depense WHERE YEAR(date) = $annee_1";
+$sql2 = "SELECT SUM(prix) FROM " . $tblpref .('depense WHERE YEAR(date) = ' . $annee_1);
 $req = mysql_query($sql2) or die('Erreur SQL !<br>'.$sql2.'<br>'.mysql_error());
 while ($data = mysql_fetch_array($req)){
  $total_gene = floatval($data['SUM(prix)']);
 }
 ?>
 <table class='page boiteaction'>
- <caption><?php echo "$lang_depenses_tri_par_fournisseur ($annee_1)"; ?></caption>
+ <caption><?php echo sprintf('%s (%s)', $lang_depenses_tri_par_fournisseur, $annee_1); ?></caption>
 <?php
-$sql = "SELECT fournisseur, SUM(prix) FROM " . $tblpref ."depense WHERE YEAR(date) = $annee_1 GROUP  BY fournisseur ORDER  BY fournisseur";
+$sql = "SELECT fournisseur, SUM(prix) FROM " . $tblpref .sprintf('depense WHERE YEAR(date) = %s GROUP  BY fournisseur ORDER  BY fournisseur', $annee_1);
 $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 ?>
  <tr>
@@ -139,7 +139,7 @@ while($data = mysql_fetch_array($req)){
  <tr>
   <td>
 <?php
-include_once("include/bas.php");
+include_once(__DIR__ . "/include/bas.php");
 ?>
  </td>
 </tr>

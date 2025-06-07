@@ -19,17 +19,17 @@
  * 		Guy Hendrickx
  *.
  */
-include_once("include/headers.php");
-include_once("include/finhead.php");
+include_once(__DIR__ . "/include/headers.php");
+include_once(__DIR__ . "/include/finhead.php");
 if ($user_fact == 'n') {
 ?>
 <table width="760" border="0" class="page" align="center">
  <tr>
   <td class="page" align="center">
 <?php
- include_once("include/head.php");
- echo "<h1>$lang_facture_droit</h1>";
- include_once("include/bas.php");
+ include_once(__DIR__ . "/include/head.php");
+ echo sprintf('<h1>%s</h1>', $lang_facture_droit);
+ include_once(__DIR__ . "/include/bas.php");
  exit;
 }
 $date_fact=isset($_POST['date_fact'])?$_POST['date_fact']:"";
@@ -40,12 +40,12 @@ $num=isset($_POST['num'])?$_POST['num']:"";
 $client=isset($_POST['client'])?$_POST['client']:"";
 
 if($client=='' || $list_num==''|| $num=='' || $date_fact=='' ){#if reload page (f5) && $fact=='ok'
- $message= "<h1>$lang_oubli_champ</h1>";
- include('form_facture.php');
+ $message= sprintf('<h1>%s</h1>', $lang_oubli_champ);
+ include(__DIR__ . '/form_facture.php');
  exit;
 }
 list($jour_fact, $mois_fact,$annee_fact) = preg_split('/\//', $date_fact, 3);
-$date_fact ="$annee_fact-$mois_fact-$jour_fact";
+$date_fact =sprintf('%s-%s-%s', $annee_fact, $mois_fact, $jour_fact);
 
 $sql = "
 SELECT * FROM " . $tblpref ."bon_comm
@@ -57,12 +57,12 @@ while($data = mysql_fetch_array($req)){
  $fact = $data['fact'];
 }
 if(isset($fact)&&$fact!='0'){#if reload page (f5) && $fact=='ok'
- $message= "<h1>$lang_err_fact</h1>";
- include('form_facture.php');
+ $message= sprintf('<h1>%s</h1>', $lang_err_fact);
+ include(__DIR__ . '/form_facture.php');
  exit;
 }
 
-$sql = " SELECT civ, nom, nom2 From " . $tblpref ."client WHERE num_client = $client ";
+$sql = " SELECT civ, nom, nom2 From " . $tblpref .sprintf('client WHERE num_client = %s ', $client);
 $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 while($data = mysql_fetch_array($req)){
  $civ = $data['civ'];
@@ -74,12 +74,13 @@ if($list_num !=''){
  $nb_bon=count($list_num);
  $list_num[$nb_bon]=$num;
 }else{
- $list_num=array(0=>$num);
+ $list_num=[0=>$num];
 }
 
-$suite_sql="and " . $tblpref ."bon_comm.num_bon ='$list_num[0]'";
-for($m=1; $m<count($list_num); $m++){
- $suite_sql .= " or " . $tblpref ."bon_comm.num_bon ='$list_num[$m]'";
+$suite_sql="and " . $tblpref .sprintf("bon_comm.num_bon ='%s'", $list_num[0]);
+$counter = count($list_num);
+for($m=1; $m<$counter; $m++){
+ $suite_sql .= " or " . $tblpref .sprintf("bon_comm.num_bon ='%s'", $list_num[$m]);
 }
 $sql9 = "SELECT date, quanti, article, remise, prix_htva, p_u_jour, tot_art_htva, to_tva_art, taux_tva, uni, num_bon
 FROM " . $tblpref ."client
@@ -87,7 +88,7 @@ LEFT JOIN " . $tblpref ."bon_comm on " . $tblpref ."client.num_client = " . $tbl
 LEFT JOIN " . $tblpref ."cont_bon on " . $tblpref ."bon_comm.num_bon = " . $tblpref ."cont_bon.bon_num
 LEFT JOIN  " . $tblpref ."article on " . $tblpref ."article.num = " . $tblpref ."cont_bon.article_num
 WHERE " . $tblpref ."client.num_client = '".$client."'";
-$sql9="$sql9 $suite_sql";
+$sql9=sprintf('%s %s', $sql9, $suite_sql);
 $req = mysql_query($sql9) or die('Erreur SQL9 !<br>'.$sql9.'<br>'.mysql_error());
 
 /*//OLD
@@ -103,7 +104,7 @@ LEFT JOIN " . $tblpref ."cont_bon on " . $tblpref ."bon_comm.num_bon = " . $tblp
 LEFT JOIN  " . $tblpref ."article on " . $tblpref ."article.num = " . $tblpref ."cont_bon.article_num
 WHERE " . $tblpref ."client.num_client = '".$client."'";
 
-$sql="$sql $suite_sql GROUP BY bon_num";
+$sql=sprintf('%s %s GROUP BY bon_num', $sql, $suite_sql);
 $req2 = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 $data = mysql_fetch_array($req2);
 $total_htva = $data['SUM(tot_art_htva)'];
@@ -111,32 +112,33 @@ $total_tva = $data['SUM(to_tva_art)'];
 $total_ttc = $total_htva + $total_tva ;
 
 if($total_htva==''){
- $message = "<h1>$lang_err_fact_2 $nom</h1>";
- include('form_facture.php');
+ $message = sprintf('<h1>%s %s</h1>', $lang_err_fact_2, $nom);
+ include(__DIR__ . '/form_facture.php');
  exit;
 }
 if (!isset($_POST['simuler'])){
  $list_num=serialize($list_num);//
  $sql1 = "
  INSERT INTO " . $tblpref ."facture(acompte, coment, client, date_fact, total_fact_h, total_fact_ttc, list_num)
- VALUES ('$acompte', '$coment', '$client', '$date_fact', '$total_htva', '$total_ttc', '$list_num')
+ VALUES ('{$acompte}', '{$coment}', '{$client}', '{$date_fact}', '{$total_htva}', '{$total_ttc}', '{$list_num}')
  ";/**/
- mysql_query($sql1) or die('Erreur SQL1 !<br>'.$sql1.'<br>'.mysql_error());
+ mysql_query($sql1) || die('Erreur SQL1 !<br>'.$sql1.'<br>'.mysql_error());
  $num_fact = mysql_insert_id();//le numero de la facture créée
 
- $sql2 = "UPDATE " . $tblpref ."bon_comm SET fact='$num_fact' WHERE " . $tblpref ."bon_comm.client_num = '".$client."'";
- $sql2 .= " $suite_sql";
- mysql_query($sql2) or die('Erreur SQL2 !<br>'.$sql2.'<br>'.mysql_error());
-}else
- $num_fact = $lang_simu;
+ $sql2 = "UPDATE " . $tblpref .sprintf("bon_comm SET fact='%s' WHERE ", $num_fact) . $tblpref ."bon_comm.client_num = '".$client."'";
+ $sql2 .= ' ' . $suite_sql;
+ mysql_query($sql2) || die('Erreur SQL2 !<br>'.$sql2.'<br>'.mysql_error());
+}else {
+    $num_fact = $lang_simu;
+}
 ?>
 <table width="760" border="0" class="page" align="center">
  <tr>
   <td class="page" align="center">
-<?php include_once("include/head.php"); ?>
-   <h2><?php echo "$lang_fact_enr $nom $nom2"; ?></h2>
+<?php include_once(__DIR__ . "/include/head.php"); ?>
+   <h2><?php echo sprintf('%s %s %s', $lang_fact_enr, $nom, $nom2); ?></h2>
    <table class="page boiteaction">
-    <caption><?php echo "$lang_facture $num_fact $lang_créée_pour $civ $nom";?></caption>
+    <caption><?php echo sprintf('%s %s %s %s %s', $lang_facture, $num_fact, $lang_créée_pour, $civ, $nom);?></caption>
     <tr>
      <th><?php echo $lang_quanti; ?></th>
      <th><?php echo $lang_unite; ?></th>
@@ -190,12 +192,12 @@ $rest = $total_htva + $total_tva - $acompte;
     </tr>
     <tr>
      <td colspan='7'>&nbsp;</td>
-     <td class='texte1'><?php echo "$lang_total $lang_remise"; ?></td>
+     <td class='texte1'><?php echo sprintf('%s %s', $lang_total, $lang_remise); ?></td>
      <td class='nombre1'><?php echo montant_financier($total_remise_htva); ?></td>
     </tr>
     <tr>
      <td colspan='7'>&nbsp;</td>
-     <td class='texte1'><?php echo "$lang_total $lang_marge"; ?></td>
+     <td class='texte1'><?php echo sprintf('%s %s', $lang_total, $lang_marge); ?></td>
      <td class='nombre1'><?php echo montant_financier($total_marge_htva); ?></td>
     </tr>
     <tr>
@@ -233,7 +235,9 @@ $rest = $total_htva + $total_tva - $acompte;
        <input type="hidden" name="user" value="adm" />
        <input type="image" src="image/prinfer.gif" alt="<?php echo $lang_imprimer; ?>" />
       </form>
-<?php } else echo $lang_simu; ?>
+<?php } else {
+    echo $lang_simu;
+} ?>
      </td>
     </tr>
    </table>
@@ -242,4 +246,4 @@ $rest = $total_htva + $total_tva - $acompte;
  <tr>
   <td>
 <?php
-include('form_facture.php');
+include(__DIR__ . '/form_facture.php');

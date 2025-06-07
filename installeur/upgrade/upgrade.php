@@ -11,11 +11,11 @@ $now='../../';
 echo "<link rel='stylesheet' type='text/css' href='".$now."include/themes/red/style.css'>";
 echo "<center><img src='".$now."image/factux.gif' alt='FactuX : Mise à niveau' title='FactuX : Mise à niveau'>";
 echo "<h2>Mise à niveau de Factux 1.1.5 -->  Factux 5.0.0</h2><hr>";
-require_once($now."include/0.php");#uptophp7
-include_once($now."include/config/common.php");
-include_once($now."include/config/var.php");
+require_once(__DIR__ . "/" . $now . "include/0.php");#uptophp7
+include_once(__DIR__ . "/" . $now . "include/config/common.php");
+include_once(__DIR__ . "/" . $now . "include/config/var.php");
 $lang=(empty($lang))?$default_lang:$lang;#default_lg in common
-include_once($now."include/language/$lang.php");
+include_once(__DIR__ . "/" . $now . sprintf('include/language/%s.php', $lang));
 
 #regénération de common.php
 $un=$user;
@@ -24,7 +24,7 @@ $trois=$db;
 $quatre=$host;
 $cinq=$default_lang;
 $six=$tblpref;
-mysql_connect($quatre,$un,$deux) or die ("<h1>Le fichier common.php semble érroné car il est impossible de ce connecter a la base de données. Veuillez verifier les information de celui-ci et recommencer la mise a niveau.");
+mysql_connect($quatre,$un,$deux) || die ("<h1>Le fichier common.php semble érroné car il est impossible de ce connecter a la base de données. Veuillez verifier les information de celui-ci et recommencer la mise a niveau.");
 $type = '<?php' . "\n";
 $com = '//common.php créé grace à l\'installeur de Factux, soyez prudent si vous l\'éditez'. "\n";
 $com .= 'error_reporting(E_ERROR | E_WARNING | E_PARSE | E_NOTICE);#cache les éléments dépréciés'. "\n";
@@ -34,7 +34,7 @@ $trois = '"'.$trois.'";//le nom de la base de données mysql' . "\n";
 $quatre = '"'.$quatre.'";//l\'adresse de la base de données mysql ' . "\n";
 $cinq = '"'.$cinq.'";//la langue de l\'interface et des factures créées par Factux : voir la doc pour les abbréviations' . "\n";
 $six = '"'.$six.'";//prefixe des tables ' . "\n";
-$sept = 'require_once(@$now."include/0.php");#uptophp7 & apostrophe()'."\n";
+$sept = 'require_once(__DIR__ . "/0.php");#uptophp7 & apostrophe()'."\n";
 
 $connect = '$cdb = mysql_connect($host,$user,$pwd) or die ("serveur de base de données injoignable. Vérifiez dans /factux/include/common.php si $host est correct.");
 mysql_select_db($db) or die ("La base de données est injoignable. Vérifiez dans /factux/include/common.php si $user, $pwd, $db sont exacts.");
@@ -45,8 +45,8 @@ else
 mysql_query("SET character_set_results = \'utf8\', character_set_client = \'utf8\', character_set_connection = \'utf8\', character_set_database = \'utf8\', character_set_server = \'utf8\'"); // , collation-server = \'utf8_general_ci\'
 ';
 #backup
-file_put_contents($now."include/config/common.old_".time().".php",str_ireplace('<?php','<?php exit;//Laisser tel quel ou supprimer ce fichier du serveur',file_get_contents($now."include/config/common.php")));
-$monfichier = fopen($now."include/config/common.php", "w+");
+file_put_contents(__DIR__ . "/" . $now . "include/config/common.old_".time().".php",str_ireplace('<?php','<?php exit;//Laisser tel quel ou supprimer ce fichier du serveur',file_get_contents(__DIR__ . "/" . $now . "include/config/common.php")));
+$monfichier = fopen(__DIR__ . "/" . $now . "include/config/common.php", "w+");
 fwrite($monfichier, "\xEF\xBB\xBF".''.$type.''.$com.'$user= '.$un.'$pwd= '.$deux.'$db= '.$trois.'$host= '.$quatre.'$default_lang= '.$cinq.'$tblpref= '.$six.$sept.$connect);
 fclose($monfichier);
 ?>
@@ -77,14 +77,14 @@ $six = '"'.$six.'";//Registre de commerce de l\'entreprise' . "\n";
 $sept = '"'.$sept.'";//adresse email' . "\n";
 $huit = '"'.$huit.'";//devise utilisée par Factux' . "\n";
 $neuf = '"'.$logo.'";//fichier comportant le logo de l\'entreprise' . "\n";
-$monfichier = fopen($now."include/config/var.php", "w+");
+$monfichier = fopen(__DIR__ . "/" . $now . "include/config/var.php", "w+");
 fwrite($monfichier, "\xEF\xBB\xBF".''.$type.''.$com.'$entrep_nom= '.$zero.'$social= '.$un.'$tel_vend= '.$deux.'$tva_vend= '.$trois.'$compte= '.$quatre.'$slogan= '.$cinq.'$reg= '.$six.'$mail= '.$sept.'$devise= '.$huit.'$logo = '.$neuf);
 fclose($monfichier);
 ?>
 <h2>Fichier <font color="red">/factux/include/config/var.php</font> mis a jour</h2>
 <?php
 #regénération de configav.php
-require($now."include/configav.php");
+require(__DIR__ . "/" . $now . "include/configav.php");
 $choix_use_lot=$lot;
 $choix_use_liste_cli=$liste_cli;
 $choix_use_cat=$use_categorie;
@@ -104,67 +104,67 @@ $texte='<?php';
 $texte.="\n";
 $texte.='$lot=\'';
 $texte.=$choix_use_lot;
-$texte.='\';';
+$texte.="';";
 $texte.="\n";
 $texte.='$liste_cli=\'';
 $texte.=$choix_use_liste_cli;
-$texte.='\';';
+$texte.="';";
 $texte.="\n";
 $texte.='$use_categorie =\'';
 $texte.=$choix_use_cat;
-$texte.='\';';
+$texte.="';";
 $texte.="\n";
 $texte.='$use_payement =\'';
 $texte.=$choix_use_payement;
-$texte.='\';';
+$texte.="';";
 $texte.="\n";
 $texte.='$theme=\'';
 $texte.=$choix_theme;
-$texte.='\';';
+$texte.="';";
 $texte.="\n";
 $texte.='$use_stock=\'';
 $texte.=$choix_use_stock;
-$texte.='\';';
+$texte.="';";
 $texte.="\n";
 $texte.='$autoprint=\'';
 $texte.=$choix_impression;
-$texte.='\';';
+$texte.="';";
 $texte.="\n";
 $texte.='$nbr_impr=\'';
 $texte.=$nbr_impression;
-$texte.='\';';
+$texte.="';";
 $texte.="\n";
 $texte.='$auth_cli_devis=\'';
 $texte.=$choix_auth_cli_devis;
-$texte.='\';';
+$texte.="';";
 $texte.="\n";
 $texte.='$auth_cli_bon=\'';
 $texte.=$choix_auth_cli_bon;
-$texte.='\';';
+$texte.="';";
 $texte.="\n";
 $texte.='$auth_cli_fact=\'';
 $texte.=$choix_auth_cli_fact;
-$texte.='\';';
+$texte.="';";
 $texte.="\n";
 $texte.='$first_art=\'';
 $texte.=$choix_first_art;
-$texte.='\';';
+$texte.="';";
 $texte.="\n";
 $texte.='$echeance_fact=\'';
 $texte.=$choix_echeance_fact;
-$texte.='\';';
+$texte.="';";
 $texte.="\n";
 
 if (is_writable($filename)){
  if (!$handle = fopen($filename, 'w+')){
-  echo "<h1>Impossible d'ouvrir le fichier ($filename)</h1>";
+  echo sprintf("<h1>Impossible d'ouvrir le fichier (%s)</h1>", $filename);
  }
  if (fwrite($handle, "\xEF\xBB\xBF".$texte) === FALSE){
-  $message= "<h1>Impossible d'écrire dans le fichier ($filename)</h1>";
+  $message= sprintf("<h1>Impossible d'écrire dans le fichier (%s)</h1>", $filename);
  }
  fclose($handle);
 }else{
- $message= "<h1>Le fichier $filename n'est pas accessible en écriture.</h1>";
+ $message= sprintf("<h1>Le fichier %s n'est pas accessible en écriture.</h1>", $filename);
 }
 ?>
 <h2>Fichier admin <font color="red">/factux/include/configav.php</font> mis a jour</h2>
@@ -186,11 +186,11 @@ while($data = mysql_fetch_array($req)){
  $tva = $data['tot_tva'];
  $date = $data['date_aff'];
  $c++;
-echo "$lang_devis $lang_numero $num_dev <br>";
+echo sprintf('%s %s %s <br>', $lang_devis, $lang_numero, $num_dev);
 }
-echo "<br>Nombre $lang_total $lang_de $lang_devis $lang_perdu dans la base : $c<br>";
+echo sprintf('<br>Nombre %s %s %s %s dans la base : %d<br>', $lang_total, $lang_de, $lang_devis, $lang_perdu, $c);
 $sql = "UPDATE " . $tblpref ."devis SET resu = '-1' WHERE resu = 'per'";
-mysql_query($sql) or die('<h1>Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+mysql_query($sql) || die('<h1>Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 echo "<br>
 Les devis perdus sont à jour.<br>
 Vérification<br>
@@ -210,9 +210,9 @@ while($data = mysql_fetch_array($req)){
  $tva = $data['tot_tva'];
  $date = $data['date_aff'];
  $d++;
- echo "$lang_devis $lang_numero $num_dev $date ($lang_total $total $lang_htva) à jour <br>";
+ echo sprintf('%s %s %s %s (%s %s %s) à jour <br>', $lang_devis, $lang_numero, $num_dev, $date, $lang_total, $total, $lang_htva);
 }
-echo "<br>Nombre total de devis perdu à jour dans la base : $d<br>Verif des devis : ";
+echo sprintf('<br>Nombre total de devis perdu à jour dans la base : %d<br>Verif des devis : ', $d);
 echo ($c==$d)?"tout semble correct ;-)":"Une disparité de nombre entre les originaux et ceux mis a jour :-(";
 ?></p>
 <h3>Les devis Gagné</h3>
@@ -231,16 +231,16 @@ while($data = mysql_fetch_array($req)){
  $tva = $data['tot_tva'];
  $date = $data['date_aff'];
  $c++;
- echo "$lang_devis $lang_ga $lang_numero $num_dev $date ($lang_total $total $lang_htva)";
+ echo sprintf('%s %s %s %s %s (%s %s %s)', $lang_devis, $lang_ga, $lang_numero, $num_dev, $date, $lang_total, $total, $lang_htva);
  if(isset($_GET['devnet'])){
   $sql1 = "DELETE FROM " . $tblpref ."cont_dev WHERE dev_num = '".$num_dev."'";
-  mysql_query($sql1) or die('<h1>Erreur SQL !<br>'.$sql1.'<br>'.mysql_error());
+  mysql_query($sql1) || die('<h1>Erreur SQL !<br>'.$sql1.'<br>'.mysql_error());
   echo " est supprimé<br>";
  }else{
   echo " va etre remis en intransformé<br>";
  }
 }
-echo "<br>Nombre total de devis gagnés dans la base : $c<br>";
+echo sprintf('<br>Nombre total de devis gagnés dans la base : %d<br>', $c);
 ?></p>
 <hr>
 <!--
@@ -272,11 +272,11 @@ $c=0;
 while($data = mysql_fetch_array($req)){
  $num_dev = $data['dev_num'];
  $c++;
- echo "$lang_devis $lang_numero $num_dev inexistant, données orphelines effacés<br>";
+ echo sprintf('%s %s %s inexistant, données orphelines effacés<br>', $lang_devis, $lang_numero, $num_dev);
  $sql1 = "DELETE FROM " . $tblpref ."cont_dev WHERE dev_num = '".$num_dev."'";
- mysql_query($sql1) or die('<h1>Erreur SQL !<br>'.$sql1.'<br>'.mysql_error());
+ mysql_query($sql1) || die('<h1>Erreur SQL !<br>'.$sql1.'<br>'.mysql_error());
 }
-echo ($c)?"<br>$t lignes orphelines appartenant à $c devis inexistants ont été néttoyés<br>":"sont propres";
+echo ($c)?sprintf('<br>%s lignes orphelines appartenant à %d devis inexistants ont été néttoyés<br>', $t, $c):"sont propres";
 ?></p>
 <h3>Les bons de commande</h3>
 <p><?php
@@ -298,10 +298,10 @@ while($data = mysql_fetch_array($req)){
  $num_bon = $data['bon_num'];
  $c++;
  $sql1 = "DELETE FROM " . $tblpref ."cont_bon WHERE bon_num = '".$num_bon."'";
- mysql_query($sql1) or die('<h1>Erreur SQL !<br>'.$sql1.'<br>'.mysql_error());
- echo "$lang_bon $lang_numero $num_bon inexistant, données orphelines effacés<br>";
+ mysql_query($sql1) || die('<h1>Erreur SQL !<br>'.$sql1.'<br>'.mysql_error());
+ echo sprintf('%s %s %s inexistant, données orphelines effacés<br>', $lang_bon, $lang_numero, $num_bon);
 }
-echo ($c)?"<br>$t lignes orphelines appartenant à $c bons inexistants ont été néttoyés<br>":"sont propres";
+echo ($c)?sprintf('<br>%s lignes orphelines appartenant à %d bons inexistants ont été néttoyés<br>', $t, $c):"sont propres";
 ?></p>
 <hr>
 <h3>Les Factures</h3>
@@ -330,12 +330,12 @@ while($data = mysql_fetch_array($req)){
  $list_num = unserialize($data['list_num']);
  foreach ($list_num as $value){
   $z++;
- $sql = "UPDATE `" . $tblpref ."bon_comm` SET `fact` = '$num' WHERE `num_bon` = '$value' LIMIT 1";
- mysql_query($sql) or die('<h1>Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
- echo "$lang_bon $lang_numero $value a $lang_jour avec le $lang_numero de $lang_facture $num <br />";
+ $sql = "UPDATE `" . $tblpref .sprintf("bon_comm` SET `fact` = '%s' WHERE `num_bon` = '%s' LIMIT 1", $num, $value);
+ mysql_query($sql) || die('<h1>Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+ echo sprintf('%s %s %s a %s avec le %s de %s %s <br />', $lang_bon, $lang_numero, $value, $lang_jour, $lang_numero, $lang_facture, $num);
  }
 }
-echo "$z ".$lang_bon."s mis a jour";
+echo $z . ' '.$lang_bon."s mis a jour";
 ?>
 </p>
 <hr>
@@ -427,13 +427,13 @@ $j=(isset($_GET['daytopay'])&&is_numeric($_GET['daytopay']))?$_GET['daytopay']:3
 while($data = mysql_fetch_array($req)){
  $num = $data['num'];
  $date_fact = $data['date_fact'];
- $date_pay = date('Y-m-d',strtotime("+$j day", strtotime($date_fact)));
- $sql = "UPDATE `" . $tblpref ."facture` SET `date_pay` = '$date_pay' WHERE `num` = '$num' LIMIT 1";
- mysql_query($sql) or die('<h1>Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
- echo "$lang_facture $lang_numero $num du $date_fact à le statut $lang_pay_le $date_pay ($j jours aprés)<br />";
+ $date_pay = date('Y-m-d',strtotime(sprintf('+%s day', $j), strtotime($date_fact)));
+ $sql = "UPDATE `" . $tblpref .sprintf("facture` SET `date_pay` = '%s' WHERE `num` = '%s' LIMIT 1", $date_pay, $num);
+ mysql_query($sql) || die('<h1>Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+ echo sprintf('%s %s %s du %s à le statut %s %s (%s jours aprés)<br />', $lang_facture, $lang_numero, $num, $date_fact, $lang_pay_le, $date_pay, $j);
  $z++;
 }
-echo "$z ".$lang_facture."s mises a jour";
+echo $z . ' '.$lang_facture."s mises a jour";
 #maybe https://docs.moodle.org/23/en/Converting_your_MySQL_database_to_UTF8
 ?>
 </p>

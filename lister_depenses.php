@@ -19,18 +19,18 @@
  * 		Guy Hendrickx
  *.
  */
-include_once("include/headers.php");
+include_once(__DIR__ . "/include/headers.php");
 ?><script type="text/javascript" src="javascripts/confdel.js"></script><?php
-include_once("include/finhead.php");
+include_once(__DIR__ . "/include/finhead.php");
 ?>
 <table width="760" border="0" class="page" align="center">
  <tr>
   <td class="page" align="center">
 <?php
-include_once("include/head.php");
+include_once(__DIR__ . "/include/head.php");
 if ($user_dep == 'n'){
- echo "<h1>$lang_depense_droit</h1>";
- include_once("include/bas.php");
+ echo sprintf('<h1>%s</h1>', $lang_depense_droit);
+ include_once(__DIR__ . "/include/bas.php");
  exit;
 }
 if (isset($message)&&$message!=''){
@@ -39,16 +39,16 @@ if (isset($message)&&$message!=''){
 //pour le formulaire
 $mois_1=isset($_GET['mois_1'])?$_GET['mois_1']:date("m");
 $annee_1=isset($_GET['annee_1'])?$_GET['annee_1']:date("Y");
-$ands = ($annee_1==$lang_toutes)?'':"WHERE YEAR(date) = $annee_1";#si année choisie
+$ands = ($annee_1==$lang_toutes)?'':'WHERE YEAR(date) = ' . $annee_1;#si année choisie
 $aw = (($annee_1==$lang_toutes&&$mois_1!=$lang_tous))?'WHERE':' AND';#si toutes années et mois choisi #idée GROUP BY DAY(date)
-$ands .= ($mois_1==$lang_tous)?'':"$aw MONTH(date) = $mois_1";#si année entiere
+$ands .= ($mois_1==$lang_tous)?'':sprintf('%s MONTH(date) = %s', $aw, $mois_1);#si année entiere
 
 $calendrier = calendrier_local_mois ();
 
 $sql = "
 SELECT num, lib, fournisseur, prix, DATE_FORMAT(date,'%d/%m/%Y') AS date_aff, date
 FROM " . $tblpref ."depense
-$ands
+{$ands}
 ";
 if ( isset ( $_GET['ordre'] ) && $_GET['ordre'] != ''){
  $sql .= " ORDER BY " . $_GET['ordre'] . " DESC";
@@ -61,7 +61,7 @@ $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
    <center>
     <form action="lister_depenses.php" method="get">
      <table class="page">
-      <caption><?php echo "$lang_lister $lang_depenses"; ?></caption>
+      <caption><?php echo sprintf('%s %s', $lang_lister, $lang_depenses); ?></caption>
       <tr>
        <td class="texte0"><?php echo $lang_mois; ?></td>
        <td class="texte0">
@@ -112,10 +112,7 @@ while($data = mysql_fetch_array($req))
   $fou = $data['fournisseur'];
   $fou = stripslashes($fou);
   $montant = $data['prix'];
-  if($c++ & 1)
-    $line="0";
-  else
-    $line="1";
+  $line = $c++ & 1 ? "0" : "1";
 ?>
      <tr class="texte<?php echo $line; ?>" onmouseover="this.className='highlight'" onmouseout="this.className='texte<?php echo $line; ?>'">
       <td class='<?php echo couleur_alternee (); ?>'><?php echo $num; ?></td>
@@ -130,7 +127,7 @@ while($data = mysql_fetch_array($req))
       </td>
       <td class='<?php echo couleur_alternee (FALSE,"c texte"); ?>'>
        <a href="delete_dep.php?num=<?php echo $num; ?>"
-        onClick="return confirmDelete('<?php echo"$lang_eff_conf_dep $num ?"; ?>')"
+        onClick="return confirmDelete('<?php echo sprintf('%s %s ?', $lang_eff_conf_dep, $num); ?>')"
         >
         <img src="image/delete.jpg" border="0" alt="<?php echo $lang_effacer; ?>">
        </a>
@@ -149,8 +146,8 @@ while($data = mysql_fetch_array($req))
 
 <?php
 $aide='depense';
-include("help.php");
-include_once("include/bas.php");
+include(__DIR__ . "/help.php");
+include_once(__DIR__ . "/include/bas.php");
 if(!strstr($_SERVER['SCRIPT_FILENAME'],__FILE__)){#autre qu'elle meme
  echo"\n  </td>\n </tr>\n</table>\n";
 }

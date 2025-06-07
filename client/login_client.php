@@ -21,36 +21,36 @@
  */
 ini_set('session.save_path', '../include/session');
 $now='../';
-include_once("../include/config/common.php");
-include_once("../include/config/var.php");
+include_once(__DIR__ . "/../include/config/common.php");
+include_once(__DIR__ . "/../include/config/var.php");
 $lang=isset($_POST['lang'])?$_POST['lang']:$default_lang;#default_lg in common
-include_once("../include/language/$lang.php");
-include_once("../include/utils.php");
+include_once(__DIR__ . sprintf('/../include/language/%s.php', $lang));
+include_once(__DIR__ . "/../include/utils.php");
 $login=isset($_POST['login'])?$_POST['login']:"";
 $pass=isset($_POST['pass'])?$_POST['pass']:"";
 
 if($login=='' || $pass==''){
- $message = "<h1>$lang_oublie_champ</h1>";
+ $message = sprintf('<h1>%s</h1>', $lang_oublie_champ);
  include(@$from_cli.'login.php');
  exit;
 }
 
-$sql = "select pass from " . $tblpref ."client where login= '$login'";
+$sql = "select pass from " . $tblpref .sprintf("client where login= '%s'", $login);
 $req = mysql_query($sql) or die('Erreur SQL1
 !<br>'.$sql.'<br>'.mysql_error());
 
 $data = mysql_fetch_array($req);
   $pass_crypt = md5($pass);
 if($data['pass'] != $pass_crypt){
- $message = "<h1>$lang_bad_log</h1>";
+ $message = sprintf('<h1>%s</h1>', $lang_bad_log);
  include(@$from_cli.'login.php');
  exit;
 } else {
  session_start();
  $_SESSION['login'] = $login;
  $_SESSION['lang'] = $lang;
- include_once("../include/headers.php");
- include_once("../include/finhead.php");
- include_once("client.php");
+ include_once(__DIR__ . "/../include/headers.php");
+ include_once(__DIR__ . "/../include/finhead.php");
+ include_once(__DIR__ . "/client.php");
 }
 

@@ -19,12 +19,12 @@
  * 		Guy Hendrickx
  *.
  */
-require_once("include/verif.php");
-include_once("include/config/common.php");
-include_once("include/config/var.php");
-include_once("include/language/$lang.php");
+require_once(__DIR__ . "/include/verif.php");
+include_once(__DIR__ . "/include/config/common.php");
+include_once(__DIR__ . "/include/config/var.php");
+include_once(__DIR__ . sprintf('/include/language/%s.php', $lang));
 $article=isset($_GET['article'])?$_GET['article']:"";
 $sql2 = "UPDATE " . $tblpref ."article SET actif='non' WHERE num = '".$article."'";
-mysql_query($sql2) OR die("<p>Erreur Mysql<br/>$sql2<br/>".mysql_error()."</p>");
-$message = "<h2>$lang_art_eff</h2>";
-include_once("form_article.php");
+mysql_query($sql2) || die(sprintf('<p>Erreur Mysql<br/>%s<br/>', $sql2).mysql_error()."</p>");
+$message = sprintf('<h2>%s</h2>', $lang_art_eff);
+include_once(__DIR__ . "/form_article.php");

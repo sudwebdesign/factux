@@ -19,7 +19,7 @@
  * 		Guy Hendrickx
  *.
  */
-include_once("include/headers.php");
+include_once(__DIR__ . "/include/headers.php");
 
 $page = explode("/", getenv('SCRIPT_NAME'));#split("/", getenv('SCRIPT_NAME'));#Deprecated
 $n = count($page)-1;
@@ -41,7 +41,7 @@ $url_base = ereg_replace("$script", '', "$_SERVER[PATH_TRANSLATED]");
 */
 #2015 alpha
 #$base_url = $_SERVER['REQUEST_SCHEME']."://".$_SERVER['SERVER_NAME'];
-$url_base = str_replace("$page.$extension",'', $_SERVER['DOCUMENT_ROOT'].$_SERVER['PHP_SELF']);
+$url_base = str_replace(sprintf('%s.%s', $page, $extension),'', $_SERVER['DOCUMENT_ROOT'].$_SERVER['PHP_SELF']);
 //$path=str_replace("$page.$extension",'', $_SERVER['SCRIPT_FILENAME']);
 #var_dump($url_base,$_SERVER);exit;
 
@@ -64,29 +64,29 @@ if (isset($send2) && $send2 == $lang_enter){
  //~ }
  $fp3 = fopen ($path."dbinfo.php","w");
  fwrite ($fp3,"<?php\n");
- fwrite ($fp3,"\$dbhost=\"$dbhost\";\n");
- fwrite ($fp3,"\$dbuser=\"$dbuser\";\n");
- fwrite ($fp3,"\$dbpass=\"$dbpass\";\n");
- fwrite ($fp3,"\$dbname=\"$dbname\";\n");
- fwrite ($fp3,"\$path=\"$path\";\n");
+ fwrite ($fp3,"\$dbhost=\"{$dbhost}\";\n");
+ fwrite ($fp3,"\$dbuser=\"{$dbuser}\";\n");
+ fwrite ($fp3,"\$dbpass=\"{$dbpass}\";\n");
+ fwrite ($fp3,"\$dbname=\"{$dbname}\";\n");
+ fwrite ($fp3,"\$path=\"{$path}\";\n");
  $i = 0;
  while($i < $num_tables){
   $tbl = mysql_tablename($tables, $i);
-  fwrite ($fp3,"\$table$i=\"$tbl\";\n");
+  fwrite ($fp3,"\$table{$i}=\"{$tbl}\";\n");
   $i++;
  }
  $i--;
- fwrite ($fp3,"\$numtables=\"$i\";\n");
+ fwrite ($fp3,"\$numtables=\"{$i}\";\n");
  fwrite ($fp3,"?>\n");
  fclose ($fp3);
  @chmod($path."dbinfo.php", 0644);
- include ("dbinfo.php");
+ include (__DIR__ . "/dbinfo.php");
 }else{
  if (!file_exists("dbinfo.php")){
   echo "<meta http-equiv=Refresh content='0;URL=form_backup.php'>";
   die("Start from index.php");
  }
- include "dbinfo.php";
+ include __DIR__ . "/dbinfo.php";
  $conn = @mysql_connect($dbhost,$dbuser,$dbpass);
  if ($conn==FALSE){
   die("<br>error: cannot connect to database<br>" );
@@ -95,7 +95,7 @@ if (isset($send2) && $send2 == $lang_enter){
 $c=0;
 $tables="";
 while ($c < $numtables){
-  $var="table$c";
+  $var='table' . $c;
   $tables .= $$var.";\n";
   $c++;
 }
@@ -105,7 +105,7 @@ $tables .= $$var;
 <table width="760" border="0" class="page" align="center">
  <tr>
   <td class="page" align="center">
-<?php include_once("include/head.php"); ?>
+<?php include_once(__DIR__ . "/include/head.php"); ?>
    <center>
     <form name="dobackup" method="post" action="backup.php">
      <table class="page" width="500" border="0" cellpadding="5" cellspacing="1" >
@@ -205,8 +205,8 @@ $tables .= $$var;
   <td>
 <?php
 $aide='backups';
-include("help.php");
-include_once("include/bas.php");
+include(__DIR__ . "/help.php");
+include_once(__DIR__ . "/include/bas.php");
 ?>
   </td>
  </tr>

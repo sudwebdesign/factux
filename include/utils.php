@@ -20,13 +20,16 @@
  *.
  */
 
-include_once("nb.php");
-include_once("date.php");
-include_once("graphisme.php");
-function naviguer($ou,$mois_1,$annee_1,$titre, $style="color:#ffffff;text-decoration:none;"){#lister_* caption's
+include_once(__DIR__ . "/nb.php");
+include_once(__DIR__ . "/date.php");
+include_once(__DIR__ . "/graphisme.php");
+function naviguer(string $ou,string $mois_1,$annee_1,string $titre, $style="color:#ffffff;text-decoration:none;"): void{#lister_* caption's
  $adresse = $ou.'&amp;mois_1=';
  $an = '&amp;annee_1=';
- $m=$d=$n=$f=0;
+ $m = 0;
+ $d = 0;
+ $n = 0;
+ $f = 0;
  if($mois_1==1){
   $m=12;
   $d=1;
@@ -38,30 +41,37 @@ function naviguer($ou,$mois_1,$annee_1,$titre, $style="color:#ffffff;text-decora
  $style = '" style="'.$style;
  global $lang_toutes;
  global $lang_tous;
- if ($annee_1==$lang_toutes){$dan=$annee_1;$fan=$annee_1;}else{$dan=($annee_1-$d);$fan=($annee_1+$f);}#an protect word
-?><?php if ($annee_1!=$lang_toutes): ?>
+ if ($annee_1==$lang_toutes){$dan=$annee_1;
+  $fan=$annee_1;
+ }else{$dan=($annee_1-$d);
+  $fan=($annee_1+$f);
+ }#an protect word
+ if ($annee_1!=$lang_toutes): ?>
      <a href="<?php echo $adresse.$mois_1.$an.($annee_1-1).$style; ?>" title="Année Precedente">&laquo;<?php echo ($annee_1-1);#ââ ?></a>
      &nbsp;&nbsp;<?php endif; if ($mois_1!=$lang_tous): ?>
      <a href="<?php echo $adresse.($m+$mois_1-1).$an.$dan.$style; ?>" title="Mois Precedent">&lt;<?php printf("%02d", ($m+$mois_1-1));#â ?></a>
      &nbsp;&nbsp;<?php endif; ?>
-     <?php echo $titre." (".(($mois_1!=$lang_tous)?sprintf("%02d",$mois_1):$mois_1)."/$annee_1)"; ?>
+     <?php echo $titre." (".(($mois_1!=$lang_tous)?sprintf("%02d",$mois_1):$mois_1).sprintf('/%s)', $annee_1); ?>
      &nbsp;&nbsp;<?php if ($mois_1!=$lang_tous): ?>
      <a href="<?php echo $adresse.($n+$mois_1+1).$an.$fan.$style; ?>" title="Mois Suivant"><?php printf("%02d", ($n+$mois_1+1));#âº ?>&gt;</a>
      &nbsp;&nbsp;<?php endif; if ($annee_1!=$lang_toutes): ?>
      <a href="<?php echo $adresse.$mois_1.$an.($annee_1+1).$style; ?>" title="Année Suivante"><?php echo ($annee_1+1);#âºâº ?>&raquo;</a>
 <?php endif;
 }
-function thespecialchars ($str){
- if (version_compare(phpversion(), '5.4', '<'))
-  return htmlspecialchars($str, ENT_COMPAT , ini_get("default_charset"));
- else
-  return htmlspecialchars($str, ENT_COMPAT | ENT_HTML401 | ENT_SUBSTITUTE, ini_get("default_charset"), FALSE);
+function thespecialchars ($str): string{
+ if (version_compare(phpversion(), '5.4', '<')) {
+     return htmlspecialchars($str, ENT_COMPAT , ini_get("default_charset"));
+ } else {
+     return htmlspecialchars($str, ENT_COMPAT | ENT_HTML401 | ENT_SUBSTITUTE, ini_get("default_charset"), FALSE);
+ }
 }
-function courriel($a,$sujet,$mess,$de,$logo){//inspiré de : https://openclassrooms.com/courses/e-mail-envoyer-un-e-mail-en-php
- if (!preg_match("#^[a-z0-9._-]+@(hotmail|live|msn).[a-z]{2,4}$#", $a)) // On filtre les serveurs qui présentent des bogues.
-  $cr = "\r\n";
- else
-  $cr = "\n";
+function courriel($a,$sujet,$mess,string $de,string $logo): bool{//inspiré de : https://openclassrooms.com/courses/e-mail-envoyer-un-e-mail-en-php
+ if (!preg_match("#^[a-z0-9._-]+@(hotmail|live|msn).[a-z]{2,4}$#", $a)) {
+     // On filtre les serveurs qui présentent des bogues.
+     $cr = "\r\n";
+ } else {
+     $cr = "\n";
+ }
 
  //~ $mess = utf8_decode(str_replace('€','',$mess));//Failed with errno=32 Broken pipe
  //~ $mess = utf8_decode(str_replace('€','euro',$mess));//Failed with errno=32 Broken pipe
@@ -72,8 +82,8 @@ function courriel($a,$sujet,$mess,$de,$logo){//inspiré de : https://openclassro
  $message_html = "<html><head></head><body>".$mess."</body></html>";
 
  //=====Lecture et mise en forme de la pièce jointe.
- $fichier   = fopen("image/$logo", "r");
- $attachement = fread($fichier, filesize("image/$logo"));
+ $fichier   = fopen('image/' . $logo, "r");
+ $attachement = fread($fichier, filesize('image/' . $logo));
  $attachement = chunk_split(base64_encode($attachement));
  fclose($fichier);
 
@@ -86,14 +96,14 @@ function courriel($a,$sujet,$mess,$de,$logo){//inspiré de : https://openclassro
  $header.= "Reply-to: ".$de.$cr;
  $header.= "MIME-Version: 1.0".$cr;
  $header.= "Date: ".date("r").$cr;
- $header.= "Content-Type: multipart/mixed;".$cr." boundary=\"$boundary\"".$cr;
+ $header.= "Content-Type: multipart/mixed;".$cr.sprintf(' boundary="%s"', $boundary).$cr;
 
  //=====Création du message.
  $message = $cr."--".$boundary.$cr;
- $message.= "Content-Type: multipart/alternative;".$cr." boundary=\"$boundary_alt\"".$cr;
+ $message.= "Content-Type: multipart/alternative;".$cr.sprintf(' boundary="%s"', $boundary_alt).$cr;
  $message.= $cr."--".$boundary_alt.$cr;
  //=====Ajout du message au format texte.
- $message.= "Content-Type: text/plain; charset=\"ISO-8859-1\"".$cr;
+ $message.= 'Content-Type: text/plain; charset="ISO-8859-1"'.$cr;
  $message.= "Content-Transfer-Encoding: 8bit".$cr;
  $message.= $cr.$message_txt.$cr;
  //==========
@@ -101,7 +111,7 @@ function courriel($a,$sujet,$mess,$de,$logo){//inspiré de : https://openclassro
  $message.= $cr."--".$boundary_alt.$cr;
 
  //=====Ajout du message au format HTML.
- $message.= "Content-Type: text/html; charset=\"ISO-8859-1\"".$cr;
+ $message.= 'Content-Type: text/html; charset="ISO-8859-1"'.$cr;
  $message.= "Content-Transfer-Encoding: 8bit".$cr;
  $message.= $cr.$message_html.$cr;
 
@@ -111,12 +121,12 @@ function courriel($a,$sujet,$mess,$de,$logo){//inspiré de : https://openclassro
  $message.= $cr."--".$boundary.$cr;
 
  //=====Ajout du logo en pièce jointe.
- $message.= "Content-Type: image/jpeg; name=\"$logo\"".$cr;
+ $message.= sprintf('Content-Type: image/jpeg; name="%s"', $logo).$cr;
  $message.= "Content-Transfer-Encoding: base64".$cr;
- $message.= "Content-Disposition: attachment; filename=\"$logo\"".$cr;
+ $message.= sprintf('Content-Disposition: attachment; filename="%s"', $logo).$cr;
  $message.= $cr.$attachement.$cr.$cr;
  $message.= $cr."--".$boundary."--".$cr;
  //==========
  //=====Envoi de l'e-mail.
- return (mail($a,$sujet,$message,$header))?true:false;
+ return mail($a,$sujet,$message,$header);
 }

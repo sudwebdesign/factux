@@ -20,8 +20,8 @@
  */
  $etape=(isset($etape)?$etape:'Étape N°1 : Bienvenue et verification des droits des dossiers et fichiers interne de Factux');
  $default_lang=isset($default_lang)?$default_lang:'fr';
- include("../include/language/fr.php");
- require_once("../include/0.php");#uptophp7 & apostrophe()
+ include(__DIR__ . "/../include/language/fr.php");
+ require_once(__DIR__ . "/../include/0.php");#uptophp7 & apostrophe()
 ?>
 <!DOCTYPE html>
 <html>

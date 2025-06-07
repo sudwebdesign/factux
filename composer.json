@@ -1,0 +1,24 @@
+{
+    "name": "sudwebdesign/factux",
+    "description": "facture libre",
+    "type": "project",
+    "require-dev": {
+        "rector/rector": "^2.0",
+        "squizlabs/php_codesniffer": "^3.13"
+    },
+    "scripts": {
+        "check": [
+            "rector",
+            "phpcs"
+        ],
+        "rector": [
+            "Composer\\Config::disableProcessTimeout",
+            "vendor/bin/rector process"
+        ],
+        "phpcs": [
+            "Composer\\Config::disableProcessTimeout",
+            "vendor/bin/phpcbf -p --standard=phpcs.xml"
+        ]
+    },
+    "minimum-stability": "dev"
+}

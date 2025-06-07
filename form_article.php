@@ -19,22 +19,23 @@
  *                 Guy Hendrickx
  *.
  */
-include_once("include/headers.php");
-include_once("javascripts/verif_form.js");
-include_once("include/finhead.php");
+include_once(__DIR__ . "/include/headers.php");
+include_once(__DIR__ . "/javascripts/verif_form.js");
+include_once(__DIR__ . "/include/finhead.php");
 ?>
 <table width="760" border="0" class="page" align="center">
  <tr>
   <td class="page" align="center">
 <?php
-include_once("include/head.php");
+include_once(__DIR__ . "/include/head.php");
 if ($user_art == 'n') {
- echo "<h1>$lang_article_droit</h1>";
- include_once("include/bas.php");
+ echo sprintf('<h1>%s</h1>', $lang_article_droit);
+ include_once(__DIR__ . "/include/bas.php");
  exit;
 }
 if (isset($message)&&$message!='') {
- echo $message; $message='';#onlyHere
+ echo $message;
+ $message='';#onlyHere
 }
 ?>
 <script type="text/javascript" style="display:none;">//calcul du prix de vente HT margé
@@ -143,7 +144,7 @@ $result = mysql_query( $rqSql ) or die( "Exécution requête impossible.");
   <td>
 <?php
 if ($use_categorie =='y') {
-  include_once("ajouter_cat.php");
+  include_once(__DIR__ . "/ajouter_cat.php");
   echo "\n  </td></tr>\n  <tr><td>\n";
 }
-require_once("lister_articles.php");
+require_once(__DIR__ . "/lister_articles.php");

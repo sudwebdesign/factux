@@ -19,10 +19,10 @@
  * 		Guy Hendrickx
  *.
  */
-require_once("include/verif.php");
-include_once("include/config/common.php");
-include_once("include/config/var.php");
-include_once("include/language/$lang.php");
+require_once(__DIR__ . "/include/verif.php");
+include_once(__DIR__ . "/include/config/common.php");
+include_once(__DIR__ . "/include/config/var.php");
+include_once(__DIR__ . sprintf('/include/language/%s.php', $lang));
 $login2=isset($_POST['login2'])?$_POST['login2']:"";
 $pass=isset($_POST['pass'])?$_POST['pass']:"";
 $nom=isset($_POST['nom'])?$_POST['nom']:"";
@@ -41,8 +41,11 @@ $cli=isset($_POST['cli'])?$_POST['cli']:"";
 $admin=isset($_POST['admin'])?$_POST['admin']:""
 ;
 #evitelesdéconvenues 2015
-if($num_user == 1)
- $admin = 'y';#protection du 1er utilisateur (les champs sont tous a non) #wip in editer_utilisteur.php
+if ($num_user == 1) {
+    $admin = 'y';
+}
+
+#protection du 1er utilisateur (les champs sont tous a non) #wip in editer_utilisteur.php
 if ($admin == 'y'){
  $dev = "y";
  $com = "y";
@@ -54,14 +57,14 @@ if ($admin == 'y'){
 }
 
 if($login2=='' || $nom=='' || $prenom=='' || $mail=='' ){
- $message = "$lang_oublie_champ";
- include('lister_utilisateurs.php');
+ $message = $lang_oublie_champ;
+ include(__DIR__ . '/lister_utilisateurs.php');
  exit;
 }
 
 if($pass != $pass2){
- $message = "<h1>$lang_suite_edit_utilisateur_err_pass</h1>";
- include('edit_utilisateur.php'); // On inclus le formulaire d'identification
+ $message = sprintf('<h1>%s</h1>', $lang_suite_edit_utilisateur_err_pass);
+ include(__DIR__ . '/edit_utilisateur.php'); // On inclus le formulaire d'identification
  exit;
 }
 
@@ -69,8 +72,8 @@ $sql = "SELECT * FROM " . $tblpref ."user WHERE email = '".$mail."' AND num != '
 $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 $test = mysql_num_rows($req);
 if ($test > 0){
- $message = "<h1>$lang_mail_exist</h1>";
- include('edit_utilisateur.php');
+ $message = sprintf('<h1>%s</h1>', $lang_mail_exist);
+ include(__DIR__ . '/edit_utilisateur.php');
  exit;
 }
 
@@ -91,6 +94,7 @@ if ($pass != '') {
  `admin` = '".$admin."'
  WHERE `num` = '".$num_user."'";
 }
+
 if ($pass == '') {
  $sql7 = "UPDATE " . $tblpref ."user
  SET `nom` = '".$nom."',
@@ -106,6 +110,7 @@ if ($pass == '') {
  `admin` = '".$admin."'
  WHERE `num` = '".$num_user."'";
 }
-mysql_query($sql7) or die('Erreur SQL !<br>'.$sql7.'<br>'.mysql_error());
-$message="<h2>$lang_suite_edit_utilisateur_succes</h2>";
-include("edit_utilisateur.php");
+
+mysql_query($sql7) || die('Erreur SQL !<br>'.$sql7.'<br>'.mysql_error());
+$message=sprintf('<h2>%s</h2>', $lang_suite_edit_utilisateur_succes);
+include(__DIR__ . "/edit_utilisateur.php");

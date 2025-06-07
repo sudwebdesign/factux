@@ -19,10 +19,10 @@
  * 		Guy Hendrickx
  *.
  */
-include_once("include/verif.php");
-include_once("include/config/common.php");
-include_once("include/config/var.php");
-include_once("include/language/$lang.php");
+include_once(__DIR__ . "/include/verif.php");
+include_once(__DIR__ . "/include/config/common.php");
+include_once(__DIR__ . "/include/config/var.php");
+include_once(__DIR__ . sprintf('/include/language/%s.php', $lang));
 $num_cont=isset($_GET['num_cont'])?$_GET['num_cont']:"";
 $num_bon=isset($_GET['num_bon'])?$_GET['num_bon']:"";
 $nom=isset($_POST['nom'])?$_POST['nom']:"";
@@ -33,13 +33,13 @@ $data = mysql_fetch_array($req);
  $quantiplus = $data['quanti'];
  $artiplus = $data['article_num'];
 
-$sql = "UPDATE `" . $tblpref ."article` SET `stock` = (stock + $quantiplus) WHERE `num` = '$artiplus'";
-mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+$sql = "UPDATE `" . $tblpref .sprintf("article` SET `stock` = (stock + %s) WHERE `num` = '%s'", $quantiplus, $artiplus);
+mysql_query($sql) || die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 ////////////////
 
 $sql = "DELETE FROM " . $tblpref ."cont_bon WHERE num = '".$num_cont."'";
-mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+mysql_query($sql) || die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 
 #header("Location: edit_bon.php?num_bon=$num_bon&nom=$nom");
-$message = "<h2>$lang_li_effa</h2>";
-include("edit_bon.php");
+$message = sprintf('<h2>%s</h2>', $lang_li_effa);
+include(__DIR__ . "/edit_bon.php");

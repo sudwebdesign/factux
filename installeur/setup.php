@@ -20,14 +20,14 @@
  *.
  */
 $etape = "Étape N°3 : Données figurantes sur vos bons de commande et factures";
-include('headers.php');
+include(__DIR__ . '/headers.php');
 $un=isset($_POST['un'])?$_POST['un']:"";
 $deux=isset($_POST['deux'])?$_POST['deux']:"";
 $trois=isset($_POST['trois'])?$_POST['trois']:"";
 $quatre=isset($_POST['quatre'])?$_POST['quatre']:"";
 $cinq=isset($_POST['cinq'])?$_POST['cinq']:"";
 $six=isset($_POST['six'])?$_POST['six']:"";
-mysql_connect($quatre,$un,$deux) or die ("<font color='red' size='4'> Les informations que vous avez entrées semblent incorrectes, veuillez les verifier et recommencer l'installeur.");
+mysql_connect($quatre,$un,$deux) || die ("<font color='red' size='4'> Les informations que vous avez entrées semblent incorrectes, veuillez les verifier et recommencer l'installeur.");
 
 $type = '<?php' . "\n";
 $com = '//common.php créé grace à l\'installeur de Factux, soyez prudent si vous l\'éditez'. "\n";
@@ -43,9 +43,9 @@ $quatre = '"'.$quatre.'";//l\'adresse de la base de données mysql ' . "\n";
 //$cinq = "valeur5";
 $cinq = '"'.$cinq.'";//la langue de l\'interface et des factures créées par Factux : voir la doc pour les abbréviations' . "\n";
 $six = '"'.$six.'";//prefixe des tables ' . "\n";
-$sept = 'require_once(@$now."include/0.php");#uptophp7 & apostrophe()'."\n";
+$sept = 'require_once(__DIR__ . "/../0.php");#uptophp7 & apostrophe()'."\n";
 
-$monfichier = fopen("../include/config/common.php", "w+");
+$monfichier = fopen(__DIR__ . "/../include/config/common.php", "w+");
 
 fwrite($monfichier, ''.$type.''.$com.'$user= '.$un.'$pwd= '.$deux.'$db= '.$trois.'$host= '.$quatre.'$default_lang= '.$cinq.'$tblpref= '.$six.$sept);
 fclose($monfichier);
@@ -56,4 +56,4 @@ fclose($monfichier);
  Ce fichier est largement commenté (en francais) pour vous y aider.</h2>
 </center><hr>
 <?php
-include("setup_suite.php");
+include(__DIR__ . "/setup_suite.php");

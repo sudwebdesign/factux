@@ -20,7 +20,7 @@
  *
  */
 
-require_once("include/config/common.php");
+require_once(__DIR__ . "/include/config/common.php");
 if(!isset($host)) {
 ?>
 <link rel="stylesheet" type="text/css" href="include/theme/red/style.css">
@@ -28,6 +28,8 @@ if(!isset($host)) {
 <?php
 $message = '<h1>Le logiciel ne semble pas encore avoir ete configuré.<br />
 Cliquez <a href="installeur/index.php">ici</a> pour le configurer dès maintenant.</h1>';
-$default_lang='fr';$entrep_nom='Factux 5';$logo='installer.jpg';
+$default_lang='fr';
+$entrep_nom='Factux 5';
+$logo='installer.jpg';
 }
-include("logout.php");
+include(__DIR__ . "/logout.php");

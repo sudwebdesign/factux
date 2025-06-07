@@ -9,3 +9,4 @@ dbinfo.php
 patches/
 /nbproject/private/
 .bugs/*
+vendor

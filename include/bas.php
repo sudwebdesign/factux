@@ -23,7 +23,7 @@
   <table cellspacing="0" cellpadding="0" align="center">
    <tr>
     <td><?php echo $lang_factux; ?>
-    <td rowspan="2"><a href="http://factux.free.fr" target="_blank" ><img src="image/factux.gif" height="77" alt="<?php echo "$lang_factux - $code_langue - $lang" ?>" ></a></td>
+    <td rowspan="2"><a href="http://factux.free.fr" target="_blank" ><img src="image/factux.gif" height="77" alt="<?php echo sprintf('%s - %s - %s', $lang_factux, $code_langue, $lang) ?>" ></a></td>
    <tr>
    <td>
     <?php echo $lang_source_fac; ?> <a href="http://factux.free.fr" target="_blank" alt="Thomas">Thom@s</a>

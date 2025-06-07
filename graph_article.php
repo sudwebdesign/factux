@@ -19,19 +19,20 @@
  * 		Guy Hendrickx
  *#included in & end of ca_articles.php
  */
-include_once("include/headers.php");
-include_once("include/finhead.php");
+include_once(__DIR__ . "/include/headers.php");
+include_once(__DIR__ . "/include/finhead.php");
 //pour le formulaire
 $mois_1 = isset($_GET['mois_1'])?$_GET['mois_1']:$lang_tous;#date("m")
 $annee_1 = isset($_GET['annee_1'])?$_GET['annee_1']:$lang_toutes;#date("Y")
-$ands = ($annee_1==$lang_toutes)?'':"WHERE YEAR(date) = $annee_1";#si année choisie
+$ands = ($annee_1==$lang_toutes)?'':'WHERE YEAR(date) = ' . $annee_1;#si année choisie
 $aw = (($annee_1==$lang_toutes&&$mois_1!=$lang_tous))?'WHERE':' AND';#si toutes années et mois choisi #idée GROUP BY DAY(date)
-$ands .= ($mois_1==$lang_tous)?'':"$aw MONTH(date) = $mois_1";#si année entiere
+$ands .= ($mois_1==$lang_tous)?'':sprintf('%s MONTH(date) = %s', $aw, $mois_1);#si année entiere
 ?>
 <table width="760" border="0" class="page" align="center">
  <tr>
   <td class="page" align="center">
-<?php include_once("include/head.php");$calendrier = calendrier_local_mois (); ?>
+<?php include_once(__DIR__ . "/include/head.php");
+$calendrier = calendrier_local_mois (); ?>
   <center>
     <form action="graph_article.php" method="GET" name="annee">
      <?php echo $lang_mois; ?>
@@ -60,11 +61,11 @@ $ands .= ($mois_1==$lang_tous)?'':"$aw MONTH(date) = $mois_1";#si année entiere
      <caption><?php naviguer("graph_article.php?ordre=".@$_GET['ordre'],$mois_1,$annee_1,$lang_stat_art); ?></caption>
      <tr>
        <th><?php echo $lang_article; ?></th>
-       <th><?php echo "$lang_total_vente ($mois_1/$annee_1)"; ?></th>
+       <th><?php echo sprintf('%s (%s/%s)', $lang_total_vente, $mois_1, $annee_1); ?></th>
        <th><?php echo $lang_quantite; ?></th>
        <th><?php echo $lang_total; ?></th>
-       <th><?php echo "$lang_prix $lang_dachat"; ?></th>
-       <th><?php echo "$lang_prix $lang_de_vente"; ?></th>
+       <th><?php echo sprintf('%s %s', $lang_prix, $lang_dachat); ?></th>
+       <th><?php echo sprintf('%s %s', $lang_prix, $lang_de_vente); ?></th>
        <th> </th>
      </tr>
 <?php
@@ -73,7 +74,7 @@ $sql = "
 SELECT SUM(tot_art_htva)
 FROM " . $tblpref ."cont_bon
 LEFT JOIN " . $tblpref ."bon_comm on bon_num = num_bon
-$ands
+{$ands}
 ";
 
 $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
@@ -94,12 +95,15 @@ uni
 FROM  " . $tblpref ."cont_bon
 LEFT JOIN " . $tblpref ."bon_comm on bon_num = num_bon
 LEFT JOIN " . $tblpref ."article on " . $tblpref ."article.num = article_num
-$ands
+{$ands}
 GROUP BY article
 ORDER BY tot_art_htva DESC";
 $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 //$data = mysql_fetch_array($req);
-$c=$remise=$marge=$margereele=0;
+$c = 0;
+$remise = 0;
+$marge = 0;
+$margereele = 0;
 while ($data = mysql_fetch_array($req)){
  $num = $data['num'];
  $art = $data['article'];
@@ -115,9 +119,9 @@ while ($data = mysql_fetch_array($req)){
  $line=($c++&1)?1:0;
 ?>
    <tr class='texte<?php echo $line; ?>' onmouseover="this.className='highlight'" onmouseout="this.className='texte<?php echo $line; ?>'">
-    <td class='<?php echo couleur_alternee (); ?>'><b title="<?php echo "$lang_numero $num"; ?>"><?php echo $art; ?></b></td>
+    <td class='<?php echo couleur_alternee (); ?>'><b title="<?php echo sprintf('%s %s', $lang_numero, $num); ?>"><?php echo $art; ?></b></td>
     <td class='<?php echo couleur_alternee (FALSE); ?>' width='261'><?php echo stat_baton_horizontal($pourcentage, 2); ?> %</td>
-    <td class='<?php echo couleur_alternee (FALSE); ?>'><?php echo "$quanti $uni "; ?></td>
+    <td class='<?php echo couleur_alternee (FALSE); ?>'><?php echo sprintf('%s %s ', $quanti, $uni); ?></td>
     <td class='<?php echo couleur_alternee (FALSE, "nombre"); ?>'><?php echo montant_financier($tot); ?>&nbsp;</td>
     <td class='<?php echo couleur_alternee (FALSE, "nombre"); ?>'><?php echo montant_financier($prix_achat); ?></td>
     <td class='<?php echo couleur_alternee (FALSE, "nombre"); ?>'><?php echo montant_financier($prix); ?></td>
@@ -129,7 +133,7 @@ while ($data = mysql_fetch_array($req)){
    </tr>
 <?php } ?>
    <tr>
-    <td colspan="3" class='totalmontant'><?php echo $lang_total_h_tva; ?><br><?php echo "$lang_marge $lang_total_h_tva"; ?><br><?php echo "$lang_remise $lang_total_h_tva"; ?><br><?php echo "$lang_marge réele $lang_total_h_tva"; ?></td>
+    <td colspan="3" class='totalmontant'><?php echo $lang_total_h_tva; ?><br><?php echo sprintf('%s %s', $lang_marge, $lang_total_h_tva); ?><br><?php echo sprintf('%s %s', $lang_remise, $lang_total_h_tva); ?><br><?php echo sprintf('%s réele %s', $lang_marge, $lang_total_h_tva); ?></td>
     <td colspan="4" class='totaltexte'><?php echo montant_financier($total); ?><br><?php echo montant_financier($marge); ?><br><?php echo montant_financier($remise); ?><br><?php echo montant_financier($margereele); ?></td>
    </tr>
   </table>
@@ -146,8 +150,8 @@ while ($data = mysql_fetch_array($req)){
   <td>
 <?php
 $aide='stats';
-include("help.php");
-include_once("include/bas.php");
+include(__DIR__ . "/help.php");
+include_once(__DIR__ . "/include/bas.php");
 ?>
   </td>
  </tr>

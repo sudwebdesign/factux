@@ -1,56 +1,60 @@
 <?php
-include_once("include/verif.php");
-include_once("include/config/common.php");
+include_once(__DIR__ . "/include/verif.php");
+include_once(__DIR__ . "/include/config/common.php");
 $num_fact=isset($_POST['num_fact'])?$_POST['num_fact']:"";
 $moins=isset($_POST['retirer'])?$_POST['retirer']:"";
 $plus=isset($_POST['ajouter'])?$_POST['ajouter']:"";
 $sql = "
 SELECT list_num,client
 FROM " . $tblpref ."facture
-WHERE num = $num_fact
+WHERE num = {$num_fact}
 ";
 $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 $data = mysql_fetch_array($req);
 $list_num = unserialize($data['list_num']);
 
 if ($moins !=''){
- $retirer=array(0=>$moins);
+ $retirer=[0=>$moins];
  $tableau3 = array_diff ($list_num, $retirer);
- $tableau4=array();
+ $tableau4=[];
  $a=0;
  foreach ($tableau3 as $value){
-  $tableau4[$a]="$value";
-  $a=$a+1;
+  $tableau4[$a]=$value;
+  $a += 1;
  }
 
- $sql = "UPDATE `" . $tblpref ."bon_comm` SET `fact` = '0' WHERE `num_bon` = '$moins' LIMIT 1";
- mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+ $sql = "UPDATE `" . $tblpref .sprintf("bon_comm` SET `fact` = '0' WHERE `num_bon` = '%s' LIMIT 1", $moins);
+ mysql_query($sql) || die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 }
+
 if ($plus!=''){
- $ajouter=array(0=>$plus);
+ $ajouter=[0=>$plus];
  $result = array_merge ($list_num, $ajouter);
  $z=0;
- $tableau4=array();
+ $tableau4=[];
  foreach ($result as $value){
-  $tableau4[$z]="$value";
-  $z=$z+1;
+  $tableau4[$z]=$value;
+  $z += 1;
  }
+
  sort($tableau4,SORT_NUMERIC);
- $sql = "UPDATE `" . $tblpref ."bon_comm` SET `fact` = '$num_fact' WHERE `num_bon` = '$plus' LIMIT 1";
- mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+ $sql = "UPDATE `" . $tblpref .sprintf("bon_comm` SET `fact` = '%s' WHERE `num_bon` = '%s' LIMIT 1", $num_fact, $plus);
+ mysql_query($sql) || die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 }
 
-$suite_sql=" and " . $tblpref ."bon_comm.num_bon ='$tableau4[0]'";
+$suite_sql=" and " . $tblpref .sprintf("bon_comm.num_bon ='%s'", $tableau4[0]);
+$counter = count($tableau4);
 
-for($m=1; $m<count($tableau4); $m++){
- $suite_sql .= " or " . $tblpref ."bon_comm.num_bon ='$tableau4[$m]'";
+for($m=1; $m<$counter; $m++){
+ $suite_sql .= " or " . $tblpref .sprintf("bon_comm.num_bon ='%s'", $tableau4[$m]);
 }
+
 $sql="
 SELECT SUM(tot_htva), SUM(tot_tva)
 FROM " . $tblpref ."bon_comm
 WHERE 1
 ";
-$sql="$sql $suite_sql";
+$sql=sprintf('%s %s', $sql, $suite_sql);
 $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 $data = mysql_fetch_array($req);
 $total_fact_h = floatval($data['SUM(tot_htva)']);
@@ -61,13 +65,13 @@ $list_num=serialize($tableau4);//
 
 $sql2 = "
 UPDATE `" . $tblpref ."facture`
-SET `list_num` = '$list_num',
-`total_fact_ttc` = '$total_fact_ttc',
-`total_fact_h` = '$total_fact_h'
-WHERE `num` = '$num_fact'
+SET `list_num` = '{$list_num}',
+`total_fact_ttc` = '{$total_fact_ttc}',
+`total_fact_h` = '{$total_fact_h}'
+WHERE `num` = '{$num_fact}'
 LIMIT 1
 ";
-mysql_query($sql2) or die('Erreur SQL !<br>'.$sql2.'<br>'.mysql_error());
+mysql_query($sql2) || die('Erreur SQL !<br>'.$sql2.'<br>'.mysql_error());
 
-header("Location: edit_fact.php?num_fact=$num_fact");
-//include_once("edit_fact.php");
+header('Location: edit_fact.php?num_fact=' . $num_fact);
+//include_once(__DIR__ . "/edit_fact.php");

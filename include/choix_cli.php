@@ -12,21 +12,21 @@ while($data6 = mysql_fetch_array($req2)){
 $l=0;
 $selettre='p0';
 foreach ($lettre as $value) {
- echo "clients['p$l'] = new Array;\n";
- $rqSql2 ="$rqSql AND `nom` LIKE '$value%'";
+ echo "clients['p{$l}'] = new Array;\n";
+ $rqSql2 =sprintf("%s AND `nom` LIKE '%s%%'", $rqSql, $value);
  $req = mysql_query($rqSql2) or die('Erreur SQL !<br>'.$rqSql2.'<br>'.mysql_error());
  $v=0;
  while($data = mysql_fetch_array($req)){
   $selec='';
   if (isset($num) && $num==$data['num_client']){//$num#from form_edit_bon/devis
-   $selettre = "p$l";
+   $selettre = 'p' . $l;
    $selec = " selected='selected'";
   }
   $nom = addslashes($data['nom']);
-  echo"clients['p$l']['$v']= new Array('$data[num_client]', ' $nom ',\"$selec\");\n";
+  echo"clients['p{$l}']['{$v}']= new Array('$data[num_client]', ' {$nom} ',\"{$selec}\");\n";
   $v++;
  }
- echo "lettres[$l] = new Array( 'p$l','$value',\"$selec\");\n";
+ echo "lettres[{$l}] = new Array( 'p{$l}','{$value}',\"{$selec}\");\n";
  $l++;
 }
 ?>

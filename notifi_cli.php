@@ -19,8 +19,8 @@
  * 		Guy Hendrickx
  *.
  */
-include_once("include/headers.php");
-include_once("include/finhead.php");
+include_once(__DIR__ . "/include/headers.php");
+include_once(__DIR__ . "/include/finhead.php");
 $type =isset($_GET['type'])?$_GET['type']:"";
 $email =isset($_GET['mail'])?$_GET['mail']:"";
 //p?type=comm&mail=$mail
@@ -29,7 +29,7 @@ $email =isset($_GET['mail'])?$_GET['mail']:"";
  <tr>
   <td class="page" align="center">
 <?php
-include_once("include/head.php");
+include_once(__DIR__ . "/include/head.php");
 if ($type == 'comm') {
 $titre = $lang_notifi_titre_bon;
 $message = $lang_notifi_message_bon;
@@ -42,9 +42,9 @@ if ($type == 'devis') {
 $titre = $lang_notifi_titre_dev;
 $message = $lang_notifi_message_dev;
 }
-$to = "$email";
-$from = "$entrep_nom<$mail>" ;
-$subject = "$titre" ;
+$to = $email;
+$from = sprintf('%s<%s>', $entrep_nom, $mail) ;
+$subject = $titre ;
 $header = 'From: '.$mail ."\n"
  .'MIME-Version: 1.0'."\n"
  .'Reply-To: '.$from."\n"
@@ -52,16 +52,13 @@ $header = 'From: '.$mail ."\n"
  .'X-Mailer: Factux'."\n"
  .'Content-Type: text/html; charset= ISO-8859-1; charset= ISO-8859-1'."\n"
  .'Content-Transfer-Encoding: 8bit'."\n\n";
-if(mail($to,$subject,$message,$header))
- $message = "<h2>$lang_notifi_cli</h2>";
-else
- $message = "<h1>$lang_notifi_cli_non</h1>";#<br>$message
+$message = mail($to,$subject,$message,$header) ? sprintf('<h2>%s</h2>', $lang_notifi_cli) : sprintf('<h1>%s</h1>', $lang_notifi_cli_non);#<br>$message
 if ($type == 'comm') {
-include_once("lister_commandes.php");
+include_once(__DIR__ . "/lister_commandes.php");
 }
 if ($type == 'fact') {
-include_once("lister_factures.php");
+include_once(__DIR__ . "/lister_factures.php");
 }
 if ($type == 'devis') {
-include_once("lister_devis.php");
+include_once(__DIR__ . "/lister_devis.php");
 }

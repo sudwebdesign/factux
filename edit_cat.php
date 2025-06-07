@@ -19,45 +19,46 @@
  * 		Thomas Ingles
  *.
  */
-include_once("include/headers.php");
+include_once(__DIR__ . "/include/headers.php");
 $categorie=isset($_POST['categorie'])?$_POST['categorie']:"";
 $id_cat=isset($_POST['id_cat'])?$_POST['id_cat']:"";
 if($id_cat!=""&&$categorie!=""){#MAJ
- $sql = "SELECT categorie FROM " . $tblpref ."categorie WHERE id_cat = $id_cat";
+ $sql = "SELECT categorie FROM " . $tblpref .('categorie WHERE id_cat = ' . $id_cat);
  $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
  $data = mysql_fetch_array($req);
  $anciennom = $data['categorie'];
- $sql = "UPDATE ".$tblpref."categorie SET categorie ='{$categorie}' WHERE id_cat = '{$id_cat}'";
+ $sql = "UPDATE ".$tblpref.sprintf("categorie SET categorie ='%s' WHERE id_cat = '%s'", $categorie, $id_cat);
  if($categorie!=''&&$categorie!=$lang_divers){
-  mysql_query($sql) OR die("<p>Erreur Mysql<br/>$sql<br/>".mysql_error()."</p>");
-  $message = "<h2>$lang_cat_maj</h2><p>$lang_de $anciennom $lang_vers $categorie</p>";
+  mysql_query($sql) || die(sprintf('<p>Erreur Mysql<br/>%s<br/>', $sql).mysql_error()."</p>");
+  $message = sprintf('<h2>%s</h2><p>%s %s %s %s</p>', $lang_cat_maj, $lang_de, $anciennom, $lang_vers, $categorie);
  }
- if($categorie==$lang_divers)
-  $message = "<h1>$lang_categorie $lang_divers</h1>";
- include("lister_cat.php");
+ if ($categorie==$lang_divers) {
+     $message = sprintf('<h1>%s %s</h1>', $lang_categorie, $lang_divers);
+ }
+ include(__DIR__ . "/lister_cat.php");
  exit;
 }
 if($id_cat==""&&$categorie!=""){#NEW from edit_cat #fix
- include("lister_cat.php");
+ include(__DIR__ . "/lister_cat.php");
  exit;
 }
-include_once("include/finhead.php");
+include_once(__DIR__ . "/include/finhead.php");
 ?>
 <table width="760" border="0" class="page" align="center">
  <tr>
   <td class="page" align="center">
 <?php
-include_once("include/head.php");
+include_once(__DIR__ . "/include/head.php");
 if ($user_com == 'n') {
- echo"<h1>$lang_commande_droit</h1>";
- include_once("include/bas.php");
+ echo sprintf('<h1>%s</h1>', $lang_commande_droit);
+ include_once(__DIR__ . "/include/bas.php");
  exit;
 }
 $id_cat=isset($_GET['id_cat'])?$_GET['id_cat']:"";
 $sql = "
 SELECT  id_cat, categorie
-FROM " . $tblpref ."categorie
-WHERE id_cat = $id_cat";
+FROM " . $tblpref .('categorie
+WHERE id_cat = ' . $id_cat);
 $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 $data = mysql_fetch_array($req);
  $categorie = $data['categorie'];
@@ -68,7 +69,7 @@ $data = mysql_fetch_array($req);
      <table class="page">
       <caption><?php echo $lang_categorie_modif; ?></caption>
       <tr>
-       <td class="texte0"><?php echo "$lang_cat_nom" ?><input name="id_cat" type="hidden" value='<?php echo $id_cat; ?>' /></td>
+       <td class="texte0"><?php echo $lang_cat_nom ?><input name="id_cat" type="hidden" value='<?php echo $id_cat; ?>' /></td>
        <td class="texte0"><input name="categorie" type="text" id="uni2" size="27" maxlength="30" value='<?php echo $categorie; ?>' /></td>
       </tr>
       <tr>
@@ -86,4 +87,4 @@ $data = mysql_fetch_array($req);
  <tr>
   <td>
 <?php
-include("lister_cat.php");
+include(__DIR__ . "/lister_cat.php");

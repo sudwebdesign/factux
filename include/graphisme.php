@@ -20,13 +20,13 @@
  *.
  */
 
-function couleur_alternee ($alterne=TRUE, $type="texte")
+function couleur_alternee ($alterne=TRUE, string $type="texte"): string
 {
   global $couleur_courante;
   return ($alterne? $type.++$couleur_courante % 2 :$type.$couleur_courante % 2);
 }
 
-function stat_baton_horizontal($valeur,$largeur = 3, $image = "image/barre.jpg",  $font=2)
+function stat_baton_horizontal(string $valeur,$largeur = 3, string $image = "image/barre.jpg",  $font=2): string
 {
   $barre = round(floatval($valeur)) * $largeur;
   return '<img src="'.$image.'" width="'.$barre.'" height="10" alt="barre"><font size='.$font.'>'. $valeur.'</font>';
@@ -40,15 +40,16 @@ function parseCSS($filename){
   $css=preg_replace("/[\s, ]+/", "", $css);
   $css_class = preg_split("/}/", $css);
 
-  foreach($css_class as $key => $val){
+  foreach($css_class as $val){
    $aCSSObj=preg_split("/{/", $val);
    $a=preg_split("/;/", $aCSSObj[1]);
-   foreach($a as $key => $val0){
+   foreach($a as $val0){
     if($val0 !=''){
      $aCSSSub=preg_split("/:/", $val0);
      $aCSSItem[$aCSSSub[0]]=$aCSSSub[1];
     }
    }
+
    $aCSS[$aCSSObj[0]]=$aCSSItem;
    unset($aCSSItem);
   }
@@ -62,4 +63,4 @@ function parseCSS($filename){
   return $aCSS;
 
 }
-?>
+

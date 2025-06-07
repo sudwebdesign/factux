@@ -19,8 +19,8 @@
  * 		Guy Hendrickx
  *.
  */
-include_once("include/headers.php");
-#include_once("include/finhead.php");
+include_once(__DIR__ . "/include/headers.php");
+#include_once(__DIR__ . "/include/finhead.php");
 ?>
 
 <script type="text/javascript">
@@ -119,13 +119,14 @@ function highlight() {
 <tr>
 <td class="page" align="center">
 <?php
-include_once("include/head.php");
+include_once(__DIR__ . "/include/head.php");
 if (isset($message)&&$message!='') {
- echo $message; $message='';
+ echo $message;
+ $message='';#onlyHere
 }
 if ($user_admin != 'y') {
- echo "<h1>$lang_admin_droit";
- include_once("include/bas.php");
+ echo '<h1>' . $lang_admin_droit;
+ include_once(__DIR__ . "/include/bas.php");
  exit;
 }
 ?>
@@ -138,7 +139,7 @@ if ($user_admin != 'y') {
       <td class="texte0"><?php echo $lang_mailing_list_titremessage; ?></td>
 	  <td class="texte0"><input type="text" name="titre"></tr>
     <tr>
-      <td class="texte0"><?php echo  "$lang_mailing_list_message"; ?></td>
+      <td class="texte0"><?php echo  $lang_mailing_list_message; ?></td>
 	  <td class="texte0">
 		<textarea id="ta" name="message" style="width:100%" rows="20" cols="80"></textarea>
 		</td>
@@ -151,8 +152,8 @@ if ($user_admin != 'y') {
 </form>
 <?php
 $aide = 'mailing';
-include("help.php");
-include_once("include/bas.php");
+include(__DIR__ . "/help.php");
+include_once(__DIR__ . "/include/bas.php");
 ?>
 </td></tr>
 </table>

@@ -1,14 +1,16 @@
 <?php
-include_once("include/config/common.php");
-include_once("include/config/var.php");
+include_once(__DIR__ . "/include/config/common.php");
+include_once(__DIR__ . "/include/config/var.php");
 if (!isset($lang)) {
    $lang = $default_lang;
 }
-include_once("include/language/$lang.php");
-include_once("include/headers.php");
+include_once(__DIR__ . sprintf('/include/language/%s.php', $lang));
+include_once(__DIR__ . "/include/headers.php");
 $mes="internet explorer";
-if (preg_match("~Edge~", $_SERVER["HTTP_USER_AGENT"]))#quel est celui de spartan ? "Edge/12.#### ça veut dire bord
- $mes="spartan";
+if (preg_match("~Edge~", $_SERVER["HTTP_USER_AGENT"])) {
+    #quel est celui de spartan ? "Edge/12.#### ça veut dire bord
+    $mes="spartan";
+}
 ?>
 </head>
 <body onBlur="window.focus()">

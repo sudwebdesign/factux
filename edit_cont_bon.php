@@ -19,14 +19,14 @@
  * 		Guy Hendrickx
  *.
  */
-include_once("include/headers.php");
-include_once("include/finhead.php");
+include_once(__DIR__ . "/include/headers.php");
+include_once(__DIR__ . "/include/finhead.php");
 $num_cont=isset($_POST['num_cont'])?$_POST['num_cont']:"";
 ?>
 <table width="760" border="0" class="page" align="center">
  <tr>
   <td class="page" align="center">
-<?php include_once("include/head.php"); ?>
+<?php include_once(__DIR__ . "/include/head.php"); ?>
    <center>
     <form name="formu2" method="post" action="edit_cont_bon_suite.php">
      <table class='page boiteaction'>
@@ -35,8 +35,7 @@ $num_cont=isset($_POST['num_cont'])?$_POST['num_cont']:"";
 $sql = "
 SELECT * FROM " . $tblpref ."cont_bon
 LEFT JOIN " . $tblpref ."article on " . $tblpref ."cont_bon.article_num = " . $tblpref ."article.num
-WHERE  " . $tblpref ."cont_bon.num = $num_cont
-";
+WHERE  " . $tblpref .sprintf('cont_bon.num = %s%s', $num_cont, PHP_EOL);
 $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 while($data = mysql_fetch_array($req)){
  $quanti = $data['quanti'];
@@ -53,7 +52,7 @@ while($data = mysql_fetch_array($req)){
      <tr>
       <td class="texte0"><?php echo $lang_article ;?></td>
       <td class="texte0">
-<?php include("include/article_choix.php"); ?>
+<?php include(__DIR__ . "/include/article_choix.php"); ?>
      </td>
 <?php
 if ($lot == 'y') {
@@ -68,7 +67,7 @@ if ($lot == 'y') {
 while ( $row = mysql_fetch_array( $result)) {
   $sel=($row['num']==$num_lot)?"' selected='selected":'';
 ?>
-         <option value='<?php echo "$row[num]$sel"; ?>'><?php echo "$row[num] $row[prod] "; ?></option>
+         <option value='<?php echo $row[num] . $sel; ?>'><?php echo sprintf('%s %s ', $row[num], $row[prod]); ?></option>
 <?php } ?>
         </select>
        </td>
@@ -77,13 +76,13 @@ while ( $row = mysql_fetch_array( $result)) {
       <tr>
        <td class="texte0"><?php echo $lang_quanti ?></td>
        <td colspan="3" class="texte0">
-        <input name="quanti" type="text" size="5" id="quanti" value="<?php echo"$quanti"?>">
+        <input name="quanti" type="text" size="5" id="quanti" value="<?php echo$quanti?>">
        </td>
       </tr>
       <tr>
        <td class="texte0"><?php echo $lang_remise ?></td>
        <td colspan="3" class="texte0">
-        <input name="remise" type="text" size="5" id="remise" value="<?php echo"$remise"?>">%
+        <input name="remise" type="text" size="5" id="remise" value="<?php echo$remise?>">%
        </td>
       </tr>
       <tr>
@@ -102,8 +101,8 @@ while ( $row = mysql_fetch_array( $result)) {
   <td>
 <?php
 $aide='bon';
-include("help.php");
-include_once("include/bas.php");
+include(__DIR__ . "/help.php");
+include_once(__DIR__ . "/include/bas.php");
 ?>
   </td>
  </tr>

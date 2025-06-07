@@ -19,64 +19,63 @@
  * 		Guy Hendrickx
  *.
  */
-include_once("include/headers.php");
-include_once("include/finhead.php");
+include_once(__DIR__ . "/include/headers.php");
+include_once(__DIR__ . "/include/finhead.php");
 $tri=isset($_POST['tri'])?$_POST['tri']:"";
 $requete = "SELECT *, TO_DAYS(NOW()) - TO_DAYS(date_fact) AS peri FROM " . $tblpref ."facture
 LEFT JOIN " . $tblpref ."client on " . $tblpref ."facture.client = num_client
 WHERE num >0";
 //on verifie le client
-if(isset($_POST['listeclients']) && $_POST['listeclients']!='')
-	$requete .= " AND client='" . $_POST['listeclients'] . "'";
+if (isset($_POST['listeclients']) && $_POST['listeclients']!='') {
+ $requete .= " AND client='" . $_POST['listeclients'] . "'";
+}
 
 //on verifie le numero
 if ( isset ( $_POST['numero'] ) && $_POST['numero'] != ''){
-$requete .= " AND num='" . $_POST['numero'] . "'";
+ $requete .= " AND num='" . $_POST['numero'] . "'";
 }
 //on verifie le mois
 if ( isset ( $_POST['mois'] ) && $_POST['mois'] != ''){
-$requete .= " AND MONTH(date_fact)='" . $_POST['mois'] . "'";
+ $requete .= " AND MONTH(date_fact)='" . $_POST['mois'] . "'";
 }
 //on verifie l'année
 if ( isset ( $_POST['annee'] ) && $_POST['annee'] != ''){
-$requete .= " AND Year(date_fact)='" . $_POST['annee'] . "'";
+ $requete .= " AND Year(date_fact)='" . $_POST['annee'] . "'";
 }
 //on verifie le jour
 if ( isset ( $_POST['jour'] ) && $_POST['jour'] != ''){
-$requete .= " AND DAYOFMONTH(date_fact)='" . $_POST['jour'] . "'";
+ $requete .= " AND DAYOFMONTH(date_fact)='" . $_POST['jour'] . "'";
 }
 //on verifie le montant
 if ( isset ( $_POST['montant'] ) && $_POST['montant'] != ''){
-$requete .= " AND trim(total_fact_ttc) =" . $_POST['montant'] . "";
+ $requete .= " AND trim(total_fact_ttc) =" . $_POST['montant'] . "";
 }
 //
-if($use_payement =='y'){
+if ($use_payement =='y') {
  if ( isset ( $_POST['payement'] ) && $_POST['payement'] != ''){
- $requete .= " AND payement ='" . $_POST['payement'] . "'";
+  $requete .= " AND payement ='" . $_POST['payement'] . "'";
  }
-}else{
- if ( isset ( $_POST['payement'] ) && $_POST['payement'] != ''){
-  if($_POST['payement'] =='non'){
+} elseif (isset ( $_POST['payement'] ) && $_POST['payement'] != '') {
+ if($_POST['payement'] =='non'){
   $requete .= " AND payement ='non'";
-  }else{
+ }else{
   $requete .= " AND payement !='non'";
-  }
  }
 }
 if ($user_fact == 'r'){
 $requete .="
-and " . $tblpref ."client.permi LIKE '$user_num,'
-or  " . $tblpref ."client.permi LIKE '%,$user_num,'
-or  " . $tblpref ."client.permi LIKE '%,$user_num,%'
-or  " . $tblpref ."client.permi LIKE '$user_num,%' ";
+and " . $tblpref ."client.permi LIKE '{$user_num},'
+or  " . $tblpref ."client.permi LIKE '%,{$user_num},'
+or  " . $tblpref ."client.permi LIKE '%,{$user_num},%'
+or  " . $tblpref .sprintf("client.permi LIKE '%s,%%' ", $user_num);
 }
-//
-$requete .= " ORDER BY $tri";
+// Tri
+$requete .= ' ORDER BY ' . $tri;
 ?>
 <table width="760" border="0" class="page" align="center">
  <tr>
   <td class="page" align="center">
-<?php include_once("include/head.php"); ?>
+<?php include_once(__DIR__ . "/include/head.php"); ?>
    <center>
     <table class='page boiteaction'>
      <caption><?php echo $lang_res_rech; ?></caption>
@@ -106,17 +105,31 @@ while($data = mysql_fetch_array($req)){
  $peri = $data['peri'];
  $pay = $data['payement'];
  switch ($pay) {
-  case "carte":$pay="$lang_carte_ban";break;
-  case "Especes":$pay="$lang_liquide";break;
-  case "ok":$pay="$lang_pay_ok";break;
-  case "Cheque":$pay="$lang_paypal";break;
-  case "virement":$pay="$lang_virement";break;
-  case "visa":$pay="$lang_visa";break;
-  case "non":$pay="<a href='lister_factures_non_reglees.php?num=$num' alt='$lang_regler'".(($peri>=$echeance_fact)?' style="color:red;"':'').">$lang_non_pay</a>";break;
+  case "carte":
+   $pay=$lang_carte_ban;
+  break;
+  case "Especes":
+   $pay=$lang_liquide;
+  break;
+  case "ok":
+   $pay=$lang_pay_ok;
+  break;
+  case "Cheque":
+   $pay=$lang_paypal;
+  break;
+  case "virement":
+   $pay=$lang_virement;
+  break;
+  case "visa":
+   $pay=$lang_visa;
+  break;
+  case "non":
+   $pay=sprintf("<a href='lister_factures_non_reglees.php?num=%s' alt='%s'", $num, $lang_regler).(($peri>=$echeance_fact)?' style="color:red;"':'').sprintf('>%s</a>', $lang_non_pay);
+  break;
  }
  $line=($c++ & 1)?0:1;
 ?>
-     <tr class="texte<?php echo "$line"; ?>" onmouseover="this.className='highlight'" onmouseout="this.className='texte<?php echo $line; ?>'">
+     <tr class="texte<?php echo $line; ?>" onmouseover="this.className='highlight'" onmouseout="this.className='texte<?php echo $line; ?>'">
       <td class='<?php echo couleur_alternee (FALSE); ?>'><?php echo $num; ?></td>
       <td class='<?php echo couleur_alternee (FALSE); ?>'><?php echo $nom; ?></td>
       <td class='<?php echo couleur_alternee (FALSE,"c texte"); ?>'><?php echo $date ;?></td>
@@ -143,7 +156,7 @@ while($data = mysql_fetch_array($req)){
      <tr><td colspan="10" class="td2"></td></tr>
     </table>
    </center>
-<?php include("chercher_factures.php"); ?>
+<?php include(__DIR__ . "/chercher_factures.php"); ?>
   </td>
  </tr>
 </table>

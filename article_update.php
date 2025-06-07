@@ -19,10 +19,10 @@
  * 		Guy Hendrickx
  *.
  */
-require_once("include/verif.php");
-include_once("include/config/common.php");
-include_once("include/config/var.php");
-include_once("include/language/$lang.php");
+require_once(__DIR__ . "/include/verif.php");
+include_once(__DIR__ . "/include/config/common.php");
+include_once(__DIR__ . "/include/config/var.php");
+include_once(__DIR__ . sprintf('/include/language/%s.php', $lang));
 $nom=isset($_POST['nom'])?$_POST['nom']:"";
 $num=isset($_POST['num'])?$_POST['num']:"";
 $prix=floatval(isset($_POST['prix'])?$_POST['prix']:"");
@@ -37,18 +37,26 @@ $article=isset($_POST['article'])?$_POST['article']:"";### ‘	&#145;	&lsquo;	Le
 $uni=isset($_POST['uni'])?$_POST['uni']:"";
 $taux_tva=floatval(isset($_POST['taux_tva'])?$_POST['taux_tva']:"");
 $set='';
-if($article!="")#jamais commandé
- $set.=",
+if ($article!="") {
+    #jamais commandé
+    $set.=",
 `article`='".$article."'
 ";
-if($uni!="")#jamais commandé
- $set.=",
+}
+
+if ($uni!="") {
+    #jamais commandé
+    $set.=",
 `uni`='".$uni."'
 ";
-if($taux_tva!="")#jamais commandé
- $set.=",
+}
+
+if ($taux_tva!="") {
+    #jamais commandé
+    $set.=",
 `taux_tva`='".$taux_tva."'
 ";
+}
 
 $sql2 = "
 UPDATE " . $tblpref ."article
@@ -60,11 +68,11 @@ SET
 `stomin`='".$min."',
 `stomax`='".$max."',
 `cat`='".$categorie."'
-$set
+{$set}
 WHERE num ='".$num."'
 LIMIT 1
 ";
 
-mysql_query($sql2) OR die("<p>Erreur Mysql<br/>$sql2<br/>".mysql_error()."</p>");
-$message= "<h2>$lang_stock_jour &laquo;$nom&raquo;</h2>";
-include_once("lister_articles.php");
+mysql_query($sql2) || die(sprintf('<p>Erreur Mysql<br/>%s<br/>', $sql2).mysql_error()."</p>");
+$message= sprintf('<h2>%s &laquo;%s&raquo;</h2>', $lang_stock_jour, $nom);
+include_once(__DIR__ . "/lister_articles.php");

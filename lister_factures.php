@@ -19,28 +19,29 @@
  *   Guy Hendrickx
  *.
  */
-include_once("include/headers.php");
+include_once(__DIR__ . "/include/headers.php");
 ?><script type="text/javascript" src="javascripts/confdel.js"></script><?php
-include_once("include/finhead.php");
+include_once(__DIR__ . "/include/finhead.php");
 ?>
 <table width="760" border="0" class="page" align="center">
  <tr>
   <td class="page" align="center">
 <?php
-include_once("include/head.php");
+include_once(__DIR__ . "/include/head.php");
 if ($user_fact == 'n') {
- echo "<h1>$lang_facture_droit</h1>";
- include_once("include/bas.php");
+ echo sprintf('<h1>%s</h1>', $lang_facture_droit);
+ include_once(__DIR__ . "/include/bas.php");
  exit;
 }
 if (isset($message)&&$message!='') {
  echo $message;
+ $message='';#onlyHere?
 }
 //pour le formulaire
 $mois_1=isset($_GET['mois_1'])?$_GET['mois_1']:date("m");
 $annee_1=isset($_GET['annee_1'])?$_GET['annee_1']:date("Y");
-$ands = ($annee_1==$lang_toutes)?'':" AND YEAR(date_fact) = $annee_1";#si année choisie
-$ands .= ($mois_1==$lang_tous)?'':" AND MONTH(date_fact) = $mois_1";#si année entiere
+$ands = ($annee_1==$lang_toutes)?'':' AND YEAR(date_fact) = ' . $annee_1;#si année choisie
+$ands .= ($mois_1==$lang_tous)?'':' AND MONTH(date_fact) = ' . $mois_1;#si année entiere
 $calendrier = calendrier_local_mois ();
 
 $sql = "
@@ -58,10 +59,10 @@ WHERE num >0".$ands;
 
 if ($user_fact == 'r') {
 $sql .= "
-and " . $tblpref ."client.permi LIKE '$user_num,'
-or  " . $tblpref ."client.permi LIKE '%,$user_num,'
-or  " . $tblpref ."client.permi LIKE '%,$user_num,%'
-or  " . $tblpref ."client.permi LIKE '$user_num,%'
+and " . $tblpref ."client.permi LIKE '{$user_num},'
+or  " . $tblpref ."client.permi LIKE '%,{$user_num},'
+or  " . $tblpref ."client.permi LIKE '%,{$user_num},%'
+or  " . $tblpref ."client.permi LIKE '{$user_num},%'
 ";
 //ORDER BY 'num' DESC
 }
@@ -119,8 +120,9 @@ $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 <?php
 $c=0;
 while($data = mysql_fetch_array($req)){
- if($data['payement']=="Irrecouvrable")
-  continue;
+ if ($data['payement']=="Irrecouvrable") {
+     continue;
+ }
  $client = $data['nom'];
  #$client = htmlentities($client, ENT_QUOTES);
  $debut = $data['date_deb2'];
@@ -137,13 +139,27 @@ while($data = mysql_fetch_array($req)){
  $login = $data['login'];
  $pay = $data['payement'];
  switch ($pay) {
-  case "carte":$pay="<b alt='$lang_le $date_reglee'>$lang_carte_ban</b>";break;
-  case "Especes":$pay="<b alt='$lang_le $date_reglee'>$lang_liquide</b>";break;
-  case "ok":$pay="<b alt='$lang_le $date_reglee'>$lang_pay_ok</b>";break;
-  case "Cheque":$pay="<b alt='$lang_le $date_reglee'>$lang_paypal</b>";break;
-  case "virement":$pay="<b alt='$lang_le $date_reglee'>$lang_virement</b>";break;
-  case "visa":$pay="<b alt='$lang_le $date_reglee'>$lang_visa</b>";break;
-  case "non":$pay="<a href='lister_factures_non_reglees.php?num=$num' alt='$lang_regler'".(($peri>=$echeance_fact)?' style="color:red;"':'').">$lang_non_pay</a>";break;
+  case "carte":
+   $pay=sprintf("<b alt='%s %s'>%s</b>", $lang_le, $date_reglee, $lang_carte_ban);
+  break;
+  case "Especes":
+   $pay=sprintf("<b alt='%s %s'>%s</b>", $lang_le, $date_reglee, $lang_liquide);
+  break;
+  case "ok":
+   $pay=sprintf("<b alt='%s %s'>%s</b>", $lang_le, $date_reglee, $lang_pay_ok);
+  break;
+  case "Cheque":
+   $pay=sprintf("<b alt='%s %s'>%s</b>", $lang_le, $date_reglee, $lang_paypal);
+  break;
+  case "virement":
+   $pay=sprintf("<b alt='%s %s'>%s</b>", $lang_le, $date_reglee, $lang_virement);
+  break;
+  case "visa":
+   $pay=sprintf("<b alt='%s %s'>%s</b>", $lang_le, $date_reglee, $lang_visa);
+  break;
+  case "non":
+   $pay=sprintf("<a href='lister_factures_non_reglees.php?num=%s' alt='%s'", $num, $lang_regler).(($peri>=$echeance_fact)?' style="color:red;"':'').sprintf('>%s</a>', $lang_non_pay);
+  break;
  }
  $line=($c++ & 1)?0:1;
 ?>
@@ -154,7 +170,7 @@ while($data = mysql_fetch_array($req)){
       <td class='<?php echo couleur_alternee (FALSE,"nombre"); ?>'><?php echo montant_financier($total); ?></td>
       <td class='<?php echo couleur_alternee (FALSE,"c texte"); ?>'><?php echo $pay; ?></td>
       <td class='<?php echo couleur_alternee (FALSE,"c texte"); ?>'>
-       <a href="edit_fact.php?num_fact=<?php echo"$num"; ?>">
+       <a href="edit_fact.php?num_fact=<?php echo$num; ?>">
         <img src="image/fact.gif" border="0" alt="<?php echo $lang_editer; ?>">
        </a>
       </td>
@@ -168,11 +184,11 @@ while($data = mysql_fetch_array($req)){
         <input type="image" src="image/prinfer.gif" style="border:none;margin:0;" alt="<?php echo $lang_imprimer; ?>" />
        </form>
       </td>
-<?php if ($mail != '' and $login != '') { ?>
+<?php if ($mail != '' && $login != '') { ?>
       <td class='<?php echo couleur_alternee (FALSE,"c texte"); ?>'>
-       <a href='notifi_cli.php?type=fact&amp;mail=<?php echo "$mail"; ?>'>
+       <a href='notifi_cli.php?type=fact&amp;mail=<?php echo $mail; ?>'>
         <img src='image/mail.gif' alt='mail' border='0'
-             onClick="return confirmDelete('<?php echo"$lang_conf_notif $client $lang_conf_notif2 $num ?"; ?>')">
+             onClick="return confirmDelete('<?php echo sprintf('%s %s %s %s ?', $lang_conf_notif, $client, $lang_conf_notif2, $num); ?>')">
        </a>
       </td>
 <?php }else { ?>
@@ -181,7 +197,7 @@ while($data = mysql_fetch_array($req)){
 if ($mail != '') {
 ?>
       <td class='<?php echo couleur_alternee (FALSE,"c texte"); ?>'>
-       <form action="fpdf/fact_pdf.php" method="post" onClick="return confirmDelete('<?php echo"$lang_conf_env $num $lang_conf_env2 $client ?"; ?>')">
+       <form action="fpdf/fact_pdf.php" method="post" onClick="return confirmDelete('<?php echo sprintf('%s %s %s %s ?', $lang_conf_env, $num, $lang_conf_env2, $client); ?>')">
         <input type="hidden" name="client" value="<?php echo $num_client ?>" />
         <input type="hidden" name="debut" value="<?php echo $debut2 ?>" />
         <input type="hidden" name="fin" value="<?php echo $fin2 ?>" />
@@ -205,8 +221,8 @@ if ($mail != '') {
   <td>
 <?php
 $aide="factures";
-include("help.php");
-include_once("include/bas.php");
+include(__DIR__ . "/help.php");
+include_once(__DIR__ . "/include/bas.php");
 if(basename($_SERVER['SCRIPT_FILENAME'])!=basename(__FILE__)){#autre qu'elle meme
 ?>
      </td>

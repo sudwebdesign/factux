@@ -20,7 +20,7 @@
  *.
  */
  $etape = "Étape N°2 : Informations de connexion à la Base de données mysql";
- include_once('headers.php');
+ include_once(__DIR__ . '/headers.php');
 ?>
   <h3>Les paramètres de connexion à votre base de données mysql.</h3>
   <hr><br>
@@ -72,7 +72,7 @@
      </table>
     </center>
    </form>
-<?php include_once("../include/bas_cli.php"); ?>
+<?php include_once(__DIR__ . "/../include/bas_cli.php"); ?>
   </td>
  </tr>
 </table>

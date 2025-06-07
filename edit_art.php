@@ -19,8 +19,8 @@
  * 		Guy Hendrickx
  *.
  */
-include_once("include/headers.php");
-include_once("include/finhead.php");
+include_once(__DIR__ . "/include/headers.php");
+include_once(__DIR__ . "/include/finhead.php");
 $article=isset($_GET['article'])?$_GET['article']:"";
 $sql = "
 SELECT " . $tblpref ."article.num,
@@ -28,7 +28,7 @@ article,prix_htva,taux_tva,commentaire,marge,uni,stock,stomin,stomax,categorie,i
 FROM " . $tblpref ."article
 LEFT JOIN " . $tblpref ."categorie on " . $tblpref ."article.cat = " . $tblpref ."categorie.id_cat
 LEFT JOIN " . $tblpref ."cont_bon on " . $tblpref ."article.num = " . $tblpref ."cont_bon.article_num
-WHERE " . $tblpref ."article.num=$article";
+WHERE " . $tblpref .('article.num=' . $article);
 
 $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 while($data = mysql_fetch_array($req)){
@@ -50,11 +50,11 @@ while($data = mysql_fetch_array($req)){
 <table width="760" border="0" class="page" align="center">
  <tr>
   <td class="page" align="center">
-<?php include_once("include/head.php"); ?>
+<?php include_once(__DIR__ . "/include/head.php"); ?>
    <center>
     <form action="article_update.php" method="post" name="article_edit" id="article_edit">
      <table class="page boiteaction">
-      <caption><?php echo"$lang_modi_pri $article ".(($quanti)?"<br><sup>$quanti $uni $lang_déja_commandé(s)</sup>":''); ?></caption>
+      <caption><?php echo sprintf('%s %s ', $lang_modi_pri, $article).(($quanti)?sprintf('<br><sup>%s %s %s(s)</sup>', $quanti, $uni, $lang_déja_commandé):''); ?></caption>
 <?php if($quanti==0){ ?>
       <tr>
        <th><?php echo $lang_art_no; ?></th>
@@ -87,7 +87,7 @@ while ( $row = mysql_fetch_array( $result)) {
 	$categorie = $row["categorie"];
 	$sel=($cat_id==$num_cat)?"' selected='selected":'';
 ?>
-         <option value='<?php echo "$num_cat$sel" ; ?>'><?php echo $categorie; ?></option>
+         <option value='<?php echo $num_cat . $sel ; ?>'><?php echo $categorie; ?></option>
 <?php } ?>
         </select>
 <?php } ?>
@@ -156,7 +156,7 @@ while ( $row = mysql_fetch_array( $result)) {
  </tr>
  <tr>
   <td>
-<?php include_once("include/bas.php"); ?>
+<?php include_once(__DIR__ . "/include/bas.php"); ?>
   </td>
  </tr>
 </table>

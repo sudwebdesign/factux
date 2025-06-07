@@ -9,39 +9,67 @@
 
 class TTFParser
 {
-	var $f;
-	var $tables;
-	var $unitsPerEm;
-	var $xMin, $yMin, $xMax, $yMax;
-	var $numberOfHMetrics;
-	var $numGlyphs;
-	var $widths;
-	var $chars;
-	var $postScriptName;
-	var $Embeddable;
-	var $Bold;
-	var $typoAscender;
-	var $typoDescender;
-	var $capHeight;
-	var $italicAngle;
-	var $underlinePosition;
-	var $underlineThickness;
-	var $isFixedPitch;
+	public $f;
 
-	function Parse($file)
+	public $tables;
+
+	public $unitsPerEm;
+
+	public $xMin;
+
+    public $yMin;
+
+    public $xMax;
+
+    public $yMax;
+
+	public $numberOfHMetrics;
+
+	public $numGlyphs;
+
+	public $widths;
+
+	public $chars;
+
+	public $postScriptName;
+
+	public $Embeddable;
+
+	public $Bold;
+
+	public $typoAscender;
+
+	public $typoDescender;
+
+	public $capHeight;
+
+	public $italicAngle;
+
+	public $underlinePosition;
+
+	public $underlineThickness;
+
+	public $isFixedPitch;
+
+	public function Parse(string $file)
 	{
 		$this->f = fopen($file, 'rb');
-		if(!$this->f)
-			$this->Error('Can\'t open file: '.$file);
+		if (!$this->f) {
+            $this->Error("Can't open file: ".$file);
+        }
 
 		$version = $this->Read(4);
-		if($version=='OTTO')
-			$this->Error('OpenType fonts based on PostScript outlines are not supported');
-		if($version!="\x00\x01\x00\x00")
-			$this->Error('Unrecognized file format');
+        if ($version=='OTTO') {
+            $this->Error('OpenType fonts based on PostScript outlines are not supported');
+        }
+
+        if ($version!="\x00\x01\x00\x00") {
+            $this->Error('Unrecognized file format');
+        }
+
 		$numTables = $this->ReadUShort();
 		$this->Skip(3*2); // searchRange, entrySelector, rangeShift
-		$this->tables = array();
+		$this->tables = [];
 		for($i=0;$i<$numTables;$i++)
 		{
 			$tag = $this->Read(4);
@@ -63,13 +91,15 @@ class TTFParser
 		fclose($this->f);
 	}
 
-	function ParseHead()
+	public function ParseHead()
 	{
 		$this->Seek('head');
 		$this->Skip(3*4); // version, fontRevision, checkSumAdjustment
 		$magicNumber = $this->ReadULong();
-		if($magicNumber!=0x5F0F3CF5)
-			$this->Error('Incorrect magic number');
+        if ($magicNumber!=0x5F0F3CF5) {
+            $this->Error('Incorrect magic number');
+        }
+
 		$this->Skip(2); // flags
 		$this->unitsPerEm = $this->ReadUShort();
 		$this->Skip(2*8); // created, modified
@@ -79,30 +109,31 @@ class TTFParser
 		$this->yMax = $this->ReadShort();
 	}
 
-	function ParseHhea()
+	public function ParseHhea()
 	{
 		$this->Seek('hhea');
 		$this->Skip(4+15*2);
 		$this->numberOfHMetrics = $this->ReadUShort();
 	}
 
-	function ParseMaxp()
+	public function ParseMaxp()
 	{
 		$this->Seek('maxp');
 		$this->Skip(4);
 		$this->numGlyphs = $this->ReadUShort();
 	}
 
-	function ParseHmtx()
+	public function ParseHmtx()
 	{
 		$this->Seek('hmtx');
-		$this->widths = array();
+		$this->widths = [];
 		for($i=0;$i<$this->numberOfHMetrics;$i++)
 		{
 			$advanceWidth = $this->ReadUShort();
 			$this->Skip(2); // lsb
 			$this->widths[$i] = $advanceWidth;
 		}
+
 		if($this->numberOfHMetrics<$this->numGlyphs)
 		{
 			$lastWidth = $this->widths[$this->numberOfHMetrics-1];
@@ -110,7 +141,7 @@ class TTFParser
 		}
 	}
 
-	function ParseCmap()
+	public function ParseCmap()
 	{
 		$this->Seek('cmap');
 		$this->Skip(2); // version
@@ -121,34 +152,46 @@ class TTFParser
 			$platformID = $this->ReadUShort();
 			$encodingID = $this->ReadUShort();
 			$offset = $this->ReadULong();
-			if($platformID==3 && $encodingID==1)
-				$offset31 = $offset;
+			if ($platformID==3 && $encodingID==1) {
+                $offset31 = $offset;
+            }
 		}
-		if($offset31==0)
-			$this->Error('No Unicode encoding found');
 
-		$startCount = array();
-		$endCount = array();
-		$idDelta = array();
-		$idRangeOffset = array();
-		$this->chars = array();
+        if ($offset31==0) {
+            $this->Error('No Unicode encoding found');
+        }
+
+		$startCount = [];
+		$endCount = [];
+		$idDelta = [];
+		$idRangeOffset = [];
+		$this->chars = [];
 		fseek($this->f, $this->tables['cmap']+$offset31, SEEK_SET);
 		$format = $this->ReadUShort();
-		if($format!=4)
-			$this->Error('Unexpected subtable format: '.$format);
+        if ($format!=4) {
+            $this->Error('Unexpected subtable format: '.$format);
+        }
+
 		$this->Skip(2*2); // length, language
 		$segCount = $this->ReadUShort()/2;
 		$this->Skip(3*2); // searchRange, entrySelector, rangeShift
-		for($i=0;$i<$segCount;$i++)
+		for($i=0;$i<$segCount;$i++) {
 			$endCount[$i] = $this->ReadUShort();
+		}
+
 		$this->Skip(2); // reservedPad
-		for($i=0;$i<$segCount;$i++)
+		for($i=0;$i<$segCount;$i++) {
 			$startCount[$i] = $this->ReadUShort();
-		for($i=0;$i<$segCount;$i++)
+		}
+
+		for($i=0;$i<$segCount;$i++) {
 			$idDelta[$i] = $this->ReadShort();
+		}
+
 		$offset = ftell($this->f);
-		for($i=0;$i<$segCount;$i++)
+		for($i=0;$i<$segCount;$i++) {
 			$idRangeOffset[$i] = $this->ReadUShort();
+		}
 
 		for($i=0;$i<$segCount;$i++)
 		{
@@ -156,29 +199,39 @@ class TTFParser
 			$c2 = $endCount[$i];
 			$d = $idDelta[$i];
 			$ro = $idRangeOffset[$i];
-			if($ro>0)
-				fseek($this->f, $offset+2*$i+$ro, SEEK_SET);
+            if ($ro>0) {
+                fseek($this->f, $offset+2*$i+$ro, SEEK_SET);
+            }
+
 			for($c=$c1;$c<=$c2;$c++)
 			{
-				if($c==0xFFFF)
-					break;
-				if($ro>0)
+				if ($c==0xFFFF) {
+                    break;
+                }
+
+                if($ro>0)
 				{
 					$gid = $this->ReadUShort();
-					if($gid>0)
-						$gid += $d;
+					if ($gid>0) {
+                        $gid += $d;
+                    }
 				}
-				else
-					$gid = $c+$d;
-				if($gid>=65536)
-					$gid -= 65536;
-				if($gid>0)
-					$this->chars[$c] = $gid;
+				else {
+                    $gid = $c+$d;
+                }
+
+                if ($gid>=65536) {
+                    $gid -= 65536;
+                }
+
+                if ($gid>0) {
+                    $this->chars[$c] = $gid;
+                }
 			}
 		}
 	}
 
-	function ParseName()
+	public function ParseName()
 	{
 		$this->Seek('name');
 		$tableOffset = ftell($this->f);
@@ -203,11 +256,13 @@ class TTFParser
 				break;
 			}
 		}
-		if($this->postScriptName=='')
-			$this->Error('PostScript name not found');
+
+        if ($this->postScriptName=='') {
+            $this->Error('PostScript name not found');
+        }
 	}
 
-	function ParseOS2()
+	public function ParseOS2()
 	{
 		$this->Seek('OS/2');
 		$version = $this->ReadUShort();
@@ -225,11 +280,12 @@ class TTFParser
 			$this->Skip(3*2+2*4+2);
 			$this->capHeight = $this->ReadShort();
 		}
-		else
-			$this->capHeight = 0;
+		else {
+            $this->capHeight = 0;
+        }
 	}
 
-	function ParsePost()
+	public function ParsePost()
 	{
 		$this->Seek('post');
 		$this->Skip(4); // version
@@ -240,50 +296,55 @@ class TTFParser
 		$this->isFixedPitch = ($this->ReadULong()!=0);
 	}
 
-	function Error($msg)
+	public function Error(string $msg)
 	{
-		if(PHP_SAPI=='cli')
-			die("Error: $msg\n");
-		else
-			die("<b>Error</b>: $msg");
+		if (PHP_SAPI=='cli') {
+            die(sprintf('Error: %s%s', $msg, PHP_EOL));
+        } else {
+            die('<b>Error</b>: ' . $msg);
+        }
 	}
 
-	function Seek($tag)
+	public function Seek(string $tag)
 	{
-		if(!isset($this->tables[$tag]))
-			$this->Error('Table not found: '.$tag);
-		fseek($this->f, $this->tables[$tag], SEEK_SET);
+		if (!isset($this->tables[$tag])) {
+            $this->Error('Table not found: '.$tag);
+        }
+
+        fseek($this->f, $this->tables[$tag], SEEK_SET);
 	}
 
-	function Skip($n)
+	public function Skip($n)
 	{
 		fseek($this->f, $n, SEEK_CUR);
 	}
 
-	function Read($n)
+	public function Read($n): string|false
 	{
 		return fread($this->f, $n);
 	}
 
-	function ReadUShort()
+	public function ReadUShort()
 	{
 		$a = unpack('nn', fread($this->f,2));
 		return $a['n'];
 	}
 
-	function ReadShort()
+	public function ReadShort()
 	{
 		$a = unpack('nn', fread($this->f,2));
 		$v = $a['n'];
-		if($v>=0x8000)
-			$v -= 65536;
+        if ($v>=0x8000) {
+            $v -= 65536;
+        }
+
 		return $v;
 	}
 
-	function ReadULong()
+	public function ReadULong()
 	{
 		$a = unpack('NN', fread($this->f,4));
 		return $a['N'];
 	}
 }
-?>
+

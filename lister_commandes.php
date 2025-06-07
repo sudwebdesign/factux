@@ -19,29 +19,30 @@
  * 		Guy Hendrickx
  *.
  */
-include_once("include/headers.php");
+include_once(__DIR__ . "/include/headers.php");
 ?><script type="text/javascript" src="javascripts/confdel.js"></script><?php
-include_once("include/finhead.php");
+include_once(__DIR__ . "/include/finhead.php");
 ?>
 <table width="760" class="page" align="center">
  <tr>
   <td class="page" align="center">
 <?php
-include_once("include/head.php");
+include_once(__DIR__ . "/include/head.php");
 if ($user_com == 'n') {
- echo "<h1>$lang_commande_droit</h1>";
- include_once("include/bas.php");
+ echo sprintf('<h1>%s</h1>', $lang_commande_droit);
+ include_once(__DIR__ . "/include/bas.php");
  exit;
 }
 if (isset($message)&&$message!='') {
- echo $message; $message='';
+ echo $message;
+ $message='';#onlyHere
 }
 //pour le formulaire
 $mois_1=isset($_GET['mois_1'])?$_GET['mois_1']:date("m");
 $annee_1=isset($_GET['annee_1'])?$_GET['annee_1']:date("Y");
-$whr = ($annee_1==$lang_toutes)?'':"WHERE YEAR(date) = $annee_1";#si année choisie
+$whr = ($annee_1==$lang_toutes)?'':'WHERE YEAR(date) = ' . $annee_1;#si année choisie
 $aw = (($annee_1==$lang_toutes&&$mois_1!=$lang_tous))?'WHERE':' AND';#si toutes années et mois choisi #idée GROUP BY DAY(date)
-$whr .= ($mois_1==$lang_tous)?'':"$aw MONTH(date) = $mois_1";#si année entiere
+$whr .= ($mois_1==$lang_tous)?'':sprintf('%s MONTH(date) = %s', $aw, $mois_1);#si année entiere
 
 //$whr=(isset($_GET['tout'])?"":"WHERE MONTH(date) = $mois_1 AND Year(date)=$annee_1 ");
 $calendrier = calendrier_local_mois ();
@@ -50,15 +51,15 @@ SELECT mail, login, num_client, num_bon, tot_htva, tot_tva, nom, fact, date,
 DATE_FORMAT(date,'%d/%m/%Y') AS date_aff,(tot_htva + tot_tva) as ttc
 FROM " . $tblpref ."bon_comm
 LEFT JOIN " . $tblpref ."client on " . $tblpref ."bon_comm.client_num = num_client
-$whr
+{$whr}
 ";
 
 if ($user_com == 'r'){
 $sql .= "
-and " . $tblpref ."client.permi LIKE '$user_num,'
-or  " . $tblpref ."client.permi LIKE '%,$user_num,'
-or  " . $tblpref ."client.permi LIKE '%,$user_num,%'
-or  " . $tblpref ."client.permi LIKE '$user_num,%'
+and " . $tblpref ."client.permi LIKE '{$user_num},'
+or  " . $tblpref ."client.permi LIKE '%,{$user_num},'
+or  " . $tblpref ."client.permi LIKE '%,{$user_num},%'
+or  " . $tblpref ."client.permi LIKE '{$user_num},%'
 ";
 }
 
@@ -129,19 +130,19 @@ while($data = mysql_fetch_array($req)){
  $line=($c++ & 1)?0:1;
 ?>
     <tr class="texte<?php echo $line; ?>" onmouseover="this.className='highlight'" onmouseout="this.className='texte<?php echo $line; ?>'">
-     <td class='<?php echo couleur_alternee (); ?>'><?php echo "$num_bon"; ?></td>
-     <td class='<?php echo couleur_alternee (FALSE); ?>'><?php echo "$nom"; ?></td>
-     <td class='<?php echo couleur_alternee (FALSE,"c texte"); ?>'><?php echo "$date"; ?></td>
+     <td class='<?php echo couleur_alternee (); ?>'><?php echo $num_bon; ?></td>
+     <td class='<?php echo couleur_alternee (FALSE); ?>'><?php echo $nom; ?></td>
+     <td class='<?php echo couleur_alternee (FALSE,"c texte"); ?>'><?php echo $date; ?></td>
      <td class='<?php echo couleur_alternee (FALSE,"nombre"); ?>'><?php echo montant_financier($total); ?></td>
      <td class='<?php echo couleur_alternee (FALSE,"nombre"); ?>'><?php echo montant_financier($ttc); ?></td>
      <td class='<?php echo couleur_alternee (FALSE,"c texte"); ?>'>
 <?php if ($fact == "0") {?>
-      <a href='edit_bon.php?num_bon=<?php echo "$num_bon"; ?>&amp;nom=<?php echo $nom_html; ?>'>
+      <a href='edit_bon.php?num_bon=<?php echo $num_bon; ?>&amp;nom=<?php echo $nom_html; ?>'>
        <img border="0" src="image/edit.gif" alt="<?php echo $lang_editer; ?>">
       </a>
 <?php }else{ ?>
       <a href='edit_fact.php?num_fact=<?php echo $fact; ?>'>
-       <img border="0" src="image/fact.gif" alt="<?php echo "$lang_editer $lang_facture $lang_numero $fact"; ?>">
+       <img border="0" src="image/fact.gif" alt="<?php echo sprintf('%s %s %s %s', $lang_editer, $lang_facture, $lang_numero, $fact); ?>">
       </a>
 <?php } ?>
      </td>
@@ -157,21 +158,21 @@ while($data = mysql_fetch_array($req)){
         <input type="hidden" name="client" value="<?php echo $num_client; ?>" />
         <input type="hidden" name="num" value="<?php echo $fact; ?>" />
         <input type="hidden" name="user" value="adm" />
-        <input type="image" src="image/prinfer.gif" style="border:none;margin:0;" alt="<?php echo "$lang_imprimer $lang_facture $lang_numero $fact"; ?>" />
+        <input type="image" src="image/prinfer.gif" style="border:none;margin:0;" alt="<?php echo sprintf('%s %s %s %s', $lang_imprimer, $lang_facture, $lang_numero, $fact); ?>" />
        </form>
  <?php } ?>
      </td>
      <td class='<?php echo couleur_alternee (FALSE,"c texte"); ?>'>
        <form action="fpdf/bon_pdf.php" method="post" target="_blank">
-       <input type="hidden" name="num_bon" value="<?php echo "$num_bon"; ?>" />
-       <input type="hidden" name="nom" value="<?php echo "$nom_html"; ?>" />
+       <input type="hidden" name="num_bon" value="<?php echo $num_bon; ?>" />
+       <input type="hidden" name="nom" value="<?php echo $nom_html; ?>" />
        <input type="hidden" name="user" value="adm" />
        <input type="image" src="image/printer.gif" alt="<?php echo $lang_imprimer; ?>" />
       </form>
      </td>
      <td class='<?php echo couleur_alternee (FALSE,"c texte"); ?>'>
-<?php if ($mail != '' and $login !='') { ?>
-      <a href='notifi_cli.php?type=comm&amp;mail=<?php echo"$mail"; ?>'
+<?php if ($mail != '' && $login != '') { ?>
+      <a href='notifi_cli.php?type=comm&amp;mail=<?php echo$mail; ?>'
          onClick="return confirmDelete('<?php echo $lang_con_env_notif.$num_bon; ?> ?')">
        <img src='image/mail.gif' border='0' alt='mail'>
       </a>
@@ -200,8 +201,8 @@ while($data = mysql_fetch_array($req)){
   <td>
 <?php
 $aide='bon';
-include("help.php");
-include_once("include/bas.php");
+include(__DIR__ . "/help.php");
+include_once(__DIR__ . "/include/bas.php");
 ?>
   </table>
 <?php

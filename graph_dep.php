@@ -21,7 +21,7 @@
  */
 ?>
 <table class='page boiteaction'>
-  <caption><?php echo "$lang_evo_dep $annee_1" ?></caption>
+  <caption><?php echo sprintf('%s %s', $lang_evo_dep, $annee_1) ?></caption>
   <tr>
    <th><?php echo $lang_mois; ?></th>
    <th></th>
@@ -29,7 +29,7 @@
    <th rowspan="14" width="200px"><img src="graph2_dep.php?annee_1=<?php echo $annee_1; ?>"></th>
   </tr>
 <?php
-$sql = "SELECT SUM( prix ) htva FROM " . $tblpref ."depense WHERE YEAR( date ) = $annee_1 ";
+$sql = "SELECT SUM( prix ) htva FROM " . $tblpref .sprintf('depense WHERE YEAR( date ) = %s ', $annee_1);
 $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 $total_gen= floatval(mysql_result($req,0));
 #$total_gen = $total - $total_dep ;

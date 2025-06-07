@@ -19,8 +19,8 @@
  * 		Guy Hendrickx
  *.
  */
-include_once("include/headers.php");
-include_once("include/finhead.php");
+include_once(__DIR__ . "/include/headers.php");
+include_once(__DIR__ . "/include/finhead.php");
 $jour = date("d");
 $mois = date("m");
 $annee = date("Y");
@@ -29,14 +29,15 @@ $annee = date("Y");
  <tr>
   <td class="page" align="center">
 <?php
-include_once("include/head.php");
+include_once(__DIR__ . "/include/head.php");
 if ($user_dep == 'n') {
- echo "<h1>$lang_depense_droit</h1>";
- include_once("include/bas.php");
+ echo sprintf('<h1>%s</h1>', $lang_depense_droit);
+ include_once(__DIR__ . "/include/bas.php");
  exit;
 }
 if (isset($message)&&$message!='') {
- echo $message;$message='';#no propagation
+ echo $message;
+ $message='';#onlyHere
 }
 $rqSql = "SELECT * FROM " . $tblpref ."depense GROUP by fournisseur ORDER BY fournisseur";
 $result = mysql_query( $rqSql ) or die( "Ex&eacute;cution requ&ecirc;te impossible.");
@@ -45,7 +46,7 @@ $result = mysql_query( $rqSql ) or die( "Ex&eacute;cution requ&ecirc;te impossib
     <table class="page boiteaction">
      <caption><?php echo $lang_depense_ajouter; ?></caption>
      <tr>
-      <td class="texte0"><?php echo "$lang_fournisseur" ?>:</td>
+      <td class="texte0"><?php echo $lang_fournisseur ?>:</td>
       <td class="texte0">
        <select name='fournisseur'>
         <option value=default><?php echo $lang_choisissez; ?></option>
@@ -76,7 +77,7 @@ while ( $row = mysql_fetch_array( $result)){
      </tr>
      <tr>
       <td class="texte0"> <?php echo $lang_date; ?>: </td>
-      <td colspan="4" class="texte0"><input type="text" name="date" value="<?php echo"$jour/$mois/$annee" ?>" readonly="readonly"/>
+      <td colspan="4" class="texte0"><input type="text" name="date" value="<?php echo sprintf('%s/%s/%s', $jour, $mois, $annee) ?>" readonly="readonly"/>
        <a href="#" onClick=" window.open('include/pop.calendrier.php?frm=depense&amp;ch=date','calendrier','width=460,height=170,scrollbars=0').focus();">
         <img src="image/petit_calendrier.gif" alt="calendrier" border="0"/>
        </a>
@@ -96,4 +97,4 @@ while ( $row = mysql_fetch_array( $result)){
  <tr>
   <td>
 <?php
-include_once("lister_depenses.php");
+include_once(__DIR__ . "/lister_depenses.php");

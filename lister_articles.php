@@ -19,18 +19,18 @@
  * 		Guy Hendrickx
  *.
  */
-include_once("include/headers.php");
+include_once(__DIR__ . "/include/headers.php");
 ?><script type="text/javascript" src="javascripts/confdel.js"></script><?php
-include_once("include/finhead.php");
+include_once(__DIR__ . "/include/finhead.php");
 ?>
 <table width="760" border="0" class="page" align="center">
  <tr>
   <td class="page" align="center">
 <?php
-include_once("include/head.php");
+include_once(__DIR__ . "/include/head.php");
 if ($user_art == 'n') {
- echo "<h1>$lang_article_droit</h1>";
- include_once("include/bas.php");
+ echo sprintf('<h1>%s</h1>', $lang_article_droit);
+ include_once(__DIR__ . "/include/bas.php");
  exit;
 }
 if (isset($message)&&$message!='') {
@@ -85,13 +85,9 @@ while($data = mysql_fetch_array($req)){
  $min = $data['stomin'];
  $max = $data['stomax'];
  if ($stock <= $min || $stock >= $max){
-  $stock="<b style='color:red;'>$stock</b>";
+  $stock=sprintf("<b style='color:red;'>%s</b>", $stock);
  }
- if($c++ & 1){
-  $line="0";
- }else{
-  $line="1";
- }
+ $line = $c++ & 1 ? "0" : "1";
 ?>
    <tr class="texte<?php echo $line; ?>" onmouseover="this.className='highlight'" onmouseout="this.className='texte<?php echo $line; ?>'">
     <td title='<?php echo $data['commentaire']; ?>' class='<?php echo couleur_alternee (); ?>'><?php echo $article; ?></td>
@@ -131,8 +127,8 @@ while($data = mysql_fetch_array($req)){
   <td>
 <?php
 $aide = 'article';
-include("help.php");
-include_once("include/bas.php");
+include(__DIR__ . "/help.php");
+include_once(__DIR__ . "/include/bas.php");
 if(!strstr($_SERVER['SCRIPT_FILENAME'],__FILE__)){#autre qu'elle meme
  echo"\n  </td>\n </tr>\n</table>\n";
 }

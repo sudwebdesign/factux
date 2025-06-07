@@ -22,7 +22,7 @@
 $sql = "
 SELECT  coment, client_num, nom FROM " . $tblpref ."bon_comm
 LEFT join " . $tblpref ."client on " . $tblpref ."bon_comm.client_num = " . $tblpref ."client.num_client
-WHERE num_bon = $num_bon
+WHERE num_bon = {$num_bon}
 ";
 $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 $data = mysql_fetch_array($req);
@@ -33,7 +33,7 @@ $sql = "
 SELECT " . $tblpref ."cont_bon.num, num_lot, quanti, remise, p_u_jour, marge_jour, uni, article, tot_art_htva, to_tva_art tva
 FROM " . $tblpref ."cont_bon
 LEFT JOIN " . $tblpref ."article on " . $tblpref ."cont_bon.article_num = " . $tblpref ."article.num
-WHERE  bon_num = $num_bon
+WHERE  bon_num = {$num_bon}
 ";
 $req5 = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 $rqSql1 = "
@@ -52,10 +52,10 @@ WHERE actif != 'non'
 
 if ($user_com == 'r') {
   $rqSql .= "
-  and (" . $tblpref ."client.permi LIKE '$user_num,'
-  or  " . $tblpref ."client.permi LIKE '%,$user_num,'
-  or  " . $tblpref ."client.permi LIKE '%,$user_num,%'
-  or  " . $tblpref ."client.permi LIKE '$user_num,%')
+  and (" . $tblpref ."client.permi LIKE '{$user_num},'
+  or  " . $tblpref ."client.permi LIKE '%,{$user_num},'
+  or  " . $tblpref ."client.permi LIKE '%,{$user_num},%'
+  or  " . $tblpref ."client.permi LIKE '{$user_num},%')
 ";
 }
 $result2 = mysql_query( $rqSql ) or die('Erreur SQL !<br>'.$rqSql.'<br>'.mysql_error());
@@ -63,13 +63,13 @@ $result2 = mysql_query( $rqSql ) or die('Erreur SQL !<br>'.$rqSql.'<br>'.mysql_e
 
 <form action="chang_cli.php" method="post" name="formu">
  <table class="page boiteaction">
-  <caption><?php echo "$lang_bon_editer $lang_numero $num_bon de $nom"; ?></caption>
+  <caption><?php echo sprintf('%s %s %s de %s', $lang_bon_editer, $lang_numero, $num_bon, $nom); ?></caption>
   <tr>
    <td><?php echo $lang_changer_client; ?></td>
    <td>
 <?php
 if ($liste_cli!='y') {
- $rqSql="$rqSql order by nom";
+ $rqSql .= ' order by nom';
  $result = mysql_query( $rqSql ) or die('Erreur SQL !<br>'.$rqSql.'<br>'.mysql_error());
 ?>
   <select name='listeclients'>
@@ -83,7 +83,7 @@ $nomcli = $row["nom"];
   </select>
 <?php
 }else{
- include_once("include/choix_cli.php");
+ include_once(__DIR__ . "/include/choix_cli.php");
 }
 ?>
    </td>
@@ -137,11 +137,7 @@ while($data = mysql_fetch_array($req5)){
 
   $total_bon += $tot;
   $total_tva += $tva;
-  if($c++ & 1){
-  $line="0";
- }else{
-  $line="1";
- }
+  $line = $c++ & 1 ? "0" : "1";
 ?>
  <tr class="texte<?php echo $line; ?>" onmouseover="this.className='highlight'" onmouseout="this.className='texte<?php echo $line; ?>'">
   <td class='<?php echo couleur_alternee (TRUE,"nombre"); ?>'><?php echo $quanti; ?></td>
@@ -176,7 +172,7 @@ while($data = mysql_fetch_array($req5)){
  </tr>
 <?php } ?>
  <tr>
-  <td class='totalmontant' colspan="2"><?php echo "$lang_total $lang_remise"; ?><br /><?php echo "$lang_total $lang_marge"; ?></td>
+  <td class='totalmontant' colspan="2"><?php echo sprintf('%s %s', $lang_total, $lang_remise); ?><br /><?php echo sprintf('%s %s', $lang_total, $lang_marge); ?></td>
   <td class='totalmontant'><?php echo montant_financier($total_remise_htva); ?><br /><?php echo montant_financier($total_marge_htva); ?></td>
   <td class='totalmontant'><?php echo $lang_total_h_tva; ?><br /><?php echo $lang_tva; ?></td>
   <td class='totalmontant'><?php echo montant_financier($total_bon); ?><br /><?php echo montant_financier($total_tva); ?></td>
@@ -187,18 +183,18 @@ while($data = mysql_fetch_array($req5)){
  </tr>
 <?php
 //on calcule la somme des contenus du bon
-$sql = " SELECT SUM(tot_art_htva) FROM " . $tblpref ."cont_bon WHERE bon_num = $num_bon";
+$sql = " SELECT SUM(tot_art_htva) FROM " . $tblpref .('cont_bon WHERE bon_num = ' . $num_bon);
 $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 ?>
 </table>
 
 <form action="edit_bon_suite.php" method="post" name="formu2">
  <table class="page boiteaction">
-  <caption><?php echo "$lang_bon_ajouter $lang_numero $num_bon"; ?></caption>
+  <caption><?php echo sprintf('%s %s %s', $lang_bon_ajouter, $lang_numero, $num_bon); ?></caption>
    <tr>
     <td class="texte0"><?php echo $lang_article; ?></td>
     <td class="texte0">
-<?php include("include/article_choix.php"); ?>
+<?php include(__DIR__ . "/include/article_choix.php"); ?>
     </td>
 <?php if ($lot=='y') { ?>
   <td class="texte0"><?php echo $lang_lot; ?></td>
@@ -218,7 +214,7 @@ while ( $row = mysql_fetch_array( $result)) {
 $num = $row["num"];
 $prod = $row["prod"];
 ?>
-     <option value='<?php echo $num; ?>'><?php echo "$num $prod "; ?></option>
+     <option value='<?php echo $num; ?>'><?php echo sprintf('%s %s ', $num, $prod); ?></option>
 <?php } ?>
     </select>
    </td>
@@ -244,7 +240,7 @@ $prod = $row["prod"];
 <?php if($c){ ?>
 <form action="bon_fin.php" method="post" name="fin_bon">
  <table class="page boiteaction">
-   <caption><?php echo "$lang_bon_enregistrer $lang_numero $num_bon"; ?></caption>
+   <caption><?php echo sprintf('%s %s %s', $lang_bon_enregistrer, $lang_numero, $num_bon); ?></caption>
    <tr>
      <th><?php echo $lang_ajo_com_bo ?></th>
    </tr>
@@ -259,4 +255,4 @@ $prod = $row["prod"];
  <input type="hidden" name="tot_tva" value='<?php echo $total_tva; ?>'>
  <input type="hidden" name="bon_num" value='<?php echo $num_bon; ?>'>
 </form>
-<?php } ?>
+<?php }

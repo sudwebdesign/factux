@@ -19,12 +19,12 @@
  * 		Hendrickx Guy
  *.
  */
-include_once("include/config/common.php");
-include_once("include/config/var.php");
+include_once(__DIR__ . "/include/config/common.php");
+include_once(__DIR__ . "/include/config/var.php");
 $lang=isset($_POST['lang'])?$_POST['lang']:"";
 $lang=(empty($lang))?$default_lang:$lang;#default_lg in common
-include_once("include/language/$lang.php");
-include_once("include/headers.php");
+include_once(__DIR__ . sprintf('/include/language/%s.php', $lang));
+include_once(__DIR__ . "/include/headers.php");
 ?>
 <script type="text/javascript">
  function popUp(URL) {
@@ -35,16 +35,18 @@ include_once("include/headers.php");
 </script>
 <?php
 
-if (preg_match("~MSIE~", $_SERVER["HTTP_USER_AGENT"])||preg_match("~Edge~", $_SERVER["HTTP_USER_AGENT"]))#quel est celui de spartan ? "Edge/12.#### ça veut dire bord
- echo "</head>\n".'<body onLoad="javascript:popUp(\''.@$now.'ie.php\')">'."\n";
-else
- include_once("include/finhead.php");
+if (preg_match("~MSIE~", $_SERVER["HTTP_USER_AGENT"])||preg_match("~Edge~", $_SERVER["HTTP_USER_AGENT"])) {
+    #quel est celui de spartan ? "Edge/12.#### ça veut dire bord
+    echo "</head>\n".'<body onLoad="javascript:popUp(\''.@$now.'ie.php\')">'."\n";
+} else {
+    include_once(__DIR__ . "/include/finhead.php");
+}
 ?>
 <div align="center">
 <?php
 if (isset($message)&&$message!='') {
- $message = ($message=="i")?"<h1>$lang_interdit</h1>":$message;
- echo "<div>$message</div>\n";
+ $message = ($message=="i")?sprintf('<h1>%s</h1>', $lang_interdit):$message;
+ echo "<div>{$message}</div>\n";
 }
 ?>
  <p><?php echo $lang_factux; ?></p>

@@ -19,4 +19,4 @@
  * 		Guy Hendrickx
  *.
  */
-include("logout.php");
+include(__DIR__ . "/logout.php");

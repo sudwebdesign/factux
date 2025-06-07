@@ -19,20 +19,23 @@
  * 		Guy Hendrickx
  *.
  */
-include_once("include/headers.php");
-include_once("include/finhead.php");
+include_once(__DIR__ . "/include/headers.php");
+include_once(__DIR__ . "/include/finhead.php");
 ?>
 <table width="760" border="0" class="page" align="center">
  <tr>
   <td class="page" align="center">
 <?php
-if($_SERVER["QUERY_STRING"]=="file=backup.sql")#before head 4 display TuxInWork flush #2015
- echo "<center id='message_backup'><h2><img src='image/tux.gif'>$lang_restore_backup</h2></center>";
-include_once("include/head.php");
+if ($_SERVER["QUERY_STRING"]=="file=backup.sql") {
+    #before head 4 display TuxInWork flush #2015
+    echo sprintf("<center id='message_backup'><h2><img src='image/tux.gif'>%s</h2></center>", $lang_restore_backup);
+}
+include_once(__DIR__ . "/include/head.php");
 extract ($_REQUEST);
-if (!file_exists("dbinfo.php"))
- die($lang_restore_err_dbinfo_file);
-include "dbinfo.php";
+if (!file_exists("dbinfo.php")) {
+    die($lang_restore_err_dbinfo_file);
+}
+include __DIR__ . "/dbinfo.php";
 $password = $dbpass;
 #js hide TuxInWork #2015 ?>
    <script type="text/javascript">document.getElementById('message_backup').style='display:none !important';</script>
@@ -46,11 +49,7 @@ $password = $dbpass;
       <td class="texte0">
 <?php
 $x=$_SERVER['SERVER_SOFTWARE'];
-if (strpos($x,"Win32")!=0) {
- $path = $path . "dump\\";
-} else {
- $path = $path . "dump/";
-}
+$path = strpos($x,"Win32") != 0 ? $path . "dump\\" : $path . "dump/";
 
 // IF WINDOWS GIVES PROBLEMS
 // FOR WINDOWS change to ==> $path = $path . "dump\\";
@@ -62,7 +61,7 @@ if (isset($file)&&$file!=""){
   fclose ($fp2);
   chmod($path."backup.sql", 0777);
   $fp = fopen("dump/backup.sql","w");
-  $zp = gzopen("dump/$file", "rb");
+  $zp = gzopen('dump/' . $file, "rb");
   if(!$fp) {
    die($lang_restore_err_crea_sql);
   }
@@ -75,7 +74,7 @@ if (isset($file)&&$file!=""){
   }
   fclose($fp);
   gzclose($zp);
-  echo " <p>$lang_back_ext $file <img alt='$lang_oui' src='image/oui.gif'></p>";
+  echo sprintf(" <p>%s %s <img alt='%s' src='image/oui.gif'></p>", $lang_back_ext, $file, $lang_oui);
   $file='';
  } // end of unzip
 }
@@ -83,12 +82,13 @@ if (isset($file)&&$file!=""){
  flush();
  $conn = mysql_connect($dbhost,$dbuser,$password) or die(mysql_error());
  $filename = $file;
- if(!ini_get('safe_mode'))
-  set_time_limit(1000);#Warning: set_time_limit() [function.set-time-limit]: Cannot set time limit in safe mode
+ if (!ini_get('safe_mode')) {
+     set_time_limit(1000);
+ }#Warning: set_time_limit() [function.set-time-limit]: Cannot set time limit in safe mode
  $file=fread(fopen($path.$file, "r"), filesize($path.$file));
  $query=explode(";#%%\n",$file);
  for ($i=0;$i < count($query)-1;$i++) {
-  mysql_db_query($dbname,$query[$i],$conn) or die(mysql_error());
+  mysql_db_query($dbname,$query[$i],$conn) || die(mysql_error());
  }
 ?>
       <table class="page" width="100%">
@@ -156,8 +156,8 @@ while ($file = readdir ($dir)) {
   <td>
 <?php
 $aide='restaurer';
-include("help.php");
-include_once("include/bas.php");
+include(__DIR__ . "/help.php");
+include_once(__DIR__ . "/include/bas.php");
 ?>
   </td>
  </tr>

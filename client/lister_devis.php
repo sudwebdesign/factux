@@ -1,4 +1,4 @@
- <?php
+<?php
  /*
  * Factux le facturier libre
  * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
@@ -19,14 +19,15 @@
  * 		Guy Hendrickx
  *.
  */
-if(!isset($num_client))
- header("Location:index.php");
+if (!isset($num_client)) {
+    header("Location:index.php");
+}
 
-include_once("../include/verif_client.php");
-include_once("../include/config/common.php");
-include_once("../include/language/$lang.php");
-include_once("../include/config/var.php");
-include_once("../include/utils.php");
+include_once(__DIR__ . "/../include/verif_client.php");
+include_once(__DIR__ . "/../include/config/common.php");
+include_once(__DIR__ . sprintf('/../include/language/%s.php', $lang));
+include_once(__DIR__ . "/../include/config/var.php");
+include_once(__DIR__ . "/../include/utils.php");
 $sql3 = "
 SELECT num_dev, tot_htva, tot_tva, DATE_FORMAT(date,'%d/%m/%Y') AS date, nom
 FROM " . $tblpref ."devis

@@ -20,8 +20,8 @@
  *.
  */
 $sql = "SELECT  coment, client_num, nom FROM " . $tblpref ."devis
-LEFT join " . $tblpref ."client on " . $tblpref ."devis.client_num = " . $tblpref ."client.num_client
-WHERE num_dev = $num_dev";
+LEFT join " . $tblpref ."client on " . $tblpref ."devis.client_num = " . $tblpref .('client.num_client
+WHERE num_dev = ' . $num_dev);
 $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 $data = mysql_fetch_array($req);
 $num = $data['client_num'];
@@ -31,7 +31,7 @@ $sql = "
 SELECT " . $tblpref ."cont_dev.num, quanti, remise, p_u_jour, marge_jour, uni, article, tot_art_htva, to_tva_art tva
 FROM " . $tblpref ."cont_dev
 LEFT JOIN " . $tblpref ."article on " . $tblpref ."cont_dev.article_num = " . $tblpref ."article.num
-WHERE dev_num = $num_dev
+WHERE dev_num = {$num_dev}
 ";
 $req5 = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 
@@ -44,23 +44,23 @@ WHERE actif != 'non'
 
 if ($user_dev == 'r') {
   $rqSql .= "
-  and (" . $tblpref ."client.permi LIKE '$user_num,'
-  or  " . $tblpref ."client.permi LIKE '%,$user_num,'
-  or  " . $tblpref ."client.permi LIKE '%,$user_num,%'
-  or  " . $tblpref ."client.permi LIKE '$user_num,%')
+  and (" . $tblpref ."client.permi LIKE '{$user_num},'
+  or  " . $tblpref ."client.permi LIKE '%,{$user_num},'
+  or  " . $tblpref ."client.permi LIKE '%,{$user_num},%'
+  or  " . $tblpref ."client.permi LIKE '{$user_num},%')
 ";
 }
 $result2 = mysql_query( $rqSql ) or die('Erreur SQL !<br>'.$rqSql.'<br>'.mysql_error());
 ?>
 <form action="chang_cli.php" method="post" name="formu">
  <table class="page boiteaction">
-  <caption><?php echo "$lang_dev_editer $lang_numero $num_dev de $nom"; ?></caption>
+  <caption><?php echo sprintf('%s %s %s de %s', $lang_dev_editer, $lang_numero, $num_dev, $nom); ?></caption>
   <tr>
    <td><?php echo $lang_changer_client; ?></td>
    <td>
 <?php
 if ($liste_cli!='y') {
- $rqSql="$rqSql order by nom";
+ $rqSql .= ' order by nom';
  $result = mysql_query( $rqSql ) or die('Erreur SQL !<br>'.$rqSql.'<br>'.mysql_error());
 ?>
   <select name='listeclients'>
@@ -74,7 +74,7 @@ while ( $row = mysql_fetch_array( $result2)) {
   </select>
 <?php
 }else{
- include_once("include/choix_cli.php");
+ include_once(__DIR__ . "/include/choix_cli.php");
 }
 ?>
    </td>
@@ -86,7 +86,7 @@ while ( $row = mysql_fetch_array( $result2)) {
 </form>
 
 <table class="page boiteaction">
- <caption><?php echo "$lang_devis_editer $lang_numero $num_dev"; ?></caption>
+ <caption><?php echo sprintf('%s %s %s', $lang_devis_editer, $lang_numero, $num_dev); ?></caption>
  <tr>
   <th><?php echo $lang_quantite; ?></th>
   <th><?php echo $lang_unite; ?></th>
@@ -121,11 +121,7 @@ while($data = mysql_fetch_array($req5)){
 
  $total_dev += $tot;
  $total_tva += $tva;
- if($c++ & 1){
-  $line="0";
- }else{
-  $line="1";
- }
+ $line = $c++ & 1 ? "0" : "1";
 ?>
  <tr class="texte<?php echo $line; ?>" onmouseover="this.className='highlight'" onmouseout="this.className='texte<?php echo $line; ?>'">
   <td class="<?php echo couleur_alternee (TRUE,"nombre"); ?>"><?php echo $quanti; ?></td>
@@ -153,7 +149,7 @@ while($data = mysql_fetch_array($req5)){
  </tr>
 <?php } ?>
  <tr>
-  <td class='totalmontant' colspan="2"><?php echo "$lang_total $lang_remise"; ?><br /><?php echo "$lang_total $lang_marge"; ?></td>
+  <td class='totalmontant' colspan="2"><?php echo sprintf('%s %s', $lang_total, $lang_remise); ?><br /><?php echo sprintf('%s %s', $lang_total, $lang_marge); ?></td>
   <td class='totalmontant'><?php echo montant_financier($total_remise_htva); ?><br /><?php echo montant_financier($total_marge_htva); ?></td>
   <td class='totalmontant'><?php echo $lang_total_h_tva; ?><br /><?php echo $lang_tva; ?></td>
   <td class='totalmontant'><?php echo montant_financier($total_dev); ?><br /><?php echo montant_financier($total_tva); ?></td>
@@ -161,17 +157,17 @@ while($data = mysql_fetch_array($req5)){
  </tr>
 <?php
 //on calcule la somme des contenus du bon
-$sql = " SELECT SUM(tot_art_htva) FROM " . $tblpref ."cont_dev WHERE dev_num = $num_dev";
+$sql = " SELECT SUM(tot_art_htva) FROM " . $tblpref .('cont_dev WHERE dev_num = ' . $num_dev);
 $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 ?>
 </table>
  <form name="formu2" method="post" action="edit_devis_suite.php">
   <table class="page boiteaction">
-   <caption><?php echo "$lang_devis_ajouter $lang_numero $num_dev"; ?></caption>
+   <caption><?php echo sprintf('%s %s %s', $lang_devis_ajouter, $lang_numero, $num_dev); ?></caption>
    <tr>
     <td class="texte0"><?php echo $lang_article; ?></td>
     <td class="texte0">
-<?php include("include/article_choix.php"); ?>
+<?php include(__DIR__ . "/include/article_choix.php"); ?>
     </td>
    </tr>
    <tr>
@@ -196,7 +192,7 @@ $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 <?php if($c){ ?>
 <form action="devis_fin.php" method="post" name="fin_dev">
  <table class="page boiteaction">
-  <caption><?php echo"$lang_devis_enregistrer $lang_numero $num_dev"; ?></caption>
+  <caption><?php echo sprintf('%s %s %s', $lang_devis_enregistrer, $lang_numero, $num_dev); ?></caption>
   <tr>
    <th><?php echo $lang_ajo_com_dev; ?></th>
   </tr>
@@ -211,4 +207,4 @@ $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
  <input type="hidden" name="tot_tva" value="<?php echo $total_tva; ?>">
  <input type="hidden" name="dev_num" value="<?php echo $num_dev; ?>">
 </form>
-<?php } ?>
+<?php }

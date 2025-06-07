@@ -27,18 +27,23 @@ function calendrier_local_mois (){
   $premier = mktime(0, 0, 0, $i, 1, $an);
   $calendrier [$i] = strftime ( "%B", $premier);
  }
+
  return $calendrier;
 }
-function calendrier_local_mois2 (){
+
+function calendrier_local_mois2 (): array{
  global $code_langue;
  setlocale(LC_TIME, $code_langue);
  $an = strftime ( "%G", time ());
  for ($i=12;$i<=12;$i++){
   $premier = mktime(0, 0, 0, $i, 1, $an);
   $calendrier [$i] = strftime ( "%B", $premier);
- }#echo '<h1>'.$code_langue.$an.'</h1>';var_dump(setlocale(LC_ALL, 'fr_FR', 'french', 'fr', 'fr_FR.ISO8859-1'),setlocale(LC_TIME, $code_langue));exit;
+ }
+
+ #echo '<h1>'.$code_langue.$an.'</h1>';var_dump(setlocale(LC_ALL, 'fr_FR', 'french', 'fr', 'fr_FR.ISO8859-1'),setlocale(LC_TIME, $code_langue));exit;
  return $calendrier;
 }
+
 function calendrier_local_mois3 (){
  global $code_langue;
  setlocale(LC_TIME, $code_langue);
@@ -47,8 +52,10 @@ function calendrier_local_mois3 (){
   $premier = mktime(0, 0, 0, $i, 1, $an);
   $calendrier [$i] = strftime ( "%B", $premier);
  }
+
  return $calendrier;
 }
+
 function calendrier_local_jour (){
  global $code_langue;
  setlocale(LC_TIME, $code_langue);
@@ -57,9 +64,11 @@ function calendrier_local_jour (){
   $premier = mktime(0, 0, 0, 0, $i, $jour);
   $calendrier [$i] = strftime ( "%A", $premier);
  }
+
  return $calendrier;
 }
-function calendrier_local_jour2 (){
+
+function calendrier_local_jour2 (): array{
  global $code_langue;
  setlocale(LC_TIME, $code_langue);
  $jour = (int)strftime ( "%A", time ());
@@ -67,6 +76,7 @@ function calendrier_local_jour2 (){
   $premier = mktime(0, 0, 0, 0, $i, $jour);
   $calendrier [$i] = strftime ( "%A", $premier);
  }
+
  return $calendrier;
 }
-?>
+

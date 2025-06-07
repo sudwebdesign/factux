@@ -31,5 +31,5 @@ $now='../';
 #require ("../include/del_pdf.php");
 ?>
 <!-- <a href='logout.php' style="float:right;"><?php echo $lang_sortir; ?></a> -->
-<h6><?php echo "$lang_bienvenue $civ $nom  $nom2"; ?></h6>
+<h6><?php echo sprintf('%s %s %s %s', $lang_bienvenue, $civ, $nom, $nom2); ?></h6>
 <center><img height="161" src="../image/<?php echo $logo ?>" alt="<?php echo $entrep_nom ?>"></center><br><hr>

@@ -19,17 +19,17 @@
  * 		Guy Hendrickx
  *.
  */
-if (!isset($user_art) OR $user_art == 'n') {
- include_once("include/headers.php");
- include_once("include/finhead.php");
+if (!isset($user_art) || $user_art == 'n') {
+ include_once(__DIR__ . "/include/headers.php");
+ include_once(__DIR__ . "/include/finhead.php");
 ?>
 <table width="760" border="0" class="page" align="center">
  <tr>
   <td class="page" align="center">
 <?php
- include_once("include/head.php");
- echo "<h1>$lang_article_droit</h1>";
- include_once("include/bas.php");
+ include_once(__DIR__ . "/include/head.php");
+ echo sprintf('<h1>%s</h1>', $lang_article_droit);
+ include_once(__DIR__ . "/include/bas.php");
  exit;
 }
 ?>
@@ -38,7 +38,7 @@ if (!isset($user_art) OR $user_art == 'n') {
      <table class="page">
       <caption><?php echo $lang_categorie_ajout; ?></caption>
       <tr>
-       <td class="texte0"> <?php echo "$lang_cat_nom" ?></td>
+       <td class="texte0"> <?php echo $lang_cat_nom ?></td>
        <td class="texte0"><input name="categorie" type="text" id="uni2" size="27" maxlength="30" value=""></td>
       </tr>
       <tr>

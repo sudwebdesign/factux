@@ -23,21 +23,29 @@ if(session_id() === '') { # ( !isset($login)||$login=='')#Only in login.php?
  ini_set('session.save_path', 'include/session');
  session_start();#Warning: session_start() [function.session-start]: Cannot send session cache limiter - headers already sent (output started at /mnt/111/sdb/b/d/factux/demo/include/headers.php:30) in /mnt/111/sdb/b/d/factux/demo/include/verif.php on line 24
 }
+
 $page_name = isset($page_name)?$page_name:'';#fix bon/devis_fin,...
 if(!isset($_SESSION['trucmuch']) || $_SESSION['trucmuch']==''){
- if(!strstr($page_name,'Log')&!strstr($page_name,'Index'))
-  $message = "i";#interdit
+ if (!strstr($page_name,'Log')&!strstr($page_name,'Index')) {
+     $message = "i";
+ }
+
+ #interdit
  $login=1;#in verif emule login.php (evite de refaire sessions start et créer un fichier vide)
- include('logout.php');
- if (empty($_SESSION)===false)#count($_SESSION)>0
-  session_destroy();
+ include(__DIR__ . '/logout.php');
+ if ($_SESSION !== []) {
+     #count($_SESSION)>0
+     session_destroy();
+ }
+
  exit;
 }
+
 $utili = $_SESSION['trucmuch'];
 $lang = $_SESSION['lang'];
-include_once("include/config/common.php");
+include_once(__DIR__ . "/config/common.php");
 
-$sqlz = "SELECT * FROM " . $tblpref ."user WHERE " . $tblpref ."user.login = \"$utili\"";
+$sqlz = "SELECT * FROM " . $tblpref ."user WHERE " . $tblpref .sprintf('user.login = "%s"', $utili);
 $req = mysql_query($sqlz) or die('Erreur SQL !<br>'.$sqlz.'<br>'.mysql_error());
 while($data = mysql_fetch_array($req)){
  $user_num = $data['num'];

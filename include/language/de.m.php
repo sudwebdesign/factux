@@ -22,7 +22,7 @@ error_reporting(0);
 
 
 $lang_factux = "Factux - kostenlose Revision 2017 Billing";#Factux - kostenlose Revision 2015 Billing  /  Factux - Biller kostenlose Revision 2015 / Factux - Biller-Verzeichnis kostenloser Revision 2015 / Factux - die Biller Revision 2015 frei
-$lang_source_fac = "$lang_factux Webiciel open Source <br />abgeleitet <a href='http://sourceforge.net/projects/factux/' target='_blank' > Factux 1.1.5</a> <br />umschreibt und vertrieben von";
+$lang_source_fac = $lang_factux . " Webiciel open Source <br />abgeleitet <a href='http://sourceforge.net/projects/factux/' target='_blank' > Factux 1.1.5</a> <br />umschreibt und vertrieben von";
 $lang_new_config_ok = "Ihre neue Konfiguration wird gespeichert";
 $lang_nbr_impression = "Die Anzahl der Impressionen";
 $lang_choix_Impression = "Verwendung automatischer Druck";
@@ -192,7 +192,7 @@ $lang_totaux = "Mehrwertsteuer: \n Mehrwertsteuer: \n Gesamt inkl. MwSt.: ";
 $lang_num_bon_ab = "Gute Nr.:";
 $lang_de = "Von";
 $lang_page = "Seite";
-$lang_condi = "$entrep_nom $social Tel :$tel_vend \n$tva_vend $compte $reg";
+$lang_condi = "{$entrep_nom} {$social} Tel :{$tel_vend} \n{$tva_vend} {$compte} {$reg}";
 $lang_prix_htva = "Preis H.T.V.A";
 $lang_dev_pdf_soc = "Firma Hauptsitz Tel / Fax VAT Bank e-mail";
 $lang_ajo_fact = "Fügen Sie einen Kommentar auf der Rechnung (optional)";
@@ -231,14 +231,14 @@ $lang_evo_ca = "Entwicklung der C.A.";
 $lang_periode = "Periode";
 $lang_dep_htva = "Ausgaben ohne MwSt.";
 $lang_bc_login = "Name der Datenbank";
-$lang_back_upl = "Wenn Sie diese Sicherung wiederherstellen möchten: <br />1.televerser die Datei in den Dump Ihre $lang_factux  <br /> 2. Executer das Dienstprogramm Backup und wählen Sie die Option wiederherstellen Sicherung";
+$lang_back_upl = sprintf('Wenn Sie diese Sicherung wiederherstellen möchten: <br />1.televerser die Datei in den Dump Ihre %s  <br /> 2. Executer das Dienstprogramm Backup und wählen Sie die Option wiederherstellen Sicherung', $lang_factux);
 $lang_back_effac = "Ihre Streichung der Sicherung Anfrage ging gut";
 $lang_back_utili = "Factux Sicherung";
 $lang_voir = "Finden Sie unter";
 $lang_rest = "Wiederherstellen";
 $lang_tai = "Größe";
 $lang_fichier = "Datei";
-$lang_back_restO2 = "Wenn kein Fehler aufgetreten ist, während Ihre Daten wiederhergestellt wurde. Dieses Tool stellt nur Sicherungen erstellt aus $lang_factux ";
+$lang_back_restO2 = sprintf('Wenn kein Fehler aufgetreten ist, während Ihre Daten wiederhergestellt wurde. Dieses Tool stellt nur Sicherungen erstellt aus %s ', $lang_factux);
 $lang_back_resto = "Sicherung wiederherstellen";
 $lang_back_ext = "Aus backup.sql Datei extrahiert";
 $lang_back_ti_re = "Factux Backup: Sicherung wiederherstellen";
@@ -345,10 +345,10 @@ $lang_commandes = "Befehle";
 $lang_clients = "Kunden, die";
 $lang_depenses = "Ausgaben";
 $lang_htva = "exkl. MwSt";#H.T.
-$lang_depenses_htva = "Ausgaben $lang_htva";
-$lang_ca_htva = "Umsatz $lang_htva";
+$lang_depenses_htva = 'Ausgaben ' . $lang_htva;
+$lang_ca_htva = 'Umsatz ' . $lang_htva;
 $lang_ttc = "INK. STEUERN";
-$lang_ca_ttc = "C.A. $lang_ttc";
+$lang_ca_ttc = 'C.A. ' . $lang_ttc;
 
 $lang_statistiques_basees_bons = "Die Statistiken basieren auf Bestellungen.";
 $lang_statistiques_par_client = "Ausführliche Clientstatistiken";
@@ -501,7 +501,7 @@ $lang_cat_effa = "Sind Sie sicher, dass Sie die Kategorie löschen möchten ";
 $lang_err_efa_cat = "Diese Kategorie verstehen Elemente, Sie können es nicht entfernen.";
 $lang_cat_eff = "Die Kategorie wurde gelöscht.";
 $lang_echea = "Aufgrund von";
-$lang_num_fact = "$lang_numero der rechnung";
+$lang_num_fact = $lang_numero . ' der rechnung';
 $lang_simu = "Simulation";
 
 $lang_art_eff = "der Artikel wurde gelöscht.";
@@ -525,8 +525,8 @@ $lang_pay_le = "Legen Sie die";
 $lang_dat_inva = "Ungültiges Datum";
 
 $lang_les_utl = "Benutzer";
-$lang_id_or_mail_exist = "Fehler-Anmeldung/$lang_email ist bereits vorhanden.";
-$lang_mail_exist = "$lang_email ist bereits vorhanden.";
+$lang_id_or_mail_exist = sprintf('Fehler-Anmeldung/%s ist bereits vorhanden.', $lang_email);
+$lang_mail_exist = $lang_email . ' ist bereits vorhanden.';
 
 $lang_admin = "Admin";
 $lang_gerer = "Verwalten";

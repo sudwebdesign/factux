@@ -19,27 +19,27 @@
  *                 Guy Hendrickx
  *.
  */
-include_once("include/headers.php");
-include_once("include/finhead.php");
+include_once(__DIR__ . "/include/headers.php");
+include_once(__DIR__ . "/include/finhead.php");
 ?>
 <table width="760" border="0" class="page" align="center">
  <tr>
   <td  class="page" align="center">
 <?php
-include_once("include/head.php");
+include_once(__DIR__ . "/include/head.php");
 if ($user_dev == 'n') {
- echo "<h1>$lang_devis_droit</h1>";
- include_once("include/bas.php");
+ echo sprintf('<h1>%s</h1>', $lang_devis_droit);
+ include_once(__DIR__ . "/include/bas.php");
  exit;
 }
 $rqSql = "SELECT num_client, nom FROM " . $tblpref ."client WHERE 1";
 if ($user_dev == 'r'){
 $rqSql = "
 SELECT num_client, nom FROM " . $tblpref ."client
-WHERE " . $tblpref ."client.permi LIKE '$user_num,'
-or  " . $tblpref ."client.permi LIKE '%,$user_num,'
-or  " . $tblpref ."client.permi LIKE '%,$user_num,%'
-or  " . $tblpref ."client.permi LIKE '$user_num,%' ";
+WHERE " . $tblpref ."client.permi LIKE '{$user_num},'
+or  " . $tblpref ."client.permi LIKE '%,{$user_num},'
+or  " . $tblpref ."client.permi LIKE '%,{$user_num},%'
+or  " . $tblpref .sprintf("client.permi LIKE '%s,%%' ", $user_num);
 }
 ?>
    <center>
@@ -47,11 +47,11 @@ or  " . $tblpref ."client.permi LIKE '$user_num,%' ";
      <table class="page" border="0" align="center">
       <caption><?php echo $lang_devis_chercher ; ?></caption>
       <tr>
-       <td class="texte1"><?php echo "$lang_client";?></td>
+       <td class="texte1"><?php echo $lang_client;?></td>
        <td class="texte1" colspan="5">
 <?php
 if ($liste_cli != 'y') {
-    $rqSql="$rqSql order by nom";
+    $rqSql .= ' order by nom';
     $result = mysql_query( $rqSql ) or die( "Exécution requête impossible.");
 ?>
           <select name='listeclients'>
@@ -64,7 +64,7 @@ if ($liste_cli != 'y') {
          <script type="text/javascript" src="javascripts/montrer_cacher.js"></script>
          <input type="checkbox" checked name="list_client" onclick="montrer_cacher(this,'cluster','cluster2')">
 <?php
-include_once("include/choix_cli.php");
+include_once(__DIR__ . "/include/choix_cli.php");
 }
 ?>
        </td>
@@ -108,8 +108,8 @@ include_once("include/choix_cli.php");
   <td>
 <?php
 $aide='devis';
-include("help.php");
-include_once("include/bas.php");
+include(__DIR__ . "/help.php");
+include_once(__DIR__ . "/include/bas.php");
 ?>
   </td>
  </tr>

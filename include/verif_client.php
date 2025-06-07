@@ -20,11 +20,15 @@
  *
  */
 ini_set('session.save_path', '../include/session');
-if(session_id() === '')#if(!isset($_SESSION['login']))
- session_start();
+if (session_id() === '') {
+    #if(!isset($_SESSION['login']))
+    session_start();
+}
+
 if(!isset($_SESSION['login'])||$_SESSION['login']==''){
  $message = "i";#interdit
  include(@$from_cli.'login.php');
  exit;
 }
+
 $lang = $_SESSION['lang'];

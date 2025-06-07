@@ -21,7 +21,7 @@
  */
 ?>
 <table class='page boiteaction'>
- <caption><?php echo "$lang_evo_ca $annee_1"; ?></caption>
+ <caption><?php echo sprintf('%s %s', $lang_evo_ca, $annee_1); ?></caption>
  <tr>
   <th><?php echo $lang_mois; ?></th>
   <th></th>
@@ -29,7 +29,7 @@
   <th rowspan="14" width="200px"><img src="graph2_ca.php?annee_1=<?php echo $annee_1; ?>"></th>
  </tr>
 <?php
-$sql = "SELECT SUM( tot_htva ) FROM " . $tblpref ."bon_comm WHERE YEAR( date ) = $annee_1 ";
+$sql = "SELECT SUM( tot_htva ) FROM " . $tblpref .sprintf('bon_comm WHERE YEAR( date ) = %s ', $annee_1);
 $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 $total= mysql_result($req,0);
 

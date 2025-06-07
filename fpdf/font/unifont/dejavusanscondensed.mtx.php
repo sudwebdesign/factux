@@ -1,7 +1,7 @@
 <?php
 $name='DejaVuSansCondensed';
 $type='TTF';
-$desc=array (
+$desc= [
   'Ascent' => 928,
   'Descent' => -236,
   'CapHeight' => 928,
@@ -10,10 +10,10 @@ $desc=array (
   'ItalicAngle' => 0,
   'StemV' => 87,
   'MissingWidth' => 540,
-);
+];
 $up=-63;
 $ut=44;
 $ttffile='font/unifont/DejaVuSansCondensed.ttf';
 $originalsize=643852;
 $fontkey='dejavu';
-?>
+

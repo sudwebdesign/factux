@@ -25,7 +25,8 @@ session_cache_limiter('private');
 session_start();
 if(!isset($_SESSION['trucmuch'])||$_SESSION['trucmuch']==''){#if(isset($_SESSION['trucmuch'])&&$_SESSION['trucmuch']==''){
  $message = "i";#interdit
- include('../login.inc.php');
+ include(__DIR__ . '/../login.inc.php');
  exit;
 }
+
 $lang = $_SESSION['lang'];

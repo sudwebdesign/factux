@@ -23,10 +23,10 @@ $rqSql = "
 SELECT num_client, nom
 FROM " . $tblpref ."client
 WHERE (actif != 'non')
-and (" . $tblpref ."client.permi NOT LIKE '$num_user,' )
-and  (" . $tblpref ."client.permi NOT LIKE '%,$num_user,' )
-and  (" . $tblpref ."client.permi NOT LIKE '%,$num_user,%' )
-and  (" . $tblpref ."client.permi NOT LIKE '$num_user,%')
+and (" . $tblpref ."client.permi NOT LIKE '{$num_user},' )
+and  (" . $tblpref ."client.permi NOT LIKE '%,{$num_user},' )
+and  (" . $tblpref ."client.permi NOT LIKE '%,{$num_user},%' )
+and  (" . $tblpref ."client.permi NOT LIKE '{$num_user},%')
 ORDER BY nom";
 $result = mysql_query( $rqSql ) or die( "Exécution requête impossible.");
 $cl_sz=mysql_num_rows($result);
@@ -35,7 +35,7 @@ if($cl_sz>0){
 <div class="left50">
  <form name="choisir_client" method="post" action="choisir_client.php" >
   <table width='99%' border='0' class='page' align='left' class='boiteaction'>
-   <caption><?php echo "$lang_ajou_cli_util"; ?></caption>
+   <caption><?php echo $lang_ajou_cli_util; ?></caption>
    <tr>
     <td class="texte0" colspan="2"><?php echo $lang_clients;?></td>
     <td class="texte0" colspan="2">
@@ -60,4 +60,4 @@ while ( $row = mysql_fetch_array( $result)) {
   <input type="hidden" name="login" value="<?php echo $login ?>" />
  </form>
 </div>
-<?php } ?>
+<?php }

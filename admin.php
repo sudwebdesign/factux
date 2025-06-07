@@ -19,17 +19,17 @@
  * 		Guy Hendrickx
  *.
  */
-include_once("include/headers.php");
-include_once("include/finhead.php");
+include_once(__DIR__ . "/include/headers.php");
+include_once(__DIR__ . "/include/finhead.php");
 ?>
 <table width="760" border="0" class="page" align="center">
  <tr>
   <td class="page" align="center">
 <?php
-include_once("include/head.php");
+include_once(__DIR__ . "/include/head.php");
 if ($user_admin != 'y') {
- echo "<h1>$lang_admin_droit</h1>";
- include_once("include/bas.php");
+ echo sprintf('<h1>%s</h1>', $lang_admin_droit);
+ include_once(__DIR__ . "/include/bas.php");
  exit;
 }
 if (isset($message)&&$message!='') {
@@ -113,7 +113,7 @@ function montrer_cacher(laCase,value,leCalk,leCalk2){
       <td class="texte1">
        <input type="checkbox" <?php if($first_art!=0){echo"checked";/*$article_num=$first_art;*/}?> name="choix_first_art" onchange="montrer_cacher(this,value,'article','clustart')" >
        <div id="clustart"<?php if($first_art==0){echo ' style="visibility:hidden"';}?> ><b><?php echo $lang_choisissez; ?>:</b><br />
-<?php include("include/article_choix.php"); ?>
+<?php include(__DIR__ . "/include/article_choix.php"); ?>
        </div>
       </td>
      </tr>
@@ -130,13 +130,13 @@ function montrer_cacher(laCase,value,leCalk,leCalk2){
 <?php
 if ($handle = opendir('include/themes')){
  while (false !== ($file = readdir($handle))) {
-  if ($file != "." && $file != ".." && is_dir("include/themes/$file")) {
+  if ($file != "." && $file != ".." && is_dir('include/themes/' . $file)) {
    echo "
          <option ";
    if($theme ==$file){
     echo"selected='selected' ";
    }
-   echo"value=\"$file\">$file</option>";
+   echo sprintf('value="%s">%s</option>', $file, $file);
   }
  }
  closedir($handle);
@@ -188,8 +188,8 @@ if ($handle = opendir('include/themes')){
   <td>
 <?php
 $aide = 'admin';
-include("help.php");
-include_once("include/bas.php");
+include(__DIR__ . "/help.php");
+include_once(__DIR__ . "/include/bas.php");
 ?>
   </td>
  </tr>

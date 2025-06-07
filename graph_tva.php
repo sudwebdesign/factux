@@ -19,8 +19,8 @@
  * 		Guy Hendrickx
  *.
  */
-include_once("include/headers.php");
-include_once("include/finhead.php");
+include_once(__DIR__ . "/include/headers.php");
+include_once(__DIR__ . "/include/finhead.php");
 $annee_1 =(isset($_POST['annee_1'])&&$_POST['annee_1'] !='')?$_POST['annee_1']:date("Y");
 $fact=(isset($_POST['fact']))?$_POST['fact']:null;
 ?>
@@ -28,10 +28,10 @@ $fact=(isset($_POST['fact']))?$_POST['fact']:null;
  <tr>
   <td class="page" align="center">
 <?php
-include_once("include/head.php");
+include_once(__DIR__ . "/include/head.php");
 if ($user_stat== 'n'){
- echo"<h1>$lang_statistique_droit</h1>";
- include_once("include/bas.php");
+ echo sprintf('<h1>%s</h1>', $lang_statistique_droit);
+ include_once(__DIR__ . "/include/bas.php");
  exit;
 }
 
@@ -52,13 +52,14 @@ if ($user_stat== 'n'){
   <td class="page" align="center">
 <?php
 // initialisation à 0
-$liste_mois = calendrier_local_mois ();$recettes = array ();
-$depenses = array ();
-$resultat_net = array ();
+$liste_mois = calendrier_local_mois ();
+$recettes =  [];
+$depenses =  [];
+$resultat_net =  [];
 //~ reset ($liste_mois);
 foreach($liste_mois as $numero_mois => $nom_mois){
- $recettes [$numero_mois] = array ("htva" => 0.0, "tva" => 0.0, "ttc" => 0.0);
- $depenses [$numero_mois] = array ("htva" => 0.0, "tva" => 0.0, "ttc" => 0.0);
+ $recettes [$numero_mois] =  ["htva" => 0.0, "tva" => 0.0, "ttc" => 0.0];
+ $depenses [$numero_mois] =  ["htva" => 0.0, "tva" => 0.0, "ttc" => 0.0];
  #$avoirs [$numero_mois] = array ("htva" => 0.0, "tva" => 0.0, "ttc" => 0.0);
  $resultat_net [$numero_mois] = 0.0;
 }
@@ -68,17 +69,19 @@ foreach($liste_mois as $numero_mois => $nom_mois){
 $sql1 = "
 SELECT  MONTH(date) numero_mois, SUM(tot_htva) htva, SUM(tot_tva) tva
 FROM " . $tblpref ."bon_comm
-".(($annee_1!=$lang_toutes)?"WHERE YEAR(date) = $annee_1":"")."
+".(($annee_1!=$lang_toutes)?'WHERE YEAR(date) = ' . $annee_1:"")."
 GROUP BY numero_mois
 ";
 
-if($fact)//réelles
-$sql1 = "
+if ($fact) {
+    //réelles
+    $sql1 = "
 SELECT  MONTH(date_fact) numero_mois, SUM(total_fact_h) as htva, SUM(total_fact_ttc) as ttc
 FROM " . $tblpref ."facture
-".(($annee_1!=$lang_toutes)?"WHERE YEAR(date_fact) = $annee_1 AND ":"WHERE ")."payement != 'non'
+".(($annee_1!=$lang_toutes)?sprintf('WHERE YEAR(date_fact) = %s AND ', $annee_1):"WHERE ")."payement != 'non'
 GROUP BY numero_mois
 ";
+}
 $req = mysql_query($sql1) or die('Erreur SQL !<br>'.$sql1.'<br>'.mysql_error());
 while ($data = mysql_fetch_array($req)){
  $numero_mois = $data["numero_mois"];
@@ -91,7 +94,7 @@ while ($data = mysql_fetch_array($req)){
 $sql2 = "
 SELECT MONTH(date) numero_mois, SUM(prix) as htva, SUM(mont_tva) as tva
 FROM " . $tblpref ."depense
-".(($annee_1!=$lang_toutes)?"WHERE YEAR(date) = $annee_1":"")."
+".(($annee_1!=$lang_toutes)?'WHERE YEAR(date) = ' . $annee_1:"")."
 GROUP BY numero_mois
 ";
 $req = mysql_query($sql2) or die('Erreur SQL !<br>'.$sql2.'<br>'.mysql_error());
@@ -101,7 +104,6 @@ while ($data = mysql_fetch_array($req)){
  #$depenses[$numero_mois]["ttc"] = $data["htva"] + $data["tva"];
  $depenses[$numero_mois]["tva"] = $data["tva"];
 }
-
 /*//Avoirs OK 3.04
 $sqlAv = "
 SELECT  MONTH(date_avoir) numero_mois, SUM(total_avoir_ht) htva, SUM(total_avoir_tva) tva, " . $tblpref ."client.num_tva
@@ -119,9 +121,10 @@ while ($dataAv = mysql_fetch_array($reqAv)){
 }
 */
 // Résultat net
-
 //~ reset ($liste_mois);
-$re=$de=$av=0;
+$re = 0;
+$de = 0;
+$av = 0;
 foreach($liste_mois as $numero_mois => $nom_mois){
  $resultat_net[$numero_mois] = $recettes[$numero_mois]["tva"] - $depenses[$numero_mois]["tva"];/* + $avoirs[$numero_mois]["tva"]*/
  $re += $recettes[$numero_mois]["tva"];
@@ -129,18 +132,20 @@ foreach($liste_mois as $numero_mois => $nom_mois){
  #$av += ;$avoirs[$numero_mois]["tva"];
 }
 $titre_recette = $lang_commandes;
-if($fact)//réelles
- $titre_recette = $lang_factures;
+if ($fact) {
+    //réelles
+    $titre_recette = $lang_factures;
+}
 ?>
   <table class="page boiteaction">
-   <caption><?php echo "$lang_montant $lang_total $lang_tva $lang_par $lang_mois $lang_de ".(($annee_1!=$lang_toutes)?"$lang_l_année $annee_1":" $lang_toutes_les_années")." ".(($fact)?" $lang_au_reel":""); ?></caption>
+   <caption><?php echo sprintf('%s %s %s %s %s %s ', $lang_montant, $lang_total, $lang_tva, $lang_par, $lang_mois, $lang_de).(($annee_1!=$lang_toutes)?sprintf('%s %s', $lang_l_année, $annee_1):' ' . $lang_toutes_les_années)." ".(($fact)?' ' . $lang_au_reel:""); ?></caption>
    <tr>
     <th>&nbsp;</th>
-    <th><?php echo "$lang_tva $lang_depenses"; ?></th>
-    <th><?php echo "$lang_tva $titre_recette"; ?></th>
+    <th><?php echo sprintf('%s %s', $lang_tva, $lang_depenses); ?></th>
+    <th><?php echo sprintf('%s %s', $lang_tva, $titre_recette); ?></th>
     <!--<th><?php //echo $lang_resultat_net; ?></th>
     <th><?php //echo "$lang_tva Avoir" ?></th>-->
-    <th><?php echo "$lang_tva $lang_total_mois"; ?></th>
+    <th><?php echo sprintf('%s %s', $lang_tva, $lang_total_mois); ?></th>
    </tr>
 <?php
 //~ reset ($liste_mois);
@@ -170,8 +175,8 @@ foreach($liste_mois as $numero_mois => $nom_mois){
  <td>
 <?php
 $aide='stats';
-include("help.php");
-include_once("include/bas.php");
+include(__DIR__ . "/help.php");
+include_once(__DIR__ . "/include/bas.php");
 ?>
   </td>
  </tr>

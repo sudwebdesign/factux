@@ -22,21 +22,24 @@
  *              Factux 10 years Remix.8.2015
  */
 
-require_once("bon_pdf.inc.php");
+require_once(__DIR__ . "/bon_pdf.inc.php");
 //page 1
 
 class PDF extends PDF_MySQL_Table{
 
-function Header()
+public function Header()
 {		}
-//debut Js
-var $javascript;
-    var $n_js;
 
-    function IncludeJS($script) {
+//debut Js
+public $javascript;
+
+    public $n_js;
+
+    public function IncludeJS($script) {
         $this->javascript=$script;
     }
-    function putjavascript() {
+
+    public function putjavascript() {
         $this->_newobj();
         $this->n_js=$this->n;
         $this->_out('<<');
@@ -50,26 +53,31 @@ var $javascript;
         $this->_out('>>');
         $this->_out('endobj');
     }
-    function putresources() {
+
+    public function putresources() {
         parent::_putresources();
         if (!empty($this->javascript)) {
             $this->_putjavascript();
         }
     }
-    function putcatalog() {
+
+    public function putcatalog() {
         parent::_putcatalog();
-        if (isset($this->javascript)) {
+        if (property_exists($this, 'javascript') && $this->javascript !== null) {
             $this->_out('/Names <</JavaScript '.($this->n_js).' 0 R>>');
         }
     }
-    function AutoPrint($dialog=false, $nb_impr=1){
+
+    public function AutoPrint($dialog=false, $nb_impr=1){
          //Ajoute du JavaScript pour lancer la boîte d'impression ou imprimer immediatement
          $param=($dialog ? 'true' : 'false');
-         $script=str_repeat("print($param);",$nb_impr);
+         $script=str_repeat(sprintf('print(%s);', $param),$nb_impr);
          $this->IncludeJS($script);
     }
+
 //fin js
 }
+
 $pdf=new PDF('p','mm','a4');
 $pdf->Open();
 $pdf->AddFont('DejaVu','','DejaVuSansCondensed.ttf',true);
@@ -85,41 +93,41 @@ for ($i=0;$i<$nb_pa;$i++){
  $pdf->SetFont('DejaVu','',10);
  $pdf->SetY(4);
  $pdf->SetX(120);
- $pdf->MultiCell(50,6,"$lang_date: $date_bon",1,'C',1);
+ $pdf->MultiCell(50,6,sprintf('%s: %s', $lang_date, $date_bon),1,'C',1);
  //le logo
- $pdf->Image("../image/$logo",10,4,50,24,'jpg');
+ $pdf->Image('../image/' . $logo,10,4,50,24,'jpg');
  //Troisieme cellule le slogan
  $pdf->SetFont('DejaVu','',15);
  $pdf->SetY(60);
  $pdf->SetX(10);
- $pdf->MultiCell(90,4,"$slogan",0,'C',0);
+ $pdf->MultiCell(90,4,$slogan,0,'C',0);
  //deuxieme cellule les coordoné clients
  $pdf->SetFont('DejaVu','',10);
  $pdf->SetY(33);
  $pdf->SetX(120);
- $pdf->MultiCell(65,6,"$nom\n$nom2\n$rue\n$cp $ville",1,'C',1);
+ $pdf->MultiCell(65,6,sprintf('%s%s%s%s%s%s%s %s', $nom, PHP_EOL, $nom2, PHP_EOL, $rue, PHP_EOL, $cp, $ville),1,'C',1);
  //Troisieme cellule les coordoné vendeur
  $pdf->SetFont('DejaVu','',8);
  $pdf->SetY(33);
  $pdf->SetX(10);
- $pdf->MultiCell(40,4,"$lang_dev_pdf_soc",1,'R',1);
+ $pdf->MultiCell(40,4,$lang_dev_pdf_soc,1,'R',1);
  //le cntenu des coordonées vendeur
  $pdf->SetFont('DejaVu','',8);
  $pdf->SetY(33);
  $pdf->SetX(51);
- $pdf->MultiCell(50,4,"$entrep_nom\n$social\n $tel_vend\n $tva_vend \n$compte \n$mail",1,'L',1);//
+ $pdf->MultiCell(50,4,"{$entrep_nom}\n{$social}\n {$tel_vend}\n {$tva_vend} \n{$compte} \n{$mail}",1,'L',1);//
  $pdf->Line(10,65,196,65);
  //$pdf->ln(10);
  //premiere celule le numero de bon
  $pdf->SetFont('DejaVu','',10);
  $pdf->SetY(11);
  $pdf->SetX(120);
- $pdf->Cell(65,6,"$lang_num_bon_ab $num_bon",1,0,'C',1);
+ $pdf->Cell(65,6,sprintf('%s %s', $lang_num_bon_ab, $num_bon),1,0,'C',1);
  if($num_tva!=' '){//cellule la tva client
   $pdf->SetFont('DejaVu','',10);
   $pdf->SetY(18);
   $pdf->SetX(120);
-  $pdf->MultiCell(65,6,"$num_tva",1,'C',1);
+  $pdf->MultiCell(65,6,$num_tva,1,'C',1);
  }
 
  //la grande cellule sous le tableau
@@ -129,49 +137,50 @@ for ($i=0;$i<$nb_pa;$i++){
  $pdf->Cell(186,161,"",1,0,'C',1);
 
  //Le tableau : on définit les colonnes
- $pdf->AddCol('quanti',15,"$lang_quanti",'R');
+ $pdf->AddCol('quanti',15,$lang_quanti,'R');
 
  if($lot=='y'){
-  $pdf->AddCol('uni',10,"$lang_unite",'L');
-  $pdf->AddCol('article',63,"$lang_article",'L');
-  $pdf->AddCol('num_lot',18,"$lang_num_lot",'L');
+  $pdf->AddCol('uni',10,$lang_unite,'L');
+  $pdf->AddCol('article',63,$lang_article,'L');
+  $pdf->AddCol('num_lot',18,$lang_num_lot,'L');
   if($total_remise_htva!=0){
-   $pdf->AddCol('taux_tva',15,"$lang_tva",'R');
-   $pdf->AddCol('p_u_jour',25,"$lang_prix_htva",'R');
-   $pdf->AddCol('remise',15,"$lang_remise",'R');
+   $pdf->AddCol('taux_tva',15,$lang_tva,'R');
+   $pdf->AddCol('p_u_jour',25,$lang_prix_htva,'R');
+   $pdf->AddCol('remise',15,$lang_remise,'R');
   }else{
-   $pdf->AddCol('taux_tva',20,"$lang_tva",'R');
-   $pdf->AddCol('p_u_jour',35,"$lang_prix_htva",'R');
+   $pdf->AddCol('taux_tva',20,$lang_tva,'R');
+   $pdf->AddCol('p_u_jour',35,$lang_prix_htva,'R');
    #$pdf->AddCol('remise',15,"$lang_remise",'R');
   }
  }else{
-  $pdf->AddCol('uni',15,"$lang_unite",'L');
-  $pdf->AddCol('article',71,"$lang_article",'L');
+  $pdf->AddCol('uni',15,$lang_unite,'L');
+  $pdf->AddCol('article',71,$lang_article,'L');
   if($total_remise_htva!=0){
-   $pdf->AddCol('taux_tva',20,"$lang_t_tva",'R');
-   $pdf->AddCol('p_u_jour',25,"$lang_prix_htva",'R');
-   $pdf->AddCol('remise',15,"$lang_remise",'R');
+   $pdf->AddCol('taux_tva',20,$lang_t_tva,'R');
+   $pdf->AddCol('p_u_jour',25,$lang_prix_htva,'R');
+   $pdf->AddCol('remise',15,$lang_remise,'R');
   }else{
-   $pdf->AddCol('taux_tva',25,"$lang_t_tva",'R');
-   $pdf->AddCol('p_u_jour',35,"$lang_prix_htva",'R');
+   $pdf->AddCol('taux_tva',25,$lang_t_tva,'R');
+   $pdf->AddCol('p_u_jour',35,$lang_prix_htva,'R');
    #$pdf->AddCol('remise',15,"$lang_remise",'R');
   }
  }
- $pdf->AddCol('tot_art_htva',25,"$lang_tot_arti",'R');
 
- $prop=array(
-  'HeaderColor'=>array(255,150,100),
-  'color1'=>array(255,255,255),
-  'color2'=>array(255,238,204),
+ $pdf->AddCol('tot_art_htva',25,$lang_tot_arti,'R');
+
+ $prop=[
+  'HeaderColor'=>[255,150,100],
+  'color1'=>[255,255,255],
+  'color2'=>[255,238,204],
   'align' =>'L',
   'padding'=>2
- );
+ ];
  $pdf->Table(
  "SELECT " . $tblpref ."cont_bon.num, num_lot, quanti, remise, uni, article, taux_tva, p_u_jour, tot_art_htva
  FROM " . $tblpref ."cont_bon
  LEFT JOIN " . $tblpref ."article on " . $tblpref ."cont_bon.article_num = " . $tblpref ."article.num
- WHERE  bon_num = $num_bon
- LIMIT $nb, 31",
+ WHERE  bon_num = {$num_bon}
+ LIMIT {$nb}, 31",
  $prop
  );
 $pdf->SetFillColor(255,255,255);#$pdf->SetFillColor(255,238,204);
@@ -185,7 +194,7 @@ $pdf->SetFillColor(255,255,255);#$pdf->SetFillColor(255,238,204);
   $pdf->SetFont('DejaVu','',9);
   $pdf->SetY(235);
   $pdf->SetX(116);
-  $pdf->MultiCell(40,4,"$lang_totaux",1,'R',1);
+  $pdf->MultiCell(40,4,$lang_totaux,1,'R',1);
   $pdf->Line(10,266,196,266);
 
   if($lang=='fr'){//le total en toute lettre nombre_literal only in french
@@ -194,22 +203,24 @@ $pdf->SetFillColor(255,255,255);#$pdf->SetFillColor(255,238,204);
    $pdf->SetX(116);
    $pdf->MultiCell(80,4,nombre_literal(avec_virgule($tot_tva_inc)),0,'L',0);#/i\work only with #,##
   }
+
   //pour les commentaire
   $pdf->SetFont('DejaVu','',8);
   $pdf->SetY(236);
   $pdf->SetX(10);
-  $pdf->MultiCell(108,4,"$coment",0,'L',0);
+  $pdf->MultiCell(108,4,$coment,0,'L',0);
   if($total_remise_htva!=0){//Pour le total de la remise
    $pdf->SetFont('DejaVu','',8);
    $pdf->SetY(235);
    $pdf->SetX(83);
-   $pdf->MultiCell(27,4,"$lang_total $lang_remise $lang_htva",1,'C',1);
+   $pdf->MultiCell(27,4,sprintf('%s %s %s', $lang_total, $lang_remise, $lang_htva),1,'C',1);
    $pdf->SetFont('DejaVu','',8);
    $pdf->SetY(239);
    $pdf->SetX(83);
    $pdf->SetTextColor(0, 207, 0);
    $pdf->Cell(27,5,montant_financier ($total_remise_htva),1,1,'R',1);
   }
+
   //total marge
   #$pdf->SetY(244);
   #$pdf->SetX(83);
@@ -222,13 +233,13 @@ $pdf->SetFillColor(255,255,255);#$pdf->SetFillColor(255,238,204);
  $pdf->SetFont('DejaVu','',6);
  $pdf->SetY(268);
  $pdf->SetX(30);
- $pdf->MultiCell(160,4,"$lang_condi",0,'C',0);
+ $pdf->MultiCell(160,4,$lang_condi,0,'C',0);
 
  //le nombre de page
  $pdf->SetFont('DejaVu','',9);
  $pdf->SetY(270);
  $pdf->SetX(170);
- $pdf->MultiCell(30,4,"$lang_page $num_pa2 / $nb_pa\n",0,'L',0);
+ $pdf->MultiCell(30,4,sprintf('%s %d / %s%s', $lang_page, $num_pa2, $nb_pa, PHP_EOL),0,'L',0);
 
  //les coordonnées vendeurs 2
  /*
@@ -256,33 +267,35 @@ if($_POST['mail'] =='y'){
  $pdf->MultiCell(160,4,"Conditions génerales de vente\n",0,'C',0);
  $pdf->SetY(70);
  $pdf->SetX(10);
- $pdf->MultiCell(160,4,"$lang_condi_ven",0,'C',0);
+ $pdf->MultiCell(160,4,$lang_condi_ven,0,'C',0);
 }
 
-if($autoprint=='y' and $_POST['mail']!='y' and $_POST['user']=='adm'){
+if($autoprint == 'y' && $_POST['mail'] != 'y' && $_POST['user'] == 'adm'){
  $pdf->AutoPrint(false, $nbr_impr);
 }
+
 //Sauvegarde du PDF dans le fichier
-$file="$lang_fi_b_c $num_bon.pdf";#exit;
+$file=sprintf('%s %s.pdf', $lang_fi_b_c, $num_bon);#exit;
 $pdf->Output($file);
 //Redirection JavaScript
 //echo "<html><script>window.location='$file';</script></html>";
 if ($_POST['mail']=='y') {
- $to = "$mail_client";
+ $to = $mail_client;
  $sujet = $lang_mail_client_bon_sujet.$entrep_nom;
  $message = $lang_mail_client_bon_message.$entrep_nom;
- $fichier = "$file";
+ $fichier = $file;
  $typemime = "pdf";
- $nom = "$file";
- $reply = "$mail";
- $from = "$entrep_nom<$mail>";
- require "../include/CMailFile.php";
- $newmail = new CMailFile("$sujet","$to","$from","$message","$fichier","application/pdf");
- if($newmail->sendfile())
-  echo "<html><script>window.location='../lister_commandes.php';</script></html>";
- else
-  echo "<html><h3 style='color:red;'>$lang_env_par_mail_non</h3><script>setTimeout(function(){window.location='../lister_commandes.php'},2000);</script></html>";
+ $nom = $file;
+ $reply = $mail;
+ $from = sprintf('%s<%s>', $entrep_nom, $mail);
+ require __DIR__ . "/../include/CMailFile.php";
+ $newmail = new CMailFile($sujet,$to,$from,$message,$fichier,"application/pdf");
+ if ($newmail->sendfile()) {
+     echo "<html><script>window.location='../lister_commandes.php';</script></html>";
+ } else {
+     echo sprintf("<html><h3 style='color:red;'>%s</h3><script>setTimeout(function(){window.location='../lister_commandes.php'},2000);</script></html>", $lang_env_par_mail_non);
+ }
 } else {
  echo "<html><script>window.location='".str_replace('+',' ',urlencode($file))."';</script></html>";
 }
-?>
+

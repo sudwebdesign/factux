@@ -19,15 +19,15 @@
  * 		Guy Hendrickx
  *.
  */
-include_once("include/headers.php");
+include_once(__DIR__ . "/include/headers.php");
 $num_dep=isset($_GET['num_dep'])?$_GET['num_dep']:"";
 ?>
 <table width="760" border="0" class="page" align="center">
  <tr>
   <td class="page" align="center">
 <?php
-include_once("include/head.php");
-$sql = "SELECT * FROM " . $tblpref ."depense WHERE num=$num_dep";
+include_once(__DIR__ . "/include/head.php");
+$sql = "SELECT * FROM " . $tblpref .('depense WHERE num=' . $num_dep);
 $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 while($data = mysql_fetch_array($req)){
   $num = $data['num'];
@@ -66,8 +66,8 @@ while($data = mysql_fetch_array($req)){
   </center>
 <?php
 $aide='depense';
-include_once("help.php");
-include_once("include/bas.php");
+include_once(__DIR__ . "/help.php");
+include_once(__DIR__ . "/include/bas.php");
 ?>
   </td>
  </tr>

@@ -19,18 +19,18 @@
  *   Guy Hendrickx
  *.
  */
-include_once("include/headers.php");
+include_once(__DIR__ . "/include/headers.php");
 ?><script type="text/javascript" src="javascripts/confdel.js"></script><?php
-include_once("include/finhead.php");
+include_once(__DIR__ . "/include/finhead.php");
 ?>
 <table width="760" border="0" class="page" align="center">
  <tr>
   <td class="page" align="center">
 <?php
-include_once("include/head.php");
+include_once(__DIR__ . "/include/head.php");
 if ($user_dev == 'n') {
- echo "<h1>$lang_devis_droit</h1>";
- include_once("include/bas.php");
+ echo sprintf('<h1>%s</h1>', $lang_devis_droit);
+ include_once(__DIR__ . "/include/bas.php");
  exit;
 }
 if (isset($message)&&$message!='') {
@@ -48,10 +48,10 @@ if ($user_dev == 'r') {
   FROM " . $tblpref ."devis
   LEFT JOIN " . $tblpref ."client on " . $tblpref ."devis.client_num = num_client
   WHERE num_dev > 0 AND resu = '0'
-  and " . $tblpref ."client.permi LIKE '$user_num,'
-  or  " . $tblpref ."client.permi LIKE '%,$user_num,'
-  or  " . $tblpref ."client.permi LIKE '%,$user_num,%'
-  or  " . $tblpref ."client.permi LIKE '$user_num,%'
+  and " . $tblpref ."client.permi LIKE '{$user_num},'
+  or  " . $tblpref ."client.permi LIKE '%,{$user_num},'
+  or  " . $tblpref ."client.permi LIKE '%,{$user_num},%'
+  or  " . $tblpref ."client.permi LIKE '{$user_num},%'
   ";
 };
 if ( isset ( $_GET['ordre'] ) && $_GET['ordre'] != ''){
@@ -86,11 +86,7 @@ while($data = mysql_fetch_array($req)){
  $mail = $data['mail'];
  $ttc = $total + $tva ;
 // $nom = $data['nom'];#htmlentities($data['nom'], ENT_QUOTES);
- if($c++ & 1){
-  $line="0";
- }else{
-  $line="1";
- }
+ $line = $c++ & 1 ? "0" : "1";
 ?>
      <tr class="texte<?php echo $line; ?>" onmouseover="this.className='highlight'" onmouseout="this.className='texte<?php echo $line; ?>'">
       <td class='<?php echo couleur_alternee (); ?>'><?php echo $num_dev; ?></td>
@@ -105,7 +101,7 @@ while($data = mysql_fetch_array($req)){
       </td>
       <td class='<?php echo couleur_alternee (FALSE,"c texte"); ?>'>
        <a href="delete_dev.php?num_dev=<?php echo $num_dev; ?>&amp;nom=<?php echo $nom_html; ?>"
-          onClick="return confirmDelete('<?php echo"$lang_eff_dev $num_dev ?"; ?>')">
+          onClick="return confirmDelete('<?php echo sprintf('%s %s ?', $lang_eff_dev, $num_dev); ?>')">
         <img src="image/delete.jpg" align="middle" border="0" alt="<?php echo $lang_supprimer; ?>">
        </a>
       </td>
@@ -117,7 +113,7 @@ while($data = mysql_fetch_array($req)){
         <input type="image" src="image/printer.gif" align="middle" style="border:none;margin:0;" alt="<?php echo $lang_imprimer; ?>" />
        </form>
       </td>
-<?php if ($mail != '' and $login != '') { ?>
+<?php if ($mail != '' && $login != '') { ?>
       <td class='<?php echo couleur_alternee (FALSE,"c texte"); ?>'>
        <a href="notifi_cli.php?type=devis&amp;mail=<?php echo $mail; ?>">
         <img src="image/mail.gif" align="middle" alt="mail" border="0"/>
@@ -143,13 +139,13 @@ if($mail != ''){
 <?php } ?>
       <td class='<?php echo couleur_alternee (FALSE,"c texte"); ?>'>
        <a href="convert.php?num_dev=<?php echo $num_dev; ?>"
-          onClick="return confirmDelete('<?php echo"$lang_convert_dev $num_dev $lang_convert_dev2 "; ?>')">
+          onClick="return confirmDelete('<?php echo sprintf('%s %s %s ', $lang_convert_dev, $num_dev, $lang_convert_dev2); ?>')">
         <img src="image/icon_lol.gif" alt="<?php echo $lang_devis_gagner; ?>" align="middle" border="0" >
        </a>
       </td>
       <td class='<?php echo couleur_alternee (FALSE,"c texte"); ?>'>
        <a href="devis_non_commandes.php?num_dev=<?php echo $num_dev; ?>"
-          onClick="return confirmDelete('<?php echo"$lang_dev_perd $num_dev $lang_dev_perd2 "; ?>')">
+          onClick="return confirmDelete('<?php echo sprintf('%s %s %s ', $lang_dev_perd, $num_dev, $lang_dev_perd2); ?>')">
         <img src="image/icon_cry.gif" alt="<?php echo $lang_devis_perdre; ?>" align="middle" border="0" >
        </a>
       </td>
@@ -164,8 +160,8 @@ if($mail != ''){
   <td>
 <?php
 $aide = $lang_devis;
-include("help.php");
-include_once("include/bas.php");
+include(__DIR__ . "/help.php");
+include_once(__DIR__ . "/include/bas.php");
 if(!strstr($_SERVER['SCRIPT_FILENAME'],__FILE__)){#autre qu'elle meme
  echo"\n  </td>\n </tr>\n</table>\n";
 }

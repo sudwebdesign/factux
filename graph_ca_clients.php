@@ -19,18 +19,18 @@
  * 		Guy Hendrickx
  *.
  */
-include_once("include/headers.php");
-include_once("include/finhead.php");
+include_once(__DIR__ . "/include/headers.php");
+include_once(__DIR__ . "/include/finhead.php");
 $annee_1 = (isset($_POST['annne_1']))?$_POST['annne_1']:date('Y');
 ?>
 <table width="760" border="0" class="page" align="center">
  <tr>
   <td class="page" align="center">
 <?php
-include_once("include/head.php");
+include_once(__DIR__ . "/include/head.php");
 if ($user_stat == 'n'){
- echo"<h1>$lang_statistique_droit</h1>";
- include_once("include/bas.php");
+ echo sprintf('<h1>%s</h1>', $lang_statistique_droit);
+ include_once(__DIR__ . "/include/bas.php");
  exit;
 }
 ?>
@@ -53,7 +53,7 @@ $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql2.'<br>'.mysql_error());
 $nb = mysql_num_rows($req);
 ?>
    <table class='page boiteaction'>
-    <caption><?php echo "$lang_ca_par_client $annee_1" ?></caption>
+    <caption><?php echo sprintf('%s %s', $lang_ca_par_client, $annee_1) ?></caption>
      <tr>
      <th><?php echo $lang_client; ?></th>
      <th width="380"><?php echo $lang_pourcentage;?></th>
@@ -64,7 +64,7 @@ $nb = mysql_num_rows($req);
 $sql = "
 SELECT SUM(tot_htva)
 FROM " . $tblpref ."bon_comm
-WHERE YEAR(date) = $annee_1
+WHERE YEAR(date) = {$annee_1}
 ";
 $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 $data = mysql_fetch_array($req);
@@ -74,7 +74,7 @@ $sql = "
 SELECT SUM(tot_htva), nom
 FROM " . $tblpref ."bon_comm
 LEFT JOIN " . $tblpref ."client on client_num = num_client
-WHERE YEAR(date) = $annee_1
+WHERE YEAR(date) = {$annee_1}
 GROUP BY nom ";
 $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 while ($data = mysql_fetch_array($req)){
@@ -107,8 +107,8 @@ $pourcentage = avec_virgule ((($tot*100)/$total), 2);
   <td>
 <?php
 $aide='stats';
-include("help.php");
-include_once("include/bas.php");
+include(__DIR__ . "/help.php");
+include_once(__DIR__ . "/include/bas.php");
 ?>
   </td>
  </tr>

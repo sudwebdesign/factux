@@ -20,7 +20,7 @@
  *.ATTENTION EN UTF-8 LE SIGLE EURO EST INCONNU, ENFIN SI :  C'EST CURIEUX
  */
 $etape = "Étape N°3 : Données des bons de commande et factures enregistrées";
-include('headers.php');
+include(__DIR__ . '/headers.php');
 $zero=isset($_POST['zero'])?apostrophe($_POST['zero']):"";
 $un=isset($_POST['un'])?apostrophe($_POST['un']):"";
 $deux=isset($_POST['deux'])?$_POST['deux']:"";
@@ -58,7 +58,7 @@ fclose($monfichier);
      <h2>Si l'installeur de Factux doit la créer, <a href='db_create.php'>cliquez ici</a></h2>
      <hr>
    </center>
-<?php include_once("../include/bas_cli.php"); ?>
+<?php include_once(__DIR__ . "/../include/bas_cli.php"); ?>
   </td>
  </tr>
 </table>

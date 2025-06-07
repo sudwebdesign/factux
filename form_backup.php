@@ -19,17 +19,17 @@
  * 		Guy Hendrickx
  *.
  */
-include_once("include/headers.php");
-include_once("include/finhead.php");
+include_once(__DIR__ . "/include/headers.php");
+include_once(__DIR__ . "/include/finhead.php");
 ?>
 <table width="760" border="0" class="page" align="center">
  <tr>
   <td class="page" align="center">
 <?php
-require_once("include/head.php");
+require_once(__DIR__ . "/include/head.php");
 if ($user_admin != 'y') {
- echo "<h1>$lang_admin_droit</h1>";
- include_once("include/bas.php");
+ echo sprintf('<h1>%s</h1>', $lang_admin_droit);
+ include_once(__DIR__ . "/include/bas.php");
  exit;
 }
 $page = explode("/", getenv('SCRIPT_NAME'));#split("/", getenv('SCRIPT_NAME'));#Deprecated
@@ -48,7 +48,7 @@ $url_base = ereg_replace("$script", '', "$_SERVER[PATH_TRANSLATED]");
 */
 #2015 alpha
 #$base_url = $_SERVER['REQUEST_SCHEME']."://".$_SERVER['SERVER_NAME'];
-$url_base = str_replace("$page.$extension",'', $_SERVER['DOCUMENT_ROOT'].$_SERVER['PHP_SELF']);
+$url_base = str_replace(sprintf('%s.%s', $page, $extension),'', $_SERVER['DOCUMENT_ROOT'].$_SERVER['PHP_SELF']);
 //$path=str_replace("$page.$extension",'', $_SERVER['SCRIPT_FILENAME']);
 #var_dump($url_base,$_SERVER);exit;
 ?>
@@ -90,8 +90,8 @@ $url_base = str_replace("$page.$extension",'', $_SERVER['DOCUMENT_ROOT'].$_SERVE
   <td>
 <?php
 $aide = 'backups';
-include("help.php");
-require_once("include/bas.php");
+include(__DIR__ . "/help.php");
+require_once(__DIR__ . "/include/bas.php");
 ?>
   </td>
  </tr>

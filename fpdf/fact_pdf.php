@@ -27,34 +27,35 @@
  */
 session_cache_limiter('private');
 if(isset($_POST['user'])&&$_POST['user']=='adm'){
- require_once("../include/verif2.php");
+ require_once(__DIR__ . "/../include/verif2.php");
 }else{
  $from_cli='../client/';
- require_once("../include/verif_client.php");
+ require_once(__DIR__ . "/../include/verif_client.php");
 }
+
 $now='../';
-require_once("../include/config/common.php");
-require_once("../include/config/var.php");
-require_once("../include/language/$lang.php");
-require_once("../include/nb.php");
-require_once("../include/configav.php");
+require_once(__DIR__ . "/../include/config/common.php");
+require_once(__DIR__ . "/../include/config/var.php");
+require_once(__DIR__ . sprintf('/../include/language/%s.php', $lang));
+require_once(__DIR__ . "/../include/nb.php");
+require_once(__DIR__ . "/../include/configav.php");
 define('FPDF_FONTPATH','font/');
-require_once('mysql_table.php');
+require_once(__DIR__ . '/mysql_table.php');
 
 $_POST['mail']=isset($_POST['mail'])?$_POST['mail']:"n";
 $client=isset($_POST['client'])?$_POST['client']:"";
-$client=array(0=>$client);
+$client=[0=>$client];
 
 $debut=isset($_POST['debut'])?$_POST['debut']:"";
-$debut=array(0=>$debut);
+$debut=[0=>$debut];
 $fin=isset($_POST['fin'])?$_POST['fin']:"";
-$fin=array(0=>$fin);
+$fin=[0=>$fin];
 $num=isset($_POST['num'])?$_POST['num']:"";
-$num=array(0=>$num);
+$num=[0=>$num];
 $oneclick=isset($_POST['oneclick'])?$_POST['oneclick']:"";
 if($oneclick!=''){
  list($jour, $mois,$annee) = preg_split('/\//', $oneclick, 3);
- $oneclick ="$annee-$mois-$jour";
+ $oneclick =sprintf('%s-%s-%s', $annee, $mois, $jour);
  $oneclick2= $oneclick;
 }
 
@@ -70,24 +71,27 @@ $mail= stripslashes($mail);
 $g=1;
 
 //nouvelle methode
-$sql_new ="SELECT * FROM " . $tblpref ."facture WHERE `num` = '$num[0]'";
+$sql_new ="SELECT * FROM " . $tblpref .sprintf("facture WHERE `num` = '%s'", $num[0]);
 $req_new = mysql_query($sql_new) or die('Erreur SQL !<br>'.$sql_new.'<br>'.mysql_error());
 
 while($data_new = mysql_fetch_array($req_new)){
  $list_num = $data_new['list_num'];
 }
-$list_num = (!isset($list_num))?'':unserialize($list_num);#$list_num undefined if oneclick
+
+$list_num = (isset($list_num))?unserialize($list_num):'';#$list_num undefined if oneclick
 if(is_array($list_num)&&isset($list_num[0])){
- $suite_sql=" and " . $tblpref ."bon_comm.num_bon ='$list_num[0]'";
- for($m=1; $m<count($list_num); $m++){
-  $suite_sql .= " or " . $tblpref ."bon_comm.num_bon ='$list_num[$m]'";
+ $suite_sql=" and " . $tblpref .sprintf("bon_comm.num_bon ='%s'", $list_num[0]);
+ $counter = count($list_num);
+ for($m=1; $m<$counter; $m++){
+  $suite_sql .= " or " . $tblpref .sprintf("bon_comm.num_bon ='%s'", $list_num[$m]);
  }
 }else{
  $suite_sql=" and " . $tblpref ."bon_comm.num_bon ='-1'";#Blank#tips:si $suite_sql = '';#toutlesprodduclient_recapglobal
 }
-$suite_sql=array(0=>$suite_sql);
+
+$suite_sql=[0=>$suite_sql];
 if($oneclick!=''){
- $sql2 ="SELECT * FROM " . $tblpref ."facture WHERE `date_fact` = '$oneclick'";
+ $sql2 ="SELECT * FROM " . $tblpref .sprintf("facture WHERE `date_fact` = '%s'", $oneclick);
  $reqd = mysql_query($sql2) or die('Erreur SQL !<br>'.$sql2.'<br>'.mysql_error());
  $nb_fact = mysql_num_rows($reqd);
  unset($client);
@@ -97,10 +101,11 @@ if($oneclick!=''){
  unset($suite_sql);
  $g=0;
  if ($nb_fact=='0') {
-  echo"$lang_fact_mu_err $oneclick";
+  echo sprintf('%s %s', $lang_fact_mu_err, $oneclick);
   exit;
  }
- $suite_sql=array();
+
+ $suite_sql=[];
  while($datad = mysql_fetch_array($reqd)){
   $debut[]= $datad['date_deb'];
   $guy=$datad['client'];
@@ -109,26 +114,32 @@ if($oneclick!=''){
   $client[]= $datad['client'];
   $list_num = $datad['list_num'];
   $list_num = unserialize($list_num);
-  $suite_sql[]=" and " . $tblpref ."bon_comm.num_bon ='$list_num[0]'";
-  for($m=1; $m<count($list_num); $m++){
-   $suite_sql[$g] .= " or " . $tblpref ."bon_comm.num_bon ='$list_num[$m]'";
+  $suite_sql[]=" and " . $tblpref .sprintf("bon_comm.num_bon ='%s'", $list_num[0]);
+  $counter = count($list_num);
+  for($m=1; $m<$counter; $m++){
+   $suite_sql[$g] .= " or " . $tblpref .sprintf("bon_comm.num_bon ='%s'", $list_num[$m]);
   }
-  $g=$g+1;
+
+  $g += 1;
  }
 }
+
 ////
 
 ////
 class PDF extends PDF_MySQL_Table{
-    function Header(){}
-//debut Js
-    var $javascript;
-    var $n_js;
+    public function Header(){}
 
-    function IncludeJS($script) {
+//debut Js
+    public $javascript;
+
+    public $n_js;
+
+    public function IncludeJS($script) {
         $this->javascript=$script;
     }
-    function putjavascript() {
+
+    public function putjavascript() {
         $this->_newobj();
         $this->n_js=$this->n;
         $this->_out('<<');
@@ -142,24 +153,28 @@ class PDF extends PDF_MySQL_Table{
         $this->_out('>>');
         $this->_out('endobj');
     }
-    function putresources() {
+
+    public function putresources() {
         parent::_putresources();
         if (!empty($this->javascript)) {
             $this->_putjavascript();
         }
     }
-    function putcatalog() {
+
+    public function putcatalog() {
         parent::_putcatalog();
-        if (isset($this->javascript)) {
+        if (property_exists($this, 'javascript') && $this->javascript !== null) {
             $this->_out('/Names <</JavaScript '.($this->n_js).' 0 R>>');
         }
     }
-    function AutoPrint($dialog=false, $nb_impr=1){
+
+    public function AutoPrint($dialog=false, $nb_impr=1){
          //Ajoute du JavaScript pour lancer la boîte d'impression ou imprimer immediatement
          $param=($dialog ? 'true' : 'false');
-         $script=str_repeat("print($param);",$nb_impr);
+         $script=str_repeat(sprintf('print(%s);', $param),$nb_impr);
          $this->IncludeJS($script);
     }
+
 //fin js
 }
 
@@ -175,17 +190,18 @@ $from_joint_where_client = "
  LEFT JOIN  " . $tblpref ."article on " . $tblpref ."article.num = " . $tblpref ."cont_bon.article_num
  WHERE " . $tblpref ."client.num_client = ";
 for ($o=0;$o<$g;$o++){
- $file = "$lang_facture $num[$o].pdf";
- if($oneclick!='')
-  $file = "$lang_factures $lang_bon_cree2$oneclick.pdf";
+ $file = sprintf('%s %s.pdf', $lang_facture, $num[$o]);
+ if ($oneclick!='') {
+     $file = sprintf('%s %s%s.pdf', $lang_factures, $lang_bon_cree2, $oneclick);
+ }
 
  //on compte le nombre de lignes #prix_htva, date, quanti, article, tot_art_htva, to_tva_art, taux_tva, remise, uni, num_bon
  $sql = "
  SELECT prix_htva, p_u_jour, quanti, tot_art_htva, marge_jour, remise
- $from_joint_where_client'".$client[$o]."'
+ {$from_joint_where_client}'".$client[$o]."'
  ";
  // AND " . $tblpref ."bon_comm.date >= '".$debut[$o]."' and " . $tblpref ."bon_comm.date <= '".$fin[$o]."'";
- $sql ="$sql $suite_sql[$o]";
+ $sql =sprintf('%s %s', $sql, $suite_sql[$o]);
 
  $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
  $nb_li = mysql_num_rows($req);
@@ -214,8 +230,8 @@ for ($o=0;$o<$g;$o++){
 
  $sql = "
  SELECT payement, coment, acompte, DATE_FORMAT(date_fact,'%d/%m/%Y') AS date_2, DATE_FORMAT(date_pay,'%d/%m/%Y') AS date_pay
- FROM " . $tblpref ."facture
- WHERE num = $num[$o]";
+ FROM " . $tblpref .('facture
+ WHERE num = ' . $num[$o]);
  $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
  $data = mysql_fetch_array($req);
  $date_fact = $data['date_2'];
@@ -226,17 +242,17 @@ for ($o=0;$o<$g;$o++){
 
  //pour les totaux
  $sql = "SELECT SUM(tot_art_htva), SUM(to_tva_art)
- $from_joint_where_client'".$client[$o]."'";
+ {$from_joint_where_client}'".$client[$o]."'";
  //AND " . $tblpref ."bon_comm.date >= '".$debut[$o]."' and " . $tblpref ."bon_comm.date <= '".$fin[$o]."'";
- $sql ="$sql $suite_sql[$o]";
+ $sql =sprintf('%s %s', $sql, $suite_sql[$o]);
  $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
  $data = mysql_fetch_array($req);
  $total_htva = $data["SUM(tot_art_htva)"];
  $total_tva = $data["SUM(to_tva_art)"];
- $tot_tva_inc = $tot_tva_inc + $total_htva;
+ $tot_tva_inc += $total_htva;
 
  //pour le nom de client
- $sql1 = "SELECT mail, nom, nom2, rue, ville, cp, num_tva FROM " . $tblpref ."client WHERE  num_client = $client[$o]";
+ $sql1 = "SELECT mail, nom, nom2, rue, ville, cp, num_tva FROM " . $tblpref .('client WHERE  num_client = ' . $client[$o]);
  $req = mysql_query($sql1) or die('Erreur SQL !<br>'.$sql1.'<br>'.mysql_error());
  $data = mysql_fetch_array($req);
   $nom = $data['nom'];
@@ -259,7 +275,7 @@ for ($o=0;$o<$g;$o++){
   $pdf->SetFont('DejaVu','',10);
   $pdf->SetY(4);
   $pdf->SetX(120);
-  $pdf->MultiCell(50,6,"$lang_date: $date_fact",1,'C',1);//
+  $pdf->MultiCell(50,6,sprintf('%s: %s', $lang_date, $date_fact),1,'C',1);//
   //la grande cellule sous le tableau
   $pdf->SetFont('DejaVu','',6);
   $pdf->SetY(74);
@@ -269,36 +285,37 @@ for ($o=0;$o<$g;$o++){
   $pdf->SetFont('DejaVu','',10);
   $pdf->SetY(11);
   $pdf->SetX(120);
-  $pdf->Cell(65,6,"$lang_fact_num_ab $num[$o]",1,0,'C',1);
+  $pdf->Cell(65,6,sprintf('%s %s', $lang_fact_num_ab, $num[$o]),1,0,'C',1);
   //deuxieme cellule les coordoné clients
   $pdf->SetFont('DejaVu','',10);
   $pdf->SetY(33);
   $pdf->SetX(120);
-  $pdf->MultiCell(65,6,"$nom\n$nom2\n$rue\n$cp $ville",1,'C',1);
+  $pdf->MultiCell(65,6,sprintf('%s%s%s%s%s%s%s %s', $nom, PHP_EOL, $nom2, PHP_EOL, $rue, PHP_EOL, $cp, $ville),1,'C',1);
   if($num_tva!=' '){//cellule la tva client
    $pdf->SetFont('DejaVu','',10);
    $pdf->SetY(18);
    $pdf->SetX(120);
-   $pdf->MultiCell(65,6,"$num_tva",1,'C',1);
+   $pdf->MultiCell(65,6,$num_tva,1,'C',1);
   }
+
   //le logo
-  $pdf->Image("../image/$logo",10,4,50,24,'jpg');
+  $pdf->Image('../image/' . $logo,10,4,50,24,'jpg');
   $pdf->ln(20);
   //Troisieme cellule le slogan
   $pdf->SetFont('DejaVu','',15);
   $pdf->SetY(60);
   $pdf->SetX(10);
-  $pdf->MultiCell(90,4,"$slogan",0,'C',0);
+  $pdf->MultiCell(90,4,$slogan,0,'C',0);
   //Troisieme cellule les coordoné vendeur
   $pdf->SetFont('DejaVu','',8);
   $pdf->SetY(33);
   $pdf->SetX(10);
-  $pdf->MultiCell(40,4,"$lang_dev_pdf_soc",1,'R',1);
+  $pdf->MultiCell(40,4,$lang_dev_pdf_soc,1,'R',1);
   //le cntenu des coordonées vendeur
   $pdf->SetFont('DejaVu','',8);
   $pdf->SetY(33);
   $pdf->SetX(51);
-  $pdf->MultiCell(50,4,"$entrep_nom\n$social\n $tel_vend\n $tva_vend \n$compte \n$mail",1,'L',1);//
+  $pdf->MultiCell(50,4,"{$entrep_nom}\n{$social}\n {$tel_vend}\n {$tva_vend} \n{$compte} \n{$mail}",1,'L',1);//
   $pdf->Line(10,65,197,65);
   $pdf->ln(17);
   //Le tableau : on définit les colonnes
@@ -320,18 +337,19 @@ for ($o=0;$o<$g;$o++){
    #$pdf->AddCol('remise',21,$lang_remise,'R');
    $pdf->AddCol('tot_art_htva',25,$lang_total_h_tva,'R');
   }
-  $prop=array(
-   'HeaderColor'=>array(255,255,120),
-   'color1'=>array(255,255,255),
-   'color2'=>array(255,255,200),
+
+  $prop=[
+   'HeaderColor'=>[255,255,120],
+   'color1'=>[255,255,255],
+   'color2'=>[255,255,200],
    'align' =>'L',
    'padding'=>2
-  );
+  ];
   $sql_table = "SELECT p_u_jour, DATE_FORMAT(date,'%d/%m/%Y') AS date, quanti, remise, article, tot_art_htva, to_tva_art, taux_tva, uni, num_bon
-  $from_joint_where_client'".$client[$o]."'";
-  $suite2_sql = "LIMIT $nb, 31";
-  $sql_table="$sql_table $suite_sql[$o] $suite2_sql";
-  $pdf->Table("$sql_table",$prop);
+  {$from_joint_where_client}'".$client[$o]."'";
+  $suite2_sql = sprintf('LIMIT %d, 31', $nb);
+  $sql_table=sprintf('%s %s %s', $sql_table, $suite_sql[$o], $suite2_sql);
+  $pdf->Table($sql_table,$prop);
 
   //deuxieme cellule les coordonnées vendeurs 2
   $pdf->SetFillColor(255,255,255);#$pdf->SetFillColor(243,244,251);
@@ -357,7 +375,7 @@ for ($o=0;$o<$g;$o++){
     $pdf->SetTextColor(0, 0, 0);
     $pdf->SetY(235);
     $pdf->SetX(117);
-    $pdf->MultiCell(40,4,"$lang_totaux",1,'R',1);#$pdf->MultiCell(40,4,"$lang_total_h_tva: \n $lang_tot_tva: \n $lang_tot_ttc: ",1,'R',1);
+    $pdf->MultiCell(40,4,$lang_totaux,1,'R',1);#$pdf->MultiCell(40,4,"$lang_total_h_tva: \n $lang_tot_tva: \n $lang_tot_ttc: ",1,'R',1);
    }else{//si un acompte est present
     //Quatrieme cellule les enoncés de totaux
     $pdf->SetFont('DejaVu','',10);
@@ -374,8 +392,9 @@ for ($o=0;$o<$g;$o++){
     $pdf->SetTextColor(0, 0, 0);
     $pdf->SetY(235);
     $pdf->SetX(117);
-    $pdf->MultiCell(40,4,"$lang_totaux\n$lang_acompte:\n$lang_rest_pay:",1,'R',1);#$pdf->MultiCell(40,4,"$lang_total_h_tva: \n $lang_tot_tva: \n $lang_tot_ttc: \n $lang_acompte: \n $lang_rest_pay: ",1,'R',1);
+    $pdf->MultiCell(40,4,"{$lang_totaux}\n{$lang_acompte}:\n{$lang_rest_pay}:",1,'R',1);#$pdf->MultiCell(40,4,"$lang_total_h_tva: \n $lang_tot_tva: \n $lang_tot_ttc: \n $lang_acompte: \n $lang_rest_pay: ",1,'R',1);
    }
+
    //la ventillation de la tva
    $pdf->SetFont('DejaVu','',8);
    $pdf->SetY(235);
@@ -394,35 +413,36 @@ for ($o=0;$o<$g;$o++){
 
    $sql2="
    SELECT SUM(to_tva_art), SUM(tot_art_htva),taux_tva
-   $from_joint_where_client'".$client[$o]."'";
+   {$from_joint_where_client}'".$client[$o]."'";
    $suite3_sql=" GROUP BY taux_tva";
-   $sql2="$sql2 $suite_sql[$o] $suite3_sql";
+   $sql2=sprintf('%s %s %s', $sql2, $suite_sql[$o], $suite3_sql);
    ///echo"$sql2<br>";
    ////$resu = mysql_query( $sql2 ) or die('Erreur SQL !<br>'.$sql2.'<br>'.mysql_error());
    $pdf->AddCol('taux_tva',20,$lang_taux_tva,'R');
    $pdf->AddCol('SUM(to_tva_art)',20,$lang_mont_tva,'R');
    $pdf->AddCol('SUM(tot_art_htva)',25,$lang_ba_imp,'R');
-   $prop=array('
-    color1'=>array(255,255,230),
-    'color2'=>array(255,255,255),
+   $prop=['
+    color1'=>[255,255,230],
+    'color2'=>[255,255,255],
     'padding'=>2,
     'entete'=>0,
     'align' =>'L'
-   );
-   $pdf->Table("$sql2",$prop);
+   ];
+   $pdf->Table($sql2,$prop);
    //fin ventillation
 
    if($total_remise_htva!=0){//Pour le total de la remise
     $pdf->SetFont('DejaVu','',8);
     $pdf->SetY(235);
     $pdf->SetX(83);
-    $pdf->MultiCell(27,4,"$lang_total $lang_remise $lang_htva",1,'C',1);
+    $pdf->MultiCell(27,4,sprintf('%s %s %s', $lang_total, $lang_remise, $lang_htva),1,'C',1);
     $pdf->SetFont('DejaVu','',8);
     $pdf->SetY(239);
     $pdf->SetX(83);
     $pdf->SetTextColor(0, 207, 0);
     $pdf->Cell(27,5,montant_financier ($total_remise_htva),1,1,'R',1);
    }
+
    //total marge
    #$pdf->SetY(244);
    #$pdf->SetX(83);
@@ -442,23 +462,25 @@ for ($o=0;$o<$g;$o++){
   $pdf->SetFont('DejaVu','',6);
   $pdf->SetY(268);
   $pdf->SetX(30);
-  $pdf->MultiCell(160,4,"$entrep_nom $social Tel :$tel_vend \n$tva_vend $compte $reg",0,'C',0);
+  $pdf->MultiCell(160,4,"{$entrep_nom} {$social} Tel :{$tel_vend} \n{$tva_vend} {$compte} {$reg}",0,'C',0);
 
   $pdf->SetY(270);
   $pdf->SetX(10);
   if ($payement!='non') {
    $pdf->SetFont('DejaVu','u',9);
-   $pdf->MultiCell(60,3,"$lang_po_acquis".($date_pay!="00/00/0000"?"\n$lang_pay_le $date_pay":""),0,'C',0);
+   $pdf->MultiCell(60,3,$lang_po_acquis.($date_pay!="00/00/0000"?sprintf('%s%s %s', PHP_EOL, $lang_pay_le, $date_pay):""),0,'C',0);
   }else{//Pour l'échéance
    $pdf->SetFont('DejaVu','',12);
    $pdf->MultiCell(160,4,$lang_echea." ".(($lang=='fr')?ucfirst(nombre_literal(30)):30)." ".$lang_jours,0,'L',0);//le total en toute lettre nombre_literal only in french
   }
+
   //le nombre de page
   $pdf->SetFont('DejaVu','',9);
   $pdf->SetY(270);
   $pdf->SetX(170);
-  $pdf->MultiCell(30,4,"$lang_page $num_pa2 / $nb_pa\n",0,'L',0);
+  $pdf->MultiCell(30,4,sprintf('%s %d / %s%s', $lang_page, $num_pa2, $nb_pa, PHP_EOL),0,'L',0);
  }
+
  if($_POST['mail'] =='y'){
   $pdf->AddPage();
   $pdf->SetFont('DejaVu','',10);
@@ -467,12 +489,14 @@ for ($o=0;$o<$g;$o++){
   $pdf->MultiCell(160,4,"Conditions génerales de vente\n",0,'C',0);
   $pdf->SetY(70);
   $pdf->SetX(10);
-  $pdf->MultiCell(160,4,"$lang_condi_ven",0,'C',0);
+  $pdf->MultiCell(160,4,$lang_condi_ven,0,'C',0);
  }
 }
-if($autoprint=='y' and $_POST['mail']!='y' and $_POST['user']=='adm'){
+
+if($autoprint == 'y' && $_POST['mail'] != 'y' && $_POST['user'] == 'adm'){
  $pdf->AutoPrint(false, $nbr_impr);
 }
+
 $pdf->Output($file);
 
 if ($_POST['mail']=='y') {
@@ -484,15 +508,16 @@ if ($_POST['mail']=='y') {
  $nom = $file;
  $reply = $mail;
  $from = $mail;
- require "../include/CMailFile.php";
- $newmail = new CMailFile("$sujet","$to","$from","$message","$fichier","application/pdf");
- if($newmail->sendfile())
-  echo "<html><script>window.location='../lister_factures.php';</script></html>";
- else
-  echo "<html><h3 style='color:red;'>$lang_env_par_mail_non</h3><script>setTimeout(function(){window.location='../lister_factures.php'},2000);</script></html>";
+ require __DIR__ . "/../include/CMailFile.php";
+ $newmail = new CMailFile($sujet,$to,$from,$message,$fichier,"application/pdf");
+ if ($newmail->sendfile()) {
+     echo "<html><script>window.location='../lister_factures.php';</script></html>";
+ } else {
+     echo sprintf("<html><h3 style='color:red;'>%s</h3><script>setTimeout(function(){window.location='../lister_factures.php'},2000);</script></html>", $lang_env_par_mail_non);
+ }
 }else{
  echo "<html><script>window.location='".str_replace('+',' ',urlencode($file))."';</script></html>";
 }
 
 
-?>
+

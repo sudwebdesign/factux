@@ -19,9 +19,9 @@
  * 		Guy Hendrickx
  *
  */
-include_once("include/config/common.php");
+include_once(__DIR__ . "/include/config/common.php");
 $num=isset($_GET['num'])?$_GET['num']:"";
 $acte=isset($_GET['acte'])?$_GET['acte']:"non";
 $sql2 = "UPDATE " . $tblpref ."lot SET actif='".$acte."' WHERE num = '".$num."'";
-mysql_query($sql2) OR die("<p>Erreur Mysql<br/>$sql2<br/>".mysql_error()."</p>");
-include_once("lister_lot.php");
+mysql_query($sql2) || die(sprintf('<p>Erreur Mysql<br/>%s<br/>', $sql2).mysql_error()."</p>");
+include_once(__DIR__ . "/lister_lot.php");

@@ -22,7 +22,7 @@
 //ini_set('post_max_size', '2048000000');51000 == 51ko
 //ini_set('upload_max_filesize', '2048000000');
 $etape = "Étape N°6 : Enregister le fichier contenant le logo de l'entreprise.";
-include_once('headers.php');
+include_once(__DIR__ . '/headers.php');
 //Pour ne traiter que si un fichier est upLoadé
 if (isset($_FILES["monfichier"]["name"])) {
 /*   // Check $_FILES['monfichier']['error'] value. #http://php.net/manual/fr/features.file-upload.php#114004
@@ -46,7 +46,7 @@ if (isset($_FILES["monfichier"]["name"])) {
   if (file_exists($repertoireDestination.$nomDestination)) {//Un fichier existe portant le même nom existe déjà => le supprimer
    //unlink ($repertoireDestination.$nomDestination);
    echo "<br><h1>Un fichier portant le même nom existe. Veuillez renommer votre fichier avant de l'uploader !</h1>";
-   include_once('form_upload.inc.php');
+   include_once(__DIR__ . '/form_upload.inc.php');
    exit();
   }
   ///////////////////////
@@ -54,7 +54,7 @@ if (isset($_FILES["monfichier"]["name"])) {
   $extention_fichier=substr(strrchr($nomDestination,'.'),1);
   if ($extention_fichier!='jpg'&& $extention_fichier!='jpe'&&$extention_fichier!='jpeg'){
    echo"<br><h1>Le logo doit absolument etre au format jpg (extention .jpg, jpeg, jpe) </h1>";
-   include_once('form_upload.inc.php');
+   include_once(__DIR__ . '/form_upload.inc.php');
    exit();
   }else{
    $autorize="ok";
@@ -82,15 +82,15 @@ if (isset($_FILES["monfichier"]["name"])) {
  }
  else {
   echo "<br><h1>Le fichier n'a pas été uploadé (trop volumineux ?)</h1>";
-  include_once('form_upload.inc.php');
+  include_once(__DIR__ . '/form_upload.inc.php');
  }
 }
 else{
- include_once('form_upload.inc.php');
+ include_once(__DIR__ . '/form_upload.inc.php');
 }
 //var_dump($_FILES);
 //Fin de ISSET et de l'installeur
-include_once("../include/bas_cli.php");
+include_once(__DIR__ . "/../include/bas_cli.php");
 ?>
   </td>
  </tr>

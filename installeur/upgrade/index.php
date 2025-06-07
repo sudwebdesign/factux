@@ -39,59 +39,59 @@ $error='0';
 
 echo "<br><hr><br><center><table>";
 echo"<caption>Vérification des droits.</caption>";
-echo "<tr><td>$verif $doss1 :<td>";
-if (is_writable("$doss1")) {
+echo sprintf('<tr><td>%s %s :<td>', $verif, $doss1);
+if (is_writable($doss1)) {
  echo "<font color=green> OK</font></td></tr>";
 } else {
- echo "<font color=red> $erreur</td></tr>";
+ echo sprintf('<font color=red> %s</td></tr>', $erreur);
  $error='1';
 }
 
-echo "<tr><td>$verif $doss2 :<td>";
-if (is_writable("$doss2")) {
+echo sprintf('<tr><td>%s %s :<td>', $verif, $doss2);
+if (is_writable($doss2)) {
  echo "<font color=green> OK</font></td></tr>";
 } else {
- echo "<font color=red> $erreur</td></tr>";
+ echo sprintf('<font color=red> %s</td></tr>', $erreur);
  $error='1';
 }
 
-echo "<tr><td>$verif $doss3 :<td>";
-if (is_writable("$doss3")) {
+echo sprintf('<tr><td>%s %s :<td>', $verif, $doss3);
+if (is_writable($doss3)) {
  echo "<font color=green> OK</font></td></tr>";
 } else {
- echo "<font color=red> $erreur</td></tr>";
+ echo sprintf('<font color=red> %s</td></tr>', $erreur);
  $error='1';
 }
 
-echo "<tr><td>$verif $doss4 :<td>";
-if (is_writable("$doss4")) {
+echo sprintf('<tr><td>%s %s :<td>', $verif, $doss4);
+if (is_writable($doss4)) {
  echo "<font color=green> OK</font></td></tr>";
 } else {
- echo "<font color=red> $erreur</td></tr>";
+ echo sprintf('<font color=red> %s</td></tr>', $erreur);
  $error='1';
 }
 
-echo "<tr><td>$verif $doss5 :<td>";
-if (is_writable("$doss5")) {
+echo sprintf('<tr><td>%s %s :<td>', $verif, $doss5);
+if (is_writable($doss5)) {
  echo "<font color=green> OK</font></td></tr>";
 } else {
- echo "<font color=red> $erreur</td></tr>";
+ echo sprintf('<font color=red> %s</td></tr>', $erreur);
  $error='1';
 }
 
-echo "<tr><td>$verif $doss6 :<td>";
-if (is_writable("$doss6")) {
+echo sprintf('<tr><td>%s %s :<td>', $verif, $doss6);
+if (is_writable($doss6)) {
  echo "<font color=green> OK</font></td></tr>";
 } else {
- echo "<font color=red> $erreur</td></tr>";
+ echo sprintf('<font color=red> %s</td></tr>', $erreur);
  $error='1';
 }
 
-echo "<tr><td>$verif2 $fich3 :<td>";
-if (is_writable("$fich3")) {
+echo sprintf('<tr><td>%s %s :<td>', $verif2, $fich3);
+if (is_writable($fich3)) {
 echo "<font color=green> OK</font></td></tr>";
 } else {
- echo "<font color=red> $erreur</font></td></tr>";
+ echo sprintf('<font color=red> %s</font></td></tr>', $erreur);
  $error='1';
 }
 

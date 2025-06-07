@@ -19,20 +19,20 @@
  * 		Guy Hendrickx
  *.
  */
-require_once("include/verif.php");
-include_once("include/config/common.php");
-include_once("include/config/var.php");
-include_once("include/language/$lang.php");
+require_once(__DIR__ . "/include/verif.php");
+include_once(__DIR__ . "/include/config/common.php");
+include_once(__DIR__ . "/include/config/var.php");
+include_once(__DIR__ . sprintf('/include/language/%s.php', $lang));
 $tot_ht=isset($_POST['tot_ht'])?$_POST['tot_ht']:"";
 $tot_tva=isset($_POST['tot_tva'])?$_POST['tot_tva']:"";
 $dev_num=isset($_POST['dev_num'])?$_POST['dev_num']:"";
 $coment=isset($_POST['coment'])?$_POST['coment']:"";
 
-$sql2 = "UPDATE " . $tblpref ."devis SET tot_htva='".$tot_ht."'  WHERE num_dev = $dev_num";
-mysql_query($sql2) OR die("<p>Erreur Mysql1<br/>$sql2<br/>".mysql_error()."</p>");
-$sql3 = "UPDATE " . $tblpref ."devis SET tot_tva='".$tot_tva."'  WHERE num_dev = $dev_num";
-mysql_query($sql3) OR die("<p>Erreur Mysql2<br/>$sql3<br/>".mysql_error()."</p>");
-$sql4 = "UPDATE " . $tblpref ."devis SET coment='".$coment."'  WHERE num_dev = $dev_num";
-mysql_query($sql4) OR die("<p>Erreur Mysql2<br/>$sql4<br/>".mysql_error()."</p>");
-$message= "<h2>$lang_devis $lang_enregistre</h2>";
-include("form_devis.php");
+$sql2 = "UPDATE " . $tblpref ."devis SET tot_htva='".$tot_ht.("'  WHERE num_dev = " . $dev_num);
+mysql_query($sql2) || die(sprintf('<p>Erreur Mysql1<br/>%s<br/>', $sql2).mysql_error()."</p>");
+$sql3 = "UPDATE " . $tblpref ."devis SET tot_tva='".$tot_tva.("'  WHERE num_dev = " . $dev_num);
+mysql_query($sql3) || die(sprintf('<p>Erreur Mysql2<br/>%s<br/>', $sql3).mysql_error()."</p>");
+$sql4 = "UPDATE " . $tblpref ."devis SET coment='".$coment.("'  WHERE num_dev = " . $dev_num);
+mysql_query($sql4) || die(sprintf('<p>Erreur Mysql2<br/>%s<br/>', $sql4).mysql_error()."</p>");
+$message= sprintf('<h2>%s %s</h2>', $lang_devis, $lang_enregistre);
+include(__DIR__ . "/form_devis.php");

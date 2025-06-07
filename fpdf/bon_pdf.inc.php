@@ -23,18 +23,19 @@
  */
 session_cache_limiter('private');
 if(isset($_POST['user'])&&$_POST['user']=='adm'){
- require_once("../include/verif2.php");
+ require_once(__DIR__ . "/../include/verif2.php");
 }else{
  $from_cli='../client/';
- require_once("../include/verif_client.php");
+ require_once(__DIR__ . "/../include/verif_client.php");
 }
+
 $now='../';
-include_once("../include/config/common.php");
-include_once("../include/config/var.php");
-include_once("../include/language/$lang.php");
-include_once("../include/configav.php");
+include_once(__DIR__ . "/../include/config/common.php");
+include_once(__DIR__ . "/../include/config/var.php");
+include_once(__DIR__ . sprintf('/../include/language/%s.php', $lang));
+include_once(__DIR__ . "/../include/configav.php");
 define('FPDF_FONTPATH','font/');
-require_once('mysql_table.php');
+require_once(__DIR__ . '/mysql_table.php');
 $_POST['mail']=isset($_POST['mail'])?$_POST['mail']:"n";
 
 $num_bon=isset($_POST['num_bon'])?$_POST['num_bon']:"";
@@ -54,7 +55,7 @@ $sql = "
 SELECT " . $tblpref ."cont_bon.num, quanti, uni, article, prix_htva, p_u_jour, marge_jour, remise, tot_art_htva
 FROM " . $tblpref ."cont_bon
 LEFT JOIN " . $tblpref ."article on " . $tblpref ."cont_bon.article_num = " . $tblpref ."article.num
-WHERE  bon_num = $num_bon
+WHERE  bon_num = {$num_bon}
 ";
 $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 	$nb_li = mysql_num_rows($req);
@@ -78,11 +79,12 @@ while($data = mysql_fetch_array($req)){
  $total_remise_htva += $remise_art_htva;
  $total_marge_htva += $marge_art_htva;
 }
+
 //pour la date
 $sql = "
 select coment, tot_htva, tot_tva, DATE_FORMAT(date,'%d/%m/%Y') AS date_2
 from " . $tblpref ."bon_comm
-where num_bon = $num_bon
+where num_bon = {$num_bon}
 ";
 $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 $data = mysql_fetch_array($req);
@@ -97,7 +99,7 @@ $sql1 = "
 SELECT mail, nom, nom2, rue, ville, cp, num_tva
 FROM " . $tblpref ."client
 LEFT JOIN " . $tblpref ."bon_comm on client_num = num_client
-WHERE  num_bon = $num_bon
+WHERE  num_bon = {$num_bon}
 ";
 $req = mysql_query($sql1) or die('Erreur SQL !<br>'.$sql1.'<br>'.mysql_error());
 $data = mysql_fetch_array($req);
@@ -109,4 +111,4 @@ $data = mysql_fetch_array($req);
 	$num_tva = $data['num_tva'];
 	$mail_client = $data['mail'];
 
-?>
+

@@ -19,9 +19,9 @@
  *   Guy Hendrickx
  *.
  */
-include_once("include/headers.php");
+include_once(__DIR__ . "/include/headers.php");
 ?><script type="text/javascript" src="javascripts/confdel.js"></script><?php
-include_once("include/finhead.php");
+include_once(__DIR__ . "/include/finhead.php");
 ?>
 <table width="760" border="0" class="page" align="center">
  <tr>
@@ -31,20 +31,20 @@ if(!isset($num_bon)/* && $num_bon==''*/){
  $num_bon=isset($_GET['num_bon'])?$_GET['num_bon']:"";
  $nom=isset($_GET['nom'])?$_GET['nom']:"";
 }
-$sql = "SELECT fact FROM " . $tblpref ."bon_comm WHERE num_bon = $num_bon";
+$sql = "SELECT fact FROM " . $tblpref .('bon_comm WHERE num_bon = ' . $num_bon);
 $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 while($data = mysql_fetch_array($req)){
  $fact = $data['fact'];
 }
 if((isset($fact)) && $fact!='0'){#$fact=='ok'
- $message = "<h1>$lang_err_efa_bon</h1>";
- include('form_commande.php');
+ $message = sprintf('<h1>%s</h1>', $lang_err_efa_bon);
+ include(__DIR__ . '/form_commande.php');
  exit;
 }
 if (isset($message)&&$message!='') {
  echo $message;
 }
-include ("form_editer_bon.php");
+include (__DIR__ . "/form_editer_bon.php");
 ?>
   </td>
  </tr>
@@ -52,8 +52,8 @@ include ("form_editer_bon.php");
   <td>
 <?php
 $aide='bon';
-include("help.php");
-include_once("include/bas.php");
+include(__DIR__ . "/help.php");
+include_once(__DIR__ . "/include/bas.php");
 ?>
   </td>
  </tr>

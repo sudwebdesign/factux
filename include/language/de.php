@@ -22,7 +22,7 @@ error_reporting(0);
 
 
 $lang_factux = "factux - facturier freien Revision 2017";
-$lang_source_fac = "$lang_factux webiciel in Quellcode<br />Derivat von <a href='http://sourceforge.net/projects/factux/' Target='_blank' >factux 1.1.5</a><br />gerade neu geschrieben und verteilt durch";
+$lang_source_fac = $lang_factux . " webiciel in Quellcode<br />Derivat von <a href='http://sourceforge.net/projects/factux/' Target='_blank' >factux 1.1.5</a><br />gerade neu geschrieben und verteilt durch";
 $lang_new_config_ok = "Ihre neue Konfiguration ist aufzuzeichnen";
 $lang_nbr_impression = "Zahl der Grundierungen";
 $lang_choix_Impression = "Verwendung der Eindruck automatisch";
@@ -192,7 +192,7 @@ $lang_totaux = "Insgesamt ohne Mehrwertsteuer: \n Insgesamt Mehrwertsteuer: \n I
 $lang_num_bon_ab = "Gute Nr. :";
 $lang_de = "Von";
 $lang_page = "Seite";
-$lang_condi = "$entrep_nom $social Tel :$tel_vend \n$tva_vend $compte $reg";
+$lang_condi = "{$entrep_nom} {$social} Tel :{$tel_vend} \n{$tva_vend} {$compte} {$reg}";
 $lang_prix_htva = "Preise h.t.v.a";
 $lang_dev_pdf_soc = "Gesellschaft\nSitz\nsolchen/Fax\nT.V. A\nBank\nE";
 $lang_ajo_fact = "Noch eine Bemerkung zu der Rechnung (fakultativ)";
@@ -231,14 +231,14 @@ $lang_evo_ca = "Entwicklung des C.A.";
 $lang_periode = "Zeitraum";
 $lang_dep_htva = "Ausgaben ohne MwSt.";
 $lang_bc_login = "Name der Datenbank";
-$lang_back_upl = "Wenn Sie möchten Wiederherstellung dieser Schutz :<br />1.téléverser die Datei in dem Verzeichnis bestimmten ihrer $lang_factux .<br />2.verwirklicht werden soll die Nutzfahrzeuge zum Schutz und choissiser Option wieder einen Schutz";
+$lang_back_upl = sprintf('Wenn Sie möchten Wiederherstellung dieser Schutz :<br />1.téléverser die Datei in dem Verzeichnis bestimmten ihrer %s .<br />2.verwirklicht werden soll die Nutzfahrzeuge zum Schutz und choissiser Option wieder einen Schutz', $lang_factux);
 $lang_back_effac = "Ihr Antrag auf Löschung Schutz gut gelaufen ist";
 $lang_back_utili = "Nutzfahrzeuge Schutzmaßnahmen factux";
 $lang_voir = "Siehe";
 $lang_rest = "Wiederherstellung";
 $lang_tai = "Grösse";
 $lang_fichier = "Datei";
-$lang_back_restO2 = "Wenn keine Fehler aufgetreten ist ihre Daten wurden zwar wieder. Dieses Instrument wieder nur Schutzmaßnahmen geschaffen ab $lang_factux ";
+$lang_back_restO2 = sprintf('Wenn keine Fehler aufgetreten ist ihre Daten wurden zwar wieder. Dieses Instrument wieder nur Schutzmaßnahmen geschaffen ab %s ', $lang_factux);
 $lang_back_resto = "Wiederherstellung Schutz";
 $lang_back_ext = "Kartei:.SQL Auszug";
 $lang_back_ti_re = "Nutzfahrzeuge Schutzmaßnahmen factux: Wiederherstellung Schutz";
@@ -345,10 +345,10 @@ $lang_commandes = "Aufträge";
 $lang_clients = "Kunden";
 $lang_depenses = "Ausgaben";
 $lang_htva = "exkl. MwSt";#H.T.
-$lang_depenses_htva = "Ausgaben $lang_htva";
-$lang_ca_htva = "Umsatz $lang_htva";
+$lang_depenses_htva = 'Ausgaben ' . $lang_htva;
+$lang_ca_htva = 'Umsatz ' . $lang_htva;
 $lang_ttc = "INK. STEUERN";
-$lang_ca_ttc = "C.A. $lang_ttc";
+$lang_ca_ttc = 'C.A. ' . $lang_ttc;
 
 $lang_statistiques_basees_bons = "Die Statistiken basieren auf gute von Bestellungen.";
 $lang_statistiques_par_client = "Die statistischen Angaben von Kunden";
@@ -465,7 +465,7 @@ $lang_art_no = "Artikel";
 $lang_uni_art = "EINHEIT (KG PCs, GR....)";
 $lang_prix_uni = "Preise H einheitliche T";
 $lang_prix_uni_abrege = "s.u.";
-$lang_ttva = "% $lang_tva";
+$lang_ttva = '% ' . $lang_tva;
 $lang_commentaire_opt = "Bemerkungen (optionel)";
 $lang_cre_bon = "Schaffung eines Bestellschein";
 $lang_10_der_bon = "Die 10 letzten Auftragsscheine";
@@ -525,8 +525,8 @@ $lang_pay_le = "Das geregelt";
 $lang_dat_inva = "Datum ungültig";
 
 $lang_les_utl = "Die Verwender";
-$lang_id_or_mail_exist = "Fehler der Login/$lang_email gibt bereits";
-$lang_mail_exist = "Fehler der $lang_email gibt bereits";
+$lang_id_or_mail_exist = sprintf('Fehler der Login/%s gibt bereits', $lang_email);
+$lang_mail_exist = sprintf('Fehler der %s gibt bereits', $lang_email);
 
 $lang_admin = "Admin";
 $lang_gerer = "Verwaltung";

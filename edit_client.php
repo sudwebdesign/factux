@@ -19,19 +19,19 @@
  * 		Guy Hendrickx
  *.
  */
-include_once("include/headers.php");
-include_once("include/finhead.php");
+include_once(__DIR__ . "/include/headers.php");
+include_once(__DIR__ . "/include/finhead.php");
 ?>
 <table width="760" border="0" class="page" align="center">
  <tr>
   <td class="page" align="center">
 <?php
-include_once("include/head.php");
+include_once(__DIR__ . "/include/head.php");
 if (isset($message)&&$message!='') {
  echo $message;
 }
 $num=isset($_GET['num'])?$_GET['num']:"";
-$sql = " SELECT * FROM " . $tblpref ."client WHERE num_client='$num'";
+$sql = " SELECT * FROM " . $tblpref .sprintf("client WHERE num_client='%s'", $num);
 $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 while($data = mysql_fetch_array($req)){
  $nom = $data['nom'];#htmlentities($data['nom'], ENT_QUOTES);
@@ -49,7 +49,7 @@ while($data = mysql_fetch_array($req)){
 ?>
    <form name="edit_client" method="post" action="client_update.php" onsubmit="return confirmUpdate()">
     <table border="0" class="page" align="center">
-     <caption><?php echo "$lang_client_modifier $nom"; ?></caption>
+     <caption><?php echo sprintf('%s %s', $lang_client_modifier, $nom); ?></caption>
      <tr>
       <td class="texte0"><?php echo $lang_civ; ?></td>
       <td class="texte0"> <input name="civ" type="text" id="civ" maxlength="15" value='<?php echo $civ; ?>'></td>
@@ -107,7 +107,7 @@ echo $login;
       <td class="texte1"><input name="passcli" type="password" maxlength="40"></td>
      </tr>
      <tr>
-      <td class="texte0"><?php echo "$lang_motdepasse_verification"; ?></td>
+      <td class="texte0"><?php echo $lang_motdepasse_verification; ?></td>
       <td class="texte0"><input name="pass2cli" type="password" maxlength="40"></td>
      </tr>
      <tr>
@@ -130,8 +130,8 @@ echo $login;
   <td>
 <?php
 $aide='client';
-include("help.php");
-include_once("include/bas.php");
+include(__DIR__ . "/help.php");
+include_once(__DIR__ . "/include/bas.php");
 ?>
   </td>
  </tr>

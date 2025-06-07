@@ -19,7 +19,7 @@
  * 		Guy Hendrickx
  *.
  */
-include_once("include/headers.php");
+include_once(__DIR__ . "/include/headers.php");
 $acompte=isset($_POST['acompte'])?$_POST['acompte']:"";
 $date_deb=isset($_POST['date_deb'])?$_POST['date_deb']:"";
 $date_fin=isset($_POST['date_fin'])?$_POST['date_fin']:"";
@@ -30,26 +30,26 @@ $coment=isset($_POST['coment'])?$_POST['coment']:"";
  <tr>
   <td class="page" align="center">
 <?php
-include_once("include/head.php");
+include_once(__DIR__ . "/include/head.php");
 if ($user_fact == 'n') {
- echo "<h1>$lang_facture_droit</h1>";
- include_once("include/bas.php");
+ echo sprintf('<h1>%s</h1>', $lang_facture_droit);
+ include_once(__DIR__ . "/include/bas.php");
  exit;
 }
 if($date_deb==''|| $date_fin=='' || $date_fact=='' || !isset($_POST['client']) ){
- $message= "<h1>$lang_oubli_champ</h1>";
- include('form_multi_facture.php');
+ $message= sprintf('<h1>%s</h1>', $lang_oubli_champ);
+ include(__DIR__ . '/form_multi_facture.php');
  exit;
 }
 $message='';
 list($jour_deb, $mois_deb,$annee_deb) = preg_split('/\//', $date_deb, 3);
 list($jour_f, $mois_f,$annee_f) = preg_split('/\//', $date_fin, 3);
 list($jour_fact, $mois_fact,$annee_fact) = preg_split('/\//', $date_fact, 3);
-$debut = "$annee_deb-$mois_deb-$jour_deb" ;
-$fin = "$annee_f-$mois_f-$jour_f" ;
-$date_fact ="$annee_fact-$mois_fact-$jour_fact";
+$debut = sprintf('%s-%s-%s', $annee_deb, $mois_deb, $jour_deb) ;
+$fin = sprintf('%s-%s-%s', $annee_f, $mois_f, $jour_f) ;
+$date_fact =sprintf('%s-%s-%s', $annee_fact, $mois_fact, $jour_fact);
 foreach($_POST['client'] as $client){
- $sql = " SELECT * From " . $tblpref ."client WHERE num_client = $client ";
+ $sql = " SELECT * From " . $tblpref .sprintf('client WHERE num_client = %s ', $client);
  $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 
  while($data = mysql_fetch_array($req)){
@@ -72,7 +72,7 @@ foreach($_POST['client'] as $client){
  }
  $guy=count($data);
  if($p !='0'){
-  $message .= "<h1>$lang_err_fact $nom</h1>";
+  $message .= sprintf('<h1>%s %s</h1>', $lang_err_fact, $nom);
   $error = '1';
  }else{
   $error = '0';
@@ -91,13 +91,13 @@ foreach($_POST['client'] as $client){
  $total_tva = $data['SUM(tot_tva)'];
  $total_ttc = $total_htva + $total_tva ;
  if($total_htva==''){
-  $message .= "<h1>$lang_err_fact_2 $nom</h1>";
+  $message .= sprintf('<h1>%s %s</h1>', $lang_err_fact_2, $nom);
   $error2 = '1';
  }else{
   $error2 = '0';
  }
 
- if($error !='1'and $error2 != '1'){
+ if($error != '1' && $error2 != '1'){
   //nouvelle methode
   $sql = "
   SELECT num_bon
@@ -113,26 +113,26 @@ foreach($_POST['client'] as $client){
   $list_num = serialize($list_num);
   //on enregistre le contenu de la facture
   $sql1 = "INSERT INTO " . $tblpref ."facture(acompte, coment, client, date_deb, date_fin, date_fact, total_fact_h, total_fact_ttc, list_num)
-  VALUES ('$acompte', '$coment', '$client', '$debut', '$fin', '$date_fact', '$total_htva', '$total_ttc', '$list_num')";
-  mysql_query($sql1) or die('Erreur SQL1 !<br>'.$sql1.'<br>'.mysql_error());
+  VALUES ('{$acompte}', '{$coment}', '{$client}', '{$debut}', '{$fin}', '{$date_fact}', '{$total_htva}', '{$total_ttc}', '{$list_num}')";
+  mysql_query($sql1) || die('Erreur SQL1 !<br>'.$sql1.'<br>'.mysql_error());
   $num_fact = mysql_insert_id();//le numero de la facture créée
 
-  $sql2 = "UPDATE " . $tblpref ."bon_comm SET fact='$num_fact' WHERE " . $tblpref ."bon_comm.client_num = '".$client."' AND " . $tblpref ."bon_comm.date >= '".$debut."' and " . $tblpref ."bon_comm.date <= '".$fin."'";
-  mysql_query($sql2) or die('Erreur SQL2 !<br>'.$sql2.'<br>'.mysql_error());
+  $sql2 = "UPDATE " . $tblpref .sprintf("bon_comm SET fact='%s' WHERE ", $num_fact) . $tblpref ."bon_comm.client_num = '".$client."' AND " . $tblpref ."bon_comm.date >= '".$debut."' and " . $tblpref ."bon_comm.date <= '".$fin."'";
+  mysql_query($sql2) || die('Erreur SQL2 !<br>'.$sql2.'<br>'.mysql_error());
 
   $message .= "
-     <h2>$lang_fact_enr $nom $nom2
+     <h2>{$lang_fact_enr} {$nom} {$nom2}
       <form action='fpdf/fact_pdf.php' method='post' target='_blank' class='img'>
-       <input type='hidden' name='client' value='$client' />
-       <input type='hidden' name='num' value='$num_fact' />
+       <input type='hidden' name='client' value='{$client}' />
+       <input type='hidden' name='num' value='{$num_fact}' />
        <input type='hidden' name='user' value='adm' />
-       <input type='image' src='image/prinfer.gif' alt='$lang_imprimer $lang_fact_num_ab $num_fact' />
+       <input type='image' src='image/prinfer.gif' alt='{$lang_imprimer} {$lang_fact_num_ab} {$num_fact}' />
       </form>
      </h2>\n";
  }
 }
 echo $message;
-include_once("include/bas.php");
+include_once(__DIR__ . "/include/bas.php");
 ?>
   </td>
  </tr>

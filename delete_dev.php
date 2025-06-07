@@ -19,14 +19,14 @@
  * 		Guy Hendrickx
  *.
  */
-include_once("include/verif.php");
-include_once("include/config/common.php");
-include_once("include/language/$lang.php");
+include_once(__DIR__ . "/include/verif.php");
+include_once(__DIR__ . "/include/config/common.php");
+include_once(__DIR__ . sprintf('/include/language/%s.php', $lang));
 $num_dev=isset($_GET['num_dev'])?$_GET['num_dev']:"";
 $nom=isset($_GET['nom'])?$_GET['nom']:"";
 $sql1 = "DELETE FROM " . $tblpref ."cont_dev WHERE dev_num = '".$num_dev."'";
-mysql_query($sql1) or die('Erreur SQL !<br>'.$sql1.'<br>'.mysql_error());
+mysql_query($sql1) || die('Erreur SQL !<br>'.$sql1.'<br>'.mysql_error());
 $sql1 = "DELETE FROM " . $tblpref ."devis WHERE num_dev = '".$num_dev."'";
-mysql_query($sql1) or die('Erreur SQL !<br>'.$sql1.'<br>'.mysql_error());
-$message = "<h2>$lang_dev_effa</h2>";
-include("form_devis.php");
+mysql_query($sql1) || die('Erreur SQL !<br>'.$sql1.'<br>'.mysql_error());
+$message = sprintf('<h2>%s</h2>', $lang_dev_effa);
+include(__DIR__ . "/form_devis.php");

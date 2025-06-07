@@ -19,15 +19,15 @@
  * 		Guy Hendrickx
  *.
  */
-include_once("include/headers.php");
-include_once("include/finhead.php");
+include_once(__DIR__ . "/include/headers.php");
+include_once(__DIR__ . "/include/finhead.php");
 $page = explode("/", getenv('SCRIPT_NAME'));
 $n = count($page)-1;
 $page = $page[$n];
 $page = explode(".", $page, 2);
 $extension = $page[1];
 $page = $page[0];
-$path = str_replace("$page.$extension",'', $_SERVER['DOCUMENT_ROOT'].$_SERVER['PHP_SELF']);
+$path = str_replace(sprintf('%s.%s', $page, $extension),'', $_SERVER['DOCUMENT_ROOT'].$_SERVER['PHP_SELF']);
 if (file_exists($path."dbinfo.php")) {
    $dir=opendir($path."dump/");
    while ($fl = readdir ($dir)) {
@@ -42,16 +42,16 @@ if (file_exists($path."dbinfo.php")) {
 <table width="760" border="0" class="page" align="center">
  <tr>
   <td class="page" align="center">
-<?php include_once("include/head.php"); ?>
+<?php include_once(__DIR__ . "/include/head.php"); ?>
    <center>
     <table class="page" width="80%" border="0" cellspacing="0" >
-     <caption><?php echo "$lang_back_utili" ?></caption>
+     <caption><?php echo $lang_back_utili ?></caption>
      <tr>
       <td class='texte0' valign="top">
        <p><?php echo $lang_back_effac; ?><img alt="<?php echo $lang_oui; ?>" src="image/oui.gif"></p>
        <font size="2">
         <br>
-        <?php echo "$lang_back_upl" ?><br>
+        <?php echo $lang_back_upl ?><br>
         <br>
        </font>
       </td>
@@ -74,8 +74,8 @@ if (file_exists($path."dbinfo.php")) {
    </center>
 <?php
 $aide='backups';
-include("help.php");
-include_once("include/bas.php");
+include(__DIR__ . "/help.php");
+include_once(__DIR__ . "/include/bas.php");
 ?>
   </td>
  </tr>

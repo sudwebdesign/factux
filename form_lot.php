@@ -19,23 +19,23 @@
  *   Guy Hendrickx
  *.
  */
-include_once("include/headers.php");
-include_once("include/finhead.php");
+include_once(__DIR__ . "/include/headers.php");
+include_once(__DIR__ . "/include/finhead.php");
 ?>
 <table width="760" border="0" class="page" align="center">
  <tr>
   <td class="page" align="center">
-<?php include_once("include/head.php"); ?>
+<?php include_once(__DIR__ . "/include/head.php"); ?>
 <?php
 if ($user_com == 'n') {
- echo"<h1>$lang_commande_droit</h1>";
- include_once("include/bas.php");
+ echo sprintf('<h1>%s</h1>', $lang_commande_droit);
+ include_once(__DIR__ . "/include/bas.php");
  exit;
 }
 ?>
    <form action="insert_lot.php" method="post" name="lot" id="lot"  >
     <table class="page boiteaction">
-     <caption><?php echo "$lang_cr_lot"; ?></caption>
+     <caption><?php echo $lang_cr_lot; ?></caption>
      <tr>
       <th colspan="3" align="center"><?php echo $lang_produit; ?></th>
      </tr>
@@ -45,9 +45,9 @@ if ($user_com == 'n') {
       <td class="texte1"></td>
      </tr>
      <tr>
-      <th><?php echo "$lang_ingred"; ?></th>
-      <th><?php echo"$lang_fournisseur"; ?></th>
-      <th><?php echo "$lang_lot_four"; ?></th>
+      <th><?php echo $lang_ingred; ?></th>
+      <th><?php echo$lang_fournisseur; ?></th>
+      <th><?php echo $lang_lot_four; ?></th>
      </tr>
 
 
@@ -73,8 +73,8 @@ if ($user_com == 'n') {
   <td>
 <?php
 $aide='lots';
-include("help.php");
-include_once("include/bas.php");
+include(__DIR__ . "/help.php");
+include_once(__DIR__ . "/include/bas.php");
 ?>
   </td>
  </tr>

@@ -19,7 +19,7 @@
  * 		Guy Hendrickx
  *.
  */
-include_once("include/headers.php");
+include_once(__DIR__ . "/include/headers.php");
 ?>
 <script type="text/javascript" src="javascripts/confdel.js"></script>
 <script type="text/javascript">
@@ -42,22 +42,22 @@ function regler_fact(message,date_fr){
 //-->
 </script>
 <?php
-include_once("include/finhead.php");
+include_once(__DIR__ . "/include/finhead.php");
 ?>
 <table width="760" border="0" class="page" align="center">
  <tr>
   <td class="page" align="center">
 <?php
-include_once("include/head.php");
+include_once(__DIR__ . "/include/head.php");
 if ($user_fact == 'n') {
- echo "<h1>$lang_facture_droit</h1>";
- include_once("include/bas.php");
+ echo sprintf('<h1>%s</h1>', $lang_facture_droit);
+ include_once(__DIR__ . "/include/bas.php");
  exit;
 }
 if(isset($message)&&$message!='') {
  echo $message;
 }
-$this_fact=isset($_GET['num'])?"AND num=$_GET[num]":'';
+$this_fact=isset($_GET['num'])?'AND num=' . $_GET[num]:'';
 $fact_irre=isset($_GET['ir'])?"OR payement = 'Irrecouvrable'":'';
 $fact_uri=isset($_GET['ir'])?"&amp;ir":'';
 $sql = "
@@ -66,15 +66,15 @@ total_fact_ttc, payement, num, nom, nom2, DATE_FORMAT(date_fact,'%d/%m/%Y') AS d
 FROM " . $tblpref ."facture
 LEFT JOIN " . $tblpref ."client on " . $tblpref ."facture.client = " . $tblpref ."client.num_client
 WHERE payement = 'non'
-$fact_irre
-$this_fact
+{$fact_irre}
+{$this_fact}
 ";
 if ($user_fact == 'r') {
  $sql .= "
-  and " . $tblpref ."client.permi LIKE '$user_num,'
-  or  " . $tblpref ."client.permi LIKE '%,$user_num,'
-  or  " . $tblpref ."client.permi LIKE '%,$user_num,%'
-  or  " . $tblpref ."client.permi LIKE '$user_num,%'
+  and " . $tblpref ."client.permi LIKE '{$user_num},'
+  or  " . $tblpref ."client.permi LIKE '%,{$user_num},'
+  or  " . $tblpref ."client.permi LIKE '%,{$user_num},%'
+  or  " . $tblpref ."client.permi LIKE '{$user_num},%'
 ";
 }
 $drdre='';
@@ -103,7 +103,7 @@ $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
      <th><a href="lister_factures_non_reglees.php?ordre=r3<?php echo $fact_uri; ?>"><?php echo $lang_rappel; ?>&nbsp;3</a></th>
     </tr>
 <?php
-$date_pay = date("d/m/Y");;
+$date_pay = date("d/m/Y");
 $c=0;
 while($data = mysql_fetch_array($req)){
  $num = $data['num'];
@@ -116,23 +116,20 @@ while($data = mysql_fetch_array($req)){
  $num_client = $data['client'];
  $peri = $data['peri'];
  $pay = $data['payement'];
- for ($i=1;$i<=3;$i++)
+ for ($i=1;$i<=3;$i++) {
   $r[$i] = ($data['r'.$i]=='non')?$lang_non:$data['r'.$i];
- if($c++ & 1){
-  $line="0";
- }else{
-  $line="1";
  }
+ $line = $c++ & 1 ? "0" : "1";
 ?>
      <tr class="texte<?php echo $line; ?>" onmouseover="this.className='highlight'" onmouseout="this.className='texte<?php echo $line; ?>'">
       <td class='<?php echo couleur_alternee (); ?>'><?php echo $num; ?></td>
       <td class='<?php echo couleur_alternee (FALSE); ?>'><?php echo $nom; ?></td>
       <td class='<?php echo couleur_alternee (FALSE,"c texte"); ?>'><?php echo $date; ?></td>
       <td class='<?php echo couleur_alternee (FALSE,"nombre"); ?>'><?php echo montant_financier($total); ?></td>
-      <td class='<?php echo couleur_alternee (FALSE,"c texte"); ?>'><a href='rapel.php?client=<?php echo $num_client; ?>'<?php echo ($peri>=$echeance_fact)?' style="color:red;"':''; ?> alt="<?php echo $lang_rappel; ?>"><?php echo "$peri $lang_jours"; ?></a></td>
+      <td class='<?php echo couleur_alternee (FALSE,"c texte"); ?>'><a href='rapel.php?client=<?php echo $num_client; ?>'<?php echo ($peri>=$echeance_fact)?' style="color:red;"':''; ?> alt="<?php echo $lang_rappel; ?>"><?php echo sprintf('%s %s', $peri, $lang_jours); ?></a></td>
       <td class='<?php echo couleur_alternee (FALSE,"c texte"); ?>'>
 <?php if($use_payement =='y'){ ?>
-       <form action="payement_suite.php" id="payement<?php echo $num;?>" method="post" name="payement<?php echo "$num";?>">
+       <form action="payement_suite.php" id="payement<?php echo $num;?>" method="post" name="payement<?php echo $num;?>">
         <select name="methode"
                 onchange="
                 if(this.value != -1){
@@ -157,12 +154,12 @@ while($data = mysql_fetch_array($req)){
        </form>
 <?php }else{ ?>
        <a href='payement_suite.php?num_fact=<?php echo $num; ?>'
-          onClick="return confirmDelete('<?php echo "$lang_regler_fact $num $lang_regler_fact2"; ?>')"><img border='0' src='image/ok.jpg' alt='<?php echo $lang_regler; ?>'></a> <?php
+          onClick="return confirmDelete('<?php echo sprintf('%s %s %s', $lang_regler_fact, $num, $lang_regler_fact2); ?>')"><img border='0' src='image/ok.jpg' alt='<?php echo $lang_regler; ?>'></a> <?php
  if($pay!='non'){#irrécouvrables
        ?><img border='0' src='image/non.gif' width='16' alt='<?php echo $lang_irrecouvrable; ?>'>
 <?php }else{
        ?><a href='payement_suite.php?num_fact=<?php echo $num; ?>&amp;ir'
-            onClick="return confirmDelete('<?php echo "$lang_conf_carte_reg $num $lang_par $lang_irrecouvrable"; ?>')" ><img border='0' src='image/icon_cry.gif' alt='<?php echo $lang_irrecouvrable; ?>?'></a>
+            onClick="return confirmDelete('<?php echo sprintf('%s %s %s %s', $lang_conf_carte_reg, $num, $lang_par, $lang_irrecouvrable); ?>')" ><img border='0' src='image/icon_cry.gif' alt='<?php echo $lang_irrecouvrable; ?>?'></a>
 <?php
  }/*#irrécouvrables (dsl pour les places des 2 ? >. Ça evite un trait noir disgracieu entre les 2 icones???)*/
 }
@@ -189,8 +186,8 @@ $sql = "
 SELECT SUM(total_fact_ttc) FROM " . $tblpref ."facture
 LEFT JOIN " . $tblpref ."client on " . $tblpref ."facture.client = " . $tblpref ."client.num_client
 WHERE payement = 'non'
-$fact_irre
-$this_fact
+{$fact_irre}
+{$this_fact}
 ";
 $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 
@@ -200,7 +197,7 @@ while($data = mysql_fetch_array($req)){
     <tr>
      <td colspan="2" class="totaltexte"><?php echo $lang_factures_non_reglees_total; ?></td>
      <td colspan="2" class="totalmontant"><?php echo montant_financier($tot) ; ?></td>
-     <td class="totalmontant" colspan="6"><a href="lister_factures_non_reglees.php?ordre=<?php echo $drdre; ?>&amp;ir"><?php echo "$lang_voir $lang_irrecouvrable"; ?></td>
+     <td class="totalmontant" colspan="6"><a href="lister_factures_non_reglees.php?ordre=<?php echo $drdre; ?>&amp;ir"><?php echo sprintf('%s %s', $lang_voir, $lang_irrecouvrable); ?></td>
     </tr>
 <?php } ?>
    </table>
@@ -210,8 +207,8 @@ while($data = mysql_fetch_array($req)){
   <td>
 <?php
 $aide = 'payement';
-include("help.php");
-include_once("include/bas.php");
+include(__DIR__ . "/help.php");
+include_once(__DIR__ . "/include/bas.php");
 ?>
   </td>
  </tr>

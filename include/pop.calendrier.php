@@ -27,7 +27,7 @@ $anneeMax = 3;
 
 $checkzero = "true";
 $format = "/";
-$ordre = array("j", "m", "a");
+$ordre = ["j", "m", "a"];
 $affichage="fr";
 
 /**
@@ -36,12 +36,13 @@ $affichage="fr";
  * un peu plus bas. Celle-là est parfaitement modifiable (c'est d'ailleurs recommandé, c'est
  * toujours mieux de personnaliser un peu le truc)
  */
-$l=(!empty($_SESSION['lang']))?$_SESSION['lang']:'fr';
-include('lang_days_months.php');
+$l=(empty($_SESSION['lang']))?'fr':$_SESSION['lang'];
+include(__DIR__ . '/lang_days_months.php');
 
 for($z=0;$z<12;$z++){
- if($z<7)
-  $nomj[$z] = $jc[$z][$l];
+ if ($z<7) {
+     $nomj[$z] = $jc[$z][$l];
+ }
  $nomm[$z] = $jm[$z][$l];
 }
 
@@ -59,7 +60,7 @@ if (isset($_POST["mois"])){
     $annee = $ajd["year"];
 }
 
-$aujourdhui = array($ajd["mday"], $ajd["mon"], $ajd["year"]);
+$aujourdhui = [$ajd["mday"], $ajd["mon"], $ajd["year"]];
 
 $moisCheck = $mois + 1;
 $anneeCheck = $annee;
@@ -70,24 +71,22 @@ if ($moisCheck > 12){
 
 $dernierJour = strftime("%d", mktime(0, 0, 0, $moisCheck, 0, $anneeCheck));
 $premierJour = date("w", mktime(0, 0, 0, $mois, 1, $annee));
-
-if ($affichage != "en"){
- //On modifie la position du premier jour suivant la disposition des jours qu'on veut
- $origine = 1;
- $j = $origine;
- for ($i = 0; $i < count($nomj); $i++){
-  if ($j >= count($nomj)){
-   $j = 0;
-  }
-  $temp[] = $nomj[$j];
-  $j++;
+//On modifie la position du premier jour suivant la disposition des jours qu'on veut
+$origine = 1;
+$j = $origine;
+$counter = count($nomj);
+for ($i = 0; $i < $counter; $i++){
+ if ($j >= count($nomj)){
+  $j = 0;
  }
- $nomj = $temp;
- //On décale le 1er jour en conséquence
- $premierJour--;
- if ($premierJour < 0){
-  $premierJour = 6;
- }
+ $temp[] = $nomj[$j];
+ $j++;
+}
+$nomj = $temp;
+//On décale le 1er jour en conséquence
+$premierJour--;
+if ($premierJour < 0){
+ $premierJour = 6;
 }
 
 /**
@@ -97,10 +96,10 @@ if ($affichage != "en"){
  * @param   integer     $i          L'annee en cours
  * @return  string                  La string nécessaire pour sélectionner une OPTION
  */
-function get_selected($temps, $i){
+function get_selected($temps, $i): string{
  $selected = "";
  if ($temps == $i){
-  $selected = " selected=\"selected\"";
+  $selected = ' selected="selected"';
  }
  return $selected;
 }
@@ -116,10 +115,10 @@ function get_selected($temps, $i){
  * @param   integer     $index      La valeur par défaut de la string
  * @return  string                  La string nécessaire pour appeller la classe CSS voulue
  */
-function get_classe($jour, $index, $mode){
+function get_classe($jour, $index, $mode): string{
  switch ($index) {
   case 1:
-   $classe = " class=\"aut\"";
+   $classe = ' class="aut"';
    break;
   default:
    $classe = "";
@@ -134,9 +133,9 @@ function get_classe($jour, $index, $mode){
    $x2 = 5;
  }
  if ($jour == $x1){
-  $classe = " class=\"dim\"";
+  $classe = ' class="dim"';
  }elseif ($jour == $x2){
-  $classe = " class=\"sam\"";
+  $classe = ' class="sam"';
  }
  return $classe;
 }
@@ -155,23 +154,21 @@ function get_classe($jour, $index, $mode){
  * @param   string      $mode           Le mode d'affichage du calendrier ("fr" ou "en")
  * @return  string                      La string nécessaire pour appeller la classe CSS voulue
  */
-function get_classeJour($ajd, $annee, $mois, $jour, $cptJour, $premierJour, $nomj, $prems, $mode){
+function get_classeJour(array $ajd, $annee, $mois, $jour, $cptJour, $premierJour, $nomj, $prems, $mode): string{
  $classe = "";
- if ($mode == "en"){
-  if (($cptJour == 0 && $jour > 1) || ($jour == 1 && $premierJour == 0)){
-   $classe = " class=\"dim\"";
-  }elseif ($cptJour == 6 || (count($nomj) - $jour == $prems)){
-   $classe = " class=\"sam\"";
-  }
- }else{
-  if ($cptJour == 6 || (count($nomj) - $jour == $prems)){
-   $classe = " class=\"dim\"";
-  }else if ($cptJour == 5 || (count($nomj) - $jour - 1 == $prems)){
-   $classe = " class=\"sam\"";
-  }
+ if ($mode == "en") {
+     if (($cptJour == 0 && $jour > 1) || ($jour == 1 && $premierJour == 0)){
+      $classe = ' class="dim"';
+     }elseif ($cptJour == 6 || (count($nomj) - $jour == $prems)){
+      $classe = ' class="sam"';
+     }
+ } elseif ($cptJour == 6 || (count($nomj) - $jour == $prems)) {
+     $classe = ' class="dim"';
+ } elseif ($cptJour == 5 || (count($nomj) - $jour - 1 == $prems)) {
+     $classe = ' class="sam"';
  }
  if ($jour == $ajd[0] && $mois == $ajd[1] && $annee == $ajd[2]){
-  $classe = " class=\"ajd\"";
+  $classe = ' class="ajd"';
  }
  return $classe;
 }
@@ -184,18 +181,16 @@ function get_classeJour($ajd, $annee, $mois, $jour, $cptJour, $premierJour, $nom
  * @param   string      $mode           Le mode d'affichage du calendrier ("fr" ou "en")
  * @return  string                      La string nécessaire pour appeller la classe CSS voulue
  */
-function get_classeJourReste($i, $cptJour, $mode){
+function get_classeJourReste($i, $cptJour, $mode): string{
  $classe = "";
- if ($mode == "en"){
-  if ($i == (7 - $cptJour) - 1){
-   $classe = " class=\"sam\"";
-  }
- }else{
-  if ($i == (6 - $cptJour) - 1){
-   $classe = " class=\"sam\"";
-  }else if ($i == (7 - $cptJour) - 1){
-   $classe = " class=\"dim\"";
-  }
+ if ($mode == "en") {
+     if ($i == (7 - $cptJour) - 1){
+      $classe = ' class="sam"';
+     }
+ } elseif ($i == (6 - $cptJour) - 1) {
+     $classe = ' class="sam"';
+ } elseif ($i == (7 - $cptJour) - 1) {
+     $classe = ' class="dim"';
  }
  return $classe;
 }
@@ -286,11 +281,15 @@ function get_classeJourReste($i, $cptJour, $mode){
  <body>
   <form id="calendrier" method="post" action="<?php echo $link; ?>">
    <select name="mois" id="mois" onChange="reload(this.form)">
-<?php
+
 /**
  * Affichage des mois
  */
-for ($i = 0; $i < count($nomm); $i++){
+$counter = count($nomm);<?php
+/**
+ * Affichage des mois
+ */
+for ($i = 0; $i < $counter; $i++){
  $selected = get_selected($mois - 1, $i);
 ?>
     <option value="<?php echo ($i + 1); ?>"<?php echo $selected; ?>><?php echo $nomm[$i]; ?></option>
@@ -447,7 +446,7 @@ if ($cptJour != 0){
     val = "<?php echo $annee; ?>" + this.format + mois + this.format + jour;
    }
   }
-  window.opener.document.<?php echo $frm.".elements[\"".$champ."\"]"; ?>.value = val;
+  window.opener.document.<?php echo $frm.'.elements["'.$champ.'"]'; ?>.value = val;
   window.close();
  }
 </script>

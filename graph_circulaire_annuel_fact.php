@@ -19,37 +19,37 @@
  * 		Guy Hendrickx
  *.
  */
-include_once("include/headers.php");
-include_once("include/finhead.php");
+include_once(__DIR__ . "/include/headers.php");
+include_once(__DIR__ . "/include/finhead.php");
 if(basename($_SERVER['PHP_SELF'])==basename(__FILE__)){
 ?>
 <table width="760" border="0" class="page" align="center">
  <tr>
   <td class="page" align="center">
 <?php
- require_once("include/head.php");
+ require_once(__DIR__ . "/include/head.php");
 }
 ?>
 <table class="page boiteaction" align="center">
 <?php
 $annee_1 = isset($annee_1)?$annee_1:date("Y");
 echo "
-<caption>$lang_statistiques_annee $annee_1 $lang_facturé</caption>
+<caption>{$lang_statistiques_annee} {$annee_1} {$lang_facturé}</caption>
 <tr>
  <td><b>&nbsp;</b></td>
- <td class='td2'><b>$lang_depenses_htva</b></td>
- <td class='td2'><b>$lang_ca_htva</b></td>
- <td class='td2'><b>$lang_ca_ttc</b></td>
- <td class='td2'><b>$lang_resultat_net</b></td>
- <td rowspan='13' class='td2'><br><b>$lang_graph_cir</b><br><br><img src='graph2_ca_fact.php?annee_1=$annee_1'></td>
+ <td class='td2'><b>{$lang_depenses_htva}</b></td>
+ <td class='td2'><b>{$lang_ca_htva}</b></td>
+ <td class='td2'><b>{$lang_ca_ttc}</b></td>
+ <td class='td2'><b>{$lang_resultat_net}</b></td>
+ <td rowspan='13' class='td2'><br><b>{$lang_graph_cir}</b><br><br><img src='graph2_ca_fact.php?annee_1={$annee_1}'></td>
 </tr>
 ";
 for ($i=1;$i<=12;$i++){
  $sql = "
  SELECT SUM(total_fact_h), SUM(total_fact_ttc)
  FROM " . $tblpref ."facture
- WHERE MONTH(date_fact) = '$i'
- AND YEAR(date_fact) = $annee_1;
+ WHERE MONTH(date_fact) = '{$i}'
+ AND YEAR(date_fact) = {$annee_1};
  ";
  $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
  $data = mysql_fetch_array($req);
@@ -60,8 +60,8 @@ for ($i=1;$i<=12;$i++){
  $sql = "
  SELECT SUM(prix)
  FROM " . $tblpref ."depense
- WHERE MONTH(date) = $i
- AND YEAR(date) = $annee_1
+ WHERE MONTH(date) = {$i}
+ AND YEAR(date) = {$annee_1}
  ";
  $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
  $data = mysql_fetch_array($req);
@@ -87,7 +87,7 @@ echo "
  </tr>
  <tr>
   <td>
-<?php require_once("include/bas.php"); ?>
+<?php require_once(__DIR__ . "/include/bas.php"); ?>
   </td>
  </tr>
 </table>

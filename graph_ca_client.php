@@ -19,22 +19,22 @@
  * 		Guy Hendrickx
  *.
  */
-include_once("include/headers.php");
-include_once("include/finhead.php");
+include_once(__DIR__ . "/include/headers.php");
+include_once(__DIR__ . "/include/finhead.php");
 ?>
 <table width="760" border="0" class="page" align="center">
  <tr>
   <td class="page" align="center">
 <?php
-include_once("include/head.php");
+include_once(__DIR__ . "/include/head.php");
 if ($user_stat== 'n') {
- echo"<h1>$lang_statistique_droit</h1>";
- include_once("include/bas.php");
+ echo sprintf('<h1>%s</h1>', $lang_statistique_droit);
+ include_once(__DIR__ . "/include/bas.php");
  exit;
 }
 $annee_1=isset($_POST['annee_1'])?$_POST['annee_1']:"";
 $client=isset($_POST['client'])?$_POST['client']:"";
-#include_once("form_stat_client_inc.php");
+#include_once(__DIR__ . "/form_stat_client_inc.php");
 ?>
 <form name="form_bon" action="graph_ca_client.php" method="post">
  <center>
@@ -81,10 +81,11 @@ while ( $row = mysql_fetch_array( $result)) {
  <tr>
   <td>
 <?php
-if(empty($client))
-  goto fin;
+if (empty($client)) {
+    goto fin;
+}
 
-$sql = "SELECT nom from " . $tblpref ."client WHERE num_client = $client";
+$sql = "SELECT nom from " . $tblpref .('client WHERE num_client = ' . $client);
 $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 $data = mysql_fetch_array($req);
 $client_nom = $data["nom"];
@@ -93,15 +94,15 @@ $calendrier = calendrier_local_mois ();
 $sql = "
 SELECT SUM(tot_htva) FROM " . $tblpref ."bon_comm
 LEFT JOIN " . $tblpref ."client on client_num = num_client
-WHERE YEAR(date) = $annee_1
-AND client_num = $client
+WHERE YEAR(date) = {$annee_1}
+AND client_num = {$client}
 ";
 $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 $data = mysql_fetch_array($req);
 $total = $data['SUM(tot_htva)'];
 ?>
    <table class='page boiteaction'>
-    <caption><?php echo "$lang_ca_htva $annee_1 $lang_client: $client_nom"; ?></caption>
+    <caption><?php echo sprintf('%s %s %s: %s', $lang_ca_htva, $annee_1, $lang_client, $client_nom); ?></caption>
      <tr>
       <th><?php echo $lang_mois; ?></th>
       <th width="380"><?php echo $lang_pourcentage; ?></th>
@@ -112,9 +113,9 @@ for ($i=1;$i<=12;$i++){
   $sql = "
   SELECT nom, SUM(tot_htva) FROM " . $tblpref ."bon_comm
   LEFT JOIN " . $tblpref ."client on client_num = num_client
-  WHERE MONTH(date) = \"$i\"
-  AND YEAR(date) = $annee_1
-  AND client_num = $client";
+  WHERE MONTH(date) = \"{$i}\"
+  AND YEAR(date) = {$annee_1}
+  AND client_num = {$client}";
   $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
   $data = mysql_fetch_array($req);
   $nom = $data['nom'];
@@ -140,8 +141,8 @@ fin:
 <?php
 
 $aide='stats';
-include("help.php");
-include_once("include/bas.php");
+include(__DIR__ . "/help.php");
+include_once(__DIR__ . "/include/bas.php");
 ?>
     </td>
  </tr>

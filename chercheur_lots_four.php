@@ -19,31 +19,31 @@
  * 		Guy Hendrickx
  *.
  */
-include_once("include/headers.php");
-include_once("include/finhead.php");
+include_once(__DIR__ . "/include/headers.php");
+include_once(__DIR__ . "/include/finhead.php");
 ?>
 <table width="760" border="0" class="page" align="center">
  <tr>
   <td class="page" align="center">
 <?php
-include_once("include/head.php");
+include_once(__DIR__ . "/include/head.php");
 $lot_fou=isset($_POST['lot_fou'])?(int)$_POST['lot_fou']:"";
 if(!is_int($lot_fou)){
-  echo"<h1>*Erreur $lang_num_lot! Utiliser uniquement les chiffres.</h1>";
+  echo sprintf('<h1>*Erreur %s! Utiliser uniquement les chiffres.</h1>', $lang_num_lot);
   $lot_fou=-1;
 }
 $sql = "
 SELECT fourn_lot, num_lot, ingr, DATE_FORMAT(date,'%m') AS mois_1, DATE_FORMAT(date,'%Y') AS annee_1
 FROM " . $tblpref ."cont_lot
 LEFT JOIN " . $tblpref ."lot  on " . $tblpref ."cont_lot.num_lot = " . $tblpref ."lot.num
-WHERE `fourn_lot`LIKE '%$lot_fou%'
+WHERE `fourn_lot`LIKE '%{$lot_fou}%'
 ORDER BY num_lot DESC
 ";
 $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 $lot_fou=($lot_fou==-1)?'*':$lang_numero.$lot_fou;
 ?>
  <table width="760" border="0" class="page" align="center">
-  <caption>Les lots suivants contiennent le lot fournisseur <?php echo "$lot_fou"; ?> </caption>
+  <caption>Les lots suivants contiennent le lot fournisseur <?php echo $lot_fou; ?> </caption>
   <tr>
    <th><?php echo $lang_ingred; ?></th>
    <th><?php echo $lang_num_lot; ?></th>
@@ -58,11 +58,7 @@ while($data = mysql_fetch_array($req)){
   $fourn_lot = $data['fourn_lot'];
   $mois_1 = $data['mois_1'];
   $annee_1 = $data['annee_1'];
- if($c++ & 1){
-  $line="0";
- }else{
-  $line="1";
- }
+ $line = $c++ & 1 ? "0" : "1";
 ?>
   <tr class="texte<?php echo $line; ?>" onmouseover="this.className='highlight'" onmouseout="this.className='texte<?php echo $line; ?>'">
    <td class='<?php echo couleur_alternee (); ?>'><?php echo $ingr; ?></td>
@@ -84,8 +80,8 @@ while($data = mysql_fetch_array($req)){
   <td>
 <?php
 $aide='admin';
-include("help.php");
-include_once("include/bas.php");
+include(__DIR__ . "/help.php");
+include_once(__DIR__ . "/include/bas.php");
 ?>
   </td>
  </tr>

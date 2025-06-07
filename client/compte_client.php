@@ -19,8 +19,9 @@
  * 		Guy Hendrickx
  *.
  */
-if(!isset($num_client))
- header("Location:index.php");
+if (!isset($num_client)) {
+    header("Location:index.php");
+}
 ?>
  <form action="client_update.php" method="post" name="client" id="client" onSubmit="return verif_formulaire()">
   <table class="page boiteaction">
@@ -53,4 +54,4 @@ if(!isset($num_client))
 </form>
 <a href='logout.php'><h2><?php echo $lang_sortir; ?></h2></a>
 <?php
-include_once("../include/bas_cli.php");
+include_once(__DIR__ . "/../include/bas_cli.php");

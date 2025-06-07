@@ -22,7 +22,7 @@ error_reporting(0);
 
 
 $lang_factux = "Factux - l'emittente libera revisione entro il 2017";
-$lang_source_fac = "$lang_factux Webiciel entro il 2015 open source<br />derivata da <a href='http://sourceforge.net/projects/factux/' target='_blank'>Factux 1.1.5</a> <br />riscrive e distribuito da";
+$lang_source_fac = $lang_factux . " Webiciel entro il 2015 open source<br />derivata da <a href='http://sourceforge.net/projects/factux/' target='_blank'>Factux 1.1.5</a> <br />riscrive e distribuito da";
 $lang_new_config_ok = "La nuova configurazione viene salvata";
 $lang_nbr_impression = "Numero di stampe";
 $lang_choix_Impression = "Utilizzare la stampa automatica";
@@ -192,7 +192,7 @@ $lang_totaux = "Totale IVA esclusa: \n Totale IVA: \n Totale IVA inclusa:";
 $lang_num_bon_ab = "Buon N°:";
 $lang_de = "Di";
 $lang_page = "Pagina";
-$lang_condi = "$entrep_nom $social Tel :$tel_vend \n$tva_vend $compte $reg";
+$lang_condi = "{$entrep_nom} {$social} Tel :{$tel_vend} \n{$tva_vend} {$compte} {$reg}";
 $lang_prix_htva = "Prezzo H.T.V.A";
 $lang_dev_pdf_soc = "Sede Centrale\n\nTel/Fax\nT. V. UNA Banca\n\ne-mail";
 $lang_ajo_fact = "Aggiungi un commento su fattura (opzionale)";
@@ -231,14 +231,14 @@ $lang_evo_ca = "Evoluzione del C. A.";
 $lang_periode = "Periodo";
 $lang_dep_htva = "Le spese al netto IVA";
 $lang_bc_login = "Nome del database";
-$lang_back_upl = "Se si desidera ripristinare questo backup: <br />1. Carica il file nella directory dump di $lang_factux . <br />2. Eseguire l'utilità di backup e choissiser l'opzione ripristina un backup";
+$lang_back_upl = sprintf("Se si desidera ripristinare questo backup: <br />1. Carica il file nella directory dump di %s . <br />2. Eseguire l'utilità di backup e choissiser l'opzione ripristina un backup", $lang_factux);
 $lang_back_effac = "La richiesta di cancellazione backup sia stato eseguito correttamente";
 $lang_back_utili = "Utilità di Backup di Factux";
 $lang_voir = "Vedere";
 $lang_rest = "Ripristinare";
 $lang_tai = "Dimensioni";
 $lang_fichier = "File";
-$lang_back_restO2 = "Se non si è verificato alcun errore quindi i dati sono stati ripristinati. Questo strumento è possibile ripristinare solo i backup creati da $lang_factux ";
+$lang_back_restO2 = sprintf('Se non si è verificato alcun errore quindi i dati sono stati ripristinati. Questo strumento è possibile ripristinare solo i backup creati da %s ', $lang_factux);
 $lang_back_resto = "Backup e ripristino";
 $lang_back_ext = "Backup del file .sql estratto di";
 $lang_back_ti_re = "Utilità di Backup di Factux: ripristinare una copia di backup";
@@ -289,7 +289,7 @@ $lang_complement = "Supplemento";
 $lang_rue = "Street";
 $lang_code_postal = "Codice Postale";
 $lang_ville = "Città";
-$lang_numero_tva = "$lang_tva N.";
+$lang_numero_tva = $lang_tva . ' N.';
 $lang_email = "E-mail";
 $lang_bc_base = "Database";
 $lang_annuler = "Annulla";
@@ -345,10 +345,10 @@ $lang_commandes = "comandi";
 $lang_clients = "Clienti";
 $lang_depenses = "Spese";
 $lang_htva = "H.T.";
-$lang_depenses_htva = "Spese $lang_htva";
-$lang_ca_htva = "Fatturato di $lang_htva";
+$lang_depenses_htva = 'Spese ' . $lang_htva;
+$lang_ca_htva = 'Fatturato di ' . $lang_htva;
 $lang_ttc = "IVA inc.";
-$lang_ca_ttc = "C.A. $lang_ttc";
+$lang_ca_ttc = 'C.A. ' . $lang_ttc;
 
 $lang_statistiques_basees_bons = "Le statistiche si basano su gli ordini di acquisto.";
 $lang_statistiques_par_client = "Le statistiche dettagliate del cliente";
@@ -387,7 +387,7 @@ $lang_bon_compr = "L'ordine comprende:";
 #$lang_suprimer = "";#unused.2015
 #lang_som_tot = "";#unused.2015
 #lang_som_tot2 = "";#unused.2015
-$lang_mont_tva = "E una quantità di $lang_tva";
+$lang_mont_tva = 'E una quantità di ' . $lang_tva;
 $lang_ajou_bon = "Aggiungere all'ordine";
 $lang_ter_enr = "Completa e salva";
 $lang_ex_rech = "Eseguire una ricerca";
@@ -525,8 +525,8 @@ $lang_pay_le = "Impostare il";
 $lang_dat_inva = "Data non valida";
 
 $lang_les_utl = "Gli utenti";
-$lang_id_or_mail_exist = "Errore login/$lang_email già esistente";
-$lang_mail_exist = "Errore $lang_email già esistente";
+$lang_id_or_mail_exist = sprintf('Errore login/%s già esistente', $lang_email);
+$lang_mail_exist = sprintf('Errore %s già esistente', $lang_email);
 
 $lang_admin = "Admin";
 $lang_gerer = "Gestire";

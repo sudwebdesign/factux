@@ -19,26 +19,26 @@
  *     Guy Hendrickx
  *.
  */
-include_once("include/headers.php");
-include_once("include/finhead.php");
+include_once(__DIR__ . "/include/headers.php");
+include_once(__DIR__ . "/include/finhead.php");
 ?>
 <table width="760" border="0" class="page" align="center">
  <tr>
   <td class="page" align="center">
 <?php
-include_once("include/head.php");
+include_once(__DIR__ . "/include/head.php");
 if ($user_com == 'n') {
- echo"<h1>$lang_commande_droit</h1>";
- include_once("include/bas.php");
+ echo sprintf('<h1>%s</h1>', $lang_commande_droit);
+ include_once(__DIR__ . "/include/bas.php");
  exit;
 }
 $rqSql = "SELECT num_client, nom FROM " . $tblpref ."client WHERE 1";
 if ($user_com == 'r') {
 $rqSql = "SELECT num_client, nom FROM " . $tblpref ."client
-  WHERE " . $tblpref ."client.permi LIKE '$user_num,'
-  or  " . $tblpref ."client.permi LIKE '%,$user_num,'
-  or  " . $tblpref ."client.permi LIKE '%,$user_num,%'
-  or  " . $tblpref ."client.permi LIKE '$user_num,%'
+  WHERE " . $tblpref ."client.permi LIKE '{$user_num},'
+  or  " . $tblpref ."client.permi LIKE '%,{$user_num},'
+  or  " . $tblpref ."client.permi LIKE '%,{$user_num},%'
+  or  " . $tblpref ."client.permi LIKE '{$user_num},%'
   ";
 }
 ?>
@@ -51,7 +51,7 @@ $rqSql = "SELECT num_client, nom FROM " . $tblpref ."client
        <td class="texte1" colspan="5">
 <?php
 if ($liste_cli!='y') {
-$rqSql="$rqSql order by nom";
+$rqSql .= ' order by nom';
 $result = mysql_query( $rqSql ) or die('Erreur SQL !<br>'.$rqSql.'<br>'.mysql_error());
 ?>
         <select name="listeclients">
@@ -70,7 +70,7 @@ $nom = $row["nom"];
         <script type="text/javascript" src="javascripts/montrer_cacher.js"></script>
         <input type="checkbox" checked name="list_client" onClick="montrer_cacher(this,'cluster','cluster2')">
 <?php
-include_once("include/choix_cli.php");
+include_once(__DIR__ . "/include/choix_cli.php");
 }
 ?>
        </td>
@@ -116,8 +116,8 @@ include_once("include/choix_cli.php");
   <td>
 <?php
 $aide='bon';
-include("help.php");
-include_once("include/bas.php");
+include(__DIR__ . "/help.php");
+include_once(__DIR__ . "/include/bas.php");
 ?>
   </td>
  </tr>

@@ -19,13 +19,14 @@
  * 		Guy Hendrickx
  *.
  */
-if(!isset($num_client))
- header("Location:index.php");
+if (!isset($num_client)) {
+    header("Location:index.php");
+}
 
-include_once("../include/config/common.php");
-include_once("../include/language/$lang.php");
-include_once("../include/config/var.php");
-include_once("../include/utils.php");
+include_once(__DIR__ . "/../include/config/common.php");
+include_once(__DIR__ . sprintf('/../include/language/%s.php', $lang));
+include_once(__DIR__ . "/../include/config/var.php");
+include_once(__DIR__ . "/../include/utils.php");
 ?>
 <table class="page boiteaction">
  <caption><?php echo $lang_commandes; ?></caption>

@@ -1,6 +1,6 @@
 <?php
-include_once("include/headers.php");
-include "dbinfo.php";
+include_once(__DIR__ . "/include/headers.php");
+include __DIR__ . "/dbinfo.php";
 extract($_POST);
 error_reporting(E_ERROR | E_WARNING | E_PARSE | E_NOTICE);
 flush();
@@ -9,30 +9,29 @@ flush();
  <tr>
   <td class="page" align="center">
 <?php
-require_once("include/head.php");
+require_once(__DIR__ . "/include/head.php");
 if ($user_admin != 'y') {
- echo "<h1>$lang_admin_droit</h1>";
- include_once("include/bas.php");
+ echo sprintf('<h1>%s</h1>', $lang_admin_droit);
+ include_once(__DIR__ . "/include/bas.php");
  exit;
 }
 # Table backup from MySql PHP Backup
 $conn = @mysql_connect($dbhost,$dbuser,$dbpass);
-if ($conn==false)
- die("password / user or database name wrong");
-$x=$_SERVER['SERVER_SOFTWARE'];
-if (strpos($x,"Win32")!=0) {
- $path = $path . "dump\\";
-} else {
- $path = $path . "dump/";
+if ($conn==false) {
+    die("password / user or database name wrong");
 }
+$x=$_SERVER['SERVER_SOFTWARE'];
+$path = strpos($x,"Win32") != 0 ? $path . "dump\\" : $path . "dump/";
 
 // If windows gives problems
 // FOR WINDOWS change to ==> $path = $path . "dump\\";
-if (!is_dir($path)) mkdir($path, 0766);
+if (!is_dir($path)) {
+    mkdir($path, 0766);
+}
 @chmod($path, 0777);
 
 $fp2 = fopen ($path."backup.sql","w");
-$copyr="# Backup de $lang_factux\n".
+$copyr=sprintf('# Backup de %s%s', $lang_factux, PHP_EOL).
 "# Table backup from MySql PHP Backup\n".
 "# AB Webservices 1999-2004\n".
 "# www.absoft-my.com/pondok\n".
@@ -42,61 +41,70 @@ fwrite ($fp2,$copyr);
 fclose ($fp2);
 //chmod($path . "backup." . date('m-d-Y ') . ".sql", 0777);
 
-if(file_exists($path . "backup.gz"))
- unlink($path."backup.gz");
+if (file_exists($path . "backup.gz")) {
+    unlink($path."backup.gz");
+}
 $recreate = 0;
 
-function get_def($dbname, $table) {
+function get_def($dbname, string $table): string {
  global $conn;
  $def = "";
- $def .= "DROP TABLE IF EXISTS $table;#%%\n";
- $def .= "CREATE TABLE $table (\n";
- $result = mysql_db_query($dbname, "SHOW FIELDS FROM $table",$conn) or die("Table $table not existing in database");
+ $def .= "DROP TABLE IF EXISTS {$table};#%%\n";
+ $def .= "CREATE TABLE {$table} (\n";
+ $result = mysql_db_query($dbname, 'SHOW FIELDS FROM ' . $table,$conn) or die(sprintf('Table %s not existing in database', $table));
  while($row = mysql_fetch_array($result)) {
-  $def .= "  $row[Field] $row[Type]";
-  if ($row["Default"] !== null) // Fix 2025
-   $def .= " DEFAULT '$row[Default]'";
-  if ($row["Null"] != "YES")
-   $def .= " NOT NULL";
-  if ($row["Extra"] != "")
-   $def .= " $row[Extra]";
+  $def .= sprintf('  %s %s', $row[Field], $row[Type]);
+  if ($row["Default"] !== null) {
+      // Fix 2025
+      $def .= sprintf(" DEFAULT '%s'", $row["Default"]);
+  }
+  if ($row["Null"] != "YES") {
+      $def .= " NOT NULL";
+  }
+  if ($row["Extra"] != "") {
+      $def .= ' ' . $row[Extra];
+  }
    $def .= ",\n";
  }
  $def = preg_replace("~,\n$~","", $def);#deprecated ereg_replace(",\n$","", $def);
- $result = mysql_db_query($dbname, "SHOW KEYS FROM $table",$conn);
+ $result = mysql_db_query($dbname, 'SHOW KEYS FROM ' . $table,$conn);
  while($row = mysql_fetch_array($result)) {
   $kname=$row['Key_name'];
-  if(($kname != "PRIMARY") && ($row['Non_unique'] == 0))
-   $kname="UNIQUE|$kname";
-  if(!isset($index[$kname]))
-   $index[$kname] = array();
+  if (($kname != "PRIMARY") && ($row['Non_unique'] == 0)) {
+      $kname='UNIQUE|' . $kname;
+  }
+  if (!isset($index[$kname])) {
+      $index[$kname] = [];
+  }
   $index[$kname][] = $row['Column_name'];
  }
  foreach($index as $x => $columns){
   $def .= ",\n";
-  if($x == "PRIMARY")
-   $def .= "  PRIMARY KEY (" . implode(", ", $columns) . ")";
-  else if (substr($x,0,6) == "UNIQUE")
-   $def .= "  UNIQUE ".substr($x,7)." (" . implode(", ", $columns) . ")";
-  else
-   $def .= "  KEY $x (" . implode(", ", $columns) . ")";
+  if ($x == "PRIMARY") {
+      $def .= "  PRIMARY KEY (" . implode(", ", $columns) . ")";
+  } elseif (substr($x,0,6) == "UNIQUE") {
+      $def .= "  UNIQUE ".substr($x,7)." (" . implode(", ", $columns) . ")";
+  } else {
+      $def .= sprintf('  KEY %s (', $x) . implode(", ", $columns) . ")";
+  }
  }
  $def .= "\n);#%%";
  return (stripslashes($def));
 }
-function get_content($dbname, $table) {
+function get_content($dbname, string $table): string {
  global $conn;
  $content="";
- $result = mysql_db_query($dbname, "SELECT * FROM $table",$conn);
+ $result = mysql_db_query($dbname, 'SELECT * FROM ' . $table,$conn);
  while($row = mysql_fetch_row($result)) {
-  $insert = "INSERT INTO $table VALUES (";
+  $insert = sprintf('INSERT INTO %s VALUES (', $table);
   for($j=0; $j<mysql_num_fields($result);$j++) {
-   if(!isset($row[$j]))
-    $insert .= "NULL,";
-   else if($row[$j] != "")
-    $insert .= "'".addslashes($row[$j])."',";
-   else
-    $insert .= "'',";
+   if (!isset($row[$j])) {
+       $insert .= "NULL,";
+   } elseif ($row[$j] != "") {
+       $insert .= "'".addslashes($row[$j])."',";
+   } else {
+       $insert .= "'',";
+   }
   }
   $insert = preg_replace("~,$~","",$insert);#deprecated ereg_replace(",$","",$insert);
   $insert .= ");#%%\n";
@@ -135,7 +143,7 @@ if (!preg_match("~/restore\.~",$_SERVER['PHP_SELF'])) {#deprecated (!eregi("/res
    }
   }
  }
- $fp = fopen ($path."backup.$filetype","a");
+ $fp = fopen ($path.('backup.' . $filetype),"a");
  fwrite ($fp,$newfile);
  fwrite ($fp,"# Valid end of backup For Factux from MySql PHP Backup\n");
  fclose ($fp);
@@ -149,12 +157,8 @@ if (!preg_match("~/restore\.~",$_SERVER['PHP_SELF'])) {#deprecated (!eregi("/res
        <p><?php echo $lang_back_ok; ?><img alt="<?php echo $lang_oui; ?>" src="image/oui.gif"></p>
        <br />
 <?php
-    echo "$lang_back_lon<br />";
-    if ($_POST['table_names'] == "*") {
-      $count = $num_tables;
-    } else {
-      $count = count($tables);
-    }
+    echo $lang_back_lon . '<br />';
+    $count = $_POST['table_names'] == "*" ? $num_tables : count($tables);
     if ($count != 0 ) {
       $i=0;
       while ($i < $count) {
@@ -166,7 +170,7 @@ if (!preg_match("~/restore\.~",$_SERVER['PHP_SELF'])) {#deprecated (!eregi("/res
         $i++;
       }
     } else {
-     echo "<font color='red'>$lang_back_err</font><br>";
+     echo sprintf("<font color='red'>%s</font><br>", $lang_back_err);
     }
     echo $lang_back_lon2;
 ?>
@@ -186,8 +190,8 @@ if (!preg_match("~/restore\.~",$_SERVER['PHP_SELF'])) {#deprecated (!eregi("/res
   <td>
 <?php
 $aide='backups';
-include("help.php");
-include_once("include/bas.php");
+include(__DIR__ . "/help.php");
+include_once(__DIR__ . "/include/bas.php");
 ?>
   </td>
  </tr>

@@ -19,20 +19,20 @@
  * 		Guy Hendrickx
  *.
  */
-require_once("include/verif.php");
-include_once("include/config/common.php");
-include_once("include/config/var.php");
-include_once("include/language/$lang.php");
+require_once(__DIR__ . "/include/verif.php");
+include_once(__DIR__ . "/include/config/common.php");
+include_once(__DIR__ . "/include/config/var.php");
+include_once(__DIR__ . sprintf('/include/language/%s.php', $lang));
 $tot_ht=isset($_POST['tot_ht'])?$_POST['tot_ht']:"";
 $tot_tva=isset($_POST['tot_tva'])?$_POST['tot_tva']:"";
 $bon_num=isset($_POST['bon_num'])?$_POST['bon_num']:"";
 $coment=isset($_POST['coment'])?$_POST['coment']:"";
 
-$sql2 = "UPDATE " . $tblpref ."bon_comm SET tot_htva='".$tot_ht."'  WHERE num_bon = $bon_num";
-mysql_query($sql2) OR die("<p>Erreur Mysql<br/>$sql2<br/>".mysql_error()."</p>");
-$sql3 = "UPDATE " . $tblpref ."bon_comm SET tot_tva='".$tot_tva."'  WHERE num_bon = $bon_num";
-mysql_query($sql3) OR die("<p>Erreur Mysql<br/>$sql3<br/>".mysql_error()."</p>");
-$sql4 = "UPDATE " . $tblpref ."bon_comm SET coment='".$coment."'  WHERE num_bon = $bon_num";
-mysql_query($sql4) OR die("<p>Erreur Mysql<br/>$sql4<br/>".mysql_error()."</p>");
-$message= "<h2>$lang_enre</h2>";
-include("form_commande.php");
+$sql2 = "UPDATE " . $tblpref ."bon_comm SET tot_htva='".$tot_ht.("'  WHERE num_bon = " . $bon_num);
+mysql_query($sql2) || die(sprintf('<p>Erreur Mysql<br/>%s<br/>', $sql2).mysql_error()."</p>");
+$sql3 = "UPDATE " . $tblpref ."bon_comm SET tot_tva='".$tot_tva.("'  WHERE num_bon = " . $bon_num);
+mysql_query($sql3) || die(sprintf('<p>Erreur Mysql<br/>%s<br/>', $sql3).mysql_error()."</p>");
+$sql4 = "UPDATE " . $tblpref ."bon_comm SET coment='".$coment.("'  WHERE num_bon = " . $bon_num);
+mysql_query($sql4) || die(sprintf('<p>Erreur Mysql<br/>%s<br/>', $sql4).mysql_error()."</p>");
+$message= sprintf('<h2>%s</h2>', $lang_enre);
+include(__DIR__ . "/form_commande.php");

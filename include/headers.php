@@ -21,26 +21,25 @@
  */
 date_default_timezone_set('Europe/Paris');
 $here=(isset($now))?$now:'';#if client callin
-include_once($here."include/configav.php");
-include_once($here."include/config/common.php");
-if(
-   !strstr($_SERVER['PHP_SELF'],'/client/')
+include_once(__DIR__ . "/configav.php");
+include_once(__DIR__ . "/config/common.php");
+if (!strstr($_SERVER['PHP_SELF'],'/client/')
   &!strstr($_SERVER['PHP_SELF'],'login.php')
   &!strstr($_SERVER['PHP_SELF'],'index.php')
-  &!strstr($_SERVER['PHP_SELF'],'logout.php')
-  )
-  require_once("include/verif.php");
-$lang=(!empty($_SESSION['lang'])?$_SESSION['lang']:(isset($lang)?$lang:$default_lang));# (isset=fix lang espace client) default_lg in common Fix PHP Fatal error:  Unparenthesized `a ? b : c ? d : e` is not supported. Use either `(a ? b : c) ? d : e` or `a ? b : (c ? d : e)` in /var/www/0.src.facturiers/factux/include/headers.php on line 33
-include_once($here."include/config/var.php");
-include_once($here."include/language/$lang.php");
-include_once($here."include/utils.php");
-$page_name = ucfirst(str_replace(array('_','.php'),array(' ',''),basename($_SERVER['PHP_SELF'])));
+  &!strstr($_SERVER['PHP_SELF'],'logout.php')) {
+    require_once(__DIR__ . "/verif.php");
+}
+$lang=(empty($_SESSION['lang'])?(isset($lang) ? $lang : $default_lang):($_SESSION['lang']));# (isset=fix lang espace client) default_lg in common Fix PHP Fatal error:  Unparenthesized `a ? b : c ? d : e` is not supported. Use either `(a ? b : c) ? d : e` or `a ? b : (c ? d : e)` in /var/www/0.src.facturiers/factux/include/headers.php on line 33
+include_once(__DIR__ . "/config/var.php");
+include_once(__DIR__ . sprintf('/language/%s.php', $lang));
+include_once(__DIR__ . "/utils.php");
+$page_name = ucfirst(str_replace(['_','.php'],[' ',''],basename($_SERVER['PHP_SELF'])));
 ?><!DOCTYPE html>
 <html>
  <head>
-  <title><?php echo "Factux - $page_name" ?></title>
+  <title><?php echo 'Factux - ' . $page_name ?></title>
   <meta charset="UTF-8">
-  <link rel="stylesheet" type="text/css" href="<?php echo $here; ?>include/themes/<?php echo"$theme";?>/style.css">
+  <link rel="stylesheet" type="text/css" href="<?php echo $here; ?>include/themes/<?php echo $theme;?>/style.css">
   <link rel="shortcut icon" type="image/x-icon" href="<?php echo $here; ?>image/favicon.ico" >
   <style style='display:none;'>
    /*h1,h2,h3,h4,h5,h6{width: 760px;}*/

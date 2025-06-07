@@ -24,35 +24,36 @@ $login=isset($_POST['login'])?$_POST['login']:"";
 $pass=isset($_POST['pass'])?$_POST['pass']:"";
 $lang=isset($_POST['lang'])?$_POST['lang']:"";
 ini_set('session.save_path', 'include/session');
-include_once("include/config/common.php");
+include_once(__DIR__ . "/include/config/common.php");
 if ($lang=='') {
- $lang ="$default_lang";
+ $lang =$default_lang;
 }
-include_once("include/config/var.php");#4 include_once("include/utils.php"); in from_commande
-include_once("include/language/$lang.php");
+
+include_once(__DIR__ . "/include/config/var.php");#4 include_once(__DIR__ . "/include/utils.php"); in from_commande
+include_once(__DIR__ . sprintf('/include/language/%s.php', $lang));
 
 if($login=='' || $pass==''){
- $message = "<h1>$lang_oublie_champ</h1>";
- include('login.inc.php'); // On inclus le formulaire d'identification
+ $message = sprintf('<h1>%s</h1>', $lang_oublie_champ);
+ include(__DIR__ . '/login.inc.php'); // On inclus le formulaire d'identification
  exit;
 }
 
 // on recupère le password de la table qui correspond au login du visiteur
-$sql = "select pwd from " . $tblpref ."user where login= '$login'";
+$sql = "select pwd from " . $tblpref .sprintf("user where login= '%s'", $login);
 $req = mysql_query($sql) or die('Erreur SQL!<br>'.$sql.'<br>'.mysql_error());
 
 $data = mysql_fetch_array($req);
 $pass_crypt = md5($pass);
 if($data['pwd'] != $pass_crypt){
- $message = "<h1>$lang_bad_log</h1>";
- include('login.inc.php'); // On inclus le formulaire d'identification
+ $message = sprintf('<h1>%s</h1>', $lang_bad_log);
+ include(__DIR__ . '/login.inc.php'); // On inclus le formulaire d'identification
  exit;
 } else {
  session_start();
  //session_register('login');
  $_SESSION['trucmuch'] = $login ;
  $_SESSION['lang'] = $lang ;
- $message= "<h2>$lang_authentification_ok <br> $lang_bienvenue $login</h2>";
- include_once("include/verif.php");
- include_once("form_commande.php");
+ $message= sprintf('<h2>%s <br> %s %s</h2>', $lang_authentification_ok, $lang_bienvenue, $login);
+ include_once(__DIR__ . "/include/verif.php");
+ include_once(__DIR__ . "/form_commande.php");
 }

@@ -19,26 +19,26 @@
  *   Guy Hendrickx
  *.
  */
-include_once("include/headers.php");
+include_once(__DIR__ . "/include/headers.php");
 ?><script type="text/javascript" src="javascripts/confdel.js"></script><?php
-include_once("include/finhead.php");
+include_once(__DIR__ . "/include/finhead.php");
 $num_fact=isset($_GET['num_fact'])?$_GET['num_fact']:"";
 ?>
 <table width="760" border="0" class="page" align="center">
  <tr>
   <td class="page" align="center">
 <?php
-include_once("include/head.php");
+include_once(__DIR__ . "/include/head.php");
 if ($user_fact == 'n') {
- echo "<h1>$lang_facture_droit</h1>";
- include_once("include/bas.php");
+ echo sprintf('<h1>%s</h1>', $lang_facture_droit);
+ include_once(__DIR__ . "/include/bas.php");
  exit;
 }
 $sql = "
 SELECT list_num,nom,client
 FROM " . $tblpref ."facture
 LEFT JOIN " . $tblpref ."client on " . $tblpref ."facture.client = num_client
-WHERE num = $num_fact
+WHERE num = {$num_fact}
 ";
 $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 $data = mysql_fetch_array($req);
@@ -49,7 +49,7 @@ $nom_html = htmlentities(urlencode ($nom));
 ?>
    <center>
     <table class='page boiteaction'>
-     <caption><?php echo "$lang_edit_fact_n $num_fact $lang_de $nom"; ?></caption>
+     <caption><?php echo sprintf('%s %s %s %s', $lang_edit_fact_n, $num_fact, $lang_de, $nom); ?></caption>
      <tr>
       <th><?php echo $lang_num_bon_ab; ?></th>
       <th><?php echo $lang_date; ?></th>
@@ -62,7 +62,7 @@ $c=0;
 foreach ($list_num as $num_bon){
  $sql="
  SELECT DATE_FORMAT(date,'%d/%m/%Y') AS date, tot_htva, tot_tva from " . $tblpref ."bon_comm
- WHERE num_bon = '$num_bon'
+ WHERE num_bon = '{$num_bon}'
  ";
  $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
  $data = mysql_fetch_array($req);
@@ -104,7 +104,7 @@ foreach ($list_num as $num_bon){
          <input type="hidden" name="client" value="<?php echo $num_client; ?>" />
          <input type="hidden" name="num" value="<?php echo $num_fact; ?>" />
          <input type="hidden" name="user" value="adm" />
-         <input type="image" src="image/prinfer.gif" style="border:none;margin:0 0 0 -1em;" alt="<?php echo "$lang_imprimer $lang_facture $lang_numero $num_fact"; ?>" />
+         <input type="image" src="image/prinfer.gif" style="border:none;margin:0 0 0 -1em;" alt="<?php echo sprintf('%s %s %s %s', $lang_imprimer, $lang_facture, $lang_numero, $num_fact); ?>" />
         </form>
        </center>
       </td>
@@ -115,12 +115,12 @@ foreach ($list_num as $num_bon){
 $sql = "SELECT num_bon, tot_htva, tot_tva, nom, num_client, DATE_FORMAT(date,'%d/%m/%Y') AS date
 FROM " . $tblpref ."bon_comm
 LEFT JOIN " . $tblpref ."client on " . $tblpref ."bon_comm.client_num = num_client
-WHERE fact='0' AND client_num = '$num_client'
+WHERE fact='0' AND client_num = '{$num_client}'
 ORDER BY " . $tblpref ."bon_comm.`num_bon` DESC";
 ?>
    <center>
     <table class='page boiteaction'>
-     <caption><?php echo "$lang_ajou_fact_n $num_fact"; ?></caption>
+     <caption><?php echo sprintf('%s %s', $lang_ajou_fact_n, $num_fact); ?></caption>
      <tr>
       <th><?php echo $lang_num_bon_ab; ?></th>
       <th><?php echo $lang_date; ?></th>
@@ -145,7 +145,7 @@ $line=($c++ & 1)?0:1;
       <td class='<?php echo couleur_alternee (FALSE); ?>'><?php echo $date; ?></td>
       <td class='<?php echo couleur_alternee (FALSE, "nombre"); ?>'><?php echo montant_financier($ttc); ?></td>
       <td class='<?php echo couleur_alternee (FALSE, "c texte"); ?>'>
-       <a href='edit_bon.php?num_bon=<?php echo "$num_bon"; ?>&amp;nom=<?php echo $nom_html; ?>'>
+       <a href='edit_bon.php?num_bon=<?php echo $num_bon; ?>&amp;nom=<?php echo $nom_html; ?>'>
         <img border="0" src="image/edit.gif" alt="<?php echo $lang_editer; ?>">
        </a>
       </td>
@@ -179,8 +179,8 @@ $line=($c++ & 1)?0:1;
   <td>
 <?php
 $aide="factures";
-include("help.php");
-include("include/bas.php");
+include(__DIR__ . "/help.php");
+include(__DIR__ . "/include/bas.php");
 ?>
   </td>
  </tr>

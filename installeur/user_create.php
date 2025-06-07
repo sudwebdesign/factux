@@ -20,7 +20,7 @@
  *.
  */
  $etape = "Étape N°5 : Enregister l'utilisateur primaire";
- include_once('headers.php');
+ include_once(__DIR__ . '/headers.php');
 ?>
     <br><h2><?php echo $lang_utilisateur_ajouter; ?></h2><br><br>
     <p><?php echo $lang_install_user_create; ?></p>
@@ -59,7 +59,7 @@
       </form>
      </center>
    <br><hr>
-<?php include_once("../include/bas_cli.php"); ?>
+<?php include_once(__DIR__ . "/../include/bas_cli.php"); ?>
   </td>
  </tr>
 </table>

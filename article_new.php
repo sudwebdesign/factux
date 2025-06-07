@@ -19,10 +19,10 @@
  * 		Guy Hendrickx
  *.
  */
-require_once("include/verif.php");
-include_once("include/config/common.php");
-include_once("include/config/var.php");
-include_once("include/language/$lang.php");
+require_once(__DIR__ . "/include/verif.php");
+include_once(__DIR__ . "/include/config/common.php");
+include_once(__DIR__ . "/include/config/var.php");
+include_once(__DIR__ . sprintf('/include/language/%s.php', $lang));
 $article=isset($_POST['article'])?$_POST['article']:"";### ‘	&#145;	&lsquo;	Left single quotation mark ::: 4 change Single quote (') http://ascii-code.com/
 $uni=isset($_POST['uni'])?$_POST['uni']:"";
 $prix=floatval(isset($_POST['prix'])?$_POST['prix']:"");
@@ -34,11 +34,12 @@ $stomax=floatval(isset($_POST['stomax'])?$_POST['stomax']:"");
 $categorie=isset($_POST['categorie'])?$_POST['categorie']:"";
 $marge=floatval(isset($_POST['marge'])?$_POST['marge']:"");
 if($article=='' || $prix==''|| $taux_tva=='' || $uni=='' ){
- $message = "<h1>$lang_oubli_champ</h1>";
- include('form_article.php');
+ $message = sprintf('<h1>%s</h1>', $lang_oubli_champ);
+ include(__DIR__ . '/form_article.php');
  exit;
 }
-$sql1 = "INSERT INTO " . $tblpref ."article(article, prix_htva, taux_tva, commentaire, uni, stock, stomin, stomax, cat, marge) VALUES ('$article', '$prix', '$taux_tva', '$commentaire', '$uni', '$stock', '$stomin', '$stomax', '$categorie', '$marge')";
-mysql_query($sql1) or die('Erreur SQL !<br>'.$sql1.'<br>'.mysql_error());
-$message = "<h2>$lang_nouv_art<br>$lang_commentaire $commentaire</h2>";
-include("form_article.php");
+
+$sql1 = "INSERT INTO " . $tblpref .sprintf("article(article, prix_htva, taux_tva, commentaire, uni, stock, stomin, stomax, cat, marge) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')", $article, $prix, $taux_tva, $commentaire, $uni, $stock, $stomin, $stomax, $categorie, $marge);
+mysql_query($sql1) || die('Erreur SQL !<br>'.$sql1.'<br>'.mysql_error());
+$message = sprintf('<h2>%s<br>%s %s</h2>', $lang_nouv_art, $lang_commentaire, $commentaire);
+include(__DIR__ . "/form_article.php");

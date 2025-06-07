@@ -34,29 +34,31 @@ $frm = $_GET["frm"];
 $champ = $_GET["ch"];
 $link = "?frm=".$frm."&amp;ch=".$champ;
 
-$ro = ($frm=="article_edit")?' readonly="readonly"':'';#tva in edit_art.php
-
+$ro = ($frm=="article_edit")?' readonly="readonly"':'';
+#tva in edit_art.php
 #init default
-$prix_achat=$tv=0;
-$coef=$coefttc=1;
+$prix_achat = 0;
+$tv = 0;
+$coef = 1;
+$coefttc = 1;
 $marge=0;#.00000000000001;#coef de marge = 1
 $tauxmarge=0;
 #set
-if (isset($_POST["pa"])){
- $prix_achat = $_POST["pa"];
- $marge = $_POST["ma"];
- $tv = $_POST["tv"];
-}else{
- if (isset($_GET["pa"])){
-  $prix_achat = round($_GET["pa"],3);
-  $marge = round($_GET["ma"],3);
-  $tv = round($_GET["tv"],3);
- }
+if (isset($_POST["pa"])) {
+    $prix_achat = $_POST["pa"];
+    $marge = $_POST["ma"];
+    $tv = $_POST["tv"];
+} elseif (isset($_GET["pa"])) {
+    $prix_achat = round($_GET["pa"],3);
+    $marge = round($_GET["ma"],3);
+    $tv = round($_GET["tv"],3);
 }
 #calc
 if($marge!=0){
- if($marge>=100)#La division par zéro est indéfinie
-  $marge=99.999;
+ if ($marge>=100) {
+     #La division par zéro est indéfinie
+     $marge=99.999;
+ }
  $coef = (1/(1-($marge/100)));
  $tauxmarge = (1-(1/$coef))*100;#%
 }
@@ -75,7 +77,7 @@ $prix_vente_ttc2 = $prix_achat * $coefttc;
  $prix_vente_ttc2 = round($prix_vente_ttc2,3);
 #*in lang
 include('config/var.php');#$devise
-$lang=(!empty($_SESSION['lang']))?$_SESSION['lang']:'fr';
+$lang=(empty($_SESSION['lang']))?'fr':$_SESSION['lang'];
 //~ $lang_prix = "Prix";#*
 //~ $lang_htva = "H.T.";#*
 //~ $lang_ttc = "T.T.C.";#*
@@ -85,20 +87,20 @@ $lang=(!empty($_SESSION['lang']))?$_SESSION['lang']:'fr';
 //~ $lang_prixunitaire = "Prix unitaire";#*
 //~ $lang_dachat = "d'achat";#*
 //~ $lang_de_vente = "de vente";#*
-include_once("language/$lang.php");
+include_once(__DIR__ . sprintf('/language/%s.php', $lang));
 
 $lang_coef = "Coef";
 
 
-$lang_prixunitaire_ht = "$lang_prixunitaire $lang_htva";
-$lang_prix_dachat_ht = "$lang_prix $lang_dachat $lang_htva";
-$lang_prix_vente_ht = "$lang_prix $lang_de_vente $lang_htva";
-$lang_prix_vente_ttc = "$lang_prix $lang_de_vente $lang_ttc";
-$lang_coef_ht = "$lang_coef $lang_htva";
-$lang_coef_ttc = "$lang_coef $lang_ttc";
-$lang_prix_ht = "$lang_prix $lang_htva";
-$lang_retour_marge = "$lang_envoyer un $lang_prix_vente_ht $prix_vente_ht$devise avec une $lang_marge $lang_de $tauxmarge%";
-$lang_retour_marge_title = "$lang_envoyer le $lang_prix $lang_dachat $lang_de $prix_achat$devise et la $lang_marge $lang_de $tauxmarge%";
+$lang_prixunitaire_ht = sprintf('%s %s', $lang_prixunitaire, $lang_htva);
+$lang_prix_dachat_ht = sprintf('%s %s %s', $lang_prix, $lang_dachat, $lang_htva);
+$lang_prix_vente_ht = sprintf('%s %s %s', $lang_prix, $lang_de_vente, $lang_htva);
+$lang_prix_vente_ttc = sprintf('%s %s %s', $lang_prix, $lang_de_vente, $lang_ttc);
+$lang_coef_ht = sprintf('%s %s', $lang_coef, $lang_htva);
+$lang_coef_ttc = sprintf('%s %s', $lang_coef, $lang_ttc);
+$lang_prix_ht = sprintf('%s %s', $lang_prix, $lang_htva);
+$lang_retour_marge = sprintf('%s un %s %s%s avec une %s %s %s%%', $lang_envoyer, $lang_prix_vente_ht, $prix_vente_ht, $devise, $lang_marge, $lang_de, $tauxmarge);
+$lang_retour_marge_title = sprintf('%s le %s %s %s %s%s et la %s %s %s%%', $lang_envoyer, $lang_prix, $lang_dachat, $lang_de, $prix_achat, $devise, $lang_marge, $lang_de, $tauxmarge);
 ?>
 <!DOCTYPE HTML>
 <html>

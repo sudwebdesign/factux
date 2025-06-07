@@ -19,23 +19,23 @@
  * 		Guy Hendrickx
  *
  */
-require_once("include/verif.php");
-include_once("include/config/common.php");
-include_once("include/config/var.php");
-include_once("include/language/$lang.php");
+require_once(__DIR__ . "/include/verif.php");
+include_once(__DIR__ . "/include/config/common.php");
+include_once(__DIR__ . "/include/config/var.php");
+include_once(__DIR__ . sprintf('/include/language/%s.php', $lang));
 //pour le formulaire
 $mois_1 = isset($_GET['mois_1'])?$_GET['mois_1']:$lang_tous;#date("m")
 $annee_1 = isset($_GET['annee_1'])?$_GET['annee_1']:$lang_toutes;#date("Y")
-$ands = ($annee_1==$lang_toutes)?'':"WHERE YEAR(date) = $annee_1";#si année choisie
+$ands = ($annee_1==$lang_toutes)?'':'WHERE YEAR(date) = ' . $annee_1;#si année choisie
 $aw = (($annee_1==$lang_toutes&&$mois_1!=$lang_tous))?'WHERE':' AND';#si toutes années et mois choisi #idée GROUP BY DAY(date)
-$ands .= ($mois_1==$lang_tous)?'':"$aw MONTH(date) = $mois_1";#si année entiere
+$ands .= ($mois_1==$lang_tous)?'':sprintf('%s MONTH(date) = %s', $aw, $mois_1);#si année entiere
 
 //pour le total
 $sql = "
 SELECT SUM(tot_art_htva)
 FROM " . $tblpref ."cont_bon
 LEFT JOIN " . $tblpref ."bon_comm on bon_num = num_bon
-$ands
+{$ands}
 ";
 
 $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
@@ -56,12 +56,15 @@ uni
 FROM  " . $tblpref ."cont_bon
 LEFT JOIN " . $tblpref ."bon_comm on bon_num = num_bon
 LEFT JOIN " . $tblpref ."article on " . $tblpref ."article.num = article_num
-$ands
+{$ands}
 GROUP BY article
 ";//ORDER BY tot_art_htva DESC
 $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 //$data = mysql_fetch_array($req);
-$c=$remise=$marge=$margereele=0;
+$c = 0;
+$remise = 0;
+$marge = 0;
+$margereele = 0;
 $cd=320;
 while ($data = mysql_fetch_array($req)){
  $num = $data['num'];
@@ -80,10 +83,12 @@ while ($data = mysql_fetch_array($req)){
  $ChartData[]=$tot;
  $cd+=10;
 }
+
 if($cd==320){#si vide
  $ChartData[]=0;
  $ChartLabel[]='N/A';
 }
+
 $ChartDiameter=($cd<=760)?$cd:760;
 $ChartFont=13;
-include("graph_circulaire_base.php");#Graphique sectoriel au format GIF
+include(__DIR__ . "/graph_circulaire_base.php");#Graphique sectoriel au format GIF

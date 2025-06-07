@@ -19,11 +19,11 @@
  * 		Guy Hendrickx
  *.
  */
-require_once("include/verif.php");
-include_once("include/config/common.php");
-include_once("include/config/var.php");
-include_once("include/language/$lang.php");
-include_once("include/utils.php");
+require_once(__DIR__ . "/include/verif.php");
+include_once(__DIR__ . "/include/config/common.php");
+include_once(__DIR__ . "/include/config/var.php");
+include_once(__DIR__ . sprintf('/include/language/%s.php', $lang));
+include_once(__DIR__ . "/include/utils.php");
 $mail_admin = $mail;
 $nom=isset($_POST['nom'])?$_POST['nom']:"";
 $nom_sup=isset($_POST['nom_sup'])?$_POST['nom_sup']:"";
@@ -44,16 +44,16 @@ $message='';
 
 $_GET['num'] = $num;#edit_client
 if($pass != $pass2){
- $message = "<h1>$lang_mot_pa</h1>";
- include('edit_client.php');#header("Location: ?num=$num");#include('form_client.php');
+ $message = sprintf('<h1>%s</h1>', $lang_mot_pa);
+ include(__DIR__ . '/edit_client.php');#header("Location: ?num=$num");#include('form_client.php');
  exit;
 }
 
 $pass = md5($pass);
 
 if($nom=='' || $rue=='' || $ville=='' || $code_post=='' || $num_tva==''){
- $message = "<h1>$lang_oubli_champ</h1>";
- include('edit_client.php');
+ $message = sprintf('<h1>%s</h1>', $lang_oubli_champ);
+ include(__DIR__ . '/edit_client.php');
  exit;
 }
 
@@ -62,8 +62,8 @@ if ($login !='') {
  $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
  $test = mysql_num_rows($req);
  if ($test > 0) {
-  $message = "<h1>$lang_er_mo_pa</h1>";
-  include('edit_client.php');
+  $message = sprintf('<h1>%s</h1>', $lang_er_mo_pa);
+  include(__DIR__ . '/edit_client.php');
   exit;
  }
 }
@@ -73,44 +73,49 @@ if ($mail_cli !='') {
  $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
  $test = mysql_num_rows($req);
  if ($test > 0){
-  $message = "<h1>$lang_mail_exist</h1>";
-  include('edit_client.php');
+  $message = sprintf('<h1>%s</h1>', $lang_mail_exist);
+  include(__DIR__ . '/edit_client.php');
   exit;
  }
 }
 
 $sql2 = "UPDATE " . $tblpref ."client SET fax='" . $fax . "', tel='" . $tel . "', civ='" . $civ . "', nom='" . $nom . "', mail='" . $mail_cli . "', num_tva='" . $num_tva . "', nom2='" . $nom_sup . "', rue='" .$rue . "', ville='" . $ville . "', cp='" . $code_post . "' WHERE num_client = '" . $num . "'";
-mysql_query($sql2) OR die("<p>Erreur Mysql<br/>$sql2<br/>".mysql_error()."</p>");
+mysql_query($sql2) || die(sprintf('<p>Erreur Mysql<br/>%s<br/>', $sql2).mysql_error()."</p>");
 
-if($pass2 !='' and $login != ''){
+if($pass2 != '' && $login != ''){
  $sql2 = "UPDATE " . $tblpref ."client SET login='" . $login . "', pass='" . $pass . "' WHERE num_client = '" . $num . "'";
- mysql_query($sql2) OR die("<p>Erreur Mysql<br/>$sql2<br/>".mysql_error()."</p>");
+ mysql_query($sql2) || die(sprintf('<p>Erreur Mysql<br/>%s<br/>', $sql2).mysql_error()."</p>");
 }
 
-if($pass2 !='' and $login2 != ''){
+if($pass2 != '' && $login2 != ''){
  $sql2 = "UPDATE " . $tblpref ."client SET login='" . $login2 . "', pass='" . $pass . "' WHERE num_client = '" . $num . "'";
- mysql_query($sql2) OR die("<p>Erreur Mysql<br/>$sql2<br/>".mysql_error()."</p>");
+ mysql_query($sql2) || die(sprintf('<p>Erreur Mysql<br/>%s<br/>', $sql2).mysql_error()."</p>");
 
- $to = "$mail_cli";
- $from = "$mail_admin" ;
- $subject = "$lang_pass_modif" ;
- $mess =  "$lang_mail_li_up1 $login2 Mot de passe: $pass2</b><br>$lang_mail_cli_up<br> ";
- if(courriel($to,$subject,$mess,$from,$logo))#if(mail($to,$subject,$message_mail,$header))
-  $message = "<h2>$lang_notif_env $mail_cli</h2>";
- else
-  $message = "<h1>$lang_notifi_cli_non</h1>";
+ $to = $mail_cli;
+ $from = $mail_admin ;
+ $subject = $lang_pass_modif ;
+ $mess =  sprintf('%s %s Mot de passe: %s</b><br>%s<br> ', $lang_mail_li_up1, $login2, $pass2, $lang_mail_cli_up);
+ if (courriel($to,$subject,$mess,$from,$logo)) {
+     #if(mail($to,$subject,$message_mail,$header))
+     $message = sprintf('<h2>%s %s</h2>', $lang_notif_env, $mail_cli);
+ } else {
+     $message = sprintf('<h1>%s</h1>', $lang_notifi_cli_non);
+ }
 }
 
-if($pass2 !='' and $login != ''and $mail_cli !=''){
- $to = "$mail_cli";
- $from = "$mail_admin" ;
- $subject = "$lang_cre_mo_pa" ;
+if($pass2 != '' && $login != '' && $mail_cli != ''){
+ $to = $mail_cli;
+ $from = $mail_admin ;
+ $subject = $lang_cre_mo_pa ;
  #$message_mail = "Cher client<br>Votre mot de passe a ete créé par l'administrateur<br><b>Login: $login Mot de passe: $pass2</b><br><br>vous pouver changer ce mot de passe en ligne mais pas le login. <br>Ce mot de pass est encodé dans notre base de donnée .<br>Si vous le perdiez, veuilliez prévevir l <a href='$mail_admin'>administrateur</a> pour qu'il vous en donne un nouveau ";
- $mess =  "$lang_mai_cre $login <br>$lang_mai_cr_pa $pass2 <br>$lang_mai_cre_enc <a href='mailto:".$mail_admin."'>$lang_admini</a> $lang_pass_nou";
- if(courriel($to,$subject,$mess,$from,$logo))#mail($to,$subject,$message_mail,$header)
-  $message .= "<h2>$lang_noti_pa</h2>";
- else
-  $message .= "<h1>$lang_notifi_cli_non</h1>";
+ $mess =  sprintf("%s %s <br>%s %s <br>%s <a href='mailto:", $lang_mai_cre, $login, $lang_mai_cr_pa, $pass2, $lang_mai_cre_enc).$mail_admin.sprintf("'>%s</a> %s", $lang_admini, $lang_pass_nou);
+ if (courriel($to,$subject,$mess,$from,$logo)) {
+     #mail($to,$subject,$message_mail,$header)
+     $message .= sprintf('<h2>%s</h2>', $lang_noti_pa);
+ } else {
+     $message .= sprintf('<h1>%s</h1>', $lang_notifi_cli_non);
+ }
 }
-$message= "<h2>$lang_cli_jour</h2>".$message;
-include("lister_clients.php");
+
+$message= sprintf('<h2>%s</h2>', $lang_cli_jour).$message;
+include(__DIR__ . "/lister_clients.php");

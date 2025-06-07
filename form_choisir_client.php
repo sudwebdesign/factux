@@ -19,14 +19,14 @@
  * 		Guy Hendrickx
  *.
  */
-include_once("include/headers.php");
-include_once("include/finhead.php");
+include_once(__DIR__ . "/include/headers.php");
+include_once(__DIR__ . "/include/finhead.php");
 ?>
 <table width="760" border="0" class="page" align="center">
  <tr>
   <td class="page" align="center">
 <?php
-include_once("include/head.php");
+include_once(__DIR__ . "/include/head.php");
 if (isset($message)&&$message!='') {
  echo $message;
 }
@@ -67,4 +67,4 @@ while ( $row = mysql_fetch_array( $result)) {
   </table>
  </form>
 </center>
-<?php } ?>
+<?php }
