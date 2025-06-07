@@ -3,7 +3,7 @@
 
 Installation de factux sur votre serveur
 
-Version 5.0.1
+Version 8.0.0
 
 Avant l'installation assurez-vous de récupérer
 1. l'adresse de votre base de données mysql
@@ -39,7 +39,7 @@ Réduire les droits des fichiers :
 Ceux-ci ne doivent être accessibles qu'en lecture seule par apache.
 Si vous ne le faites pas, un rappel vous sera adressé dans Factux
 
-Bugs et desiderata sur ici même ou sur http://factux.free.fr
+Bugs et desiderata ici même ou sur http://factux.free.fr
 
 ############################################################
 

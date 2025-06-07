@@ -12,8 +12,8 @@
  * File Name: de.m.php
  * 	fichier contenant les variables allemandes
  *
- * * Version:  5.0.0
- * * * Modified: 07/10/2016
+ * * Version: 8.0.0
+ * * * Modified: 07/06/2025
  *
  * File Authors:
  * 		Thomas Ingles
@@ -21,7 +21,7 @@
 error_reporting(0);
 
 
-$lang_factux = "Factux - kostenlose Revision 2017 Billing";#Factux - kostenlose Revision 2015 Billing  /  Factux - Biller kostenlose Revision 2015 / Factux - Biller-Verzeichnis kostenloser Revision 2015 / Factux - die Biller Revision 2015 frei
+$lang_factux = "Factux - kostenlose Revision 2025 Billing";#Factux - kostenlose Revision 2015 Billing  /  Factux - Biller kostenlose Revision 2015 / Factux - Biller-Verzeichnis kostenloser Revision 2015 / Factux - die Biller Revision 2015 frei
 $lang_source_fac = $lang_factux . " Webiciel open Source <br />abgeleitet <a href='http://sourceforge.net/projects/factux/' target='_blank' > Factux 1.1.5</a> <br />umschreibt und vertrieben von";
 $lang_new_config_ok = "Ihre neue Konfiguration wird gespeichert";
 $lang_nbr_impression = "Die Anzahl der Impressionen";

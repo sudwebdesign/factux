@@ -11,7 +11,7 @@
 </head><body>
 <?php
 echo '<center><img src="../../image/factux.gif" alt="">';
-echo '<h2>Mise à niveau de Factux 5.0.0 -->  FactuX5.0.0</h2><hr>';
+echo '<h2>Mise à niveau de Factux 1.1.5 -->  Factux 8.0.0</h2><hr>';
 echo 'Vous voici dans le module de mise à niveau de Factux. Avant de commencer la mise à niveau <b>
 <font color=red>faite une sauvegarde de votre base de donnée </font></b><br> ';
 echo 'Si vous avez bien suivit les informations du fichier readme.txt vous avez:';

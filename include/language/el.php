@@ -12,8 +12,8 @@
  * File Name: el.php
  * 	fichier contenant les variables grecques
  *
- * * Version:  5.0.0
- * * * Modified: 07/10/2016
+ * * Version: 8.0.0
+ * * * Modified: 07/06/2025
  *
  * File Authors:
  * 		Thomas Ingles
@@ -21,7 +21,7 @@
 error_reporting(0);
 
 
-$lang_factux = "Factux - biller ελεύθερη Αναθεώρηση 2017";
+$lang_factux = "Factux - biller ελεύθερη Αναθεώρηση 2025";
 $lang_source_fac = "Factux - biller ελεύθερη Αναθεώρηση 2015 Webiciel open source<br />προέρχεται από το <a href='http://sourceforge.net/projects/factux/' target='_blank'>Factux 1.1.5 </a> <br />ξαναγράφει και διανέμονται από";
 $lang_new_config_ok = "Η νέα διαμόρφωση αποθηκεύεται";
 $lang_nbr_impression = "Αριθμός εκτυπώσεων";
@@ -238,7 +238,7 @@ $lang_voir = "Βλ.";
 $lang_rest = "Επαναφορά";
 $lang_tai = "Μέγεθος";
 $lang_fichier = "Αρχείο";
-$lang_back_restO2 = "Εάν δεν υπάρχει σφάλμα τότε τα δεδομένα σας έχει αποκατασταθεί. Αυτό το εργαλείο επαναφέρει μόνο τα αντίγραφα που δημιουργούνται από Factux - biller ελεύθερη Αναθεώρηση 2017";
+$lang_back_restO2 = "Εάν δεν υπάρχει σφάλμα τότε τα δεδομένα σας έχει αποκατασταθεί. Αυτό το εργαλείο επαναφέρει μόνο τα αντίγραφα που δημιουργούνται από Factux - biller ελεύθερη Αναθεώρηση 2025";
 $lang_back_resto = "Ανάκτηση εφεδρικών αντιγράφων";
 $lang_back_ext = "Το αρχείο backup.sql αποσπάσματος";
 $lang_back_ti_re = "Το βοηθητικό πρόγραμμα δημιουργίας αντιγράφων ασφαλείας των Factux: Επαναφορά των αντιγράφων ασφαλείας";

@@ -12,8 +12,8 @@
  * File Name: es.php
  * 	fichier contenant les variables espagnoles
  *
- * * Version:  5.0.0
- * * * Modified: 07/10/2016
+ * * * * Version:  8.0.0
+ * * * * Modified: 07/06/2025
  *
  * File Authors:
  * 		Thomas Ingles
@@ -21,7 +21,7 @@
 error_reporting(0);
 
 
-$lang_factux = "Factux - El Libro libre revisión 2017";
+$lang_factux = "Factux - El Libro libre revisión 2025";
 $lang_source_fac = $lang_factux . " Webiciel de fuente abierta<pr>derivado de <a href='http://sourceforge.net/projects/factux/' Target='_blank' >Factux 1.1.5<a><br>reformulado y distribuido por";
 $lang_new_config_ok = "Su nueva configuración está registrada";
 $lang_nbr_impression = "Número de impresiones";

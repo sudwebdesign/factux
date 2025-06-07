@@ -1,6 +1,6 @@
 ![Factux](http://factux.free.fr/goodies/factux.png)
-# Factux révision 2017
-## v5.0.1
+# Factux révision 2025
+## v8.0.0
 ## Le facturier libre
 ## The free/libre invoicer
 
@@ -19,7 +19,7 @@ J'ai fait de mon mieux pour que la mise a niveau de Factux 1.1.5 vers celle-ci s
 La documentation de Factux se trouve dans le dossier /doc et aussi sur le [site de Factux](http://factux.free.fr).
 
 ## Spécifications
-1. PHP 5.1.6 et plus (php 7 ready)
+1. PHP 7 et plus (php 8 ready)
 2. Base de données MariaDB/MySQL
 3. Serveur web Linux / Windows (Apache de préférence)
 

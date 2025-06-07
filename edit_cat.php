@@ -1,7 +1,7 @@
 <?php
 /*
  * Factux le facturier libre
- * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
+ * Copyright (C) 2003-2005 Guy Hendrickx, 2017~ Thomas Ingles
  *
  * Licensed under the terms of the GNU  General Public License:
  * 		http://opensource.org/licenses/GPL-3.0
@@ -12,8 +12,8 @@
  * File Name: edit_cat.php
  * 	Formulaire d'edition d'une categorie
  *
- * * * Version:  2015
- * * * * Created: 07/10/2016
+ * * * * Version:  8.0.0
+ * * * * Modified: 07/06/2025
  *
  * File Authors:
  * 		Thomas Ingles

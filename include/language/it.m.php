@@ -12,8 +12,8 @@
  * File Name: it.m.php
  * 	fichier contenant les variables italiennes
  *
- * * Version:  5.0.0
- * * * Modified: 07/10/2016
+ * * * * Version:  8.0.0
+ * * * * Modified: 07/06/2025
  *
  * File Authors:
  * 		Thomas Ingles
@@ -21,7 +21,7 @@
 error_reporting(0);
 
 
-$lang_factux = "Factux - fatturazione gratuito revisione 2017";#Factux - l'emittente di fatture Revisione//Factux - la Directory Biller gratuita Revisione 2015//Factux - l'emittente della fattura la revisione 2015
+$lang_factux = "Factux - fatturazione gratuito revisione 2025";#Factux - l'emittente di fatture Revisione//Factux - la Directory Biller gratuita Revisione 2015//Factux - l'emittente della fattura la revisione 2015
 $lang_source_fac = $lang_factux . " Webiciel open source gratuito <br />derivato da <a href='http://sourceforge.net/projects/factux/' target='_blank'>Factux 1.1.5</a> <br />riscrive e distribuito da";
 $lang_new_config_ok = "La nuova configurazione viene salvata";
 $lang_nbr_impression = "Il numero di impressioni";

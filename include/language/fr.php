@@ -1,7 +1,7 @@
 <?php
 /*
  * Factux le facturier libre
- * Copyright (C) 2003-2005 Guy Hendrickx, 2017 Thomas Ingles
+ * Copyright (C) 2003-2005 Guy Hendrickx, 2017~ Thomas Ingles
  *
  * Licensed under the terms of the GNU  General Public License:
  * 		http://opensource.org/licenses/GPL-3.0
@@ -12,8 +12,8 @@
  * File Name: fr.php
  * 	fichier contenant les variables francophones
  *
- * * Version:  5.0.0
- * * * Modified: 07/10/2016
+ * * * * Version:  8.0.0
+ * * * * Modified: 07/06/2025
  *
  * File Authors:
  * 		Guy Hendrickx
@@ -21,7 +21,7 @@
 error_reporting(0);
 
 
-$lang_factux = "Factux - Le Facturier libre Révision 2017";
+$lang_factux = "Factux - Le Facturier libre Révision 2025";
 $lang_source_fac = $lang_factux . ' Webiciel à source ouverte<br>dérivé de <a href=\'http://sourceforge.net/projects/factux/\' target=\'_blank\' >Factux 1.1.5</a><br>Réécrit et distribué par';
 $lang_new_config_ok= "Votre nouvelle configuration est enregistrée";
 $lang_nbr_impression= "Nombre d'impressions";

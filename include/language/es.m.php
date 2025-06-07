@@ -12,8 +12,8 @@
  * File Name: es.php
  * 	fichier contenant les variables espagnoles
  *
- * * Version:  5.0.0
- * * * Modified: 07/10/2016
+ * * * * Version:  8.0.0
+ * * * * Modified: 07/06/2025
  *
  * File Authors:
  * 		Thomas Ingles
@@ -21,7 +21,7 @@
 error_reporting(0);
 
 
-$lang_factux = "Factux - facturación libre revisión 2017";
+$lang_factux = "Factux - facturación libre revisión 2025";
 $lang_source_fac = "Factux - el facturador gratis revisión 2015 Webiciel <br>derivado <a href='http://sourceforge.net/projects/factux/' target='_blank' > Factux 1.1.5</a> <br>reescribe y distribuido por";
 $lang_new_config_ok = "La nueva configuración se guarda";
 $lang_nbr_impression = "El número de impresiones";
@@ -238,7 +238,7 @@ $lang_voir = "Ver";
 $lang_rest = "Restaurar";
 $lang_tai = "Tamaño";
 $lang_fichier = "Archivo";
-$lang_back_restO2 = "Si ningún error ha ocurrido mientras los datos se ha restaurado. Esta herramienta restaura sólo copias de seguridad creadas de Factux - el facturador gratis revisión 2017";
+$lang_back_restO2 = "Si ningún error ha ocurrido mientras los datos se ha restaurado. Esta herramienta restaura sólo copias de seguridad creadas de Factux - el facturador gratis revisión 2025";
 $lang_back_resto = "Restaurar copia de seguridad";
 $lang_back_ext = "Extraído del archivo backup.sql";
 $lang_back_ti_re = "Factux backup: restaurar una copia de seguridad";

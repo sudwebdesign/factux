@@ -10,7 +10,7 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE | E_NOTICE);#cache les éléments 
 $now='../../';
 echo "<link rel='stylesheet' type='text/css' href='".$now."include/themes/red/style.css'>";
 echo "<center><img src='".$now."image/factux.gif' alt='FactuX : Mise à niveau' title='FactuX : Mise à niveau'>";
-echo "<h2>Mise à niveau de Factux 1.1.5 -->  Factux 5.0.0</h2><hr>";
+echo "<h2>Mise à niveau de Factux 1.1.5 -->  Factux 8.0.0</h2><hr>";
 require_once(__DIR__ . "/" . $now . "include/0.php");#uptophp7
 include_once(__DIR__ . "/" . $now . "include/config/common.php");
 include_once(__DIR__ . "/" . $now . "include/config/var.php");
@@ -310,7 +310,7 @@ echo ($c)?sprintf('<br>%s lignes orphelines appartenant à %d bons inexistants o
 /*
 #fonctionnel
 lister_commandes #si facturée, donne son numéro pour éditer la facture
-Mesure pour relation numero_fact et commande (upgrade from 5.0.0)
+Mesure pour relation numero_fact et commande (upgrade from 8.0.0)
 pseudo code
 	pour toutes les facture
 		déserialisé les numéros de bons de la facture

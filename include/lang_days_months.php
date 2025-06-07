@@ -12,8 +12,8 @@
  * File Name: lang_days_months.php
  * 	fichier contenant les variables du calendrier
  *
- * * Version:  5.0.0
- * * * Modified: 07/10/2016
+ * * Version: 8.0.0
+ * * * Modified: 07/06/2025
  *
  * File Authors:
  * 		Thomas Ingles

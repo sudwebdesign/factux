@@ -12,8 +12,8 @@
  * File Name: de.php
  * 	fichier contenant les variables allemandes
  *
- * * Version:  5.0.0
- * * * Modified: 07/10/2016
+ * * Version: 8.0.0
+ * * * Modified: 07/06/2025
  *
  * File Authors:
  * 		Thomas Ingles
@@ -21,7 +21,7 @@
 error_reporting(0);
 
 
-$lang_factux = "factux - facturier freien Revision 2017";
+$lang_factux = "factux - facturier freien Revision 2025";
 $lang_source_fac = $lang_factux . " webiciel in Quellcode<br />Derivat von <a href='http://sourceforge.net/projects/factux/' Target='_blank' >factux 1.1.5</a><br />gerade neu geschrieben und verteilt durch";
 $lang_new_config_ok = "Ihre neue Konfiguration ist aufzuzeichnen";
 $lang_nbr_impression = "Zahl der Grundierungen";

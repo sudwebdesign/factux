@@ -1,27 +1,27 @@
 <?php
 /*
-*Factux de vrije fakturier
-*Copyright  (C) 2003-2005 Guy Hendrickx
-*
-Licensed under the terms of the GNU General Public licence:
-*              http://opensource.org/licenses/GPL-3.0
-*
-* For further information visit:
-*              http://factux.free.fr
-*
-*File Name: nl.php (b)
-*   bestand bevattende de nederlandstalige variabels  Nederlandstalige versie en correcties :@ ant.maes"AT"free.fr
-*
- * * Version:  5.0.0
- * * * Modified: 07/10/2016
-*
-* File Authors:
-*           Guy Hendricks
-*/
+ * Factux de vrije fakturier
+ * Copyright  (C) 2003-2005 Guy Hendrickx
+ *
+ * Licensed under the terms of the GNU General Public licence:
+ *              http://opensource.org/licenses/GPL-3.0
+ *
+ * For further information visit:
+ *              http://factux.free.fr
+ *
+ * File Name: nl.php (b)
+ *   bestand bevattende de nederlandstalige variabels  Nederlandstalige versie en correcties :@ ant.maes"AT"free.fr
+ *
+ * * * * Version:  8.0.0
+ * * * * Modified: 07/06/2025
+ *
+ * File Authors:
+ *           Guy Hendricks
+ */
 error_reporting(0);
 
 
-$lang_factux = "Factux de vrije fakturier Revision 2017";
+$lang_factux = "Factux de vrije fakturier Revision 2025";
 $lang_source_fac = $lang_factux . '<br />is een Open source programma verdeeld door ';
 $lang_new_config_ok="Your new configuration is recorded";
 $lang_nbr_impression="Aantal afdrukken";

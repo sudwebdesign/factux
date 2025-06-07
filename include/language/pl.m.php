@@ -12,8 +12,8 @@
  * File Name: pl.php
  * 	fichier contenant les variables polonaise
  *
- * * Version:  5.0.0
- * * * Modified: 07/10/2016
+ * * * * Version:  8.0.0
+ * * * * Modified: 07/06/2025
  *
  * File Authors:
  * 		Thomas Ingles
@@ -21,7 +21,7 @@
 error_reporting(0);
 
 
-$lang_factux = "Factux - rozliczeniowych wolna wersja 2017";#Factux - rozliczeniowego wolna wersja 2015 / Factux - katalogu Biller Darmowe 2015 rewizji / Factux - rozliczeniowego wolny rewizja 2015
+$lang_factux = "Factux - rozliczeniowych wolna wersja 2025";#Factux - rozliczeniowego wolna wersja 2015 / Factux - katalogu Biller Darmowe 2015 rewizji / Factux - rozliczeniowego wolny rewizja 2015
 $lang_source_fac = $lang_factux . ' Webiciel open source<br />pochodną <a href=\'http://sourceforge.net/projects/factux/\' target=\'_blank\' > Factux 1.1.5</a> <br />przepisuje i dystrybuowane przez';
 $lang_new_config_ok = "Nowa konfiguracja jest zapisywana";
 $lang_nbr_impression = "Liczba wyświetleń";

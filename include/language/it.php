@@ -12,8 +12,8 @@
  * File Name: it.php
  * 	fichier contenant les variables italiennes
  *
- * * Version:  5.0.0
- * * * Modified: 07/10/2016
+ * * * * Version:  8.0.0
+ * * * * Modified: 07/06/2025
  *
  * File Authors:
  * 		Thomas Ingles
@@ -21,7 +21,7 @@
 error_reporting(0);
 
 
-$lang_factux = "Factux - l'emittente libera revisione entro il 2017";
+$lang_factux = "Factux - l'emittente libera revisione entro il 2025";
 $lang_source_fac = $lang_factux . " Webiciel entro il 2015 open source<br />derivata da <a href='http://sourceforge.net/projects/factux/' target='_blank'>Factux 1.1.5</a> <br />riscrive e distribuito da";
 $lang_new_config_ok = "La nuova configurazione viene salvata";
 $lang_nbr_impression = "Numero di stampe";
