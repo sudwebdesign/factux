@@ -69,7 +69,7 @@ if ($moisCheck > 12){
  $anneeCheck = $annee + 1;
 }
 
-$dernierJour = strftime("%d", mktime(0, 0, 0, $moisCheck, 0, $anneeCheck));
+$dernierJour = date("d", mktime(0, 0, 0, $moisCheck, 0, $anneeCheck));
 $premierJour = date("w", mktime(0, 0, 0, $mois, 1, $annee));
 //On modifie la position du premier jour suivant la disposition des jours qu'on veut
 $origine = 1;
