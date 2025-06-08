@@ -61,7 +61,7 @@ while($data = mysql_fetch_array($req)){
      <td class ='<?php echo couleur_alternee (TRUE, "nombre"); ?>'><?php echo $data['quanti']; ?>
      <td class ='<?php echo couleur_alternee (FALSE); ?>'><?php echo $data['uni'];  ?>
      <td class ='<?php echo couleur_alternee (FALSE); ?>'><?php echo $data['article']; ?>
-     <td class ='<?php echo couleur_alternee (FALSE, "nombre"); ?>'><?php echo sprintf('%s %s', $data[tot_art_htva], $devise) ?>
+     <td class ='<?php echo couleur_alternee (FALSE, "nombre"); ?>'><?php echo sprintf('%s %s', $data["tot_art_htva"], $devise) ?>
    </tr>
 <?php }
 //on calcule la somme des contenus du bon
