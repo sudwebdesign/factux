@@ -67,12 +67,15 @@ while($data = mysql_fetch_array($req)){
 }
 
 $from = $mail ;
-$subject = $lang_dif_mail_mdp ;
-$message =  sprintf('Cher client<br>%s<br><b>Login: %s %s %s</b><br>%s<br> ', $lang_mdp_jour, $login, $lang_mai_cr_pa, $pass_new2, $lang_mai_cre_enc);
-$header = 'From: '.$from."\n"
- .'MIME-Version: 1.0'."\n"
- .'Content-Type: text/html; charset= ISO-8859-1'."\n"
- .'Content-Transfer-Encoding: 7bit'."\n\n";
+$subject = $lang_dif_mail_mdp;
+$hide = substr($pass_new2, 1, -1);
+$star = str_repeat('•', strlen($hide));
+$hide = strtr($pass_new2, [$hide => $star]);
+$message = sprintf('Cher client<br>%s<br><b>Login: %s %s %s</b><br>%s<br> ', $lang_mdp_jour, $login, $lang_mai_cr_pa, $hide, $lang_mai_cre_enc);
+$header = 'From: '.$from."\r\n"
+ .'MIME-Version: 1.0'."\r\n"
+ .'Content-Type: text/html; charset= UTF-8'."\r\n"
+ .'Content-Transfer-Encoding: 8bit'."\r\n\r\n";
 if (mail($to,$subject,$message,$header)) {
     echo sprintf('<h2>%s %s</h2>', $lang_mdp_chang, $to);
 } else {
