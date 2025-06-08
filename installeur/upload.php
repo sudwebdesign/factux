@@ -76,8 +76,7 @@ if (isset($_FILES["monfichier"]["name"])) {
 <?php
   }
   else {
-   echo "<br><h1>Le déplacement du fichier temporaire a échoué".
-   " vérifiez l'existence du répertoire ".$repertoireDestination."</h1>";
+   echo "<br><h1>Le déplacement du fichier temporaire a échoué ! Vérifiez l'existence du répertoire ".$repertoireDestination."</h1>";
   }
  }
  else {

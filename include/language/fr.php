@@ -150,8 +150,8 @@ $lang_commande_droit = "Vous n'avez pas les droits nécessaires pour gérer les 
 $lang_devis_droit = "Vous n'avez pas les droits nécessaires pour gérer les devis contactez l'administrateur si vous pensez qu'il y as erreur";
 $lang_admin_droit = "vous n'avez pas les droits necessaire il faut etre administrateur pour pouvoir acceder a cette page";
 
-$lang_mdp_jour = "Votre mot de passe a ete mis a jour ";
-$lang_dif_mail_mdp = "Modification  de votre mot de passe";
+$lang_mdp_jour = "Votre mot de passe a été mis a jour ";
+$lang_dif_mail_mdp = "Modification de votre mot de passe";
 $lang_mdp_chang = "Votre mot de passe à été changé <br>Un courriel vas etre envoyé avec vos nouveau login et mot de passe à";
 $lang_err_mdp_corr = "Erreur les deux mots de passe ne correspondent pas";
 $lang_err_chan_mdp = "Erreur!!!!Vous devez absolument remplir touts les champs <br> Veuiller vous reedentifier avec vos ancien login et mot de passe";

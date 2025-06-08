@@ -31,11 +31,9 @@ if (!is_dir($path)) {
 @chmod($path, 0777);
 
 $fp2 = fopen ($path."backup.sql","w");
-$copyr=sprintf('# Backup de %s%s', $lang_factux, PHP_EOL).
-"# Table backup from MySql PHP Backup\n".
-"# AB Webservices 1999-2004\n".
-"# www.absoft-my.com/pondok\n".
-"# Creation date: ".date("m-d-Y h:s",time())."\n\n";
+$copyr=sprintf('# Backup de %s', $lang_factux).'
+# Table backup from MySql PHP Backup (AB Webservices 1999-2004 www.absoft-my.com/pondok)
+# Creation date: '.date('m-d-Y h:s',time()).PHP_EOL.PHP_EOL;
 
 fwrite ($fp2,$copyr);
 fclose ($fp2);

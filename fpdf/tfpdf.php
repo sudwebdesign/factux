@@ -711,7 +711,7 @@ public function AddFont($family, $style='', $file='', $uni=false)
 			$s.='$originalsize='.$originalsize.";\n";
 			$s.='$fontkey=\''.$fontkey."';\n";
 			$s.="?>";
-			if (is_writable(dirname($this->_getfontpath().'unifont/'.'x'))) {
+			if (is_writable(dirname($this->_getfontpath().'unifont/x'))) {
 				$fh = fopen($unifilename.'.mtx.php',"w");
 				fwrite($fh,$s,strlen($s));
 				fclose($fh);

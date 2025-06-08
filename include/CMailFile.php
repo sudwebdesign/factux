@@ -6,7 +6,7 @@ the attachment). This is useful since in a web submission you often can't
 tell what the filename was supposed to be from the submission itself. I
 also added my own version of chunk_split because our production version of
 PHP doesn't have it. You can change that back or whatever though =).
-Finally, I added an extra "\n" before the message text gets added into the
+Finally, I added an extra "\r\n" before the message text gets added into the
 MIME output because otherwise the message text wasn't showing up.
 /*
 note: someone mentioned a command-line utility called 'mutt' that
@@ -16,7 +16,7 @@ can mail attachments.
 If chunk_split works on your system, change the call to my_chunk_split
 to chunk_split
 */
-/* Note: if you don't have base64_encode on your sytem it will not work */
+/* Note: if you don't have base64_encode on your system it will not work */
 
 // simple class that encapsulates mail() with addition of mime file attachment.
 class CMailFile {
@@ -49,13 +49,13 @@ class CMailFile {
       $filename = $mime_filename;
   }
 
-  $out = "--" . $this->mime_boundary . "\n";
-  $out = $out . "Content-type: " . $mimetype . "; name=\"{$filename}\";\n";
-  $out .= "Content-Transfer-Encoding: base64\n";
-  $out .= "Content-disposition: attachment; filename=\"{$filename}\"\n\n";
-  $out = $out . $encoded . "\n";
-  return $out . "--" . $this->mime_boundary . "--" . "\n";
-// added -- to notify email client attachment is done
+  $out = "--" . $this->mime_boundary . "\r\n";
+  $out .= "Content-type: {$mimetype}; name=\"{$filename}\";\r\n";
+  $out .= "Content-Transfer-Encoding: base64\r\n";
+  $out .= "Content-disposition: attachment; filename=\"{$filename}\"\r\n\r\n";
+  $out .= $encoded . "\r\n";
+  return $out . "--" . $this->mime_boundary . "--\r\n";
+  // added -- to notify email client attachment is done
  }
 
  public function encode_file($sourcefile): string {
@@ -80,9 +80,9 @@ class CMailFile {
  }
 
  public function write_body(string $msgtext): string {
-  $out = "--" . $this->mime_boundary . "\n";
-  $out .= "Content-Type: text/plain; charset=\"us-ascii\"\n\n";
-  return $out . $msgtext . "\n";
+  $out = "--" . $this->mime_boundary . "\r\n";
+  $out .= "Content-Type: text/plain; charset=\"us-ascii\"\r\n\r\n";
+  return $out . $msgtext . "\r\n";
  }
 
  public function write_mimeheaders($filename, $mime_filename): string {
@@ -90,17 +90,17 @@ class CMailFile {
       $filename = $mime_filename;
   }
 
-  $out = "MIME-version: 1.0\n";
+  $out = "MIME-version: 1.0\r\n";
   $out .= "Content-type: multipart/mixed; ";
-  $out .= "boundary=\"$this->mime_boundary\"\n";
-  $out .= "Content-transfer-encoding: 7BIT\n";
-  return $out . "X-attachments: {$filename};\n\n";
+  $out .= "boundary=\"$this->mime_boundary\"\r\n";
+  $out .= "Content-transfer-encoding: 7BIT\r\n";
+  return $out . "X-attachments: {$filename};\r\n\r\n";
  }
 
  public function write_smtpheaders($addr_from): string {
   $out = sprintf('From: %s%s', $addr_from, PHP_EOL);
   $out .= sprintf('Reply-To: %s%s', $addr_from, PHP_EOL);
-  $out .= "X-Mailer: PHP3\n";
+  $out .= "X-Mailer: PHP3\r\n";
   return $out . sprintf('X-Sender: %s%s', $addr_from, PHP_EOL);
  }
 }
