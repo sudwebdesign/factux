@@ -2,8 +2,9 @@
 var lettres = new Array;
 var clients = new Array;
 <?php
-$sql1="SELECT SUBSTRING(nom, 1, 1)as lettre FROM `" . $tblpref ."client` WHERE actif != 'non' GROUP by SUBSTRING(nom, 1, 1)";
+$sql1 = "SELECT SUBSTRING(nom, 1, 1) as lettre FROM `" . $tblpref ."client` WHERE actif != 'non' GROUP by SUBSTRING(nom, 1, 1)";
 $req2 = mysql_query($sql1) or die('Erreur SQL !<br>'.$sql1.'<br>'.mysql_error());
+$lettre = [];
 while($data6 = mysql_fetch_array($req2)){
  $initiale=$data6['lettre'];
  $lettre[]=$initiale;
