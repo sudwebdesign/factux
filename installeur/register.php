@@ -19,14 +19,13 @@
  * 		Guy Hendrickx
  *.
  */
-$now='../';
-require_once(__DIR__ . "/../include/config/common.php");
+require_once(__DIR__ . '/../include/config/common.php');
 $lang=(isset($lang))?$lang:$default_lang;#default_lg in common
 include_once(__DIR__ . sprintf('/../include/language/%s.php', $lang));
 $login2=isset($_POST['login2'])?$_POST['login2']:"";
 $pass=isset($_POST['pass'])?$_POST['pass']:"";
-$nom=isset($_POST['nom'])?apostrophe($_POST['nom']):"";
-$prenom=isset($_POST['prenom'])?apostrophe($_POST['prenom']):"";
+$nom=isset($_POST['nom'])?$_POST['nom']:"";
+$prenom=isset($_POST['prenom'])?$_POST['prenom']:"";
 $mail=isset($_POST['mail'])?$_POST['mail']:"";
 $pass2=isset($_POST['pass2'])?$_POST['pass2']:"";
 if($login2=='' || $pass==''|| $nom=='' || $prenom=='' || $mail=='' ){
@@ -48,4 +47,4 @@ mysql_query($sql7) || die('Erreur SQL !<br>'.$sql7.'<br>'.mysql_error());
 $etape = "Étape N°6 : Enregister le logo de l'entreprise";
 include_once(__DIR__ . '/headers.php');
 echo sprintf('<h2>%s %s est maintenant enregistré et a comme login : %s et comme mot de passe : %s</h2>', $prenom, $nom, $login2, $pass);
-include(__DIR__ . "/upload.php");
+include(__DIR__ . '/upload.php');

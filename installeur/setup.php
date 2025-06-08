@@ -33,17 +33,17 @@ $type = '<?php' . "\n";
 $com = '//common.php créé grace à l\'installeur de Factux, soyez prudent si vous l\'éditez'. "\n";
 $com .= 'error_reporting(E_ERROR | E_WARNING | E_PARSE | E_NOTICE);#cache les éléments dépréciés'. "\n";
 //$un = "valeur1";
-$un = '"'.$un.'";//l\'utilisateur de la base de données mysql' . "\n";
+$un = "'".$un."';//l\'utilisateur de la base de données mysql\n";
 //$deux = "valeur2";
-$deux = '"'.$deux.'";//le mot de passe à la base de données mysql' . "\n";
+$deux = "'".$deux."';//le mot de passe à la base de données mysql\n";
 //$trois = "valeur3";
-$trois = '"'.$trois.'";//le nom de la base de données mysql' . "\n";
+$trois = "'".$trois."';//le nom de la base de données mysql\n";
 //$quatre = "valeur4";
-$quatre = '"'.$quatre.'";//l\'adresse de la base de données mysql ' . "\n";
+$quatre = "'".$quatre."';//l\'adresse de la base de données mysql \n";
 //$cinq = "valeur5";
-$cinq = '"'.$cinq.'";//la langue de l\'interface et des factures créées par Factux : voir la doc pour les abbréviations' . "\n";
-$six = '"'.$six.'";//prefixe des tables ' . "\n";
-$sept = 'require_once(__DIR__ . "/../0.php");#uptophp7 & apostrophe()'."\n";
+$cinq = "'".$cinq."';//la langue de l\'interface et des factures créées par Factux : voir la doc pour les abbréviations\n";
+$six = "'".$six."';//prefixe des tables \n";
+$sept = "require_once(__DIR__ . '/../0.php');#uptophp7 & apostrophe()\n";
 
 $monfichier = fopen(__DIR__ . "/../include/config/common.php", "w+");
 
