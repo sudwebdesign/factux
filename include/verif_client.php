@@ -19,10 +19,9 @@
  * 		Guy Hendrickx
  *
  */
-ini_set('session.save_path', '../include/session');
 if (session_id() === '') {
-    #if(!isset($_SESSION['login']))
-    session_start();
+ ini_set('session.save_path', '../include/session');
+ session_start();
 }
 
 if(!isset($_SESSION['login'])||$_SESSION['login']==''){
