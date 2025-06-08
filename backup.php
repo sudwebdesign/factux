@@ -51,7 +51,7 @@ function get_def($dbname, string $table): string {
  $def .= "CREATE TABLE {$table} (\n";
  $result = mysql_db_query($dbname, 'SHOW FIELDS FROM ' . $table,$conn) or die(sprintf('Table %s not existing in database', $table));
  while($row = mysql_fetch_array($result)) {
-  $def .= sprintf('  %s %s', $row[Field], $row[Type]);
+  $def .= sprintf('  %s %s', $row["Field"], $row["Type"]);
   if ($row["Default"] !== null) {
       // Fix 2025
       $def .= sprintf(" DEFAULT '%s'", $row["Default"]);
@@ -60,7 +60,7 @@ function get_def($dbname, string $table): string {
       $def .= " NOT NULL";
   }
   if ($row["Extra"] != "") {
-      $def .= ' ' . $row[Extra];
+      $def .= ' ' . $row["Extra"];
   }
    $def .= ",\n";
  }
